@@ -1,0 +1,83 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+########################
+format = """
+[](fg:color_shell)\
+[ ](bg:color_shell fg:color_shell_text)\
+[](fg:color_shell bg:color_directory)\
+$directory\
+[](fg:color_directory bg:color_lang)\
+$nodejs\
+$python\
+$lua\
+[](fg:color_lang bg:color_git)\
+$git_branch\
+$git_status\
+$git_metrics\
+[](fg:color_git bg:color_tip)\
+$fill\
+$character\
+$cmd_duration\
+\n[⦿](fg:#eba0ad) """
+########################
+palette = 'custom'
+[palettes.custom]
+color_shell = '#da6871'          # red - choosen using oklch
+color_shell_text = '#251415'     # black 92% opacity
+color_directory = '#22c5c7'      # green - choosen using oklch
+color_directory_text = '#112424' # black 92% opacity
+color_lang = '#3a9ef4'           # blue - choosen using oklch
+color_lang_text = '#101D2C'      # black 92% opacity
+color_git = '#fef1b9'            # yellow - adjusted
+color_git_text = '#2F2D23'       # black 92% opacity
+color_time = '#da6871'           # red - choosen using oklch
+color_time_text = '#251415'      # black 92% opacity
+########################
+[directory]
+style = "bg:color_directory fg:color_directory_text"
+format = "[  $path ]($style)"
+truncation_length = 3
+truncation_symbol = ""
+########################
+[lua]
+symbol = ""
+style = "bg:color_lang fg:color_lang_text"
+format = '[ $symbol ($version) ]($style)'
+[nodejs]
+symbol = ""
+style = "bg:color_lang fg:color_lang_text"
+format = '[ $symbol ($version) ]($style)'
+[python]
+symbol = ""
+style = "bg:color_lang fg:color_lang_text"
+format = '[ $symbol ($version )($virtualenv )]($style)'
+########################
+# 
+[git_branch]
+style = "bg:color_git fg:color_git_text"
+symbol = ""                                            # 󰊤
+format = '[ $symbol $branch(:$remote_branch) ]($style)'
+[git_status]
+style = "bg:color_git fg:color_git_text"
+format = '[$all_status$ahead_behind ]($style)'
+[git_metrics]
+format = "([+$added]($added_style))[]($added_style)"
+added_style = "bg:color_git fg:color_git_text"
+deleted_style = "bg:235 fg:bright-red"
+disabled = false
+########################
+[cmd_duration]
+format = "[ $duration]($style)"
+style = "fg:bright-white"
+########################
+[character]
+success_symbol = ''
+error_symbol = '[ ✗‼](#da6871) '
+[fill]
+symbol = ' '
+[time]
+disabled = false
+time_format = "%R"                         # Hour:Minute Format
+style = "bg:color_time fg:color_time_text"
+format = '[$time]($style)'
+[package]
+disabled = true

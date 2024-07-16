@@ -1,0 +1,7 @@
+{
+  "files.exclude": {
+    ".vscode": false,
+    "logs": false,
+    ".DS_Store": false
+  }
+}
