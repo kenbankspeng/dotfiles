@@ -7,7 +7,7 @@ default:
 #####################   SHELL   #####################
 
 # git origin
-@git-remote:
+@gr:
   git remote -v
 
 #scripts
@@ -24,5 +24,6 @@ default:
 @lss *args:
   /bin/ls {{ args }}
 
+#new ls
 @ls *args:
   lsd {{ args }}
