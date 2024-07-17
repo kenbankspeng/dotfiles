@@ -36,10 +36,6 @@ default:
 
 #####################    NODE    #####################
 
-# color <hue> -d <degrees> or -h <#hues>
+# transition to: pastel color <color>
 @color one two *rest:
   node "$NODE_SCRIPTS/color/color.mjs" {{ one }} "{{ two }}" {{ rest }}
-
-# oklch hue shifting
-@oklch *args: 
-  node "$NODE_SCRIPTS/oklch/oklch.mjs" {{ args }}

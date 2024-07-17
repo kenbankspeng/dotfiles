@@ -20,10 +20,10 @@ default:
     . "$PYTHON_SCRIPTS/neo/.venv/bin/activate"
     python -m neo {{ args }}
 
-# original ls
-@lss *args:
-  /bin/ls {{ args }}
-
 #new ls
 @ls *args:
   lsd {{ args }}
+
+# new cat
+@cat *args:
+  bat {{ args }}
