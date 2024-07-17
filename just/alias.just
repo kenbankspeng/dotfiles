@@ -25,4 +25,4 @@ default:
   /bin/ls {{ args }}
 
 @ls *args:
-  lsd --config-file "$DOTFILES"/lsd/config.yaml {{ args }}
+  lsd {{ args }}
