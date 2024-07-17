@@ -30,7 +30,7 @@ default:
 # json cv to pdf
 @cv *args:
   #!/usr/bin/env zsh
-  . "$DEV_APPS/cv-python/.venv/bin/activate"
+  . "$DEV_BOX/apps/cv-python/.venv/bin/activate"
   python -m cv {{ args }}
 
 
