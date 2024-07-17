@@ -6,7 +6,7 @@ return function(options)
 
   -- gui-startup
   wezterm.on('gui-startup', function(cmd)
-    local tab, pane, window = mux.spawn_window(cmd or {})
+    local pane, window = mux.spawn_window(cmd or {})
     local gui = window:gui_window()
 
     -- max or position, not both

@@ -1,4 +1,3 @@
-local wezterm = require('wezterm')
 local gpu_adapters = require('util.gpu_adapter')
 local colors = require('colors.custom')
 

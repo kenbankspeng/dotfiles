@@ -1,6 +1,0 @@
-01:44:48.560  ERROR  wezterm_gui > while processing gui-startup event: runtime error: /Users/ken/.config/wezterm/startup.lua:24: attempt to get length of a nil value (field 'args')
-stack traceback:
-	/Users/ken/.config/wezterm/startup.lua:24: in function </Users/ken/.config/wezterm/startup.lua:8>
-01:56:45.203  INFO   wezterm_gui::termwindow > clicking https://err.sh/micro/no-export
-02:00:13.654  INFO   wezterm_gui::termwindow > clicking https://err.sh/micro/no-export
-02:09:45.107  INFO   wezterm_gui::termwindow > clicking https://bun.sh/docs/cli/pm
