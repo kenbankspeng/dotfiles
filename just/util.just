@@ -13,6 +13,7 @@ default:
 # bundleid "Visual Studio Code"
 @bundleid arg: 
   mdls -name kMDItemCFBundleIdentifier "/Applications/{{arg}}.app"
+  mdls -name kMDItemCFBundleIdentifier "{{arg}}"
 
 #####################   PYTHON   #####################
 
