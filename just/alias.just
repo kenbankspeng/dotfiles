@@ -27,3 +27,8 @@ default:
 # new cat
 @cat *args:
   bat {{ args }}
+
+# new code
+@code *args:
+  cursor {{ args }}
+  
