@@ -1,7 +1,7 @@
 -- HammerSpoon script entry point
 
 local terminalID = "com.github.wez.wezterm" -- 'dev.warp.Warp-Stable'
-local editorID = "com.microsoft.VSCode"
+local editorID = "com.todesktop.230313mzl4w4u92"
 local aigptID = "co.podzim.BoltGPT"
 local browserID = "company.thebrowser.Browser"
 local mailID = "com.microsoft.Outlook"
@@ -83,9 +83,9 @@ Modal:action({ { "cmd" }, "right" }, winAction("rightHalf"), { msg = "right half
 
 -- layouts
 local editorLayouts = {
-	{ { bundleID = editorID, rect = { 0, 0, 1, 1 } }, { bundleID = terminalID, rect = { 0, 0.5, 1, 0.5 } } },
+	{ { bundleID = editorID, rect = { 0, 0, 1, 1 } },     { bundleID = terminalID, rect = { 0, 0.5, 1, 0.5 } } },
 	{ { bundleID = editorID, rect = { 0, 0, 1, 2 / 3 } }, { bundleID = terminalID, rect = { 0, 2 / 3, 1, 1 / 3 } } },
-	{ { bundleID = editorID, rect = { 0, 0, 1, 0.5 } }, { bundleID = terminalID, rect = { 0, 0, 1, 1 } } },
+	{ { bundleID = editorID, rect = { 0, 0, 1, 0.5 } },   { bundleID = terminalID, rect = { 0, 0, 1, 1 } } },
 }
 Layout:registerGroup("editor", editorLayouts, {})
 Modal:action({ {}, "e" }, layoutAction("editor", "forward"), { msg = "Editor / Terminal" })
