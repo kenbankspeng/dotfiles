@@ -32,3 +32,7 @@ default:
 @code *args:
   cursor {{ args }}
   
+# browse code
+@browse *args:
+  yazi {{ args }}
+  
