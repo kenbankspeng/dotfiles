@@ -9,6 +9,3 @@ default:
     #!/usr/bin/env zsh
     . "$PYTHON_SCRIPTS/neo/.venv/bin/activate"
     python -m neo {{ args }}
-
-@mux *args:
-    tmux -f "$XDG_CONFIG_HOME/tmux/tmux.conf" {{ args }}
