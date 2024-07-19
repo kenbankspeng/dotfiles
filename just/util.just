@@ -11,8 +11,9 @@ default:
   gh auth status
 
 # bundleid "Visual Studio Code"
-@bundleid arg: 
-  mdls -name kMDItemCFBundleIdentifier "{{arg}}"
+@bundleid arg:
+  osascript -e 'id of app "{{arg}}"'
+  # mdls -name kMDItemCFBundleIdentifier "{{arg}}"
 
 #####################   PYTHON   #####################
 
