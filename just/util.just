@@ -36,6 +36,11 @@ default:
 
 #####################    NODE    #####################
 
-# transition to: pastel color <color>
-@color one two *rest:
-  node "$NODE_SCRIPTS/color/color.mjs" {{ one }} "{{ two }}" {{ rest }}
+# mycolor <color>
+@mycolor arg:
+  zx "$NODE_SCRIPTS"/color/color.mjs -c "{{ arg }}"
+
+# use pastel color <color> instead
+@color *args:
+  pastel color {{ args }}
+  

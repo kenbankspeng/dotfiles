@@ -14,12 +14,6 @@ default:
 @scripts:
   code "$DEV_BOX"
 
-# neovim client-server
-@neo *args:
-    #!/usr/bin/env zsh
-    . "$PYTHON_SCRIPTS/neo/.venv/bin/activate"
-    python -m neo {{ args }}
-
 #new ls
 @ls *args:
   lsd {{ args }}

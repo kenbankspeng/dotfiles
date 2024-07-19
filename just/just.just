@@ -17,3 +17,5 @@ mod util
 # aliases
 mod alias
 
+# apps
+mod apps
