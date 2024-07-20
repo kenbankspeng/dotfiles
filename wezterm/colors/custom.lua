@@ -12,12 +12,12 @@
 
 -- catppucchin mocha
 local mocha = {
-   darkred = '#8c2e4f',    -- manually darkened
-   darkgreen = '#2b6428',  -- manually darkened
-   darkyellow = '#665223', -- manually darkened
-   darkblue = '#2e5492',   -- manually darkened
-   darkpeach = '#804315',  -- manually darkened
-   darkteal = '#016359',   -- manually darkened
+   darkred = '#590128',    -- manually darkened
+   darkgreen = '#0e380d',  -- manually darkened
+   darkyellow = '#0e380d', -- manually darkened
+   darkblue = '#012868',   -- manually darkened
+   darkpeach = '#6e3300',  -- manually darkened
+   darkteal = '#053630',   -- manually darkened
    rosewater = '#f4e0dc',
    flamingo = '#f2cdcd',
    pink = '#f5c2e7',
