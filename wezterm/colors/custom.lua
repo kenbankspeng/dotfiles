@@ -12,6 +12,12 @@
 
 -- catppucchin mocha
 local mocha = {
+   darkred = '#8c2e4f',    -- manually darkened
+   darkgreen = '#2b6428',  -- manually darkened
+   darkyellow = '#665223', -- manually darkened
+   darkblue = '#2e5492',   -- manually darkened
+   darkpeach = '#804315',  -- manually darkened
+   darkteal = '#016359',   -- manually darkened
    rosewater = '#f4e0dc',
    flamingo = '#f2cdcd',
    pink = '#f5c2e7',
@@ -60,14 +66,14 @@ local colorscheme = {
    },
    -- brights to be reviewed
    brights = {
-      mocha.crust,  -- black
-      mocha.red,    -- red
-      mocha.green,  -- green
-      mocha.yellow, -- yellow
-      mocha.blue,   -- blue
-      mocha.peach,  -- purple (orange)
-      mocha.teal,   -- cyan
-      mocha.text,   -- white
+      mocha.crust,      -- black
+      mocha.darkred,    -- red
+      mocha.darkgreen,  -- green
+      mocha.darkyellow, -- yellow
+      mocha.darkblue,   -- blue
+      mocha.darkpeach,  -- purple (orange)
+      mocha.darkteal,   -- cyan
+      mocha.text,       -- white
    },
    tab_bar = {
       background = 'rgba(0, 0, 0, 0.4)',
