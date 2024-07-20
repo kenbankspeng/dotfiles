@@ -54,7 +54,7 @@ local colorscheme = {
    cursor_fg = mocha.crust,
    selection_bg = mocha.surface2,
    selection_fg = mocha.text,
-   ansi = {
+   brights = {
       mocha.crust,  -- black
       mocha.red,    -- red
       mocha.green,  -- green
@@ -64,8 +64,7 @@ local colorscheme = {
       mocha.teal,   -- cyan
       mocha.text,   -- white
    },
-   -- brights to be reviewed
-   brights = {
+   ansi = {
       mocha.crust,      -- black
       mocha.darkred,    -- red
       mocha.darkgreen,  -- green
