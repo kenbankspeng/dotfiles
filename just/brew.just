@@ -7,28 +7,28 @@ default:
 
 # tree of casks and formulas
 @brew-tree:
-  echo "{{purple}}CASK APPS"
-  echo "---------{{blue}}"
+  echo "{{BrightMagenta}}CASK APPS"
+  echo "---------{{BrightBlue}}"
   brew list --cask
   echo
-  echo "{{purple}}FORMULAS"
-  echo "--------{{cyan}}"
+  echo "{{BrightMagenta}}FORMULAS"
+  echo "--------{{BrightCyan}}"
   brew leaves | xargs brew deps --tree
 
 # versions
 @brew-versions: 
-  echo "{{purple}}CASK APPS"
-  echo "---------{{blue}}"
+  echo "{{BrightMagenta}}CASK APPS"
+  echo "---------{{BrightBlue}}"
   brew list --versions --cask
   echo
-  echo "{{purple}}FORMULA APPS"
-  echo "------------{{cyan}}"
+  echo "{{BrightMagenta}}FORMULA APPS"
+  echo "------------{{BrightCyan}}"
   brew list --versions --formula
 
 # installed by user
 @brew-leaves:
-  echo "{{purple}}FORMULAS INSTALLED ON REQUEST"
-  echo "-----------------------------{{cyan}}"
+  echo "{{BrightMagenta}}FORMULAS INSTALLED ON REQUEST"
+  echo "-----------------------------{{BrightCyan}}"
   brew leaves --installed-on-request
 
 # outdated
