@@ -15,6 +15,10 @@ default:
   osascript -e 'id of app "{{arg}}"'
   # mdls -name kMDItemCFBundleIdentifier "{{arg}}"
 
+# new man
+@man *args:
+  tldr --config $XDG_CONFIG_HOME/tlrc/config.toml {{ args }}
+
 #####################   PYTHON   #####################
 
 # create symbolic link
