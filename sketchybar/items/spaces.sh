@@ -11,7 +11,7 @@ done
 
 sketchybar --add \
   item space_separator left \
-  --set space_separator icon="􀆊" \
+  --set space_separator \
   icon.color=$ACCENT_COLOR \
   script="$PLUGIN_DIR/space_windows.sh" \
-  --subscribe space_separator space_windows_change
+  --subscribe space_separator space_windows_change front_app_switched

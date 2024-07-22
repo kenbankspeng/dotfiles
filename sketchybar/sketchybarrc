@@ -72,7 +72,6 @@ sketchybar --default "${default[@]}"
 
 ##### Left Side Items #####
 source $ITEM_DIR/spaces.sh
-source $ITEM_DIR/front_app.sh
 
 ##### Right Side Of Notch Items #####
 source $ITEM_DIR/media.sh
