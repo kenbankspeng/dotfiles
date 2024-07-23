@@ -47,7 +47,7 @@ local keys = {
    map('f', 'ALT|CMD', action.QuickSelect), -- ??
 
    -- COPY MODE
-   map('F1', 'NONE', 'ActivateCopyMode'), -- CMD+g
+   map('g', mod.SUPER, 'ActivateCopyMode'), -- CMD+g
 
    -- SEARCH MODE
    map('f', mod.SUPER, action.Search({ CaseInSensitiveString = '' })), -- 'CurrentSelectionOrEmptyString'
@@ -120,10 +120,12 @@ local keys = {
    map('PageDown', 'SHIFT', action.ScrollByPage(1)),
 
    -- CURSOR MOVEMENT
-   map('LeftArrow', mod.SUPER, action.SendString '\x1bOH'),
-   map('RightArrow', mod.SUPER, action.SendString '\x1bOF'),
-   map('Backspace', mod.SUPER, action.SendString '\x15'),
-
+   map('Home', 'NONE', action.SendString('\x01')),           -- Move to the beginning of the line
+   map('End', 'NONE', action.SendString("\x05")),            -- Move to the end of the line
+   map('LeftArrow', mod.SUPER, action.SendString("\x1bb")),  -- Move backward one word
+   map('RightArrow', mod.SUPER, action.SendString("\x1bf")), -- Move forward one word
+   map('Backspace', mod.SUPER, action.SendString('\x15')),   -- Clear the current command line (Ctrl + U)
+   map('RightArrow', 'CMD|ALT', action.SendString("\x0b")),  -- Clear from the cursor to the end of the line (Ctrl + K)
 
    -- CLEAR, COPY, PASTE, SEARCH
    map('k', mod.SUPER, action.Multiple {
