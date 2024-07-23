@@ -8,7 +8,7 @@ if [ "$SENDER" = "space_windows_change" ]; then
   if [ -n "$apps" ] && [ "$space" != "null" ]; then
     label=""
     while read -r app; do
-      icon="$($CONFIG_DIR/plugins/map_icon.sh "$app")"
+      icon="$($CONFIG_DIR/plugins/icon_map.sh "$app")"
       label+="$icon"
     done <<<"${apps}"
   fi
