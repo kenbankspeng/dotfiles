@@ -37,25 +37,19 @@ export PINK=0xfff5bde6
 export FLAMINGO=0xfff0c6c6
 export ROSEWATER=0xfff4dbd6
 
-export RANDOM_CAT_COLOR=("$BLUE" "$LAVENDER" "$SAPPHIRE" "$SKY" "$TEAL" "$GREEN" "$YELLOW" "$PEACH" "$MAROON" "$RED" "$MAUVE" "$PINK" "$FLAMINGO" "$ROSEWATER")
-
-function getRandomCatColor() {
-  echo "${RANDOM_CAT_COLOR[$RANDOM % ${#RANDOM_CAT_COLOR[@]}]}"
-}
-
 # General bar colors
 export BAR_COLOR=$BASE
 export ICON_COLOR=$TEXT  # Color of all icons
 export LABEL_COLOR=$TEXT # Color of all labels
-
 export ITEM_BG_COLOR=0x00000000
-export ACCENT1=$(getRandomCatColor)
-export ACCENT2=$(getRandomCatColor)
-export ACCENT3=$(getRandomCatColor)
-export ACCENT4=$(getRandomCatColor)
-export ACCENT5=$(getRandomCatColor)
-export ACCENT6=$(getRandomCatColor)
-export ACCENT7=$(getRandomCatColor)
-export ACCENT8=$(getRandomCatColor)
-export ACCENT9=$(getRandomCatColor)
-export ACCENT10=$(getRandomCatColor)
+
+export ACCENT1=$BLUE
+export ACCENT2=$LAVENDER
+export ACCENT3=$FLAMINGO
+export ACCENT4=$GREEN
+export ACCENT5=$MAROON
+export ACCENT6=$PEACH
+export ACCENT7=$YELLOW
+export ACCENT8=$SKY
+export ACCENT9=$TEAL
+export ACCENT10=$RED

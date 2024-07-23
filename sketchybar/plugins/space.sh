@@ -4,12 +4,16 @@
 
 source "$CONFIG_DIR/colors.sh" # Loads all defined colors
 
+# space.index: for index 1 to 10, accent is ACCENT($index)
+index=$(echo "$NAME" | awk -F. '{print $2}')
+accent=$(eval echo \$ACCENT$index)
+
 if [ $SELECTED = true ]; then
-  bg=$ACCENT1
+  bg=$accent
   text=$BAR_COLOR
 else
   bg=$BAR_COLOR
-  text=$ACCENT1
+  text=$accent
 fi
 
 props=(

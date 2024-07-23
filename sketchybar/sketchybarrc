@@ -70,8 +70,6 @@ default=(
 )
 sketchybar --default "${default[@]}"
 
-echo "sketchybarrc: $ACCENT1"
-
 ##### Left Side Items #####
 source $ITEM_DIR/spaces.sh
 
