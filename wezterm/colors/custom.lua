@@ -46,6 +46,8 @@ local mocha = {
    crust = '#11111b',
 }
 
+-- some programs use standard and others use brights
+-- too difficult so just make them all the same
 local colorscheme = {
    foreground = mocha.text,
    background = mocha.base,
@@ -65,15 +67,25 @@ local colorscheme = {
       mocha.text,   -- white
    },
    ansi = {
-      mocha.crust,      -- black
-      mocha.darkred,    -- red
-      mocha.darkgreen,  -- green
-      mocha.darkyellow, -- yellow
-      mocha.darkblue,   -- blue
-      mocha.darkpeach,  -- purple (orange)
-      mocha.darkteal,   -- cyan
-      mocha.text,       -- white
+      mocha.crust,  -- black
+      mocha.red,    -- red
+      mocha.green,  -- green
+      mocha.yellow, -- yellow
+      mocha.blue,   -- blue
+      mocha.peach,  -- purple (orange)
+      mocha.teal,   -- cyan
+      mocha.text,   -- white
    },
+   -- ansi = {
+   --    mocha.crust,      -- black
+   --    mocha.darkred,    -- red
+   --    mocha.darkgreen,  -- green
+   --    mocha.darkyellow, -- yellow
+   --    mocha.darkblue,   -- blue
+   --    mocha.darkpeach,  -- purple (orange)
+   --    mocha.darkteal,   -- cyan
+   --    mocha.text,       -- white
+   -- },
    tab_bar = {
       background = 'rgba(0, 0, 0, 0.4)',
       active_tab = {
