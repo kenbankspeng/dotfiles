@@ -61,12 +61,12 @@ default=(
   background.color=$ITEM_BG_COLOR
   background.corner_radius=5
   background.height=24
-  padding_left=5
-  padding_right=5
-  label.padding_left=4
-  label.padding_right=4
+  padding_left=6
+  padding_right=6
   icon.padding_left=4
   icon.padding_right=4
+  label.padding_left=4
+  label.padding_right=4
 )
 sketchybar --default "${default[@]}"
 
