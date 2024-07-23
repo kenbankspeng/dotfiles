@@ -68,7 +68,7 @@ local colorscheme = {
    },
    ansi = {
       mocha.crust,      -- black
-      mocha.darkred,    -- red
+      mocha.red,        -- red   (yazi catppucin theme lets a red slip through)
       mocha.green,      -- green (yazi catppucin theme lets a green slip through)
       mocha.darkyellow, -- yellow
       mocha.darkblue,   -- blue
