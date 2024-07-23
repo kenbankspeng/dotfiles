@@ -22,9 +22,9 @@ elif [ "$SENDER" = "front_app_switched" ]; then
     apps="$(echo "$info" | jq -r '.apps | keys[]')"
 
     label="-"
-    if [ "${apps}" != "" ]; then
+    front=""
+    if [ -n "$apps" ] && [ "$space" != "null" ]; then
       label=""
-      front=""
       while read -r app; do
         icon="$($CONFIG_DIR/plugins/icon_map_fn.sh "$app")"
         if [ "$app" = "$frontapp" ]; then
@@ -35,7 +35,9 @@ elif [ "$SENDER" = "front_app_switched" ]; then
       done <<<"${apps}"
     fi
 
-    sketchybar --set space.$space icon="$space" label="$label$front"
-  done
+    if [ -n "$space" ]; then
+      sketchybar --set space.$space icon="$space" label="$label$front"
+    fi
 
+  done
 fi
