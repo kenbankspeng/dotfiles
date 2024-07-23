@@ -63,10 +63,10 @@ default=(
   background.height=24
   padding_left=5
   padding_right=5
-  label.padding_left=3
-  label.padding_right=3
-  icon.padding_left=3
-  icon.padding_right=3
+  label.padding_left=4
+  label.padding_right=4
+  icon.padding_left=4
+  icon.padding_right=4
 )
 sketchybar --default "${default[@]}"
 

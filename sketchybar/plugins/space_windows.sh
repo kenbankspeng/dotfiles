@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 SPACE_DIR="/tmp/spaces"
 
 # Ensure the directory for space files exists
@@ -26,9 +27,9 @@ elif [ "$SENDER" = "front_app_switched" ]; then
     if [ -n "$apps" ] && [ "$space" != "null" ]; then
       label=""
       while read -r app; do
-        icon="$($CONFIG_DIR/plugins/icon_map_fn.sh "$app")"
+        icon="$($CONFIG_DIR/plugins/map_icon.sh "$app")"
         if [ "$app" = "$frontapp" ]; then
-          front="$icon$app"
+          front="$icon$($CONFIG_DIR/plugins/map_app.sh "$app")"
         else
           label+="$icon"
         fi
