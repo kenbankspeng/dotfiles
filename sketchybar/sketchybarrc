@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # https://github.com/FelixKratz/dotfiles
 # https://felixkratz.github.io/SketchyBar/config/bar
@@ -74,7 +74,6 @@ sketchybar --default "${default[@]}"
 source $ITEM_DIR/spaces.sh
 
 ##### Right Side Of Notch Items #####
-source $ITEM_DIR/media.sh
 
 ##### Right Side Items #####
 # source $ITEM_DIR/calendar.sh

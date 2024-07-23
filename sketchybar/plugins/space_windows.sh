@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 SPACE_DIR="/tmp/spaces"
 
 # Ensure the directory for space files exists
