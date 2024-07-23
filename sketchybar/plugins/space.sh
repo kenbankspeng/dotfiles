@@ -7,11 +7,11 @@
 source "$CONFIG_DIR/colors.sh" # Loads all defined colors
 
 if [ $SELECTED = true ]; then
-  bg=$ACCENT_COLOR
+  bg=$ACCENT1
   text=$BAR_COLOR
 else
   bg=$BAR_COLOR
-  text=$ACCENT_COLOR
+  text=$ACCENT1
 fi
 
 props=(

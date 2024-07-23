@@ -55,9 +55,9 @@ sketchybar --bar "${bar[@]}"
 ##### Changing Defaults #####
 default=(
   icon.font="SF Pro:Semibold:15.0"
-  icon.color=$WHITE
+  icon.color=$TEXT
   label.font="SF Pro:Semibold:15.0"
-  label.color=$WHITE
+  label.color=$TEXT
   background.color=$ITEM_BG_COLOR
   background.corner_radius=5
   background.height=24
@@ -69,6 +69,8 @@ default=(
   icon.padding_right=4
 )
 sketchybar --default "${default[@]}"
+
+echo "sketchybarrc: $ACCENT1"
 
 ##### Left Side Items #####
 source $ITEM_DIR/spaces.sh
