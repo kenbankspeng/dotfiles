@@ -7,6 +7,7 @@ props=(
 	icon=􀐛
 	padding_right=10
 	padding_left=0
+	update_freq=$((60 * 60)) # once per hour
 	script="$PLUGIN_DIR/brew.sh"
 )
 sketchybar --add event brew_update \
