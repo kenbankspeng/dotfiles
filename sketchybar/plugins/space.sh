@@ -2,7 +2,7 @@
 
 # The $SELECTED variable is available for space components
 
-source "$CONFIG_DIR/colors.sh" # Loads all defined colors
+source "$CONFIG_DIR/colors.sh"
 
 # space.index: for index 1 to 10, accent is ACCENT($index)
 index=$(echo "$NAME" | awk -F. '{print $2}')
@@ -10,6 +10,8 @@ accent=$(eval echo \$ACCENT$index)
 
 if [ $SELECTED = true ]; then
   border=$accent
+else
+  border=$TRANSPARENT
 fi
 
 props=(

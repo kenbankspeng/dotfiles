@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
+source "$CONFIG_DIR/colors.sh"
+
 props=(
 	icon="􀣺"
-	icon.font="sketchybar-app-font:Regular:17"
+	icon.font="$SKETCHY_FONT:18"
 	icon.color="$SKY"
 )
 

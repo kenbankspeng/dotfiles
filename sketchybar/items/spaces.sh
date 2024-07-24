@@ -12,10 +12,12 @@ for i in "${!SPACE_ICONS[@]}"; do
     icon="${SPACE_ICONS[i]}"
     icon.padding_left=10
     icon.padding_right=10
-    padding_left=2
-    padding_right=2
-    label.padding_right=20
-    label.font="sketchybar-app-font:Regular:16"
+    padding_left=5
+    padding_right=5
+    label.padding_left=0
+    label.padding_right=12
+    label.font="$SKETCHY_FONT:$SKETCHY_FONTSIZE"
+    icon.font="$FONT:$FONTSIZE"
     script="$PLUGIN_DIR/space.sh"
   )
 

@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 export FONT="SF Pro:Semibold"
-export FONTSIZE=15
-export APPFONT="sketchybar-app-font:Regular"
-export APPFONTSIZE=17
+export FONTSIZE=13
+export SKETCHY_FONT="sketchybar-app-font:Regular"
+export SKETCHY_FONTSIZE=16
 
 #
 #
