@@ -67,14 +67,14 @@ local colorscheme = {
       mocha.text,   -- white
    },
    ansi = {
-      mocha.crust,      -- black
-      mocha.red,        -- red   (yazi catppucin theme lets a red slip through)
-      mocha.green,      -- green (yazi catppucin theme lets a green slip through)
-      mocha.darkyellow, -- yellow
-      mocha.darkblue,   -- blue
-      mocha.darkpeach,  -- purple (orange)
-      mocha.darkteal,   -- cyan
-      mocha.text,       -- white
+      mocha.crust,  -- black
+      mocha.red,    -- red
+      mocha.green,  -- green
+      mocha.yellow, -- yellow
+      mocha.blue,   -- blue
+      mocha.peach,  -- purple (orange)
+      mocha.teal,   -- cyan
+      mocha.text,   -- white
    },
    tab_bar = {
       background = 'rgba(0, 0, 0, 0.4)',
