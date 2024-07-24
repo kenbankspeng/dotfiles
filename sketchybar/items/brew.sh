@@ -5,8 +5,6 @@
 
 props=(
 	icon=􀐛
-	label=Brew
-	icon.color="$BLUE"
 	padding_right=10
 	padding_left=0
 	script="$PLUGIN_DIR/brew.sh"

@@ -5,8 +5,6 @@
 
 props=(
 	icon=􀐛
-	label=Mise
-	icon.color="$BLUE"
 	padding_right=10
 	padding_left=0
 	script="$PLUGIN_DIR/mise.sh"

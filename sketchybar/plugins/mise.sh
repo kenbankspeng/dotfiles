@@ -1,50 +1,33 @@
 #!/bin/bash
 
-mouse_click() {
-	sketchybar --set $NAME label="Mise"
-	prev=$(cat /tmp/mise_count)
-	sleep 2
-	sketchybar --set $NAME label="$prev"
-}
+source "$CONFIG_DIR/colors.sh"
 
-update() {
-	source "$CONFIG_DIR/colors.sh"
+# reprocess on mouse click
+sketchybar --set "$NAME" label=Mise icon.color="$BLUE"
 
-	count=$(mise outdated | wc -l)
-	if [ -n "$count" ]; then count=$(echo $((count - 1))); fi
-	sleep 10
+count=$(mise outdated | wc -l)
+if [ -n "$count" ]; then count=$(echo $((count - 1))); fi
+sleep 3
 
-	case "$count" in
-	0)
-		color=$GREEN
-		count=􀆅
-		;;
-	[1-2])
-		color=$YELLOW
-		;;
-	[3-4])
-		color=$ORANGE
-		;;
-	*)
-		color=$RED
-		;;
-	esac
-
-	props=(
-		label="$count"
-		icon.color="$color"
-		label.color="$color"
-	)
-	sketchybar --set "$NAME" "${props[@]}"
-
-	echo $count >/tmp/mise_count
-}
-
-case "$SENDER" in
-"mouse.clicked")
-	mouse_click
+case "$count" in
+0)
+	color=$GREEN
+	count=􀆅
+	;;
+[1-2])
+	color=$YELLOW
+	;;
+[3-4])
+	color=$ORANGE
 	;;
 *)
-	update
+	color=$RED
 	;;
 esac
+
+props=(
+	label="$count"
+	icon.color="$color"
+	label.color="$color"
+)
+sketchybar --set "$NAME" "${props[@]}"
