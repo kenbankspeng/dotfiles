@@ -83,6 +83,7 @@ source $ITEM_DIR/volume.sh
 source $ITEM_DIR/disk.sh
 source $ITEM_DIR/cpu.sh
 source $ITEM_DIR/brew.sh
+source $ITEM_DIR/mise.sh
 
 ##### Finalizing Setup #####
 sketchybar --update

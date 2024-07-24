@@ -5,13 +5,13 @@
 
 props=(
 	icon=􀐛
-	label=Brew
+	label=Mise
 	icon.color="$BLUE"
 	padding_right=10
 	padding_left=0
-	script="$PLUGIN_DIR/brew.sh"
+	script="$PLUGIN_DIR/mise.sh"
 )
-sketchybar --add event brew_update \
-	--add item brew right \
-	--set brew "${props[@]}" \
-	--subscribe brew brew_update mouse.clicked
+sketchybar --add event mise_update \
+	--add item mise right \
+	--set mise "${props[@]}" \
+	--subscribe mise mise_update mouse.clicked

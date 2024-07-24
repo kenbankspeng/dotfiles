@@ -11,12 +11,6 @@ alpha() {
   echo 0x${new_alpha}${rgb_part} # new color
 }
 
-# Example usage
-original_color=0xff123456
-new_alpha=80
-
-new_color=$(change_alpha $original_color $new_alpha)
-
 # The $SELECTED variable is available for space components
 
 source "$CONFIG_DIR/colors.sh"
