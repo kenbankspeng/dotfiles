@@ -16,19 +16,20 @@ elif [[ $ipaddress != "" ]]; then
 else
   bg=$BLACK
   color=$RED
-  text="Not Connected"
+  text="— No WiFi —"
 fi
 
 props=(
+  background.color=$bg
   background.padding_left=0
   background.padding_right=0
-  label.padding_left=0
-  label.padding_right=0
-  icon.padding_left=0
-  icon.padding_right=0
+  icon.drawing=off
+  label.align="left"
+  label.padding_left=10
+  label.padding_right=10
   label="$text"
   label.color=$color
   label.font="$FONT:12"
-  background.color=$bg
+  width=75
 )
 sketchybar --set $NAME "${props[@]}"
