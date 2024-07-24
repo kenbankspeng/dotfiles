@@ -8,24 +8,27 @@ isVpn=$(scutil --nwi | grep -m1 'utun' | awk '{ print $1 }')
 if [[ $isVpn != "" ]]; then
   bg=$BLUE
   color=$BLACK
-  icon="􀎠"
   text="VPN"
 elif [[ $ipaddress != "" ]]; then
   bg=$BLACK
   color=$BLUE
-  icon="􀙇"
   text=$ipaddress
 else
   bg=$BLACK
   color=$RED
-  icon="􀙥"
   text="Not Connected"
 fi
 
-sketchybar --set $NAME \
-  icon=$icon \
-  label="$text" \
-  icon.color=$color \
-  label.color=$color \
-  label.font="$FONT:12" \
+props=(
+  background.padding_left=0
+  background.padding_right=0
+  label.padding_left=0
+  label.padding_right=0
+  icon.padding_left=0
+  icon.padding_right=0
+  label="$text"
+  label.color=$color
+  label.font="$FONT:12"
   background.color=$bg
+)
+sketchybar --set $NAME "${props[@]}"

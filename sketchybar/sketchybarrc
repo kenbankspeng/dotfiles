@@ -77,7 +77,7 @@ source $ITEM_DIR/spaces.sh
 ##### Right Side Of Notch Items #####
 
 ##### Right Side Items #####
-source $ITEM_DIR/network.sh
+source $ITEM_DIR/wifi.sh
 source $ITEM_DIR/battery.sh
 source $ITEM_DIR/volume.sh
 source $ITEM_DIR/disk.sh
