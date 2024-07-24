@@ -3,7 +3,7 @@
 props=(
 	icon="􀣺"
 	icon.font="sketchybar-app-font:Regular:17"
-	icon.color="$WHITE"
+	icon.color="$SKY"
 )
 
 sketchybar --add item apple.logo left \
