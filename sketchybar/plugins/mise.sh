@@ -16,20 +16,16 @@ update() {
 
 	case "$count" in
 	0)
-		echo "case: 0"
 		color=$GREEN
 		count=􀆅
 		;;
 	[1-2])
-		echo "case: 1-2"
 		color=$YELLOW
 		;;
 	[3-4])
-		echo "case: 3-4"
 		color=$ORANGE
 		;;
 	*)
-		echo "case: *"
 		color=$RED
 		;;
 	esac
@@ -41,7 +37,6 @@ update() {
 	)
 	sketchybar --set "$NAME" "${props[@]}"
 
-	echo "count: $count"
 	echo $count >/tmp/mise_count
 }
 
