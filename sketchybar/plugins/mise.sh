@@ -5,8 +5,7 @@ source "$CONFIG_DIR/colors.sh"
 # reprocess on mouse click
 sketchybar --set "$NAME" label=Mise icon.color="$BLUE"
 
-count=$(mise outdated | wc -l)
-if [ -n "$count" ]; then count=$(echo $((count - 1))); fi
+count=$(mise list | grep -o '\boutdated\b' | wc -l | tr -d '[:space:]')
 sleep 3
 
 case "$count" in
