@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+export FONT="SF Pro:Semibold"
+export FONTSIZE=15
+export APPFONT="sketchybar-app-font:Regular"
+export APPFONTSIZE=17
+
 #
 #
 # Catppuccin Macchiato palette
@@ -7,6 +12,9 @@
 #
 
 export BLACK=0xff000000
+export WHITE=0xffffffff
+export GREY=0xff606060
+
 export BASE=0xff24273a
 export MANTLE=0xff1e2030
 export CRUST=0xff181926

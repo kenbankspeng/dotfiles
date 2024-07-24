@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 
-SPACE_ICONS=("1" "2" "3" "4" "5" "6" "7" "8" "9" "10" "11" "12")
-
-# Destroy space on right click, focus space on left click.
-# New space by left clicking separator (>)
+SPACE_ICONS=("1" "2" "3" "4" "5" "6" "7" "8" "9" "10")
 
 sid=0
 spaces=()
@@ -26,25 +23,7 @@ for i in "${!SPACE_ICONS[@]}"; do
     --set space.$sid "${space[@]}"
 done
 
-space_creator=(
-  icon=􀆊
-  icon.font="$FONT:Heavy:16.0"
-  padding_left=10
-  padding_right=8
-  label.drawing=off
-  display=active
-  # click_script='yabai -m space --create'
-  script="$PLUGIN_DIR/space_windows.sh"
-  icon.color=$ACCENT_COLOR
-)
-
 sketchybar --add item space_creator left \
-  --set space_creator "${space_creator[@]}" \
+  --set space_creator \
+  script="$PLUGIN_DIR/space_windows.sh" \
   --subscribe space_creator space_windows_change
-
-#  front_app_switched
-
-sketchybar --add bracket spaces '/space\..*/' \
-  --set spaces background.color="$BASE" \
-  background.corner_radius=4 \
-  background.height=25

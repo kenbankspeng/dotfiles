@@ -54,9 +54,9 @@ sketchybar --bar "${bar[@]}"
 
 ##### Changing Defaults #####
 default=(
-  icon.font="SF Pro:Semibold:15.0"
+  icon.font="$FONT:$FONTSIZE"
   icon.color=$TEXT
-  label.font="SF Pro:Semibold:15.0"
+  label.font="$FONT:$FONTSIZE"
   label.color=$TEXT
   background.color=$ITEM_BG_COLOR
   background.corner_radius=5
@@ -71,7 +71,7 @@ default=(
 sketchybar --default "${default[@]}"
 
 ##### Left Side Items #####
-# source $ITEM_DIR/spaces.sh
+source $ITEM_DIR/apple.sh
 source $ITEM_DIR/spaces.sh
 
 ##### Right Side Of Notch Items #####
