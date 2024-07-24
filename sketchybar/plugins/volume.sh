@@ -1,23 +1,32 @@
 #!/usr/bin/env bash
 
+source "$CONFIG_DIR/colors.sh"
+
 # The volume_change event supplies a $INFO variable in which the current volume
 # percentage is passed to the script.
 
 if [ "$SENDER" = "volume_change" ]; then
-  VOLUME=$INFO
+  volumn=$INFO
 
-  case $VOLUME in
+  case $volumn in
   [6-9][0-9] | 100)
-    ICON="􀊩"
+    icon="􀊩"
     ;;
   [3-5][0-9])
-    ICON="􀊥"
+    icon="􀊥"
     ;;
   [1-9] | [1-2][0-9])
-    ICON="􀊡"
+    icon="􀊡"
     ;;
-  *) ICON="􀊣" ;;
+  *) icon="􀊣" ;;
   esac
 
-  sketchybar --set $NAME icon="$ICON" label="$VOLUME%" label.font="SF Pro:Semibold:12"
+  props=(
+    icon="$icon"
+    icon.color=$LAVENDER
+    label="$volumn%"
+    label.color=$LAVENDER
+    label.font="$FONT:12"
+  )
+  sketchybar --set $NAME "${props[@]}"
 fi

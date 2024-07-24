@@ -1,35 +1,39 @@
 #!/usr/bin/env bash
 
-PERCENTAGE=$(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)
-CHARGING=$(pmset -g batt | grep 'AC Power')
+source "$CONFIG_DIR/colors.sh"
 
-if [ $PERCENTAGE = "" ]; then
+percentage=$(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)
+charging=$(pmset -g batt | grep 'AC Power')
+
+if [ $percentage = "" ]; then
   exit 0
 fi
 
-case ${PERCENTAGE} in
+case ${percentage} in
 9[0-9] | 100)
-  ICON="􀛨"
+  icon="􀛨"
   ;;
 [6-8][0-9])
-  ICON="􀺸"
+  icon="􀺸"
   ;;
 [3-5][0-9])
-  ICON="􀺶"
+  icon="􀺶"
   ;;
 [1-2][0-9])
-  ICON="􀛩"
+  icon="􀛩"
   ;;
-*) ICON="􀛪" ;;
+*) icon="􀛪" ;;
 esac
 
-if [[ $CHARGING != "" ]]; then
-  ICON="􀢋"
+if [[ $charging != "" ]]; then
+  icon="􀢋"
 fi
 
-# The item invoking this script (name $NAME) will get its icon and label
-# updated with the current battery status
-sketchybar --set $NAME \
-  icon="$ICON" \
-  label="${PERCENTAGE}%" \
-  label.font="SF Pro:Semibold:12"
+props=(
+  icon="$icon"
+  icon.color=$GREEN
+  label="${percentage}%"
+  label.color=$GREEN
+  label.font="$FONT:12"
+)
+sketchybar --set $NAME "${props[@]}"

@@ -1,27 +1,31 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-source "$CONFIG_DIR/colors.sh" # Loads all defined colors
+source "$CONFIG_DIR/colors.sh"
 
-IP_ADDRESS=$(scutil --nwi | grep address | sed 's/.*://' | tr -d ' ' | head -1)
-IS_VPN=$(scutil --nwi | grep -m1 'utun' | awk '{ print $1 }')
+ipaddress=$(scutil --nwi | grep address | sed 's/.*://' | tr -d ' ' | head -1)
+isVpn=$(scutil --nwi | grep -m1 'utun' | awk '{ print $1 }')
 
-if [[ $IS_VPN != "" ]]; then
-  color=$ACCENT1
+if [[ $isVpn != "" ]]; then
+  bg=$BLUE
+  color=$BLACK
   icon="􀎠"
-  label="VPN"
-elif [[ $IP_ADDRESS != "" ]]; then
+  text="VPN"
+elif [[ $ipaddress != "" ]]; then
+  bg=$BLACK
   color=$BLUE
   icon="􀙇"
-  label=$IP_ADDRESS
+  text=$ipaddress
 else
+  bg=$BLACK
   color=$RED
   icon="􀙥"
-  label="Not Connected"
+  text="Not Connected"
 fi
 
 sketchybar --set $NAME \
   icon=$icon \
-  label="$label" \
+  label="$text" \
   icon.color=$color \
   label.color=$color \
-  label.font="SF Pro:Semibold:12"
+  label.font="$FONT:12" \
+  background.color=$bg
