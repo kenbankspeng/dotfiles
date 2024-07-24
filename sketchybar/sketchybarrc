@@ -30,12 +30,12 @@ ITEM_DIR="$CONFIG_DIR/items"
 # shadow	        <boolean>	off	If the bar should draw a shadow
 
 bar=(
-  color=$BAR_COLOR
+  color=$BLACK
   border_color=0xffff0000
   position=top
-  height=31
+  height=36
   margin=0
-  y_offset=32
+  y_offset=0
   corner_radius=0
   border_width=0
   blur_radius=0
@@ -45,7 +45,7 @@ bar=(
   notch_offset=0
   display=all
   hidden=off
-  topmost=on
+  topmost=off
   sticky=on
   font_smoothing=off
   shadow=off
@@ -71,6 +71,7 @@ default=(
 sketchybar --default "${default[@]}"
 
 ##### Left Side Items #####
+# source $ITEM_DIR/spaces.sh
 source $ITEM_DIR/spaces.sh
 
 ##### Right Side Of Notch Items #####

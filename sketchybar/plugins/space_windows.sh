@@ -4,19 +4,19 @@ if [ "$SENDER" = "space_windows_change" ]; then
   space=$(echo "$INFO" | jq -r '.space')
   apps="$(echo "$INFO" | jq -r '.apps | keys[]')"
 
-  label="-"
-  if [ -n "$apps" ] && [ "$space" != "null" ]; then
-    label=""
+  icon_strip="-"
+  if [ -n "${apps}" ]; then
+    icon_strip=""
     while read -r app; do
-      icon="$($CONFIG_DIR/plugins/icon_map.sh "$app")"
-      label+="$icon"
+      icon="$($CONFIG_DIR/icon_map.sh "$app")"
+      icon_strip+="$icon"
     done <<<"${apps}"
   fi
 
   if [ -n "$space" ]; then
     sketchybar --set space.$space \
       icon="$space" \
-      label="$label" \
+      label="$icon_strip" \
       padding_left=10 \
       padding_right=10 \
       icon.padding_left=10 \

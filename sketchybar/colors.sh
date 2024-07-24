@@ -6,6 +6,7 @@
 #
 #
 
+export BLACK=0xff000000
 export BASE=0xff24273a
 export MANTLE=0xff1e2030
 export CRUST=0xff181926
@@ -38,7 +39,6 @@ export FLAMINGO=0xfff0c6c6
 export ROSEWATER=0xfff4dbd6
 
 # General bar colors
-export BAR_COLOR=$BASE
 export ICON_COLOR=$TEXT  # Color of all icons
 export LABEL_COLOR=$TEXT # Color of all labels
 export ITEM_BG_COLOR=0x00000000

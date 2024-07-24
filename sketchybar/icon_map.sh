@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ### START-OF-ICON-MAP
-function __icon_map() {
+function icon_map() {
      case "$1" in
 
      # from SF symbols app
@@ -662,5 +662,5 @@ function __icon_map() {
 }
 ### END-OF-ICON-MAP
 
-__icon_map "$1"
+icon_map "$1"
 echo "${icon_result}"

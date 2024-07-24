@@ -9,16 +9,14 @@ index=$(echo "$NAME" | awk -F. '{print $2}')
 accent=$(eval echo \$ACCENT$index)
 
 if [ $SELECTED = true ]; then
-  bg=$accent
-  text=$BAR_COLOR
-else
-  bg=$BAR_COLOR
-  text=$accent
+  border=$accent
 fi
 
 props=(
-  background.color=$bg
-  label.color=$text
-  icon.color=$text
+  # background.color=$bg
+  background.border_width=1
+  background.border_color=$border
+  label.color=$accent
+  icon.color=$accent
 )
 sketchybar --set $NAME "${props[@]}"
