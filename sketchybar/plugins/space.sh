@@ -39,24 +39,16 @@ update() {
 }
 
 if [ "$BUTTON" == "left" ]; then
-  echo "left"
   if [ "$SELECTED" == "false" ]; then
-    echo "selected false"
     yabai -m space --focus "$index"
   else
-    echo "selected true"
-    yabai -m space --focus "$index"
     if [ "$(space_type "$index")" == "stack" ]; then
-      echo "space is stack"
       first_window=$(first_window "$index")
       last_window=$(last_window "$index")
-      echo "first_window $first_window"
-      echo "last_window $last_window"
       yabai -m window "$first_window" --stack "$last_window"
     fi
   fi
 elif [ "$BUTTON" == "right" ]; then
-  echo "right"
   toggle_layout "$index"
 else
   update
