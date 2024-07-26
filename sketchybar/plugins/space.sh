@@ -1,37 +1,42 @@
 #!/usr/bin/env bash
 
-# modify alpha of a 0xaarrggbb color
+index=$(echo "$NAME" | awk -F. '{print $2}')
+
+# helper to modify alpha of a 0xaarrggbb color
 alpha() {
   local color=$1
   local new_alpha=$2
-
-  # Extract the remaining part of the color (rrggbb)
   local rgb_part=${color:4}
-
   echo 0x${new_alpha}${rgb_part} # new color
 }
 
-# The $SELECTED variable is available for space components
+update() {
+  # The $SELECTED variable is available for space components
 
-source "$CONFIG_DIR/colors.sh"
+  source "$CONFIG_DIR/colors.sh"
+  # space.index: for index 1 to 10, accent is ACCENT($index)
+  accent=$(eval echo \$ACCENT$index)
 
-# space.index: for index 1 to 10, accent is ACCENT($index)
-index=$(echo "$NAME" | awk -F. '{print $2}')
-accent=$(eval echo \$ACCENT$index)
+  if [ $SELECTED = true ]; then
+    border=$(alpha $accent 80) # 80 hex
+    bg=$(alpha $accent 40)     # 40 hex
+  else
+    border=$TRANSPARENT
+    bg=$TRANSPARENT
+  fi
 
-if [ $SELECTED = true ]; then
-  border=$(alpha $accent 80) # 80 hex
-  bg=$(alpha $accent 40)     # 40 hex
+  props=(
+    background.color=$bg
+    background.border_width=1
+    background.border_color=$border
+    label.color=$accent
+    icon.color=$accent
+  )
+  sketchybar --set $NAME "${props[@]}"
+}
+
+if [ "$BUTTON" != "" ]; then
+  yabai -m space --focus $index
 else
-  border=$TRANSPARENT
-  bg=$TRANSPARENT
+  update
 fi
-
-props=(
-  background.color=$bg
-  background.border_width=1
-  background.border_color=$border
-  label.color=$accent
-  icon.color=$accent
-)
-sketchybar --set $NAME "${props[@]}"

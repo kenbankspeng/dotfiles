@@ -20,12 +20,13 @@ for i in "${!SPACE_ICONS[@]}"; do
     icon.font="$FONT:$FONTSIZE"
     script="$PLUGIN_DIR/space.sh"
   )
-
   sketchybar --add space space.$sid left \
-    --set space.$sid "${space[@]}"
+    --set space.$sid "${space[@]}" \
+    --subscribe space.$sid mouse.clicked
 done
 
-sketchybar --add item space_creator left \
-  --set space_creator \
+# reconstruct the bar when a window changes
+sketchybar --add item space_windows left \
+  --set space_windows \
   script="$PLUGIN_DIR/space_windows.sh" \
-  --subscribe space_creator space_windows_change
+  --subscribe space_windows space_windows_change
