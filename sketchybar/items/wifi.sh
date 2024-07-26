@@ -10,8 +10,8 @@ sketchybar --add item ip_address right \
 props=(
 	icon.drawing=off
 	label.drawing=off
-	alias.color=$GREEN
 	width=28
+	script="$PLUGIN_DIR/wifi.sh"
 )
 sketchybar --add alias "Control Center,WiFi" right \
 	--rename "Control Center,WiFi" wifi_alias \

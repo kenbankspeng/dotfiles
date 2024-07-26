@@ -29,4 +29,7 @@ props=(
   label.font="$FONT:12"
   width=75
 )
-sketchybar --set $NAME "${props[@]}"
+
+# update wifi_alias and ip_address
+sketchybar --set wifi_alias alias.color="$color"
+sketchybar --set ip_address "${props[@]}"
