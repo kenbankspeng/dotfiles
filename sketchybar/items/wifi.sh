@@ -10,7 +10,7 @@ sketchybar --add item ip_address right \
 props=(
 	icon.drawing=off
 	label.drawing=off
-	alias.color=$BLUE
+	alias.color=$GREEN
 	width=28
 )
 sketchybar --add alias "Control Center,WiFi" right \

@@ -6,15 +6,12 @@ ipaddress=$(scutil --nwi | grep address | sed 's/.*://' | tr -d ' ' | head -1)
 isVpn=$(scutil --nwi | grep -m1 'utun' | awk '{ print $1 }')
 
 if [[ $isVpn != "" ]]; then
-  bg=$BLUE
-  color=$BLACK
+  color=$MAROON
   text="VPN"
 elif [[ $ipaddress != "" ]]; then
-  bg=$BLACK
-  color=$BLUE
+  color=$GREEN
   text=$ipaddress
 else
-  bg=$BLACK
   color=$RED
   text="— No WiFi —"
 fi

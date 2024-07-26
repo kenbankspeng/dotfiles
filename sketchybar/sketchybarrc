@@ -30,7 +30,7 @@ ITEM_DIR="$CONFIG_DIR/items"
 # shadow	        <boolean>	off	If the bar should draw a shadow
 
 bar=(
-  color=$BLACK
+  color=$BAR
   border_color=$TRANSPARENT
   border_width=0
   position=top
@@ -58,7 +58,7 @@ default=(
   icon.color=$TEXT
   label.font="$FONT:$FONTSIZE"
   label.color=$TEXT
-  background.color=$BLACK
+  background.color=$BAR
   background.corner_radius=5
   background.height=24
   padding_left=6

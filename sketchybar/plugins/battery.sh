@@ -31,9 +31,9 @@ fi
 
 props=(
   icon="$icon"
-  icon.color=$GREEN
+  icon.color=$SKY
   label="${percentage}%"
-  label.color=$GREEN
+  label.color=$SKY
   label.font="$FONT:12"
   label.padding_right=20
 )

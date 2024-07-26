@@ -19,5 +19,6 @@
     "next-env.d.ts": true,
     "node_modules/": true
   },
-  "hide-files.files": []
+  "hide-files.files": [],
+  "asciidoc.antora.enableAntoraSupport": false
 }
