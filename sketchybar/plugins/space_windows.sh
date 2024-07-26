@@ -2,7 +2,7 @@
 
 if [ "$SENDER" = "space_windows_change" ]; then
   space_number=$(echo "$INFO" | jq -r '.space')
-  apps="$(echo "$INFO" | jq -r '.apps | keys[]')"
+  apps="$(echo "$INFO" | jq -r '.apps | to_entries | map(.key as $k | range(.value) | $k) | .[]')"
 
   icon_strip="—"
   if [ -n "${apps}" ]; then
