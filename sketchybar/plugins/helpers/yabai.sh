@@ -31,14 +31,13 @@ toggle_layout() {
 
   # hack bug workaround
   islast=$(yabai -m query --spaces | jq '.[-1]."has-focus" == true')
-  echo "islast: $islast"
   if [ "$islast" == "true" ]; then
     yabai -m space --focus prev
-    sleep 0.1
+    sleep 0.2
     yabai -m space --focus next
   else
     yabai -m space --focus next
-    sleep 0.1
+    sleep 0.2
     yabai -m space --focus prev
   fi
 }
