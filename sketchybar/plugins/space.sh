@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+source "$CONFIG_DIR/plugins/helpers/yabai.sh"
+
+# get the num from space.<num>
 index=$(echo "$NAME" | awk -F. '{print $2}')
 
 # helper to modify alpha of a 0xaarrggbb color
@@ -17,9 +20,9 @@ update() {
   # space.index: for index 1 to 10, accent is ACCENT($index)
   accent=$(eval echo \$ACCENT$index)
 
-  if [ $SELECTED = true ]; then
-    border=$(alpha $accent 80) # 80 hex
-    bg=$(alpha $accent 40)     # 40 hex
+  if [ "$SELECTED" = true ]; then
+    border=$(alpha "$accent" 80) # 80 hex
+    bg=$(alpha "$accent" 40)     # 40 hex
   else
     border=$TRANSPARENT
     bg=$TRANSPARENT
@@ -32,11 +35,29 @@ update() {
     label.color=$accent
     icon.color=$accent
   )
-  sketchybar --set $NAME "${props[@]}"
+  sketchybar --set "$NAME" "${props[@]}"
 }
 
-if [ "$BUTTON" != "" ]; then
-  yabai -m space --focus $index
+if [ "$BUTTON" == "left" ]; then
+  echo "left"
+  if [ "$SELECTED" == "false" ]; then
+    echo "selected false"
+    yabai -m space --focus "$index"
+  else
+    echo "selected true"
+    yabai -m space --focus "$index"
+    if [ "$(space_type "$index")" == "stack" ]; then
+      echo "space is stack"
+      first_window=$(first_window "$index")
+      last_window=$(last_window "$index")
+      echo "first_window $first_window"
+      echo "last_window $last_window"
+      yabai -m window "$first_window" --stack "$last_window"
+    fi
+  fi
+elif [ "$BUTTON" == "right" ]; then
+  echo "right"
+  toggle_layout "$index"
 else
   update
 fi
