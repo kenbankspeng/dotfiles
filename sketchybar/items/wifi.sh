@@ -8,6 +8,7 @@ sketchybar --add item ip_address right \
 
 # wifi alias
 props=(
+	update_freq=30
 	icon.drawing=off
 	label.drawing=off
 	width=28
