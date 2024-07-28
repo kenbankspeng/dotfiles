@@ -15,30 +15,30 @@ color_preselect=0xE02d74da
 #
 # GLOBAL SETTINGS
 #
-global_settings=(      
-    debug_output                 off
-    external_bar                 off:40:0 
-    menubar_opacity              1.0
-    mouse_follows_focus          off            
-    focus_follows_mouse          autoraise  
-    display_arrangement_order    default        
-    window_origin_display        default 
-    window_placement             second_child   
-    window_zoom_persist          on             
-    window_shadow                off  
-    window_opacity               off
-    window_opacity_duration      0.0  
-    active_window_opacity        1.00            
-    normal_window_opacity        1.00
-    window_animation_duration    0.0            
-    window_animation_easing      ease_out_circ  
-    insert_feedback_color        ${color_preselect}
-    split_ratio                  0.50 
-    split_type                   auto  
-    mouse_modifier               fn             
-    mouse_action1                move           
-    mouse_action2                resize 
-    mouse_drop_action            swap
+global_settings=(
+    debug_output off
+    external_bar off:40:0
+    menubar_opacity 1.0
+    mouse_follows_focus off
+    focus_follows_mouse autoraise
+    display_arrangement_order default
+    window_origin_display default
+    window_placement second_child
+    window_zoom_persist on
+    window_shadow off
+    window_opacity off
+    window_opacity_duration 0.0
+    active_window_opacity 1.00
+    normal_window_opacity 1.00
+    window_animation_duration 0.0
+    window_animation_easing ease_out_circ
+    insert_feedback_color ${color_preselect}
+    split_ratio 0.50
+    split_type auto
+    mouse_modifier fn
+    mouse_action1 move
+    mouse_action2 resize
+    mouse_drop_action swap
 )
 yabai -m config "${global_settings[@]}"
 
@@ -47,13 +47,13 @@ yabai -m config "${global_settings[@]}"
 # yabai -m config [--space <SPACE_SEL>] <space setting>
 #
 space_settings=(
-    layout                       bsp 
-    top_padding                  ${gap_top}
-    bottom_padding               ${gap_bottom}
-    left_padding                 ${gap_left}
-    right_padding                ${gap_right}
-    window_gap                   ${gap_inner}
-    auto_balance                 off
+    layout bsp
+    top_padding ${gap_top}
+    bottom_padding ${gap_bottom}
+    left_padding ${gap_left}
+    right_padding ${gap_right}
+    window_gap ${gap_inner}
+    auto_balance off
 )
 yabai -m config "${space_settings[@]}"
 
@@ -61,22 +61,19 @@ yabai -m config "${space_settings[@]}"
 # WINDOW SETTINGS managed with skhd / sketchybar
 #
 
-
 #
 # RULES
 #
-# yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
-# yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
-# yabai -m rule --add label="macfeh" app="^macfeh$" manage=off
-# yabai -m rule --add label="System Preferences" app="^System Preferences$" title=".*" manage=off
-# yabai -m rule --add label="App Store" app="^App Store$" manage=off
-# yabai -m rule --add label="Activity Monitor" app="^Activity Monitor$" manage=off
-# yabai -m rule --add label="KeePassXC" app="^KeePassXC$" manage=off
-# yabai -m rule --add label="Calculator" app="^Calculator$" manage=off
-# yabai -m rule --add label="Dictionary" app="^Dictionary$" manage=off
-# yabai -m rule --add label="mpv" app="^mpv$" manage=off
-# yabai -m rule --add label="Software Update" title="Software Update" manage=off
-# yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
+
+yabai -m rule --add label="Finder" app="^Finder$" manage=off
+yabai -m rule --add label="System Settings" app="^System Settings$" manage=off
+yabai -m rule --add label="Activity Monitor" app="^Activity Monitor$" manage=off
+yabai -m rule --add label="Calculator" app="^Calculator$" manage=off
+yabai -m rule --add label="Software Update" title="Software Update" manage=off
+yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
+yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
+yabai -m rule --add label="App Store" app="^App Store$" manage=off
+yabai -m rule --add label="Dictionary" app="^Dictionary$" manage=off
 
 #
 # SIGNALS
