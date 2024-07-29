@@ -89,8 +89,7 @@ yabai -m rule --add label="Dictionary" app="^Dictionary$" manage=off
 # add these lines to the bottom of your yabairc file
 # they're needed to trigger a custom event in sketchybar that we will later define in sketchybarrc
 
-# TODO: test this
-yabai -m signal --add event=window_created action="sketchybar -m --trigger window_change &> /dev/null"
-yabai -m signal --add event=window_destroyed action="sketchybar -m --trigger window_change &> /dev/null"
+yabai -m signal --add event=window_created action="sketchybar --trigger window_changed &> /dev/null"
+yabai -m signal --add event=window_destroyed action="sketchybar --trigger window_changed &> /dev/null"
 
 set +x
