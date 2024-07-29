@@ -56,6 +56,34 @@ echo "$query" | jq -c '.[]' | while IFS= read -r item; do
       sketchybar --remove window.$sid.$wid
     done
   fi
+
+  # Group windows in the same space with a bracket
+  bracket_cache_file="$CACHE_DIR/space_bracket_$sid"
+  members=($(seq 0 $((current_count - 1)) | sed "s/^/window.$sid./"))
+
+  if [ ${#members[@]} -gt 0 ]; then
+    echo "space$sid" "${members[@]}"
+    if [ ! -f "$bracket_cache_file" ]; then
+      sketchybar --add bracket "space$sid" "${members[@]}"
+      echo "space$sid" >"$bracket_cache_file"
+    fi
+    props=(
+      padding_left=10
+      padding_right=10
+      background.border_color=0xff0000ff
+      background.border_width=2
+      background.corner_radius=4
+      background.height=30
+    )
+    sketchybar --set "space$sid" "${props[@]}"
+  else
+    if [ -f "$bracket_cache_file" ]; then
+      sketchybar --remove bracket "space$sid"
+      # Properly remove the bracket entry from the cache
+      sed -i '' "/^space$sid/d" "$bracket_cache_file"
+    fi
+  fi
+
 done
 
 # Sort the items by sid and wid
