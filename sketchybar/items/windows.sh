@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Remove the cache directory and its contents
+# this cache is cleared on every startup so windows get created
 rm -rf "$CACHE_DIR"
 
 sketchybar --add event window_changed \
