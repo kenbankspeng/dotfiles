@@ -57,3 +57,9 @@ echo "$query" | jq -c '.[]' | while IFS= read -r item; do
     done
   fi
 done
+
+# Sort the items by sid and wid
+all_items=($(sketchybar --query bar | jq -r '.items[]' | grep '^window\.' | sort -t '.' -k2,2n -k3,3n))
+
+# Reorder items using sketchybar --reorder
+sketchybar --reorder "${all_items[@]}"
