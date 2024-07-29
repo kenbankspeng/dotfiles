@@ -68,11 +68,18 @@ echo "$query" | jq -c '.[]' | while IFS= read -r item; do
   members=($(seq 0 $((current_count - 1)) | sed "s/^/window.$sid./"))
 
   if [ ${#members[@]} -gt 0 ]; then
-    echo "space$sid" "${members[@]}"
-    if ! grep -q "^space$sid" "$bracket_cache_file"; then
+
+    existing_entry=$(grep "^space$sid" "$bracket_cache_file")
+    if [ -z "$existing_entry" ]; then
       sketchybar --add bracket "space$sid" "${members[@]}"
-      echo "space$sid" >>"$bracket_cache_file"
+      echo "space$sid ${members[*]}" >>"$bracket_cache_file"
+    elif [ "$existing_entry" != "space$sid ${members[*]}" ]; then
+      sketchybar --remove bracket "space$sid"
+      sketchybar --add bracket "space$sid" "${members[@]}"
+      sed -i '' "/^space$sid/d" "$bracket_cache_file"
+      echo "space$sid ${members[*]}" >>"$bracket_cache_file"
     fi
+
     space_props=(
       padding_left=10
       padding_right=10
@@ -89,6 +96,10 @@ echo "$query" | jq -c '.[]' | while IFS= read -r item; do
       sed -i '' "/^space$sid/d" "$bracket_cache_file"
     fi
   fi
+
+  # Debug echo to show the contents of the space bracket cache file
+  echo "Space Bracket Cache Contents:"
+  cat "$bracket_cache_file"
 done
 
 # Sort the items by sid and wid
