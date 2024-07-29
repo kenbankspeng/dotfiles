@@ -8,46 +8,16 @@ ACCENT_COLORS=($ACCENT1 $ACCENT2 $ACCENT3 $ACCENT4 $ACCENT5 $ACCENT6 $ACCENT7 $A
 CACHE_DIR="/tmp/sketchybar_window_cache"
 mkdir -p "$CACHE_DIR"
 
-# Get dynamic space information
-spaces_query=$(yabai -m query --spaces | jq '[.[] | {
-    space: .index,
-    visible: .visible
-}]')
-
-# Get dynamic window information grouped by space
-windows_query=$(yabai -m query --windows | jq '[group_by(.space)[] | {
-    space: .[0].space,
-    apps: [.[] | .app],
-    has_focus: (map(select(.["has-focus"] == true).app) | if length > 0 then .[0] else false end)
-}]')
+# Get space information, including windows
+spaces_query=$(yabai -m query --spaces)
 
 # Create and update windows dynamically
 echo "$spaces_query" | jq -c '.[]' | while IFS= read -r space_item; do
-  sid=$(echo "$space_item" | jq '.space')
-  visible=$(echo "$space_item" | jq '.visible')
-
-  # Find windows for the space
-  window_item=$(echo "$windows_query" | jq -c --argjson sid "$sid" 'map(select(.space == $sid)) | .[0]')
-
-  if [ "$window_item" != "null" ]; then
-    apps=($(echo "$window_item" | jq -r '.apps[]'))
-  else
-    apps=()
-  fi
-
-  # Load previous window count from cache
-  cache_file="$CACHE_DIR/space_$sid"
-  items_cache_file="$CACHE_DIR/items_$sid"
-  if [ -f "$cache_file" ]; then
-    prev_count=$(cat "$cache_file")
-  else
-    prev_count=0
-  fi
-
-  current_count=${#apps[@]}
-  echo "$current_count" >"$cache_file"
+  sid=$(echo "$space_item" | jq '.index')
+  current_count=$(echo "$space_item" | jq '.windows | length')
 
   # Track existing items
+  items_cache_file="$CACHE_DIR/items_$sid"
   if [ -f "$items_cache_file" ]; then
     existing_items=$(cat "$items_cache_file")
   else
@@ -56,7 +26,8 @@ echo "$spaces_query" | jq -c '.[]' | while IFS= read -r space_item; do
 
   # Allocate only needed items
   for ((wid = 0; wid < current_count; wid++)); do
-    app=${apps[$wid]}
+    window_id=$(echo "$space_item" | jq -r ".windows[$wid]")
+    app=$(yabai -m query --windows --window "$window_id" | jq -r '.app')
     icon="$($CONFIG_DIR/icon_map.sh "$app")"
 
     item_id="window.$sid.$wid"
@@ -77,7 +48,7 @@ echo "$spaces_query" | jq -c '.[]' | while IFS= read -r space_item; do
     sketchybar --set "$item_id" "${props[@]}" icon.drawing=on icon="$icon"
   done
 
-  # If there are no windows, show a '-' symbol
+  # If space is empty, show a '-' symbol
   if ((current_count == 0)); then
     item_id="window.$sid.0"
     if ! grep -q "$item_id" <<<"$existing_items"; then
@@ -89,16 +60,21 @@ echo "$spaces_query" | jq -c '.[]' | while IFS= read -r space_item; do
   fi
 
   # Remove any excess items dynamically and update the cache
-  if ((current_count < prev_count)); then
-    new_existing_items=""
-    for ((wid = 0; wid < current_count; wid++)); do
-      new_existing_items+="window.$sid.$wid"$'\n'
-    done
-    echo "$new_existing_items" >"$items_cache_file"
-    for ((wid = current_count; wid < prev_count; wid++)); do
-      sketchybar --remove window.$sid.$wid
-    done
+  new_existing_items=""
+  for ((wid = 0; wid < current_count; wid++)); do
+    new_existing_items+="window.$sid.$wid"$'\n'
+  done
+  if ((current_count == 0)); then
+    new_existing_items+="window.$sid.0"$'\n'
   fi
+  echo "$new_existing_items" >"$items_cache_file"
+
+  # Remove items that are no longer needed
+  for item in $existing_items; do
+    if ! grep -q "$item" <<<"$new_existing_items"; then
+      sketchybar --remove "$item"
+    fi
+  done
 
   # Group windows in the same space with a bracket
   bracket_cache_file="$CACHE_DIR/space_bracket_cache"
