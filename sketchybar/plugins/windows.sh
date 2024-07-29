@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source "$CONFIG_DIR/colors.sh"
+source "$CONFIG_DIR/env.sh"
 
 props=(
   label.drawing=off
@@ -12,6 +12,9 @@ props=(
   icon.padding_right=2
 )
 
+CACHE_DIR="/tmp/sketchybar_window_cache"
+mkdir -p "$CACHE_DIR"
+
 # Get dynamic window information grouped by space
 query=$(yabai -m query --windows | jq '[group_by(.space)[] | {
     space: .[0].space,
@@ -20,26 +23,37 @@ query=$(yabai -m query --windows | jq '[group_by(.space)[] | {
 }]')
 
 # Create and update windows dynamically
-echo $query | jq -c '.[]' | while IFS= read -r item; do
+echo "$query" | jq -c '.[]' | while IFS= read -r item; do
   sid=$(echo "$item" | jq '.space')
   apps=($(echo "$item" | jq -r '.apps[]'))
 
+  # Load previous window count from cache
+  cache_file="$CACHE_DIR/space_$sid"
+  if [ -f "$cache_file" ]; then
+    prev_count=$(cat "$cache_file")
+  else
+    prev_count=0
+  fi
+
+  current_count=${#apps[@]}
+  echo "$current_count" >"$cache_file"
+
   # Allocate only needed items
-  for ((wid = 0; wid < ${#apps[@]}; wid++)); do
+  for ((wid = 0; wid < current_count; wid++)); do
     app=${apps[$wid]}
     icon="$($CONFIG_DIR/icon_map.sh "$app")"
-    sketchybar --add item window.$sid.$wid left \
-      --set window.$sid.$wid "${props[@]}" icon.drawing=on icon="$icon"
+
+    if ((wid >= prev_count)); then
+      sketchybar --add item window.$sid.$wid left
+    fi
+
+    sketchybar --set window.$sid.$wid "${props[@]}" icon.drawing=on icon="$icon"
   done
 
   # Remove any excess items dynamically
-  wid=${#apps[@]}
-  while true; do
-    if sketchybar --query window.$sid.$wid &>/dev/null; then
+  if ((current_count < prev_count)); then
+    for ((wid = current_count; wid < prev_count; wid++)); do
       sketchybar --remove window.$sid.$wid
-      ((wid++))
-    else
-      break
-    fi
-  done
+    done
+  fi
 done

@@ -3,10 +3,7 @@
 # https://github.com/FelixKratz/dotfiles
 # https://felixkratz.github.io/SketchyBar/config/bar
 
-source "$CONFIG_DIR/colors.sh" # Loads all defined colors
-
-PLUGIN_DIR="$CONFIG_DIR/plugins"
-ITEM_DIR="$CONFIG_DIR/items"
+source "$CONFIG_DIR/env.sh" # Loads all defined colors
 
 ##### Bar Appearance #####
 # color           <argb_hex>	0x44000000	Color of the bar

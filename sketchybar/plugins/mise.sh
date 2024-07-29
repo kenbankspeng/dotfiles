@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source "$CONFIG_DIR/colors.sh"
+source "$CONFIG_DIR/env.sh"
 
 # reprocess on mouse click
 sketchybar --set "$NAME" label=Mise icon.color="$BLUE"

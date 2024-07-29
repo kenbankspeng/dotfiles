@@ -16,7 +16,7 @@ alpha() {
 update() {
   # The $SELECTED variable is available for space components
 
-  source "$CONFIG_DIR/colors.sh"
+  source "$CONFIG_DIR/env.sh"
   # space.index: for index 1 to 10, accent is ACCENT($index)
   accent=$(eval echo \$ACCENT$index)
 
