@@ -86,4 +86,11 @@ yabai -m rule --add label="Dictionary" app="^Dictionary$" manage=off
 # yabai -m signal --add event=window_focused action="${ubersicht_spaces_refresh_command}"
 # yabai -m signal --add event=window_title_changed action="${ubersicht_spaces_refresh_command}"
 
+# add these lines to the bottom of your yabairc file
+# they're needed to trigger a custom event in sketchybar that we will later define in sketchybarrc
+
+# TODO: test this
+yabai -m signal --add event=window_created action="sketchybar -m --trigger window_change &> /dev/null"
+yabai -m signal --add event=window_destroyed action="sketchybar -m --trigger window_change &> /dev/null"
+
 set +x

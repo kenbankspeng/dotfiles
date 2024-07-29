@@ -29,6 +29,7 @@ update() {
   fi
 
   props=(
+    background.drawing=$SELECTED
     background.color=$bg
     background.border_width=1
     background.border_color=$border

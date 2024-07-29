@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-if [ "$SENDER" = "space_windows_change" ]; then
+# TODO: front_app_switched
+if [[ $SENDER == "front_app_switched" || "$SENDER" = "space_windows_change" ]]; then
   space_number=$(echo "$INFO" | jq -r '.space')
   apps="$(echo "$INFO" | jq -r '.apps | to_entries | map(.key as $k | range(.value) | $k) | .[]')"
 

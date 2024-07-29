@@ -86,6 +86,10 @@ source $ITEM_DIR/cpu.sh
 source $ITEM_DIR/brew.sh
 source $ITEM_DIR/mise.sh
 
+# TODO: Add custom event
+# Register custom event - this will be use by sketchybar's space items as well as app_space.sh
+sketchybar --add event window_change
+
 ##### Finalizing Setup #####
 sketchybar --update
 sketchybar --hotload true
