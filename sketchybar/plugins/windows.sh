@@ -10,7 +10,7 @@ NUM_SPACES=$(echo "$SPACES_QUERY" | jq '. | length')
 mkdir -p "$CACHE_DIR"
 touch "$BRACKET_CACHE_FILE"
 
-# helper to modify alpha of a 0xaarrggbb color
+# Helper to modify alpha of a 0xaarrggbb color
 alpha() {
   local color=$1
   local new_alpha=$2
@@ -62,14 +62,14 @@ manage_windows() {
     local app_name=$(yabai -m query --windows --window "$window_serial_id" | jq -r '.app')
     local icon=$($CONFIG_DIR/icon_map.sh "$app_name")
 
-    # add new windows
+    # Add new windows
     local window_handle="window.$space_id.$window_id"
     if ! grep -q "$window_handle" <<<"$cached_windows"; then
       sketchybar --add item "$window_handle" left
       echo "$window_handle" >>"$windows_cache_file"
     fi
 
-    # update new and existing windows
+    # Update new and existing windows
     local padding_left=0
     local padding_right=0
     # Set padding for the first and last window in each space group
@@ -92,7 +92,7 @@ manage_windows() {
     sketchybar --set "$window_handle" "${window_props[@]}"
   done
 
-  # special case for empty spaces - add placeholder
+  # Special case for empty spaces - add placeholder
   if ((window_count == 0)); then
     local window_handle="window.$space_id.0"
     if ! grep -q "$window_handle" <<<"$cached_windows"; then
@@ -110,7 +110,7 @@ manage_windows() {
     sketchybar --set "$window_handle" "${window_props[@]}"
   fi
 
-  # remove closed windows
+  # Remove closed windows
   local new_cached_windows=$(renew_cache "$space_id" "$window_count" "$windows_cache_file")
   remove_closed_windows "$new_cached_windows" "$cached_windows"
 }
@@ -149,7 +149,7 @@ manage_space() {
   fi
 
   local existing_bracket_entry=$(grep "^space$space_id " "$BRACKET_CACHE_FILE")
-  if ([[ -z "$existing_bracket_entry" ]]); then
+  if [[ -z "$existing_bracket_entry" ]]; then
     sketchybar --add bracket "space$space_id" "${bracket_members[@]}"
     echo "space$space_id ${bracket_members[*]}" >>"$BRACKET_CACHE_FILE"
   elif [[ "$existing_bracket_entry" != "space$space_id ${bracket_members[*]}" ]]; then
