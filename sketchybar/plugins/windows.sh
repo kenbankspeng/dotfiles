@@ -23,20 +23,25 @@ for ((space_index = 0; space_index < num_spaces; space_index++)); do
   # Allocate only needed windows
   if ((window_count > 0)); then
     for ((window_index = 0; window_index < window_count; window_index++)); do
-      window_id=$(echo "$space_info" | jq -r ".windows[$window_index]")
-      if [[ "$window_id" == "null" ]]; then
-        continue
-      fi
-      application=$(yabai -m query --windows --window "$window_id" | jq -r '.app')
-      icon="$($CONFIG_DIR/icon_map.sh "$application")"
+      window_serial=$(echo "$space_info" | jq -r ".windows[$window_index]")
 
-      window_item_id="window.$space_id.$window_index"
-      if ! grep -q "$window_item_id" <<<"$cached_windows"; then
-        sketchybar --add item "$window_item_id" left
-        echo "$window_item_id" >>"$windows_cache_file"
+      echo "window_serial: $window_serial"
+
+      # Skip if no window serial
+      [[ "$window_serial" == "null" ]] && continue
+
+      # Get app icon
+      app_name=$(yabai -m query --windows --window "$window_serial" | jq -r '.app')
+      icon="$($CONFIG_DIR/icon_map.sh "$app_name")"
+
+      window_handle="window.$space_id.$window_index"
+      echo "window_handle: $window_handle"
+      if ! grep -q "$window_handle" <<<"$cached_windows"; then
+        sketchybar --add item "$window_handle" left
+        echo "$window_handle" >>"$windows_cache_file"
       fi
 
-      window_properties=(
+      window_props=(
         label.drawing=off
         icon.drawing=off
         padding_left=5
@@ -45,15 +50,15 @@ for ((space_index = 0; space_index < num_spaces; space_index++)); do
         icon.padding_left=2
         icon.padding_right=2
       )
-      sketchybar --set "$window_item_id" "${window_properties[@]}" icon.drawing=on icon="$icon"
+      sketchybar --set "$window_handle" "${window_props[@]}" icon.drawing=on icon="$icon"
     done
   else
-    window_item_id="window.$space_id.0"
-    if ! grep -q "$window_item_id" <<<"$cached_windows"; then
-      sketchybar --add item "$window_item_id" left
-      echo "$window_item_id" >>"$windows_cache_file"
+    window_handle="window.$space_id.0"
+    if ! grep -q "$window_handle" <<<"$cached_windows"; then
+      sketchybar --add item "$window_handle" left
+      echo "$window_handle" >>"$windows_cache_file"
     fi
-    sketchybar --set "$window_item_id" label.drawing=on label='-' \
+    sketchybar --set "$window_handle" label.drawing=on label='-' \
       padding_left=5 padding_right=5 icon.drawing=off
   fi
 
