@@ -41,12 +41,11 @@ remove_closed_windows() {
   local new_cached_windows="$1"
   local cached_windows="$2"
 
-  IFS=$'\n' read -r -d '' -a cached_windows_array <<<"$cached_windows"
-  for cached_window in "${cached_windows_array[@]}"; do
+  while IFS= read -r cached_window; do
     if ! grep -q "$cached_window" <<<"$new_cached_windows"; then
       sketchybar --remove "$cached_window"
     fi
-  done
+  done <<<"$cached_windows"
 }
 
 # As needed, add new windows, update existing, remove closed
@@ -77,7 +76,7 @@ manage_windows() {
 
     # Add new windows
     local window_handle="window.$space_id.$window_id"
-    if (! grep -q "$window_handle" <<<"$cached_windows"); then
+    if ! grep -q "$window_handle" <<<"$cached_windows"; then
       sketchybar --add item "$window_handle" left
       echo "$window_handle" >>"$windows_cache_file"
     fi
@@ -114,7 +113,7 @@ manage_windows() {
   # Special case for empty spaces - add placeholder
   if ((window_count == 0)); then
     local window_handle="window.$space_id.0"
-    if (! grep -q "$window_handle" <<<"$cached_windows"); then
+    if ! grep -q "$window_handle" <<<"$cached_windows"; then
       sketchybar --add item "$window_handle" left
       echo "$window_handle" >>"$windows_cache_file"
     fi
