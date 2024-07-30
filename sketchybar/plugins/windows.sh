@@ -6,7 +6,7 @@ CACHE_DIR="/tmp/sketchybar_window_cache"
 BRACKET_CACHE_FILE="$CACHE_DIR/space_bracket_cache"
 SPACES_QUERY=$(yabai -m query --spaces)
 NUM_SPACES=$(echo "$SPACES_QUERY" | jq '. | length')
-CLICK_HANDLER="$CONFIG_DIR/plugins/window_actions.sh"
+CLICK_HANDLER="$CONFIG_DIR/plugins/window_action.sh"
 
 mkdir -p "$CACHE_DIR"
 touch "$BRACKET_CACHE_FILE"
