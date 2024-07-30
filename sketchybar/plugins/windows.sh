@@ -29,13 +29,14 @@ for ((space_index = 0; space_index < num_spaces; space_index++)); do
       app_name=$(yabai -m query --windows --window "$window_serial_id" | jq -r '.app')
       icon="$($CONFIG_DIR/icon_map.sh "$app_name")"
 
+      # create the sketchybar resource if it is a new window not in the cache
       window_handle="window.$space_id.$window_id"
-
       if ! grep -q "$window_handle" <<<"$cached_windows"; then
         sketchybar --add item "$window_handle" left
         echo "$window_handle" >>"$windows_cache_file"
       fi
 
+      # style the window
       window_props=(
         label.drawing=off
         icon.drawing=off
@@ -48,11 +49,14 @@ for ((space_index = 0; space_index < num_spaces; space_index++)); do
       sketchybar --set "$window_handle" "${window_props[@]}" icon.drawing=on icon="$icon"
     done
   else
+    # index 0 is a placeholder for a space with no window
+    # add to cache if needed
     window_handle="window.$space_id.0"
     if ! grep -q "$window_handle" <<<"$cached_windows"; then
       sketchybar --add item "$window_handle" left
       echo "$window_handle" >>"$windows_cache_file"
     fi
+    # style the window placeholder
     sketchybar --set "$window_handle" label.drawing=on label='-' \
       padding_left=5 padding_right=5 icon.drawing=off
   fi
