@@ -5,50 +5,32 @@ source "$CONFIG_DIR/env.sh"
 CACHE_DIR="/tmp/sketchybar_window_cache"
 mkdir -p "$CACHE_DIR"
 
-get_space_info() {
-  yabai -m query --spaces
-}
-
-get_window_info() {
-  local window_serial_id=$1
-  yabai -m query --windows --window "$window_serial_id" | jq -r '.app'
-}
-
-get_space_count() {
-  echo "$1" | jq '. | length'
-}
-
-get_space_object() {
-  local spaces_query=$1
-  local space_index=$2
-  echo "$spaces_query" | jq ".[$space_index]"
-}
-
-get_windows_count() {
-  local space_info=$1
-  echo "$space_info" | jq '.windows | length'
-}
-
-get_window_serial_id() {
-  local space_info=$1
-  local window_id=$2
-  echo "$space_info" | jq -r ".windows[$window_id]"
-}
-
-cache_windows() {
-  local space_id=$1
-  local window_count=$2
-  local space_info=$3
-
+process_space() {
+  local space_info="$1"
+  local space_id=$(echo "$space_info" | jq '.index')
+  local window_count=$(echo "$space_info" | jq '.windows | length')
   local windows_cache_file="$CACHE_DIR/windows_$space_id"
   local cached_windows=""
   [[ -f "$windows_cache_file" ]] && cached_windows=$(<"$windows_cache_file")
 
+  manage_windows "$space_info" "$space_id" "$window_count" "$cached_windows" "$windows_cache_file"
+  manage_brackets "$space_id" "$window_count" "$space_info"
+  set_space_properties "$space_id"
+}
+
+manage_windows() {
+  local space_info="$1"
+  local space_id="$2"
+  local window_count="$3"
+  local cached_windows="$4"
+  local windows_cache_file="$5"
+
   if ((window_count > 0)); then
     for ((window_id = 0; window_id < window_count; window_id++)); do
-      local window_serial_id=$(get_window_serial_id "$space_info" "$window_id")
-      local app_name=$(get_window_info "$window_serial_id")
-      local icon="$($CONFIG_DIR/icon_map.sh "$app_name")"
+      local window_serial_id=$(echo "$space_info" | jq -r ".windows[$window_id]")
+      local app_name=$(yabai -m query --windows --window "$window_serial_id" | jq -r '.app')
+      local icon
+      icon="$($CONFIG_DIR/icon_map.sh "$app_name")"
 
       local window_handle="window.$space_id.$window_id"
       if ! grep -q "$window_handle" <<<"$cached_windows"; then
@@ -70,13 +52,14 @@ cache_windows() {
       padding_left=5 padding_right=5 icon.drawing=off
   fi
 
-  remove_excess_windows "$windows_cache_file" "$space_id" "$window_count"
+  update_cache_and_remove_excess "$space_id" "$window_count" "$cached_windows" "$windows_cache_file"
 }
 
-remove_excess_windows() {
-  local windows_cache_file=$1
-  local space_id=$2
-  local window_count=$3
+update_cache_and_remove_excess() {
+  local space_id="$1"
+  local window_count="$2"
+  local cached_windows="$3"
+  local windows_cache_file="$4"
 
   local new_cached_windows=""
   if ((window_count > 0)); then
@@ -88,22 +71,18 @@ remove_excess_windows() {
   fi
   echo "$new_cached_windows" >"$windows_cache_file"
 
-  local cached_windows_array=()
-  IFS=$'\n' read -r -d '' -a cached_windows_array <"$windows_cache_file" || true
-
+  IFS=$'\n' read -r -d '' -a cached_windows_array <<<"$cached_windows"
   for cached_window in "${cached_windows_array[@]}"; do
     if ! grep -q "$cached_window" <<<"$new_cached_windows"; then
       sketchybar --remove "$cached_window"
     fi
   done
-
-  group_windows "$space_id" "$window_count"
 }
 
-group_windows() {
-  local space_id=$1
-  local window_count=$2
-
+manage_brackets() {
+  local space_id="$1"
+  local window_count="$2"
+  local space_info="$3"
   local bracket_cache_file="$CACHE_DIR/space_bracket_cache"
   touch "$bracket_cache_file"
 
@@ -116,8 +95,7 @@ group_windows() {
     done
   fi
 
-  local existing_bracket_entry
-  existing_bracket_entry=$(grep "^space$space_id " "$bracket_cache_file")
+  local existing_bracket_entry=$(grep "^space$space_id " "$bracket_cache_file")
   if [[ -z "$existing_bracket_entry" ]]; then
     sketchybar --add bracket "space$space_id" "${bracket_members[@]}"
     echo "space$space_id ${bracket_members[*]}" >>"$bracket_cache_file"
@@ -127,36 +105,30 @@ group_windows() {
     sed -i '' "/^space$space_id /d" "$bracket_cache_file"
     echo "space$space_id ${bracket_members[*]}" >>"$bracket_cache_file"
   fi
+}
 
+set_space_properties() {
+  local space_id="$1"
   sketchybar --set "space$space_id" padding_left=10 padding_right=10 \
     background.border_color=${ACCENTS[$((space_id - 1))]} background.border_width=2 \
     background.corner_radius=4 background.height=30
 }
 
-sort_and_reorder_windows() {
-  local all_window_items
-  all_window_items=($(sketchybar --query bar | jq -r '.items[]' | grep '^window\.' | sort -t '.' -k2,2n -k3,3n))
+reorder_windows() {
+  local all_window_items=($(sketchybar --query bar | jq -r '.items[]' | grep '^window\.' | sort -t '.' -k2,2n -k3,3n))
   sketchybar --reorder "${all_window_items[@]}"
 }
 
 main() {
-  local spaces_query
-  spaces_query=$(get_space_info)
-  local num_spaces
-  num_spaces=$(get_space_count "$spaces_query")
+  local spaces_query=$(yabai -m query --spaces)
+  local num_spaces=$(echo "$spaces_query" | jq '. | length')
 
   for ((space_index = 0; space_index < num_spaces; space_index++)); do
-    local space_info
-    space_info=$(get_space_object "$spaces_query" "$space_index")
-    local space_id
-    space_id=$(echo "$space_info" | jq '.index')
-    local window_count
-    window_count=$(get_windows_count "$space_info")
-
-    cache_windows "$space_id" "$window_count" "$space_info"
+    local space_info=$(echo "$spaces_query" | jq ".[$space_index]")
+    process_space "$space_info"
   done
 
-  sort_and_reorder_windows
+  reorder_windows
 }
 
 main
