@@ -56,6 +56,19 @@ manage_windows() {
   local window_count="$3"
   local cached_windows="$4"
   local windows_cache_file="$5"
+  local dividers_cache_file="$CACHE_DIR/dividers_cache"
+  local cached_dividers=""
+  [[ -f "$dividers_cache_file" ]] && cached_dividers=$(<"$dividers_cache_file")
+
+  # Add a divider before the first window in any space except space 1
+  if ((space_id > 1)); then
+    local divider_handle="divider.$space_id"
+    if ! grep -q "$divider_handle" <<<"$cached_dividers"; then
+      sketchybar --add item "$divider_handle" left
+      sketchybar --set "$divider_handle" icon.drawing=off label.drawing=off background.padding_left=10 background.padding_right=10
+      echo "$divider_handle" >>"$dividers_cache_file"
+    fi
+  fi
 
   for ((window_id = 0; window_id < window_count; window_id++)); do
     local window_serial_id=$(echo "$space_info" | jq -r ".windows[$window_id]")
@@ -115,23 +128,6 @@ manage_windows() {
   remove_closed_windows "$new_cached_windows" "$cached_windows"
 }
 
-# Function to create a divider item
-create_divider() {
-  local divider_handle="$1"
-  if ! grep -q "$divider_handle" "$BRACKET_CACHE_FILE"; then
-    # Add the divider item to the bar
-    local divider_props=(
-      icon.drawing=off
-      label.drawing=off
-      background.padding_left=10
-      background.padding_right=10
-    )
-    sketchybar --add item "$divider_handle" left
-    sketchybar --set "$divider_handle" "${divider_props[@]}"
-    echo "$divider_handle" >>"$BRACKET_CACHE_FILE"
-  fi
-}
-
 # Use brackets to group windows in the same space
 manage_space() {
   local space_id="$1"
@@ -165,42 +161,10 @@ manage_space() {
   sketchybar --set "space$space_id" "${space_props[@]}"
 }
 
-# Ensure dividers are created between all spaces
-manage_dividers() {
-  local all_dividers=""
-  for ((space_id = 1; space_id < NUM_SPACES; space_id++)); do
-    local divider_handle="divider.$space_id"
-    create_divider "$divider_handle"
-    all_dividers+=" $divider_handle"
-  done
-  echo "$all_dividers" >"$CACHE_DIR/dividers_cache"
-}
-
 # Reorder windows and dividers
 reorder_windows() {
   local all_window_items=($(sketchybar --query bar | jq -r '.items[]' | grep -E '^(window|divider)\.' | sort -t '.' -k2,2n -k3,3n))
-  local reordered_items=()
-  local previous_space_id=0
-
-  for item in "${all_window_items[@]}"; do
-    if [[ $item =~ ^window\.([0-9]+)\. ]]; then
-      local current_space_id=${BASH_REMATCH[1]}
-      if ((previous_space_id != 0 && previous_space_id != current_space_id)); then
-        local divider_handle="divider.$previous_space_id"
-        reordered_items+=("$divider_handle")
-      fi
-      reordered_items+=("$item")
-      previous_space_id=$current_space_id
-    fi
-  done
-
-  # Add the last divider if needed
-  if ((previous_space_id != 0 && previous_space_id != NUM_SPACES)); then
-    local divider_handle="divider.$previous_space_id"
-    reordered_items+=("$divider_handle")
-  fi
-
-  sketchybar --reorder "${reordered_items[@]}"
+  sketchybar --reorder "${all_window_items[@]}"
 }
 
 main() {
@@ -220,7 +184,6 @@ main() {
     manage_space "$space_id" "$window_count"
   done
 
-  manage_dividers
   reorder_windows
 }
 
