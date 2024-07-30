@@ -77,12 +77,18 @@ manage_windows() {
 
     # Add new windows
     local window_handle="window.$space_id.$window_id"
-    if ! grep -q "$window_handle" <<<"$cached_windows"; then
+    if (! grep -q "$window_handle" <<<"$cached_windows"); then
       sketchybar --add item "$window_handle" left
       echo "$window_handle" >>"$windows_cache_file"
     fi
+  done
 
-    # Update new and existing windows
+  # Reorder windows and dividers immediately after adding them
+  reorder_windows
+
+  # Update new and existing windows
+  for ((window_id = 0; window_id < window_count; window_id++)); do
+    local window_handle="window.$space_id.$window_id"
     local padding_left=0
     local padding_right=0
     # Set padding for the first and last window in each space group
@@ -94,8 +100,8 @@ manage_windows() {
     fi
 
     local window_props=(
-      background.padding_left=$padding_left
-      background.padding_right=$padding_right
+      background.padding_left="$padding_left"
+      background.padding_right="$padding_right"
       label.drawing=off
       icon.padding_left=2
       icon.padding_right=2
@@ -108,7 +114,7 @@ manage_windows() {
   # Special case for empty spaces - add placeholder
   if ((window_count == 0)); then
     local window_handle="window.$space_id.0"
-    if ! grep -q "$window_handle" <<<"$cached_windows"; then
+    if (! grep -q "$window_handle" <<<"$cached_windows"); then
       sketchybar --add item "$window_handle" left
       echo "$window_handle" >>"$windows_cache_file"
     fi
@@ -116,7 +122,7 @@ manage_windows() {
     local window_props=(
       label.drawing=off
       icon.drawing=on
-      icon='–'
+      icon="–"
       icon.padding_left=6
       icon.padding_right=6
     )
@@ -154,7 +160,7 @@ manage_space() {
   fi
 
   local space_props=(
-    background.border_color=$(alpha "${ACCENTS[$((space_id - 1))]}" 80)
+    background.border_color="$(alpha "${ACCENTS[$((space_id - 1))]}" 80)"
     background.border_width=1
     background.corner_radius=8
   )
