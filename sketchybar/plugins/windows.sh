@@ -108,9 +108,15 @@ manage_space() {
     echo "space$space_id ${bracket_members[*]}" >>"$BRACKET_CACHE_FILE"
   fi
 
-  sketchybar --set "space$space_id" padding_left=10 padding_right=10 \
-    background.border_color=${ACCENTS[$((space_id - 1))]} background.border_width=2 \
-    background.corner_radius=4 background.height=30
+  space_props=(
+    background.padding_left=30
+    background.padding_right=30
+    background.border_color=${ACCENTS[$((space_id - 1))]}
+    background.border_width=2
+    background.corner_radius=6
+    background.height=30
+  )
+  sketchybar --set "space$space_id" "${space_props[@]}"
 }
 
 # reorder because yabai puts latest changes last
