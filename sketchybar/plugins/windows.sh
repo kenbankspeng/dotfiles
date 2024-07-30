@@ -28,6 +28,7 @@ renew_cache() {
   echo "$new_cached_windows"
 }
 
+# determine closed windows by comparing new cache to prev cache
 remove_closed_windows() {
   local new_cached_windows="$1"
   local cached_windows="$2"
@@ -40,6 +41,7 @@ remove_closed_windows() {
   done
 }
 
+# As needed, add new windows, update existing, remove closed
 manage_windows() {
   local space_info="$1"
   local space_id="$2"
@@ -52,17 +54,20 @@ manage_windows() {
     local app_name=$(yabai -m query --windows --window "$window_serial_id" | jq -r '.app')
     local icon=$($CONFIG_DIR/icon_map.sh "$app_name")
 
+    # add new windows
     local window_handle="window.$space_id.$window_id"
     if ! grep -q "$window_handle" <<<"$cached_windows"; then
       sketchybar --add item "$window_handle" left
       echo "$window_handle" >>"$windows_cache_file"
     fi
 
+    # update new and existing windows
     sketchybar --set "$window_handle" label.drawing=off icon.drawing=off \
       padding_left=5 padding_right=5 icon.font="$SKETCHY_FONT:$SKETCHY_FONTSIZE" \
       icon.padding_left=2 icon.padding_right=2 icon.drawing=on icon="$icon"
   done
 
+  # special case for empty spaces - add placeholder
   if ((window_count == 0)); then
     local window_handle="window.$space_id.0"
     if ! grep -q "$window_handle" <<<"$cached_windows"; then
@@ -73,10 +78,12 @@ manage_windows() {
       padding_left=5 padding_right=5 icon.drawing=off
   fi
 
+  # remove closed windows
   local new_cached_windows=$(renew_cache "$space_id" "$window_count" "$windows_cache_file")
   remove_closed_windows "$new_cached_windows" "$cached_windows"
 }
 
+# use brackets to group windows in the same space
 manage_space() {
   local space_id="$1"
   local window_count="$2"
@@ -106,6 +113,7 @@ manage_space() {
     background.corner_radius=4 background.height=30
 }
 
+# reorder because yabai puts latest changes last
 reorder_windows() {
   local all_window_items=($(sketchybar --query bar | jq -r '.items[]' | grep '^window\.' | sort -t '.' -k2,2n -k3,3n))
   sketchybar --reorder "${all_window_items[@]}"
@@ -113,13 +121,17 @@ reorder_windows() {
 
 main() {
   for ((space_index = 0; space_index < NUM_SPACES; space_index++)); do
+    # get data from json
     local space_info=$(echo "$SPACES_QUERY" | jq ".[$space_index]")
     local space_id=$(echo "$space_info" | jq '.index')
     local window_count=$(echo "$space_info" | jq '.windows | length')
+
+    # get cached data
     local windows_cache_file="$CACHE_DIR/windows_$space_id"
     local cached_windows=""
     [[ -f "$windows_cache_file" ]] && cached_windows=$(<"$windows_cache_file")
 
+    # construct the spaces and windows
     manage_windows "$space_info" "$space_id" "$window_count" "$cached_windows" "$windows_cache_file"
     manage_space "$space_id" "$window_count"
   done
