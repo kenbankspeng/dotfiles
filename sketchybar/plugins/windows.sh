@@ -66,7 +66,7 @@ manage_windows() {
   update_cache_and_remove_excess "$space_id" "$window_count" "$cached_windows" "$windows_cache_file"
 }
 
-manage_brackets() {
+manage_spaces() {
   local space_id="$1" window_count="$2" space_info="$3"
 
   local bracket_cache_file="$CACHE_DIR/space_bracket_cache"
@@ -91,6 +91,8 @@ manage_brackets() {
     sed -i '' "/^space$space_id /d" "$bracket_cache_file"
     echo "space$space_id ${bracket_members[*]}" >>"$bracket_cache_file"
   fi
+
+  set_space_properties "$space_id"
 }
 
 process_space() {
@@ -103,8 +105,7 @@ process_space() {
   [[ -f "$windows_cache_file" ]] && cached_windows=$(<"$windows_cache_file")
 
   manage_windows "$space_info" "$space_id" "$window_count" "$cached_windows" "$windows_cache_file"
-  manage_brackets "$space_id" "$window_count" "$space_info"
-  set_space_properties "$space_id"
+  manage_spaces "$space_id" "$window_count" "$space_info"
 }
 
 reorder_windows() {
