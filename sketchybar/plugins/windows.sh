@@ -97,6 +97,22 @@ manage_windows() {
   remove_closed_windows "$new_cached_windows" "$cached_windows"
 }
 
+# Function to create a divider item
+create_divider() {
+  local space_id="$1"
+  local divider_handle="divider.$space_id"
+
+  # Add the divider item to the bar
+  local divider_props=(
+    icon.drawing=off
+    label.drawing=off
+    background.padding_left=10
+    background.padding_right=10
+  )
+  sketchybar --add item "$divider_handle" left
+  sketchybar --set "$divider_handle" "${divider_props[@]}"
+}
+
 # use brackets to group windows in the same space
 manage_space() {
   local space_id="$1"
@@ -112,7 +128,7 @@ manage_space() {
   fi
 
   local existing_bracket_entry=$(grep "^space$space_id " "$BRACKET_CACHE_FILE")
-  if [[ -z "$existing_bracket_entry" ]]; then
+  if ([[ -z "$existing_bracket_entry" ]]); then
     sketchybar --add bracket "space$space_id" "${bracket_members[@]}"
     echo "space$space_id ${bracket_members[*]}" >>"$BRACKET_CACHE_FILE"
   elif [[ "$existing_bracket_entry" != "space$space_id ${bracket_members[*]}" ]]; then
@@ -129,6 +145,9 @@ manage_space() {
     background.height=30
   )
   sketchybar --set "space$space_id" "${space_props[@]}"
+
+  # Create a divider between space groups
+  create_divider "$space_id"
 }
 
 # reorder because yabai puts latest changes last
