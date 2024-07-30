@@ -7,6 +7,7 @@ mkdir -p "$CACHE_DIR"
 
 process_space() {
   local space_info="$1"
+
   local space_id=$(echo "$space_info" | jq '.index')
   local window_count=$(echo "$space_info" | jq '.windows | length')
   local windows_cache_file="$CACHE_DIR/windows_$space_id"
@@ -19,11 +20,7 @@ process_space() {
 }
 
 manage_windows() {
-  local space_info="$1"
-  local space_id="$2"
-  local window_count="$3"
-  local cached_windows="$4"
-  local windows_cache_file="$5"
+  local space_info="$1" space_id="$2" window_count="$3" cached_windows="$4" windows_cache_file="$5"
 
   if ((window_count > 0)); then
     for ((window_id = 0; window_id < window_count; window_id++)); do
@@ -56,10 +53,7 @@ manage_windows() {
 }
 
 update_cache_and_remove_excess() {
-  local space_id="$1"
-  local window_count="$2"
-  local cached_windows="$3"
-  local windows_cache_file="$4"
+  local space_id="$1" window_count="$2" cached_windows="$3" windows_cache_file="$4"
 
   local new_cached_windows=""
   if ((window_count > 0)); then
@@ -80,9 +74,8 @@ update_cache_and_remove_excess() {
 }
 
 manage_brackets() {
-  local space_id="$1"
-  local window_count="$2"
-  local space_info="$3"
+  local space_id="$1" window_count="$2" space_info="$3"
+
   local bracket_cache_file="$CACHE_DIR/space_bracket_cache"
   touch "$bracket_cache_file"
 
