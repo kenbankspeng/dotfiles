@@ -22,8 +22,8 @@ for ((space_index = 0; space_index < num_spaces; space_index++)); do
 
   # Allocate only needed windows
   if ((window_count > 0)); then
-    for ((window_index = 0; window_index < window_count; window_index++)); do
-      window_serial_id=$(echo "$space_info" | jq -r ".windows[$window_index]")
+    for ((window_id = 0; window_id < window_count; window_id++)); do
+      window_serial_id=$(echo "$space_info" | jq -r ".windows[$window_id]")
 
       # Skip if no window serial
       [[ "$window_serial_id" == "null" ]] && continue
@@ -32,8 +32,8 @@ for ((space_index = 0; space_index < num_spaces; space_index++)); do
       app_name=$(yabai -m query --windows --window "$window_serial_id" | jq -r '.app')
       icon="$($CONFIG_DIR/icon_map.sh "$app_name")"
 
-      window_handle="window.$space_id.$window_index"
-      echo "window_handle: $window_handle"
+      window_handle="window.$space_id.$window_id"
+
       if ! grep -q "$window_handle" <<<"$cached_windows"; then
         sketchybar --add item "$window_handle" left
         echo "$window_handle" >>"$windows_cache_file"
@@ -63,8 +63,8 @@ for ((space_index = 0; space_index < num_spaces; space_index++)); do
   # Remove any excess windows dynamically and update the cache
   new_cached_windows=""
   if ((window_count > 0)); then
-    for ((window_index = 0; window_index < window_count; window_index++)); do
-      new_cached_windows+="window.$space_id.$window_index"$'\n'
+    for ((window_id = 0; window_id < window_count; window_id++)); do
+      new_cached_windows+="window.$space_id.$window_id"$'\n'
     done
   else
     new_cached_windows+="window.$space_id.0"$'\n'
@@ -87,8 +87,8 @@ for ((space_index = 0; space_index < num_spaces; space_index++)); do
   if ((window_count == 0)); then
     bracket_members=("window.$space_id.0")
   else
-    for ((window_index = 0; window_index < window_count; window_index++)); do
-      bracket_members+=("window.$space_id.$window_index")
+    for ((window_id = 0; window_id < window_count; window_id++)); do
+      bracket_members+=("window.$space_id.$window_id")
     done
   fi
 
@@ -114,7 +114,7 @@ for ((space_index = 0; space_index < num_spaces; space_index++)); do
   sketchybar --set "space$space_id" "${space_properties[@]}"
 done
 
-# Sort the windows by space_id and window_index
+# Sort the windows by space_id and window_id
 all_window_items=($(sketchybar --query bar | jq -r '.items[]' | grep '^window\.' | sort -t '.' -k2,2n -k3,3n))
 
 # Reorder windows using sketchybar --reorder
