@@ -5,18 +5,32 @@ source "$CONFIG_DIR/env.sh"
 CACHE_DIR="/tmp/sketchybar_window_cache"
 mkdir -p "$CACHE_DIR"
 
-process_space() {
-  local space_info="$1"
+set_space_properties() {
+  local space_id="$1"
+  sketchybar --set "space$space_id" padding_left=10 padding_right=10 \
+    background.border_color=${ACCENTS[$((space_id - 1))]} background.border_width=2 \
+    background.corner_radius=4 background.height=30
+}
 
-  local space_id=$(echo "$space_info" | jq '.index')
-  local window_count=$(echo "$space_info" | jq '.windows | length')
-  local windows_cache_file="$CACHE_DIR/windows_$space_id"
-  local cached_windows=""
-  [[ -f "$windows_cache_file" ]] && cached_windows=$(<"$windows_cache_file")
+update_cache_and_remove_excess() {
+  local space_id="$1" window_count="$2" cached_windows="$3" windows_cache_file="$4"
 
-  manage_windows "$space_info" "$space_id" "$window_count" "$cached_windows" "$windows_cache_file"
-  manage_brackets "$space_id" "$window_count" "$space_info"
-  set_space_properties "$space_id"
+  local new_cached_windows=""
+  if ((window_count > 0)); then
+    for ((window_id = 0; window_id < window_count; window_id++)); do
+      new_cached_windows+="window.$space_id.$window_id"$'\n'
+    done
+  else
+    new_cached_windows+="window.$space_id.0"$'\n'
+  fi
+  echo "$new_cached_windows" >"$windows_cache_file"
+
+  IFS=$'\n' read -r -d '' -a cached_windows_array <<<"$cached_windows"
+  for cached_window in "${cached_windows_array[@]}"; do
+    if ! grep -q "$cached_window" <<<"$new_cached_windows"; then
+      sketchybar --remove "$cached_window"
+    fi
+  done
 }
 
 manage_windows() {
@@ -52,27 +66,6 @@ manage_windows() {
   update_cache_and_remove_excess "$space_id" "$window_count" "$cached_windows" "$windows_cache_file"
 }
 
-update_cache_and_remove_excess() {
-  local space_id="$1" window_count="$2" cached_windows="$3" windows_cache_file="$4"
-
-  local new_cached_windows=""
-  if ((window_count > 0)); then
-    for ((window_id = 0; window_id < window_count; window_id++)); do
-      new_cached_windows+="window.$space_id.$window_id"$'\n'
-    done
-  else
-    new_cached_windows+="window.$space_id.0"$'\n'
-  fi
-  echo "$new_cached_windows" >"$windows_cache_file"
-
-  IFS=$'\n' read -r -d '' -a cached_windows_array <<<"$cached_windows"
-  for cached_window in "${cached_windows_array[@]}"; do
-    if ! grep -q "$cached_window" <<<"$new_cached_windows"; then
-      sketchybar --remove "$cached_window"
-    fi
-  done
-}
-
 manage_brackets() {
   local space_id="$1" window_count="$2" space_info="$3"
 
@@ -100,11 +93,18 @@ manage_brackets() {
   fi
 }
 
-set_space_properties() {
-  local space_id="$1"
-  sketchybar --set "space$space_id" padding_left=10 padding_right=10 \
-    background.border_color=${ACCENTS[$((space_id - 1))]} background.border_width=2 \
-    background.corner_radius=4 background.height=30
+process_space() {
+  local space_info="$1"
+
+  local space_id=$(echo "$space_info" | jq '.index')
+  local window_count=$(echo "$space_info" | jq '.windows | length')
+  local windows_cache_file="$CACHE_DIR/windows_$space_id"
+  local cached_windows=""
+  [[ -f "$windows_cache_file" ]] && cached_windows=$(<"$windows_cache_file")
+
+  manage_windows "$space_info" "$space_id" "$window_count" "$cached_windows" "$windows_cache_file"
+  manage_brackets "$space_id" "$window_count" "$space_info"
+  set_space_properties "$space_id"
 }
 
 reorder_windows() {
