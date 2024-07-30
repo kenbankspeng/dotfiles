@@ -101,11 +101,11 @@ manage_windows() {
     fi
 
     local window_props=(
-      icon.drawing=off
-      label.drawing=on
-      label='–'
-      label.padding_left=6
-      label.padding_right=6
+      label.drawing=off
+      icon.drawing=on
+      icon='–'
+      icon.padding_left=6
+      icon.padding_right=6
     )
     sketchybar --set "$window_handle" "${window_props[@]}"
   fi
