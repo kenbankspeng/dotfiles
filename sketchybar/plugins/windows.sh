@@ -66,7 +66,7 @@ manage_windows() {
   update_cache_and_remove_excess "$space_id" "$window_count" "$cached_windows" "$windows_cache_file"
 }
 
-manage_spaces() {
+manage_space() {
   local space_id="$1" window_count="$2" space_info="$3"
 
   local bracket_cache_file="$CACHE_DIR/space_bracket_cache"
@@ -95,19 +95,6 @@ manage_spaces() {
   set_space_properties "$space_id"
 }
 
-process_space() {
-  local space_info="$1"
-
-  local space_id=$(echo "$space_info" | jq '.index')
-  local window_count=$(echo "$space_info" | jq '.windows | length')
-  local windows_cache_file="$CACHE_DIR/windows_$space_id"
-  local cached_windows=""
-  [[ -f "$windows_cache_file" ]] && cached_windows=$(<"$windows_cache_file")
-
-  manage_windows "$space_info" "$space_id" "$window_count" "$cached_windows" "$windows_cache_file"
-  manage_spaces "$space_id" "$window_count" "$space_info"
-}
-
 reorder_windows() {
   local all_window_items=($(sketchybar --query bar | jq -r '.items[]' | grep '^window\.' | sort -t '.' -k2,2n -k3,3n))
   sketchybar --reorder "${all_window_items[@]}"
@@ -119,7 +106,14 @@ main() {
 
   for ((space_index = 0; space_index < num_spaces; space_index++)); do
     local space_info=$(echo "$spaces_query" | jq ".[$space_index]")
-    process_space "$space_info"
+    local space_id=$(echo "$space_info" | jq '.index')
+    local window_count=$(echo "$space_info" | jq '.windows | length')
+    local windows_cache_file="$CACHE_DIR/windows_$space_id"
+    local cached_windows=""
+    [[ -f "$windows_cache_file" ]] && cached_windows=$(<"$windows_cache_file")
+
+    manage_windows "$space_info" "$space_id" "$window_count" "$cached_windows" "$windows_cache_file"
+    manage_space "$space_id" "$window_count" "$space_info"
   done
 
   reorder_windows
