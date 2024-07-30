@@ -48,6 +48,28 @@ remove_closed_windows() {
   done <<<"$cached_windows"
 }
 
+# Add placeholder for empty spaces
+add_placeholder() {
+  local space_id="$1"
+  local windows_cache_file="$2"
+  local cached_windows="$3"
+  local placeholder="window.$space_id.0"
+
+  if ! grep -q "$placeholder" <<<"$cached_windows"; then
+    sketchybar --add item "$placeholder" left
+    echo "$placeholder" >>"$windows_cache_file"
+  fi
+
+  local window_props=(
+    label.drawing=off
+    icon.drawing=on
+    icon="–" # Unified placeholder value
+    icon.padding_left=6
+    icon.padding_right=6
+  )
+  sketchybar --set "$placeholder" "${window_props[@]}"
+}
+
 # As needed, add new windows, update existing, remove closed
 manage_windows() {
   local space_info="$1"
@@ -112,20 +134,7 @@ manage_windows() {
 
   # Special case for empty spaces - add placeholder
   if ((window_count == 0)); then
-    local window_handle="window.$space_id.0"
-    if ! grep -q "$window_handle" <<<"$cached_windows"; then
-      sketchybar --add item "$window_handle" left
-      echo "$window_handle" >>"$windows_cache_file"
-    fi
-
-    local window_props=(
-      label.drawing=off
-      icon.drawing=on
-      icon="–"
-      icon.padding_left=6
-      icon.padding_right=6
-    )
-    sketchybar --set "$window_handle" "${window_props[@]}"
+    add_placeholder "$space_id" "$windows_cache_file" "$cached_windows"
   fi
 
   # Remove closed windows
