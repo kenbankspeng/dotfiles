@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
 
+# env variables
+export PLUGIN_DIR="$CONFIG_DIR/plugins"
+export ITEM_DIR="$CONFIG_DIR/items"
+export CACHE_DIR="/tmp/sketchybar_window_cache"
 export FONT="SF Pro:Semibold"
 export FONTSIZE=13
+export HEIGHT=38
 export SKETCHY_FONT="sketchybar-app-font:Regular"
-export SKETCHY_FONTSIZE=16
+export SKETCHY_FONTSIZE=18
 
 #
 #
@@ -69,5 +74,6 @@ export ACCENT7=$YELLOW
 export ACCENT8=$SKY
 export ACCENT9=$FLAMINGO
 export ACCENT10=$SAPPHIRE
+export ACCENTS=($ACCENT1 $ACCENT2 $ACCENT3 $ACCENT4 $ACCENT5 $ACCENT6 $ACCENT7 $ACCENT8 $ACCENT9 $ACCENT10)
 
 export BAR=$CRUST

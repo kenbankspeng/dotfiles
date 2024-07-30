@@ -31,7 +31,3 @@ sketchybar --add item space_windows left \
   script="$PLUGIN_DIR/space_windows.sh" \
   --subscribe space_windows space_windows_change
 # front_app_switched
-
-# TODO: brackets
-sketchybar --add bracket spaces '/space\..*/' \
-  --set spaces background.color=red
