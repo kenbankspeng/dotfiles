@@ -62,13 +62,23 @@ manage_windows() {
     fi
 
     # update new and existing windows
+    local padding_left=0
+    local padding_right=0
+    # Set padding for the first and last window in each space group
+    if ((window_id == 0)); then
+      padding_left=10
+    fi
+    if ((window_id == window_count - 1)); then
+      padding_right=10
+    fi
+
     local window_props=(
+      background.padding_left=$padding_left
+      background.padding_right=$padding_right
       label.drawing=off
-      background.padding_left=2
-      background.padding_right=2
-      icon.font="$SKETCHY_FONT:$SKETCHY_FONTSIZE"
       icon.padding_left=2
       icon.padding_right=2
+      icon.font="$SKETCHY_FONT:$SKETCHY_FONTSIZE"
       icon="$icon"
     )
     sketchybar --set "$window_handle" "${window_props[@]}"
@@ -83,11 +93,11 @@ manage_windows() {
     fi
 
     local window_props=(
-      label.drawing=on
-      label='-'
-      padding_left=5
-      padding_right=5
       icon.drawing=off
+      label.drawing=on
+      label='–'
+      label.padding_left=6
+      label.padding_right=6
     )
     sketchybar --set "$window_handle" "${window_props[@]}"
   fi
@@ -142,7 +152,6 @@ manage_space() {
     background.border_color=${ACCENTS[$((space_id - 1))]}
     background.border_width=2
     background.corner_radius=6
-    background.height=30
   )
   sketchybar --set "space$space_id" "${space_props[@]}"
 

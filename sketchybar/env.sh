@@ -6,8 +6,9 @@ export ITEM_DIR="$CONFIG_DIR/items"
 export CACHE_DIR="/tmp/sketchybar_window_cache"
 export FONT="SF Pro:Semibold"
 export FONTSIZE=13
+export HEIGHT=38
 export SKETCHY_FONT="sketchybar-app-font:Regular"
-export SKETCHY_FONTSIZE=16
+export SKETCHY_FONTSIZE=18
 
 #
 #

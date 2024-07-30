@@ -31,7 +31,7 @@ bar=(
   border_color=$TRANSPARENT
   border_width=0
   position=top
-  height=36
+  height=$HEIGHT
   margin=0
   y_offset=0
   corner_radius=0
@@ -51,13 +51,13 @@ sketchybar --bar "${bar[@]}"
 
 ##### Changing Defaults #####
 default=(
+  background.height=$(($FONTSIZE + 18))
   icon.font="$FONT:$FONTSIZE"
   icon.color=$TEXT
   label.font="$FONT:$FONTSIZE"
   label.color=$TEXT
-  background.color=$BAR
+  background.color=$TRANSPARENT
   background.corner_radius=5
-  background.height=24
   padding_left=6
   padding_right=6
   icon.padding_left=4
