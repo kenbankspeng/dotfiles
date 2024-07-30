@@ -11,22 +11,26 @@ mkdir -p "$CACHE_DIR"
 touch "$BRACKET_CACHE_FILE"
 
 renew_cache() {
-  local space_id="$1" window_count="$2" windows_cache_file="$3"
+  local space_id="$1"
+  local window_count="$2"
+  local windows_cache_file="$3"
 
   local new_cached_windows=""
-  if ((window_count > 0)); then
-    for ((window_id = 0; window_id < window_count; window_id++)); do
-      new_cached_windows+="window.$space_id.$window_id"$'\n'
-    done
-  else
+  for ((window_id = 0; window_id < window_count; window_id++)); do
+    new_cached_windows+="window.$space_id.$window_id"$'\n'
+  done
+
+  if ((window_count == 0)); then
     new_cached_windows+="window.$space_id.0"$'\n'
   fi
+
   echo "$new_cached_windows" >"$windows_cache_file"
   echo "$new_cached_windows"
 }
 
 remove_closed_windows() {
-  local new_cached_windows="$1" cached_windows="$2"
+  local new_cached_windows="$1"
+  local cached_windows="$2"
 
   IFS=$'\n' read -r -d '' -a cached_windows_array <<<"$cached_windows"
   for cached_window in "${cached_windows_array[@]}"; do
@@ -37,28 +41,31 @@ remove_closed_windows() {
 }
 
 manage_windows() {
-  local space_info="$1" space_id="$2" window_count="$3" cached_windows="$4" windows_cache_file="$5"
+  local space_info="$1"
+  local space_id="$2"
+  local window_count="$3"
+  local cached_windows="$4"
+  local windows_cache_file="$5"
 
-  if ((window_count > 0)); then
-    for ((window_id = 0; window_id < window_count; window_id++)); do
-      local window_serial_id=$(echo "$space_info" | jq -r ".windows[$window_id]")
-      local app_name=$(yabai -m query --windows --window "$window_serial_id" | jq -r '.app')
-      local icon
-      icon="$($CONFIG_DIR/icon_map.sh "$app_name")"
+  for ((window_id = 0; window_id < window_count; window_id++)); do
+    local window_serial_id=$(echo "$space_info" | jq -r ".windows[$window_id]")
+    local app_name=$(yabai -m query --windows --window "$window_serial_id" | jq -r '.app')
+    local icon=$($CONFIG_DIR/icon_map.sh "$app_name")
 
-      local window_handle="window.$space_id.$window_id"
-      if ! grep -q "$window_handle" <<<"$cached_windows"; then
-        sketchybar --add item "$window_handle" left
-        echo "$window_handle" >>"$windows_cache_file"
-      fi
+    local window_handle="window.$space_id.$window_id"
+    if ! grep -q "$window_handle" <<<"$cached_windows"; then
+      sketchybar --add item "$window_handle" left
+      echo "$window_handle" >>"$windows_cache_file"
+    fi
 
-      sketchybar --set "$window_handle" label.drawing=off icon.drawing=off \
-        padding_left=5 padding_right=5 icon.font="$SKETCHY_FONT:$SKETCHY_FONTSIZE" \
-        icon.padding_left=2 icon.padding_right=2 icon.drawing=on icon="$icon"
-    done
-  else
+    sketchybar --set "$window_handle" label.drawing=off icon.drawing=off \
+      padding_left=5 padding_right=5 icon.font="$SKETCHY_FONT:$SKETCHY_FONTSIZE" \
+      icon.padding_left=2 icon.padding_right=2 icon.drawing=on icon="$icon"
+  done
+
+  if ((window_count == 0)); then
     local window_handle="window.$space_id.0"
-    if (! grep -q "$window_handle" <<<"$cached_windows"); then
+    if ! grep -q "$window_handle" <<<"$cached_windows"; then
       sketchybar --add item "$window_handle" left
       echo "$window_handle" >>"$windows_cache_file"
     fi
@@ -71,15 +78,16 @@ manage_windows() {
 }
 
 manage_space() {
-  local space_id="$1" window_count="$2"
+  local space_id="$1"
+  local window_count="$2"
 
   local bracket_members=()
+  for ((window_id = 0; window_id < window_count; window_id++)); do
+    bracket_members+=("window.$space_id.$window_id")
+  done
+
   if ((window_count == 0)); then
     bracket_members=("window.$space_id.0")
-  else
-    for ((window_id = 0; window_id < window_count; window_id++)); do
-      bracket_members+=("window.$space_id.$window_id")
-    done
   fi
 
   local existing_bracket_entry=$(grep "^space$space_id " "$BRACKET_CACHE_FILE")
@@ -96,7 +104,6 @@ manage_space() {
   sketchybar --set "space$space_id" padding_left=10 padding_right=10 \
     background.border_color=${ACCENTS[$((space_id - 1))]} background.border_width=2 \
     background.corner_radius=4 background.height=30
-
 }
 
 reorder_windows() {
