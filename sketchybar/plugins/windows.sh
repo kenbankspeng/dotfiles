@@ -5,8 +5,8 @@ source "$CONFIG_DIR/env.sh"
 CACHE_DIR="/tmp/sketchybar_window_cache"
 mkdir -p "$CACHE_DIR"
 
-update_cache_and_remove_excess() {
-  local space_id="$1" window_count="$2" cached_windows="$3" windows_cache_file="$4"
+renew_cache() {
+  local space_id="$1" window_count="$2" windows_cache_file="$3"
 
   local new_cached_windows=""
   if ((window_count > 0)); then
@@ -17,6 +17,11 @@ update_cache_and_remove_excess() {
     new_cached_windows+="window.$space_id.0"$'\n'
   fi
   echo "$new_cached_windows" >"$windows_cache_file"
+  echo "$new_cached_windows"
+}
+
+remove_closed_windows() {
+  local new_cached_windows="$1" cached_windows="$2"
 
   IFS=$'\n' read -r -d '' -a cached_windows_array <<<"$cached_windows"
   for cached_window in "${cached_windows_array[@]}"; do
@@ -48,7 +53,7 @@ manage_windows() {
     done
   else
     local window_handle="window.$space_id.0"
-    if ! grep -q "$window_handle" <<<"$cached_windows"; then
+    if (! grep -q "$window_handle" <<<"$cached_windows"); then
       sketchybar --add item "$window_handle" left
       echo "$window_handle" >>"$windows_cache_file"
     fi
@@ -56,7 +61,8 @@ manage_windows() {
       padding_left=5 padding_right=5 icon.drawing=off
   fi
 
-  update_cache_and_remove_excess "$space_id" "$window_count" "$cached_windows" "$windows_cache_file"
+  local new_cached_windows=$(renew_cache "$space_id" "$window_count" "$windows_cache_file")
+  remove_closed_windows "$new_cached_windows" "$cached_windows"
 }
 
 manage_space() {
