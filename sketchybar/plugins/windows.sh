@@ -107,17 +107,10 @@ manage_windows() {
         --subscribe "$window_handle" mouse.clicked
       echo "$window_handle" >>"$windows_cache_file"
     fi
-  done
 
-  # Reorder windows and dividers immediately after adding them
-  reorder_windows
-
-  # Update new and existing windows
-  for ((window_id = 0; window_id < window_count; window_id++)); do
-    local window_handle="window.$space_id.$window_id"
+    # Determine padding for the first and last window in the space
     local padding_left=0
     local padding_right=0
-    # Set padding for the first and last window in each space group
     if ((window_id == 0)); then
       padding_left=10
     fi
@@ -125,6 +118,7 @@ manage_windows() {
       padding_right=10
     fi
 
+    # Update window properties
     local window_props=(
       background.padding_left="$padding_left"
       background.padding_right="$padding_right"
@@ -136,6 +130,9 @@ manage_windows() {
     )
     sketchybar --set "$window_handle" "${window_props[@]}"
   done
+
+  # Reorder windows and dividers immediately after adding them
+  reorder_windows
 
   # Special case for empty spaces - add placeholder
   if ((window_count == 0)); then
