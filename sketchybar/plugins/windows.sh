@@ -26,7 +26,8 @@ renew_cache() {
 
   local new_cached_windows=""
   for ((window_index = 0; window_index < window_count; window_index++)); do
-    new_cached_windows+="window.$space_id.$window_index"$'\n'
+    local window_id=$(echo "$space_info" | jq -r ".windows[$window_index]")
+    new_cached_windows+="window.$space_id.$window_id"$'\n'
   done
 
   if ((window_count == 0)); then
@@ -100,7 +101,7 @@ manage_windows() {
     local icon=$($CONFIG_DIR/icon_map.sh "$app_name")
 
     # Add new windows
-    local window_handle="window.$space_id.$window_index"
+    local window_handle="window.$space_id.$window_id"
     if ! grep -q "$window_handle" <<<"$cached_windows"; then
       sketchybar --add item "$window_handle" left
       sketchybar --set "$window_handle" script="$CLICK_HANDLER" \
@@ -151,7 +152,8 @@ manage_space() {
 
   local bracket_members=()
   for ((window_index = 0; window_index < window_count; window_index++)); do
-    bracket_members+=("window.$space_id.$window_index")
+    local window_id=$(echo "$space_info" | jq -r ".windows[$window_index]")
+    bracket_members+=("window.$space_id.$window_id")
   done
 
   if ((window_count == 0)); then
