@@ -23,15 +23,13 @@ for ((space_index = 0; space_index < num_spaces; space_index++)); do
   # Allocate only needed windows
   if ((window_count > 0)); then
     for ((window_index = 0; window_index < window_count; window_index++)); do
-      window_serial=$(echo "$space_info" | jq -r ".windows[$window_index]")
-
-      echo "window_serial: $window_serial"
+      window_serial_id=$(echo "$space_info" | jq -r ".windows[$window_index]")
 
       # Skip if no window serial
-      [[ "$window_serial" == "null" ]] && continue
+      [[ "$window_serial_id" == "null" ]] && continue
 
       # Get app icon
-      app_name=$(yabai -m query --windows --window "$window_serial" | jq -r '.app')
+      app_name=$(yabai -m query --windows --window "$window_serial_id" | jq -r '.app')
       icon="$($CONFIG_DIR/icon_map.sh "$app_name")"
 
       window_handle="window.$space_id.$window_index"
