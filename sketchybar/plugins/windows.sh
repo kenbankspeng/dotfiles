@@ -25,9 +25,6 @@ for ((space_index = 0; space_index < num_spaces; space_index++)); do
     for ((window_id = 0; window_id < window_count; window_id++)); do
       window_serial_id=$(echo "$space_info" | jq -r ".windows[$window_id]")
 
-      # Skip if no window serial
-      [[ "$window_serial_id" == "null" ]] && continue
-
       # Get app icon
       app_name=$(yabai -m query --windows --window "$window_serial_id" | jq -r '.app')
       icon="$($CONFIG_DIR/icon_map.sh "$app_name")"
