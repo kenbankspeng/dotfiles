@@ -6,6 +6,7 @@ CACHE_DIR="/tmp/sketchybar_window_cache"
 BRACKET_CACHE_FILE="$CACHE_DIR/space_bracket_cache"
 SPACES_QUERY=$(yabai -m query --spaces)
 NUM_SPACES=$(echo "$SPACES_QUERY" | jq '. | length')
+CLICK_HANDLER="$CONFIG_DIR/plugins/window_actions.sh"
 
 mkdir -p "$CACHE_DIR"
 touch "$BRACKET_CACHE_FILE"
@@ -57,6 +58,8 @@ add_placeholder() {
 
   if ! grep -q "$placeholder" <<<"$cached_windows"; then
     sketchybar --add item "$placeholder" left
+    sketchybar --set "$placeholder" script="$CLICK_HANDLER" \
+      --subscribe "$placeholder" mouse.clicked
     echo "$placeholder" >>"$windows_cache_file"
   fi
 
@@ -100,6 +103,8 @@ manage_windows() {
     local window_handle="window.$space_id.$window_id"
     if ! grep -q "$window_handle" <<<"$cached_windows"; then
       sketchybar --add item "$window_handle" left
+      sketchybar --set "$window_handle" script="$CLICK_HANDLER" \
+        --subscribe "$window_handle" mouse.clicked
       echo "$window_handle" >>"$windows_cache_file"
     fi
   done

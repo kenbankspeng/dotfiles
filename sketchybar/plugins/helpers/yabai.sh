@@ -5,6 +5,12 @@ space_type() {
   echo "$type"
 }
 
+focused_space() {
+  spaces=$(yabai -m query --spaces "index,has-focus")
+  focused_space=$(echo "$spaces" | jq -r ".[] | select(.[\"has-focus\"] == true) | .index")
+  echo "$focused_space"
+}
+
 # do first_window ourselves
 # $1 : space index
 first_window() {
