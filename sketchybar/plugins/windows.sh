@@ -5,13 +5,6 @@ source "$CONFIG_DIR/env.sh"
 CACHE_DIR="/tmp/sketchybar_window_cache"
 mkdir -p "$CACHE_DIR"
 
-set_space_properties() {
-  local space_id="$1"
-  sketchybar --set "space$space_id" padding_left=10 padding_right=10 \
-    background.border_color=${ACCENTS[$((space_id - 1))]} background.border_width=2 \
-    background.corner_radius=4 background.height=30
-}
-
 update_cache_and_remove_excess() {
   local space_id="$1" window_count="$2" cached_windows="$3" windows_cache_file="$4"
 
@@ -92,7 +85,10 @@ manage_space() {
     echo "space$space_id ${bracket_members[*]}" >>"$bracket_cache_file"
   fi
 
-  set_space_properties "$space_id"
+  sketchybar --set "space$space_id" padding_left=10 padding_right=10 \
+    background.border_color=${ACCENTS[$((space_id - 1))]} background.border_width=2 \
+    background.corner_radius=4 background.height=30
+
 }
 
 reorder_windows() {
