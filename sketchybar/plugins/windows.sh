@@ -10,6 +10,14 @@ NUM_SPACES=$(echo "$SPACES_QUERY" | jq '. | length')
 mkdir -p "$CACHE_DIR"
 touch "$BRACKET_CACHE_FILE"
 
+# helper to modify alpha of a 0xaarrggbb color
+alpha() {
+  local color=$1
+  local new_alpha=$2
+  local rgb_part=${color:4}
+  echo 0x${new_alpha}${rgb_part} # new color
+}
+
 renew_cache() {
   local space_id="$1"
   local window_count="$2"
@@ -112,15 +120,18 @@ create_divider() {
   local space_id="$1"
   local divider_handle="divider.$space_id"
 
-  # Add the divider item to the bar
-  local divider_props=(
-    icon.drawing=off
-    label.drawing=off
-    background.padding_left=10
-    background.padding_right=10
-  )
-  sketchybar --add item "$divider_handle" left
-  sketchybar --set "$divider_handle" "${divider_props[@]}"
+  if ! grep -q "$divider_handle" "$BRACKET_CACHE_FILE"; then
+    # Add the divider item to the bar
+    local divider_props=(
+      icon.drawing=off
+      label.drawing=off
+      background.padding_left=10
+      background.padding_right=10
+    )
+    sketchybar --add item "$divider_handle" left
+    sketchybar --set "$divider_handle" "${divider_props[@]}"
+    echo "$divider_handle" >>"$BRACKET_CACHE_FILE"
+  fi
 }
 
 # use brackets to group windows in the same space
@@ -149,9 +160,9 @@ manage_space() {
   fi
 
   local space_props=(
-    background.border_color=${ACCENTS[$((space_id - 1))]}
-    background.border_width=2
-    background.corner_radius=6
+    background.border_color=$(alpha "${ACCENTS[$((space_id - 1))]}" 80)
+    background.border_width=1
+    background.corner_radius=8
   )
   sketchybar --set "space$space_id" "${space_props[@]}"
 
