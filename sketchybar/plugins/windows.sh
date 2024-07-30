@@ -3,7 +3,12 @@
 source "$CONFIG_DIR/env.sh"
 
 CACHE_DIR="/tmp/sketchybar_window_cache"
+BRACKET_CACHE_FILE="$CACHE_DIR/space_bracket_cache"
+SPACES_QUERY=$(yabai -m query --spaces)
+NUM_SPACES=$(echo "$SPACES_QUERY" | jq '. | length')
+
 mkdir -p "$CACHE_DIR"
+touch "$BRACKET_CACHE_FILE"
 
 renew_cache() {
   local space_id="$1" window_count="$2" windows_cache_file="$3"
@@ -66,10 +71,7 @@ manage_windows() {
 }
 
 manage_space() {
-  local space_id="$1" window_count="$2" space_info="$3"
-
-  local bracket_cache_file="$CACHE_DIR/space_bracket_cache"
-  touch "$bracket_cache_file"
+  local space_id="$1" window_count="$2"
 
   local bracket_members=()
   if ((window_count == 0)); then
@@ -80,15 +82,15 @@ manage_space() {
     done
   fi
 
-  local existing_bracket_entry=$(grep "^space$space_id " "$bracket_cache_file")
+  local existing_bracket_entry=$(grep "^space$space_id " "$BRACKET_CACHE_FILE")
   if [[ -z "$existing_bracket_entry" ]]; then
     sketchybar --add bracket "space$space_id" "${bracket_members[@]}"
-    echo "space$space_id ${bracket_members[*]}" >>"$bracket_cache_file"
+    echo "space$space_id ${bracket_members[*]}" >>"$BRACKET_CACHE_FILE"
   elif [[ "$existing_bracket_entry" != "space$space_id ${bracket_members[*]}" ]]; then
     sketchybar --remove "space$space_id"
     sketchybar --add bracket "space$space_id" "${bracket_members[@]}"
-    sed -i '' "/^space$space_id /d" "$bracket_cache_file"
-    echo "space$space_id ${bracket_members[*]}" >>"$bracket_cache_file"
+    sed -i '' "/^space$space_id /d" "$BRACKET_CACHE_FILE"
+    echo "space$space_id ${bracket_members[*]}" >>"$BRACKET_CACHE_FILE"
   fi
 
   sketchybar --set "space$space_id" padding_left=10 padding_right=10 \
@@ -103,11 +105,8 @@ reorder_windows() {
 }
 
 main() {
-  local spaces_query=$(yabai -m query --spaces)
-  local num_spaces=$(echo "$spaces_query" | jq '. | length')
-
-  for ((space_index = 0; space_index < num_spaces; space_index++)); do
-    local space_info=$(echo "$spaces_query" | jq ".[$space_index]")
+  for ((space_index = 0; space_index < NUM_SPACES; space_index++)); do
+    local space_info=$(echo "$SPACES_QUERY" | jq ".[$space_index]")
     local space_id=$(echo "$space_info" | jq '.index')
     local window_count=$(echo "$space_info" | jq '.windows | length')
     local windows_cache_file="$CACHE_DIR/windows_$space_id"
@@ -115,7 +114,7 @@ main() {
     [[ -f "$windows_cache_file" ]] && cached_windows=$(<"$windows_cache_file")
 
     manage_windows "$space_info" "$space_id" "$window_count" "$cached_windows" "$windows_cache_file"
-    manage_space "$space_id" "$window_count" "$space_info"
+    manage_space "$space_id" "$window_count"
   done
 
   reorder_windows
