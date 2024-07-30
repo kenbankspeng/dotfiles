@@ -25,8 +25,8 @@ renew_cache() {
   local windows_cache_file="$3"
 
   local new_cached_windows=""
-  for ((window_id = 0; window_id < window_count; window_id++)); do
-    new_cached_windows+="window.$space_id.$window_id"$'\n'
+  for ((window_index = 0; window_index < window_count; window_index++)); do
+    new_cached_windows+="window.$space_id.$window_index"$'\n'
   done
 
   if ((window_count == 0)); then
@@ -94,13 +94,13 @@ manage_windows() {
     fi
   fi
 
-  for ((window_id = 0; window_id < window_count; window_id++)); do
-    local window_serial_id=$(echo "$space_info" | jq -r ".windows[$window_id]")
-    local app_name=$(yabai -m query --windows --window "$window_serial_id" | jq -r '.app')
+  for ((window_index = 0; window_index < window_count; window_index++)); do
+    local window_id=$(echo "$space_info" | jq -r ".windows[$window_index]")
+    local app_name=$(yabai -m query --windows --window "$window_id" | jq -r '.app')
     local icon=$($CONFIG_DIR/icon_map.sh "$app_name")
 
     # Add new windows
-    local window_handle="window.$space_id.$window_id"
+    local window_handle="window.$space_id.$window_index"
     if ! grep -q "$window_handle" <<<"$cached_windows"; then
       sketchybar --add item "$window_handle" left
       sketchybar --set "$window_handle" script="$CLICK_HANDLER" \
@@ -111,10 +111,10 @@ manage_windows() {
     # Determine padding for the first and last window in the space
     local padding_left=0
     local padding_right=0
-    if ((window_id == 0)); then
+    if ((window_index == 0)); then
       padding_left=10
     fi
-    if ((window_id == window_count - 1)); then
+    if ((window_index == window_count - 1)); then
       padding_right=10
     fi
 
@@ -150,8 +150,8 @@ manage_space() {
   local window_count="$2"
 
   local bracket_members=()
-  for ((window_id = 0; window_id < window_count; window_id++)); do
-    bracket_members+=("window.$space_id.$window_id")
+  for ((window_index = 0; window_index < window_count; window_index++)); do
+    bracket_members+=("window.$space_id.$window_index")
   done
 
   if ((window_count == 0)); then
