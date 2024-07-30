@@ -62,9 +62,16 @@ manage_windows() {
     fi
 
     # update new and existing windows
-    sketchybar --set "$window_handle" label.drawing=off icon.drawing=off \
-      padding_left=5 padding_right=5 icon.font="$SKETCHY_FONT:$SKETCHY_FONTSIZE" \
-      icon.padding_left=2 icon.padding_right=2 icon.drawing=on icon="$icon"
+    local window_props=(
+      label.drawing=off
+      background.padding_left=2
+      background.padding_right=2
+      icon.font="$SKETCHY_FONT:$SKETCHY_FONTSIZE"
+      icon.padding_left=2
+      icon.padding_right=2
+      icon="$icon"
+    )
+    sketchybar --set "$window_handle" "${window_props[@]}"
   done
 
   # special case for empty spaces - add placeholder
@@ -74,8 +81,15 @@ manage_windows() {
       sketchybar --add item "$window_handle" left
       echo "$window_handle" >>"$windows_cache_file"
     fi
-    sketchybar --set "$window_handle" label.drawing=on label='-' \
-      padding_left=5 padding_right=5 icon.drawing=off
+
+    local window_props=(
+      label.drawing=on
+      label='-'
+      padding_left=5
+      padding_right=5
+      icon.drawing=off
+    )
+    sketchybar --set "$window_handle" "${window_props[@]}"
   fi
 
   # remove closed windows
@@ -108,9 +122,7 @@ manage_space() {
     echo "space$space_id ${bracket_members[*]}" >>"$BRACKET_CACHE_FILE"
   fi
 
-  space_props=(
-    background.padding_left=30
-    background.padding_right=30
+  local space_props=(
     background.border_color=${ACCENTS[$((space_id - 1))]}
     background.border_width=2
     background.corner_radius=6
