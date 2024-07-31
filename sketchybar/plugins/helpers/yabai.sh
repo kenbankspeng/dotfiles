@@ -1,32 +1,28 @@
+# Get the type of a space by its index
 # $1 : space index
 space_type() {
-  spaces=$(yabai -m query --spaces "index,type")
-  type=$(echo "$spaces" | jq -r ".[] | select(.index == $1) | .type")
-  echo "$type"
+  yabai -m query --spaces --space "$1" | jq -r ".type"
 }
 
+# Get the focused space index
 focused_space() {
-  spaces=$(yabai -m query --spaces "index,has-focus")
-  focused_space=$(echo "$spaces" | jq -r ".[] | select(.[\"has-focus\"] == true) | .index")
-  echo "$focused_space"
+  yabai -m query --spaces --space | jq -r '.[] | select(.["has-focus"] == true) | .index'
 }
 
-# do first_window ourselves
+# Get the first window of a space by its index
 # $1 : space index
 first_window() {
-  spaces=$(yabai -m query --spaces)
-  first_window=$(echo "$spaces" | jq -r ".[] | select(.index == $1) | .windows[0]")
-  echo "$first_window"
+  yabai -m query --spaces --space "$1" | jq -r ".windows[0]"
 }
 
-# do last_window ourselves, since yabai field is buggy
+# Get the last window of a space by its index
 # $1 : space index
 last_window() {
-  spaces=$(yabai -m query --spaces)
-  last_window=$(echo "$spaces" | jq -r ".[] | select(.index == $1) | .windows[-1]")
-  echo "$last_window"
+  yabai -m query --spaces --space "$1" | jq -r ".windows[-1]"
 }
 
+# Toggle the layout of a space by its index
+# $1 : space index
 toggle_layout() {
   type=$(space_type "$1")
   if [ "$type" == "bsp" ]; then
@@ -35,7 +31,7 @@ toggle_layout() {
     yabai -m space "$1" --layout bsp
   fi
 
-  # hack bug workaround
+  # Workaround for focus bug
   islast=$(yabai -m query --spaces | jq '.[-1]."has-focus" == true')
   if [ "$islast" == "true" ]; then
     yabai -m space --focus prev
@@ -46,4 +42,26 @@ toggle_layout() {
     sleep 0.2
     yabai -m space --focus prev
   fi
+}
+
+# Get all spaces
+get_spaces() {
+  yabai -m query --spaces
+}
+
+# Get a specific space by its index
+# $1 : space index
+get_space_info() {
+  yabai -m query --spaces --space "$1"
+}
+
+# Get all windows in a specific space by its index
+# $1 : space index
+get_windows_in_space() {
+  yabai -m query --spaces --space "$1" | jq -r ".windows"
+}
+
+# Get the number of spaces
+num_spaces() {
+  get_spaces | jq '. | length'
 }
