@@ -188,7 +188,6 @@ reorder_windows() {
   local space_index
   local windows
   local window_item
-  local space_items_map=()
 
   # Fetch JSON data from yabai and sketchybar
   yabai_spaces_json=$(yabai -m query --spaces)
@@ -232,30 +231,20 @@ reorder_windows() {
     fi
   done
 
-  # Create a map of sketchybar items to preserve their original order
-  declare -A sketchybar_map
-  local index=0
-  for item in "${sketchybar_items[@]}"; do
-    sketchybar_map["$item"]=$index
-    index=$((index + 1))
-  done
-
   # Copy the original sketchybar items to the final list, preserving the order
   local final_sorted_list=()
+  local item
+
+  # First, add all items that are not in sorted_list
   for item in "${sketchybar_items[@]}"; do
-    if [[ " ${sorted_list[*]} " =~ " $item " ]]; then
-      final_sorted_list+=("$item")
-      sorted_list=("${sorted_list[@]/$item/}") # Remove from sorted_list
-    else
+    if ! [[ " ${sorted_list[*]} " =~ " $item " ]]; then
       final_sorted_list+=("$item")
     fi
   done
 
-  # Reorder the remaining windows to match the order found in yabai
+  # Then, add items from sorted_list in the correct order
   for item in "${sorted_list[@]}"; do
-    if [ -n "${sketchybar_map[$item]}" ]; then
-      final_sorted_list=("${final_sorted_list[@]:0:${sketchybar_map[$item]}}" "$item" "${final_sorted_list[@]:${sketchybar_map[$item]}}")
-    fi
+    final_sorted_list+=("$item")
   done
 
   # Print the final sorted list
