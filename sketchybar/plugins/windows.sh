@@ -255,6 +255,23 @@ reorder_windows() {
     final_sorted_list+=("$item")
   done
 
+  # Ensure dividers are correctly placed after each space
+  for ((i = 0; i < ${#final_sorted_list[@]}; i++)); do
+    if [[ "${final_sorted_list[i]}" =~ ^space[0-9]+$ ]]; then
+      space_num=${final_sorted_list[i]//[^0-9]/}
+      if [[ " ${existing_spaces[*]} " == *" space$space_num "* ]]; then
+        divider="divider.$space_num"
+        for ((j = 0; j < ${#final_sorted_list[@]}; j++)); do
+          if [[ "${final_sorted_list[j]}" == "$divider" ]]; then
+            final_sorted_list=("${final_sorted_list[@]:0:i+1}" "$divider" "${final_sorted_list[@]:i+1:j-i-1}" "${final_sorted_list[@]:j+1}")
+            ((i++))
+            break
+          fi
+        done
+      fi
+    fi
+  done
+
   # Print the final sorted list
   echo "Final Sorted List:"
   for item in "${final_sorted_list[@]}"; do
