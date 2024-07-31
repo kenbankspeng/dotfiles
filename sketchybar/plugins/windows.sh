@@ -202,6 +202,11 @@ reorder_windows() {
   echo "$yabai_spaces_json"
   echo
 
+  # Debug: print the Sketchybar query
+  echo "Sketchybar Items JSON:"
+  echo "$sketchybar_items_json"
+  echo
+
   # Create sets of existing spaces and windows in Sketchybar items
   existing_spaces=($(printf "%s\n" "${sketchybar_items[@]}" | grep -Eo 'space[0-9]+'))
   existing_windows=($(printf "%s\n" "${sketchybar_items[@]}" | grep -Eo 'window\.[0-9]+\.[0-9]+'))
