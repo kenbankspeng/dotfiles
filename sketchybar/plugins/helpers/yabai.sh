@@ -1,49 +1,88 @@
+# Get all spaces
+yabai_get_spaces() {
+  yabai -m query --spaces
+}
+
+# Get a specific space by its index
 # $1 : space index
-space_type() {
-  spaces=$(yabai -m query --spaces "index,type")
-  type=$(echo "$spaces" | jq -r ".[] | select(.index == $1) | .type")
-  echo "$type"
+yabai_get_space_info() {
+  yabai -m query --spaces --space "$1"
 }
 
-focused_space() {
-  spaces=$(yabai -m query --spaces "index,has-focus")
-  focused_space=$(echo "$spaces" | jq -r ".[] | select(.[\"has-focus\"] == true) | .index")
-  echo "$focused_space"
-}
-
-# do first_window ourselves
+# Get all windows in a specific space by its index
 # $1 : space index
-first_window() {
-  spaces=$(yabai -m query --spaces)
-  first_window=$(echo "$spaces" | jq -r ".[] | select(.index == $1) | .windows[0]")
-  echo "$first_window"
+yabai_get_windows_in_space() {
+  yabai_get_space_info "$1" | jq -r ".windows"
 }
 
-# do last_window ourselves, since yabai field is buggy
+# Get the type of a space by its index
 # $1 : space index
-last_window() {
-  spaces=$(yabai -m query --spaces)
-  last_window=$(echo "$spaces" | jq -r ".[] | select(.index == $1) | .windows[-1]")
-  echo "$last_window"
+yabai_get_space_type() {
+  yabai_get_space_info "$1" | jq -r ".type"
 }
 
-toggle_layout() {
-  type=$(space_type "$1")
+# Get the focused space index
+yabai_get_focused_space() {
+  yabai_get_spaces | jq -r '.[] | select(.["has-focus"] == true) | .index'
+}
+
+# Get the number of spaces
+yabai_get_num_spaces() {
+  yabai_get_spaces | jq '. | length'
+}
+
+# Get the number of windows in a space by its index
+# $1 : space index
+yabai_get_num_windows_in_space() {
+  yabai_get_windows_in_space "$1" | jq '. | length'
+}
+
+# Get app name of a window by its id
+# $1: window id
+yabai_get_window_app_name() {
+  yabai -m query --windows --window "$1" | jq -r '.app'
+}
+
+# Focus a specific space by its index
+# $1 : space index
+yabai_focus_space() {
+  yabai -m space --focus "$1"
+}
+
+# Focus a specific window by its id
+# $1 : window id
+yabai_focus_window() {
+  yabai -m window --focus "$1"
+}
+
+# Stack the first window on top of the last window in a specific space
+# $1 : space index
+yabai_rotate_stack() {
+  local space_id="$1"
+  local first_window=$(yabai_get_windows_in_space "$space_id" | jq -r ".[0]")
+  local last_window=$(yabai_get_windows_in_space "$space_id" | jq -r ".[-1]")
+  yabai -m window "$first_window" --stack "$last_window"
+}
+
+# Toggle the layout of a space by its index
+# $1 : space index
+yabai_toggle_layout() {
+  type=$(yabai_get_space_type "$1")
   if [ "$type" == "bsp" ]; then
     yabai -m space "$1" --layout stack
   else
     yabai -m space "$1" --layout bsp
   fi
 
-  # hack bug workaround
-  islast=$(yabai -m query --spaces | jq '.[-1]."has-focus" == true')
+  # Workaround for focus bug
+  islast=$(yabai_get_spaces | jq '.[-1]."has-focus" == true')
   if [ "$islast" == "true" ]; then
-    yabai -m space --focus prev
+    yabai_focus_space prev
     sleep 0.2
-    yabai -m space --focus next
+    yabai_focus_space next
   else
-    yabai -m space --focus next
+    yabai_focus_space next
     sleep 0.2
-    yabai -m space --focus prev
+    yabai_focus_space prev
   fi
 }
