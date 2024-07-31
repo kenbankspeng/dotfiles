@@ -185,10 +185,11 @@ reorder_windows() {
   local sketchybar_items
   local existing_spaces
   local existing_windows
-  local sorted_list
+  local sorted_list=()
   local space_index
   local windows
   local window_item
+  local space_items_map=()
 
   # Fetch JSON data from yabai and sketchybar
   yabai_spaces_json=$(yabai -m query --spaces)
@@ -202,9 +203,7 @@ reorder_windows() {
   existing_spaces=($(printf "%s\n" "${sketchybar_items[@]}" | grep -Eo 'space[0-9]+'))
   existing_windows=($(printf "%s\n" "${sketchybar_items[@]}" | grep -Eo 'window\.[0-9]+\.[0-9]+'))
 
-  # Create the sorted list based on yabai order
-  sorted_list=()
-
+  # Map windows to their respective spaces
   for space in $yabai_spaces; do
     space_index=$(echo "$space" | jq -r '.index')
     windows=$(echo "$space" | jq -r '.windows[]?')
@@ -227,22 +226,35 @@ reorder_windows() {
     fi
   done
 
+  # Combine spaces and their respective windows into a single list
+  local final_sorted_list=()
+  for item in "${sorted_list[@]}"; do
+    if [[ $item == space* ]]; then
+      final_sorted_list+=("$item")
+      for window in "${sorted_list[@]}"; do
+        if [[ $window == window.${item:5}* ]]; then
+          final_sorted_list+=("$window")
+        fi
+      done
+    fi
+  done
+
   # Add remaining items that are neither spaces nor windows in their original order
   for item in "${sketchybar_items[@]}"; do
-    if [[ ! " ${sorted_list[*]} " =~ " $item " ]]; then
-      sorted_list+=("$item")
+    if [[ ! " ${final_sorted_list[*]} " =~ " $item " ]]; then
+      final_sorted_list+=("$item")
     fi
   done
 
   # Debug: print the final sorted list before reordering
   echo "Final Sorted List:"
-  for item in "${sorted_list[@]}"; do
+  for item in "${final_sorted_list[@]}"; do
     echo "$item"
   done
   echo
 
   # Set the new order in Sketchybar, ensure it is space-separated
-  sketchybar --reorder $(printf "%s " "${sorted_list[@]}")
+  sketchybar --reorder $(printf "%s " "${final_sorted_list[@]}")
 }
 
 main() {
