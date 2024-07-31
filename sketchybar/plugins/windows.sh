@@ -236,10 +236,12 @@ reorder_windows() {
       done
     fi
 
-    # Append the corresponding divider
-    divider=$(echo "$windows_dividers" | grep "window.$space_id.$space_index")
-    if [ -n "$divider" ]; then
-      sorted_list+=("$divider")
+    # Append the corresponding divider if exists
+    if [ -n "$windows_dividers" ]; then
+      divider=$(echo "$windows_dividers" | grep "window.$space_id.$space_index")
+      if [ -n "$divider" ]; then
+        sorted_list+=("$divider")
+      fi
     fi
   done
 
