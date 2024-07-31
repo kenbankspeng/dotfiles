@@ -227,6 +227,11 @@ reorder_windows() {
         fi
       done
     fi
+
+    # Add divider to sorted list if it exists in Sketchybar items
+    if printf "%s\n" "${sketchybar_items[@]}" | grep -q "divider.$space_index"; then
+      sorted_list+=("divider.$space_index")
+    fi
   done
 
   # Copy the original sketchybar items to the final list, preserving the order
