@@ -229,23 +229,22 @@ reorder_windows() {
     fi
   done
 
-  # Temporary lists to store combined items with original order preserved
+  # Combine the sorted windows, spaces, and dividers with the remaining items while preserving original order
   temp_sorted_list=()
   space_counter=0
   window_counter=0
 
-  # Combine the sorted windows, spaces, and dividers with the remaining items while preserving original order
   for item in "${sketchybar_items[@]}"; do
     if echo "$item" | grep -q 'window\.[0-9]\+\.[0-9]\+'; then
-      if [ $window_counter -lt ${#sorted_windows[@]} ]; then
-        temp_sorted_list+=("${sorted_windows[window_counter]}")
+      if [[ " ${sorted_windows[*]} " == *" $item "* ]]; then
+        temp_sorted_list+=("$item")
         window_counter=$((window_counter + 1))
       else
         temp_sorted_list+=("$item")
       fi
     elif echo "$item" | grep -q 'space[0-9]\+'; then
-      if [ $space_counter -lt ${#sorted_spaces[@]} ]; then
-        temp_sorted_list+=("${sorted_spaces[space_counter]}")
+      if [[ " ${sorted_spaces[*]} " == *" $item "* ]]; then
+        temp_sorted_list+=("$item")
         space_counter=$((space_counter + 1))
       else
         temp_sorted_list+=("$item")
