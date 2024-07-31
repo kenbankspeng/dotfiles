@@ -203,12 +203,14 @@ reorder_windows() {
   echo "$sketchybar_items"
   echo
 
-  # Extract windows from sketchybar items
-  if [ -n "$sketchybar_items" ]; then
-    sketchybar_windows=$(echo "$sketchybar_items" | grep -Eo 'window\.[0-9]+\.[0-9]+')
-  else
-    sketchybar_windows=""
+  # If sketchybar items are empty, log and return
+  if [ -z "$sketchybar_items" ]; then
+    echo "No Sketchybar items found."
+    return
   fi
+
+  # Extract windows from sketchybar items
+  sketchybar_windows=$(echo "$sketchybar_items" | grep -Eo 'window\.[0-9]+\.[0-9]+')
 
   # Debug: print extracted sketchybar windows
   echo "Extracted Sketchybar Windows:"
@@ -230,7 +232,10 @@ reorder_windows() {
 
     if [ -n "$windows" ]; then
       for window_id in $windows; do
+        # Correctly format the window item to match Sketchybar format
         window_item="window.$space_id.$window_id"
+
+        # Check if this window item exists in the Sketchybar windows
         if echo "$sketchybar_windows" | grep -q "$window_item"; then
           sorted_list+=("$window_item")
         fi
