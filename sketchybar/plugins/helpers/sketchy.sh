@@ -18,7 +18,7 @@ sketchybar_get_windows_in_space() {
   is_in_space=false
 
   echo -e "\nProcessing items:"
-  while read -r item; do
+  while IFS= read -r item; do
     echo "Processing item: $item"
     if [[ $item == "$space_marker" ]]; then
       is_in_space=true
