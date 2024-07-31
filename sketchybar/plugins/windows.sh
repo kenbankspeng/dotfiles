@@ -243,7 +243,7 @@ reorder_windows() {
   done
 
   # Set the new order in Sketchybar
-  sketchybar --set bar order="${final_sorted_list[*]}"
+  sketchybar --reorder "${final_sorted_list[@]}"
 
   # Debug: print the final sorted list
   echo "Final Sorted List:"
