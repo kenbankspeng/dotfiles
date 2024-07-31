@@ -230,7 +230,7 @@ reorder_windows() {
 
     if [ -n "$windows" ]; then
       for window_id in $windows; do
-        window_item="window.$window_id"
+        window_item="window.$space_id.$window_id"
         if echo "$sketchybar_windows" | grep -q "$window_item"; then
           sorted_list+=("$window_item")
         fi
