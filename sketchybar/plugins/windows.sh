@@ -220,7 +220,7 @@ reorder_windows() {
     fi
 
     if [ -n "$windows" ]; then
-      for window_id in $(echo "$windows" | jq -r '.'); do
+      for window_id in $windows; do
         # Correctly format the window item to match Sketchybar format
         window_item="window.$space_index.$window_id"
 
@@ -232,15 +232,29 @@ reorder_windows() {
     fi
   done
 
-  # Copy the original sketchybar items to the final list
-  local final_sorted_list=()
+  # Create a map of sketchybar items to preserve their original order
+  declare -A sketchybar_map
+  local index=0
+  for item in "${sketchybar_items[@]}"; do
+    sketchybar_map["$item"]=$index
+    index=$((index + 1))
+  done
 
+  # Copy the original sketchybar items to the final list, preserving the order
+  local final_sorted_list=()
   for item in "${sketchybar_items[@]}"; do
     if [[ " ${sorted_list[*]} " =~ " $item " ]]; then
       final_sorted_list+=("$item")
       sorted_list=("${sorted_list[@]/$item/}") # Remove from sorted_list
     else
       final_sorted_list+=("$item")
+    fi
+  done
+
+  # Reorder the remaining windows to match the order found in yabai
+  for item in "${sorted_list[@]}"; do
+    if [ -n "${sketchybar_map[$item]}" ]; then
+      final_sorted_list=("${final_sorted_list[@]:0:${sketchybar_map[$item]}}" "$item" "${final_sorted_list[@]:${sketchybar_map[$item]}}")
     fi
   done
 
