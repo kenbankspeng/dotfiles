@@ -26,7 +26,9 @@ sketchybar_get_windows_in_space() {
     elif [[ $item =~ ^space[0-9]+$ ]] && [[ $item != "$space_marker" ]]; then
       is_in_space=false
       echo "Exiting space: $item"
-    elif $is_in_space && [[ $item =~ ^window\.$space\.[0-9]+$ ]]; then
+    fi
+
+    if $is_in_space && [[ $item =~ ^window\.$space\.[0-9]+$ ]]; then
       window_id=$(echo "$item" | sed -E "s/window\.$space\.([0-9]+)/\1/")
       window_ids+=("$window_id")
       echo "Found window ID: $window_id"
