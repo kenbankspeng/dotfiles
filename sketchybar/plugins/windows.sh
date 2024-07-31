@@ -205,7 +205,7 @@ reorder_windows() {
 
   # Extract windows from sketchybar items
   if [ -n "$sketchybar_items" ]; then
-    sketchybar_windows=$(echo "$sketchybar_items" | grep -E '^window\.')
+    sketchybar_windows=$(echo "$sketchybar_items" | grep -E '^window\.[0-9]+')
   else
     sketchybar_windows=""
   fi
@@ -230,7 +230,7 @@ reorder_windows() {
 
     if [ -n "$windows" ]; then
       for window_id in $windows; do
-        window_item="window.$space_id.$window_id"
+        window_item="window.$window_id"
         if echo "$sketchybar_windows" | grep -q "$window_item"; then
           sorted_list+=("$window_item")
         fi
