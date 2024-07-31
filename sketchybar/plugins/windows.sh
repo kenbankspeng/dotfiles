@@ -264,8 +264,8 @@ reorder_windows() {
   done
   echo
 
-  # Set the new order in Sketchybar
-  sketchybar --reorder "${final_sorted_list[@]}"
+  # Set the new order in Sketchybar, ensure it is space-separated
+  # sketchybar --reorder $(printf "%s " "${final_sorted_list[@]}")
 }
 
 main() {
