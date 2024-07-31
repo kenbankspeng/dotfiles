@@ -55,6 +55,25 @@ yabai_get_window_app_name() {
   yabai -m query --windows --window "$1" | jq -r '.app'
 }
 
+# Focus a specific space by its index
+# $1 : space index
+yabai_focus_space() {
+  yabai -m space --focus "$1"
+}
+
+# Focus a specific window by its id
+# $1 : window id
+yabai_focus_window() {
+  yabai -m window --focus "$1"
+}
+
+# Stack a window on top of another
+# $1 : first window id
+# $2 : last window id
+yabai_rotate_stack() {
+  yabai -m window "$1" --stack "$2"
+}
+
 # Toggle the layout of a space by its index
 # $1 : space index
 yabai_toggle_layout() {
@@ -68,12 +87,12 @@ yabai_toggle_layout() {
   # Workaround for focus bug
   islast=$(yabai_get_spaces | jq '.[-1]."has-focus" == true')
   if [ "$islast" == "true" ]; then
-    yabai -m space --focus prev
+    yabai_focus_space prev
     sleep 0.2
-    yabai -m space --focus next
+    yabai_focus_space next
   else
-    yabai -m space --focus next
+    yabai_focus_space next
     sleep 0.2
-    yabai -m space --focus prev
+    yabai_focus_space prev
   fi
 }
