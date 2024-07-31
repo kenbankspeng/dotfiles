@@ -192,36 +192,36 @@ reorder_windows() {
 
   # Parse the JSON data
   yabai_spaces=$(echo "$yabai_spaces_json" | jq -c '.[]')
-  sketchybar_items=$(echo "$sketchybar_items_json" | jq -r '.[]')
+  sketchybar_items=($(echo "$sketchybar_items_json" | jq -r '.[]'))
 
   # Debug: print parsed items
   echo "Parsed Yabai Spaces:"
   echo "$yabai_spaces"
   echo
   echo "Parsed Sketchybar Items:"
-  echo "$sketchybar_items"
+  echo "${sketchybar_items[@]}"
   echo
 
   # If sketchybar items are empty, log and return
-  if [ -z "$sketchybar_items" ]; then
+  if [ ${#sketchybar_items[@]} -eq 0 ]; then
     echo "No Sketchybar items found."
     return
   fi
 
   # Extract windows, spaces, and dividers from sketchybar items
-  sketchybar_windows=$(echo "$sketchybar_items" | grep -Eo 'window\.[0-9]+\.[0-9]+')
-  sketchybar_spaces=$(echo "$sketchybar_items" | grep -Eo 'space[0-9]+')
-  sketchybar_dividers=$(echo "$sketchybar_items" | grep -Eo 'divider\.[0-9]+')
+  sketchybar_windows=($(printf "%s\n" "${sketchybar_items[@]}" | grep -Eo 'window\.[0-9]+\.[0-9]+'))
+  sketchybar_spaces=($(printf "%s\n" "${sketchybar_items[@]}" | grep -Eo 'space[0-9]+'))
+  sketchybar_dividers=($(printf "%s\n" "${sketchybar_items[@]}" | grep -Eo 'divider\.[0-9]+'))
 
   # Debug: print extracted sketchybar windows, spaces, and dividers
   echo "Extracted Sketchybar Windows:"
-  echo "$sketchybar_windows"
+  echo "${sketchybar_windows[@]}"
   echo
   echo "Extracted Sketchybar Spaces:"
-  echo "$sketchybar_spaces"
+  echo "${sketchybar_spaces[@]}"
   echo
   echo "Extracted Sketchybar Dividers:"
-  echo "$sketchybar_dividers"
+  echo "${sketchybar_dividers[@]}"
   echo
 
   # Create the sorted list based on yabai order
@@ -247,41 +247,50 @@ reorder_windows() {
         window_item="window.$space_index.$window_id"
 
         # Check if this window item exists in the Sketchybar windows
-        if echo "$sketchybar_windows" | grep -q "$window_item"; then
+        if printf "%s\n" "${sketchybar_windows[@]}" | grep -q "$window_item"; then
           sorted_windows+=("$window_item")
         fi
       done
     fi
   done
 
-  # Combine the sorted windows, spaces, and dividers with the remaining items while preserving original order
-  final_sorted_list=()
+  # Temporary lists to store combined items with original order preserved
+  temp_sorted_list=()
   space_counter=0
   window_counter=0
-  sorted_index=0
 
-  for item in $sketchybar_items; do
+  for item in "${sketchybar_items[@]}"; do
     if echo "$item" | grep -q 'window\.[0-9]\+\.[0-9]\+'; then
       if [ $window_counter -lt ${#sorted_windows[@]} ]; then
-        final_sorted_list+=("${sorted_windows[window_counter]}")
+        temp_sorted_list+=("${sorted_windows[window_counter]}")
         window_counter=$((window_counter + 1))
       fi
     elif echo "$item" | grep -q 'space[0-9]\+'; then
       if [ $space_counter -lt ${#sorted_spaces[@]} ]; then
-        final_sorted_list+=("${sorted_spaces[space_counter]}")
+        temp_sorted_list+=("${sorted_spaces[space_counter]}")
         space_counter=$((space_counter + 1))
       fi
+    else
+      temp_sorted_list+=("$item")
+    fi
+  done
+
+  # Combine the temporary sorted list with original items while preserving order
+  final_sorted_list=()
+  for item in "${sketchybar_items[@]}"; do
+    if printf "%s\n" "${temp_sorted_list[@]}" | grep -q "^$item\$"; then
+      final_sorted_list+=("$item")
     else
       final_sorted_list+=("$item")
     fi
   done
 
-  # Set the new order in Sketchybar
-  sketchybar --reorder "${final_sorted_list[@]}"
-
-  # Debug: print the final sorted list
+  # Debug: print the final sorted list before reordering
   echo "Final Sorted List:"
   printf "%s\n" "${final_sorted_list[@]}"
+
+  # Set the new order in Sketchybar
+  sketchybar --reorder "${final_sorted_list[@]}"
 }
 
 main() {
