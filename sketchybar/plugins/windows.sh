@@ -76,7 +76,7 @@ add_placeholder() {
 # As needed, add new windows, update existing, remove closed
 manage_windows() {
   local space_id="$1"
-  local window_count=$(yabai_get_space_info "$space_id" | jq '.windows | length')
+  local window_count=$(yabai_get_num_windows_in_space "$space_id")
   local cached_windows="$2"
   local windows_cache_file="$3"
   local dividers_cache_file="$CACHE_DIR/dividers_cache"
@@ -95,7 +95,7 @@ manage_windows() {
 
   for ((window_index = 0; window_index < window_count; window_index++)); do
     local window_id=$(yabai_get_windows_in_space "$space_id" | jq -r ".[$window_index]")
-    local app_name=$(yabai -m query --windows --window "$window_id" | jq -r '.app')
+    local app_name=$(yabai_get_window_app_name "$window_id")
     local icon=$($CONFIG_DIR/icon_map.sh "$app_name")
 
     # Add new windows
@@ -146,7 +146,7 @@ manage_windows() {
 # Use brackets to group windows in the same space
 manage_space() {
   local space_id="$1"
-  local window_count=$(yabai_get_space_info "$space_id" | jq '.windows | length')
+  local window_count=$(yabai_get_num_windows_in_space "$space_id")
 
   local bracket_members=()
   for ((window_index = 0; window_index < window_count; window_index++)); do

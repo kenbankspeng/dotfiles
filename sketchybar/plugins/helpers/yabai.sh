@@ -43,6 +43,18 @@ yabai_get_num_spaces() {
   yabai_get_spaces | jq '. | length'
 }
 
+# Get the number of windows in a space by its index
+# $1 : space index
+yabai_get_num_windows_in_space() {
+  yabai_get_windows_in_space "$1" | jq '. | length'
+}
+
+# Get app name of a window by its id
+# $1: window id
+yabai_get_window_app_name() {
+  yabai -m query --windows --window "$1" | jq -r '.app'
+}
+
 # Toggle the layout of a space by its index
 # $1 : space index
 yabai_toggle_layout() {
