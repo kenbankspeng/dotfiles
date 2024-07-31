@@ -221,11 +221,11 @@ reorder_windows() {
   sorted_list=()
 
   for space in $yabai_spaces; do
-    space_id=$(echo "$space" | jq -r '.id')
+    space_index=$(echo "$space" | jq -r '.index')
     windows=$(echo "$space" | jq -r '.windows[]?')
 
     # Debug: print the current space details
-    echo "Processing Space ID: $space_id"
+    echo "Processing Space Index: $space_index"
     echo "Windows in this space:"
     echo "$windows"
     echo
@@ -233,7 +233,7 @@ reorder_windows() {
     if [ -n "$windows" ]; then
       for window_id in $windows; do
         # Correctly format the window item to match Sketchybar format
-        window_item="window.$space_id.$window_id"
+        window_item="window.$space_index.$window_id"
 
         # Check if this window item exists in the Sketchybar windows
         if echo "$sketchybar_windows" | grep -q "$window_item"; then
