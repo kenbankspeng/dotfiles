@@ -5,7 +5,6 @@ source "$CONFIG_DIR/plugins/helpers/yabai.sh"
 
 CACHE_DIR="/tmp/sketchybar_window_cache"
 BRACKET_CACHE_FILE="$CACHE_DIR/space_bracket_cache"
-NUM_SPACES=$(num_spaces)
 CLICK_HANDLER="$CONFIG_DIR/plugins/window_action.sh"
 
 mkdir -p "$CACHE_DIR"
@@ -26,7 +25,7 @@ renew_cache() {
 
   local new_cached_windows=""
   for ((window_index = 0; window_index < window_count; window_index++)); do
-    local window_id=$(get_windows_in_space "$space_id" | jq -r ".[$window_index]")
+    local window_id=$(yabai_get_windows_in_space "$space_id" | jq -r ".[$window_index]")
     new_cached_windows+="window.$space_id.$window_id"$'\n'
   done
 
@@ -57,7 +56,7 @@ add_placeholder() {
   local cached_windows="$3"
   local placeholder="window.$space_id.0"
 
-  if ! grep -q "$placeholder" <<<"$cached_windows"; then
+  if (! grep -q "$placeholder" <<<"$cached_windows"); then
     sketchybar --add item "$placeholder" left
     sketchybar --set "$placeholder" script="$CLICK_HANDLER" \
       --subscribe "$placeholder" mouse.clicked
@@ -77,7 +76,7 @@ add_placeholder() {
 # As needed, add new windows, update existing, remove closed
 manage_windows() {
   local space_id="$1"
-  local window_count=$(get_space_info "$space_id" | jq '.windows | length')
+  local window_count=$(yabai_get_space_info "$space_id" | jq '.windows | length')
   local cached_windows="$2"
   local windows_cache_file="$3"
   local dividers_cache_file="$CACHE_DIR/dividers_cache"
@@ -87,7 +86,7 @@ manage_windows() {
   # Add a divider before the first window in any space except space 1
   if ((space_id > 1)); then
     local divider_handle="divider.$space_id"
-    if ! grep -q "$divider_handle" <<<"$cached_dividers"; then
+    if (! grep -q "$divider_handle" <<<"$cached_dividers"); then
       sketchybar --add item "$divider_handle" left
       sketchybar --set "$divider_handle" icon.drawing=off label.drawing=off background.padding_left=10 background.padding_right=10
       echo "$divider_handle" >>"$dividers_cache_file"
@@ -95,13 +94,13 @@ manage_windows() {
   fi
 
   for ((window_index = 0; window_index < window_count; window_index++)); do
-    local window_id=$(get_windows_in_space "$space_id" | jq -r ".[$window_index]")
+    local window_id=$(yabai_get_windows_in_space "$space_id" | jq -r ".[$window_index]")
     local app_name=$(yabai -m query --windows --window "$window_id" | jq -r '.app')
     local icon=$($CONFIG_DIR/icon_map.sh "$app_name")
 
     # Add new windows
     local window_handle="window.$space_id.$window_id"
-    if ! grep -q "$window_handle" <<<"$cached_windows"; then
+    if (! grep -q "$window_handle" <<<"$cached_windows"); then
       sketchybar --add item "$window_handle" left
       sketchybar --set "$window_handle" script="$CLICK_HANDLER" \
         --subscribe "$window_handle" mouse.clicked
@@ -147,11 +146,11 @@ manage_windows() {
 # Use brackets to group windows in the same space
 manage_space() {
   local space_id="$1"
-  local window_count=$(get_space_info "$space_id" | jq '.windows | length')
+  local window_count=$(yabai_get_space_info "$space_id" | jq '.windows | length')
 
   local bracket_members=()
   for ((window_index = 0; window_index < window_count; window_index++)); do
-    local window_id=$(get_windows_in_space "$space_id" | jq -r ".[$window_index]")
+    local window_id=$(yabai_get_windows_in_space "$space_id" | jq -r ".[$window_index]")
     bracket_members+=("window.$space_id.$window_id")
   done
 
@@ -185,7 +184,8 @@ reorder_windows() {
 }
 
 main() {
-  for ((space_index = 0; space_index < NUM_SPACES; space_index++)); do
+  local num_spaces=$(yabai_get_num_spaces)
+  for ((space_index = 0; space_index < num_spaces; space_index++)); do
     local space_id=$((space_index + 1)) # Space index starts from 1
 
     # get cached data
