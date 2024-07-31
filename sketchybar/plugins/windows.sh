@@ -204,7 +204,11 @@ reorder_windows() {
   echo
 
   # Extract windows and dividers from sketchybar items
-  windows_dividers=$(echo "$sketchybar_items" | grep -E '^window\.|^divider\.')
+  if [ -n "$sketchybar_items" ]; then
+    windows_dividers=$(echo "$sketchybar_items" | grep -E '^window\.|^divider\.')
+  else
+    windows_dividers=""
+  fi
 
   # Debug: print extracted windows and dividers
   echo "Extracted Windows and Dividers:"
