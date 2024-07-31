@@ -220,7 +220,7 @@ reorder_windows() {
     fi
 
     if [ -n "$windows" ]; then
-      for window_id in $windows; do
+      for window_id in $(echo "$windows" | jq -r '.'); do
         # Correctly format the window item to match Sketchybar format
         window_item="window.$space_index.$window_id"
 
