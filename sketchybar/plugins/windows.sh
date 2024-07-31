@@ -182,9 +182,25 @@ reorder_windows() {
   yabai_spaces_json=$(yabai -m query --spaces)
   sketchybar_items_json=$(sketchybar --query bar | jq -r '.items')
 
+  # Debug: print the fetched JSON data
+  echo "Yabai Spaces JSON:"
+  echo "$yabai_spaces_json"
+  echo
+  echo "Sketchybar Items JSON:"
+  echo "$sketchybar_items_json"
+  echo
+
   # Parse the JSON data
   yabai_spaces=$(echo "$yabai_spaces_json" | jq -c '.[]')
   sketchybar_items=$(echo "$sketchybar_items_json" | jq -r '.[]')
+
+  # Debug: print parsed items
+  echo "Parsed Yabai Spaces:"
+  echo "$yabai_spaces"
+  echo
+  echo "Parsed Sketchybar Items:"
+  echo "$sketchybar_items"
+  echo
 
   # If sketchybar items are empty, log and return
   if [ -z "$sketchybar_items" ]; then
@@ -197,6 +213,17 @@ reorder_windows() {
   sketchybar_spaces=$(echo "$sketchybar_items" | grep -Eo 'space[0-9]+')
   sketchybar_dividers=$(echo "$sketchybar_items" | grep -Eo 'divider\.[0-9]+')
 
+  # Debug: print extracted sketchybar windows, spaces, and dividers
+  echo "Extracted Sketchybar Windows:"
+  echo "$sketchybar_windows"
+  echo
+  echo "Extracted Sketchybar Spaces:"
+  echo "$sketchybar_spaces"
+  echo
+  echo "Extracted Sketchybar Dividers:"
+  echo "$sketchybar_dividers"
+  echo
+
   # Create the sorted list based on yabai order
   sorted_windows=()
   sorted_spaces=()
@@ -204,6 +231,12 @@ reorder_windows() {
   for space in $yabai_spaces; do
     space_index=$(echo "$space" | jq -r '.index')
     windows=$(echo "$space" | jq -r '.windows[]?')
+
+    # Debug: print the current space details
+    echo "Processing Space Index: $space_index"
+    echo "Windows in this space:"
+    echo "$windows"
+    echo
 
     # Add space to sorted list
     sorted_spaces+=("space$space_index")
