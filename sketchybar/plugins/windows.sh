@@ -221,6 +221,11 @@ reorder_windows() {
       sorted_list+=("space$space_index")
     fi
 
+    # Add divider to sorted list after the space
+    if printf "%s\n" "${sketchybar_items[@]}" | grep -q "divider.$space_index"; then
+      sorted_list+=("divider.$space_index")
+    fi
+
     if [ -n "$windows" ]; then
       for window_id in $windows; do
         # Correctly format the window item to match Sketchybar format
@@ -231,11 +236,6 @@ reorder_windows() {
           sorted_list+=("$window_item")
         fi
       done
-    fi
-
-    # Add divider to sorted list after the space and its windows
-    if printf "%s\n" "${sketchybar_items[@]}" | grep -q "divider.$space_index"; then
-      sorted_list+=("divider.$space_index")
     fi
   done
 
