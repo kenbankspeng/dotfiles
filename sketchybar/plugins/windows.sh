@@ -178,7 +178,6 @@ manage_space() {
 }
 
 reorder_windows() {
-  # Use local variables to prevent interference with other code
   local yabai_spaces_json
   local sketchybar_items_json
   local yabai_spaces
