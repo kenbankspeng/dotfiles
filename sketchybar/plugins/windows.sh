@@ -197,11 +197,9 @@ reorder_windows() {
   yabai_spaces=$(echo "$yabai_spaces_json" | jq -c '.[]')
   sketchybar_items=($(echo "$sketchybar_items_json" | jq -r '.[]'))
 
-  # Debug: print the initial Sketchybar items
-  echo "Sketchybar Items JSON:"
-  for item in "${sketchybar_items[@]}"; do
-    echo "$item"
-  done
+  # Debug: print the Yabai query
+  echo "Yabai Spaces JSON:"
+  echo "$yabai_spaces_json"
   echo
 
   # Create sets of existing spaces and windows in Sketchybar items
