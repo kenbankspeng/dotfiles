@@ -259,7 +259,9 @@ reorder_windows() {
 
   # Debug: print the final sorted list before reordering
   echo "Final Sorted List:"
-  printf "%s\n" "${final_sorted_list[@]}"
+  for item in "${final_sorted_list[@]}"; do
+    echo "$item"
+  done
   echo
 
   # Set the new order in Sketchybar
