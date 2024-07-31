@@ -203,45 +203,38 @@ reorder_windows() {
   echo "$sketchybar_items"
   echo
 
-  # Extract windows and dividers from sketchybar items
+  # Extract windows from sketchybar items
   if [ -n "$sketchybar_items" ]; then
-    windows_dividers=$(echo "$sketchybar_items" | grep -E '^window\.|^divider\.')
+    sketchybar_windows=$(echo "$sketchybar_items" | grep -E '^window\.')
   else
-    windows_dividers=""
+    sketchybar_windows=""
   fi
 
-  # Debug: print extracted windows and dividers
-  echo "Extracted Windows and Dividers:"
-  echo "$windows_dividers"
+  # Debug: print extracted sketchybar windows
+  echo "Extracted Sketchybar Windows:"
+  echo "$sketchybar_windows"
   echo
 
-  # Create the sorted list
+  # Create the sorted list based on yabai order
   sorted_list=()
 
   for space in $yabai_spaces; do
     space_id=$(echo "$space" | jq -r '.id')
-    space_index=$(echo "$space" | jq -r '.index')
     windows=$(echo "$space" | jq -r '.windows[]?')
 
     # Debug: print the current space details
-    echo "Processing Space ID: $space_id, Index: $space_index"
+    echo "Processing Space ID: $space_id"
     echo "Windows in this space:"
     echo "$windows"
     echo
 
-    # Append windows in the order found in yabai spaces
     if [ -n "$windows" ]; then
       for window_id in $windows; do
-        sorted_list+=("window.$space_id.$window_id")
+        window_item="window.$window_id"
+        if echo "$sketchybar_windows" | grep -q "$window_item"; then
+          sorted_list+=("$window_item")
+        fi
       done
-    fi
-
-    # Append the corresponding divider if exists
-    if [ -n "$windows_dividers" ]; then
-      divider=$(echo "$windows_dividers" | grep "window.$space_id.$space_index")
-      if [ -n "$divider" ]; then
-        sorted_list+=("$divider")
-      fi
     fi
   done
 
