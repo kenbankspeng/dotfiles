@@ -178,6 +178,18 @@ manage_space() {
 }
 
 reorder_windows() {
+  # Use local variables to prevent interference with other code
+  local yabai_spaces_json
+  local sketchybar_items_json
+  local yabai_spaces
+  local sketchybar_items
+  local sketchybar_windows
+  local sketchybar_spaces
+  local sketchybar_dividers
+  local sorted_list
+  local space_counter
+  local window_counter
+
   # Fetch JSON data from yabai and sketchybar
   yabai_spaces_json=$(yabai -m query --spaces)
   sketchybar_items_json=$(sketchybar --query bar | jq -r '.items')
@@ -206,15 +218,15 @@ reorder_windows() {
   sketchybar_dividers=($(printf "%s\n" "${sketchybar_items[@]}" | grep -Eo 'divider\.[0-9]+'))
 
   # Create the sorted list based on yabai order
-  sorted_windows=()
-  sorted_spaces=()
+  sorted_list=()
+  local space_index windows window_item
 
   for space in $yabai_spaces; do
     space_index=$(echo "$space" | jq -r '.index')
     windows=$(echo "$space" | jq -r '.windows[]?')
 
     # Add space to sorted list
-    sorted_spaces+=("space$space_index")
+    sorted_list+=("space$space_index")
 
     if [ -n "$windows" ]; then
       for window_id in $windows; do
@@ -223,49 +235,28 @@ reorder_windows() {
 
         # Check if this window item exists in the Sketchybar windows
         if printf "%s\n" "${sketchybar_windows[@]}" | grep -q "$window_item"; then
-          sorted_windows+=("$window_item")
+          sorted_list+=("$window_item")
         fi
       done
     fi
   done
 
-  # Combine the sorted windows, spaces, and dividers with the remaining items while preserving original order
-  temp_sorted_list=()
-  space_counter=0
-  window_counter=0
-
+  # Add dividers and other items in their original order
   for item in "${sketchybar_items[@]}"; do
-    if echo "$item" | grep -q 'window\.[0-9]\+\.[0-9]\+'; then
-      if [[ " ${sorted_windows[*]} " == *" $item "* ]]; then
-        temp_sorted_list+=("$item")
-        window_counter=$((window_counter + 1))
-      else
-        temp_sorted_list+=("$item")
-      fi
-    elif echo "$item" | grep -q 'space[0-9]\+'; then
-      if [[ " ${sorted_spaces[*]} " == *" $item "* ]]; then
-        temp_sorted_list+=("$item")
-        space_counter=$((space_counter + 1))
-      else
-        temp_sorted_list+=("$item")
-      fi
-    else
-      temp_sorted_list+=("$item")
+    if ! echo "$item" | grep -q 'window\.[0-9]\+\.[0-9]\+' && ! echo "$item" | grep -q 'space[0-9]\+'; then
+      sorted_list+=("$item")
     fi
   done
 
-  # Final sorted list to ensure windows are correctly placed relative to their respective spaces
-  final_sorted_list=("${temp_sorted_list[@]}")
-
   # Debug: print the final sorted list before reordering
   echo "Final Sorted List:"
-  for item in "${final_sorted_list[@]}"; do
+  for item in "${sorted_list[@]}"; do
     echo "$item"
   done
   echo
 
   # Set the new order in Sketchybar, ensure it is space-separated
-  # sketchybar --reorder $(printf "%s " "${final_sorted_list[@]}")
+  sketchybar --reorder $(printf "%s " "${sorted_list[@]}")
 }
 
 main() {
