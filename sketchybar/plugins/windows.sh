@@ -226,12 +226,14 @@ reorder_windows() {
     echo
 
     # Append windows in the order found in yabai spaces
-    for window_id in $windows; do
-      sorted_list+=("window.$space_id.$window_id")
-    done
+    if [ -n "$windows" ]; then
+      for window_id in $windows; do
+        sorted_list+=("window.$space_id.$window_id")
+      done
+    fi
 
     # Append the corresponding divider
-    divider=$(echo "$windows_dividers" | grep "divider.$space_index")
+    divider=$(echo "$windows_dividers" | grep "window.$space_id.$space_index")
     if [ -n "$divider" ]; then
       sorted_list+=("$divider")
     fi
