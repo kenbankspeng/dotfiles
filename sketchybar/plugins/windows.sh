@@ -179,8 +179,67 @@ manage_space() {
 
 # Reorder windows and dividers
 reorder_windows() {
-  local all_window_items=($(sketchybar --query bar | jq -r '.items[]' | grep -E '^(window|divider)\.' | sort -t '.' -k2,2n -k3,3n))
-  sketchybar --reorder "${all_window_items[@]}"
+  # Fetch JSON data from yabai and sketchybar
+  yabai_spaces_json=$(yabai -m query --spaces)
+  sketchybar_items_json=$(sketchybar --query bar | jq -r '.items')
+
+  # Debug: print the fetched JSON data
+  echo "Yabai Spaces JSON:"
+  echo "$yabai_spaces_json"
+  echo
+  echo "Sketchybar Items JSON:"
+  echo "$sketchybar_items_json"
+  echo
+
+  # Parse the JSON data
+  yabai_spaces=$(echo "$yabai_spaces_json" | jq -c '.[]')
+  sketchybar_items=$(echo "$sketchybar_items_json" | jq -r '.[]')
+
+  # Debug: print parsed items
+  echo "Parsed Yabai Spaces:"
+  echo "$yabai_spaces"
+  echo
+  echo "Parsed Sketchybar Items:"
+  echo "$sketchybar_items"
+  echo
+
+  # Extract windows and dividers from sketchybar items
+  windows_dividers=$(echo "$sketchybar_items" | grep -E '^window\.|^divider\.')
+
+  # Debug: print extracted windows and dividers
+  echo "Extracted Windows and Dividers:"
+  echo "$windows_dividers"
+  echo
+
+  # Create the sorted list
+  sorted_list=()
+
+  for space in $yabai_spaces; do
+    space_id=$(echo "$space" | jq -r '.id')
+    space_index=$(echo "$space" | jq -r '.index')
+    windows=$(echo "$space" | jq -r '.windows[]?')
+
+    # Debug: print the current space details
+    echo "Processing Space ID: $space_id, Index: $space_index"
+    echo "Windows in this space:"
+    echo "$windows"
+    echo
+
+    # Append windows in the order found in yabai spaces
+    for window_id in $windows; do
+      sorted_list+=("window.$space_id.$window_id")
+    done
+
+    # Append the corresponding divider
+    divider=$(echo "$windows_dividers" | grep "divider.$space_index")
+    if [ -n "$divider" ]; then
+      sorted_list+=("$divider")
+    fi
+  done
+
+  # Debug: print the sorted list
+  echo "Sorted List:"
+  printf "%s\n" "${sorted_list[@]}"
 }
 
 main() {
