@@ -216,14 +216,14 @@ reorder_windows() {
     space_index=$(echo "$space" | jq -r '.index')
     windows=$(echo "$space" | jq -r '.windows[]?')
 
+    # Add divider to sorted list before the space
+    if printf "%s\n" "${sketchybar_items[@]}" | grep -q "divider.$space_index"; then
+      sorted_list+=("divider.$space_index")
+    fi
+
     # Add space to sorted list if it exists in Sketchybar items
     if printf "%s\n" "${existing_spaces[@]}" | grep -q "space$space_index"; then
       sorted_list+=("space$space_index")
-    fi
-
-    # Add divider to sorted list after the space
-    if printf "%s\n" "${sketchybar_items[@]}" | grep -q "divider.$space_index"; then
-      sorted_list+=("divider.$space_index")
     fi
 
     if [ -n "$windows" ]; then
@@ -238,6 +238,11 @@ reorder_windows() {
       done
     fi
   done
+
+  # Ensure space5 is added
+  if ! printf "%s\n" "${sorted_list[@]}" | grep -q "space5"; then
+    sorted_list+=("space5")
+  fi
 
   # Copy the original sketchybar items to the final list, preserving the order of non-space and non-window items
   local final_sorted_list=()
