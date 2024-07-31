@@ -8,9 +8,9 @@ sketchybar_get_windows_in_space() {
   echo "$json" | jq
 
   # Extracting items array
-  items=$(echo "$json" | jq -r '.items')
+  items=$(echo "$json" | jq -r '.items[]')
   echo -e "\nItems array:"
-  echo "$items" | jq
+  echo "$items" | jq -R . | jq -s .
 
   # Extracting window IDs within the specified space
   window_ids=()
@@ -18,7 +18,7 @@ sketchybar_get_windows_in_space() {
   is_in_space=false
 
   echo -e "\nProcessing items:"
-  for item in $(echo "$items" | jq -r '.[]'); do
+  while read -r item; do
     echo "Processing item: $item"
     if [[ $item == "$space_marker" ]]; then
       is_in_space=true
@@ -33,7 +33,7 @@ sketchybar_get_windows_in_space() {
       window_ids+=("$window_id")
       echo "Found window ID: $window_id"
     fi
-  done
+  done <<<"$items"
 
   # Output the window IDs as JSON array
   windows=$(printf "%s\n" "${window_ids[@]}" | jq -R . | jq -s .)
