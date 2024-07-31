@@ -239,11 +239,6 @@ reorder_windows() {
     fi
   done
 
-  # Ensure space5 is added
-  if ! printf "%s\n" "${sorted_list[@]}" | grep -q "space5"; then
-    sorted_list+=("space5")
-  fi
-
   # Copy the original sketchybar items to the final list, preserving the order of non-space and non-window items
   local final_sorted_list=()
   local item
