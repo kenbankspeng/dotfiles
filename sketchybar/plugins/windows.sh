@@ -204,6 +204,7 @@ reorder_windows() {
   for item in "${sketchybar_items[@]}"; do
     echo "$item"
   done
+  echo
 
   # Create sets of existing spaces and windows in Sketchybar items
   existing_spaces=($(printf "%s\n" "${sketchybar_items[@]}" | grep -Eo 'space[0-9]+'))
@@ -242,10 +243,14 @@ reorder_windows() {
     fi
   done
 
-  # Print the command used to reorder items in Sketchybar
-  echo "Reordering Command:"
-  echo "sketchybar --reorder $(printf "%s " "${final_sorted_list[@]}")"
+  # Print the final sorted list
+  echo "Final Sorted List:"
+  for item in "${final_sorted_list[@]}"; do
+    echo "$item"
+  done
+  echo
 
+  # Execute the reorder command
   sketchybar --reorder $(printf "%s " "${final_sorted_list[@]}")
 }
 
