@@ -239,9 +239,8 @@ reorder_windows() {
     echo "$windows"
     echo
 
-    # Add space and corresponding divider to sorted lists
+    # Add space to sorted list
     sorted_spaces+=("space$space_index")
-    sorted_dividers+=("divider.$space_index")
 
     if [ -n "$windows" ]; then
       for window_id in $windows; do
@@ -273,10 +272,7 @@ reorder_windows() {
         space_counter=$((space_counter + 1))
       fi
     elif echo "$item" | grep -q 'divider\.[0-9]\+'; then
-      if [ ${#sorted_dividers[@]} -gt 0 ]; then
-        final_sorted_list+=("${sorted_dividers[divider_counter]}")
-        divider_counter=$((divider_counter + 1))
-      fi
+      final_sorted_list+=("$item")
     else
       final_sorted_list+=("$item")
     fi
