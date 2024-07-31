@@ -188,12 +188,15 @@ reorder_windows() {
 
   # Debug: print sketchybar input
   echo "Sketchybar Items JSON:"
-  echo "${sketchybar_items[@]}"
+  if [ ${#sketchybar_items[@]} -eq 0 ]; then
+    echo "No Sketchybar items found."
+  else
+    echo "${sketchybar_items[@]}"
+  fi
   echo
 
   # If sketchybar items are empty, log and return
   if [ ${#sketchybar_items[@]} -eq 0 ]; then
-    echo "No Sketchybar items found."
     return
   fi
 
@@ -254,6 +257,7 @@ reorder_windows() {
   # Debug: print the final sorted list before reordering
   echo "Final Sorted List:"
   printf "%s\n" "${final_sorted_list[@]}"
+  echo
 
   # Set the new order in Sketchybar
   sketchybar --reorder "${final_sorted_list[@]}"
