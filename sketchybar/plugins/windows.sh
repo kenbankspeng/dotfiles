@@ -233,11 +233,13 @@ reorder_windows() {
   done
 
   # Copy the original sketchybar items to the final list
-  local final_sorted_list=("${sketchybar_items[@]}")
+  local final_sorted_list=()
 
-  # Append the sorted spaces and windows to the final list
-  for item in "${sorted_list[@]}"; do
-    if [[ ! " ${final_sorted_list[*]} " =~ " $item " ]]; then
+  for item in "${sketchybar_items[@]}"; do
+    if [[ " ${sorted_list[*]} " =~ " $item " ]]; then
+      final_sorted_list+=("$item")
+      sorted_list=("${sorted_list[@]/$item/}") # Remove from sorted_list
+    else
       final_sorted_list+=("$item")
     fi
   done
