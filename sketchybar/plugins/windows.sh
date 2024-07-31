@@ -187,11 +187,11 @@ reorder_windows() {
   sketchybar_items=($(echo "$sketchybar_items_json" | jq -r '.[]'))
 
   # Debug: print sketchybar input
-  echo "Sketchybar Items JSON:"
+  echo -n "Sketchybar Items JSON:"
   if [ ${#sketchybar_items[@]} -eq 0 ]; then
-    echo "No Sketchybar items found."
+    echo " No Sketchybar items found."
   else
-    echo "${sketchybar_items[@]}"
+    echo " ${sketchybar_items[@]}"
   fi
   echo
 
@@ -240,11 +240,15 @@ reorder_windows() {
       if [ $window_counter -lt ${#sorted_windows[@]} ]; then
         temp_sorted_list+=("${sorted_windows[window_counter]}")
         window_counter=$((window_counter + 1))
+      else
+        temp_sorted_list+=("$item")
       fi
     elif echo "$item" | grep -q 'space[0-9]\+'; then
       if [ $space_counter -lt ${#sorted_spaces[@]} ]; then
         temp_sorted_list+=("${sorted_spaces[space_counter]}")
         space_counter=$((space_counter + 1))
+      else
+        temp_sorted_list+=("$item")
       fi
     else
       temp_sorted_list+=("$item")
