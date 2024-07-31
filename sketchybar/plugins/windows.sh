@@ -259,6 +259,7 @@ reorder_windows() {
   space_counter=0
   window_counter=0
 
+  # Combine the sorted windows, spaces, and dividers with the remaining items while preserving original order
   for item in "${sketchybar_items[@]}"; do
     if echo "$item" | grep -q 'window\.[0-9]\+\.[0-9]\+'; then
       if [ $window_counter -lt ${#sorted_windows[@]} ]; then
@@ -275,14 +276,10 @@ reorder_windows() {
     fi
   done
 
-  # Combine the temporary sorted list with original items while preserving order
+  # Final sorted list to ensure windows are correctly placed relative to their respective spaces
   final_sorted_list=()
-  for item in "${sketchybar_items[@]}"; do
-    if printf "%s\n" "${temp_sorted_list[@]}" | grep -q "^$item\$"; then
-      final_sorted_list+=("$item")
-    else
-      final_sorted_list+=("$item")
-    fi
+  for item in "${temp_sorted_list[@]}"; do
+    final_sorted_list+=("$item")
   done
 
   # Debug: print the final sorted list before reordering
