@@ -258,16 +258,25 @@ reorder_windows() {
 
   # Combine the sorted windows, spaces, and dividers with the remaining items
   final_sorted_list=()
+  space_counter=0
+  divider_counter=0
+
   for item in $sketchybar_items; do
     if echo "$item" | grep -q 'window\.[0-9]\+\.[0-9]\+'; then
-      final_sorted_list+=("${sorted_windows[0]}")
-      sorted_windows=("${sorted_windows[@]:1}")
+      if [ ${#sorted_windows[@]} -gt 0 ]; then
+        final_sorted_list+=("${sorted_windows[0]}")
+        sorted_windows=("${sorted_windows[@]:1}")
+      fi
     elif echo "$item" | grep -q 'space[0-9]\+'; then
-      final_sorted_list+=("${sorted_spaces[0]}")
-      sorted_spaces=("${sorted_spaces[@]:1}")
+      if [ ${#sorted_spaces[@]} -gt 0 ]; then
+        final_sorted_list+=("${sorted_spaces[space_counter]}")
+        space_counter=$((space_counter + 1))
+      fi
     elif echo "$item" | grep -q 'divider\.[0-9]\+'; then
-      final_sorted_list+=("${sorted_dividers[0]}")
-      sorted_dividers=("${sorted_dividers[@]:1}")
+      if [ ${#sorted_dividers[@]} -gt 0 ]; then
+        final_sorted_list+=("${sorted_dividers[divider_counter]}")
+        divider_counter=$((divider_counter + 1))
+      fi
     else
       final_sorted_list+=("$item")
     fi
