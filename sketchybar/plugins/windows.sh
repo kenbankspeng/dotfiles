@@ -219,6 +219,11 @@ reorder_windows() {
     # Add space to sorted list if it exists in Sketchybar items
     if printf "%s\n" "${existing_spaces[@]}" | grep -q "space$space_index"; then
       sorted_list+=("space$space_index")
+
+      # Add divider to sorted list if it exists in Sketchybar items
+      if printf "%s\n" "${sketchybar_items[@]}" | grep -q "divider.$space_index"; then
+        sorted_list+=("divider.$space_index")
+      fi
     fi
 
     if [ -n "$windows" ]; then
@@ -231,11 +236,6 @@ reorder_windows() {
           sorted_list+=("$window_item")
         fi
       done
-    fi
-
-    # Add divider to sorted list if it exists in Sketchybar items
-    if printf "%s\n" "${sketchybar_items[@]}" | grep -q "divider.$space_index"; then
-      sorted_list+=("divider.$space_index")
     fi
   done
 
@@ -253,23 +253,6 @@ reorder_windows() {
   # Then, add items from sorted_list in the correct order
   for item in "${sorted_list[@]}"; do
     final_sorted_list+=("$item")
-  done
-
-  # Ensure dividers are correctly placed after each space
-  for ((i = 0; i < ${#final_sorted_list[@]}; i++)); do
-    if [[ "${final_sorted_list[i]}" =~ ^space[0-9]+$ ]]; then
-      space_num=${final_sorted_list[i]//[^0-9]/}
-      if [[ " ${existing_spaces[*]} " == *" space$space_num "* ]]; then
-        divider="divider.$space_num"
-        for ((j = 0; j < ${#final_sorted_list[@]}; j++)); do
-          if [[ "${final_sorted_list[j]}" == "$divider" ]]; then
-            final_sorted_list=("${final_sorted_list[@]:0:i+1}" "$divider" "${final_sorted_list[@]:i+1:j-i-1}" "${final_sorted_list[@]:j+1}")
-            ((i++))
-            break
-          fi
-        done
-      fi
-    fi
   done
 
   # Print the final sorted list
