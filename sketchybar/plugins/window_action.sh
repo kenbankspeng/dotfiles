@@ -15,12 +15,11 @@ handle_click() {
       yabai_focus_space "$space_id"
       yabai_focus_window "$window_id"
     elif [ "$(yabai_get_space_type "$space_id")" = "stack" ]; then
-      first_window=$(yabai_get_first_window "$space_id")
-      last_window=$(yabai_get_last_window "$space_id")
-      yabai_rotate_stack "$first_window" "$last_window"
+      yabai_rotate_stack "$space_id"
     fi
   elif [ "$BUTTON" = "right" ]; then
     echo "debug: right"
+    # Uncomment the line below if you want to toggle layout on right-click
     # yabai_toggle_layout "$space_id"
   fi
 }

@@ -26,18 +26,6 @@ yabai_get_focused_space() {
   yabai_get_spaces | jq -r '.[] | select(.["has-focus"] == true) | .index'
 }
 
-# Get the first window of a space by its index
-# $1 : space index
-yabai_get_first_window() {
-  yabai_get_windows_in_space "$1" | jq -r ".[0]"
-}
-
-# Get the last window of a space by its index
-# $1 : space index
-yabai_get_last_window() {
-  yabai_get_windows_in_space "$1" | jq -r ".[-1]"
-}
-
 # Get the number of spaces
 yabai_get_num_spaces() {
   yabai_get_spaces | jq '. | length'
@@ -67,11 +55,13 @@ yabai_focus_window() {
   yabai -m window --focus "$1"
 }
 
-# Stack a window on top of another
-# $1 : first window id
-# $2 : last window id
+# Stack the first window on top of the last window in a specific space
+# $1 : space index
 yabai_rotate_stack() {
-  yabai -m window "$1" --stack "$2"
+  local space_id="$1"
+  local first_window=$(yabai_get_windows_in_space "$space_id" | jq -r ".[0]")
+  local last_window=$(yabai_get_windows_in_space "$space_id" | jq -r ".[-1]")
+  yabai -m window "$first_window" --stack "$last_window"
 }
 
 # Toggle the layout of a space by its index
