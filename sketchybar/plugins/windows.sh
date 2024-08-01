@@ -86,9 +86,10 @@ manage_windows() {
   local cached_dividers=""
   [[ -f "$dividers_cache_file" ]] && cached_dividers=$(<"$dividers_cache_file")
 
+  local divider_handle
   # Add a divider before the first window in any space except space 1
   if ((space_id > 1)); then
-    local divider_handle="divider.$((space_id - 1))"
+    divider_handle="divider.$((space_id - 1))"
     if (! grep -q "$divider_handle" <<<"$cached_dividers"); then
       sketchybar --add item "$divider_handle" left
       sketchybar --set "$divider_handle" icon.drawing=off label.drawing=off background.padding_left=10 background.padding_right=10
@@ -105,10 +106,12 @@ manage_windows() {
     local window_handle="window.$space_id.$window_id"
     if (! grep -q "$window_handle" <<<"$cached_windows"); then
       # Add new windows
-      sketchybar --add item "$window_handle" left
-      sketchybar --set "$window_handle" script="$CLICK_HANDLER" \
+      sketchybar --add item "$window_handle" left \
+        --set "$window_handle" script="$CLICK_HANDLER" \
         --subscribe "$window_handle" mouse.clicked
       echo "$window_handle" >>"$windows_cache_file"
+
+      sketchybar --move "$window_handle" before "$divider_handle"
 
       # Reorder windows and dividers immediately after adding them
       # reorder_windows "$space_id"
@@ -145,6 +148,8 @@ manage_windows() {
   # Remove closed windows
   local new_cached_windows=$(renew_cache "$space_id" "$window_count" "$windows_cache_file")
   remove_closed_windows "$new_cached_windows" "$cached_windows"
+  # Reorder windows and dividers immediately after adding them
+  reorder_windows "$space_id"
 
 }
 
@@ -235,11 +240,11 @@ reorder_windows() {
   done
 
   # Print the final sorted list for debugging
-  # echo "------ reordered list ------"
-  # for item in "${sorted_list[@]}"; do
-  #   echo "$item"
-  # done
-  # echo
+  echo "------ reordered list ------"
+  for item in "${sorted_list[@]}"; do
+    echo "$item"
+  done
+  echo
 
   # reorder
   if [ ${#sorted_list[@]} -gt 0 ]; then
@@ -255,6 +260,7 @@ main() {
     manage_windows "$space_id"
     manage_space "$space_id"
   done
+
 }
 
 main
