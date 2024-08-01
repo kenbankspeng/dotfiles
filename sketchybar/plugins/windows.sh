@@ -102,9 +102,9 @@ manage_windows() {
     local app_name=$(yabai_get_window_app_name "$window_id")
     local icon=$($CONFIG_DIR/icon_map.sh "$app_name")
 
-    # Add new windows
     local window_handle="window.$space_id.$window_id"
     if (! grep -q "$window_handle" <<<"$cached_windows"); then
+      # Add new windows
       sketchybar --add item "$window_handle" left
       sketchybar --set "$window_handle" script="$CLICK_HANDLER" \
         --subscribe "$window_handle" mouse.clicked
@@ -248,10 +248,10 @@ reorder_windows() {
 }
 
 main() {
+  # construct the spaces and windows as per yabai query
   local num_spaces=$(yabai_get_num_spaces)
   for ((space_index = 0; space_index < num_spaces; space_index++)); do
     local space_id=$((space_index + 1)) # Space index starts from 1
-    # construct the spaces and windows
     manage_windows "$space_id"
     manage_space "$space_id"
   done
