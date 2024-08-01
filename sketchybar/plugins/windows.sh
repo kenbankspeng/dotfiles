@@ -96,6 +96,8 @@ manage_windows() {
   fi
 
   local window_count=$(yabai_get_num_windows_in_space "$space_id")
+
+  # Add new windows and reorder them
   for ((window_index = 0; window_index < window_count; window_index++)); do
     local window_id=$(yabai_get_windows_in_space "$space_id" | jq -r ".[$window_index]")
     local app_name=$(yabai_get_window_app_name "$window_id")
@@ -109,33 +111,49 @@ manage_windows() {
         --move "$window_handle" before "$divider_handle" \
         --subscribe "$window_handle" mouse.clicked
       echo "$window_handle" >>"$windows_cache_file"
-
-      # Reorder windows immediately after adding them to minimize flicker
-      reorder_windows
     fi
-
-    # Determine padding for the first and last window in the space
-    local padding_left=0
-    local padding_right=0
-    if ((window_index == 0)); then
-      padding_left=10
-    fi
-    if ((window_index == window_count - 1)); then
-      padding_right=10
-    fi
-
-    # Update window properties
-    local window_props=(
-      background.padding_left="$padding_left"
-      background.padding_right="$padding_right"
-      label.drawing=off
-      icon.padding_left=2
-      icon.padding_right=2
-      icon.font="$SKETCHY_FONT:$SKETCHY_FONTSIZE"
-      icon="$icon"
-    )
-    sketchybar --set "$window_handle" "${window_props[@]}"
   done
+
+  # Reorder windows immediately after adding them to minimize flicker
+  reorder_windows
+
+  # Get the reordered list of windows for the current space
+  local reordered_windows=($(sketchybar --query bar | jq -r ".items[] | select(startswith(\"window.$space_id.\"))"))
+
+  # Check if reordered_windows is not empty
+  if [[ ${#reordered_windows[@]} -gt 0 ]]; then
+    # Determine the first and last window handles
+    local first_window="${reordered_windows[0]}"
+    local last_index=$((${#reordered_windows[@]} - 1))
+    local last_window="${reordered_windows[$last_index]}"
+
+    # Loop through the reordered windows for styling
+    for window_handle in "${reordered_windows[@]}"; do
+      # Determine padding for the first and last window in the reordered list
+      local padding_left=0
+      local padding_right=0
+
+      # Check if the current window_handle is the first or last in the reordered list
+      if [[ "$window_handle" == "$first_window" ]]; then
+        padding_left=10
+      fi
+      if [[ "$window_handle" == "$last_window" ]]; then
+        padding_right=10
+      fi
+
+      # Update window properties
+      local window_props=(
+        background.padding_left="$padding_left"
+        background.padding_right="$padding_right"
+        label.drawing=off
+        icon.padding_left=2
+        icon.padding_right=2
+        icon.font="$SKETCHY_FONT:$SKETCHY_FONTSIZE"
+        icon="$icon"
+      )
+      sketchybar --set "$window_handle" "${window_props[@]}"
+    done
+  fi
 
   # Special case for empty spaces - add placeholder
   if ((window_count == 0)); then
@@ -186,89 +204,92 @@ manage_space() {
 }
 
 reorder_windows() {
-  local sketchybar_items_json
-  local sketchybar_items
-  local sorted_list=()
-  local window_batch=()
-  local space_index
-  local windows
 
-  # Fetch JSON data from sketchybar
-  sketchybar_items_json=$(sketchybar --query bar | jq -r '.items[]')
-  sketchybar_items=($sketchybar_items_json)
+  #
+  # FIRST PASS - sort by spaceid groups (space, windows, divider)
+  #
 
-  echo "------ sketchybar items ------"
-  echo "$sketchybar_items_json"
-  local others
-  local spaces
-  local grouped_spaces=()
+  # the sketchybar data to be reordered
+  local sketchybar_items_json=$(sketchybar --query bar | jq -r '.items[]')
+  local sketchybar_items=($sketchybar_items_json)
 
   # Extract non-prefixed entities
-  others=$(printf "%s\n" "${sketchybar_items[@]}" | grep -vE '^(space|window|divider)\.')
+  local others=$(printf "%s\n" "${sketchybar_items[@]}" | grep -vE '^(space|window|divider)\.')
 
   # Extract space-related entities
-  spaces=$(printf "%s\n" "${sketchybar_items[@]}" | grep -E '^(space|window|divider)\.')
+  local spaces=$(printf "%s\n" "${sketchybar_items[@]}" | grep -E '^(space|window|divider)\.')
 
-  # Sort spaces by spaceid
+  # First pass: Sort spaces by spaceid and group them
+  local grouped_spaces=()
   for spaceid in $(echo "$spaces" | grep '^space\.' | awk -F. '{print $2}' | sort -n | uniq); do
     grouped_spaces+=($(echo "$spaces" | grep "^space\.$spaceid"))
     grouped_spaces+=($(echo "$spaces" | grep "^window\.$spaceid"))
     grouped_spaces+=($(echo "$spaces" | grep "^divider\.$spaceid"))
   done
 
-  # Output the result
-  sorted_list=("$others")
+  # Output the result of the first pass
+  local sorted_list=("$others")
   sorted_list+=("${grouped_spaces[@]}")
 
-  # # Create a sorted list based on existing Sketchybar items
-  # for item in "${sketchybar_items[@]}"; do
-  #   if [[ $item == window.* ]]; then
-  #     window_batch+=("$item") # Batch window items
-  #   else
-  #     # If we hit a non-window item, process the batched windows
-  #     if [ ${#window_batch[@]} -gt 0 ]; then
-  #       space_index=${window_batch[0]#window.}
-  #       space_index=${space_index%%.*}
+  #
+  # SECOND PASS - reorder window items within each group
+  #               based on yabai query order
+  #
 
-  #       # Get windows for this space from Yabai
-  #       yabai_windows=$(yabai_get_windows_in_space "$space_index")
-  #       # echo "------ yabai space $space_index ------"
-  #       # echo "$yabai_windows"
-  #       # Parse the JSON array into a bash array
-  #       IFS=',' read -r -a yabai_window_ids <<<"$(echo "$yabai_windows" | jq -r '. | @csv' | tr -d '\"')"
-  #       local found=false
-  #       for yabai_window_id in "${yabai_window_ids[@]}"; do
-  #         if item_in_array "window.$space_index.$yabai_window_id" "${window_batch[@]}"; then
-  #           sorted_list+=("window.$space_index.$yabai_window_id")
-  #         fi
-  #       done
-  #       for window_item in "${window_batch[@]}"; do
-  #         if ! item_in_array "$window_item" "${sorted_list[@]}"; then
-  #           sorted_list+=("$window_item")
-  #         fi
-  #       done
-  #       window_batch=()
-  #     fi
-  #     # Add the non-window item to the sorted list
-  #     sorted_list+=("$item")
-  #   fi
-  # done
+  # Second pass: Reorder the window items within each group
+  local final_list=()
+  local window_batch=()
+  local space_index=""
 
-  # # Add any remaining batched windows that were not in Yabai order
-  # for window_item in "${window_batch[@]}"; do
-  #   sorted_list+=("$window_item")
-  # done
+  for item in "${sorted_list[@]}"; do
+    if [[ $item == window.* ]]; then
+      window_batch+=("$item")
+    else
+      if [ ${#window_batch[@]} -gt 0 ]; then
+        space_index=${window_batch[0]#window.}
+        space_index=${space_index%%.*}
+
+        # Get windows for this space from Yabai
+        local yabai_windows=$(yabai -m query --windows --space "$space_index" | jq -r '.[].id')
+        local yabai_window_ids
+        IFS=$'\n' read -rd '' -a yabai_window_ids <<<"$yabai_windows"
+
+        # echo "------ yabai space $space_index ------"
+        # echo "${yabai_window_ids[@]}"
+
+        local reordered_windows=()
+        for yabai_window_id in "${yabai_window_ids[@]}"; do
+          if item_in_array "window.$space_index.$yabai_window_id" "${window_batch[@]}"; then
+            reordered_windows+=("window.$space_index.$yabai_window_id")
+          fi
+        done
+        for window_item in "${window_batch[@]}"; do
+          if ! item_in_array "$window_item" "${reordered_windows[@]}"; then
+            reordered_windows+=("$window_item")
+          fi
+        done
+        final_list+=("${reordered_windows[@]}")
+        window_batch=()
+      fi
+      final_list+=("$item")
+    fi
+  done
+
+  # Add any remaining window items
+  if [ ${#window_batch[@]} -gt 0 ]; then
+    final_list+=("${window_batch[@]}")
+  fi
 
   # Print the final sorted list for debugging
-  echo "------ reordered list ------"
-  for item in "${sorted_list[@]}"; do
-    echo "$item"
-  done
-  echo
+  # echo "------ reordered list ------"
+  # for item in "${final_list[@]}"; do
+  #   echo "$item"
+  # done
+  # echo
 
-  # reorder
-  if [ ${#sorted_list[@]} -gt 0 ]; then
-    sketchybar --reorder $(printf "%s " "${sorted_list[@]}")
+  # Reorder
+  if [ ${#final_list[@]} -gt 0 ]; then
+    sketchybar --reorder $(printf "%s " "${final_list[@]}")
   fi
 }
 
