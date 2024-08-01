@@ -117,43 +117,36 @@ manage_windows() {
   # Reorder windows immediately after adding them to minimize flicker
   reorder_windows
 
-  # Get the reordered list of windows for the current space
-  local reordered_windows=($(sketchybar --query bar | jq -r ".items[] | select(startswith(\"window.$space_id.\"))"))
+  # style windows
+  # get from yabai again since window may have been deleted
+  window_count=$(yabai_get_num_windows_in_space "$space_id")
+  for ((window_index = 0; window_index < window_count; window_index++)); do
+    local window_id=$(yabai_get_windows_in_space "$space_id" | jq -r ".[$window_index]")
+    local window_handle="window.$space_id.$window_id"
 
-  # Check if reordered_windows is not empty
-  if [[ ${#reordered_windows[@]} -gt 0 ]]; then
-    # Determine the first and last window handles
-    local first_window="${reordered_windows[0]}"
-    local last_index=$((${#reordered_windows[@]} - 1))
-    local last_window="${reordered_windows[$last_index]}"
+    # Determine padding for the first and last window in the reordered list
+    local padding_left=0
+    local padding_right=0
 
-    # Loop through the reordered windows for styling
-    for window_handle in "${reordered_windows[@]}"; do
-      # Determine padding for the first and last window in the reordered list
-      local padding_left=0
-      local padding_right=0
+    if [[ $window_index == 0 ]]; then
+      padding_left=10
+    fi
+    if [[ $window_index == $((window_count - 1)) ]]; then
+      padding_right=10
+    fi
 
-      # Check if the current window_handle is the first or last in the reordered list
-      if [[ "$window_handle" == "$first_window" ]]; then
-        padding_left=10
-      fi
-      if [[ "$window_handle" == "$last_window" ]]; then
-        padding_right=10
-      fi
-
-      # Update window properties
-      local window_props=(
-        background.padding_left="$padding_left"
-        background.padding_right="$padding_right"
-        label.drawing=off
-        icon.padding_left=2
-        icon.padding_right=2
-        icon.font="$SKETCHY_FONT:$SKETCHY_FONTSIZE"
-        icon="$icon"
-      )
-      sketchybar --set "$window_handle" "${window_props[@]}"
-    done
-  fi
+    # Update window properties
+    local window_props=(
+      background.padding_left="$padding_left"
+      background.padding_right="$padding_right"
+      label.drawing=off
+      icon.padding_left=2
+      icon.padding_right=2
+      icon.font="$SKETCHY_FONT:$SKETCHY_FONTSIZE"
+      icon="$icon"
+    )
+    sketchybar --set "$window_handle" "${window_props[@]}"
+  done
 
   # Special case for empty spaces - add placeholder
   if ((window_count == 0)); then
