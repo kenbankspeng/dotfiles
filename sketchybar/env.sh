@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
 # env variables
+export CACHE_DIR="$HOME/.cache/sketchybar"
+mkdir -p "$CACHE_DIR"
+
 export PLUGIN_DIR="$CONFIG_DIR/plugins"
 export ITEM_DIR="$CONFIG_DIR/items"
-export CACHE_DIR="/tmp/sketchybar_window_cache"
 export FONT="SF Pro:Semibold"
 export FONTSIZE=13
 export HEIGHT=38

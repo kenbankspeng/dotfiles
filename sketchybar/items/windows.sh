@@ -10,6 +10,6 @@ windows_props=(
   script="$PLUGIN_DIR/windows.sh"
 )
 sketchybar --add event window_changed \
-  --add item windows left \
-  --set windows "${windows_props[@]}" \
-  --subscribe windows window_changed
+  --add item win_listener left \
+  --set win_listener "${windows_props[@]}" \
+  --subscribe win_listener window_changed

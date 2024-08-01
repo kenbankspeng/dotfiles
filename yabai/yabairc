@@ -78,18 +78,12 @@ yabai -m rule --add label="Dictionary" app="^Dictionary$" manage=off
 #
 # SIGNALS
 #
-# yabai -m signal --add event=application_front_switched action="${ubersicht_spaces_refresh_command}"
-# yabai -m signal --add event=display_changed action="${ubersicht_spaces_refresh_command}"
-# yabai -m signal --add event=space_changed action="${ubersicht_spaces_refresh_command}"
-# yabai -m signal --add event=window_created action="${ubersicht_spaces_refresh_command}"
-# yabai -m signal --add event=window_destroyed action="${ubersicht_spaces_refresh_command}"
-# yabai -m signal --add event=window_focused action="${ubersicht_spaces_refresh_command}"
-# yabai -m signal --add event=window_title_changed action="${ubersicht_spaces_refresh_command}"
-
-# add these lines to the bottom of your yabairc file
-# they're needed to trigger a custom event in sketchybar that we will later define in sketchybarrc
 
 yabai -m signal --add event=window_created action="sketchybar --trigger window_changed &> /dev/null"
 yabai -m signal --add event=window_destroyed action="sketchybar --trigger window_changed &> /dev/null"
+yabai -m signal --add event=space_created action="sketchybar --trigger window_changed &> /dev/null"
+yabai -m signal --add event=space_destroyed action="sketchybar --trigger window_changed &> /dev/null"
+yabai -m signal --add event=space_changed action="sketchybar --trigger window_changed &> /dev/null"
+yabai -m signal --add event=space_changed action="sketchybar --trigger window_changed &> /dev/null"
 
 set +x
