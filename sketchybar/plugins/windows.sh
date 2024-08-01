@@ -2,6 +2,7 @@
 
 source "$CONFIG_DIR/env.sh"
 source "$CONFIG_DIR/plugins/helpers/yabai.sh"
+source "$CONFIG_DIR/plugins/helpers/util.sh"
 
 CACHE_DIR="/tmp/sketchybar_window_cache"
 BRACKET_CACHE_FILE="$CACHE_DIR/space_bracket_cache"
@@ -85,7 +86,7 @@ manage_windows() {
 
   # Add a divider before the first window in any space except space 1
   if ((space_id > 1)); then
-    local divider_handle="divider.$space_id"
+    local divider_handle="divider.$((space_id - 1))"
     if (! grep -q "$divider_handle" <<<"$cached_dividers"); then
       sketchybar --add item "$divider_handle" left
       sketchybar --set "$divider_handle" icon.drawing=off label.drawing=off background.padding_left=10 background.padding_right=10
@@ -105,6 +106,9 @@ manage_windows() {
       sketchybar --set "$window_handle" script="$CLICK_HANDLER" \
         --subscribe "$window_handle" mouse.clicked
       echo "$window_handle" >>"$windows_cache_file"
+
+      # Reorder windows and dividers immediately after adding them
+      reorder_windows
     fi
 
     # Determine padding for the first and last window in the space
@@ -130,9 +134,6 @@ manage_windows() {
     sketchybar --set "$window_handle" "${window_props[@]}"
   done
 
-  # Reorder windows and dividers immediately after adding them
-  reorder_windows
-
   # Special case for empty spaces - add placeholder
   if ((window_count == 0)); then
     add_placeholder "$space_id" "$windows_cache_file" "$cached_windows"
@@ -141,6 +142,7 @@ manage_windows() {
   # Remove closed windows
   local new_cached_windows=$(renew_cache "$space_id" "$window_count" "$windows_cache_file")
   remove_closed_windows "$new_cached_windows" "$cached_windows"
+
 }
 
 # Use brackets to group windows in the same space
@@ -154,6 +156,7 @@ manage_space() {
     bracket_members+=("window.$space_id.$window_id")
   done
 
+  # placeholder for empty spaces
   if ((window_count == 0)); then
     bracket_members=("window.$space_id.0")
   fi
@@ -177,10 +180,68 @@ manage_space() {
   sketchybar --set "space$space_id" "${space_props[@]}"
 }
 
-# Reorder windows and dividers
 reorder_windows() {
-  local all_window_items=($(sketchybar --query bar | jq -r '.items[]' | grep -E '^(window|divider)\.' | sort -t '.' -k2,2n -k3,3n))
-  sketchybar --reorder "${all_window_items[@]}"
+  local sketchybar_items_json
+  local sketchybar_items
+  local sorted_list=()
+  local window_batch=()
+  local space_index
+  local windows
+
+  # Fetch JSON data from sketchybar
+  sketchybar_items_json=$(sketchybar --query bar | jq -r '.items[]')
+  sketchybar_items=($sketchybar_items_json)
+
+  # Create a sorted list based on existing Sketchybar items
+  for item in "${sketchybar_items[@]}"; do
+    if [[ $item == window.* ]]; then
+      window_batch+=("$item") # Batch window items
+    else
+      # If we hit a non-window item, process the batched windows
+      if [ ${#window_batch[@]} -gt 0 ]; then
+        space_index=${window_batch[0]#window.}
+        space_index=${space_index%%.*}
+
+        # Get windows for this space from Yabai
+        yabai_windows=$(yabai_get_windows_in_space "$space_index")
+        # echo "------ yabai space $space_index ------"
+        # echo "$yabai_windows"
+        # Parse the JSON array into a bash array
+        IFS=',' read -r -a yabai_window_ids <<<"$(echo "$yabai_windows" | jq -r '. | @csv' | tr -d '\"')"
+        local found=false
+        for yabai_window_id in "${yabai_window_ids[@]}"; do
+          if item_in_array "window.$space_index.$yabai_window_id" "${window_batch[@]}"; then
+            sorted_list+=("window.$space_index.$yabai_window_id")
+          fi
+        done
+        for window_item in "${window_batch[@]}"; do
+          if ! item_in_array "$window_item" "${sorted_list[@]}"; then
+            sorted_list+=("$window_item")
+          fi
+        done
+        window_batch=()
+      fi
+      # Add the non-window item to the sorted list
+      sorted_list+=("$item")
+    fi
+  done
+
+  # Add any remaining batched windows that were not in Yabai order
+  for window_item in "${window_batch[@]}"; do
+    sorted_list+=("$window_item")
+  done
+
+  # Print the final sorted list for debugging
+  # echo "------ reordered list ------"
+  # for item in "${sorted_list[@]}"; do
+  #   echo "$item"
+  # done
+  # echo
+
+  # reorder
+  if [ ${#sorted_list[@]} -gt 0 ]; then
+    sketchybar --reorder $(printf "%s " "${sorted_list[@]}")
+  fi
 }
 
 main() {
@@ -197,8 +258,6 @@ main() {
     manage_windows "$space_id" "$cached_windows" "$windows_cache_file"
     manage_space "$space_id"
   done
-
-  reorder_windows
 }
 
 main
