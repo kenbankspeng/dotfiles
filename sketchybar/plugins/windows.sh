@@ -77,10 +77,12 @@ add_placeholder() {
 # As needed, add new windows, update existing, remove closed
 manage_windows() {
   local space_id="$1"
-  local window_count=$(yabai_get_num_windows_in_space "$space_id")
-  local cached_windows="$2"
-  local windows_cache_file="$3"
+
+  # get cached data
+  local windows_cache_file="$CACHE_DIR/windows_$space_id"
   local dividers_cache_file="$CACHE_DIR/dividers_cache"
+  local cached_windows=""
+  [[ -f "$windows_cache_file" ]] && cached_windows=$(<"$windows_cache_file")
   local cached_dividers=""
   [[ -f "$dividers_cache_file" ]] && cached_dividers=$(<"$dividers_cache_file")
 
@@ -94,6 +96,7 @@ manage_windows() {
     fi
   fi
 
+  local window_count=$(yabai_get_num_windows_in_space "$space_id")
   for ((window_index = 0; window_index < window_count; window_index++)); do
     local window_id=$(yabai_get_windows_in_space "$space_id" | jq -r ".[$window_index]")
     local app_name=$(yabai_get_window_app_name "$window_id")
@@ -108,7 +111,7 @@ manage_windows() {
       echo "$window_handle" >>"$windows_cache_file"
 
       # Reorder windows and dividers immediately after adding them
-      reorder_windows
+      # reorder_windows "$space_id"
     fi
 
     # Determine padding for the first and last window in the space
@@ -248,14 +251,8 @@ main() {
   local num_spaces=$(yabai_get_num_spaces)
   for ((space_index = 0; space_index < num_spaces; space_index++)); do
     local space_id=$((space_index + 1)) # Space index starts from 1
-
-    # get cached data
-    local windows_cache_file="$CACHE_DIR/windows_$space_id"
-    local cached_windows=""
-    [[ -f "$windows_cache_file" ]] && cached_windows=$(<"$windows_cache_file")
-
     # construct the spaces and windows
-    manage_windows "$space_id" "$cached_windows" "$windows_cache_file"
+    manage_windows "$space_id"
     manage_space "$space_id"
   done
 }
