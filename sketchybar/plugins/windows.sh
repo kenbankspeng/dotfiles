@@ -100,9 +100,6 @@ manage_windows() {
   # Add new windows and reorder them
   for ((window_index = 0; window_index < window_count; window_index++)); do
     local window_id=$(yabai_get_windows_in_space "$space_id" | jq -r ".[$window_index]")
-    local app_name=$(yabai_get_window_app_name "$window_id")
-    local icon=$($CONFIG_DIR/icon_map.sh "$app_name")
-
     local window_handle="window.$space_id.$window_id"
     if (! grep -q "$window_handle" <<<"$cached_windows"); then
       # Add new windows
@@ -123,6 +120,8 @@ manage_windows() {
   for ((window_index = 0; window_index < window_count; window_index++)); do
     local window_id=$(yabai_get_windows_in_space "$space_id" | jq -r ".[$window_index]")
     local window_handle="window.$space_id.$window_id"
+    local app_name=$(yabai_get_window_app_name "$window_id")
+    local icon=$($CONFIG_DIR/icon_map.sh "$app_name")
 
     # Determine padding for the first and last window in the reordered list
     local padding_left=0
