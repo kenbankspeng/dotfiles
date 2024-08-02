@@ -10,11 +10,6 @@ update() {
   type=$(yabai_get_focused_space_type)
 
   case "$type" in
-  "float")
-    normal_color=$on
-    bsp_color=$off
-    stack_color=$off
-    ;;
   "bsp")
     float_color=$off
     bsp_color=$on
@@ -26,7 +21,7 @@ update() {
     stack_color=$on
     ;;
   *)
-    float_color=$off
+    float_color=$on
     bsp_color=$off
     stack_color=$off
     ;;

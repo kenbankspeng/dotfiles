@@ -1,18 +1,19 @@
 #!/usr/bin/env bash
 
 props=(
+  icon.font="$ICON_FONT:$ICON_FONTSIZE"
   icon.color=$GREY
   script="$PLUGIN_DIR/stack.sh"
 )
 
 # stack
 sketchybar -m --add item stack q \
-  --set stack icon=􀧈 ${props[@]} \
+  --set stack icon=􀏧 ${props[@]} \
   --subscribe stack mouse.clicked
 
 # bsp = grid
 sketchybar -m --add item bsp q \
-  --set bsp icon=􀏧 ${props[@]} \
+  --set bsp icon=􀏟 ${props[@]} \
   --subscribe bsp mouse.clicked
 
 # float = normal
