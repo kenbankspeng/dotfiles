@@ -1,3 +1,7 @@
+yabai_get_focused_space_type() {
+  yabai_get_spaces | jq -r '.[] | select(.["has-focus"] == true) | .type'
+}
+
 # INTERNAL ONLY
 # Get all spaces
 yabai_get_spaces() {
