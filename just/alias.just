@@ -10,11 +10,11 @@ default:
 @gr:
   git remote -v
 
-#scripts
+# edit scripts in cursor
 @scripts:
-  code "$DEV_BOX"
+  cursor "$DEV_BOX"
 
-#new ls
+# new ls
 @ls *args:
   lsd {{ args }}
 
@@ -26,7 +26,14 @@ default:
 @code *args:
   cursor {{ args }}
   
-# browse code
-@browse *args:
-  yazi {{ args }}
+# yazi wrapper - so it can exit to a chosen directory
+yy *args:
+  #!/usr/bin/env bash
+  tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+  yazi "$@" --cwd-file="$tmp"
+  if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+    builtin cd -- "$cwd"
+  fi
+  rm -f -- "$tmp"
   
+

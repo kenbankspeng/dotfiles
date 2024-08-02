@@ -17,5 +17,5 @@ mod util
 # aliases
 mod alias
 
-# apps
-mod apps
+# tui apps
+mod tui

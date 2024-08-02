@@ -19,6 +19,27 @@ default:
 @man *args:
   tldr --config $XDG_CONFIG_HOME/tlrc/config.toml {{ args }}
 
+# get directory path
+@gd *args:
+  echo $(command tere "$@")
+
+# more readable path. duplicates in red.
+path:
+  #!/usr/bin/env zsh
+  echo $PATH | tr ':' '\n' | awk '{
+    count[$0]++
+    paths[NR] = $0
+  }
+  END {
+      for (i = 1; i <= NR; i++) {
+          if (count[paths[i]] > 1) {
+              printf "\033[31m%s\033[0m\n", paths[i]
+          } else {
+              print paths[i]
+          }
+      }
+  }'
+
 #####################   PYTHON   #####################
 
 # create symbolic link
