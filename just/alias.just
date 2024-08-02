@@ -18,6 +18,10 @@ default:
 @ls *args:
   lsd {{ args }}
 
+# new ls -al
+@l *args:
+  lsd -al {{ args }}
+
 # new cat
 @cat *args:
   bat {{ args }}

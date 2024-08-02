@@ -1,0 +1,8 @@
+[tools]
+node = "latest"
+git = "latest"
+python = "latest"
+bun = "latest"
+
+[settings]
+experimental = false
