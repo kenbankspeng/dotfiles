@@ -12,40 +12,45 @@ update() {
   case "$type" in
   "float")
     normal_color=$on
-    grid_color=$off
+    bsp_color=$off
     stack_color=$off
     ;;
   "bsp")
-    normal_color=$off
-    grid_color=$on
+    float_color=$off
+    bsp_color=$on
     stack_color=$off
     ;;
   "stack")
-    normal_color=$off
-    grid_color=$off
+    float_color=$off
+    bsp_color=$off
     stack_color=$on
     ;;
   *)
-    normal_color=$off
-    grid_color=$off
+    float_color=$off
+    bsp_color=$off
     stack_color=$off
     ;;
   esac
 
-  sketchybar -m --set normal icon.color=$normal_color
-  sketchybar -m --set grid icon.color=$grid_color
+  sketchybar -m --set float icon.color=$float_color
+  sketchybar -m --set bsp icon.color=$bsp_color
   sketchybar -m --set stack icon.color=$stack_color
 }
 
-case $NAME in
-normal)
+if [ "$BUTTON" == "left" ]; then
+  yabai -m space --layout "$NAME"
+else
   update
-  ;;
-grid)
-  update
-  ;;
-stack)
-  update
-  ;;
-*) ;;
-esac
+fi
+
+# if [ "$SELECTED" == "false" ]; then
+#     yabai -m space --focus "$index"
+#   else
+#     if [ "$(space_type "$index")" == "stack" ]; then
+#       first_window=$(first_window "$index")
+#       last_window=$(last_window "$index")
+#       yabai -m window "$first_window" --stack "$last_window"
+#     fi
+#   fi
+# elif [ "$BUTTON" == "right" ]; then
+#   toggle_layout "$index"
