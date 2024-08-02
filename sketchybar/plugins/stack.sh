@@ -39,9 +39,10 @@ update() {
 
 if [ "$BUTTON" == "left" ]; then
   yabai -m space --layout "$NAME"
-else
-  update
+  #elif [ "$BUTTON" == "right" ]; then
 fi
+
+update
 
 # if [ "$SELECTED" == "false" ]; then
 #     yabai -m space --focus "$index"

@@ -4,20 +4,21 @@ props=(
   icon.color=$GREY
   script="$PLUGIN_DIR/stack.sh"
 )
-# float = normal
-sketchybar -m --add item float q \
-  --set float icon=􀆨 ${props[@]} \
-  --subscribe float mouse.click
-
-# bsp = grid
-sketchybar -m --add item bsp q \
-  --set bsp icon=􀏧 ${props[@]} \
-  --subscribe bsp mouse.click
 
 # stack
 sketchybar -m --add item stack q \
   --set stack icon=􀧈 ${props[@]} \
-  --subscribe stack mouse.click
+  --subscribe stack mouse.clicked
+
+# bsp = grid
+sketchybar -m --add item bsp q \
+  --set bsp icon=􀏧 ${props[@]} \
+  --subscribe bsp mouse.clicked
+
+# float = normal
+sketchybar -m --add item float q \
+  --set float icon=􀆨 ${props[@]} \
+  --subscribe float mouse.clicked
 
 props=(
   icon.drawing=off
