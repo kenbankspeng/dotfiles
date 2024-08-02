@@ -12,6 +12,4 @@ default:
 @g *args:
   lazygit {{ args }}
 
-# tui file manager
-@f *args:
-  yazi {{ args }}
+

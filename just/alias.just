@@ -29,15 +29,3 @@ default:
 # new code
 @code *args:
   cursor {{ args }}
-  
-# yazi wrapper - so it can exit to a chosen directory
-yy *args:
-  #!/usr/bin/env bash
-  tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
-  yazi "$@" --cwd-file="$tmp"
-  if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-    builtin cd -- "$cwd"
-  fi
-  rm -f -- "$tmp"
-  
-
