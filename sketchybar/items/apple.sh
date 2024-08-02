@@ -4,7 +4,7 @@ source "$CONFIG_DIR/env.sh"
 
 props=(
 	icon="􀣺"
-	icon.font="$SKETCHY_FONT:18"
+	icon.font="$ICON_FONT:18"
 	icon.color="$SKY"
 	script="$PLUGIN_DIR/apple.sh"
 )

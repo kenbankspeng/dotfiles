@@ -69,9 +69,9 @@ add_placeholder() {
   local window_props=(
     label.drawing=off
     icon.drawing=on
-    icon="–" # Unified placeholder value
-    icon.padding_left=6
-    icon.padding_right=6
+    icon="􀅽" # narrow icon needs more padding
+    icon.padding_left=$((PADDING_H + 2))
+    icon.padding_right=$((PADDING_H + 2))
   )
   sketchybar --set "$placeholder" "${window_props[@]}"
 }
@@ -125,9 +125,7 @@ manage_windows() {
     # Update window properties
     local window_props=(
       label.drawing=off
-      icon.padding_left=2
-      icon.padding_right=2
-      icon.font="$SKETCHY_FONT:$SKETCHY_FONTSIZE"
+      icon.font="$ICON_FONT:$ICON_FONTSIZE"
       icon="$icon"
     )
     sketchybar --set "$window_handle" "${window_props[@]}"

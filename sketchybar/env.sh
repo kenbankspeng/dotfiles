@@ -9,8 +9,10 @@ export ITEM_DIR="$CONFIG_DIR/items"
 export FONT="SF Pro:Semibold"
 export FONTSIZE=13
 export HEIGHT=38
-export SKETCHY_FONT="sketchybar-app-font:Regular"
-export SKETCHY_FONTSIZE=18
+export ICON_FONT="sketchybar-app-font:Regular"
+export ICON_FONTSIZE=18
+export PADDING_V=6
+export PADDING_H=4
 
 #
 #
