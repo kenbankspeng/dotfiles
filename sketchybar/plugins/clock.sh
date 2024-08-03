@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
-sketchybar --set $NAME label="$(date "+%-l:%M%P" | tr "[:upper:]" "[:lower:]")"
+sketchybar --set $NAME label="$(
+  date +"%-I:%M %p" | sed -e 's/AM/a/' -e 's/PM/p/'
+)"

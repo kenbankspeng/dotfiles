@@ -142,97 +142,16 @@ manage_windows() {
   local new_cached_windows=$(renew_cache "$space_id" "$window_count" "$windows_cache_file")
   remove_closed_windows "$new_cached_windows" "$cached_windows"
 
-  # Reorder windows to minimize flicker
-  reorder_windows
 }
 
-# Use brackets to group windows in the same space
-manage_space() {
-  local space_id="$1"
-  local window_count=$(yabai_get_num_windows_in_space "$space_id")
-
-  local bracket_members=()
-  for ((window_index = 0; window_index < window_count; window_index++)); do
-    local window_id=$(yabai_get_windows_in_space "$space_id" | jq -r ".[$window_index]")
-    bracket_members+=("window.$space_id.$window_id")
+display_windows() {
+  local windows=yabai_get_windows_focused_space
+  for window in $windows; do
   done
-
-  # placeholder for empty spaces
-  if ((window_count == 0)); then
-    bracket_members=("window.$space_id.0")
-  fi
-
-  local existing_bracket_entry=$(grep "^space.$space_id " "$BRACKET_CACHE_FILE")
-  if [[ -z "$existing_bracket_entry" ]]; then
-    sketchybar --add bracket "space.$space_id" "${bracket_members[@]}"
-    echo "space.$space_id ${bracket_members[*]}" >>"$BRACKET_CACHE_FILE"
-  elif [[ "$existing_bracket_entry" != "space.$space_id ${bracket_members[*]}" ]]; then
-    sketchybar --remove "space.$space_id"
-    sketchybar --add bracket "space.$space_id" "${bracket_members[@]}"
-    sed -i '' "/^space.$space_id /d" "$BRACKET_CACHE_FILE"
-    echo "space.$space_id ${bracket_members[*]}" >>"$BRACKET_CACHE_FILE"
-  fi
-
-  local space_props=(
-    background.border_color="$(alpha "${ACCENTS[$((space_id - 1))]}" 80)"
-    background.border_width=1
-    background.corner_radius=8
-  )
-  sketchybar --set "space.$space_id" "${space_props[@]}"
-}
-
-# sort by spaceid groups (space, windows, divider)
-reorder_windows() {
-
-  # the sketchybar data to be reordered
-  local sketchybar_items_json=$(sketchybar --query bar | jq -r '.items[]')
-  local sketchybar_items=($sketchybar_items_json)
-
-  # Extract non-prefixed entities
-  local others=$(printf "%s\n" "${sketchybar_items[@]}" | grep -vE '^(space|window|divider)\.')
-
-  # Extract space-related entities
-  local spaces=$(printf "%s\n" "${sketchybar_items[@]}" | grep -E '^(space|window|divider)\.')
-
-  # First pass: Sort spaces by spaceid and group them
-  local grouped_spaces=()
-  for spaceid in $(echo "$spaces" | grep '^space\.' | awk -F. '{print $2}' | sort -n | uniq); do
-    grouped_spaces+=($(echo "$spaces" | grep "^space\.$spaceid"))
-    grouped_spaces+=($(echo "$spaces" | grep "^window\.$spaceid"))
-    grouped_spaces+=($(echo "$spaces" | grep "^divider\.$spaceid"))
-  done
-
-  # Output the result of the first pass
-  local sorted_list=("$others")
-  sorted_list+=("${grouped_spaces[@]}")
-
-  # Add any remaining window items
-  if [ ${#window_batch[@]} -gt 0 ]; then
-    sorted_list+=("${window_batch[@]}")
-  fi
-
-  # Print the final sorted list for debugging
-  # echo "------ reordered list ------"
-  # for item in "${sorted_list[@]}"; do
-  #   echo "$item"
-  # done
-  # echo
-
-  # Reorder
-  if [ ${#sorted_list[@]} -gt 0 ]; then
-    sketchybar --reorder $(printf "%s " "${sorted_list[@]}")
-  fi
 }
 
 main() {
-  # construct the spaces and windows as per yabai query
-  local num_spaces=$(yabai_get_num_spaces)
-  for ((space_index = 0; space_index < num_spaces; space_index++)); do
-    local space_id=$((space_index + 1)) # Space index starts from 1
-    manage_windows "$space_id"
-    manage_space "$space_id"
-  done
-  reorder_windows "$space_id"
+  display_windows
 }
 
 main
