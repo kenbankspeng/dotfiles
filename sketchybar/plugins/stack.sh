@@ -5,7 +5,7 @@ source "$CONFIG_DIR/plugins/helpers/yabai.sh"
 
 update() {
   off=$GREY
-  on=$YELLOW
+  on=$GREEN
 
   type=$(yabai_get_focused_space_type)
 
@@ -33,8 +33,20 @@ update() {
 }
 
 if [ "$BUTTON" == "left" ]; then
-  yabai -m space --layout "$NAME"
-  #elif [ "$BUTTON" == "right" ]; then
+  current_type=$(yabai_get_focused_space_type)
+  if [ "$current_type" == "$NAME" ]; then
+    if [ "$NAME" == "bsp" ]; then
+      yabai -m space --balance
+    elif [ "$NAME" == "stack" ]; then
+      echo "### 2nd stack function ###"
+    fi
+  else
+    yabai -m space --layout "$NAME"
+  fi
+elif [ "$BUTTON" == "right" ]; then
+  if [ "$NAME" == "bsp" ]; then
+    yabai -m space --rotate 270
+  fi
 fi
 
 update

@@ -13,7 +13,7 @@ sketchybar -m --add item stack q \
 
 # bsp = grid
 sketchybar -m --add item bsp q \
-  --set bsp icon=􀏟 ${props[@]} \
+  --set bsp icon=􀏝 ${props[@]} \
   --subscribe bsp mouse.clicked
 
 # float = normal
