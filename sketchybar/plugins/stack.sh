@@ -38,7 +38,7 @@ if [ "$BUTTON" == "left" ]; then
     if [ "$NAME" == "bsp" ]; then
       yabai -m space --balance
     elif [ "$NAME" == "stack" ]; then
-      echo "### 2nd stack function ###"
+      yabai_rotate_stack
     fi
   else
     yabai -m space --layout "$NAME"
