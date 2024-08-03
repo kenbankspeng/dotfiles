@@ -70,7 +70,7 @@ sketchybar --default "${default[@]}"
 ##### Left Side Items #####
 source $ITEM_DIR/apple.sh
 source $ITEM_DIR/stack.sh
-# source $ITEM_DIR/windows.sh
+source $ITEM_DIR/space.sh
 
 ##### Right Side Of Notch Items #####
 

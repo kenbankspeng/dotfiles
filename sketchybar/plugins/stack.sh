@@ -34,18 +34,22 @@ update() {
 
 if [ "$BUTTON" == "left" ]; then
   current_type=$(yabai_get_focused_space_type)
-  if [ "$current_type" == "$NAME" ]; then
+  if [ "$current_type" != "$NAME" ]; then
+    # first left click - change layout
+    yabai -m space --layout "$NAME"
+  else
     if [ "$NAME" == "bsp" ]; then
-      yabai -m space --balance
+      # second left click - rotate bsp grid
+      yabai -m space --rotate 270
     elif [ "$NAME" == "stack" ]; then
+      # second left click - rotate stack
       yabai_rotate_stack
     fi
-  else
-    yabai -m space --layout "$NAME"
   fi
 elif [ "$BUTTON" == "right" ]; then
   if [ "$NAME" == "bsp" ]; then
-    yabai -m space --rotate 270
+    # second left click - balance bsp grid
+    yabai -m space --balance
   fi
 fi
 
