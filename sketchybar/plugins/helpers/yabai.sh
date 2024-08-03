@@ -11,8 +11,13 @@ yabai_get_focused_space_type() {
 }
 
 yabai_get_windows_focused_space() {
-  # convert from a space separated string to an array
-  read -a result < <(yabai_get_focused_space_info | jq -r '.windows[]')
+  # Read space-separated window IDs into an array
+  local result=()
+  while IFS= read -r window_id; do
+    result+=("$window_id")
+  done < <(yabai_get_focused_space_info | jq -r '.windows[]')
+
+  # Return the result as a space-separated string
   echo "${result[@]}"
 }
 

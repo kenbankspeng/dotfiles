@@ -5,15 +5,6 @@ source "$CONFIG_DIR/plugins/helpers/yabai.sh"
 source "$CONFIG_DIR/plugins/helpers/sketchy.sh"
 
 CLICK_HANDLER="$CONFIG_DIR/plugins/window_action.sh"
-BRACKET_CACHE_FILE="$CACHE_DIR/space_bracket_cache"
-WINDOWS_CACHE_FILE="$CACHE_DIR/windows_cache"
-LOG_DIR="$CACHE_DIR/logs"
-LOG_FILE="$LOG_DIR/windows.log"
-
-mkdir -p "$LOG_DIR"
-touch "$BRACKET_CACHE_FILE"
-touch "$WINDOWS_CACHE_FILE"
-touch "$LOG_FILE"
 
 # Helper to modify alpha of a 0xaarrggbb color
 alpha() {
@@ -121,9 +112,6 @@ manage_windows() {
     local app_name=$(yabai_get_window_app_name "$window_id")
     local icon=$($CONFIG_DIR/icon_map.sh "$app_name")
 
-    # Log window properties
-    #  echo "space: $space_id, window: $window_id, app: $app_name" >>"$LOG_FILE"
-
     # Update window properties
     local window_props=(
       label.drawing=off
@@ -167,7 +155,6 @@ cache_windows() {
   done
 
   printf "%s\n" "${window_handles[@]}" >"$WINDOWS_CACHE_FILE"
-  echo "cached: ${window_handles[@]}"
 }
 
 display_windows() {
@@ -178,7 +165,7 @@ display_windows() {
     local window_handle="window.$space_id.$window_id"
 
     # add window
-    sketchy --add item "$window_handle" left
+    sketchy --add item "$window_handle" q
     sketchybar --set "$window_handle" script="$CLICK_HANDLER" \
       --subscribe "$window_handle" mouse.clicked
 
@@ -201,8 +188,6 @@ remove_windows() {
   while IFS= read -r line; do
     cached_windows+=("$line")
   done <"$WINDOWS_CACHE_FILE"
-
-  echo "remove: ${cached_windows[@]}"
 
   for window_handle in "${cached_windows[@]}"; do
     sketchybar --remove "$window_handle"
