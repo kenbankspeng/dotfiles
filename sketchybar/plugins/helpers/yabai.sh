@@ -2,17 +2,28 @@ yabai_get_focused_space_info() {
   yabai -m query --spaces | jq -r '.[] | select(.["has-focus"] == true)'
 }
 
+yabai_get_focused_space() {
+  yabai_get_focused_space_info | jq -r '.index'
+}
+
 yabai_get_focused_space_type() {
   yabai_get_focused_space_info | jq -r .type
 }
 
 yabai_get_windows_focused_space() {
-  yabai_get_focused_space_info | jq -r .windows
+  # convert from a space separated string to an array
+  read -a result < <(yabai_get_focused_space_info | jq -r '.windows[]')
+  echo "${result[@]}"
 }
 
 # focusing on the last window brings it to the top
 yabai_rotate_stack() {
   yabai -m window --focus $(yabai_get_windows_focused_space | jq -r ".[-1]")
+}
+
+# $1: window id
+yabai_get_window_app_name() {
+  yabai -m query --windows --window "$1" | jq -r '.app'
 }
 
 # INTERNAL ONLY
@@ -63,13 +74,6 @@ yabai_rotate_stack() {
 # # $1 : space index
 # yabai_get_num_windows_in_space() {
 #   yabai_get_windows_in_space "$1" | jq '. | length'
-# }
-
-# # 1 call
-# # Get app name of a window by its id
-# # $1: window id
-# yabai_get_window_app_name() {
-#   yabai -m query --windows --window "$1" | jq -r '.app'
 # }
 
 # # 1 call

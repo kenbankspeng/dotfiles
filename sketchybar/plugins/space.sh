@@ -2,15 +2,17 @@
 
 source "$CONFIG_DIR/env.sh"
 source "$CONFIG_DIR/plugins/helpers/yabai.sh"
-source "$CONFIG_DIR/plugins/helpers/util.sh"
+source "$CONFIG_DIR/plugins/helpers/sketchy.sh"
 
 CLICK_HANDLER="$CONFIG_DIR/plugins/window_action.sh"
 BRACKET_CACHE_FILE="$CACHE_DIR/space_bracket_cache"
+WINDOWS_CACHE_FILE="$CACHE_DIR/windows_cache"
 LOG_DIR="$CACHE_DIR/logs"
 LOG_FILE="$LOG_DIR/windows.log"
 
 mkdir -p "$LOG_DIR"
 touch "$BRACKET_CACHE_FILE"
+touch "$WINDOWS_CACHE_FILE"
 touch "$LOG_FILE"
 
 # Helper to modify alpha of a 0xaarrggbb color
@@ -144,13 +146,71 @@ manage_windows() {
 
 }
 
+# ------------------
+
+cache_windows() {
+  local space_id="$1"
+  local windows=("${@:2}")
+
+  # Empty the cache file
+  : >"$WINDOWS_CACHE_FILE"
+
+  # If no windows, add placeholder
+  if [ ${#windows[@]} -eq 0 ]; then
+    windows=("window.$space_id.0")
+  fi
+
+  # Construct full window handles and cache them
+  local window_handles=()
+  for window_id in "${windows[@]}"; do
+    window_handles+=("window.$space_id.$window_id")
+  done
+
+  printf "%s\n" "${window_handles[@]}" >"$WINDOWS_CACHE_FILE"
+  echo "cached: ${window_handles[@]}"
+}
+
 display_windows() {
-  local windows=yabai_get_windows_focused_space
-  for window in $windows; do
+  local space_id=$(yabai_get_focused_space)
+  local windows=$(yabai_get_windows_focused_space)
+
+  for window_id in $windows; do
+    local window_handle="window.$space_id.$window_id"
+
+    # add window
+    sketchy --add item "$window_handle" left
+    sketchybar --set "$window_handle" script="$CLICK_HANDLER" \
+      --subscribe "$window_handle" mouse.clicked
+
+    # style window
+    local app_name=$(yabai_get_window_app_name "$window_id")
+    local icon=$($CONFIG_DIR/icon_map.sh "$app_name")
+    local window_props=(
+      label.drawing=off
+      icon.font="$ICON_FONT:$ICON_FONTSIZE"
+      icon="$icon"
+    )
+    sketchybar --set "$window_handle" "${window_props[@]}"
+  done
+  cache_windows "$space_id" $windows
+}
+
+remove_windows() {
+  local cached_windows=()
+
+  while IFS= read -r line; do
+    cached_windows+=("$line")
+  done <"$WINDOWS_CACHE_FILE"
+
+  echo "remove: ${cached_windows[@]}"
+
+  for window_handle in "${cached_windows[@]}"; do
+    sketchybar --remove "$window_handle"
   done
 }
 
 main() {
+  remove_windows
   display_windows
 }
 
