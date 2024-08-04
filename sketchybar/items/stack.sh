@@ -31,7 +31,7 @@ props=(
   background.color=off
   script="$PLUGIN_DIR/stack.sh"
 )
-sketchybar --add event window_changed \
+sketchybar --add event space_changed \
   --add item stack_listener $position \
   --set stack_listener "${props[@]}" \
-  --subscribe stack_listener window_changed
+  --subscribe stack_listener space_changed

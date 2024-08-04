@@ -93,9 +93,7 @@ add_windows_for_space() {
 }
 
 main() {
-  if [ "$SENDER" = "space_changed" ]; then
-    echo "space changed"
-  elif [ "$SENDER" = "focus_changed" ]; then
+  if [ "$SENDER" = "focus_changed" ]; then
     focus_changed "$ID"
   elif [ "$SENDER" = "window_created" ]; then
     add_window "unknown" "$ID"
@@ -109,7 +107,6 @@ main() {
       add_windows_for_space "$space_id"
     done
   fi
-
 }
 
 main

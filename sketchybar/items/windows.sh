@@ -22,9 +22,8 @@ props=(
   script="$PLUGIN_DIR/windows.sh"
 )
 sketchybar --add event focus_changed
-sketchybar --add event space_changed
 sketchybar --add event window_created
 sketchybar --add event window_destroyed
 sketchybar --add item win_listener left \
   --set win_listener "${props[@]}" \
-  --subscribe win_listener window_created window_destroyed space_changed focus_changed
+  --subscribe win_listener window_created window_destroyed focus_changed
