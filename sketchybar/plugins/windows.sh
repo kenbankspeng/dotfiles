@@ -23,49 +23,6 @@ alpha() {
   echo 0x${new_alpha}${rgb_part} # new color
 }
 
-# sort by spaceid groups (space, windows, divider)
-reorder_windows() {
-
-  # the sketchybar data to be reordered
-  local sketchybar_items_json=$(sketchybar --query bar | jq -r '.items[]')
-  local sketchybar_items=($sketchybar_items_json)
-
-  # Extract non-prefixed entities
-  local others=$(printf "%s\n" "${sketchybar_items[@]}" | grep -vE '^(space|window|divider)\.')
-
-  # Extract space-related entities
-  local spaces=$(printf "%s\n" "${sketchybar_items[@]}" | grep -E '^(space|window|divider)\.')
-
-  # First pass: Sort spaces by spaceid and group them
-  local grouped_spaces=()
-  for spaceid in $(echo "$spaces" | grep '^space\.' | awk -F. '{print $2}' | sort -n | uniq); do
-    grouped_spaces+=($(echo "$spaces" | grep "^space\.$spaceid"))
-    grouped_spaces+=($(echo "$spaces" | grep "^window\.$spaceid"))
-    grouped_spaces+=($(echo "$spaces" | grep "^divider\.$spaceid"))
-  done
-
-  # Output the result of the first pass
-  local sorted_list=("$others")
-  sorted_list+=("${grouped_spaces[@]}")
-
-  # Add any remaining window items
-  if [ ${#window_batch[@]} -gt 0 ]; then
-    sorted_list+=("${window_batch[@]}")
-  fi
-
-  # # Print the final sorted list for debugging
-  # echo "------ reordered list ------"
-  # for item in "${sorted_list[@]}"; do
-  #   echo "$item"
-  # done
-  # echo
-
-  # Reorder
-  if [ ${#sorted_list[@]} -gt 0 ]; then
-    sketchybar --reorder $(printf "%s " "${sorted_list[@]}")
-  fi
-}
-
 add_section() {
   local space_id="$1"
   local props=(
