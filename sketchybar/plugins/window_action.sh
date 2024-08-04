@@ -11,8 +11,7 @@ handle_click() {
   if [ "$BUTTON" = "left" ]; then
     local current_focused_space=$(yabai_get_focused_space)
     if [ "$current_focused_space" != "$space_id" ]; then
-      yabai_focus_space "$space_id"
-      # yabai_focus_window "$window_id"
+      yabai_focus_window "$window_id"
     elif [ "$(yabai_get_space_type "$space_id")" = "stack" ]; then
       yabai_rotate_stack "$space_id"
     fi
