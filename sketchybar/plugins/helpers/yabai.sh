@@ -44,11 +44,6 @@ yabai_get_window_space() {
   yabai -m query --windows | jq -r --arg window_id "$window_id" '.[] | select(.id == ($window_id | tonumber)) | .space'
 }
 
-# focusing on the last window brings it to the top
-yabai_rotate_stack() {
-  yabai -m window --focus $(yabai_get_windows_focused_space | jq -r ".[-1]")
-}
-
 yabai_get_focused_window() {
   yabai -m query --windows | jq -r '.[] | select(.["has-focus"] == true) | .id'
 }
@@ -67,7 +62,9 @@ yabai_get_focused_space() {
   yabai_get_focused_space_info | jq -r '.index'
 }
 
-# reutrns array of window ids
-yabai_get_windows_focused_space() {
-  yabai_get_focused_space_info | jq -r '.windows'
+# focusing on the last window brings it to the top
+yabai_rotate_stack() {
+  local windows=$(yabai_get_focused_space_info | jq -r '.windows')
+  local last_window=$(echo "$windows" | jq -r ".[-1]")
+  yabai -m window --focus $last_window
 }

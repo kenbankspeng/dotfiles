@@ -26,6 +26,7 @@ alpha() {
 focus_changed() {
   local window_id="$1"
   local window_handle=$(sketchybar --query bar | jq -r --arg window_id "$window_id" '.items[] | select(contains($window_id))')
+  echo "focus changed $window_handle"
 }
 
 add_section() {

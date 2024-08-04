@@ -8,8 +8,6 @@ sketchybar --set "$NAME" label=Brew icon.color="$BLUE"
 count="$(brew outdated | wc -l | tr -d ' ')"
 sleep 10
 
-echo "count $count"
-
 case "$count" in
 0)
 	color=$GREEN
