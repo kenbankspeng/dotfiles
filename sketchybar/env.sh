@@ -54,6 +54,7 @@ export CRUST=0xff11111b
 export BLACK=0xff000000
 export WHITE=0xffffffff
 export GREY=0xff808080
+export FAINT=0xff555555
 export TRANSPARENT=0x00000000
 
 # TODO:hard colors

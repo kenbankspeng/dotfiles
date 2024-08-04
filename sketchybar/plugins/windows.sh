@@ -39,15 +39,23 @@ highlight_focused_window() {
 add_section() {
   # start with space
   local space_id="$1"
+  local is_last_space="$2"
+
   sketchy --add item space.$space_id $position
   sketchybar --set space.$space_id width=0
 
+  if [ "$is_last_space" == "true" ]; then
+    local color=$TRANSPARENT
+  else
+    local color=$FAINT
+  fi
+
   local props=(
-    icon='|'
-    icon.color="$off"
     icon.padding_left=0
     icon.padding_right=0
     label.drawing=off
+    background.height=10
+    background.color=$color
   )
   # end with divider
   sketchy --add item divider.$space_id $position
@@ -67,8 +75,6 @@ add_window() {
   if [ "$space_id" == "unknown" ]; then
     space_id=$(yabai_get_window_space "$window_id")
   fi
-
-  add_section "$space_id"
 
   # add window
   local window_handle="window.$space_id.$window_id"
@@ -114,6 +120,12 @@ main() {
     local num_spaces=$(yabai_get_num_spaces)
     for ((space_index = 0; space_index < num_spaces; space_index++)); do
       local space_id=$((space_index + 1)) # Space index starts from 1
+      if [ "$space_id" == "$num_spaces" ]; then
+        local is_last_space=true
+      else
+        local is_last_space=false
+      fi
+      add_section "$space_id" "$is_last_space"
       add_windows_for_space "$space_id"
     done
   fi
