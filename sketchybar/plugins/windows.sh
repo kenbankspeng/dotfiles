@@ -23,6 +23,11 @@ alpha() {
   echo 0x${new_alpha}${rgb_part} # new color
 }
 
+focus_changed() {
+  local window_id="$1"
+  local window_handle=$(sketchybar --query bar | jq -r --arg window_id "$window_id" '.items[] | select(contains($window_id))')
+}
+
 add_section() {
   local space_id="$1"
   local props=(
@@ -85,6 +90,8 @@ add_windows_for_space() {
 main() {
   if [ "$SENDER" = "space_changed" ]; then
     echo "space changed"
+  elif [ "$SENDER" = "focus_changed" ]; then
+    focus_changed "$ID"
   elif [ "$SENDER" = "window_created" ]; then
     add_window "unknown" "$ID"
   elif [ "$SENDER" = "window_destroyed" ]; then

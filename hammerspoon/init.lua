@@ -17,6 +17,7 @@ Lib.loader:loadSpoons({
 	"CircleClock",
 	"Calendar",
 	"FocusOverlay",
+	"SketchyBar",
 	"Launcher",
 	"Layout",
 	"Modal",
@@ -30,6 +31,7 @@ local Launcher = spoon.Launcher
 local Layout = spoon.Layout
 local Windows = spoon.Windows
 local FocusOverlay = spoon.FocusOverlay
+local SketchyBar = spoon.SketchyBar
 local ReloadConfiguration = spoon.ReloadConfiguration
 local Alert = spoon.Alert
 
@@ -39,6 +41,9 @@ local launchOrFocus = partial(Launcher.launchOrFocus, Launcher)
 local layoutAction = partial(Layout.layoutAction, Layout)
 local winAction = partial(Windows.action, Windows)
 local toggleOverlay = hs.fnutils.partial(FocusOverlay.toggle, FocusOverlay)
+
+-- SketchyBar
+SketchyBar:start()
 
 -- console management
 ReloadConfiguration:start()
