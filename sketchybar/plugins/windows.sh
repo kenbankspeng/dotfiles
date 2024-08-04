@@ -34,14 +34,19 @@ focus_changed() {
 }
 
 add_section() {
+  # start with space
   local space_id="$1"
+  sketchy --add item space.$space_id $position
+  sketchybar --set space.$space_id width=0
+
   local props=(
-    width=0
-    icon.drawing=off
+    icon='|'
+    icon.color="$off"
+    icon.padding_left=0
+    icon.padding_right=0
     label.drawing=off
   )
-  sketchy --add item space.$space_id $position
-  sketchybar --set space.$space_id "${props[@]}"
+  # end with divider
   sketchy --add item divider.$space_id $position
   sketchybar --set divider.$space_id "${props[@]}"
 }
