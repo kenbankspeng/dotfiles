@@ -10,9 +10,15 @@ touch "$WINDOWS_CACHE_FILE"
 : >"$WINDOWS_CACHE_FILE"
 
 props=(
-  label.drawing=off
   icon.drawing=off
+  icon.padding_left=0
+  icon.padding_right=0
+  label.drawing=off
+  label.padding_left=0
+  label.padding_right=0
   background.drawing=off
+  padding_left=0
+  padding_right=0
   script="$PLUGIN_DIR/windows.sh"
 )
 sketchybar --add event space_created

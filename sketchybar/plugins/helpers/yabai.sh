@@ -40,7 +40,8 @@ yabai_get_space_type() {
 # get the space of a window
 # $1 : window id
 yabai_get_window_space() {
-  yabai -m query --windows | jq -r --arg window_id "$1" '.[] | select(.id == $window_id) | .space'
+  local window_id="$1"
+  yabai -m query --windows | jq -r --arg window_id "$window_id" '.[] | select(.id == ($window_id | tonumber)) | .space'
 }
 
 # focusing on the last window brings it to the top

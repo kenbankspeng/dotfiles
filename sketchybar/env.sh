@@ -58,14 +58,14 @@ export TRANSPARENT=0x00000000
 
 # TODO:hard colors
 
-export COLOR_BLACK=0xe0282828
-export COLOR_RED=0xe0cc241d
-export COLOR_GREEN=0xe098971a
-export COLOR_YELLOW=0xe0d79921
-export COLOR_BLUE=0xe0458588
-export COLOR_MAGENTA=0xe0b16286
-export COLOR_CYAN=0xe0689d6a
-export COLOR_WHITE=0xe0a89984
+# export COLOR_BLACK=0xe0282828
+# export COLOR_RED=0xe0cc241d
+# export COLOR_GREEN=0xe098971a
+# export COLOR_YELLOW=0xe0d79921
+# export COLOR_BLUE=0xe0458588
+# export COLOR_MAGENTA=0xe0b16286
+# export COLOR_CYAN=0xe0689d6a
+# export COLOR_WHITE=0xe0a89984
 
 # convenience variables
 

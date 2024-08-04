@@ -4,6 +4,8 @@ source "$CONFIG_DIR/env.sh"
 source "$CONFIG_DIR/plugins/helpers/yabai.sh"
 source "$CONFIG_DIR/plugins/helpers/sketchy.sh"
 
+position=left
+
 CLICK_HANDLER="$CONFIG_DIR/plugins/window_action.sh"
 BRACKET_CACHE_FILE="$CACHE_DIR/space_bracket_cache"
 LOG_DIR="$CACHE_DIR/logs"
@@ -51,7 +53,7 @@ reorder_windows() {
     sorted_list+=("${window_batch[@]}")
   fi
 
-  # Print the final sorted list for debugging
+  # # Print the final sorted list for debugging
   # echo "------ reordered list ------"
   # for item in "${sorted_list[@]}"; do
   #   echo "$item"
@@ -64,14 +66,23 @@ reorder_windows() {
   fi
 }
 
-remove_window() {
+add_section() {
   local space_id="$1"
-  local window_id="$2"
-  if [ "$space_id" == "unknown" ]; then
-    space_id=$(yabai_get_window_space "$window_id")
-  fi
-  local window_handle="window.$space_id.$window_id"
-  sketchybar --remove "$window_handle"
+  local props=(
+    width=0
+    icon.drawing=off
+    label.drawing=off
+  )
+  sketchy --add item space.$space_id $position
+  sketchybar --set space.$space_id "${props[@]}"
+  sketchy --add item divider.$space_id $position
+  sketchybar --set divider.$space_id "${props[@]}"
+}
+
+remove_window() {
+  local window_id="$1"
+  local window_handle=$(sketchybar --query bar | jq -r --arg window_id "$window_id" '.items[] | select(contains($window_id))')
+  sketchy --remove "$window_handle"
 }
 
 add_window() {
@@ -81,10 +92,12 @@ add_window() {
     space_id=$(yabai_get_window_space "$window_id")
   fi
 
-  local window_handle="window.$space_id.$window_id"
+  add_section "$space_id"
 
   # add window
-  sketchy --add item "$window_handle" q
+  local window_handle="window.$space_id.$window_id"
+  sketchy --add item "$window_handle" $position
+  sketchybar --move "$window_handle" before divider.$space_id
   sketchybar --set "$window_handle" script="$CLICK_HANDLER" \
     --subscribe "$window_handle" mouse.clicked
 
@@ -110,8 +123,6 @@ add_windows_for_space() {
   for window_id in $windows; do
     add_window "$space_id" "$window_id"
   done
-
-  reorder_windows
 }
 
 main() {
@@ -120,7 +131,7 @@ main() {
   elif [ "$SENDER" = "window_created" ]; then
     add_window "unknown" "$ID"
   elif [ "$SENDER" = "window_destroyed" ]; then
-    remove_window "unknown" "$ID"
+    remove_window "$ID"
   else
     # construct the spaces and windows as per yabai query
     local num_spaces=$(yabai_get_num_spaces)
@@ -129,6 +140,7 @@ main() {
       add_windows_for_space "$space_id"
     done
   fi
+
 }
 
 main
