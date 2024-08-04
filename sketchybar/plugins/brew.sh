@@ -13,8 +13,11 @@ case "$count" in
 	color=$GREEN
 	count=􀆅
 	;;
-[1-3])
+[1-2])
 	color=$YELLOW
+	;;
+[3-4])
+	color=$PEACH
 	;;
 *)
 	color=$RED
