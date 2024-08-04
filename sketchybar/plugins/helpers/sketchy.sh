@@ -8,3 +8,7 @@ sketchy() {
     sketchybar "$@"
   fi
 }
+
+sketchy_get_all_windows() {
+  sketchybar --query bar | jq -r '.items[] | select(contains("window"))'
+}
