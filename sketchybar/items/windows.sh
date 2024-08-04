@@ -15,7 +15,9 @@ props=(
   background.drawing=off
   script="$PLUGIN_DIR/windows.sh"
 )
-sketchybar --add event window_changed \
-  --add item win_listener left \
+sketchybar --add event space_created
+sketchybar --add event window_created
+sketchybar --add event window_destroyed
+sketchybar --add item win_listener left \
   --set win_listener "${props[@]}" \
-  --subscribe win_listener window_changed
+  --subscribe win_listener space_created window_created window_destroyed
