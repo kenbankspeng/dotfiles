@@ -9,17 +9,13 @@ handle_click() {
   local window_id=$(echo "$NAME" | cut -d '.' -f 3)
 
   if [ "$BUTTON" = "left" ]; then
-    local current_focused_space=$(yabai_get_focused_space)
-    if [ "$current_focused_space" != "$space_id" ]; then
-      # TODO: should check prev focused window
+    local current_focused_window=$(yabai_get_focused_window)
+    if [ "$current_focused_window" != "$window_id" ]; then
       yabai_focus_window "$window_id"
-    elif [ "$(yabai_get_space_type "$space_id")" = "stack" ]; then
-      yabai_rotate_stack "$space_id"
     fi
   elif [ "$BUTTON" = "right" ]; then
-    echo "debug: right"
-    # Uncomment the line below if you want to toggle layout on right-click
-    # yabai_toggle_layout "$space_id"
+    # redraw the windows
+    sketchybar --trigger reset
   fi
 }
 

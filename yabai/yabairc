@@ -81,7 +81,6 @@ yabai -m rule --add label="Dictionary" app="^Dictionary$" manage=off
 
 yabai -m signal --add event=window_created action="sketchybar --trigger window_created ID=\$YABAI_WINDOW_ID &> /dev/null"
 yabai -m signal --add event=window_destroyed action="sketchybar --trigger window_destroyed ID=\$YABAI_WINDOW_ID &> /dev/null"
-yabai - m signal --add event=window_focused action="sketchybar --trigger window_focused ID=\$YABAI_WINDOW_ID &> /dev/null"
 # yabai -m signal --add event=space_changed action="sketchybar --trigger space_changed &> /dev/null"
 # yabai -m signal --add event=space_created action="sketchybar --trigger window_changed &> /dev/null"
 # yabai -m signal --add event=space_destroyed action="sketchybar --trigger window_changed &> /dev/null"

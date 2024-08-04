@@ -53,7 +53,7 @@ add_section() {
   local props=(
     icon='|'
     icon.color=$color
-    icon.padding_left=3
+    icon.padding_left=3 # better centering
     icon.padding_right=0
     label.drawing=off
     padding_left=0
@@ -69,6 +69,13 @@ remove_window() {
   local window_handle=$(sketchybar --query bar | jq -r --arg window_id "$window_id" '.items[] | select(contains($window_id))')
   sketchy --remove "$window_handle"
   highlight_focused_window
+}
+
+remove_all_windows() {
+  local windows=$(sketchy_get_all_window_handles)
+  for window_handle in $windows; do
+    sketchy --remove "$window_handle"
+  done
 }
 
 add_window() {
@@ -118,7 +125,10 @@ main() {
   elif [ "$SENDER" = "window_destroyed" ]; then
     remove_window "$ID"
   else
+    echo "### window bar ###"
+    # called by forced (init) and by reset
     # construct the spaces and windows as per yabai query
+    remove_all_windows
     local num_spaces=$(yabai_get_num_spaces)
     for ((space_index = 0; space_index < num_spaces; space_index++)); do
       local space_id=$((space_index + 1)) # Space index starts from 1
