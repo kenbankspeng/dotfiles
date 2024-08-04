@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-position=q
+position=e
 
 props=(
   label.drawing=off
