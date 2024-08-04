@@ -4,9 +4,6 @@ source "$CONFIG_DIR/env.sh"
 source "$CONFIG_DIR/plugins/helpers/yabai.sh"
 
 update() {
-  off=$GREY
-  on=$GREEN
-
   type=$(yabai_get_focused_space_type)
 
   case "$type" in

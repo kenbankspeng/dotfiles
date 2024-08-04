@@ -8,3 +8,8 @@ sketchy() {
     sketchybar "$@"
   fi
 }
+
+# returns handles not ids
+sketchy_get_all_window_handles() {
+  sketchybar --query bar | jq -r '.items[] | select(contains("window"))'
+}
