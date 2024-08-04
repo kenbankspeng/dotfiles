@@ -8,16 +8,15 @@ sketchybar --set "$NAME" label=Brew icon.color="$BLUE"
 count="$(brew outdated | wc -l | tr -d ' ')"
 sleep 10
 
+echo "count $count"
+
 case "$count" in
 0)
 	color=$GREEN
 	count=􀆅
 	;;
-[1-2])
+[1-3])
 	color=$YELLOW
-	;;
-[3-4])
-	color=$ORANGE
 	;;
 *)
 	color=$RED
@@ -29,4 +28,5 @@ props=(
 	icon.color="$color"
 	label.color="$color"
 )
+
 sketchybar --set "$NAME" "${props[@]}"
