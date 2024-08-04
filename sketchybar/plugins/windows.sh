@@ -23,14 +23,17 @@ alpha() {
   echo 0x${new_alpha}${rgb_part} # new color
 }
 
-focus_changed() {
-  local window_id="$1"
-  local window_handle=$(sketchybar --query bar | jq -r --arg window_id "$window_id" '.items[] | select(contains($window_id))')
-  local windows=$(sketchy_get_all_windows)
-  for window in $windows; do
-    sketchybar --set "$window" icon.color="$off"
+highlight_focused_window() {
+  local handles=$(sketchy_get_all_window_handles)
+  for window_handle in $handles; do
+    sketchybar --set "$window_handle" icon.color="$off"
   done
-  sketchybar --set "$window_handle" icon.color="$on"
+
+  local window_id=$(yabai_get_focused_window)
+  local window_handle=$(sketchybar --query bar | jq -r --arg window_id "$window_id" '.items[] | select(contains($window_id))')
+  if [ -n "$window_handle" ]; then
+    sketchybar --set "$window_handle" icon.color="$on"
+  fi
 }
 
 add_section() {
@@ -55,6 +58,7 @@ remove_window() {
   local window_id="$1"
   local window_handle=$(sketchybar --query bar | jq -r --arg window_id "$window_id" '.items[] | select(contains($window_id))')
   sketchy --remove "$window_handle"
+  highlight_focused_window
 }
 
 add_window() {
@@ -85,6 +89,7 @@ add_window() {
     icon.color="$color"
   )
   sketchybar --set "$window_handle" "${window_props[@]}"
+  highlight_focused_window
 }
 
 add_windows_for_space() {
@@ -99,7 +104,7 @@ add_windows_for_space() {
 
 main() {
   if [ "$SENDER" = "focus_changed" ]; then
-    focus_changed "$ID"
+    highlight_focused_window
   elif [ "$SENDER" = "window_created" ]; then
     add_window "unknown" "$ID"
   elif [ "$SENDER" = "window_destroyed" ]; then
