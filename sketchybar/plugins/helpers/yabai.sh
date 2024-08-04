@@ -39,15 +39,9 @@ yabai_get_focused_space() {
   yabai_get_focused_space_info | jq -r '.index'
 }
 
+# reutrns array of window ids
 yabai_get_windows_focused_space() {
-  # Read space-separated window IDs into an array
-  local result=()
-  while IFS= read -r window_id; do
-    result+=("$window_id")
-  done < <(yabai_get_focused_space_info | jq -r '.windows[]')
-
-  # Return the result as a space-separated string
-  echo "${result[@]}"
+  yabai_get_focused_space_info | jq -r '.windows'
 }
 
 # # focusing on the last window brings it to the top
