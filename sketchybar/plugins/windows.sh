@@ -125,7 +125,6 @@ main() {
   elif [ "$SENDER" = "window_destroyed" ]; then
     remove_window "$ID"
   else
-    echo "### window bar ###"
     # called by forced (init) and by reset
     # construct the spaces and windows as per yabai query
     remove_all_windows
