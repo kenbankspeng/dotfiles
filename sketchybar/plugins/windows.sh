@@ -51,11 +51,13 @@ add_section() {
   fi
 
   local props=(
-    icon.padding_left=0
+    icon='|'
+    icon.color=$color
+    icon.padding_left=3
     icon.padding_right=0
     label.drawing=off
-    background.height=10
-    background.color=$color
+    padding_left=0
+    padding_right=0
   )
   # end with divider
   sketchy --add item divider.$space_id $position
