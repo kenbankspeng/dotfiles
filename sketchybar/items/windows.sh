@@ -13,7 +13,7 @@ props=(
   label.drawing=off
   icon.drawing=off
   background.drawing=off
-  script="$PLUGIN_DIR/space.sh"
+  script="$PLUGIN_DIR/windows.sh"
 )
 sketchybar --add event window_changed \
   --add item win_listener left \
