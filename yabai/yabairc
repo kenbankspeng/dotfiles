@@ -47,7 +47,7 @@ yabai -m config "${global_settings[@]}"
 # yabai -m config [--space <SPACE_SEL>] <space setting>
 #
 space_settings=(
-    layout float
+    layout stack
     top_padding ${gap_top}
     bottom_padding ${gap_bottom}
     left_padding ${gap_left}
