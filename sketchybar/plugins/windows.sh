@@ -30,7 +30,7 @@ highlight_focused_window() {
   done
 
   local window_id=$(yabai_get_focused_window)
-  local window_handle=$(sketchybar --query bar | jq -r --arg window_id "$window_id" '.items[] | select(contains($window_id))')
+  local window_handle=$(sketchybar --query bar | jq -r --arg window_id "$window_id" '.items[] | select(startswith("window.") and endswith("." + $window_id))')
   if [ -n "$window_handle" ]; then
     sketchybar --set "$window_handle" icon.color="$on"
   fi
