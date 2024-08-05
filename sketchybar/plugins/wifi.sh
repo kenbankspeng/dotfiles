@@ -10,7 +10,7 @@ else
   color=$RED
 fi
 
-local props=(
+props=(
   padding_left=0
   padding_right=0
   icon.drawing=off

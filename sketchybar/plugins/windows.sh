@@ -117,6 +117,23 @@ add_windows_for_space() {
   done
 }
 
+make_window_bar() {
+  # called by forced (init) and by reset
+  # construct the spaces and windows as per yabai query
+  remove_all_windows
+  local num_spaces=$(yabai_get_num_spaces)
+  for ((space_index = 0; space_index < num_spaces; space_index++)); do
+    local space_id=$((space_index + 1)) # Space index starts from 1
+    if [ "$space_id" == "$num_spaces" ]; then
+      local is_last_space=true
+    else
+      local is_last_space=false
+    fi
+    add_section "$space_id" "$is_last_space"
+    add_windows_for_space "$space_id"
+  done
+}
+
 main() {
   if [ "$SENDER" = "focus_changed" ]; then
     highlight_focused_window
@@ -124,21 +141,10 @@ main() {
     add_window "unknown" "$ID"
   elif [ "$SENDER" = "window_destroyed" ]; then
     remove_window "$ID"
+  elif [ "$SENDER" = "reset" ]; then
+    make_window_bar
   else
-    # called by forced (init) and by reset
-    # construct the spaces and windows as per yabai query
-    remove_all_windows
-    local num_spaces=$(yabai_get_num_spaces)
-    for ((space_index = 0; space_index < num_spaces; space_index++)); do
-      local space_id=$((space_index + 1)) # Space index starts from 1
-      if [ "$space_id" == "$num_spaces" ]; then
-        local is_last_space=true
-      else
-        local is_last_space=false
-      fi
-      add_section "$space_id" "$is_last_space"
-      add_windows_for_space "$space_id"
-    done
+    make_window_bar
   fi
 }
 
