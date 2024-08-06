@@ -69,13 +69,15 @@ sketchybar --default "${default[@]}"
 
 ##### Left Side Items #####
 source $ITEM_DIR/apple.sh
+# source $ITEM_DIR/windows.sh
 
 ##### Left Side Of Notch Items #####
-source $ITEM_DIR/mouse.sh
-source $ITEM_DIR/stack.sh
-source $ITEM_DIR/windows.sh
+source $ITEM_DIR/brew.sh
+source $ITEM_DIR/mise.sh
 
 ##### Right Side Of Notch Items #####
+source $ITEM_DIR/stack.sh
+source $ITEM_DIR/mouse.sh
 
 ##### Right Side Items #####
 source $ITEM_DIR/clock.sh
@@ -84,8 +86,6 @@ source $ITEM_DIR/battery.sh
 source $ITEM_DIR/volume.sh
 source $ITEM_DIR/disk.sh
 source $ITEM_DIR/cpu.sh
-source $ITEM_DIR/brew.sh
-source $ITEM_DIR/mise.sh
 
 ##### Finalizing Setup #####
 sketchybar --update
