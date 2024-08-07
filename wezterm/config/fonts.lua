@@ -3,7 +3,7 @@ local wezterm = require 'wezterm'
 --   weight: Thin, ExtraLight, Light, DemiLight, Book, Regular, Medium, DemiBold, Bold, ExtraBold, Black, ExtraBlack
 --   style: Normal, Italic, Oblique
 --   stretch: UltraCondensed, ExtraCondensed, Condensed, SemiCondensed, Normal, SemiExpanded, Expanded, ExtraExpanded, UltraExpanded
-local font = 'SauceCodePro Nerd Font'
+local font = 'hasklig'
 local font_options = { weight = 'Regular', stretch = 'Normal', style = 'Normal' }
 local font_size = 18
 
