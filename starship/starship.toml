@@ -2,7 +2,7 @@
 ########################
 format = """
 [](fg:color_shell)\
-[ ](bg:color_shell fg:color_shell_text)\
+[ ](bg:color_shell fg:color_shell_text)\
 [](fg:color_shell bg:color_directory)\
 $directory\
 [](fg:color_directory bg:color_lang)\
