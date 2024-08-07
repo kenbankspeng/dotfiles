@@ -2,9 +2,9 @@ local wezterm = require 'wezterm'
 
 --   weight: Thin, ExtraLight, Light, DemiLight, Book, Regular, Medium, DemiBold, Bold, ExtraBold, Black, ExtraBlack
 --   style: Normal, Italic, Oblique
---   stretch: UltraCondensed, ExtraCondensed, Condensed, SemiCondensed, Normal, SemiExpanded, Expanded, ExtraExpanded, UltraExpanded
-local font = 'hasklig'
-local font_options = { weight = 'Regular', stretch = 'Normal', style = 'Normal' }
+--   stretch??: UltraCondensed, ExtraCondensed, Condensed, SemiCondensed, Normal, SemiExpanded, Expanded, ExtraExpanded, UltraExpanded
+local font = 'Hasklug Nerd Font Mono' -- based on hasklig
+local font_options = { weight = 'Regular', style = 'Normal', stretch = 'Normal' }
 local font_size = 18
 
 return {
