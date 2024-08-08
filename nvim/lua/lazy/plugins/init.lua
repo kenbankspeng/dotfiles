@@ -18,13 +18,15 @@ local plugin_filenames = {
   'yazi',
   'lazygit',
   'trouble',
+  -- TBD
   -- 'debug',
   -- 'indent_line',
   -- 'lint',
   -- 'autopairs',
-  -- 'neo-tree',
   -- 'gitsigns-adv',
   -- 'custom.my-plugin',
+  -- RRethy/vim-illuminate
+  -- windwp/nvim-ts-autotag
 }
 
 -- table of plugin configs
