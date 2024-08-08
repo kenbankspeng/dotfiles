@@ -17,6 +17,7 @@ local plugin_filenames = {
   'treesitter',
   'yazi',
   'lazygit',
+  'trouble',
   -- 'debug',
   -- 'indent_line',
   -- 'lint',
