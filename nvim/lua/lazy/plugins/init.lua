@@ -2,6 +2,7 @@
 
 local plugin_filenames = {
   'vim-sleuth',
+  'numbertoggle',
   'gitsigns-basic',
   'which-key',
   'telescope',
