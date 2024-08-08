@@ -15,7 +15,8 @@ local plugin_filenames = {
   'todo-comments',
   'misc',
   'treesitter',
-  'yazi'
+  'yazi',
+  'lazygit',
   -- 'debug',
   -- 'indent_line',
   -- 'lint',
