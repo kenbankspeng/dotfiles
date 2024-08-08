@@ -29,7 +29,7 @@ local plugin_filenames = {
 -- table of plugin configs
 local plugins = {}
 for _, filename in ipairs(plugin_filenames) do
-  local plugin_path = 'lua.lazy.plugins.' .. filename
+  local plugin_path = 'lazy.plugins.' .. filename
   table.insert(plugins, require(plugin_path))
 end
 
