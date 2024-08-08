@@ -1,12 +1,5 @@
 -- add more plugin filenames here
 
-
--- require 'kickstart.plugins.indent_line',
--- require 'kickstart.plugins.lint',
--- require 'kickstart.plugins.autopairs',
--- require 'kickstart.plugins.neo-tree',
--- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
-
 local plugin_filenames = {
   'vim-sleuth',
   'gitsigns-basic',
@@ -21,9 +14,16 @@ local plugin_filenames = {
   'todo-comments',
   'misc',
   'treesitter',
-  -- 'kickstart.plugins.debug',
+  -- 'debug',
+  -- 'indent_line',
+  -- 'lint',
+  -- 'autopairs',
+  -- 'neo-tree',
+  -- 'gitsigns-adv',
+  -- 'custom.my-plugin',
 }
 
+-- table of plugin configs
 local plugins = {}
 for _, filename in ipairs(plugin_filenames) do
   local plugin_path = 'lua.lazy.plugins.' .. filename

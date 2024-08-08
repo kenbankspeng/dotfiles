@@ -11,5 +11,6 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 local config = require('lazy.plugins')
-print(vim.inspect(config))
--- require('lazy').setup(config)
+local options = require('lazy.options')
+-- print(vim.inspect(options))
+require('lazy').setup(config, options)
