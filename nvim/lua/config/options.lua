@@ -8,6 +8,7 @@ local env = v.env
 
 ------- globals -------
 
+g.base46_cache = vim.fn.stdpath "data" .. "/lazy/base46/"
 g.mapleader = ' ' -- `:help mapleader`. NOTE: must be before plugins loaded
 g.maplocalleader = ' '
 g.have_nerd_font = true
