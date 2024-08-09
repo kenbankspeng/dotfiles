@@ -5,8 +5,8 @@ return {
   build = ":TSUpdate",
   opts = function()
     pcall(function()
-      dofile(vim.g.base46_cache .. "syntax")
-      dofile(vim.g.base46_cache .. "treesitter")
+      -- dofile(vim.g.base46_cache .. "syntax")
+      -- dofile(vim.g.base46_cache .. "treesitter")
     end)
 
     local options = {

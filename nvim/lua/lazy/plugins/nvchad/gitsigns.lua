@@ -2,7 +2,7 @@ return {
   "lewis6991/gitsigns.nvim",
   event = "User FilePost",
   opts = function()
-    dofile(vim.g.base46_cache .. "git")
+    -- dofile(vim.g.base46_cache .. "git")
 
     local options = {
       signs = {

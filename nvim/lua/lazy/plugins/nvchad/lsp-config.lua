@@ -59,7 +59,7 @@ return {
     }
 
     local function defaults()
-      dofile(vim.g.base46_cache .. "lsp")
+      -- dofile(vim.g.base46_cache .. "lsp")
       require("nvchad.lsp").diagnostic_config()
 
       require("lspconfig").lua_ls.setup {

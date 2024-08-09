@@ -3,7 +3,7 @@ return {
   dependencies = { "nvim-treesitter/nvim-treesitter" },
   cmd = "Telescope",
   opts = function()
-    dofile(vim.g.base46_cache .. "telescope")
+    -- dofile(vim.g.base46_cache .. "telescope")
 
     local options = {
       defaults = {
