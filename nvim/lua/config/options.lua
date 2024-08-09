@@ -1,69 +1,82 @@
--- Set <space> as the leader key
--- See `:help mapleader`
---  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+local v = vim
+local opt = v.opt
+local o = v.o
+local g = v.g
+local schedule = v.schedule
+local fn = v.fn
+local env = v.env
 
--- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = true
+------- globals -------
 
--- [[ Setting options ]]
--- See `:help vim.opt`
--- NOTE: For more options, you can see `:help option-list`
+g.mapleader = ' ' -- `:help mapleader`. NOTE: must be before plugins loaded
+g.maplocalleader = ' '
+g.have_nerd_font = true
 
--- Make line numbers default
-vim.opt.number = true
--- You can also add relative line numbers, to help with jumping.
-vim.opt.relativenumber = true
--- Show which line your cursor is on
-vim.opt.cursorline = true
+------- options -------
+-- See `:help vim.opt` and `:help option-list`
 
--- Enable mouse mode, can be useful for resizing splits for example!
-vim.opt.mouse = 'a'
+opt.shortmess:append "sI" -- disable nvim intro
 
--- Don't show the mode, since it's already in the status line
-vim.opt.showmode = false
+-- Indenting
+o.expandtab = true
+o.shiftwidth = 2
+o.smartindent = true
+o.tabstop = 2
+o.softtabstop = 2
 
--- Sync clipboard between OS and Neovim.
---  Schedule the setting after `UiEnter` because it can increase startup-time.
---  Remove this option if you want your OS clipboard to remain independent.
---  See `:help 'clipboard'`
-vim.schedule(function()
-  vim.opt.clipboard = 'unnamedplus'
+-- Numbers
+o.number = true -- line numbers
+o.numberwidth = 2
+o.ruler = false
+o.relativenumber = true -- relative line numbers
+o.cursorline = true     -- Show which line your cursor is on
+o.cursorlineopt = "number"
+
+o.laststatus = 3
+o.showmode = false -- mode already in the status line
+
+o.mouse = 'a'      -- Enable mouse mode
+
+opt.fillchars = { eob = " " }
+o.ignorecase = true -- unless \C or one or more capital letters used
+o.smartcase = true
+
+o.signcolumn = "yes"
+o.splitbelow = true -- how new splits should be opened
+o.splitright = true
+
+o.undofile = true  -- Save undo history
+
+o.timeoutlen = 300 -- to display which-key popup sooner
+o.updatetime = 250 -- interval for writing swap file to disk
+
+--  Schedule to reduce startup-time.
+schedule(function()
+  o.clipboard = 'unnamedplus' -- -- Sync clipboard between OS and Neovim.`:help 'clipboard'`
 end)
 
--- Enable break indent
-vim.opt.breakindent = true
+o.breakindent = true   -- Enable break indent
+o.inccommand = 'split' -- Preview substitutions live, as you type!
+o.scrolloff = 10       -- Minimal number of screen lines to keep above and below the cursor.
 
--- Save undo history
-vim.opt.undofile = true
+-- go to previous/next line with h,l,left arrow and right arrow
+-- when cursor reaches end/beginning of line
+opt.whichwrap:append "<>[]hl"
 
--- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-
--- Keep signcolumn on by default
-vim.opt.signcolumn = 'yes'
-
--- Decrease update time
-vim.opt.updatetime = 250
-
--- Decrease mapped sequence wait time
--- Displays which-key popup sooner
-vim.opt.timeoutlen = 300
-
--- Configure how new splits should be opened
-vim.opt.splitright = true
-vim.opt.splitbelow = true
+-- disable some default providers
+-- g.loaded_node_provider = 0
+-- g.loaded_python3_provider = 0
+-- g.loaded_perl_provider = 0
+-- g.loaded_ruby_provider = 0
 
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
-vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+o.list = true
+opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
--- Preview substitutions live, as you type!
-vim.opt.inccommand = 'split'
-
--- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 10
+-- add binaries installed by mason.nvim to path
+local is_windows = fn.has "win32" ~= 0
+local sep = is_windows and "\\" or "/"
+local delim = is_windows and ";" or ":"
+env.PATH = table.concat({ fn.stdpath "data", "mason", "bin" }, sep) .. delim .. env.PATH
