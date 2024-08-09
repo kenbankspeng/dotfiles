@@ -6,6 +6,8 @@
 local map = vim.keymap.set
 local diagnostic = vim.diagnostic
 
+map("n", "-", "<cmd>Oil<CR>", { desc = 'open parent directory' })
+map("n", "<leader>-", "require('oil').toggle_float", { desc = 'open parent directory' })
 -- See `:help hlsearch`
 -- map('n', '<Esc>', '<cmd>nohlsearch<CR>') -- Clear highlights on search
 map("n", "<Esc>", "<cmd>noh<CR>", { desc = "general clear highlights" })
