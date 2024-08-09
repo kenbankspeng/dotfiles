@@ -1,7 +1,6 @@
 -- add more plugin filenames here
 
 local plugin_filenames = {
-  'plenary',
   'vim-sleuth',
   'numbertoggle',
   'telescope',
@@ -20,6 +19,7 @@ local plugin_filenames = {
   'which-key',
   'autoformat',
   'treesitter',
+  'indent-blankline',
   -- TBD
   -- 'nvchad.base46',
   -- 'nvchad.nvim-web-devicons',
