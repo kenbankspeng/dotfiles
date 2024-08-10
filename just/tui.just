@@ -12,4 +12,15 @@ default:
 @g *args:
   lazygit {{ args }}
 
+# tui ssh client
+@s *args:
+  sshs {{ args }}
+
+# tui file transfer (portal)
+@p *args:
+  portal {{ args }}
+
+# tui api client (atac)
+@a:
+  atac --directory "$HOME"/.local/share/atac
 
