@@ -6,37 +6,49 @@
 local map = vim.keymap.set
 local diagnostic = vim.diagnostic
 
-map("n", "-", "<cmd>Oil<CR>", { desc = 'open parent directory' })
-map("n", "<leader>-", "require('oil').toggle_float", { desc = 'open parent directory' })
--- See `:help hlsearch`
--- map('n', '<Esc>', '<cmd>nohlsearch<CR>') -- Clear highlights on search
-map("n", "<Esc>", "<cmd>noh<CR>", { desc = "general clear highlights" })
 
--- Diagnostic keymaps
-map('n', '<leader>q', diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+-- whichkey
+-- map("n", "<leader>", "<cmd>WhichKey<CR>", { desc = "whichkey all keymaps" })
 
--- Exit terminal mode in the builtin terminal.
-map('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
--- Use CTRL+<hjkl> to switch between windows
--- See `:help wincmd` for a list of all window commands
-map('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-map('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-map('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-map('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
-map("n", "<C-s>", "<cmd>w<CR>", { desc = "file save" })
-map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "file copy whole" })
+map("n", "<leader><leader>", "<cmd>Oil --float<CR>", { desc = 'open parent directory' })
 
-map("n", "<leader>n", "<cmd>set nu!<CR>", { desc = "toggle line number" })
-map("n", "<leader>rn", "<cmd>set rnu!<CR>", { desc = "toggle relative number" })
-map("n", "<leader>ch", "<cmd>NvCheatsheet<CR>", { desc = "toggle nvcheatsheet" })
+map("n", "<leader>1", "<cmd>Yazi<CR>", { desc = "Open yazi at the current file" })
+map("n", "<leader>2", "<cmd>Yazi cwd<CR>", { desc = "Open yazi at working directory" })
+map("n", "<leader>3", "<cmd>Yazi toggle<CR>", { desc = "Resume yazi session" })
 
-map("n", "<leader>fm", function()
-  require("conform").format { lsp_fallback = true }
-end, { desc = "format files" })
 
------- review keymaps ------
+-- terminal
+map('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }) -- Exit terminal mode in the builtin terminal.
+
+
+------ review keymaps kickstart ------
+
+-- map("n", "<Esc>", "<cmd>noh<CR>", { desc = "general clear highlights" })                   -- <cmd>nohlsearch<CR> -- See `:help hlsearch`
+
+-- map('n', '<leader>q', diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' }) -- Diagnostic keymaps
+
+
+-- -- Use CTRL+<hjkl> to switch between windows
+-- -- See `:help wincmd` for a list of all window commands
+-- map('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+-- map('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+-- map('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+-- map('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
+-- map("n", "<C-s>", "<cmd>w<CR>", { desc = "file save" })
+-- map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "file copy whole" })
+
+-- map("n", "<leader>n", "<cmd>set nu!<CR>", { desc = "toggle line number" })
+-- map("n", "<leader>rn", "<cmd>set rnu!<CR>", { desc = "toggle relative number" })
+-- map("n", "<leader>ch", "<cmd>NvCheatsheet<CR>", { desc = "toggle nvcheatsheet" })
+
+-- map("n", "<leader>fm", function()
+--   require("conform").format { lsp_fallback = true }
+-- end, { desc = "format files" })
+
+------ review keymaps NVChad ------
 
 -- local fn = vim.fn
 -- local cmd = vim.cmd
@@ -115,8 +127,6 @@ end, { desc = "format files" })
 --   require("nvchad.term").toggle { pos = "float", id = "floatTerm" }
 -- end, { desc = "terminal toggle floating term" })
 
--- -- whichkey
--- map("n", "<leader>wK", "<cmd>WhichKey <CR>", { desc = "whichkey all keymaps" })
 
 -- map("n", "<leader>wk", function()
 --   cmd("WhichKey " .. fn.input "WhichKey: ")

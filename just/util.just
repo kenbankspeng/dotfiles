@@ -5,6 +5,21 @@ default:
 
 #####################   SHELL   #####################
 
+# 
+# security procedure:
+#   key-gen
+#   cat file | key-enc <publickey> 
+#   cat encrypted
+#   cat encrypted | key-dec secret.key -> decrypted
+#s
+# optional --armor formatting, -p passwords
+#
+
+# age wrapper 
+@secure:
+  . "$ZSH_SCRIPTS/secure.zsh"
+  
+
 # multiplex github accounts
 @github:
   cp ~/.config/gh/hosts.yml.$1 ~/.config/gh/hosts.yml
