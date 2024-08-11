@@ -5,15 +5,15 @@
 --  s/                                    No command                                                                   [S]earch [/] in Open Files
 --  /                                     No command                                                                   [/] Fuzzily search in current buffer
 --  fb                                    No command                                                                   [F]ind existing [B]uffers
---  s.                                    No command                                                                   [S]earch Recent Files ("." for repeat)
---  sr                                    No command                                                                   [S]earch [R]esume
---  sd                                    No command                                                                   [S]earch [D]iagnostics
---  sg                                    No command                                                                   [S]earch by [G]rep
---  sw                                    No command                                                                   [S]earch current [W]ord
---  ss                                    No command                                                                   [S]earch [S]elect Telescope
---  sf                                    No command                                                                   [S]earch [F]iles
---  sk                                    No command                                                                   [S]earch [K]eymaps
---  sh                                    No command                                                                   [S]earch [H]elp
+--  s.                                    No command                                                                   search Recent Files ("." for repeat)
+--  sr                                    No command                                                                   search [R]esume
+--  sd                                    No command                                                                   search [D]iagnostics
+--  sg                                    No command                                                                   search by [G]rep
+--  sw                                    No command                                                                   search current [W]ord
+--  ss                                    No command                                                                   search [S]elect Telescope
+--  sf                                    No command                                                                   search [F]iles
+--  sk                                    No command                                                                   search [K]eymaps
+--  sh                                    No command                                                                   search [H]elp
 --  yy                                    <Cmd>Yazi cwd<CR>                                                            Open yazi at working directory
 --  y.                                    <Cmd>Yazi<CR>                                                                Open yazi at the current file
 --                                        <Cmd>Oil --float<CR>                                                         open parent directory
@@ -65,33 +65,40 @@
 --  bd                                    No command                                                                   Delete Buffer
 --  `                                     <Cmd>e #<CR>                                                                 Switch to Other Buffer
 --  bb                                    <Cmd>e #<CR>                                                                 Switch to Other Buffer
+--  br                                    <Cmd>BufferLineCloseRight<CR>                                                Delete Buffers to the Right
+--  bo                                    <Cmd>BufferLineCloseOthers<CR>                                               Delete Other Buffers
+--  bP                                    <Cmd>BufferLineGroupClose ungrouped<CR>                                      Delete Non-Pinned Buffers
+--  bp                                    <Cmd>BufferLineTogglePin<CR>                                                 Toggle Pin
+--  bl                                    <Cmd>BufferLineCloseLeft<CR>                                                 Delete Buffers to the Left
 --  up                                    No command                                                                   Toggle Mini Pairs
---  fE                                    No command                                                                   Explorer NeoTree (cwd)
---  fe                                    No command                                                                   Explorer NeoTree (Root Dir)
 --  be                                    No command                                                                   Buffer Explorer
 --  ge                                    No command                                                                   Git Explorer
 --  E                                     No command                                                                   Explorer NeoTree (cwd)
 --  e                                     No command                                                                   Explorer NeoTree (Root Dir)
+--  fE                                    No command                                                                   Explorer NeoTree (cwd)
+--  fe                                    No command                                                                   Explorer NeoTree (Root Dir)
 -- %                                      <Plug>(MatchitNormalForward)                                                 No description
 -- &                                      :&&<CR>                                                                      :help &-default
 -- ,                                      No command                                                                   No description
 -- ;                                      No command                                                                   No description
 -- F                                      No command                                                                   No description
--- H                                      <Cmd>bprevious<CR>                                                           Prev Buffer
--- L                                      <Cmd>bnext<CR>                                                               Next Buffer
+-- H                                      <Cmd>BufferLineCyclePrev<CR>                                                 Prev Buffer
+-- L                                      <Cmd>BufferLineCycleNext<CR>                                                 Next Buffer
 -- N                                      'nN'[v:searchforward].'zv'                                                   Prev Search Result
 -- T                                      No command                                                                   No description
 -- Y                                      y$                                                                           :help Y-default
 -- [w                                     No command                                                                   Prev Warning
 -- [e                                     No command                                                                   Prev Error
 -- [q                                     No command                                                                   Previous Quickfix
--- [b                                     <Cmd>bprevious<CR>                                                           Prev Buffer
+-- [b                                     <Cmd>BufferLineCyclePrev<CR>                                                 Prev Buffer
+-- [B                                     <Cmd>BufferLineMovePrev<CR>                                                  Move buffer prev
 -- [%                                     <Plug>(MatchitNormalMultiBackward)                                           No description
 -- [d                                     No command                                                                   Prev Diagnostic
 -- ]w                                     No command                                                                   Next Warning
 -- ]e                                     No command                                                                   Next Error
 -- ]q                                     No command                                                                   Next Quickfix
--- ]b                                     <Cmd>bnext<CR>                                                               Next Buffer
+-- ]b                                     <Cmd>BufferLineCycleNext<CR>                                                 Next Buffer
+-- ]B                                     <Cmd>BufferLineMoveNext<CR>                                                  Move buffer next
 -- ]%                                     <Plug>(MatchitNormalMultiForward)                                            No description
 -- ]d                                     No command                                                                   Next Diagnostic
 -- f                                      No command                                                                   No description
@@ -107,7 +114,6 @@
 -- k                                      v:count == 0 ? 'gk' : 'k'                                                    Up
 -- n                                      'Nn'[v:searchforward].'zv'                                                   Next Search Result
 -- t                                      No command                                                                   No description
--- <Plug>PlenaryTestFile                  :lua require('plenary.test_harness').test_file(vim.fn.expand("%:p"))<CR>     No description
 -- <C-_>                                  No command                                                                   which_key_ignore
 -- <C-/>                                  No command                                                                   Terminal (Root Dir)
 -- <C-S>                                  <Cmd>w<CR><Esc>                                                              Save File
@@ -122,6 +128,7 @@
 -- <C-H>                                  <C-W>h                                                                       Go to Left Window
 -- <Up>                                   v:count == 0 ? 'gk' : 'k'                                                    Up
 -- <Down>                                 v:count == 0 ? 'gj' : 'j'                                                    Down
+-- <Plug>PlenaryTestFile                  :lua require('plenary.test_harness').test_file(vim.fn.expand("%:p"))<CR>     No description
 -- <Plug>(MatchitNormalMultiForward)      :<C-U>call matchit#MultiMatch("W",  "n")<CR>                                 No description
 -- <Plug>(MatchitNormalMultiBackward)     :<C-U>call matchit#MultiMatch("bW", "n")<CR>                                 No description
 -- <Plug>(MatchitNormalBackward)          :<C-U>call matchit#Match_wrapper('',0,'n')<CR>                               No description

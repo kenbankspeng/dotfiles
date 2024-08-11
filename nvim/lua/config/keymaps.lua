@@ -4,25 +4,90 @@ local map = function(keys, func, desc)
   vim.keymap.set('n', keys, func, { desc = desc })
 end
 
+-- NVIM/LAZY DEFAULTS -- shown in comments
+
 -- OIL --
-map('<leader><leader>', '<cmd>Oil --float<CR>', 'open parent directory')
+map('<leader><leader>', '<cmd>Oil --float<CR>', 'open parent directory') -- ok
 
 -- YAZI --
-map('<leader>y.', '<cmd>Yazi<CR>', 'Open yazi at the current file')      -- YAZI --
-map('<leader>yy', '<cmd>Yazi cwd<CR>', 'Open yazi at working directory') -- YAZI --
+map('<leader>y.', '<cmd>Yazi<CR>', 'Open yazi at the current file')      -- ok
+map('<leader>yy', '<cmd>Yazi cwd<CR>', 'Open yazi at working directory') -- ok
+
+
+
+
+-- GENERAL --
+-- <Esc>                                  <Cmd>noh<CR><Esc>                                  Escape and Clear hlsearch
+-- <leader>fn -- ok                       <Cmd>enew<CR>                                      New File
+-- <C-S> -- ok                            <Cmd>w<CR><Esc>                                    Save File
+-- <leader>qq -- ok                       <Cmd>qa<CR>                                        Quit All
+-- cf                                     No command                                         Format
+-- ul                                     No command                                         Toggle Line Numbers
+-- uL                                     No command                                         Toggle Relative Number
+-- uw                                     No command                                         Toggle Wrap
+-- us                                     No command                                         Toggle Spelling
+-- uF                                     No command                                         Toggle Auto Format (Buffer)
+-- uf                                     No command                                         Toggle Auto Format (Global)
+-- uh                                     No command                                         Toggle Inlay Hints
+-- ub                                     No command                                         Toggle Background
+-- uT                                     No command                                         Toggle Treesitter Highlight
+-- uc                                     No command                                         Toggle conceallevel
+-- up                                     No command                                         Toggle Mini Pairs
+
+
+-- NOT_SURE --
+-- uI                                     <Cmd>InspectTree<CR>                               Inspect Tree
+-- ui                                     No command                                         Inspect Pos
+-- xq                                     <Cmd>copen<CR>                                     Quickfix List
+-- xl                                     <Cmd>lopen<CR>                                     Location List
+-- K                                      <Cmd>norm! K<CR>                                   Keywordprg
+-- ur                                     <Cmd>nohlsearch|diffupdate|normal! <C-L><CR>       Redraw / Clear hlsearch / Diff Update
+-- ,                                      No command                                         No description
+-- ;                                      No command                                         No description
+-- F                                      No command                                         No description
+-- T                                      No command                                         No description
+-- f                                      No command                                         No description
+-- t                                      No command                                         No description
+-- <C-_>                                  No command                                         which_key_ignore
+-- gx                                     No command                                         Opens filepath or URI under cursor with the system handler (file explorer, web browser, …)
+
+-- TABS/BUFFERS --
+-- H  -- ok                               <Cmd>BufferLineCyclePrev<CR>                       Prev Buffer
+-- L  -- ok                               <Cmd>BufferLineCycleNext<CR>                       Next Buffer
+-- [b -- ok                               <Cmd>BufferLineCyclePrev<CR>                       Prev Buffer
+-- ]b -- ok                               <Cmd>BufferLineCycleNext<CR>                       Next Buffer
+-- <leader>bl -- ok                       <Cmd>BufferLineCloseLeft<CR>                       Delete Buffers to the Left
+-- <leader>br -- ok                       <Cmd>BufferLineCloseRight<CR>                      Delete Buffers to the Right
+-- <leader>bo -- ok                       <Cmd>BufferLineCloseOthers<CR>                     Delete Other Buffers
+-- <leader>bP -- ok                       <Cmd>BufferLineGroupClose ungrouped<CR>            Delete Non-Pinned Buffers
+-- <leader>bp -- ok                       <Cmd>BufferLineTogglePin<CR>                       Toggle Pin
+
+-- <leader><Tab>[     -- buggy?           <Cmd>tabprevious<CR>                               Previous Tab
+-- <leader><Tab>d     -- buggy?           <Cmd>tabclose<CR>                                  Close Tab
+-- <leader><Tab>]     -- buggy?           <Cmd>tabnext<CR>                                   Next Tab
+-- <leader><Tab><Tab> -- buggy?           <Cmd>tabnew<CR>                                    New Tab
+-- <leader><Tab>f     -- buggy?           <Cmd>tabfirst<CR>                                  First Tab
+-- <leader><Tab>o     -- buggy?           <Cmd>tabonly<CR>                                   Close Other Tabs
+-- <leader><Tab>l     -- buggy?           <Cmd>tablast<CR>                                   Last Tab
+
+
+-- SEARCH --
+-- ?   -- ok
+-- n   -- ok                                  'Nn'[v:searchforward].'zv'                         Next Search Result
+-- N   -- ok                                  'nN'[v:searchforward].'zv'                         Prev Search Result
 
 -- TELESCOPE -- -- See `:help telescope.builtin`
 local builtin = require 'telescope.builtin'
-map('<leader>sh', builtin.help_tags, '[S]earch [H]elp')
-map('<leader>sk', builtin.keymaps, '[S]earch [K]eymaps')
-map('<leader>sf', builtin.find_files, '[S]earch [F]iles')
-map('<leader>ss', builtin.builtin, '[S]earch [S]elect Telescope')
-map('<leader>sw', builtin.grep_string, '[S]earch current [W]ord')
-map('<leader>sg', builtin.live_grep, '[S]earch by [G]rep')
-map('<leader>sd', builtin.diagnostics, '[S]earch [D]iagnostics')
-map('<leader>sr', builtin.resume, '[S]earch [R]esume')
-map('<leader>s.', builtin.oldfiles, '[S]earch Recent Files ("." for repeat)')
-map('<leader>fb', builtin.buffers, '[F]ind existing [B]uffers')
+map('<leader>sh', builtin.help_tags, 'search [H]elp')                       -- ok
+map('<leader>sk', builtin.keymaps, 'search [K]eymaps')                      -- ok
+map('<leader>sf', builtin.find_files, 'search [F]iles')                     -- ok
+map('<leader>ss', builtin.builtin, 'search [S]elect Telescope')             -- ok
+map('<leader>sw', builtin.grep_string, 'search current [W]ord')             -- ok
+map('<leader>sg', builtin.live_grep, 'search by [G]rep')                    -- ok
+map('<leader>sd', builtin.diagnostics, 'search [D]iagnostics')              -- ok
+map('<leader>sr', builtin.resume, 'search [R]esume')                        -- ok
+map('<leader>s.', builtin.oldfiles, 'search Recent Files ("." for repeat)') -- ok
+map('<leader>fb', builtin.buffers, '[F]ind existing [B]uffers')             -- ok
 
 -- defined in lsp-nvim-lspconfig.lua as autocmd
 --
@@ -57,47 +122,6 @@ end, '[S]earch [N]eovim files')
 
 
 
-
-
-
-
-
--- NVIM/LAZY DEFAULTS --
-
--- GENERAL --
--- <Esc>                                  <Cmd>noh<CR><Esc>                                  Escape and Clear hlsearch
--- fn                                     <Cmd>enew<CR>                                      New File
--- cf                                     No command                                         Format
--- <C-S>                                  <Cmd>w<CR><Esc>                                    Save File
--- qq                                     <Cmd>qa<CR>                                        Quit All
--- ul                                     No command                                         Toggle Line Numbers
--- uL                                     No command                                         Toggle Relative Number
--- uw                                     No command                                         Toggle Wrap
--- us                                     No command                                         Toggle Spelling
--- uF                                     No command                                         Toggle Auto Format (Buffer)
--- uf                                     No command                                         Toggle Auto Format (Global)
--- uh                                     No command                                         Toggle Inlay Hints
--- ub                                     No command                                         Toggle Background
--- uT                                     No command                                         Toggle Treesitter Highlight
--- uc                                     No command                                         Toggle conceallevel
--- up                                     No command                                         Toggle Mini Pairs
-
-
--- NOT_SURE --
--- uI                                     <Cmd>InspectTree<CR>                               Inspect Tree
--- ui                                     No command                                         Inspect Pos
--- xq                                     <Cmd>copen<CR>                                     Quickfix List
--- xl                                     <Cmd>lopen<CR>                                     Location List
--- K                                      <Cmd>norm! K<CR>                                   Keywordprg
--- ur                                     <Cmd>nohlsearch|diffupdate|normal! <C-L><CR>       Redraw / Clear hlsearch / Diff Update
--- ,                                      No command                                         No description
--- ;                                      No command                                         No description
--- F                                      No command                                         No description
--- T                                      No command                                         No description
--- f                                      No command                                         No description
--- t                                      No command                                         No description
--- <C-_>                                  No command                                         which_key_ignore
--- gx                                     No command                                         Opens filepath or URI under cursor with the system handler (file explorer, web browser, …)
 
 
 -- GIT --
@@ -147,17 +171,6 @@ map('<leader>lg', '<cmd>LazyGit<cr>', 'LazyGit')
 
 
 
--- TABS/BUFFERS --
--- H                                      <Cmd>bprevious<CR>                                 Prev Buffer
--- L                                      <Cmd>bnext<CR>                                     Next Buffer
--- ]b                                     <Cmd>bnext<CR>                                     Next Buffer
--- <Tab>[                                 <Cmd>tabprevious<CR>                               Previous Tab
--- <Tab>d                                 <Cmd>tabclose<CR>                                  Close Tab
--- <Tab>]                                 <Cmd>tabnext<CR>                                   Next Tab
--- <Tab><Tab>                             <Cmd>tabnew<CR>                                    New Tab
--- <Tab>f                                 <Cmd>tabfirst<CR>                                  First Tab
--- <Tab>o                                 <Cmd>tabonly<CR>                                   Close Other Tabs
--- <Tab>l                                 <Cmd>tablast<CR>                                   Last Tab
 
 
 -- TERMINAL --
@@ -176,9 +189,6 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 -- ]q                                     No command                                         Next Quickfix
 
 
--- SEARCH --
--- n                                      'Nn'[v:searchforward].'zv'                         Next Search Result
--- N                                      'nN'[v:searchforward].'zv'                         Prev Search Result
 
 
 -- LAZY --
