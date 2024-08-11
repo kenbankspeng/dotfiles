@@ -10,65 +10,82 @@
 
 -- local diagnostic = vim.diagnostic
 
-local map = vim.keymap.set
+
+local map = function(keys, func, desc)
+  vim.keymap.set('n', keys, func, { desc = desc })
+end
 
 
+map('<Esc>', '<cmd>nohlsearch<CR>')
 
+-- OIL --
+map('<leader><leader>', '<cmd>Oil --float<CR>', 'open parent directory')
 
--- vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+-- YAZI --
+map('<leader>y.', '<cmd>Yazi<CR>', 'Open yazi at the current file')      -- YAZI --
+map('<leader>yy', '<cmd>Yazi cwd<CR>', 'Open yazi at working directory') -- YAZI --
 
--- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+-- DIAGNOSTICS --
+map('<leader>q', vim.diagnostic.setloclist, 'Open diagnostic [Q]uickfix list')
 
-
--- vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-
--- --  See `:help wincmd` for a list of all window commands
--- vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
--- vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
--- vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
--- vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+--  See `:help wincmd` for a list of all window commands
+map('<C-h>', '<C-w><C-h>', 'Move focus to the left window')
+map('<C-l>', '<C-w><C-l>', 'Move focus to the right window')
+map('<C-j>', '<C-w><C-j>', 'Move focus to the lower window')
+map('<C-k>', '<C-w><C-k>', 'Move focus to the upper window')
 
 -- { '<leader>lg', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
 
--- -- See `:help telescope.builtin`
--- local builtin = require 'telescope.builtin'
--- vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
--- vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
--- vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
--- vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
--- vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
--- vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
--- vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
--- vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
--- vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
--- vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = '[F]ind existing [B]uffers' })
+-- See `:help telescope.builtin`
+local builtin = require 'telescope.builtin'
+map('<leader>sh', builtin.help_tags, '[S]earch [H]elp')
+map('<leader>sk', builtin.keymaps, '[S]earch [K]eymaps')
+map('<leader>sf', builtin.find_files, '[S]earch [F]iles')
+map('<leader>ss', builtin.builtin, '[S]earch [S]elect Telescope')
+map('<leader>sw', builtin.grep_string, '[S]earch current [W]ord')
+map('<leader>sg', builtin.live_grep, '[S]earch by [G]rep')
+map('<leader>sd', builtin.diagnostics, '[S]earch [D]iagnostics')
+map('<leader>sr', builtin.resume, '[S]earch [R]esume')
+map('<leader>s.', builtin.oldfiles, '[S]earch Recent Files ("." for repeat)')
+map('<leader>fb', builtin.buffers, '[F]ind existing [B]uffers')
 
--- -- Slightly advanced example of overriding default behavior and theme
--- vim.keymap.set('n', '<leader>/', function()
---   -- You can pass additional configuration to Telescope to change the theme, layout, etc.
---   builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
---     winblend = 10,
---     previewer = false,
---   })
--- end, { desc = '[/] Fuzzily search in current buffer' })
-
--- -- It's also possible to pass additional configuration options.
--- --  See `:help telescope.builtin.live_grep()` for information about particular keys
--- vim.keymap.set('n', '<leader>s/', function()
---   builtin.live_grep {
---     grep_open_files = true,
---     prompt_title = 'Live Grep in Open Files',
---   }
--- end, { desc = '[S]earch [/] in Open Files' })
-
--- -- Shortcut for searching your Neovim configuration files
--- vim.keymap.set('n', '<leader>sn', function()
---   builtin.find_files { cwd = vim.fn.stdpath 'config' }
--- end, { desc = '[S]earch [N]eovim files' })
+-- defined in lsp-nvim-lspconfig.lua as autocmd
+--
+-- gd                   telescope lsp_definitions                -- [G]oto [D]efinition
+-- gr                   telescope lsp_references                 -- [G]oto [R]eferences
+-- gI                   telescope lsp_implementations            -- [G]oto [I]mplementation
+-- <leader>D            telescope lsp_type_definitions           -- Type [D]efinition
+-- <leader>ds           telescope lsp_document_symbols           -- [D]ocument [S]ymbols
+-- <leader>ws           telescope lsp_dynamic_workspace_symbols  -- [W]orkspace [S]ymbols
+-- <leader>rn           vim.lsp.buf.rename                       -- [R]e[n]ame
+-- <leader>ca           vim.lsp.buf.code_action                  -- [C]ode [A]ction
+-- gD                   vim.lsp.buf.declaration                  -- [G]oto [D]eclaration
 
 
 
 
+-- Slightly advanced example of overriding default behavior and theme
+map('<leader>/', function()
+  -- You can pass additional configuration to Telescope to change the theme, layout, etc.
+  builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+    winblend = 10,
+    previewer = false,
+  })
+end, '[/] Fuzzily search in current buffer')
+
+-- It's also possible to pass additional configuration options.
+--  See `:help telescope.builtin.live_grep()` for information about particular keys
+map('<leader>s/', function()
+  builtin.live_grep {
+    grep_open_files = true,
+    prompt_title = 'Live Grep in Open Files',
+  }
+end, '[S]earch [/] in Open Files')
+
+-- Shortcut for searching your Neovim configuration files
+map('<leader>sn', function()
+  builtin.find_files { cwd = vim.fn.stdpath 'config' }
+end, '[S]earch [N]eovim files')
 
 
 
@@ -85,25 +102,11 @@ local map = vim.keymap.set
 
 
 
--- OIL --
-map("n", "<leader><leader>", "<cmd>Oil --float<CR>", { desc = 'open parent directory' })
+-- -- TELESCOPE --
 
--- TELESCOPE --
-map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
-map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
-map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-
--- LSP --
-map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-
--- YAZI --
-map("n", "<leader>y.", "<cmd>Yazi<CR>", { desc = "Open yazi at the current file" })      -- YAZI --
-map("n", "<leader>yy", "<cmd>Yazi cwd<CR>", { desc = "Open yazi at working directory" }) -- YAZI --
+-- -- LSP --
+-- map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+-- map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
 
 
 
@@ -209,8 +212,7 @@ map("n", "<leader>yy", "<cmd>Yazi cwd<CR>", { desc = "Open yazi at working direc
 -- fT                                     No command                                         Terminal (cwd)
 -- ft                                     No command                                         Terminal (Root Dir)
 -- <C-/>                                  No command                                         Terminal (Root Dir)
-map('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- TROUBLE --
 -- [w                                     No command                                         Prev Warning
