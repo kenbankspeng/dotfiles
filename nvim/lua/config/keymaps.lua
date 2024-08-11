@@ -51,7 +51,7 @@ map('<leader>yy', '<cmd>Yazi cwd<CR>', 'Open yazi at working directory') -- ok
 -- <C-_>                       No command                                         which_key_ignore
 -- gx                          No command                                         Opens filepath or URI under cursor with the system handler (file explorer, web browser, …)
 
--- TABS/BUFFERS --
+-- TABS/BUFFERS -- half ok
 -- H  -- ok                    <Cmd>BufferLineCyclePrev<CR>                       Prev Buffer
 -- L  -- ok                    <Cmd>BufferLineCycleNext<CR>                       Next Buffer
 -- [b -- ok                    <Cmd>BufferLineCyclePrev<CR>                       Prev Buffer
@@ -71,12 +71,12 @@ map('<leader>yy', '<cmd>Yazi cwd<CR>', 'Open yazi at working directory') -- ok
 -- <leader><Tab>l    -- buggy? <Cmd>tablast<CR>                                   Last Tab
 
 
--- SEARCH --
+-- SEARCH -- ok
 -- ?   -- ok
 -- n   -- ok                                  'Nn'[v:searchforward].'zv'                         Next Search Result
 -- N   -- ok                                  'nN'[v:searchforward].'zv'                         Prev Search Result
 
--- TELESCOPE -- -- See `:help telescope.builtin`
+-- TELESCOPE -- ok -- See `:help telescope.builtin`
 local builtin = require 'telescope.builtin'
 map('<leader>sh', builtin.help_tags, 'search [H]elp')                       -- ok
 map('<leader>sk', builtin.keymaps, 'search [K]eymaps')                      -- ok
@@ -120,60 +120,60 @@ map('<leader>sn', function()
   builtin.find_files { cwd = vim.fn.stdpath 'config' }
 end, '[S]earch [N]eovim files')
 
---  :                    <Cmd>Telescope command_history<CR>                   Command History
---  ,                    <Cmd>Telescope buffers sort_lastused=true<CR>        Switch Buffer
---  <leader>sR           <Cmd>Telescope resume<CR>                            Resume
---  <leader>so           <Cmd>Telescope vim_options<CR>                       Options
---  <leader>sm           <Cmd>Telescope marks<CR>                             Jump to Mark
---  <leader>sM           <Cmd>Telescope man_pages<CR>                         Man Pages
---  <leader>sl           <Cmd>Telescope loclist<CR>                           Location List
---  <leader>sj           <Cmd>Telescope jumplist<CR>                          Jumplist
---  <leader>sH           <Cmd>Telescope highlights<CR>                        Search Highlight Groups
---  <leader>sD           <Cmd>Telescope diagnostics<CR>                       Workspace Diagnostics
---  <leader>sC           <Cmd>Telescope commands<CR>                          Commands
---  <leader>sc           <Cmd>Telescope command_history<CR>                   Command History
---  <leader>sb           <Cmd>Telescope current_buffer_fuzzy_find<CR>         Buffer
---  <leader>sa           <Cmd>Telescope autocommands<CR>                      Auto Commands
---  <leader>s"           <Cmd>Telescope registers<CR>                         Registers
---  <leader>gs           <Cmd>Telescope git_status<CR>                        Status
---  <leader>gc           <Cmd>Telescope git_commits<CR>                       Commits
---  <leader>fr           <Cmd>Telescope oldfiles<CR>                          Recent
---  <leader>fg           <Cmd>Telescope git_files<CR>                         Find Files (git-files)
---  <leader>sq           <Cmd>Telescope quickfix<CR>                          Quickfix List
---  <leader>sW           No command                                           Word (cwd)
---  <leader>sG           No command                                           Grep (cwd)
---  <leader>fR           No command                                           Recent (cwd)
---  <leader>uC           No command                                           Colorscheme with Preview
---  <leader>sS           No command                                           Goto Symbol (Workspace)
---  <leader>fF           No command                                           Find Files (cwd)
---  <leader>ff           No command                                           Find Files (Root Dir)
---  <leader>fc           No command                                           Find Config File
+--  :                    <Cmd>Telescope command_history<CR>       Command History
+--  ,                    <Cmd>Telescope buffers sort...<CR>       Switch Buffer
+--  <leader>sR           <Cmd>Telescope resume<CR>                Resume
+--  <leader>so           <Cmd>Telescope vim_options<CR>           Options
+--  <leader>sm           <Cmd>Telescope marks<CR>                 Jump to Mark
+--  <leader>sM           <Cmd>Telescope man_pages<CR>             Man Pages
+--  <leader>sl           <Cmd>Telescope loclist<CR>               Location List
+--  <leader>sj           <Cmd>Telescope jumplist<CR>              Jumplist
+--  <leader>sH           <Cmd>Telescope highlights<CR>            Search Highlight Groups
+--  <leader>sD           <Cmd>Telescope diagnostics<CR>           Workspace Diagnostics
+--  <leader>sC           <Cmd>Telescope commands<CR>              Commands
+--  <leader>sc           <Cmd>Telescope command_history<CR>       Command History
+--  <leader>sb           <Cmd>Telescope current_buffer_ff<CR>     Buffer
+--  <leader>sa           <Cmd>Telescope autocommands<CR>          Auto Commands
+--  <leader>s"           <Cmd>Telescope registers<CR>             Registers
+--  <leader>gs           <Cmd>Telescope git_status<CR>            Status
+--  <leader>gc           <Cmd>Telescope git_commits<CR>           Commits
+--  <leader>fr           <Cmd>Telescope oldfiles<CR>              Recent
+--  <leader>fg           <Cmd>Telescope git_files<CR>             Find Files (git-files)
+--  <leader>sq           <Cmd>Telescope quickfix<CR>              Quickfix List
+--  <leader>sW           No command                               Word (cwd)
+--  <leader>sG           No command                               Grep (cwd)
+--  <leader>fR           No command                               Recent (cwd)
+--  <leader>uC           No command                               Colorscheme with Preview
+--  <leader>sS           No command                               Goto Symbol (Workspace)
+--  <leader>fF           No command                               Find Files (cwd)
+--  <leader>ff           No command                               Find Files (Root Dir)
+--  <leader>fc           No command                               Find Config File
 
 
 
--- GIT --
--- gB                    No command                                           Git Browse
--- gb                    No command                                           Git Blame Line
--- gG                    No command                                           Lazygit (cwd)
--- gg                    No command                                           Lazygit (Root Dir)
--- gL                    No command                                           Lazygit Log (cwd)
--- gl                    No command                                           Lazygit Log
--- gf                    No command                                           Lazygit Current File History
+-- GIT -- ok
+-- gB                    No command                               Git Browse
+-- gb                    No command                               Git Blame Line
+-- gG                    No command                               Lazygit (cwd)
+-- gg                    No command                               Lazygit (Root Dir)
+-- gL                    No command                               Lazygit Log (cwd)
+-- gl                    No command                               Lazygit Log
+-- gf                    No command                               Lazygit Current File History
 
 -- HELP --
--- &                     :&&<CR>                                              :help &-default
--- Y                     y$                                                   :help Y-default
+-- &                     :&&<CR>                                  :help &-default
+-- Y                     y$                                       :help Y-default
 
 
 -- NAVIGATION --
--- j                     v:count == 0 ? 'gj' : 'j'                          Down
--- k                     v:count == 0 ? 'gk' : 'k'                          Up
--- <M-k>                 <Cmd>m .-2<CR>==                                   Move Up
--- <M-j>                 <Cmd>m .+1<CR>==                                   Move Down
--- <Up>                  v:count == 0 ? 'gk' : 'k'                          Up
--- <Down>                v:count == 0 ? 'gj' : 'j'                          Down
--- g]                    No command                                         Move to right "around"
--- g[                    No command                                         Move to left "around"
+-- j                     v:count == 0 ? 'gj' : 'j'                Down
+-- k                     v:count == 0 ? 'gk' : 'k'                Up
+-- <M-k>                 <Cmd>m .-2<CR>==                         Move Up
+-- <M-j>                 <Cmd>m .+1<CR>==                         Move Down
+-- <Up>                  v:count == 0 ? 'gk' : 'k'                Up
+-- <Down>                v:count == 0 ? 'gj' : 'j'                Down
+-- g]                    No command                               Move to right "around"
+-- g[                    No command                               Move to left "around"
 
 
 -- WINDOWS --
