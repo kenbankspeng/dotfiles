@@ -1,22 +1,8 @@
 -- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
--- Add any additional keymaps here
--- See `:help vim.keymap.set()`
-
--- local deleteKeys = require('config.helpers.deleteKeys')
--- deleteKeys('n')
--- local logKeys = require('config.helpers.logKeys')
--- logKeys('n', '/Users/ken/Documents/Software/DevBox/dotfiles/nvim/lua/debug.txt')
-
--- local diagnostic = vim.diagnostic
-
 
 local map = function(keys, func, desc)
   vim.keymap.set('n', keys, func, { desc = desc })
 end
-
-
-map('<Esc>', '<cmd>nohlsearch<CR>')
 
 -- OIL --
 map('<leader><leader>', '<cmd>Oil --float<CR>', 'open parent directory')
@@ -25,18 +11,7 @@ map('<leader><leader>', '<cmd>Oil --float<CR>', 'open parent directory')
 map('<leader>y.', '<cmd>Yazi<CR>', 'Open yazi at the current file')      -- YAZI --
 map('<leader>yy', '<cmd>Yazi cwd<CR>', 'Open yazi at working directory') -- YAZI --
 
--- DIAGNOSTICS --
-map('<leader>q', vim.diagnostic.setloclist, 'Open diagnostic [Q]uickfix list')
-
---  See `:help wincmd` for a list of all window commands
-map('<C-h>', '<C-w><C-h>', 'Move focus to the left window')
-map('<C-l>', '<C-w><C-l>', 'Move focus to the right window')
-map('<C-j>', '<C-w><C-j>', 'Move focus to the lower window')
-map('<C-k>', '<C-w><C-k>', 'Move focus to the upper window')
-
--- { '<leader>lg', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
-
--- See `:help telescope.builtin`
+-- TELESCOPE -- -- See `:help telescope.builtin`
 local builtin = require 'telescope.builtin'
 map('<leader>sh', builtin.help_tags, '[S]earch [H]elp')
 map('<leader>sk', builtin.keymaps, '[S]earch [K]eymaps')
@@ -61,10 +36,6 @@ map('<leader>fb', builtin.buffers, '[F]ind existing [B]uffers')
 -- <leader>ca           vim.lsp.buf.code_action                  -- [C]ode [A]ction
 -- gD                   vim.lsp.buf.declaration                  -- [G]oto [D]eclaration
 
-
-
-
--- Slightly advanced example of overriding default behavior and theme
 map('<leader>/', function()
   -- You can pass additional configuration to Telescope to change the theme, layout, etc.
   builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
@@ -73,8 +44,6 @@ map('<leader>/', function()
   })
 end, '[/] Fuzzily search in current buffer')
 
--- It's also possible to pass additional configuration options.
---  See `:help telescope.builtin.live_grep()` for information about particular keys
 map('<leader>s/', function()
   builtin.live_grep {
     grep_open_files = true,
@@ -82,7 +51,6 @@ map('<leader>s/', function()
   }
 end, '[S]earch [/] in Open Files')
 
--- Shortcut for searching your Neovim configuration files
 map('<leader>sn', function()
   builtin.find_files { cwd = vim.fn.stdpath 'config' }
 end, '[S]earch [N]eovim files')
@@ -90,23 +58,6 @@ end, '[S]earch [N]eovim files')
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
--- -- TELESCOPE --
-
--- -- LSP --
--- map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
--- map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
 
 
 
@@ -157,7 +108,7 @@ end, '[S]earch [N]eovim files')
 -- gL                                     No command                                         Lazygit Log (cwd)
 -- gl                                     No command                                         Lazygit Log
 -- gf                                     No command                                         Lazygit Current File History
-
+map('<leader>lg', '<cmd>LazyGit<cr>', 'LazyGit')
 
 -- HELP --
 -- &                                      :&&<CR>                                            :help &-default
@@ -193,6 +144,7 @@ end, '[S]earch [N]eovim files')
 -- <C-Left>                               <Cmd>vertical resize -2<CR>                        Decrease Window Width
 -- <C-Down>                               <Cmd>resize -2<CR>                                 Decrease Window Height
 -- <C-Up>                                 <Cmd>resize +2<CR>                                 Increase Window Height
+
 
 
 -- TABS/BUFFERS --
@@ -248,6 +200,7 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 -- ]d                                     No command                                         Jump to the next diagnostic
 -- <C-W><C-D>                             <C-W>d                                             Show diagnostics under the cursor
 -- <C-W>d                                 No command                                         Show diagnostics under the cursor
+map('<leader>q', vim.diagnostic.setloclist, 'Open diagnostic [Q]uickfix list')
 
 
 -- MATCHIT --
@@ -259,3 +212,8 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 -- ]%                                     <Plug>(MatchitNormalMultiForward)                  No description
 -- %                                      <Plug>(MatchitNormalForward)                       No description
 -- [%                                     <Plug>(MatchitNormalMultiBackward)                 No description
+
+
+
+local logKeys = require('config.helpers.logKeys')
+logKeys('n', '/Users/ken/Documents/Software/DevBox/dotfiles/nvim/lua/debug.txt')
