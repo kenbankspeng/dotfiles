@@ -18,14 +18,7 @@ logKeys('n', '/Users/ken/Documents/Software/DevBox/dotfiles/nvim/lua/debug.txt')
 --     ○ catppuccin
 
 
---     ○ indent-blankline.nvim  LazyFile
---     ○ lazydev.nvim  LazyDev  lua
---     ○ luvit-meta
---     ○ mason-lspconfig.nvim  nvim-lspconfig
---     ○ mason.nvim  <leader>cm  Mason  nvim-lspconfig  conform.nvim
---     ○ mini.icons
---     ○ neo-tree.nvim  <leader>E  <leader>ge  <leader>be  <leader>fe  <leader>fE  <leader>e  Neotree
---     ○ nvim-cmp  <Tab> (s)  <S-Tab> (s)  <S-Tab> (i)  <Tab> (i)  InsertEnter
+
 --     ○ nvim-lint  LazyFile
 --     ○ nvim-lspconfig  LazyFile
 --     ○ nvim-snippets  nvim-cmp
