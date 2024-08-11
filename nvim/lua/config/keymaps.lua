@@ -19,17 +19,6 @@ logKeys('n', '/Users/ken/Documents/Software/DevBox/dotfiles/nvim/lua/debug.txt')
 
 
 
---     ○ nvim-lint  LazyFile
---     ○ nvim-lspconfig  LazyFile
---     ○ nvim-snippets  nvim-cmp
---     ○ nvim-ts-autotag  LazyFile
---     ○ persistence.nvim  <leader>ql  <leader>qd  <leader>qs  BufReadPre
---     ○ plenary.nvim
---     ○ telescope-fzf-native.nvim  telescope.nvim
---     ○ todo-comments.nvim  <leader>sT  <leader>st  [t  <leader>xt  <leader>xT  ]t  LazyFile  TodoTelescope  TodoTrouble
-
-
-
 
 ------------------------------------------------------------------------------
 -----------------                              -------------------------------
