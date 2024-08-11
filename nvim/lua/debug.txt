@@ -50,28 +50,23 @@
 --  bd                                    No command                                                                   Delete Buffer
 --  `                                     <Cmd>e #<CR>                                                                 Switch to Other Buffer
 --  bb                                    <Cmd>e #<CR>                                                                 Switch to Other Buffer
+--  bl                                    <Cmd>BufferLineCloseLeft<CR>                                                 Delete Buffers to the Left
 --  br                                    <Cmd>BufferLineCloseRight<CR>                                                Delete Buffers to the Right
 --  bo                                    <Cmd>BufferLineCloseOthers<CR>                                               Delete Other Buffers
---  bp                                    <Cmd>BufferLineTogglePin<CR>                                                 Toggle Pin
 --  bP                                    <Cmd>BufferLineGroupClose ungrouped<CR>                                      Delete Non-Pinned Buffers
---  bl                                    <Cmd>BufferLineCloseLeft<CR>                                                 Delete Buffers to the Left
+--  bp                                    <Cmd>BufferLineTogglePin<CR>                                                 Toggle Pin
 --  up                                    No command                                                                   Toggle Mini Pairs
 --  sn                                    No command                                                                   [S]earch [N]eovim files
 --  s/                                    No command                                                                   [S]earch [/] in Open Files
 --  s.                                    No command                                                                   search Recent Files ("." for repeat)
 --  sr                                    No command                                                                   search [R]esume
 --  sf                                    No command                                                                   search [F]iles
---  fR                                    No command                                                                   Recent (cwd)
---  fr                                    <Cmd>Telescope oldfiles<CR>                                                  Recent
---                                        <Cmd>Oil --float<CR>                                                         open parent directory
---  fF                                    No command                                                                   Find Files (cwd)
---  ff                                    No command                                                                   Find Files (Root Dir)
 --  fc                                    No command                                                                   Find Config File
 --  fb                                    No command                                                                   [F]ind existing [B]uffers
 --  :                                     <Cmd>Telescope command_history<CR>                                           Command History
 --  /                                     No command                                                                   [/] Fuzzily search in current buffer
 --  ,                                     <Cmd>Telescope buffers sort_mru=true sort_lastused=true<CR>                  Switch Buffer
---  fg                                    <Cmd>Telescope git_files<CR>                                                 Find Files (git-files)
+--                                        <Cmd>Oil<CR>                                                                 open parent directory
 --  sS                                    No command                                                                   Goto Symbol (Workspace)
 --  ss                                    No command                                                                   search [S]elect Telescope
 --  uC                                    No command                                                                   Colorscheme with Preview
@@ -98,12 +93,17 @@
 --  s"                                    <Cmd>Telescope registers<CR>                                                 Registers
 --  gs                                    <Cmd>Telescope git_status<CR>                                                Status
 --  gc                                    <Cmd>Telescope git_commits<CR>                                               Commits
+--  fR                                    No command                                                                   Recent (cwd)
+--  fr                                    <Cmd>Telescope oldfiles<CR>                                                  Recent
+--  fg                                    <Cmd>Telescope git_files<CR>                                                 Find Files (git-files)
+--  fF                                    No command                                                                   Find Files (cwd)
+--  ff                                    No command                                                                   Find Files (Root Dir)
+--  E                                     No command                                                                   Explorer NeoTree (cwd)
 --  e                                     No command                                                                   Explorer NeoTree (Root Dir)
 --  fE                                    No command                                                                   Explorer NeoTree (cwd)
 --  fe                                    No command                                                                   Explorer NeoTree (Root Dir)
---  ge                                    No command                                                                   Git Explorer
---  E                                     No command                                                                   Explorer NeoTree (cwd)
 --  be                                    No command                                                                   Buffer Explorer
+--  ge                                    No command                                                                   Git Explorer
 -- %                                      <Plug>(MatchitNormalForward)                                                 No description
 -- &                                      :&&<CR>                                                                      :help &-default
 -- ,                                      No command                                                                   No description
@@ -117,15 +117,15 @@
 -- [w                                     No command                                                                   Prev Warning
 -- [e                                     No command                                                                   Prev Error
 -- [q                                     No command                                                                   Previous Quickfix
--- [b                                     <Cmd>BufferLineCyclePrev<CR>                                                 Prev Buffer
 -- [B                                     <Cmd>BufferLineMovePrev<CR>                                                  Move buffer prev
+-- [b                                     <Cmd>BufferLineCyclePrev<CR>                                                 Prev Buffer
 -- [%                                     <Plug>(MatchitNormalMultiBackward)                                           No description
 -- [d                                     No command                                                                   Prev Diagnostic
 -- ]w                                     No command                                                                   Next Warning
 -- ]e                                     No command                                                                   Next Error
 -- ]q                                     No command                                                                   Next Quickfix
--- ]b                                     <Cmd>BufferLineCycleNext<CR>                                                 Next Buffer
 -- ]B                                     <Cmd>BufferLineMoveNext<CR>                                                  Move buffer next
+-- ]b                                     <Cmd>BufferLineCycleNext<CR>                                                 Next Buffer
 -- ]%                                     <Plug>(MatchitNormalMultiForward)                                            No description
 -- ]d                                     No command                                                                   Next Diagnostic
 -- f                                      No command                                                                   No description
