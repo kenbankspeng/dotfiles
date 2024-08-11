@@ -15,15 +15,10 @@ logKeys('n', '/Users/ken/Documents/Software/DevBox/dotfiles/nvim/lua/debug.txt')
 
 --     ● lazy.nvim 26.28ms  init.lua
 --     ● LazyVim 5.81ms  start
-
-
-
---   Not Loaded (26)
 --     ○ catppuccin
---     ○ cmp-buffer  nvim-cmp
---     ○ cmp-nvim-lsp  nvim-cmp
---     ○ cmp-path  nvim-cmp
---     ○ conform.nvim  <leader>cF  <leader>cF (v)  ConformInfo
+
+
+
 --     ○ dressing.nvim
 --     ○ friendly-snippets  nvim-snippets
 --     ○ gitsigns.nvim  LazyFile
@@ -43,7 +38,6 @@ logKeys('n', '/Users/ken/Documents/Software/DevBox/dotfiles/nvim/lua/debug.txt')
 --     ○ persistence.nvim  <leader>ql  <leader>qd  <leader>qs  BufReadPre
 --     ○ plenary.nvim
 --     ○ telescope-fzf-native.nvim  telescope.nvim
---     ○ telescope.nvim  <leader>sq  <leader>sw  <leader>sW  <leader>sw (v)  <leader>sW (v)  <leader>uC  <leader>ss  <leader>sS  <leader><space>  <leader>,  <leader>/  <leader>:  <leader>fb  <leader>fc  <leader>ff  <leader>fF  <leader>fg  <leader>fr  <leader>fR  <leader>gc  <leader>gs  <leader>s"  <leader>sa  <leader>sb  <leader>sc  <leader>sC  <leader>sd  <leader>sD  <leader>sg  <leader>sG  <leader>sh  <leader>sH  <leader>sj  <leader>sk  <leader>sl  <leader>sM  <leader>sm  <leader>so  <leader>sR  Telescope
 --     ○ todo-comments.nvim  <leader>sT  <leader>st  [t  <leader>xt  <leader>xT  ]t  LazyFile  TodoTelescope  TodoTrouble
 
 
