@@ -17,11 +17,6 @@ logKeys('n', '/Users/ken/Documents/Software/DevBox/dotfiles/nvim/lua/debug.txt')
 --     ● LazyVim 5.81ms  start
 
 
---     ● mini.ai 1.77ms  VeryLazy
---     ● mini.pairs 5.76ms  VeryLazy
---     ● noice.nvim 2.16ms  VeryLazy
---     ● nui.nvim 0.05ms 󰢱 nui.object  noice.nvim
---     ● nvim-notify 4.92ms 󰢱 notify  noice.nvim
 --     ● nvim-treesitter 7.45ms  VeryLazy
 --     ● nvim-treesitter-textobjects 3.28ms  VeryLazy
 --     ● tokyonight.nvim 2.19ms 󰢱 tokyonight  LazyVim
