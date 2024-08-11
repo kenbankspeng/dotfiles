@@ -17,12 +17,6 @@ logKeys('n', '/Users/ken/Documents/Software/DevBox/dotfiles/nvim/lua/debug.txt')
 --     ● LazyVim 5.81ms  start
 
 
---     ● nvim-treesitter 7.45ms  VeryLazy
---     ● nvim-treesitter-textobjects 3.28ms  VeryLazy
---     ● tokyonight.nvim 2.19ms 󰢱 tokyonight  LazyVim
---     ● trouble.nvim 13.95ms 󰢱 trouble  lualine.nvim
---     ● ts-comments.nvim 1.59ms  VeryLazy
---     ● which-key.nvim 3ms 󰢱 which-key  mini.pairs
 
 --   Not Loaded (26)
 --     ○ catppuccin
