@@ -159,7 +159,6 @@ end, '[S]earch [N]eovim files')
 -- gL                    No command                                           Lazygit Log (cwd)
 -- gl                    No command                                           Lazygit Log
 -- gf                    No command                                           Lazygit Current File History
-map('<leader>lg', '<cmd>LazyGit<cr>', 'LazyGit')
 
 -- HELP --
 -- &                     :&&<CR>                                              :help &-default
@@ -167,34 +166,34 @@ map('<leader>lg', '<cmd>LazyGit<cr>', 'LazyGit')
 
 
 -- NAVIGATION --
--- j                                      v:count == 0 ? 'gj' : 'j'                          Down
--- k                                      v:count == 0 ? 'gk' : 'k'                          Up
--- <M-k>                                  <Cmd>m .-2<CR>==                                   Move Up
--- <M-j>                                  <Cmd>m .+1<CR>==                                   Move Down
--- <Up>                                   v:count == 0 ? 'gk' : 'k'                          Up
--- <Down>                                 v:count == 0 ? 'gj' : 'j'                          Down
--- g]                                     No command                                         Move to right "around"
--- g[                                     No command                                         Move to left "around"
+-- j                     v:count == 0 ? 'gj' : 'j'                          Down
+-- k                     v:count == 0 ? 'gk' : 'k'                          Up
+-- <M-k>                 <Cmd>m .-2<CR>==                                   Move Up
+-- <M-j>                 <Cmd>m .+1<CR>==                                   Move Down
+-- <Up>                  v:count == 0 ? 'gk' : 'k'                          Up
+-- <Down>                v:count == 0 ? 'gj' : 'j'                          Down
+-- g]                    No command                                         Move to right "around"
+-- g[                    No command                                         Move to left "around"
 
 
 -- WINDOWS --
--- bD                                     <Cmd>:bd<CR>                                       Delete Buffer and Window
--- bd                                     No command                                         Delete Buffer
--- `                                      <Cmd>e #<CR>                                       Switch to Other Buffer
--- bb                                     <Cmd>e #<CR>                                       Switch to Other Buffer
--- w                                      <C-W>                                              Windows
--- |                                      <C-W>v                                             Split Window Right
--- -                                      <C-W>s                                             Split Window Below
--- wm                                     No command                                         Toggle Maximize
--- wd                                     <C-W>c                                             Delete Window
--- <C-L>                                  <C-W>l                                             Go to Right Window
--- <C-K>                                  <C-W>k                                             Go to Upper Window
--- <C-J>                                  <C-W>j                                             Go to Lower Window
--- <C-H>                                  <C-W>h                                             Go to Left Window
--- <C-Right>                              <Cmd>vertical resize +2<CR>                        Increase Window Width
--- <C-Left>                               <Cmd>vertical resize -2<CR>                        Decrease Window Width
--- <C-Down>                               <Cmd>resize -2<CR>                                 Decrease Window Height
--- <C-Up>                                 <Cmd>resize +2<CR>                                 Increase Window Height
+-- bD                    <Cmd>:bd<CR>                                       Delete Buffer and Window
+-- bd                    No command                                         Delete Buffer
+-- `                     <Cmd>e #<CR>                                       Switch to Other Buffer
+-- bb                    <Cmd>e #<CR>                                       Switch to Other Buffer
+-- w                     <C-W>                                              Windows
+-- |                     <C-W>v                                             Split Window Right
+-- -                     <C-W>s                                             Split Window Below
+-- wm                    No command                                         Toggle Maximize
+-- wd                    <C-W>c                                             Delete Window
+-- <C-L>                 <C-W>l                                             Go to Right Window
+-- <C-K>                 <C-W>k                                             Go to Upper Window
+-- <C-J>                 <C-W>j                                             Go to Lower Window
+-- <C-H>                 <C-W>h                                             Go to Left Window
+-- <C-Right>             <Cmd>vertical resize +2<CR>                        Increase Window Width
+-- <C-Left>              <Cmd>vertical resize -2<CR>                        Decrease Window Width
+-- <C-Down>              <Cmd>resize -2<CR>                                 Decrease Window Height
+-- <C-Up>                <Cmd>resize +2<CR>                                 Increase Window Height
 
 
 
