@@ -1,0 +1,131 @@
+-- <Esc>                                  <Cmd>noh<CR><Esc>                                                            Escape and Clear hlsearch
+--  q                                     No command                                                                   Open diagnostic [Q]uickfix list
+--  lg                                    <Cmd>LazyGit<CR>                                                             LazyGit
+--  sn                                    No command                                                                   [S]earch [N]eovim files
+--  s/                                    No command                                                                   [S]earch [/] in Open Files
+--  /                                     No command                                                                   [/] Fuzzily search in current buffer
+--  fb                                    No command                                                                   [F]ind existing [B]uffers
+--  s.                                    No command                                                                   [S]earch Recent Files ("." for repeat)
+--  sr                                    No command                                                                   [S]earch [R]esume
+--  sd                                    No command                                                                   [S]earch [D]iagnostics
+--  sg                                    No command                                                                   [S]earch by [G]rep
+--  sw                                    No command                                                                   [S]earch current [W]ord
+--  ss                                    No command                                                                   [S]earch [S]elect Telescope
+--  sf                                    No command                                                                   [S]earch [F]iles
+--  sk                                    No command                                                                   [S]earch [K]eymaps
+--  sh                                    No command                                                                   [S]earch [H]elp
+--  yy                                    <Cmd>Yazi cwd<CR>                                                            Open yazi at working directory
+--  y.                                    <Cmd>Yazi<CR>                                                                Open yazi at the current file
+--                                        <Cmd>Oil --float<CR>                                                         open parent directory
+--  <Tab>[                                <Cmd>tabprevious<CR>                                                         Previous Tab
+--  <Tab>d                                <Cmd>tabclose<CR>                                                            Close Tab
+--  <Tab>]                                <Cmd>tabnext<CR>                                                             Next Tab
+--  <Tab><Tab>                            <Cmd>tabnew<CR>                                                              New Tab
+--  <Tab>f                                <Cmd>tabfirst<CR>                                                            First Tab
+--  <Tab>o                                <Cmd>tabonly<CR>                                                             Close Other Tabs
+--  <Tab>l                                <Cmd>tablast<CR>                                                             Last Tab
+--  wm                                    No command                                                                   Toggle Maximize
+--  wd                                    <C-W>c                                                                       Delete Window
+--  |                                     <C-W>v                                                                       Split Window Right
+--  -                                     <C-W>s                                                                       Split Window Below
+--  w                                     <C-W>                                                                        Windows
+--  fT                                    No command                                                                   Terminal (cwd)
+--  ft                                    No command                                                                   Terminal (Root Dir)
+--  L                                     No command                                                                   LazyVim Changelog
+--  uI                                    <Cmd>InspectTree<CR>                                                         Inspect Tree
+--  ui                                    No command                                                                   Inspect Pos
+--  qq                                    <Cmd>qa<CR>                                                                  Quit All
+--  gL                                    No command                                                                   Lazygit Log (cwd)
+--  gl                                    No command                                                                   Lazygit Log
+--  gf                                    No command                                                                   Lazygit Current File History
+--  gB                                    No command                                                                   Git Browse
+--  gb                                    No command                                                                   Git Blame Line
+--  gG                                    No command                                                                   Lazygit (cwd)
+--  gg                                    No command                                                                   Lazygit (Root Dir)
+--  uh                                    No command                                                                   Toggle Inlay Hints
+--  ub                                    No command                                                                   Toggle Background
+--  uT                                    No command                                                                   Toggle Treesitter Highlight
+--  uc                                    No command                                                                   Toggle conceallevel
+--  ul                                    No command                                                                   Toggle Line Numbers
+--  ud                                    No command                                                                   Toggle Diagnostics
+--  uL                                    No command                                                                   Toggle Relative Number
+--  uw                                    No command                                                                   Toggle Wrap
+--  us                                    No command                                                                   Toggle Spelling
+--  uF                                    No command                                                                   Toggle Auto Format (Buffer)
+--  uf                                    No command                                                                   Toggle Auto Format (Global)
+--  cd                                    No command                                                                   Line Diagnostics
+--  cf                                    No command                                                                   Format
+--  xq                                    <Cmd>copen<CR>                                                               Quickfix List
+--  xl                                    <Cmd>lopen<CR>                                                               Location List
+--  fn                                    <Cmd>enew<CR>                                                                New File
+--  l                                     <Cmd>Lazy<CR>                                                                Lazy
+--  K                                     <Cmd>norm! K<CR>                                                             Keywordprg
+--  ur                                    <Cmd>nohlsearch|diffupdate|normal! <C-L><CR>                                 Redraw / Clear hlsearch / Diff Update
+--  bD                                    <Cmd>:bd<CR>                                                                 Delete Buffer and Window
+--  bd                                    No command                                                                   Delete Buffer
+--  `                                     <Cmd>e #<CR>                                                                 Switch to Other Buffer
+--  bb                                    <Cmd>e #<CR>                                                                 Switch to Other Buffer
+--  up                                    No command                                                                   Toggle Mini Pairs
+--  fE                                    No command                                                                   Explorer NeoTree (cwd)
+--  fe                                    No command                                                                   Explorer NeoTree (Root Dir)
+--  be                                    No command                                                                   Buffer Explorer
+--  ge                                    No command                                                                   Git Explorer
+--  E                                     No command                                                                   Explorer NeoTree (cwd)
+--  e                                     No command                                                                   Explorer NeoTree (Root Dir)
+-- %                                      <Plug>(MatchitNormalForward)                                                 No description
+-- &                                      :&&<CR>                                                                      :help &-default
+-- ,                                      No command                                                                   No description
+-- ;                                      No command                                                                   No description
+-- F                                      No command                                                                   No description
+-- H                                      <Cmd>bprevious<CR>                                                           Prev Buffer
+-- L                                      <Cmd>bnext<CR>                                                               Next Buffer
+-- N                                      'nN'[v:searchforward].'zv'                                                   Prev Search Result
+-- T                                      No command                                                                   No description
+-- Y                                      y$                                                                           :help Y-default
+-- [w                                     No command                                                                   Prev Warning
+-- [e                                     No command                                                                   Prev Error
+-- [q                                     No command                                                                   Previous Quickfix
+-- [b                                     <Cmd>bprevious<CR>                                                           Prev Buffer
+-- [%                                     <Plug>(MatchitNormalMultiBackward)                                           No description
+-- [d                                     No command                                                                   Prev Diagnostic
+-- ]w                                     No command                                                                   Next Warning
+-- ]e                                     No command                                                                   Next Error
+-- ]q                                     No command                                                                   Next Quickfix
+-- ]b                                     <Cmd>bnext<CR>                                                               Next Buffer
+-- ]%                                     <Plug>(MatchitNormalMultiForward)                                            No description
+-- ]d                                     No command                                                                   Next Diagnostic
+-- f                                      No command                                                                   No description
+-- gcO                                    O<Esc>Vcx<Esc><Cmd>normal gcc<CR>fxa<BS>                                     Add Comment Above
+-- gco                                    o<Esc>Vcx<Esc><Cmd>normal gcc<CR>fxa<BS>                                     Add Comment Below
+-- g]                                     No command                                                                   Move to right "around"
+-- g[                                     No command                                                                   Move to left "around"
+-- g%                                     <Plug>(MatchitNormalBackward)                                                No description
+-- gcc                                    No command                                                                   Toggle comment line
+-- gc                                     No command                                                                   Toggle comment
+-- gx                                     No command                                                                   Opens filepath or URI under cursor with the system handler (file explorer, web browser, …)
+-- j                                      v:count == 0 ? 'gj' : 'j'                                                    Down
+-- k                                      v:count == 0 ? 'gk' : 'k'                                                    Up
+-- n                                      'Nn'[v:searchforward].'zv'                                                   Next Search Result
+-- t                                      No command                                                                   No description
+-- <Plug>PlenaryTestFile                  :lua require('plenary.test_harness').test_file(vim.fn.expand("%:p"))<CR>     No description
+-- <C-_>                                  No command                                                                   which_key_ignore
+-- <C-/>                                  No command                                                                   Terminal (Root Dir)
+-- <C-S>                                  <Cmd>w<CR><Esc>                                                              Save File
+-- <M-k>                                  <Cmd>m .-2<CR>==                                                             Move Up
+-- <M-j>                                  <Cmd>m .+1<CR>==                                                             Move Down
+-- <C-Right>                              <Cmd>vertical resize +2<CR>                                                  Increase Window Width
+-- <C-Left>                               <Cmd>vertical resize -2<CR>                                                  Decrease Window Width
+-- <C-Down>                               <Cmd>resize -2<CR>                                                           Decrease Window Height
+-- <C-Up>                                 <Cmd>resize +2<CR>                                                           Increase Window Height
+-- <C-K>                                  <C-W>k                                                                       Go to Upper Window
+-- <C-J>                                  <C-W>j                                                                       Go to Lower Window
+-- <C-H>                                  <C-W>h                                                                       Go to Left Window
+-- <Up>                                   v:count == 0 ? 'gk' : 'k'                                                    Up
+-- <Down>                                 v:count == 0 ? 'gj' : 'j'                                                    Down
+-- <Plug>(MatchitNormalMultiForward)      :<C-U>call matchit#MultiMatch("W",  "n")<CR>                                 No description
+-- <Plug>(MatchitNormalMultiBackward)     :<C-U>call matchit#MultiMatch("bW", "n")<CR>                                 No description
+-- <Plug>(MatchitNormalBackward)          :<C-U>call matchit#Match_wrapper('',0,'n')<CR>                               No description
+-- <Plug>(MatchitNormalForward)           :<C-U>call matchit#Match_wrapper('',1,'n')<CR>                               No description
+-- <C-W><C-D>                             <C-W>d                                                                       Show diagnostics under the cursor
+-- <C-W>d                                 No command                                                                   Show diagnostics under the cursor
+-- <C-L>                                  <C-W>l                                                                       Go to Right Window
