@@ -24,7 +24,7 @@ return function(mode, filepath)
 
     -- Function to create a filler string of a given length
     local function create_filler(length)
-      return string.rep("-", length)
+      return string.rep(" ", length)
     end
 
     -- Second pass to write formatted output
@@ -33,7 +33,7 @@ return function(mode, filepath)
       local command = keymap.rhs or "No command"
       local description = keymap.desc or "No description"
       file:write(string.format(
-        "-- %s %s %s %s %s ----\n",
+        "-- %s%s%s%s%s\n",
         key,
         create_filler(key_padding - #key - 1),
         command,
