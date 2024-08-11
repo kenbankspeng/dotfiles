@@ -17,58 +17,58 @@ map('<leader>yy', '<cmd>Yazi cwd<CR>', 'Open yazi at working directory') -- ok
 
 
 -- GENERAL --
--- <Esc>                                  <Cmd>noh<CR><Esc>                                  Escape and Clear hlsearch
--- <leader>fn -- ok                       <Cmd>enew<CR>                                      New File
--- <C-S> -- ok                            <Cmd>w<CR><Esc>                                    Save File
--- <leader>qq -- ok                       <Cmd>qa<CR>                                        Quit All
--- cf                                     No command                                         Format
--- ul                                     No command                                         Toggle Line Numbers
--- uL                                     No command                                         Toggle Relative Number
--- uw                                     No command                                         Toggle Wrap
--- us                                     No command                                         Toggle Spelling
--- uF                                     No command                                         Toggle Auto Format (Buffer)
--- uf                                     No command                                         Toggle Auto Format (Global)
--- uh                                     No command                                         Toggle Inlay Hints
--- ub                                     No command                                         Toggle Background
--- uT                                     No command                                         Toggle Treesitter Highlight
--- uc                                     No command                                         Toggle conceallevel
--- up                                     No command                                         Toggle Mini Pairs
+-- <Esc>                       <Cmd>noh<CR><Esc>                                  Escape and Clear hlsearch
+-- <leader>fn -- ok            <Cmd>enew<CR>                                      New File
+-- <C-S> -- ok                 <Cmd>w<CR><Esc>                                    Save File
+-- <leader>qq -- ok            <Cmd>qa<CR>                                        Quit All
+-- cf                          No command                                         Format
+-- ul                          No command                                         Toggle Line Numbers
+-- uL                          No command                                         Toggle Relative Number
+-- uw                          No command                                         Toggle Wrap
+-- us                          No command                                         Toggle Spelling
+-- uF                          No command                                         Toggle Auto Format (Buffer)
+-- uf                          No command                                         Toggle Auto Format (Global)
+-- uh                          No command                                         Toggle Inlay Hints
+-- ub                          No command                                         Toggle Background
+-- uT                          No command                                         Toggle Treesitter Highlight
+-- uc                          No command                                         Toggle conceallevel
+-- up                          No command                                         Toggle Mini Pairs
 
 
 -- NOT_SURE --
--- uI                                     <Cmd>InspectTree<CR>                               Inspect Tree
--- ui                                     No command                                         Inspect Pos
--- xq                                     <Cmd>copen<CR>                                     Quickfix List
--- xl                                     <Cmd>lopen<CR>                                     Location List
--- K                                      <Cmd>norm! K<CR>                                   Keywordprg
--- ur                                     <Cmd>nohlsearch|diffupdate|normal! <C-L><CR>       Redraw / Clear hlsearch / Diff Update
--- ,                                      No command                                         No description
--- ;                                      No command                                         No description
--- F                                      No command                                         No description
--- T                                      No command                                         No description
--- f                                      No command                                         No description
--- t                                      No command                                         No description
--- <C-_>                                  No command                                         which_key_ignore
--- gx                                     No command                                         Opens filepath or URI under cursor with the system handler (file explorer, web browser, …)
+-- uI                          <Cmd>InspectTree<CR>                               Inspect Tree
+-- ui                          No command                                         Inspect Pos
+-- xq                          <Cmd>copen<CR>                                     Quickfix List
+-- xl                          <Cmd>lopen<CR>                                     Location List
+-- K                           <Cmd>norm! K<CR>                                   Keywordprg
+-- ur                          <Cmd>nohlsearch|diffupdate|normal! <C-L><CR>       Redraw / Clear hlsearch / Diff Update
+-- ,                           No command                                         No description
+-- ;                           No command                                         No description
+-- F                           No command                                         No description
+-- T                           No command                                         No description
+-- f                           No command                                         No description
+-- t                           No command                                         No description
+-- <C-_>                       No command                                         which_key_ignore
+-- gx                          No command                                         Opens filepath or URI under cursor with the system handler (file explorer, web browser, …)
 
 -- TABS/BUFFERS --
--- H  -- ok                               <Cmd>BufferLineCyclePrev<CR>                       Prev Buffer
--- L  -- ok                               <Cmd>BufferLineCycleNext<CR>                       Next Buffer
--- [b -- ok                               <Cmd>BufferLineCyclePrev<CR>                       Prev Buffer
--- ]b -- ok                               <Cmd>BufferLineCycleNext<CR>                       Next Buffer
--- <leader>bl -- ok                       <Cmd>BufferLineCloseLeft<CR>                       Delete Buffers to the Left
--- <leader>br -- ok                       <Cmd>BufferLineCloseRight<CR>                      Delete Buffers to the Right
--- <leader>bo -- ok                       <Cmd>BufferLineCloseOthers<CR>                     Delete Other Buffers
--- <leader>bP -- ok                       <Cmd>BufferLineGroupClose ungrouped<CR>            Delete Non-Pinned Buffers
--- <leader>bp -- ok                       <Cmd>BufferLineTogglePin<CR>                       Toggle Pin
+-- H  -- ok                    <Cmd>BufferLineCyclePrev<CR>                       Prev Buffer
+-- L  -- ok                    <Cmd>BufferLineCycleNext<CR>                       Next Buffer
+-- [b -- ok                    <Cmd>BufferLineCyclePrev<CR>                       Prev Buffer
+-- ]b -- ok                    <Cmd>BufferLineCycleNext<CR>                       Next Buffer
+-- <leader>bl -- ok            <Cmd>BufferLineCloseLeft<CR>                       Delete Buffers to the Left
+-- <leader>br -- ok            <Cmd>BufferLineCloseRight<CR>                      Delete Buffers to the Right
+-- <leader>bo -- ok            <Cmd>BufferLineCloseOthers<CR>                     Delete Other Buffers
+-- <leader>bP -- ok            <Cmd>BufferLineGroupClose ungrouped<CR>            Delete Non-Pinned Buffers
+-- <leader>bp -- ok            <Cmd>BufferLineTogglePin<CR>                       Toggle Pin
 
--- <leader><Tab>[     -- buggy?           <Cmd>tabprevious<CR>                               Previous Tab
--- <leader><Tab>d     -- buggy?           <Cmd>tabclose<CR>                                  Close Tab
--- <leader><Tab>]     -- buggy?           <Cmd>tabnext<CR>                                   Next Tab
--- <leader><Tab><Tab> -- buggy?           <Cmd>tabnew<CR>                                    New Tab
--- <leader><Tab>f     -- buggy?           <Cmd>tabfirst<CR>                                  First Tab
--- <leader><Tab>o     -- buggy?           <Cmd>tabonly<CR>                                   Close Other Tabs
--- <leader><Tab>l     -- buggy?           <Cmd>tablast<CR>                                   Last Tab
+-- <leader><Tab>[    -- buggy? <Cmd>tabprevious<CR>                               Previous Tab
+-- <leader><Tab>d    -- buggy? <Cmd>tabclose<CR>                                  Close Tab
+-- <leader><Tab>]    -- buggy? <Cmd>tabnext<CR>                                   Next Tab
+-- <leader><Tab><Tab> - buggy? <Cmd>tabnew<CR>                                    New Tab
+-- <leader><Tab>f    -- buggy? <Cmd>tabfirst<CR>                                  First Tab
+-- <leader><Tab>o    -- buggy? <Cmd>tabonly<CR>                                   Close Other Tabs
+-- <leader><Tab>l    -- buggy? <Cmd>tablast<CR>                                   Last Tab
 
 
 -- SEARCH --
@@ -120,23 +120,50 @@ map('<leader>sn', function()
   builtin.find_files { cwd = vim.fn.stdpath 'config' }
 end, '[S]earch [N]eovim files')
 
-
+--  :                    <Cmd>Telescope command_history<CR>                   Command History
+--  ,                    <Cmd>Telescope buffers sort_lastused=true<CR>        Switch Buffer
+--  <leader>sR           <Cmd>Telescope resume<CR>                            Resume
+--  <leader>so           <Cmd>Telescope vim_options<CR>                       Options
+--  <leader>sm           <Cmd>Telescope marks<CR>                             Jump to Mark
+--  <leader>sM           <Cmd>Telescope man_pages<CR>                         Man Pages
+--  <leader>sl           <Cmd>Telescope loclist<CR>                           Location List
+--  <leader>sj           <Cmd>Telescope jumplist<CR>                          Jumplist
+--  <leader>sH           <Cmd>Telescope highlights<CR>                        Search Highlight Groups
+--  <leader>sD           <Cmd>Telescope diagnostics<CR>                       Workspace Diagnostics
+--  <leader>sC           <Cmd>Telescope commands<CR>                          Commands
+--  <leader>sc           <Cmd>Telescope command_history<CR>                   Command History
+--  <leader>sb           <Cmd>Telescope current_buffer_fuzzy_find<CR>         Buffer
+--  <leader>sa           <Cmd>Telescope autocommands<CR>                      Auto Commands
+--  <leader>s"           <Cmd>Telescope registers<CR>                         Registers
+--  <leader>gs           <Cmd>Telescope git_status<CR>                        Status
+--  <leader>gc           <Cmd>Telescope git_commits<CR>                       Commits
+--  <leader>fr           <Cmd>Telescope oldfiles<CR>                          Recent
+--  <leader>fg           <Cmd>Telescope git_files<CR>                         Find Files (git-files)
+--  <leader>sq           <Cmd>Telescope quickfix<CR>                          Quickfix List
+--  <leader>sW           No command                                           Word (cwd)
+--  <leader>sG           No command                                           Grep (cwd)
+--  <leader>fR           No command                                           Recent (cwd)
+--  <leader>uC           No command                                           Colorscheme with Preview
+--  <leader>sS           No command                                           Goto Symbol (Workspace)
+--  <leader>fF           No command                                           Find Files (cwd)
+--  <leader>ff           No command                                           Find Files (Root Dir)
+--  <leader>fc           No command                                           Find Config File
 
 
 
 -- GIT --
--- gB                                     No command                                         Git Browse
--- gb                                     No command                                         Git Blame Line
--- gG                                     No command                                         Lazygit (cwd)
--- gg                                     No command                                         Lazygit (Root Dir)
--- gL                                     No command                                         Lazygit Log (cwd)
--- gl                                     No command                                         Lazygit Log
--- gf                                     No command                                         Lazygit Current File History
+-- gB                    No command                                           Git Browse
+-- gb                    No command                                           Git Blame Line
+-- gG                    No command                                           Lazygit (cwd)
+-- gg                    No command                                           Lazygit (Root Dir)
+-- gL                    No command                                           Lazygit Log (cwd)
+-- gl                    No command                                           Lazygit Log
+-- gf                    No command                                           Lazygit Current File History
 map('<leader>lg', '<cmd>LazyGit<cr>', 'LazyGit')
 
 -- HELP --
--- &                                      :&&<CR>                                            :help &-default
--- Y                                      y$                                                 :help Y-default
+-- &                     :&&<CR>                                              :help &-default
+-- Y                     y$                                                   :help Y-default
 
 
 -- NAVIGATION --
