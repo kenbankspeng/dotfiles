@@ -19,8 +19,6 @@ logKeys('n', '/Users/ken/Documents/Software/DevBox/dotfiles/nvim/lua/debug.txt')
 
 
 
---     ○ dressing.nvim
---     ○ friendly-snippets  nvim-snippets
 --     ○ gitsigns.nvim  LazyFile
 --     ○ grug-far.nvim  <leader>sr  <leader>sr (v)  GrugFar
 --     ○ indent-blankline.nvim  LazyFile
