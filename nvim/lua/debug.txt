@@ -1,6 +1,5 @@
 -- <Esc>                                  <Cmd>noh<CR><Esc>                                                            Escape and Clear hlsearch
 --  q                                     No command                                                                   Open diagnostic [Q]uickfix list
---  lg                                    <Cmd>LazyGit<CR>                                                             LazyGit
 --  yy                                    <Cmd>Yazi cwd<CR>                                                            Open yazi at working directory
 --  y.                                    <Cmd>Yazi<CR>                                                                Open yazi at the current file
 --  <Tab>[                                <Cmd>tabprevious<CR>                                                         Previous Tab
