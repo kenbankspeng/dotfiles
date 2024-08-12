@@ -1,4 +1,4 @@
 return {
-  'stevearc/conform.nvim',
+  'hrsh7th/cmp-nvim-lsp',
   -- keys = function() return {} end -- remove lazyvim keymaps
 }
