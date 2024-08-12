@@ -1,20 +1,17 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 
 local map = function(keys, func, desc)
-  vim.keymap.set('n', keys, func, { desc = desc })
+  vim.keymap.set("n", keys, func, { desc = desc })
 end
 
 -- NVIM/LAZY DEFAULTS -- shown in comments
 
 -- OIL --
-map('<leader><leader>', '<cmd>Oil<CR>', 'open parent directory') -- ok
+map("<leader><leader>", "<cmd>Oil<CR>", "open parent directory") -- ok
 
 -- YAZI --
-map('<leader>y.', '<cmd>Yazi<CR>', 'Open yazi at the current file')      -- ok
-map('<leader>yy', '<cmd>Yazi cwd<CR>', 'Open yazi at working directory') -- ok
-
-
-
+map("<leader>y.", "<cmd>Yazi<CR>", "Open yazi at the current file")      -- ok
+map("<leader>yy", "<cmd>Yazi cwd<CR>", "Open yazi at working directory") -- ok
 
 -- GENERAL --
 -- <Esc>                       <Cmd>noh<CR><Esc>                                  Escape and Clear hlsearch
@@ -33,7 +30,6 @@ map('<leader>yy', '<cmd>Yazi cwd<CR>', 'Open yazi at working directory') -- ok
 -- uT                          No command                                         Toggle Treesitter Highlight
 -- uc                          No command                                         Toggle conceallevel
 -- up                          No command                                         Toggle Mini Pairs
-
 
 -- NOT_SURE --
 -- uI                          <Cmd>InspectTree<CR>                               Inspect Tree
@@ -70,24 +66,23 @@ map('<leader>yy', '<cmd>Yazi cwd<CR>', 'Open yazi at working directory') -- ok
 -- <leader><Tab>o    -- buggy? <Cmd>tabonly<CR>                                   Close Other Tabs
 -- <leader><Tab>l    -- buggy? <Cmd>tablast<CR>                                   Last Tab
 
-
 -- SEARCH -- ok
 -- ?   -- ok
 -- n   -- ok                                  'Nn'[v:searchforward].'zv'                         Next Search Result
 -- N   -- ok                                  'nN'[v:searchforward].'zv'                         Prev Search Result
 
 -- TELESCOPE -- ok -- See `:help telescope.builtin`
-local builtin = require 'telescope.builtin'
-map('<leader>sh', builtin.help_tags, 'search [H]elp')                       -- ok
-map('<leader>sk', builtin.keymaps, 'search [K]eymaps')                      -- ok
-map('<leader>sf', builtin.find_files, 'search [F]iles')                     -- ok
-map('<leader>ss', builtin.builtin, 'search [S]elect Telescope')             -- ok
-map('<leader>sw', builtin.grep_string, 'search current [W]ord')             -- ok
-map('<leader>sg', builtin.live_grep, 'search by [G]rep')                    -- ok
-map('<leader>sd', builtin.diagnostics, 'search [D]iagnostics')              -- ok
-map('<leader>sr', builtin.resume, 'search [R]esume')                        -- ok
-map('<leader>s.', builtin.oldfiles, 'search Recent Files ("." for repeat)') -- ok
-map('<leader>fb', builtin.buffers, '[F]ind existing [B]uffers')             -- ok
+local builtin = require("telescope.builtin")
+map("<leader>sh", builtin.help_tags, "search [H]elp")                       -- ok
+map("<leader>sk", builtin.keymaps, "search [K]eymaps")                      -- ok
+map("<leader>sf", builtin.find_files, "search [F]iles")                     -- ok
+map("<leader>ss", builtin.builtin, "search [S]elect Telescope")             -- ok
+map("<leader>sw", builtin.grep_string, "search current [W]ord")             -- ok
+map("<leader>sg", builtin.live_grep, "search by [G]rep")                    -- ok
+map("<leader>sd", builtin.diagnostics, "search [D]iagnostics")              -- ok
+map("<leader>sr", builtin.resume, "search [R]esume")                        -- ok
+map("<leader>s.", builtin.oldfiles, 'search Recent Files ("." for repeat)') -- ok
+map("<leader>fb", builtin.buffers, "[F]ind existing [B]uffers")             -- ok
 
 -- defined in lsp-nvim-lspconfig.lua as autocmd
 --
@@ -101,24 +96,24 @@ map('<leader>fb', builtin.buffers, '[F]ind existing [B]uffers')             -- o
 -- <leader>ca           vim.lsp.buf.code_action                  -- [C]ode [A]ction
 -- gD                   vim.lsp.buf.declaration                  -- [G]oto [D]eclaration
 
-map('<leader>/', function()
+map("<leader>/", function()
   -- You can pass additional configuration to Telescope to change the theme, layout, etc.
-  builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+  builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
     winblend = 10,
     previewer = false,
-  })
-end, '[/] Fuzzily search in current buffer')
+  }))
+end, "[/] Fuzzily search in current buffer")
 
-map('<leader>s/', function()
-  builtin.live_grep {
+map("<leader>s/", function()
+  builtin.live_grep({
     grep_open_files = true,
-    prompt_title = 'Live Grep in Open Files',
-  }
-end, '[S]earch [/] in Open Files')
+    prompt_title = "Live Grep in Open Files",
+  })
+end, "[S]earch [/] in Open Files")
 
-map('<leader>sn', function()
-  builtin.find_files { cwd = vim.fn.stdpath 'config' }
-end, '[S]earch [N]eovim files')
+map("<leader>sn", function()
+  builtin.find_files({ cwd = vim.fn.stdpath("config") })
+end, "[S]earch [N]eovim files")
 
 --  :                    <Cmd>Telescope command_history<CR>       Command History
 --  ,                    <Cmd>Telescope buffers sort...<CR>       Switch Buffer
@@ -149,8 +144,6 @@ end, '[S]earch [N]eovim files')
 --  <leader>ff           No command                               Find Files (Root Dir)
 --  <leader>fc           No command                               Find Config File
 
-
-
 -- GIT -- ok
 -- gB                    No command                               Git Browse
 -- gb                    No command                               Git Blame Line
@@ -164,7 +157,6 @@ end, '[S]earch [N]eovim files')
 -- &                     :&&<CR>                                  :help &-default
 -- Y                     y$                                       :help Y-default
 
-
 -- NAVIGATION --
 -- j                     v:count == 0 ? 'gj' : 'j'                Down
 -- k                     v:count == 0 ? 'gk' : 'k'                Up
@@ -174,7 +166,6 @@ end, '[S]earch [N]eovim files')
 -- <Down>                v:count == 0 ? 'gj' : 'j'                Down
 -- g]                    No command                               Move to right "around"
 -- g[                    No command                               Move to left "around"
-
 
 -- WINDOWS --
 -- bD                    <Cmd>:bd<CR>                                       Delete Buffer and Window
@@ -195,15 +186,11 @@ end, '[S]earch [N]eovim files')
 -- <C-Down>              <Cmd>resize -2<CR>                                 Decrease Window Height
 -- <C-Up>                <Cmd>resize +2<CR>                                 Increase Window Height
 
-
-
-
-
 -- TERMINAL --
 -- fT                                     No command                                         Terminal (cwd)
 -- ft                                     No command                                         Terminal (Root Dir)
 -- <C-/>                                  No command                                         Terminal (Root Dir)
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- TROUBLE --
 -- [w                                     No command                                         Prev Warning
@@ -214,20 +201,15 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 -- ]e                                     No command                                         Next Error
 -- ]q                                     No command                                         Next Quickfix
 
-
-
-
 -- LAZY --
 -- l                                      <Cmd>Lazy<CR>                                      Lazy
 -- L                                      No command                                         LazyVim Changelog
-
 
 -- COMMENTS --
 -- gcO                                    O<Esc>Vcx<Esc><Cmd>normal gcc<CR>fxa<BS>           Add Comment Above
 -- gco                                    o<Esc>Vcx<Esc><Cmd>normal gcc<CR>fxa<BS>           Add Comment Below
 -- gcc                                    No command                                         Toggle comment line
 -- gc                                     No command                                         Toggle comment
-
 
 -- DIAGNOSTICS --
 -- cd                                     No command                                         Line Diagnostics
@@ -236,8 +218,7 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 -- ]d                                     No command                                         Jump to the next diagnostic
 -- <C-W><C-D>                             <C-W>d                                             Show diagnostics under the cursor
 -- <C-W>d                                 No command                                         Show diagnostics under the cursor
-map('<leader>q', vim.diagnostic.setloclist, 'Open diagnostic [Q]uickfix list')
-
+map("<leader>q", vim.diagnostic.setloclist, "Open diagnostic [Q]uickfix list")
 
 -- MATCHIT --
 -- <Plug>(MatchitNormalMultiForward)      :<C-U>call matchit#MultiMatch("W",  "n")<CR>       No description
@@ -249,10 +230,9 @@ map('<leader>q', vim.diagnostic.setloclist, 'Open diagnostic [Q]uickfix list')
 -- %                                      <Plug>(MatchitNormalForward)                       No description
 -- [%                                     <Plug>(MatchitNormalMultiBackward)                 No description
 
-
 local function logit()
-  print('logit!')
-  require('config.helpers.logKeys')('n', '/Users/ken/Documents/Software/DevBox/dotfiles/nvim/lua/debug.txt')
+  print("logit!")
+  require("config.helpers.logKeys")("n", "/Users/ken/Documents/Software/DevBox/dotfiles/nvim/lua/debug.txt")
 end
 
-map('<leader>gz', logit, 'logit')
+map("<leader>gz", logit, "logit")
