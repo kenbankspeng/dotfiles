@@ -1,4 +1,5 @@
 -- <Esc>                                  <Cmd>noh<CR><Esc>                                                            Escape and Clear hlsearch
+--  gz                                    No command                                                                   logit
 --  q                                     No command                                                                   Open diagnostic [Q]uickfix list
 --  yy                                    <Cmd>Yazi cwd<CR>                                                            Open yazi at working directory
 --  y.                                    <Cmd>Yazi<CR>                                                                Open yazi at the current file
@@ -61,12 +62,7 @@
 --  s.                                    No command                                                                   search Recent Files ("." for repeat)
 --  sr                                    No command                                                                   search [R]esume
 --  sf                                    No command                                                                   search [F]iles
---  fc                                    No command                                                                   Find Config File
---  fb                                    No command                                                                   [F]ind existing [B]uffers
---  :                                     <Cmd>Telescope command_history<CR>                                           Command History
---  /                                     No command                                                                   [/] Fuzzily search in current buffer
---  ,                                     <Cmd>Telescope buffers sort_mru=true sort_lastused=true<CR>                  Switch Buffer
---                                        <Cmd>Oil<CR>                                                                 open parent directory
+--  sm                                    <Cmd>Telescope marks<CR>                                                     Jump to Mark
 --  sS                                    No command                                                                   Goto Symbol (Workspace)
 --  ss                                    No command                                                                   search [S]elect Telescope
 --  uC                                    No command                                                                   Colorscheme with Preview
@@ -75,7 +71,7 @@
 --  sq                                    <Cmd>Telescope quickfix<CR>                                                  Quickfix List
 --  sR                                    <Cmd>Telescope resume<CR>                                                    Resume
 --  so                                    <Cmd>Telescope vim_options<CR>                                               Options
---  sm                                    <Cmd>Telescope marks<CR>                                                     Jump to Mark
+--                                        <Cmd>Oil<CR>                                                                 open parent directory
 --  sM                                    <Cmd>Telescope man_pages<CR>                                                 Man Pages
 --  sl                                    <Cmd>Telescope loclist<CR>                                                   Location List
 --  sk                                    No command                                                                   search [K]eymaps
@@ -98,12 +94,17 @@
 --  fg                                    <Cmd>Telescope git_files<CR>                                                 Find Files (git-files)
 --  fF                                    No command                                                                   Find Files (cwd)
 --  ff                                    No command                                                                   Find Files (Root Dir)
+--  fc                                    No command                                                                   Find Config File
+--  fb                                    No command                                                                   [F]ind existing [B]uffers
+--  :                                     <Cmd>Telescope command_history<CR>                                           Command History
+--  /                                     No command                                                                   [/] Fuzzily search in current buffer
+--  ,                                     <Cmd>Telescope buffers sort_mru=true sort_lastused=true<CR>                  Switch Buffer
+--  be                                    No command                                                                   Buffer Explorer
+--  ge                                    No command                                                                   Git Explorer
 --  E                                     No command                                                                   Explorer NeoTree (cwd)
 --  e                                     No command                                                                   Explorer NeoTree (Root Dir)
 --  fE                                    No command                                                                   Explorer NeoTree (cwd)
 --  fe                                    No command                                                                   Explorer NeoTree (Root Dir)
---  be                                    No command                                                                   Buffer Explorer
---  ge                                    No command                                                                   Git Explorer
 -- %                                      <Plug>(MatchitNormalForward)                                                 No description
 -- &                                      :&&<CR>                                                                      :help &-default
 -- ,                                      No command                                                                   No description
@@ -124,8 +125,8 @@
 -- ]w                                     No command                                                                   Next Warning
 -- ]e                                     No command                                                                   Next Error
 -- ]q                                     No command                                                                   Next Quickfix
--- ]B                                     <Cmd>BufferLineMoveNext<CR>                                                  Move buffer next
 -- ]b                                     <Cmd>BufferLineCycleNext<CR>                                                 Next Buffer
+-- ]B                                     <Cmd>BufferLineMoveNext<CR>                                                  Move buffer next
 -- ]%                                     <Plug>(MatchitNormalMultiForward)                                            No description
 -- ]d                                     No command                                                                   Next Diagnostic
 -- f                                      No command                                                                   No description
