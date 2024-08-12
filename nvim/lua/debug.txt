@@ -102,8 +102,8 @@
 --  ,                                     <Cmd>Telescope buffers sort_mru=true sort_lastused=true<CR>                  Switch Buffer
 --  be                                    No command                                                                   Buffer Explorer
 --  ge                                    No command                                                                   Git Explorer
---  E                                      fE                                                                          Explorer NeoTree (cwd)
---  e                                      fe                                                                          Explorer NeoTree (Root Dir)
+--  E                                     No command                                                                   Explorer NeoTree (cwd)
+--  e                                     No command                                                                   Explorer NeoTree (Root Dir)
 --  fE                                    No command                                                                   Explorer NeoTree (cwd)
 --  fe                                    No command                                                                   Explorer NeoTree (Root Dir)
 --  cF                                    No command                                                                   Format Injected Langs
