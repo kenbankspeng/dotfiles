@@ -1,4 +1,5 @@
 -- <Esc>                                  <Cmd>noh<CR><Esc>                                                            Escape and Clear hlsearch
+--  ug                                    No command                                                                   Toggle Indention Guides
 --  gz                                    No command                                                                   logit
 --  q                                     No command                                                                   Open diagnostic [Q]uickfix list
 --  yy                                    <Cmd>Yazi cwd<CR>                                                            Open yazi at working directory
