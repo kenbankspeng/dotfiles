@@ -14,15 +14,20 @@ map("<leader>y.", "<cmd>Yazi<CR>", "Open yazi at the current file")      -- ok
 map("<leader>yy", "<cmd>Yazi cwd<CR>", "Open yazi at working directory") -- ok
 
 -- CONFORM -- autoformat
---  cF                                    No command                                                                   Format Injected Langs
+-- <leader>cF                         No command                                 Format Injected Langs
+-- <leader>cf    --ok                 No command                                 Format Code
 
+-- NEOTREE -- cannot disable
+-- <leader>E     -- ok                fE                                         Explorer NeoTree (cwd)
+-- <leader>e     -- ok                fe                                         Explorer NeoTree (Root Dir)
+-- <leader>fE                         No command                                 Explorer NeoTree (cwd)
+-- <leader>fe                         No command                                 Explorer NeoTree (Root Dir)
 
 -- GENERAL --
 -- <Esc>                       <Cmd>noh<CR><Esc>                                  Escape and Clear hlsearch
 -- <leader>fn -- ok            <Cmd>enew<CR>                                      New File
 -- <C-S> -- ok                 <Cmd>w<CR><Esc>                                    Save File
 -- <leader>qq -- ok            <Cmd>qa<CR>                                        Quit All
--- cf                          No command                                         Format
 -- ul                          No command                                         Toggle Line Numbers
 -- uL                          No command                                         Toggle Relative Number
 -- uw                          No command                                         Toggle Wrap
