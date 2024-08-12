@@ -52,30 +52,17 @@
 --  bd                                    No command                                                                   Delete Buffer
 --  `                                     <Cmd>e #<CR>                                                                 Switch to Other Buffer
 --  bb                                    <Cmd>e #<CR>                                                                 Switch to Other Buffer
---  br                                    <Cmd>BufferLineCloseRight<CR>                                                Delete Buffers to the Right
 --  bo                                    <Cmd>BufferLineCloseOthers<CR>                                               Delete Other Buffers
 --  bP                                    <Cmd>BufferLineGroupClose ungrouped<CR>                                      Delete Non-Pinned Buffers
 --  bp                                    <Cmd>BufferLineTogglePin<CR>                                                 Toggle Pin
 --  bl                                    <Cmd>BufferLineCloseLeft<CR>                                                 Delete Buffers to the Left
+--  br                                    <Cmd>BufferLineCloseRight<CR>                                                Delete Buffers to the Right
 --  up                                    No command                                                                   Toggle Mini Pairs
 --  sn                                    No command                                                                   [S]earch [N]eovim files
 --  s/                                    No command                                                                   [S]earch [/] in Open Files
 --  s.                                    No command                                                                   search Recent Files ("." for repeat)
 --  sr                                    No command                                                                   search [R]esume
 --  sf                                    No command                                                                   search [F]iles
---                                        <Cmd>Oil<CR>                                                                 open parent directory
---  sS                                    No command                                                                   Goto Symbol (Workspace)
---  ss                                    No command                                                                   search [S]elect Telescope
---  uC                                    No command                                                                   Colorscheme with Preview
---  sW                                    No command                                                                   Word (cwd)
---  sw                                    No command                                                                   search current [W]ord
---  sq                                    <Cmd>Telescope quickfix<CR>                                                  Quickfix List
---  sR                                    <Cmd>Telescope resume<CR>                                                    Resume
---  so                                    <Cmd>Telescope vim_options<CR>                                               Options
---  sm                                    <Cmd>Telescope marks<CR>                                                     Jump to Mark
---  sM                                    <Cmd>Telescope man_pages<CR>                                                 Man Pages
---  sl                                    <Cmd>Telescope loclist<CR>                                                   Location List
---  sk                                    No command                                                                   search [K]eymaps
 --  sj                                    <Cmd>Telescope jumplist<CR>                                                  Jumplist
 --  sH                                    <Cmd>Telescope highlights<CR>                                                Search Highlight Groups
 --  sh                                    No command                                                                   search [H]elp
@@ -94,18 +81,31 @@
 --  fr                                    <Cmd>Telescope oldfiles<CR>                                                  Recent
 --  fg                                    <Cmd>Telescope git_files<CR>                                                 Find Files (git-files)
 --  fF                                    No command                                                                   Find Files (cwd)
---  ff                                    No command                                                                   Find Files (Root Dir)
+--                                        <Cmd>Oil<CR>                                                                 open parent directory
 --  fc                                    No command                                                                   Find Config File
 --  fb                                    No command                                                                   [F]ind existing [B]uffers
 --  :                                     <Cmd>Telescope command_history<CR>                                           Command History
 --  /                                     No command                                                                   [/] Fuzzily search in current buffer
 --  ,                                     <Cmd>Telescope buffers sort_mru=true sort_lastused=true<CR>                  Switch Buffer
+--  ff                                    No command                                                                   Find Files (Root Dir)
+--  sS                                    No command                                                                   Goto Symbol (Workspace)
+--  ss                                    No command                                                                   search [S]elect Telescope
+--  uC                                    No command                                                                   Colorscheme with Preview
+--  sW                                    No command                                                                   Word (cwd)
+--  sw                                    No command                                                                   search current [W]ord
+--  sq                                    <Cmd>Telescope quickfix<CR>                                                  Quickfix List
+--  sR                                    <Cmd>Telescope resume<CR>                                                    Resume
+--  so                                    <Cmd>Telescope vim_options<CR>                                               Options
+--  sm                                    <Cmd>Telescope marks<CR>                                                     Jump to Mark
+--  sM                                    <Cmd>Telescope man_pages<CR>                                                 Man Pages
+--  sl                                    <Cmd>Telescope loclist<CR>                                                   Location List
+--  sk                                    No command                                                                   search [K]eymaps
+--  fe                                    No command                                                                   Explorer NeoTree (Root Dir)
 --  be                                    No command                                                                   Buffer Explorer
 --  ge                                    No command                                                                   Git Explorer
 --  E                                     No command                                                                   Explorer NeoTree (cwd)
 --  e                                     No command                                                                   Explorer NeoTree (Root Dir)
 --  fE                                    No command                                                                   Explorer NeoTree (cwd)
---  fe                                    No command                                                                   Explorer NeoTree (Root Dir)
 --  cF                                    No command                                                                   Format Injected Langs
 -- %                                      <Plug>(MatchitNormalForward)                                                 No description
 -- &                                      :&&<CR>                                                                      :help &-default
@@ -115,6 +115,7 @@
 -- H                                      <Cmd>BufferLineCyclePrev<CR>                                                 Prev Buffer
 -- L                                      <Cmd>BufferLineCycleNext<CR>                                                 Next Buffer
 -- N                                      'nN'[v:searchforward].'zv'                                                   Prev Search Result
+-- S                                      No command                                                                   Flash Treesitter
 -- T                                      No command                                                                   No description
 -- Y                                      y$                                                                           :help Y-default
 -- [w                                     No command                                                                   Prev Warning
@@ -143,7 +144,6 @@
 -- j                                      v:count == 0 ? 'gj' : 'j'                                                    Down
 -- k                                      v:count == 0 ? 'gk' : 'k'                                                    Up
 -- n                                      'Nn'[v:searchforward].'zv'                                                   Next Search Result
--- S                                      No command                                                                   Flash Treesitter
 -- s                                      No command                                                                   Flash
 -- t                                      No command                                                                   No description
 -- <C-_>                                  No command                                                                   which_key_ignore
