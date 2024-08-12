@@ -78,7 +78,7 @@
 --  gs                                    <Cmd>Telescope git_status<CR>                                                Status
 --  gc                                    <Cmd>Telescope git_commits<CR>                                               Commits
 --  fR                                    No command                                                                   Recent (cwd)
---  fr                                    <Cmd>Telescope oldfiles<CR>                                                  Recent
+--  fr                                    No command                                                                   Find and Replace
 --  fg                                    <Cmd>Telescope git_files<CR>                                                 Find Files (git-files)
 --  fF                                    No command                                                                   Find Files (cwd)
 --                                        <Cmd>Oil<CR>                                                                 open parent directory
