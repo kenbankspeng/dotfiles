@@ -162,6 +162,12 @@ end, "[S]earch [N]eovim files")
 -- gl                    No command                               Lazygit Log
 -- gf                    No command                               Lazygit Current File History
 
+-- FLASH -- ok
+-- S                     No command                               Flash Treesitter
+-- s                     No command                               Flash
+
+
+
 -- HELP --
 -- &                     :&&<CR>                                  :help &-default
 -- Y                     y$                                       :help Y-default

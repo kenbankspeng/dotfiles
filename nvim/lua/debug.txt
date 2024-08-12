@@ -143,6 +143,8 @@
 -- j                                      v:count == 0 ? 'gj' : 'j'                                                    Down
 -- k                                      v:count == 0 ? 'gk' : 'k'                                                    Up
 -- n                                      'Nn'[v:searchforward].'zv'                                                   Next Search Result
+-- S                                      No command                                                                   Flash Treesitter
+-- s                                      No command                                                                   Flash
 -- t                                      No command                                                                   No description
 -- <C-_>                                  No command                                                                   which_key_ignore
 -- <C-/>                                  No command                                                                   Terminal (Root Dir)
