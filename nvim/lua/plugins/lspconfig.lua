@@ -1,4 +1,5 @@
 return {
-  'neovim/nvim-lspconfig',
-  keys = function() return {} end -- remove lazyvim keymaps
+  {
+    'neovim/nvim-lspconfig',
+  }
 }
