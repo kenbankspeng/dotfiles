@@ -13,6 +13,10 @@ map("<leader><leader>", "<cmd>Oil<CR>", "open parent directory") -- ok
 map("<leader>y.", "<cmd>Yazi<CR>", "Open yazi at the current file")      -- ok
 map("<leader>yy", "<cmd>Yazi cwd<CR>", "Open yazi at working directory") -- ok
 
+-- CONFORM -- autoformat
+--  cF                                    No command                                                                   Format Injected Langs
+
+
 -- GENERAL --
 -- <Esc>                       <Cmd>noh<CR><Esc>                                  Escape and Clear hlsearch
 -- <leader>fn -- ok            <Cmd>enew<CR>                                      New File

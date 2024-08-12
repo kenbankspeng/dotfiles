@@ -1,4 +1,6 @@
+-- autoformat code
+-- no keys
 return {
   'stevearc/conform.nvim',
-  -- keys = function() return {} end -- remove lazyvim keymaps
+  -- TODO: review languages and formats
 }

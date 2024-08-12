@@ -1,3 +1,4 @@
+-- no keys
 return {
   {
     -- use `:Telescope colorscheme` to see all available colorschemes.
