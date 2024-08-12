@@ -250,6 +250,9 @@ map('<leader>q', vim.diagnostic.setloclist, 'Open diagnostic [Q]uickfix list')
 -- [%                                     <Plug>(MatchitNormalMultiBackward)                 No description
 
 
+local function logit()
+  print('logit!')
+  require('config.helpers.logKeys')('n', '/Users/ken/Documents/Software/DevBox/dotfiles/nvim/lua/debug.txt')
+end
 
-local logKeys = require('config.helpers.logKeys')
-logKeys('n', '/Users/ken/Documents/Software/DevBox/dotfiles/nvim/lua/debug.txt')
+map('<leader>gz', logit, 'logit')
