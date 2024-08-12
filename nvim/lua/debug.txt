@@ -52,18 +52,18 @@
 --  bd                                    No command                                                                   Delete Buffer
 --  `                                     <Cmd>e #<CR>                                                                 Switch to Other Buffer
 --  bb                                    <Cmd>e #<CR>                                                                 Switch to Other Buffer
---  bl                                    <Cmd>BufferLineCloseLeft<CR>                                                 Delete Buffers to the Left
 --  br                                    <Cmd>BufferLineCloseRight<CR>                                                Delete Buffers to the Right
 --  bo                                    <Cmd>BufferLineCloseOthers<CR>                                               Delete Other Buffers
 --  bP                                    <Cmd>BufferLineGroupClose ungrouped<CR>                                      Delete Non-Pinned Buffers
 --  bp                                    <Cmd>BufferLineTogglePin<CR>                                                 Toggle Pin
+--  bl                                    <Cmd>BufferLineCloseLeft<CR>                                                 Delete Buffers to the Left
 --  up                                    No command                                                                   Toggle Mini Pairs
 --  sn                                    No command                                                                   [S]earch [N]eovim files
 --  s/                                    No command                                                                   [S]earch [/] in Open Files
 --  s.                                    No command                                                                   search Recent Files ("." for repeat)
 --  sr                                    No command                                                                   search [R]esume
 --  sf                                    No command                                                                   search [F]iles
---  sm                                    <Cmd>Telescope marks<CR>                                                     Jump to Mark
+--                                        <Cmd>Oil<CR>                                                                 open parent directory
 --  sS                                    No command                                                                   Goto Symbol (Workspace)
 --  ss                                    No command                                                                   search [S]elect Telescope
 --  uC                                    No command                                                                   Colorscheme with Preview
@@ -72,7 +72,7 @@
 --  sq                                    <Cmd>Telescope quickfix<CR>                                                  Quickfix List
 --  sR                                    <Cmd>Telescope resume<CR>                                                    Resume
 --  so                                    <Cmd>Telescope vim_options<CR>                                               Options
---                                        <Cmd>Oil<CR>                                                                 open parent directory
+--  sm                                    <Cmd>Telescope marks<CR>                                                     Jump to Mark
 --  sM                                    <Cmd>Telescope man_pages<CR>                                                 Man Pages
 --  sl                                    <Cmd>Telescope loclist<CR>                                                   Location List
 --  sk                                    No command                                                                   search [K]eymaps
@@ -102,8 +102,8 @@
 --  ,                                     <Cmd>Telescope buffers sort_mru=true sort_lastused=true<CR>                  Switch Buffer
 --  be                                    No command                                                                   Buffer Explorer
 --  ge                                    No command                                                                   Git Explorer
---  E                                      fE                                                                          Explorer NeoTree (cwd)
---  e                                      fe                                                                          Explorer NeoTree (Root Dir)
+--  E                                     No command                                                                   Explorer NeoTree (cwd)
+--  e                                     No command                                                                   Explorer NeoTree (Root Dir)
 --  fE                                    No command                                                                   Explorer NeoTree (cwd)
 --  fe                                    No command                                                                   Explorer NeoTree (Root Dir)
 --  cF                                    No command                                                                   Format Injected Langs
@@ -120,8 +120,8 @@
 -- [w                                     No command                                                                   Prev Warning
 -- [e                                     No command                                                                   Prev Error
 -- [q                                     No command                                                                   Previous Quickfix
--- [B                                     <Cmd>BufferLineMovePrev<CR>                                                  Move buffer prev
 -- [b                                     <Cmd>BufferLineCyclePrev<CR>                                                 Prev Buffer
+-- [B                                     <Cmd>BufferLineMovePrev<CR>                                                  Move buffer prev
 -- [%                                     <Plug>(MatchitNormalMultiBackward)                                           No description
 -- [d                                     No command                                                                   Prev Diagnostic
 -- ]w                                     No command                                                                   Next Warning
