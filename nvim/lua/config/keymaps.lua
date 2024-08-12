@@ -1,4 +1,6 @@
+--
 -- Keymaps are automatically loaded on the VeryLazy event
+--
 
 local map = function(keys, func, desc)
   vim.keymap.set("n", keys, func, { desc = desc })
@@ -10,7 +12,7 @@ end
 map("<leader><leader>", "<cmd>Oil<CR>", "open parent directory") -- ok
 
 -- YAZI --
-map("<leader>y.", "<cmd>Yazi<CR>", "Open yazi at the current file")      -- ok
+map("<leader>y.", "<cmd>Yazi<CR>", "Open yazi at the current file") -- ok
 map("<leader>yy", "<cmd>Yazi cwd<CR>", "Open yazi at working directory") -- ok
 
 -- CONFORM -- autoformat
@@ -82,16 +84,16 @@ map("<leader>yy", "<cmd>Yazi cwd<CR>", "Open yazi at working directory") -- ok
 
 -- TELESCOPE -- ok -- See `:help telescope.builtin`
 local builtin = require("telescope.builtin")
-map("<leader>sh", builtin.help_tags, "search [H]elp")                       -- ok
-map("<leader>sk", builtin.keymaps, "search [K]eymaps")                      -- ok
-map("<leader>sf", builtin.find_files, "search [F]iles")                     -- ok
-map("<leader>ss", builtin.builtin, "search [S]elect Telescope")             -- ok
-map("<leader>sw", builtin.grep_string, "search current [W]ord")             -- ok
-map("<leader>sg", builtin.live_grep, "search by [G]rep")                    -- ok
-map("<leader>sd", builtin.diagnostics, "search [D]iagnostics")              -- ok
-map("<leader>sr", builtin.resume, "search [R]esume")                        -- ok
+map("<leader>sh", builtin.help_tags, "search [H]elp") -- ok
+map("<leader>sk", builtin.keymaps, "search [K]eymaps") -- ok
+map("<leader>sf", builtin.find_files, "search [F]iles") -- ok
+map("<leader>ss", builtin.builtin, "search [S]elect Telescope") -- ok
+map("<leader>sw", builtin.grep_string, "search current [W]ord") -- ok
+map("<leader>sg", builtin.live_grep, "search by [G]rep") -- ok
+map("<leader>sd", builtin.diagnostics, "search [D]iagnostics") -- ok
+map("<leader>sr", builtin.resume, "search [R]esume") -- ok
 map("<leader>s.", builtin.oldfiles, 'search Recent Files ("." for repeat)') -- ok
-map("<leader>fb", builtin.buffers, "[F]ind existing [B]uffers")             -- ok
+map("<leader>fb", builtin.buffers, "[F]ind existing [B]uffers") -- ok
 
 -- defined in lsp-nvim-lspconfig.lua as autocmd
 --
@@ -153,10 +155,8 @@ end, "[S]earch [N]eovim files")
 --  <leader>ff           No command                               Find Files (Root Dir)
 --  <leader>fc           No command                               Find Config File
 
-
 -- GRUG-FAR -- ** conflict with Telescope
 map("<leader>fr", require("config.helpers.find_replace"), "Find and Replace")
-
 
 -- GIT -- ok
 -- gB                    No command                               Git Browse
@@ -170,8 +170,6 @@ map("<leader>fr", require("config.helpers.find_replace"), "Find and Replace")
 -- FLASH -- ok
 -- S                     No command                               Flash Treesitter
 -- s                     No command                               Flash
-
-
 
 -- HELP --
 -- &                     :&&<CR>                                  :help &-default
@@ -256,3 +254,5 @@ local function logit()
 end
 
 map("<leader>gz", logit, "logit")
+
+-- the end --
