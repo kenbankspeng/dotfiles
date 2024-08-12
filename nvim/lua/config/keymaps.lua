@@ -141,7 +141,7 @@ end, "[S]earch [N]eovim files")
 --  <leader>s"           <Cmd>Telescope registers<CR>             Registers
 --  <leader>gs           <Cmd>Telescope git_status<CR>            Status
 --  <leader>gc           <Cmd>Telescope git_commits<CR>           Commits
---  <leader>fr           <Cmd>Telescope oldfiles<CR>              Recent
+--  <leader>fr    **     <Cmd>Telescope oldfiles<CR>              Recent
 --  <leader>fg           <Cmd>Telescope git_files<CR>             Find Files (git-files)
 --  <leader>sq           <Cmd>Telescope quickfix<CR>              Quickfix List
 --  <leader>sW           No command                               Word (cwd)
@@ -152,6 +152,11 @@ end, "[S]earch [N]eovim files")
 --  <leader>fF           No command                               Find Files (cwd)
 --  <leader>ff           No command                               Find Files (Root Dir)
 --  <leader>fc           No command                               Find Config File
+
+
+-- GRUG-FAR -- ** conflict with Telescope
+map("<leader>fr", require("config.helpers.find_replace"), "Find and Replace")
+
 
 -- GIT -- ok
 -- gB                    No command                               Git Browse

@@ -1,4 +1,4 @@
+-- find and replace across files
 return {
   'MagicDuck/grug-far.nvim',
-  keys = function() return {} end -- remove lazyvim keymaps
 }
