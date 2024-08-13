@@ -1,4 +1,3 @@
 return {
-  'akinsho/bufferline.nvim',
-  -- keys = function() return {} end -- remove lazyvim keymaps
+  { 'akinsho/bufferline.nvim', enabled = false }
 }

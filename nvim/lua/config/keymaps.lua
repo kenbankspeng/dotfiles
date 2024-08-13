@@ -1,3 +1,37 @@
+-- <Nul> CTRL-@, <BS>	backspace	CTRL-H, <Tab> tab CTRL-I,
+-- <NL> linefeed CTRL-J, <CR> carriage return CTRL-M,
+-- <Esc> escape, <Space> space, <lt> less-than
+-- <Bslash>	backslash, <Bar> vertical bar |, <Del> delete
+-- <EOL> end-of-line (can be <CR>, <NL> or <CR><NL>,
+-- <NOP> no-op: do nothing (useful in mappings)
+-- <Up> cursor-up, <Down> cursor-down, <Left> cursor-left, <Right> cursor-right
+-- <F1> - <F12>	function keys 1 to 12
+-- <S-F1> - <S-F12> shift-function keys 1 to 12	<S-F1>
+-- <Home> home (fn-left), <End> end (fn-right), <PageUp> fn-up, <PageDown> fn-down
+-- <S-…> shift-key, <C-…> control-key		
+-- <A-…> or <M-…> alt-key or meta-key, <D-…> command-key or "super" key
+
+
+--
+-- Delete unwanted LazyVim mappings
+--
+
+-- LAZY --
+vim.keymap.del('n', '<leader>L') -- LazyVim Changelog
+vim.keymap.del('n', '<leader>K') -- man keyword lookup
+vim.keymap.del('n', "<C-Up>")    -- Resize window
+vim.keymap.del('n', "<C-Down>")  -- Resize window
+vim.keymap.del('n', "<C-Left>")  -- Resize window
+vim.keymap.del('n', "<C-Right>") -- Resize window
+
+
+-- NEOTREE -- cannot disable - so remove keys
+vim.keymap.del('n', '<leader>E')  -- Explorer NeoTree (cwd)
+vim.keymap.del('n', '<leader>e')  -- Explorer NeoTree (Root Dir)
+vim.keymap.del('n', '<leader>fE') -- Explorer NeoTree (cwd)
+vim.keymap.del('n', '<leader>fe') -- Explorer NeoTree (Root Dir)
+
+
 --
 -- Keymaps are automatically loaded on the VeryLazy event
 --
@@ -193,10 +227,10 @@ map("<leader>fr", require("config.helpers.find_replace"), "Find and Replace")
 -- <C-K>                 <C-W>k                                             Go to Upper Window
 -- <C-J>                 <C-W>j                                             Go to Lower Window
 -- <C-H>                 <C-W>h                                             Go to Left Window
--- <C-Right>             <Cmd>vertical resize +2<CR>                        Increase Window Width
--- <C-Left>              <Cmd>vertical resize -2<CR>                        Decrease Window Width
--- <C-Down>              <Cmd>resize -2<CR>                                 Decrease Window Height
--- <C-Up>                <Cmd>resize +2<CR>                                 Increase Window Height
+map("<S-Up>", "<cmd>resize +2<cr>", "Increase Window Height")
+map("<S-Down>", "<cmd>resize -2<cr>", "Decrease Window Height")
+map("<S-Left>", "<cmd>vertical resize -2<cr>", "Decrease Window Width")
+map("<S-Right>", "<cmd>vertical resize +2<cr>", "Increase Window Width")
 
 -- TERMINAL --
 -- fT                                     No command                                         Terminal (cwd)
@@ -244,20 +278,6 @@ map("<leader>q", vim.diagnostic.setloclist, "Open diagnostic [Q]uickfix list")
 
 
 --
--- Delete unwanted LazyVim mappings
---
-
--- NEOTREE -- cannot disable - so remove keys
-vim.keymap.del('n', '<leader>E')  -- Explorer NeoTree (cwd)
-vim.keymap.del('n', '<leader>e')  -- Explorer NeoTree (Root Dir)
-vim.keymap.del('n', '<leader>fE') -- Explorer NeoTree (cwd)
-vim.keymap.del('n', '<leader>fe') -- Explorer NeoTree (Root Dir)
-
--- LAZY --
-vim.keymap.del('n', '<leader>L') -- LazyVim Changelog
-
-
---
 -- Log the keys
 --
 
@@ -267,5 +287,3 @@ local function logit()
 end
 
 map("<leader>gz", logit, "logit")
-
--- hmmm --
