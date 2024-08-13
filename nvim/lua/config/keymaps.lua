@@ -12,18 +12,12 @@ end
 map("<leader><leader>", "<cmd>Oil<CR>", "open parent directory") -- ok
 
 -- YAZI --
-map("<leader>y.", "<cmd>Yazi<CR>", "Open yazi at the current file") -- ok
+map("<leader>y.", "<cmd>Yazi<CR>", "Open yazi at the current file")      -- ok
 map("<leader>yy", "<cmd>Yazi cwd<CR>", "Open yazi at working directory") -- ok
 
 -- CONFORM -- autoformat
 -- <leader>cF                         No command                                 Format Injected Langs
 -- <leader>cf    --ok                 No command                                 Format Code
-
--- NEOTREE -- cannot disable
--- <leader>E     -- ok                fE                                         Explorer NeoTree (cwd)
--- <leader>e     -- ok                fe                                         Explorer NeoTree (Root Dir)
--- <leader>fE                         No command                                 Explorer NeoTree (cwd)
--- <leader>fe                         No command                                 Explorer NeoTree (Root Dir)
 
 -- GENERAL --
 -- <Esc>                       <Cmd>noh<CR><Esc>                                  Escape and Clear hlsearch
@@ -84,16 +78,16 @@ map("<leader>yy", "<cmd>Yazi cwd<CR>", "Open yazi at working directory") -- ok
 
 -- TELESCOPE -- ok -- See `:help telescope.builtin`
 local builtin = require("telescope.builtin")
-map("<leader>sh", builtin.help_tags, "search [H]elp") -- ok
-map("<leader>sk", builtin.keymaps, "search [K]eymaps") -- ok
-map("<leader>sf", builtin.find_files, "search [F]iles") -- ok
-map("<leader>ss", builtin.builtin, "search [S]elect Telescope") -- ok
-map("<leader>sw", builtin.grep_string, "search current [W]ord") -- ok
-map("<leader>sg", builtin.live_grep, "search by [G]rep") -- ok
-map("<leader>sd", builtin.diagnostics, "search [D]iagnostics") -- ok
-map("<leader>sr", builtin.resume, "search [R]esume") -- ok
+map("<leader>sh", builtin.help_tags, "search [H]elp")                       -- ok
+map("<leader>sk", builtin.keymaps, "search [K]eymaps")                      -- ok
+map("<leader>sf", builtin.find_files, "search [F]iles")                     -- ok
+map("<leader>ss", builtin.builtin, "search [S]elect Telescope")             -- ok
+map("<leader>sw", builtin.grep_string, "search current [W]ord")             -- ok
+map("<leader>sg", builtin.live_grep, "search by [G]rep")                    -- ok
+map("<leader>sd", builtin.diagnostics, "search [D]iagnostics")              -- ok
+map("<leader>sr", builtin.resume, "search [R]esume")                        -- ok
 map("<leader>s.", builtin.oldfiles, 'search Recent Files ("." for repeat)') -- ok
-map("<leader>fb", builtin.buffers, "[F]ind existing [B]uffers") -- ok
+map("<leader>fb", builtin.buffers, "[F]ind existing [B]uffers")             -- ok
 
 -- defined in lsp-nvim-lspconfig.lua as autocmd
 --
@@ -247,6 +241,25 @@ map("<leader>q", vim.diagnostic.setloclist, "Open diagnostic [Q]uickfix list")
 -- ]%                                     <Plug>(MatchitNormalMultiForward)                  No description
 -- %                                      <Plug>(MatchitNormalForward)                       No description
 -- [%                                     <Plug>(MatchitNormalMultiBackward)                 No description
+
+
+--
+-- Delete unwanted LazyVim mappings
+--
+
+-- NEOTREE -- cannot disable - so remove keys
+vim.keymap.del('n', '<leader>E')  -- Explorer NeoTree (cwd)
+vim.keymap.del('n', '<leader>e')  -- Explorer NeoTree (Root Dir)
+vim.keymap.del('n', '<leader>fE') -- Explorer NeoTree (cwd)
+vim.keymap.del('n', '<leader>fe') -- Explorer NeoTree (Root Dir)
+
+-- LAZY --
+vim.keymap.del('n', '<leader>L') -- LazyVim Changelog
+
+
+--
+-- Log the keys
+--
 
 local function logit()
   print("logit!")
