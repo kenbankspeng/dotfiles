@@ -80,7 +80,7 @@ map("<leader>hn", function() harpoon:list():next() end, "harpoon next")
 -- GENERAL --
 
 -- custom quit command because using bufferline
-command('Q', vim.api.nvim_buf_delete(0, {}), {})
+command('Q', function() vim.api.nvim_buf_delete(0, {}) end, {})
 
 -- <Esc>                       <Cmd>noh<CR><Esc>                                  Escape and Clear hlsearch
 -- <leader>fn -- ok            <Cmd>enew<CR>                                      New File
