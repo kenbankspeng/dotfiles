@@ -1,4 +1,10 @@
-return function(mode, filepath)
+local function deleteAll(mode)
+  for _, keymap in ipairs(vim.api.nvim_get_keymap(mode)) do
+    vim.keymap.del(mode, keymap.lhs)
+  end
+end
+
+local function log(mode, filepath)
   local keymaps = vim.api.nvim_get_keymap(mode)
   local file = io.open(filepath, "w")
 
@@ -47,3 +53,9 @@ return function(mode, filepath)
     print("Error: Unable to open file " .. filepath)
   end
 end
+
+-- key management
+return {
+  delete = deleteAll,
+  log = log
+}

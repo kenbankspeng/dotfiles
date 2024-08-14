@@ -301,7 +301,7 @@ end, "[S]earch [N]eovim files")
 --  <leader>fc           No command                               Find Config File
 
 -- GRUG-FAR -- ** conflict with Telescope
-map("<leader>fr", require("config.helpers.find_replace"), "Find and Replace")
+map("<leader>fr", require("config.helpers.grug_far").find_replace, "Find and Replace")
 
 -- GIT -- ok
 -- gB                    No command                               Git Browse
@@ -400,7 +400,7 @@ map("<leader>qf", vim.diagnostic.setloclist, "Open diagnostic [Q]uickfix list")
 
 local function logit()
   print("logit!")
-  require("config.helpers.logKeys")("n", "/Users/ken/Documents/Software/DevBox/dotfiles/nvim/lua/debug.txt")
+  require("config.helpers.keys").log("n", "/Users/ken/Documents/Software/DevBox/dotfiles/nvim/lua/debug.txt")
 end
 
 map("<leader>gz", logit, "logit")
