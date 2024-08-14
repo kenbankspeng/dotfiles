@@ -45,7 +45,7 @@ return {
       -- Window-local options to use for oil buffers
       win_options = {
         wrap = false,
-        signcolumn = "no",
+        signcolumn = "yes:2",
         cursorcolumn = false,
         foldcolumn = "0",
         spell = false,
@@ -108,7 +108,7 @@ return {
 
         is_hidden_file = function(name, bufnr)
           -- dotfiles are always considered hidden
-          if vim.startswith(name, ".") and name ~= ".." then
+          if vim.startswith(name, ".") then
             return true
           end
           local dir = require("oil").get_current_dir()
