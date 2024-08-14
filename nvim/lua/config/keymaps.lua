@@ -17,6 +17,7 @@
 
 -- helpers
 local command = vim.api.nvim_create_user_command
+local del = vim.keymap.del
 local map = function(keys, func, desc)
   vim.keymap.set("n", keys, func, { desc = desc })
 end
@@ -100,56 +101,66 @@ vim.api.nvim_set_keymap('n', 'q', ':bdelete<CR>', { noremap = true, silent = tru
 
 
 --
--- Delete unwanted LazyVim/Plugin mappings
+-- DELETE unwanted LazyVim/Plugin mappings
 --
 
 -- LAZY --
-vim.keymap.del('n', '<leader>L')  -- LazyVim Changelog
-vim.keymap.del('n', '<leader>K')  -- man keyword lookup
-vim.keymap.del('n', "<C-Up>")     -- Resize window
-vim.keymap.del('n', "<C-Down>")   -- Resize window
-vim.keymap.del('n', "<C-Left>")   -- Resize window
-vim.keymap.del('n', "<C-Right>")  -- Resize window
-vim.keymap.del('n', "<leader>qq") -- quit all
+del('n', '<leader>L')          -- LazyVim Changelog
+del('n', '<leader>K')          -- man keyword lookup
+del('n', "<C-Up>")             -- Resize window
+del('n', "<C-Down>")           -- Resize window
+del('n', "<C-Left>")           -- Resize window
+del('n', "<C-Right>")          -- Resize window
+del('n', "<leader>qq")         -- quit all
+
+del('n', "<leader><Tab>[")     -- real vim tabs
+del('n', "<leader><Tab>d")     -- real vim tabs
+del('n', "<leader><Tab>]")     -- real vim tabs
+del('n', "<leader><Tab><Tab>") -- real vim tabs
+del('n', "<leader><Tab>f")     -- real vim tabs
+del('n', "<leader><Tab>o")     -- real vim tabs
+del('n', "<leader><Tab>l")     -- real vim tabs
+
+del('n', "[b")                 -- Prev Buffer
+del('n', "]b")                 -- Next Buffer
+del('n', '<leader>bl')         -- Delete Buffers to the Left
+del('n', '<leader>br')         -- Delete Buffers to the Right
+del('n', '<leader>bo')         -- Delete Other Buffers
+del('n', '<leader>bP')         -- Delete Non-Pinned Buffers
+del('n', '<leader>bp')         -- Toggle Pin
+
+
 
 -- NEOTREE -- cannot disable - so remove keys
-vim.keymap.del('n', '<leader>E')  -- Explorer NeoTree (cwd)
-vim.keymap.del('n', '<leader>e')  -- Explorer NeoTree (Root Dir)
-vim.keymap.del('n', '<leader>fE') -- Explorer NeoTree (cwd)
-vim.keymap.del('n', '<leader>fe') -- Explorer NeoTree (Root Dir)
+del('n', '<leader>E')  -- Explorer NeoTree (cwd)
+del('n', '<leader>e')  -- Explorer NeoTree (Root Dir)
+del('n', '<leader>fE') -- Explorer NeoTree (cwd)
+del('n', '<leader>fe') -- Explorer NeoTree (Root Dir)
 
 
 --
 -- Add/modify key mappings
 -- nvim/lazy defaults shown in comments
 --
-local oil = require("oil")
-local actions = require("oil.actions")
-local function right()
-  local entry = oil.get_cursor_entry()
-  if entry ~= nil and entry.type == "directory" then
-    -- print(vim.inspect(entry))
-    actions.select.callback()
-  else
-    -- go right
-    vim.api.nvim_feedkeys('l', 'n', false)
-  end
-end
-
 
 -- OIL --
 -- oil has a bug which prevents me from setting all the keymaps here
 -- See :help oil-actions for a list of all available actions
-local detail = false
-
-map("<leader><leader>", "<cmd>Oil --float<CR>", "open parent directory")     -- ok
-map("gd", require("config.helpers.oil").toggle_detail, "toggle Oil details") -- no leader
-map("<left>", actions.parent.callback, "parent")
-map("<right>", right, "right")
+local detail = false -- used in oil_helper
+local actions = require("oil.actions")
+local oil_helper = require("config.helpers.oil")
+local toggle_detail = oil_helper.toggle_detail
+local mux = oil_helper.mux
+local go_right = oil_helper.go_right
+local go_left = oil_helper.go_left
+local maybe_go_right_maybe_cd = oil_helper.maybe_go_right_maybe_cd
+map("<leader><leader>", "<cmd>Oil --float<CR>", "open parent directory") -- ok
+map("gd", function() toggle_detail(detail) end, "toggle Oil details")    -- no leader
+map("<left>", mux(go_left, actions.parent.callback), "parent")
+map("<right>", mux(go_right, maybe_go_right_maybe_cd), "right")
 --   g?             actions.show_help
 --   g.             actions.toggle_hidden
 -- <CR>             actions.select
--- <C-s>            actions.select  opts = { vertical = true }     Open the entry in a vertical split
 -- <C-h>            actions.select  opts = { horizontal = true }   Open the entry in a horizontal split
 -- <C-t>            actions.select  opts = { tab = true }          Open the entry in new tab
 -- <C-p>            actions.preview
@@ -162,6 +173,12 @@ map("<right>", right, "right")
 --   gs             actions.change_sort
 --   gx             actions.open_external
 --   g\\            actions.toggle_trash
+
+-- BUFFERS (using bufferline, emulating tabs)
+map("H", "<Cmd>BufferLineCyclePrev<CR>", "Prev Buffer")
+map("L", "<Cmd>BufferLineCycleNext<CR>", "Next Buffer")
+map("<S-Tab>", "<Cmd>BufferLineCyclePrev<CR>", "Prev Buffer")
+map("<Tab>", "<Cmd>BufferLineCycleNext<CR>", "Next Buffer")
 
 -- YAZI --
 map("<leader>y.", "<cmd>Yazi<CR>", "Open yazi at the current file")      -- ok
@@ -218,25 +235,6 @@ command('Q', function() vim.api.nvim_buf_delete(0, {}) end, {})
 -- t                           No command                                         No description
 -- <C-_>                       No command                                         which_key_ignore
 -- gx                          No command                                         Opens filepath or URI under cursor with the system handler (file explorer, web browser, …)
-
--- TABS/BUFFERS -- half ok
--- H  -- ok                    <Cmd>BufferLineCyclePrev<CR>                       Prev Buffer
--- L  -- ok                    <Cmd>BufferLineCycleNext<CR>                       Next Buffer
--- [b -- ok                    <Cmd>BufferLineCyclePrev<CR>                       Prev Buffer
--- ]b -- ok                    <Cmd>BufferLineCycleNext<CR>                       Next Buffer
--- <leader>bl -- ok            <Cmd>BufferLineCloseLeft<CR>                       Delete Buffers to the Left
--- <leader>br -- ok            <Cmd>BufferLineCloseRight<CR>                      Delete Buffers to the Right
--- <leader>bo -- ok            <Cmd>BufferLineCloseOthers<CR>                     Delete Other Buffers
--- <leader>bP -- ok            <Cmd>BufferLineGroupClose ungrouped<CR>            Delete Non-Pinned Buffers
--- <leader>bp -- ok            <Cmd>BufferLineTogglePin<CR>                       Toggle Pin
-
--- <leader><Tab>[    -- buggy? <Cmd>tabprevious<CR>                               Previous Tab
--- <leader><Tab>d    -- buggy? <Cmd>tabclose<CR>                                  Close Tab
--- <leader><Tab>]    -- buggy? <Cmd>tabnext<CR>                                   Next Tab
--- <leader><Tab><Tab> - buggy? <Cmd>tabnew<CR>                                    New Tab
--- <leader><Tab>f    -- buggy? <Cmd>tabfirst<CR>                                  First Tab
--- <leader><Tab>o    -- buggy? <Cmd>tabonly<CR>                                   Close Other Tabs
--- <leader><Tab>l    -- buggy? <Cmd>tablast<CR>                                   Last Tab
 
 -- SEARCH -- ok
 -- ?   -- ok
