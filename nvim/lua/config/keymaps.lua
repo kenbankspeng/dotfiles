@@ -123,13 +123,29 @@ vim.keymap.del('n', '<leader>fe') -- Explorer NeoTree (Root Dir)
 -- Add/modify key mappings
 -- nvim/lazy defaults shown in comments
 --
+local oil = require("oil")
+local actions = require("oil.actions")
+local function right()
+  local entry = oil.get_cursor_entry()
+  if entry ~= nil and entry.type == "directory" then
+    -- print(vim.inspect(entry))
+    actions.select.callback()
+  else
+    -- go right
+    vim.api.nvim_feedkeys('l', 'n', false)
+  end
+end
+
 
 -- OIL --
 -- oil has a bug which prevents me from setting all the keymaps here
 -- See :help oil-actions for a list of all available actions
 local detail = false
+
 map("<leader><leader>", "<cmd>Oil --float<CR>", "open parent directory")     -- ok
 map("gd", require("config.helpers.oil").toggle_detail, "toggle Oil details") -- no leader
+map("<left>", actions.parent.callback, "parent")
+map("<right>", right, "right")
 --   g?             actions.show_help
 --   g.             actions.toggle_hidden
 -- <CR>             actions.select
