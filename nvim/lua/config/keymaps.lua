@@ -13,17 +13,34 @@
 
 
 --
+-- Keymaps are automatically loaded on the VeryLazy event
+--
+
+
+-- command_override
+local command = vim.api.nvim_create_user_command
+
+
+
+
+-- custom keymaps
+local map = function(keys, func, desc)
+  vim.keymap.set("n", keys, func, { desc = desc })
+end
+
+
+--
 -- Delete unwanted LazyVim mappings
 --
 
 -- LAZY --
-vim.keymap.del('n', '<leader>L') -- LazyVim Changelog
-vim.keymap.del('n', '<leader>K') -- man keyword lookup
-vim.keymap.del('n', "<C-Up>")    -- Resize window
-vim.keymap.del('n', "<C-Down>")  -- Resize window
-vim.keymap.del('n', "<C-Left>")  -- Resize window
-vim.keymap.del('n', "<C-Right>") -- Resize window
-
+vim.keymap.del('n', '<leader>L')  -- LazyVim Changelog
+vim.keymap.del('n', '<leader>K')  -- man keyword lookup
+vim.keymap.del('n', "<C-Up>")     -- Resize window
+vim.keymap.del('n', "<C-Down>")   -- Resize window
+vim.keymap.del('n', "<C-Left>")   -- Resize window
+vim.keymap.del('n', "<C-Right>")  -- Resize window
+vim.keymap.del('n', "<leader>qq") -- quit all
 
 -- NEOTREE -- cannot disable - so remove keys
 vim.keymap.del('n', '<leader>E')  -- Explorer NeoTree (cwd)
@@ -33,19 +50,9 @@ vim.keymap.del('n', '<leader>fe') -- Explorer NeoTree (Root Dir)
 
 
 --
--- Keymaps are automatically loaded on the VeryLazy event
+-- Add/modify key mappings
+-- nvim/lazy defaults shown in comments
 --
-
-local map = function(keys, func, desc)
-  vim.keymap.set("n", keys, func, { desc = desc })
-end
-
--- NVIM/LAZY DEFAULTS -- shown in comments
-
-
-
-
-
 
 -- OIL --
 map("<leader><leader>", "<cmd>Oil<CR>", "open parent directory") -- ok
@@ -54,15 +61,30 @@ map("<leader><leader>", "<cmd>Oil<CR>", "open parent directory") -- ok
 map("<leader>y.", "<cmd>Yazi<CR>", "Open yazi at the current file")      -- ok
 map("<leader>yy", "<cmd>Yazi cwd<CR>", "Open yazi at working directory") -- ok
 
+-- HARPOON --
+local harpoon = require("harpoon")
+map("<leader>ha", function() harpoon:list():add() end, "harpoon add")
+map("<leader>hl", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, "harpoon list")
+map("<leader>h1", function() harpoon:list():select(1) end, "harpoon select1")
+map("<leader>h2", function() harpoon:list():select(2) end, "harpoon select2")
+map("<leader>h3", function() harpoon:list():select(3) end, "harpoon select")
+map("<leader>h4", function() harpoon:list():select(4) end, "harpoon select")
+map("<leader>hp", function() harpoon:list():prev() end, "harpoon prev")
+map("<leader>hn", function() harpoon:list():next() end, "harpoon next")
+
+
 -- CONFORM -- autoformat
 -- <leader>cF                         No command                                 Format Injected Langs
 -- <leader>cf    --ok                 No command                                 Format Code
 
 -- GENERAL --
+
+-- custom quit command because using bufferline
+command('Q', vim.api.nvim_buf_delete(0, {}))
+
 -- <Esc>                       <Cmd>noh<CR><Esc>                                  Escape and Clear hlsearch
 -- <leader>fn -- ok            <Cmd>enew<CR>                                      New File
--- <C-S> -- ok                 <Cmd>w<CR><Esc>                                    Save File
--- <leader>qq -- ok            <Cmd>qa<CR>                                        Quit All
+-- <C-S> -- ok                 <Cmd>w<CR><Esc>                                    Save File                                    Quit All
 -- ul                          No command                                         Toggle Line Numbers
 -- uL                          No command                                         Toggle Relative Number
 -- uw                          No command                                         Toggle Wrap
@@ -109,18 +131,6 @@ map("<leader>yy", "<cmd>Yazi cwd<CR>", "Open yazi at working directory") -- ok
 -- <leader><Tab>f    -- buggy? <Cmd>tabfirst<CR>                                  First Tab
 -- <leader><Tab>o    -- buggy? <Cmd>tabonly<CR>                                   Close Other Tabs
 -- <leader><Tab>l    -- buggy? <Cmd>tablast<CR>                                   Last Tab
-
-
-local harpoon = require("harpoon")
-map("<leader>ha", function() harpoon:list():add() end, "harpoon add")
-map("<leader>hl", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, "harpoon list")
-map("<leader>h1", function() harpoon:list():select(1) end, "harpoon select1")
-map("<leader>h2", function() harpoon:list():select(2) end, "harpoon select2")
-map("<leader>h3", function() harpoon:list():select(3) end, "harpoon select")
-map("<leader>h4", function() harpoon:list():select(4) end, "harpoon select")
-map("<leader>hp", function() harpoon:list():prev() end, "harpoon prev")
-map("<leader>hn", function() harpoon:list():next() end, "harpoon next")
-
 
 -- SEARCH -- ok
 -- ?   -- ok
@@ -281,7 +291,7 @@ vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" }
 -- ]d                                     No command                                         Jump to the next diagnostic
 -- <C-W><C-D>                             <C-W>d                                             Show diagnostics under the cursor
 -- <C-W>d                                 No command                                         Show diagnostics under the cursor
-map("<leader>q", vim.diagnostic.setloclist, "Open diagnostic [Q]uickfix list")
+map("<leader>qf", vim.diagnostic.setloclist, "Open diagnostic [Q]uickfix list")
 
 -- MATCHIT --
 -- <Plug>(MatchitNormalMultiForward)      :<C-U>call matchit#MultiMatch("W",  "n")<CR>       No description
