@@ -125,7 +125,10 @@ vim.keymap.del('n', '<leader>fe') -- Explorer NeoTree (Root Dir)
 --
 
 -- OIL --
-map("<leader><leader>", "<cmd>Oil --float<CR>", "open parent directory") -- ok
+local detail = false
+map("<leader><leader>", "<cmd>Oil --float<CR>", "open parent directory")     -- ok
+-- g. -- toggle hidden files
+map("gd", require("config.helpers.oil").toggle_detail, "toggle Oil details") -- no leader
 
 -- YAZI --
 map("<leader>y.", "<cmd>Yazi<CR>", "Open yazi at the current file")      -- ok
