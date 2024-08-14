@@ -125,12 +125,13 @@ vim.keymap.del('n', '<leader>fe') -- Explorer NeoTree (Root Dir)
 --
 
 -- OIL --
--- oil has a bug which prevents me from setting the keymaps here
+-- oil has a bug which prevents me from setting all the keymaps here
 -- See :help oil-actions for a list of all available actions
 local detail = false
 map("<leader><leader>", "<cmd>Oil --float<CR>", "open parent directory")     -- ok
 map("gd", require("config.helpers.oil").toggle_detail, "toggle Oil details") -- no leader
--- g?               actions.show_help
+--   g?             actions.show_help
+--   g.             actions.toggle_hidden
 -- <CR>             actions.select
 -- <C-s>            actions.select  opts = { vertical = true }     Open the entry in a vertical split
 -- <C-h>            actions.select  opts = { horizontal = true }   Open the entry in a horizontal split
@@ -138,14 +139,13 @@ map("gd", require("config.helpers.oil").toggle_detail, "toggle Oil details") -- 
 -- <C-p>            actions.preview
 -- <C-c>            actions.close
 -- <C-l>            actions.refresh
--- "                actions.parent
--- _                actions.open_cwd
--- `                actions.cd
--- ~                actions.cd opts = { scope = "tab" }            :tcd to the current oil directory
--- gs               actions.change_sort
--- gx               actions.open_external
--- g.               actions.toggle_hidden
--- g\\              actions.toggle_trash
+--   -              actions.parent
+--   _              actions.open_cwd
+--   `              actions.cd
+--   ~              actions.cd opts = { scope = "tab" }            :tcd to the current oil directory
+--   gs             actions.change_sort
+--   gx             actions.open_external
+--   g\\            actions.toggle_trash
 
 -- YAZI --
 map("<leader>y.", "<cmd>Yazi<CR>", "Open yazi at the current file")      -- ok
