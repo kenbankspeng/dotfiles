@@ -15,13 +15,19 @@
 -- <A-…> or <M-…> alt-key or meta-key, <D-…> command-key or "super" key
 
 
+-- helpers
+local command = vim.api.nvim_create_user_command
+local map = function(keys, func, desc)
+  vim.keymap.set("n", keys, func, { desc = desc })
+end
+
 -- VIM KEYMAPS
+
+-- Remap Q to start/stop recording a macro (requires a register)
+vim.api.nvim_set_keymap('n', 'Q', 'q', { noremap = true })
 
 -- Remap q to delete the current buffer
 vim.api.nvim_set_keymap('n', 'q', ':bdelete<CR>', { noremap = true, silent = true })
-
--- Remap Q to record a macro
-vim.api.nvim_set_keymap('n', 'Q', 'q', { noremap = true })
 
 -- Insertion and Appending
 -- `a`: append after cursor
@@ -75,13 +81,14 @@ vim.api.nvim_set_keymap('n', 'Q', 'q', { noremap = true })
 -- `N`: repeat search backward
 
 -- Miscellaneous
+-- 'q': delete current buffer (with bufferline, acts like a quit)
 -- `u`: undo
 -- `U`: redo
 -- `r`: replace character (requires a character)
 -- `R`: replace mode
 -- `v`: visual mode
 -- `V`: visual line mode
--- `q`: record macro (requires a register)
+-- `Q`: record macro (requires a register)
 -- `m`: mark (requires a character)
 -- `z`: various commands (requires another key)
 -- `J`: join lines
@@ -90,12 +97,6 @@ vim.api.nvim_set_keymap('n', 'Q', 'q', { noremap = true })
 --
 -- CUSTOM KEYMAPS - automatically loaded on the VeryLazy event
 --
-
--- helpers
-local command = vim.api.nvim_create_user_command
-local map = function(keys, func, desc)
-  vim.keymap.set("n", keys, func, { desc = desc })
-end
 
 
 --
