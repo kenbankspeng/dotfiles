@@ -125,8 +125,7 @@ vim.keymap.del('n', '<leader>fe') -- Explorer NeoTree (Root Dir)
 --
 
 -- OIL --
--- oil requires a string - but that means I can't set the keymaps here
--- since I cannot bypass setup and go straght to the target function
+-- oil has a bug which prevents me from setting the keymaps here
 -- See :help oil-actions for a list of all available actions
 local detail = false
 map("<leader><leader>", "<cmd>Oil --float<CR>", "open parent directory")     -- ok
