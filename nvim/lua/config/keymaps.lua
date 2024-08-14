@@ -17,6 +17,12 @@
 
 -- VIM KEYMAPS
 
+-- Remap q to delete the current buffer
+vim.api.nvim_set_keymap('n', 'q', ':bdelete<CR>', { noremap = true, silent = true })
+
+-- Remap Q to record a macro
+vim.api.nvim_set_keymap('n', 'Q', 'q', { noremap = true })
+
 -- Insertion and Appending
 -- `a`: append after cursor
 -- `A`: append at end of line
