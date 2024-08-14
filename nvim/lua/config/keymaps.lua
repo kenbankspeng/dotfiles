@@ -125,7 +125,7 @@ vim.keymap.del('n', '<leader>fe') -- Explorer NeoTree (Root Dir)
 --
 
 -- OIL --
-map("<leader><leader>", "<cmd>Oil<CR>", "open parent directory") -- ok
+map("<leader><leader>", "<cmd>Oil --float<CR>", "open parent directory") -- ok
 
 -- YAZI --
 map("<leader>y.", "<cmd>Yazi<CR>", "Open yazi at the current file")      -- ok
