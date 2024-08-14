@@ -1,3 +1,6 @@
+--
+-- KEYMAP CONSTANTS
+--
 -- <Nul> CTRL-@, <BS>	backspace	CTRL-H, <Tab> tab CTRL-I,
 -- <NL> linefeed CTRL-J, <CR> carriage return CTRL-M,
 -- <Esc> escape, <Space> space, <lt> less-than
@@ -12,25 +15,85 @@
 -- <A-…> or <M-…> alt-key or meta-key, <D-…> command-key or "super" key
 
 
+-- VIM KEYMAPS
+
+-- Insertion and Appending
+-- `a`: append after cursor
+-- `A`: append at end of line
+-- `i`: insert before cursor
+-- `I`: insert at beginning of line
+-- `o`: open a new line below
+-- `O`: open a new line above
+
+-- Deletion
+-- `d`: delete (requires a motion)
+-- `D`: delete to the end of the line
+-- `x`: delete character
+-- `X`: delete character before cursor
+
+-- Change
+-- `c`: change (requires a motion)
+-- `C`: change to the end of the line
+-- `s`: substitute character
+-- `S`: substitute line
+
+-- Movement
+-- `h`: move left
+-- `j`: move down
+-- `k`: move up
+-- `l`: move right
+-- `w`: move forward by word
+-- `W`: move forward by WORD
+-- `b`: move backward by word
+-- `B`: move backward by WORD
+-- `e`: move to the end of a word
+-- `E`: move to the end of a WORD
+-- `f`: find character forward (requires a character)
+-- `F`: find character backward (requires a character)
+-- `t`: move until character forward (requires a character)
+-- `T`: move until character backward (requires a character)
+-- `g`: various commands (requires another key)
+-- `G`: go to the last line of the file
+-- `H`: move to the top of the screen
+-- `L`: move to the bottom of the screen
+-- `M`: move to the middle of the screen
+
+-- Yanking and Pasting
+-- `y`: yank (requires a motion)
+-- `Y`: yank line
+-- `p`: paste after cursor
+-- `P`: paste before cursor
+
+-- Searching and Repeating
+-- `n`: repeat search forward
+-- `N`: repeat search backward
+
+-- Miscellaneous
+-- `u`: undo
+-- `U`: redo
+-- `r`: replace character (requires a character)
+-- `R`: replace mode
+-- `v`: visual mode
+-- `V`: visual line mode
+-- `q`: record macro (requires a register)
+-- `m`: mark (requires a character)
+-- `z`: various commands (requires another key)
+-- `J`: join lines
+-- `K`: look up keyword under the cursor
+
 --
--- Keymaps are automatically loaded on the VeryLazy event
+-- CUSTOM KEYMAPS - automatically loaded on the VeryLazy event
 --
 
-
--- command_override
+-- helpers
 local command = vim.api.nvim_create_user_command
-
-
-
-
--- custom keymaps
 local map = function(keys, func, desc)
   vim.keymap.set("n", keys, func, { desc = desc })
 end
 
 
 --
--- Delete unwanted LazyVim mappings
+-- Delete unwanted LazyVim/Plugin mappings
 --
 
 -- LAZY --
