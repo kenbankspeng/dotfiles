@@ -125,10 +125,27 @@ vim.keymap.del('n', '<leader>fe') -- Explorer NeoTree (Root Dir)
 --
 
 -- OIL --
+-- oil requires a string - but that means I can't set the keymaps here
+-- since I cannot bypass setup and go straght to the target function
 local detail = false
 map("<leader><leader>", "<cmd>Oil --float<CR>", "open parent directory")     -- ok
--- g. -- toggle hidden files
 map("gd", require("config.helpers.oil").toggle_detail, "toggle Oil details") -- no leader
+-- g?               actions.show_help
+-- <CR>             actions.select
+-- <C-s>            actions.select  opts = { vertical = true }     Open the entry in a vertical split
+-- <C-h>            actions.select  opts = { horizontal = true }   Open the entry in a horizontal split
+-- <C-t>            actions.select  opts = { tab = true }          Open the entry in new tab
+-- <C-p>            actions.preview
+-- <C-c>            actions.close
+-- <C-l>            actions.refresh
+-- "                actions.parent
+-- _                actions.open_cwd
+-- `                actions.cd
+-- ~                actions.cd opts = { scope = "tab" }            :tcd to the current oil directory
+-- gs               actions.change_sort
+-- gx               actions.open_external
+-- g.               actions.toggle_hidden
+-- g\\              actions.toggle_trash
 
 -- YAZI --
 map("<leader>y.", "<cmd>Yazi<CR>", "Open yazi at the current file")      -- ok
