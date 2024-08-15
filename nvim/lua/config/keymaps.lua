@@ -16,11 +16,28 @@
 
 
 -- helpers
+local whichkey = require('which-key')
 local command = vim.api.nvim_create_user_command
 local del = vim.keymap.del
 local map = function(keys, func, desc)
   vim.keymap.set("n", keys, func, { desc = desc })
 end
+
+
+-- Document existing key chains
+whichkey.add {
+  { '<leader>b', group = '+buffer' },
+  { '<leader>c', group = '+code' },
+  { '<leader>f', group = '+find/+file' },
+  { '<leader>g', group = '+git' },
+  { '<leader>h', group = '+harpoon' },
+  { '<leader>s', group = '+search' },
+  { '<leader>u', group = '+toggle' },
+  { '<leader>x', group = '+lists' },
+  { '<leader>y', group = '+yazi' }
+}
+
+
 
 -- VIM KEYMAPS
 
@@ -129,8 +146,6 @@ del('n', '<leader>bo')         -- Delete Other Buffers
 del('n', '<leader>bP')         -- Delete Non-Pinned Buffers
 del('n', '<leader>bp')         -- Toggle Pin
 
-
-
 -- NEOTREE -- cannot disable - so remove keys
 del('n', '<leader>E')  -- Explorer NeoTree (cwd)
 del('n', '<leader>e')  -- Explorer NeoTree (Root Dir)
@@ -185,15 +200,52 @@ map("<leader>y.", "<cmd>Yazi<CR>", "Open yazi at the current file")      -- ok
 map("<leader>yy", "<cmd>Yazi cwd<CR>", "Open yazi at working directory") -- ok
 
 -- HARPOON --
-local harpoon = require("harpoon")
-map("<leader>ha", function() harpoon:list():add() end, "harpoon add")
-map("<leader>hl", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, "harpoon list")
-map("<leader>h1", function() harpoon:list():select(1) end, "harpoon select1")
-map("<leader>h2", function() harpoon:list():select(2) end, "harpoon select2")
-map("<leader>h3", function() harpoon:list():select(3) end, "harpoon select")
-map("<leader>h4", function() harpoon:list():select(4) end, "harpoon select")
-map("<leader>hp", function() harpoon:list():prev() end, "harpoon prev")
-map("<leader>hn", function() harpoon:list():next() end, "harpoon next")
+-- local harpoon = require("harpoon")
+-- map("<leader>ha", function() harpoon:list():add() end, "harpoon add")
+-- map("<leader>hl", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, "harpoon list")
+-- map("<leader>h1", function() harpoon:list():select(1) end, "harpoon select1")
+-- map("<leader>h2", function() harpoon:list():select(2) end, "harpoon select2")
+-- map("<leader>h3", function() harpoon:list():select(3) end, "harpoon select")
+-- map("<leader>h4", function() harpoon:list():select(4) end, "harpoon select")
+-- map("<leader>hp", function() harpoon:list():prev() end, "harpoon prev")
+-- map("<leader>hn", function() harpoon:list():next() end, "harpoon next")
+
+
+
+-- SMART SPLITS --
+-- `10<A-h>` will `resize_left` by `(10 * config.default_amount)`
+local smart_splits = require('smart-splits')
+map('<A-j>', smart_splits.resize_down)
+map('<A-h>', smart_splits.resize_left)
+map('<A-k>', smart_splits.resize_up)
+map('<A-l>', smart_splits.resize_right)
+map('<A-Left>', smart_splits.resize_left)   -- nok broken
+map('<A-Down>', smart_splits.resize_down)   -- nok
+map('<A-Up>', smart_splits.resize_up)       -- nok
+map('<A-Right>', smart_splits.resize_right) -- nok
+
+-- moving between splits
+map('<C-h>', smart_splits.move_cursor_left)
+map('<C-j>', smart_splits.move_cursor_down)
+map('<C-k>', smart_splits.move_cursor_up)
+map('<C-l>', smart_splits.move_cursor_right)
+map('<S-Left>', smart_splits.move_cursor_left)
+map('<S-Down>', smart_splits.move_cursor_down)
+map('<S-Up>', smart_splits.move_cursor_up)
+map('<S-Right>', smart_splits.move_cursor_right)
+
+map('<C-\\>', smart_splits.move_cursor_previous)
+
+
+-- swapping buffers between windows
+map('<leader><leader>h', smart_splits.swap_buf_left)
+map('<leader><leader>j', smart_splits.swap_buf_down)
+map('<leader><leader>k', smart_splits.swap_buf_up)
+map('<leader><leader>l', smart_splits.swap_buf_right)
+
+
+
+
 
 
 -- CONFORM -- autoformat
@@ -358,10 +410,8 @@ map("<leader>fr", require("config.helpers.grug_far").find_replace, "Find and Rep
 -- <C-K>                 <C-W>k                                             Go to Upper Window
 -- <C-J>                 <C-W>j                                             Go to Lower Window
 -- <C-H>                 <C-W>h                                             Go to Left Window
-map("<S-Up>", "<cmd>resize +2<cr>", "Increase Window Height")
-map("<S-Down>", "<cmd>resize -2<cr>", "Decrease Window Height")
-map("<S-Left>", "<cmd>vertical resize -2<cr>", "Decrease Window Width")
-map("<S-Right>", "<cmd>vertical resize +2<cr>", "Increase Window Width")
+
+
 
 -- TERMINAL --
 -- fT                                     No command                                         Terminal (cwd)
@@ -395,7 +445,7 @@ vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" }
 -- ]d                                     No command                                         Jump to the next diagnostic
 -- <C-W><C-D>                             <C-W>d                                             Show diagnostics under the cursor
 -- <C-W>d                                 No command                                         Show diagnostics under the cursor
-map("<leader>qf", vim.diagnostic.setloclist, "Open diagnostic [Q]uickfix list")
+map("<leader>xf", vim.diagnostic.setloclist, "Open diagnostic [Q]uickfix list")
 
 -- MATCHIT --
 -- <Plug>(MatchitNormalMultiForward)      :<C-U>call matchit#MultiMatch("W",  "n")<CR>       No description
@@ -418,3 +468,35 @@ local function logit()
 end
 
 map("<leader>gz", logit, "logit")
+
+
+-- OVERLAPPING KEYMAPS --
+--------------------------------------------------------------
+
+-- checking for overlapping keymaps ~
+-- - WARNING In mode `n`, <<Space>w> overlaps with <<Space>wm>, <<C-W><C-D>>, <<Space>wd>:
+--   - <<Space>w>: windows
+--   - <<Space>wm>: Enable Maximize
+--   - <<C-W><C-D>>: Show diagnostics under the cursor
+--   - <<Space>wd>: Delete Window
+-- - WARNING In mode `n`, <gc> overlaps with <gco>, <gcO>, <gcc>:
+--   - <gc>: Toggle comment
+--   - <gco>: Add Comment Below
+--   - <gcO>: Add Comment Above
+--   - <gcc>: Toggle comment line
+-- - WARNING In mode `x`, <i> overlaps with <il>, <in>:
+--   - <i>: inside
+--   - <il>: last
+--   - <in>: next
+-- - WARNING In mode `x`, <a> overlaps with <a%>, <al>, <an>:
+--   - <a>: around
+--   - <al>: last
+--   - <an>: next
+-- - WARNING In mode `o`, <i> overlaps with <il>, <in>:
+--   - <i>: inside
+--   - <il>: last
+--   - <in>: next
+-- - WARNING In mode `o`, <a> overlaps with <al>, <an>:
+--   - <a>: around
+--   - <al>: last
+--   - <an>: next
