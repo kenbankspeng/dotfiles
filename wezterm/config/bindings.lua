@@ -1,3 +1,5 @@
+-- type `wezterm show-keys` in the terminal to see the key bindings
+
 local wezterm = require('wezterm')
 local action = wezterm.action
 local quick_select = require('config.quick_select')
@@ -17,8 +19,13 @@ local quick_select_open_url = quick_select.quick_select_open_url
 --   F13, F14, F15, F16, F17, F18, F19, F20, F21, F22, F23, F24
 
 local mod = {
+   NONE = 'NONE',
+   ALT = 'ALT',
+   CTRL = 'CTRL',
+   SHIFT = 'SHIFT',
    SUPER = 'CMD',
-   SUPER_REV = 'CMD|ALT'
+   SUPER_REV = 'CMD|ALT',
+   LEADER = 'LEADER',
 }
 
 local function map(key, mods, act)
@@ -42,9 +49,8 @@ end
 
 -- stylua: ignore
 local keys = {
-
    -- QUICK SELECT MODE
-   map('f', 'ALT|CMD', action.QuickSelect), -- ??
+   map('f', mod.SUPER_REV, action.QuickSelect), -- ??
 
    -- COPY MODE
    map('g', mod.SUPER, 'ActivateCopyMode'), -- CMD+g
@@ -53,24 +59,24 @@ local keys = {
    map('f', mod.SUPER, action.Search({ CaseInSensitiveString = '' })), -- 'CurrentSelectionOrEmptyString'
 
    -- manage enter variants
-   map("Enter", "NONE", action.SendString("\x0d")),
-   map("Enter", "ALT", action.ToggleFullScreen),
-   map("Enter", "SHIFT", action.SendString("\x1b[13;2u")), -- escape sequence for shift+enter
-   map("Enter", "CTRL", action.SendString("\x1b[13;5u")),  -- escape sequence for ctrl+enter
+   map("Enter", mod.NONE, action.SendString("\x0d")),
+   map("Enter", mod.ALT, action.ToggleFullScreen),
+   map("Enter", mod.SHIFT, action.SendString("\x1b[13;2u")), -- escape sequence for shift+enter
+   map("Enter", mod.CTRL, action.SendString("\x1b[13;5u")),  -- escape sequence for ctrl+enter
 
    -- APPLICATION
    -- spawn windows
    map('n', mod.SUPER, action.SpawnWindow),
    map('q', mod.SUPER, action.QuitApplication), -- not required
-   map('Enter', 'ALT', action.ToggleFullScreen),
+   map('Enter', mod.ALT, action.ToggleFullScreen),
    map('h', mod.SUPER, action.HideApplication),
    map('r', mod.SUPER, action.ReloadConfiguration),
    map('p', mod.SUPER, action.ActivateCommandPalette),
-   map('j', 'CMD|ALT', action.ShowDebugOverlay),
-   map('k', 'CMD|ALT', action.ShowDebugOverlay),
-   map('F1', 'NONE', action.ShowLauncher),
-   map('F2', 'NONE', action.ShowLauncherArgs({ flags = 'FUZZY|TABS' })),
-   map('F3', 'NONE', action.ShowLauncherArgs({ flags = 'FUZZY|WORKSPACES' })),
+   map('j', mod.SUPER_REV, action.ShowDebugOverlay),
+   map('k', mod.SUPER_REV, action.ShowDebugOverlay),
+   map('F1', mod.NONE, action.ShowLauncher),
+   map('F2', mod.NONE, action.ShowLauncherArgs({ flags = 'FUZZY|TABS' })),
+   map('F3', mod.NONE, action.ShowLauncherArgs({ flags = 'FUZZY|WORKSPACES' })),
 
    -- PANE or TAB
    map('w', mod.SUPER, wezterm.action_callback(close_pane_or_tab)),
@@ -80,7 +86,7 @@ local keys = {
    map('t', mod.SUPER, action.SpawnTab('DefaultDomain')), -- 'CurrentPaneDomain'
    map('[', mod.SUPER, action.ActivateTabRelative(-1)),
    map(']', mod.SUPER, action.ActivateTabRelative(1)),
-   map('Tab', 'CTRL', action.ActivateTabRelative(1)),
+   map('Tab', mod.CTRL, action.ActivateTabRelative(1)),
    map('[', mod.SUPER_REV, action.MoveTabRelative(-1)),
    map(']', mod.SUPER_REV, action.MoveTabRelative(1)),
    map('1', mod.SUPER, action.ActivateTab(0)),
@@ -103,34 +109,36 @@ local keys = {
    map('/', mod.SUPER, action.SplitVertical({ domain = 'CurrentPaneDomain' })),
    map('\\', mod.SUPER, action.SplitHorizontal({ domain = 'CurrentPaneDomain' })),
    map('Enter', mod.SUPER, action.TogglePaneZoomState), -- zoom
-   map('LeftArrow', mod.SUPER, action.ActivatePaneDirection('Left')),
-   map('RightArrow', mod.SUPER, action.ActivatePaneDirection('Right')),
-   map('UpArrow', mod.SUPER, action.ActivatePaneDirection('Up')),
-   map('DownArrow', mod.SUPER, action.ActivatePaneDirection('Down')),
-   map('LeftArrow', 'ALT', action.AdjustPaneSize({ 'Left', 1 })),
-   map('RightArrow', 'ALT', action.AdjustPaneSize({ 'Right', 1 })),
-   map('UpArrow', 'ALT', action.AdjustPaneSize({ 'Up', 1 })),
-   map('DownArrow', 'ALT', action.AdjustPaneSize({ 'Down', 1 })),
-
+   map('LeftArrow', mod.SHIFT, action.ActivatePaneDirection('Left')),
+   map('RightArrow', mod.SHIFT, action.ActivatePaneDirection('Right')),
+   map('UpArrow', mod.SHIFT, action.ActivatePaneDirection('Up')),
+   map('DownArrow', mod.SHIFT, action.ActivatePaneDirection('Down')),
    map('p', mod.SUPER_REV, action.PaneSelect({ alphabet = '1234567890', mode = 'SwapWithActiveKeepFocus' })),
+
+   -- LEADER-p for resize-pane mode, the use arrow keys
+   map('p', mod.LEADER, action.ActivateKeyTable({
+      name = 'resize_pane',
+      one_shot = false,
+      timemout_miliseconds = 1000,
+   })),
 
 
    -- SCROLL
-   map('PageUp', 'SHIFT', action.ScrollByPage(-1)),
-   map('PageDown', 'SHIFT', action.ScrollByPage(1)),
+   map('PageUp', mod.SHIFT, action.ScrollByPage(-1)),
+   map('PageDown', mod.SHIFT, action.ScrollByPage(1)),
 
    -- CURSOR MOVEMENT
-   map('Home', 'NONE', action.SendString('\x01')),           -- Move to the beginning of the line
-   map('End', 'NONE', action.SendString("\x05")),            -- Move to the end of the line
-   map('LeftArrow', mod.SUPER, action.SendString("\x1bb")),  -- Move backward one word
-   map('RightArrow', mod.SUPER, action.SendString("\x1bf")), -- Move forward one word
-   map('Backspace', mod.SUPER, action.SendString('\x15')),   -- Clear the current command line (Ctrl + U)
-   map('RightArrow', 'CMD|ALT', action.SendString("\x0b")),  -- Clear from the cursor to the end of the line (Ctrl + K)
+   map('Home', mod.NONE, action.SendString('\x01')),            -- Move to the beginning of the line
+   map('End', mod.NONE, action.SendString("\x05")),             -- Move to the end of the line
+   map('LeftArrow', mod.SUPER, action.SendString("\x1bb")),     -- Move backward one word
+   map('RightArrow', mod.SUPER, action.SendString("\x1bf")),    -- Move forward one word
+   map('Backspace', mod.SUPER, action.SendString('\x15')),      -- Clear the current command line (Ctrl + U)
+   map('RightArrow', mod.SUPER_REV, action.SendString("\x0b")), -- Clear from the cursor to the end of the line (Ctrl + K)
 
    -- CLEAR, COPY, PASTE, SEARCH
    map('k', mod.SUPER, action.Multiple {
       action.ClearScrollback 'ScrollbackAndViewport',
-      action.SendKey { key = 'L', mods = 'CTRL' },
+      action.SendKey { key = 'L', mods = mod.CTRL },
    }), -- clear and redraw prompt
    map('c', mod.SUPER, action.CopyTo('Clipboard')),
    map('v', mod.SUPER, action.PasteFrom('Clipboard')),
@@ -181,99 +189,100 @@ local keys = {
 
    -- key-tables --
    -- resizes fonts
-   map('f', 'LEADER', action.ActivateKeyTable({
+   map('f', mod.LEADER, action.ActivateKeyTable({
       name = 'resize_font',
       one_shot = false,
       timemout_miliseconds = 1000,
    })),
-   -- resize panes
-   map('p', 'LEADER', action.ActivateKeyTable({
-      name = 'resize_pane',
-      one_shot = false,
-      timemout_miliseconds = 1000,
-   })),
+
 }
 
 local key_tables = {}
 key_tables.copy_mode = {
    -- MOVE CURSOR -- 1 CHARACTER
-   map('LeftArrow', 'NONE', action.CopyMode('MoveLeft')),
-   map('RightArrow', 'NONE', action.CopyMode('MoveRight')),
-   map('DownArrow', 'NONE', action.CopyMode('MoveDown')),
-   map('UpArrow', 'NONE', action.CopyMode('MoveUp')),
+   map('LeftArrow', mod.NONE, action.CopyMode('MoveLeft')),
+   map('RightArrow', mod.NONE, action.CopyMode('MoveRight')),
+   map('DownArrow', mod.NONE, action.CopyMode('MoveDown')),
+   map('UpArrow', mod.NONE, action.CopyMode('MoveUp')),
 
    -- MOVE CURSOR -- WORDS
-   map('Tab', 'NONE', action.CopyMode('MoveForwardWord')),
-   map('Tab', 'SHIFT', action.CopyMode('MoveBackwardWord')),
-   map('Tab', 'CTRL', action.CopyMode('MoveForwardWordEnd')),
+   map('Tab', mod.NONE, action.CopyMode('MoveForwardWord')),
+   map('Tab', mod.SHIFT, action.CopyMode('MoveBackwardWord')),
+   map('Tab', mod.CTRL, action.CopyMode('MoveForwardWordEnd')),
 
    -- MOVE CURSOR -- JUMP
-   map('UpArrow', 'SHIFT', action.CopyMode('MoveToScrollbackTop')),      -- top
-   map('DownArrow', 'SHIFT', action.CopyMode('MoveToScrollbackBottom')), -- bottom
-   map('PageUp', 'NONE', action.CopyMode('PageUp')),                     -- page up
-   map('PageDown', 'NONE', action.CopyMode('PageDown')),                 -- page down
-   map('m', 'NONE', action.CopyMode('MoveToViewportMiddle')),            -- middle
-   map('d', 'NONE', action.CopyMode({ MoveByPage = 0.5 })),              -- down
-   map('u', 'NONE', action.CopyMode({ MoveByPage = (-0.5) })),           -- up
+   map('UpArrow', mod.SHIFT, action.CopyMode('MoveToScrollbackTop')),      -- top
+   map('DownArrow', mod.SHIFT, action.CopyMode('MoveToScrollbackBottom')), -- bottom
+   map('PageUp', mod.NONE, action.CopyMode('PageUp')),                     -- page up
+   map('PageDown', mod.NONE, action.CopyMode('PageDown')),                 -- page down
+   map('m', mod.NONE, action.CopyMode('MoveToViewportMiddle')),            -- middle
+   map('d', mod.NONE, action.CopyMode({ MoveByPage = 0.5 })),              -- down
+   map('u', mod.NONE, action.CopyMode({ MoveByPage = (-0.5) })),           -- up
 
    -- MOVE CURSOR -- LINES
-   map('Enter', 'NONE', action.CopyMode('MoveToStartOfNextLine')),
-   map('Home', 'NONE', action.CopyMode('MoveToStartOfLineContent')),
-   map('End', 'NONE', action.CopyMode('MoveToEndOfLineContent')),
+   map('Enter', mod.NONE, action.CopyMode('MoveToStartOfNextLine')),
+   map('Home', mod.NONE, action.CopyMode('MoveToStartOfLineContent')),
+   map('End', mod.NONE, action.CopyMode('MoveToEndOfLineContent')),
 
    -- TOGGLE SELECTION
-   map('Space', 'NONE', action.CopyMode({ SetSelectionMode = 'Cell' })),
-   map('l', 'NONE', action.CopyMode({ SetSelectionMode = 'Line' })),
-   map('b', 'NONE', action.CopyMode({ SetSelectionMode = 'Block' })),
+   map('Space', mod.NONE, action.CopyMode({ SetSelectionMode = 'Cell' })),
+   map('l', mod.NONE, action.CopyMode({ SetSelectionMode = 'Line' })),
+   map('b', mod.NONE, action.CopyMode({ SetSelectionMode = 'Block' })),
 
    -- MOVE CURSOR -- SELECTION
-   map('o', 'NONE', action.CopyMode('MoveToSelectionOtherEnd')), -- other end
+   map('o', mod.NONE, action.CopyMode('MoveToSelectionOtherEnd')), -- other end
 
    -- FINISH
-   map('c', 'NONE', action.Multiple({
+   map('c', mod.NONE, action.Multiple({
       { CopyTo = 'ClipboardAndPrimarySelection' },
       { CopyMode = 'Close' }
-   })),                                             -- copy
-   map('Escape', 'NONE', action.CopyMode('Close')), -- close
+   })),                                               -- copy
+   map('Escape', mod.NONE, action.CopyMode('Close')), -- close
 }
 
 key_tables.search_mode = {
-   map('UpArrow', 'NONE', action.CopyMode('PriorMatch')),
-   map('DownArrow', 'NONE', action.CopyMode('NextMatch')),
-   map('PageUp', 'NONE', action.CopyMode('PriorMatchPage')),
-   map('PageDown', 'NONE', action.CopyMode('NextMatchPage')),
+   map('UpArrow', mod.NONE, action.CopyMode('PriorMatch')),
+   map('DownArrow', mod.NONE, action.CopyMode('NextMatch')),
+   map('PageUp', mod.NONE, action.CopyMode('PriorMatchPage')),
+   map('PageDown', mod.NONE, action.CopyMode('NextMatchPage')),
    map('t', mod.SUPER, action.CopyMode('CycleMatchType')), -- type
    map('x', mod.SUPER, action.CopyMode('ClearPattern')),   -- clear
-   map('Escape', 'NONE', action.CopyMode('Close')),        -- close
+   map('Escape', mod.NONE, action.CopyMode('Close')),      -- close
 }
 
 key_tables.resize_font = {
-   map('k', 'NONE', action.IncreaseFontSize),
-   map('j', 'NONE', action.DecreaseFontSize),
-   map('r', 'NONE', action.ResetFontSize),
-   map('Escape', 'NONE', 'PopKeyTable'),
-   map('q', 'NONE', 'PopKeyTable'),
+   map('j', mod.NONE, action.DecreaseFontSize),
+   map('k', mod.NONE, action.IncreaseFontSize),
+   map('r', mod.NONE, action.ResetFontSize),
+
+   map('Escape', mod.NONE, 'PopKeyTable'),
+   map('q', mod.NONE, 'PopKeyTable'),
 }
 
 key_tables.resize_pane = {
-   map('k', 'NONE', action.AdjustPaneSize({ 'Up', 1 })),
-   map('j', 'NONE', action.AdjustPaneSize({ 'Down', 1 })),
-   map('h', 'NONE', action.AdjustPaneSize({ 'Left', 1 })),
-   map('l', 'NONE', action.AdjustPaneSize({ 'Right', 1 })),
-   map('Escape', 'NONE', 'PopKeyTable'),
-   map('q', 'NONE', 'PopKeyTable'),
+   map('h', mod.NONE, action.AdjustPaneSize({ 'Left', 1 })),
+   map('j', mod.NONE, action.AdjustPaneSize({ 'Down', 1 })),
+   map('k', mod.NONE, action.AdjustPaneSize({ 'Up', 1 })),
+   map('l', mod.NONE, action.AdjustPaneSize({ 'Right', 1 })),
+   map('LeftArrow', mod.NONE, action.AdjustPaneSize({ 'Left', 1 })),
+   map('RightArrow', mod.NONE, action.AdjustPaneSize({ 'Right', 1 })),
+   map('UpArrow', mod.NONE, action.AdjustPaneSize({ 'Up', 1 })),
+   map('DownArrow', mod.NONE, action.AdjustPaneSize({ 'Down', 1 })),
+
+   map('Escape', mod.NONE, 'PopKeyTable'),
+   map('q', mod.NONE, 'PopKeyTable'),
 }
 
 
 local mouse_bindings = {
    -- Ctrl-click will open the link under the mouse cursor
-   eventmap({ Up = { streak = 1, button = 'Left' } }, 'CTRL', action.OpenLinkAtMouseCursor),
+   eventmap({ Up = { streak = 1, button = 'Left' } }, mod.CTRL, action.OpenLinkAtMouseCursor),
 }
 
 return {
    disable_default_key_bindings = true, -- reset all keys
    debug_key_events = false,
-   leader = { key = 'Space', mods = mod.SUPER_REV },
+   leader = { key = 'Space', mods = mod.ALT },
    keys = keys,
    key_tables = key_tables,
    mouse_bindings = mouse_bindings,
