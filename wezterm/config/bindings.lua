@@ -1,5 +1,6 @@
 -- type `wezterm show-keys` in the terminal to see the key bindings
 
+-- local merge = require('util.table').merge
 local wezterm = require('wezterm')
 local action = wezterm.action
 local quick_select = require('config.quick_select')
@@ -196,6 +197,12 @@ local keys = {
    })),
 
 }
+
+local split_nav = require('config.nvim')
+print(wezterm.to_string(split_nav))
+
+-- merge in nvim split-window integration
+-- merge(split_nav, keys)
 
 local key_tables = {}
 key_tables.copy_mode = {

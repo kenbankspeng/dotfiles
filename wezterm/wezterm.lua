@@ -1,6 +1,3 @@
--- nvim split-window integration
-require('plugins.nvim')
-
 -- gui pre-init configs
 require('startup')({
     max = true,
@@ -19,4 +16,5 @@ return Config:init()
     :append(require('config.appearance'))
     :append(require('config.fonts'))
     :append(require('config.general'))
-    :append(require('config.domains')).options
+    :append(require('config.domains'))
+    .options

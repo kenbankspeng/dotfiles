@@ -1,5 +1,5 @@
 return {
-  obj = require('util.obj'),
+  table = require('util.table'),
   math = require('util.math'),
   gpu_adapter = require('util.gpu_adapter'),
   platform = require('util.platform'),
