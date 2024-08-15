@@ -1,3 +1,7 @@
+-- nvim split-window integration
+require('plugins.nvim')
+
+-- gui pre-init configs
 require('startup')({
     max = true,
     -- args = { 'neo' }, -- server
@@ -8,6 +12,7 @@ require('startup')({
     -- },
 })
 
+-- full configs
 local Config = require('config')
 return Config:init()
     :append(require('config.bindings'))
