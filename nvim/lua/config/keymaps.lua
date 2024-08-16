@@ -219,10 +219,10 @@ map('<A-j>', smart_splits.resize_down)
 map('<A-h>', smart_splits.resize_left)
 map('<A-k>', smart_splits.resize_up)
 map('<A-l>', smart_splits.resize_right)
-map('<A-Left>', smart_splits.resize_left)   -- nok broken
-map('<A-Down>', smart_splits.resize_down)   -- nok
-map('<A-Up>', smart_splits.resize_up)       -- nok
-map('<A-Right>', smart_splits.resize_right) -- nok
+map('<A-Left>', smart_splits.resize_left)
+map('<A-Down>', smart_splits.resize_down)
+map('<A-Up>', smart_splits.resize_up)
+map('<A-Right>', smart_splits.resize_right)
 
 -- moving between splits
 map('<C-h>', smart_splits.move_cursor_left)
