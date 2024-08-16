@@ -14,6 +14,7 @@ end
 
 local function wezterm_exec(cmd)
   -- command = { "wezterm", "cli", "activate-pane-direction", "left" }
+  -- wezterm cli adjust-pane-size --amount 5 up
   local command = vim.deepcopy(cmd)
   table.insert(command, 1, "wezterm")
   table.insert(command, 2, "cli")
