@@ -146,6 +146,10 @@ del('n', '<leader>bo')         -- Delete Other Buffers
 del('n', '<leader>bP')         -- Delete Non-Pinned Buffers
 del('n', '<leader>bp')         -- Toggle Pin
 
+del('n', '<M-k>')              -- Move Code Up
+del('n', '<M-j>')              -- Move Code Down
+
+
 -- NEOTREE -- cannot disable - so remove keys
 del('n', '<leader>E')  -- Explorer NeoTree (cwd)
 del('n', '<leader>e')  -- Explorer NeoTree (Root Dir)
@@ -221,6 +225,11 @@ map("<leader>yy", "<cmd>Yazi cwd<CR>", "Open yazi at working directory") -- ok
 -- <leader>cf    --ok                 No command                                 Format Code
 
 -- GENERAL --
+
+-- removed, but put under new keys
+-- <M-k>                 <Cmd>m .-2<CR>==                         Move Code Up
+-- <M-j>                 <Cmd>m .+1<CR>==                         Move Code Down
+
 
 -- custom quit command because using bufferline
 command('Q', function() vim.api.nvim_buf_delete(0, {}) end, {})
@@ -357,14 +366,12 @@ map("<leader>fr", require("config.helpers.grug_far").find_replace, "Find and Rep
 -- NAVIGATION --
 -- j                     v:count == 0 ? 'gj' : 'j'                Down
 -- k                     v:count == 0 ? 'gk' : 'k'                Up
--- <M-k>                 <Cmd>m .-2<CR>==                         Move Up
--- <M-j>                 <Cmd>m .+1<CR>==                         Move Down
 -- <Up>                  v:count == 0 ? 'gk' : 'k'                Up
 -- <Down>                v:count == 0 ? 'gj' : 'j'                Down
 -- g]                    No command                               Move to right "around"
 -- g[                    No command                               Move to left "around"
 
--- WINDOWS --
+-- BUFFERS / WINDOWS --
 -- bD                    <Cmd>:bd<CR>                                       Delete Buffer and Window
 -- bd                    No command                                         Delete Buffer
 -- `                     <Cmd>e #<CR>                                       Switch to Other Buffer
@@ -378,8 +385,10 @@ map("<leader>fr", require("config.helpers.grug_far").find_replace, "Find and Rep
 -- <C-K>                 <C-W>k                                             Go to Upper Window
 -- <C-J>                 <C-W>j                                             Go to Lower Window
 -- <C-H>                 <C-W>h                                             Go to Left Window
-
-
+map("<M-h>", "<cmd>vertical resize-2<CR>", "increase width")
+map("<M-j>", "<cmd>resize+1<CR>", "increase height")
+map("<M-k>", "<cmd>resize-1<CR>", "decrease height")
+map("<M-l>", "<cmd>vertical resize+2<CR>", "decrease width")
 
 -- TERMINAL --
 -- fT                                     No command                                         Terminal (cwd)
