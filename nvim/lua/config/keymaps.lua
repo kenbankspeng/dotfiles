@@ -390,6 +390,19 @@ map("<M-j>", "<cmd>resize+1<CR>", "increase height")
 map("<M-k>", "<cmd>resize-1<CR>", "decrease height")
 map("<M-l>", "<cmd>vertical resize+2<CR>", "decrease width")
 
+
+local move = require("config.helpers.wezterm")
+map("<S-Left>", function() move("h") end, "move left")
+map("<S-Down>", function() move("j") end, "move down")
+map("<S-Up>", function() move("k") end, "move up")
+map("<S-Right>", function() move("l") end, "move right")
+
+
+
+
+
+
+
 -- TERMINAL --
 -- fT                                     No command                                         Terminal (cwd)
 -- ft                                     No command                                         Terminal (Root Dir)

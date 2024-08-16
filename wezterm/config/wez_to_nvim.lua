@@ -8,15 +8,15 @@ local function is_vim(pane)
 end
 
 local direction_keys = {
-  Left = "h",
-  Down = "j",
-  Up = "k",
-  Right = "l",
+  Left = "LeftArrow",
+  Down = "DownArrow",
+  Up = "UpArrow",
+  Right = "RightArrow",
   -- reverse lookup
-  h = "Left",
-  j = "Down",
-  k = "Up",
-  l = "Right",
+  LeftArrow = "Left",
+  DownArrow = "Down",
+  UpArrow = "Up",
+  RightArrow = "Right",
 }
 
 local function split_nav(resize_or_move, key)
@@ -27,7 +27,7 @@ local function split_nav(resize_or_move, key)
       if is_vim(pane) then
         -- pass the keys through to vim/nvim
         win:perform_action({
-          SendKey = { key = key, mods = resize_or_move == "resize" and "META" or "CTRL" },
+          SendKey = { key = key, mods = resize_or_move == "resize" and "META" or "SHIFT" },
         }, pane)
       else
         if resize_or_move == "resize" then
@@ -42,14 +42,14 @@ end
 
 local nav_keys = {
   -- move between split panes
-  split_nav("move", "h"),
-  split_nav("move", "j"),
-  split_nav("move", "k"),
-  split_nav("move", "l"),
+  split_nav("move", "LeftArrow"),
+  split_nav("move", "DownArrow"),
+  split_nav("move", "UpArrow"),
+  split_nav("move", "RightArrow"),
   -- resize panes
-  split_nav("resize", "h"),
-  split_nav("resize", "j"),
-  split_nav("resize", "k"),
-  split_nav("resize", "l"),
+  split_nav("resize", "LeftArrow"),
+  split_nav("resize", "DownArrow"),
+  split_nav("resize", "UpArrow"),
+  split_nav("resize", "RightArrow"),
 }
 return nav_keys
