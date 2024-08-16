@@ -1,6 +1,5 @@
 -- type `wezterm show-keys` in the terminal to see the key bindings
 
--- local merge = require('util.table').merge
 local wezterm = require('wezterm')
 local action = wezterm.action
 local quick_select = require('config.quick_select')
@@ -110,18 +109,22 @@ local keys = {
    map('/', mod.SUPER, action.SplitVertical({ domain = 'CurrentPaneDomain' })),
    map('\\', mod.SUPER, action.SplitHorizontal({ domain = 'CurrentPaneDomain' })),
    map('Enter', mod.SUPER, action.TogglePaneZoomState), -- zoom
-   map('LeftArrow', mod.SHIFT, action.ActivatePaneDirection('Left')),
-   map('RightArrow', mod.SHIFT, action.ActivatePaneDirection('Right')),
-   map('UpArrow', mod.SHIFT, action.ActivatePaneDirection('Up')),
-   map('DownArrow', mod.SHIFT, action.ActivatePaneDirection('Down')),
+   -- map('LeftArrow', mod.ALT, action.AdjustPaneSize({ 'Left', 1 })),
+   -- map('RightArrow', mod.ALT, action.AdjustPaneSize({ 'Down', 1 })),
+   -- map('UpArrow', mod.ALT, action.AdjustPaneSize({ 'Up', 1 })),
+   -- map('DownArrow', mod.ALT, action.AdjustPaneSize({ 'Right', 1 })),
+   -- map('LeftArrow', mod.SHIFT, action.ActivatePaneDirection('Left')),
+   -- map('RightArrow', mod.SHIFT, action.ActivatePaneDirection('Right')),
+   -- map('UpArrow', mod.SHIFT, action.ActivatePaneDirection('Up')),
+   -- map('DownArrow', mod.SHIFT, action.ActivatePaneDirection('Down')),
    map('p', mod.SUPER_REV, action.PaneSelect({ alphabet = '1234567890', mode = 'SwapWithActiveKeepFocus' })),
 
-   -- LEADER-p for resize-pane mode, the use arrow keys
-   map('p', mod.LEADER, action.ActivateKeyTable({
-      name = 'resize_pane',
-      one_shot = false,
-      timemout_miliseconds = 1000,
-   })),
+   -- -- LEADER-p for resize-pane mode, the use arrow keys
+   -- map('p', mod.LEADER, action.ActivateKeyTable({
+   --    name = 'resize_pane',
+   --    one_shot = false,
+   --    timemout_miliseconds = 1000,
+   -- })),
 
 
    -- SCROLL
@@ -197,12 +200,6 @@ local keys = {
    })),
 
 }
-
-local split_nav = require('config.nvim')
-print(wezterm.to_string(split_nav))
-
--- merge in nvim split-window integration
--- merge(split_nav, keys)
 
 local key_tables = {}
 key_tables.copy_mode = {

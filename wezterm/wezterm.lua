@@ -1,3 +1,6 @@
+-- setup package paths
+require('path')
+
 -- gui pre-init configs
 require('startup')({
     max = true,
