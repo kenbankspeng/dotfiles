@@ -3,12 +3,12 @@ local function meta__index(tbl)
   return setmetatable(tbl, tbl)
 end
 
-local function merge(original, update)
-  for k, v in pairs(update) do
-    if type(v) == 'table' and type(original[k]) == 'table' then
-      merge(original[k], v)
+local function merge(dest, src)
+  for k, v in pairs(src) do
+    if type(v) == 'table' and type(dest[k]) == 'table' then
+      merge(dest[k], v)
     else
-      original[k] = v
+      dest[k] = v
     end
   end
 end

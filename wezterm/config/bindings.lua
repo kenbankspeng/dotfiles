@@ -201,6 +201,14 @@ local keys = {
 
 }
 
+
+-- wezterm-nvim integration
+-- merge nav_keys into keys
+local nav_keys = require('config.nvim')
+for _, v in ipairs(nav_keys) do
+   table.insert(keys, v)
+end
+
 local key_tables = {}
 key_tables.copy_mode = {
    -- MOVE CURSOR -- 1 CHARACTER

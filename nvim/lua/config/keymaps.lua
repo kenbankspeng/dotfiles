@@ -212,38 +212,6 @@ map("<leader>yy", "<cmd>Yazi cwd<CR>", "Open yazi at working directory") -- ok
 
 
 
--- SMART SPLITS --
--- `10<A-h>` will `resize_left` by `(10 * config.default_amount)`
-local smart_splits = require('smart-splits')
-map('<A-j>', smart_splits.resize_down)
-map('<A-h>', smart_splits.resize_left)
-map('<A-k>', smart_splits.resize_up)
-map('<A-l>', smart_splits.resize_right)
-map('<A-Left>', smart_splits.resize_left)
-map('<A-Down>', smart_splits.resize_down)
-map('<A-Up>', smart_splits.resize_up)
-map('<A-Right>', smart_splits.resize_right)
-
--- moving between splits
-map('<C-h>', smart_splits.move_cursor_left)
-map('<C-j>', smart_splits.move_cursor_down)
-map('<C-k>', smart_splits.move_cursor_up)
-map('<C-l>', smart_splits.move_cursor_right)
-map('<S-Left>', smart_splits.move_cursor_left)
-map('<S-Down>', smart_splits.move_cursor_down)
-map('<S-Up>', smart_splits.move_cursor_up)
-map('<S-Right>', smart_splits.move_cursor_right)
-
-map('<C-\\>', smart_splits.move_cursor_previous)
-
-
--- swapping buffers between windows
-map('<leader><leader>h', smart_splits.swap_buf_left)
-map('<leader><leader>j', smart_splits.swap_buf_down)
-map('<leader><leader>k', smart_splits.swap_buf_up)
-map('<leader><leader>l', smart_splits.swap_buf_right)
-
-
 
 
 
