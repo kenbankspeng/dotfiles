@@ -25,6 +25,8 @@ local function send_key_to_wezterm(direction)
   wezterm_exec({ "activate-pane-direction", wezterm_directions[direction] })
 end
 
+-- if you're at the edge, send the command to wezterm
+-- otherwise send command to vim
 return function(direction)
   if at_edge(direction) then
     send_key_to_wezterm(direction)
