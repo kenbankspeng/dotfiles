@@ -391,11 +391,11 @@ map("<M-k>", "<cmd>resize-1<CR>", "decrease height")
 map("<M-l>", "<cmd>vertical resize+2<CR>", "decrease width")
 
 
-local move = require("config.helpers.wezterm")
-map("<S-Left>", function() move("h") end, "move left")
-map("<S-Down>", function() move("j") end, "move down")
-map("<S-Up>", function() move("k") end, "move up")
-map("<S-Right>", function() move("l") end, "move right")
+local nvim_to_wez = require("config.helpers.nvim_to_wez")
+map("<S-Left>", function() nvim_to_wez("h") end, "move left")
+map("<S-Down>", function() nvim_to_wez("j") end, "move down")
+map("<S-Up>", function() nvim_to_wez("k") end, "move up")
+map("<S-Right>", function() nvim_to_wez("l") end, "move right")
 
 
 
