@@ -377,8 +377,8 @@ map("<leader>fr", require("config.helpers.grug_far").find_replace, "Find and Rep
 -- `                     <Cmd>e #<CR>                                       Switch to Other Buffer
 -- bb                    <Cmd>e #<CR>                                       Switch to Other Buffer
 -- w                     <C-W>                                              Windows
--- |                     <C-W>v                                             Split Window Right
--- -                     <C-W>s                                             Split Window Below
+-- <leader>|             <C-W>v                                             Split Window Right
+-- <leader>-             <C-W>s                                             Split Window Below
 -- wm                    No command                                         Toggle Maximize
 -- wd                    <C-W>c                                             Delete Window
 -- <C-L>                 <C-W>l                                             Go to Right Window
