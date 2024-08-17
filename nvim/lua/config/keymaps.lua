@@ -385,21 +385,41 @@ map("<leader>fr", require("config.helpers.grug_far").find_replace, "Find and Rep
 -- <C-K>                 <C-W>k                                             Go to Upper Window
 -- <C-J>                 <C-W>j                                             Go to Lower Window
 -- <C-H>                 <C-W>h                                             Go to Left Window
-map("<M-h>", "<cmd>vertical resize-2<CR>", "increase width")
-map("<M-j>", "<cmd>resize+1<CR>", "increase height")
-map("<M-k>", "<cmd>resize-1<CR>", "decrease height")
-map("<M-l>", "<cmd>vertical resize+2<CR>", "decrease width")
-
--- ok
-local nvim_to_wez = require("config.helpers.nvim_to_wez")
-map("<S-Left>", function() nvim_to_wez("h") end, "move left")
-map("<S-Down>", function() nvim_to_wez("j") end, "move down")
-map("<S-Up>", function() nvim_to_wez("k") end, "move up")
-map("<S-Right>", function() nvim_to_wez("l") end, "move right")
 
 
+-- move -- ok
+local nvim_wezterm = require("config.helpers.nvim_wezterm")
+map("<S-Left>", function() nvim_wezterm("h") end, "move left")
+map("<S-Down>", function() nvim_wezterm("j") end, "move down")
+map("<S-Up>", function() nvim_wezterm("k") end, "move up")
+map("<S-Right>", function() nvim_wezterm("l") end, "move right")
 
 
+-- Function to determine the correct polarity for resizing
+local function resize(direction, amount)
+  local win_id = vim.api.nvim_get_current_win()
+  if direction == 'vertical' then
+    local win_pos = vim.fn.win_screenpos(win_id)[2] -- get horizontal position
+    local screen_width = vim.o.columns
+    if win_pos > screen_width / 2 then
+      amount = -amount
+    end
+    vim.cmd(string.format('vertical resize %d', amount))
+  else
+    local win_pos = vim.fn.win_screenpos(win_id)[1] -- get vertical position
+    local screen_height = vim.o.lines
+    if win_pos > screen_height / 2 then
+      amount = -amount
+    end
+    vim.cmd(string.format('resize %d', amount))
+  end
+end
+
+-- Key mappings using vim.keymap.set
+vim.keymap.set('n', '<M-Left>', function() resize("vertical", 2) end, { noremap = true, silent = true })
+vim.keymap.set('n', '<M-Right>', function() resize("vertical", -2) end, { noremap = true, silent = true })
+vim.keymap.set('n', '<M-Up>', function() resize("horizontal", -1) end, { noremap = true, silent = true })
+vim.keymap.set('n', '<M-Down>', function() resize("horizontal", 1) end, { noremap = true, silent = true })
 
 
 
