@@ -96,6 +96,7 @@ local function maybe_invert(direction, amount)
   if (chk1 and not chk2) or (chk2 and not chk1) then
     amount = -amount
   end
+  return amount
 end
 
 local function resize(direction, amount)
