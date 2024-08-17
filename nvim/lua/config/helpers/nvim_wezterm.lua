@@ -2,6 +2,8 @@
 -- wezterm cli
 --
 
+local winnr = vim.fn.winnr
+
 local function wezterm_exec(cmd)
   -- ex. { "wezterm", "cli", "activate-pane-direction", "left" }
   -- ex. { "wezterm", "cli", "adjust-pane-size", "--amount", "2", "up" }
@@ -63,32 +65,28 @@ local function resize_vim_split(direction, amount)
   vim.cmd(cmd)
 end
 
+-- rightmost and bottom-most windows are resized in the opposite direction
+local function maybe_invert(direction, amount)
+  local check = 'j'
+  if direction == 'h' or direction == 'l' then
+    check = 'l'
+  end
+  -- if going right doesn't change your window number, then you're at the right edge
+  -- if going down doesn't change your window number, then you're at the bottom edge
+  if winnr() == winnr(check) then
+    amount = -amount
+  end
+  return amount
+end
+
 local function resize(direction, amount)
   local win_nr = vim.fn.winnr() -- get window number
-
-  if direction == 'h' or direction == 'l' then
-    if no_nvim_split(direction) then
-      -- if no nvim split, send command to wezterm
-      -- wezterm uses left, down, up, right for directions
-      wezterm_exec({ "adjust-pane-size", "--amount", "2", wezterm_directions[direction] })
-    else
-      -- invert if rightmost window
-      if win_nr == vim.fn.winnr('l') then
-        amount = -amount -- rightmost windows are resized left
-      end
-      resize_vim_split(direction, amount)
-    end
+  -- if no nvim split, send command to wezterm
+  if no_nvim_split(direction) then
+    wezterm_exec({ "adjust-pane-size", "--amount", "2", wezterm_directions[direction] })
   else
-    if no_nvim_split(direction) then
-      -- if no nvim split, send command to wezterm
-      -- wezterm uses left, down, up, right for directions
-      wezterm_exec({ "adjust-pane-size", "--amount", "2", wezterm_directions[direction] })
-    else
-      if win_nr == vim.fn.winnr('j') then
-        amount = -amount -- bottom-most windows are resized up
-      end
-      resize_vim_split(direction, amount)
-    end
+    amount = maybe_invert(direction, amount)
+    resize_vim_split(direction, amount)
   end
 end
 
