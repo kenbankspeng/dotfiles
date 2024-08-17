@@ -20,11 +20,11 @@ local quick_select_open_url = quick_select.quick_select_open_url
 
 local mod = {
    NONE = 'NONE',
-   ALT = 'ALT',
+   META = 'ALT',
    CTRL = 'CTRL',
    SHIFT = 'SHIFT',
    SUPER = 'CMD',
-   SUPER_REV = 'CMD|ALT',
+   SUPER_REV = 'CMD|META',
    LEADER = 'LEADER',
 }
 
@@ -60,7 +60,7 @@ local keys = {
 
    -- manage enter variants
    map("Enter", mod.NONE, action.SendString("\x0d")),
-   map("Enter", mod.ALT, action.ToggleFullScreen),
+   map("Enter", mod.META, action.ToggleFullScreen),
    map("Enter", mod.SHIFT, action.SendString("\x1b[13;2u")), -- escape sequence for shift+enter
    map("Enter", mod.CTRL, action.SendString("\x1b[13;5u")),  -- escape sequence for ctrl+enter
 
@@ -68,7 +68,7 @@ local keys = {
    -- spawn windows
    map('n', mod.SUPER, action.SpawnWindow),
    map('q', mod.SUPER, action.QuitApplication), -- not required
-   map('Enter', mod.ALT, action.ToggleFullScreen),
+   map('Enter', mod.META, action.ToggleFullScreen),
    map('h', mod.SUPER, action.HideApplication),
    map('r', mod.SUPER, action.ReloadConfiguration),
    map('p', mod.SUPER, action.ActivateCommandPalette),
@@ -109,10 +109,10 @@ local keys = {
    map('/', mod.SUPER, action.SplitVertical({ domain = 'CurrentPaneDomain' })),
    map('\\', mod.SUPER, action.SplitHorizontal({ domain = 'CurrentPaneDomain' })),
    map('Enter', mod.SUPER, action.TogglePaneZoomState), -- zoom
-   -- map('LeftArrow', mod.ALT, action.AdjustPaneSize({ 'Left', 1 })),
-   -- map('RightArrow', mod.ALT, action.AdjustPaneSize({ 'Down', 1 })),
-   -- map('UpArrow', mod.ALT, action.AdjustPaneSize({ 'Up', 1 })),
-   -- map('DownArrow', mod.ALT, action.AdjustPaneSize({ 'Right', 1 })),
+   -- map('LeftArrow', mod.META, action.AdjustPaneSize({ 'Left', 1 })),
+   -- map('RightArrow', mod.META, action.AdjustPaneSize({ 'Down', 1 })),
+   -- map('UpArrow', mod.META, action.AdjustPaneSize({ 'Up', 1 })),
+   -- map('DownArrow', mod.META, action.AdjustPaneSize({ 'Right', 1 })),
    -- map('LeftArrow', mod.SHIFT, action.ActivatePaneDirection('Left')),
    -- map('RightArrow', mod.SHIFT, action.ActivatePaneDirection('Right')),
    -- map('UpArrow', mod.SHIFT, action.ActivatePaneDirection('Up')),
@@ -294,7 +294,7 @@ local mouse_bindings = {
 return {
    disable_default_key_bindings = true, -- reset all keys
    debug_key_events = false,
-   leader = { key = 'Space', mods = mod.ALT },
+   leader = { key = 'Space', mods = mod.META },
    keys = keys,
    key_tables = key_tables,
    mouse_bindings = mouse_bindings,
