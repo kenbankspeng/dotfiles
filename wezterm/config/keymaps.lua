@@ -109,23 +109,7 @@ local keys = {
    map('/', mod.SUPER, action.SplitVertical({ domain = 'CurrentPaneDomain' })),
    map('\\', mod.SUPER, action.SplitHorizontal({ domain = 'CurrentPaneDomain' })),
    map('Enter', mod.SUPER, action.TogglePaneZoomState), -- zoom
-   -- map('LeftArrow', mod.META, action.AdjustPaneSize({ 'Left', 1 })),
-   -- map('RightArrow', mod.META, action.AdjustPaneSize({ 'Down', 1 })),
-   -- map('UpArrow', mod.META, action.AdjustPaneSize({ 'Up', 1 })),
-   -- map('DownArrow', mod.META, action.AdjustPaneSize({ 'Right', 1 })),
-   -- map('LeftArrow', mod.SHIFT, action.ActivatePaneDirection('Left')),
-   -- map('RightArrow', mod.SHIFT, action.ActivatePaneDirection('Right')),
-   -- map('UpArrow', mod.SHIFT, action.ActivatePaneDirection('Up')),
-   -- map('DownArrow', mod.SHIFT, action.ActivatePaneDirection('Down')),
    map('p', mod.SUPER_REV, action.PaneSelect({ alphabet = '1234567890', mode = 'SwapWithActiveKeepFocus' })),
-
-   -- -- LEADER-p for resize-pane mode, the use arrow keys
-   -- map('p', mod.LEADER, action.ActivateKeyTable({
-   --    name = 'resize_pane',
-   --    one_shot = false,
-   --    timemout_miliseconds = 1000,
-   -- })),
-
 
    -- SCROLL
    map('PageUp', mod.SHIFT, action.ScrollByPage(-1)),
@@ -266,20 +250,6 @@ key_tables.resize_font = {
    map('j', mod.NONE, action.DecreaseFontSize),
    map('k', mod.NONE, action.IncreaseFontSize),
    map('r', mod.NONE, action.ResetFontSize),
-
-   map('Escape', mod.NONE, 'PopKeyTable'),
-   map('q', mod.NONE, 'PopKeyTable'),
-}
-
-key_tables.resize_pane = {
-   map('h', mod.NONE, action.AdjustPaneSize({ 'Left', 1 })),
-   map('j', mod.NONE, action.AdjustPaneSize({ 'Down', 1 })),
-   map('k', mod.NONE, action.AdjustPaneSize({ 'Up', 1 })),
-   map('l', mod.NONE, action.AdjustPaneSize({ 'Right', 1 })),
-   map('LeftArrow', mod.NONE, action.AdjustPaneSize({ 'Left', 1 })),
-   map('RightArrow', mod.NONE, action.AdjustPaneSize({ 'Right', 1 })),
-   map('UpArrow', mod.NONE, action.AdjustPaneSize({ 'Up', 1 })),
-   map('DownArrow', mod.NONE, action.AdjustPaneSize({ 'Down', 1 })),
 
    map('Escape', mod.NONE, 'PopKeyTable'),
    map('q', mod.NONE, 'PopKeyTable'),
