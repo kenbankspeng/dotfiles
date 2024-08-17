@@ -1,4 +1,6 @@
 return {
-  'echasnovski/mini.ai',
-  keys = function() return {} end -- remove lazyvim keymaps
+  {
+    'echasnovski/mini.ai',
+    keys = function() return {} end -- remove lazyvim keymaps
+  }
 }

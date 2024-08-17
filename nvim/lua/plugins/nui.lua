@@ -1,4 +1,6 @@
 return {
-  'MunifTanjim/nui.nvim',
-  keys = function() return {} end -- remove lazyvim keymaps
+  {
+    'MunifTanjim/nui.nvim',
+    keys = function() return {} end -- remove lazyvim keymaps
+  }
 }

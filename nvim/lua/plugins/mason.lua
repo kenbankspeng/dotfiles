@@ -1,4 +1,6 @@
 return {
-  'williamboman/mason.nvim',
-  keys = function() return {} end -- remove lazyvim keymaps
+  {
+    'williamboman/mason.nvim',
+    keys = function() return {} end -- remove lazyvim keymaps
+  }
 }
