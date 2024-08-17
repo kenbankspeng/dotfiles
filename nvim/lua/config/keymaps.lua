@@ -38,10 +38,11 @@ whichkey.add({
 -- VIM KEYMAPS
 
 -- Remap Q to start/stop recording a macro (requires a register)
-vim.api.nvim_set_keymap("n", "Q", "q", { noremap = true })
+vim.keymap.set("n", "Q", "q", { noremap = true })
 
--- Remap q to delete the current buffer
-vim.api.nvim_set_keymap("n", "q", ":bdelete<CR>", { noremap = true, silent = true })
+-- close split or buffer
+local smart_close = require("config.helpers.window").smart_close
+vim.keymap.set("n", "q", smart_close, { noremap = true, silent = true })
 
 -- Insertion and Appending
 -- `a`: append after cursor
@@ -143,6 +144,9 @@ del("n", "<leader>bp")         -- Toggle Pin
 
 del("n", "<M-k>")              -- Move Code Up
 del("n", "<M-j>")              -- Move Code Down
+
+del("n", "<leader>|")          -- Split Window Right <C-W>v                                             Split Window Right
+del("n", "<leader>-")          -- Split Window Below <C-W>s                                             Split Window Below
 
 -- NEOTREE -- cannot disable - so remove keys
 del("n", "<leader>E")  -- Explorer NeoTree (cwd)
@@ -378,6 +382,10 @@ map("<leader>fr", require("config.helpers.grug_far").find_replace, "Find and Rep
 
 -- depending on situation, send command to neovim or to wezterm
 local unified = require("config.helpers.nvim_wezterm")
+
+-- splits
+map("<leader>\\", "<C-w>v", "split right")
+map("<leader>/", "<C-w>s", "split down")
 
 -- navigate splits   -- ok
 map("<S-Left>", function() unified.navigate("h") end, "navigate left")
