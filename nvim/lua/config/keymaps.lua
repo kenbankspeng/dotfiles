@@ -404,14 +404,14 @@ local function resize(direction, amount)
     if win_pos > screen_width / 2 then
       amount = -amount
     end
-    vim.cmd(string.format('vertical resize %d', amount))
+    vim.cmd(string.format('vertical resize%d', amount))
   else
     local win_pos = vim.fn.win_screenpos(win_id)[1] -- get vertical position
     local screen_height = vim.o.lines
     if win_pos > screen_height / 2 then
       amount = -amount
     end
-    vim.cmd(string.format('resize %d', amount))
+    vim.cmd(string.format('resize%d', amount))
   end
 end
 
