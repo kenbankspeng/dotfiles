@@ -1,4 +1,18 @@
 --
+-- wezterm cli
+--
+
+local function wezterm_exec(cmd)
+  -- ex. { "wezterm", "cli", "activate-pane-direction", "left" }
+  -- ex. { "wezterm", "cli", "adjust-pane-size", "--amount", "2", "up" }
+  local command = vim.deepcopy(cmd)
+  table.insert(command, 1, "wezterm")
+  table.insert(command, 2, "cli")
+  return vim.system(command)
+end
+
+
+--
 -- navigate splits - nvim and wezterm
 --
 
@@ -16,25 +30,13 @@ local function at_edge(direction)
   return vim.fn.winnr() == vim.fn.winnr(direction)
 end
 
-local function wezterm_exec(cmd)
-  -- command = { "wezterm", "cli", "activate-pane-direction", "left" }
-  -- wezterm cli adjust-pane-size --amount 5 up
-  local command = vim.deepcopy(cmd)
-  table.insert(command, 1, "wezterm")
-  table.insert(command, 2, "cli")
-  return vim.system(command)
-end
-
-local function send_key_to_wezterm(direction)
-  -- wezterm uses left, down, up, right for directions
-  wezterm_exec({ "activate-pane-direction", wezterm_directions[direction] })
-end
 
 -- if you're at the edge, send the command to wezterm
 -- otherwise send command to vim
 local function navigate(direction)
   if at_edge(direction) then
-    send_key_to_wezterm(direction)
+    -- wezterm uses left, down, up, right for directions
+    wezterm_exec({ "activate-pane-direction", wezterm_directions[direction] })
   else
     -- vim functions use h, j, k, l for directions
     vim.cmd("wincmd " .. direction)
@@ -45,26 +47,44 @@ end
 -- resize splits - nvim and wezterm
 --
 
+local function no_nvim_split(direction)
+  if direction == 'vertical' then
+    return vim.fn.winnr() == vim.fn.winnr('h') and vim.fn.winnr() == vim.fn.winnr('l')
+  else
+    return vim.fn.winnr() == vim.fn.winnr('j') and vim.fn.winnr() == vim.fn.winnr('k')
+  end
+end
+
+local function resize_vim_split(direction, amount)
+  local cmd = 'vertical resize' .. (amount > 0 and '+' or '') .. amount
+  if direction == 'vertical' then
+    vim.cmd('vertical ' .. cmd)
+  else
+    vim.cmd(cmd)
+  end
+end
+
 local function resize(direction, amount)
   local win_nr = vim.fn.winnr() -- get window number
 
   if direction == 'vertical' then
-    -- if to nvim split, send command to wezterm
-
-
-    -- invert if rightmost window
-    if win_nr == vim.fn.winnr('l') then
-      amount = -amount
+    if no_nvim_split(direction) then
+      -- if no nvim split, send command to wezterm
+    else
+      -- invert if rightmost window
+      if win_nr == vim.fn.winnr('l') then
+        amount = -amount -- rightmost windows are resized left
+      end
+      resize_vim_split(direction, amount)
     end
-    vim.cmd(string.format('vertical resize%s%d', amount > 0 and '+' or '', amount))
   else
-    if win_nr == vim.fn.winnr('j') and win_nr == vim.fn.winnr('k') then
-      -- if to nvim split, send command to wezterm
+    if no_nvim_split(direction) then
+      -- if no nvim split, send command to wezterm
     else
       if win_nr == vim.fn.winnr('j') then
-        amount = -amount
+        amount = -amount -- bottom-most windows are resized up
       end
-      vim.cmd(string.format('resize%s%d', amount > 0 and '+' or '', amount))
+      resize_vim_split(direction, amount)
     end
   end
 end
