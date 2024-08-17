@@ -387,40 +387,20 @@ map("<leader>fr", require("config.helpers.grug_far").find_replace, "Find and Rep
 -- <C-H>                 <C-W>h                                             Go to Left Window
 
 
--- move -- ok
+-- navigate splits   -- ok
 local nvim_wezterm = require("config.helpers.nvim_wezterm")
-map("<S-Left>", function() nvim_wezterm("h") end, "move left")
-map("<S-Down>", function() nvim_wezterm("j") end, "move down")
-map("<S-Up>", function() nvim_wezterm("k") end, "move up")
-map("<S-Right>", function() nvim_wezterm("l") end, "move right")
+local navigate = nvim_wezterm.navigate
+local resize = nvim_wezterm.resize
 
+map("<S-Left>", function() navigate("h") end, "navigate left")
+map("<S-Down>", function() navigate("j") end, "navigate down")
+map("<S-Up>", function() navigate("k") end, "navigate up")
+map("<S-Right>", function() navigate("l") end, "navigate right")
 
--- Function to determine the correct polarity for resizing
-local function resize(direction, amount)
-  local win_nr = vim.fn.winnr() -- get window number
-
-  if direction == 'vertical' then
-    -- invert if rightmost window
-    if win_nr == vim.fn.winnr('l') then
-      amount = -amount
-    end
-    vim.cmd(string.format('vertical resize%s%d', amount > 0 and '+' or '', amount))
-  else
-    -- don't resize if window is full height (no horizontal split)
-    if win_nr ~= vim.fn.winnr('j') or win_nr ~= vim.fn.winnr('k') then
-      if win_nr == vim.fn.winnr('j') then
-        amount = -amount
-      end
-      vim.cmd(string.format('resize%s%d', amount > 0 and '+' or '', amount))
-    end
-  end
-end
-
--- Key mappings using vim.keymap.set
-vim.keymap.set('n', '<M-Left>', function() resize("vertical", -2) end, { noremap = true, silent = true })
-vim.keymap.set('n', '<M-Right>', function() resize("vertical", 2) end, { noremap = true, silent = true })
-vim.keymap.set('n', '<M-Up>', function() resize("horizontal", -2) end, { noremap = true, silent = true })
-vim.keymap.set('n', '<M-Down>', function() resize("horizontal", 2) end, { noremap = true, silent = true })
+map('<M-Left>', function() resize("vertical", -2) end, "resize left")
+map('<M-Right>', function() resize("vertical", 2) end, "resize right")
+map('<M-Up>', function() resize("horizontal", -2) end, "resize up")
+map('<M-Down>', function() resize("horizontal", 2) end, "resize down")
 
 
 -- TERMINAL --

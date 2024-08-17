@@ -1,3 +1,7 @@
+--
+-- navigate splits - nvim and wezterm
+--
+
 local wezterm_directions = {
   h = "Left",
   j = "Down",
@@ -28,7 +32,7 @@ end
 
 -- if you're at the edge, send the command to wezterm
 -- otherwise send command to vim
-return function(direction)
+local function navigate(direction)
   if at_edge(direction) then
     send_key_to_wezterm(direction)
   else
@@ -36,3 +40,36 @@ return function(direction)
     vim.cmd("wincmd " .. direction)
   end
 end
+
+--
+-- resize splits - nvim and wezterm
+--
+
+local function resize(direction, amount)
+  local win_nr = vim.fn.winnr() -- get window number
+
+  if direction == 'vertical' then
+    -- if to nvim split, send command to wezterm
+
+
+    -- invert if rightmost window
+    if win_nr == vim.fn.winnr('l') then
+      amount = -amount
+    end
+    vim.cmd(string.format('vertical resize%s%d', amount > 0 and '+' or '', amount))
+  else
+    if win_nr == vim.fn.winnr('j') and win_nr == vim.fn.winnr('k') then
+      -- if to nvim split, send command to wezterm
+    else
+      if win_nr == vim.fn.winnr('j') then
+        amount = -amount
+      end
+      vim.cmd(string.format('resize%s%d', amount > 0 and '+' or '', amount))
+    end
+  end
+end
+
+return {
+  navigage = navigate,
+  resize = resize
+}
