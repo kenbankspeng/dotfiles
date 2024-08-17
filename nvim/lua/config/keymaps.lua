@@ -395,10 +395,10 @@ map("<S-Down>", function() nw.navigate("j") end, "navigate down")
 map("<S-Up>", function() nw.navigate("k") end, "navigate up")
 map("<S-Right>", function() nw.navigate("l") end, "navigate right")
 
-map('<M-Left>', function() nw.resize("vertical", -2) end, "resize left")
-map('<M-Right>', function() nw.resize("vertical", 2) end, "resize right")
-map('<M-Up>', function() nw.resize("horizontal", -2) end, "resize up")
-map('<M-Down>', function() nw.resize("horizontal", 2) end, "resize down")
+map('<M-Left>', function() nw.resize("h", -2) end, "resize left")
+map('<M-Down>', function() nw.resize("j", 2) end, "resize down")
+map('<M-Up>', function() nw.resize("k", -2) end, "resize up")
+map('<M-Right>', function() nw.resize("l", 2) end, "resize right")
 
 
 -- TERMINAL --

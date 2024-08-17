@@ -56,20 +56,21 @@ local function no_nvim_split(direction)
 end
 
 local function resize_vim_split(direction, amount)
-  local cmd = 'vertical resize' .. (amount > 0 and '+' or '') .. amount
-  if direction == 'vertical' then
-    vim.cmd('vertical ' .. cmd)
-  else
-    vim.cmd(cmd)
+  local cmd = 'resize' .. (amount > 0 and '+' or '') .. amount
+  if direction == 'h' or direction == 'l' then
+    cmd = 'vertical ' .. cmd
   end
+  vim.cmd(cmd)
 end
 
 local function resize(direction, amount)
   local win_nr = vim.fn.winnr() -- get window number
 
-  if direction == 'vertical' then
+  if direction == 'h' or direction == 'l' then
     if no_nvim_split(direction) then
       -- if no nvim split, send command to wezterm
+      -- wezterm uses left, down, up, right for directions
+      wezterm_exec({ "adjust-pane-size", "--amount", "2", wezterm_directions[direction] })
     else
       -- invert if rightmost window
       if win_nr == vim.fn.winnr('l') then
@@ -80,6 +81,8 @@ local function resize(direction, amount)
   else
     if no_nvim_split(direction) then
       -- if no nvim split, send command to wezterm
+      -- wezterm uses left, down, up, right for directions
+      wezterm_exec({ "adjust-pane-size", "--amount", "2", wezterm_directions[direction] })
     else
       if win_nr == vim.fn.winnr('j') then
         amount = -amount -- bottom-most windows are resized up
