@@ -376,18 +376,19 @@ map("<leader>fr", require("config.helpers.grug_far").find_replace, "Find and Rep
 -- <C-J>                 <C-W>j                                             Go to Lower Window
 -- <C-H>                 <C-W>h                                             Go to Left Window
 
+-- depending on situation, send command to neovim or to wezterm
+local unified = require("config.helpers.nvim_wezterm")
+
 -- navigate splits   -- ok
-local nw = require("config.helpers.nvim_wezterm")
-
-map("<S-Left>", function() nw.navigate("h") end, "navigate left")
-map("<S-Down>", function() nw.navigate("j") end, "navigate down")
-map("<S-Up>", function() nw.navigate("k") end, "navigate up")
-map("<S-Right>", function() nw.navigate("l") end, "navigate right")
-
-map("<M-Left>", function() nw.resize("h", -2) end, "resize left")
-map("<M-Down>", function() nw.resize("j", 2) end, "resize down")
-map("<M-Up>", function() nw.resize("k", -2) end, "resize up")
-map("<M-Right>", function() nw.resize("l", 2) end, "resize right")
+map("<S-Left>", function() unified.navigate("h") end, "navigate left")
+map("<S-Down>", function() unified.navigate("j") end, "navigate down")
+map("<S-Up>", function() unified.navigate("k") end, "navigate up")
+map("<S-Right>", function() unified.navigate("l") end, "navigate right")
+-- resize splits   -- ok
+map("<M-Left>", function() unified.resize("h", 2) end, "resize left")
+map("<M-Down>", function() unified.resize("j", 2) end, "resize down")
+map("<M-Up>", function() unified.resize("k", 2) end, "resize up")
+map("<M-Right>", function() unified.resize("l", 2) end, "resize right")
 
 -- TERMINAL --
 -- fT                                     No command                                         Terminal (cwd)

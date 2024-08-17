@@ -69,18 +69,33 @@ local function resize_vim_split(direction, amount)
   vim.cmd(cmd)
 end
 
+
 -- rightmost and bottom-most windows are resized in the opposite direction
 local function maybe_invert(direction, amount)
-  local check = 'j'
-  if is_vertical_split(direction) then
-    check = 'l'
-  end
   -- if going right doesn't change your window number, then you're at the right edge
   -- if going down doesn't change your window number, then you're at the bottom edge
-  if winnr() == winnr(check) then
+
+  local function check_winnr(check)
+    return winnr() == winnr(check)
+  end
+
+  local function is_bottom_or_rightmost()
+    if is_vertical_split(direction) then
+      return check_winnr('l')
+    else
+      return check_winnr('j')
+    end
+  end
+
+  local chk1 = direction == 'h' or direction == 'k'
+  local chk2 = is_bottom_or_rightmost()
+
+  -- logical XOR
+  -- only invert if need to invert once
+  -- if need to invert twice, don't invert
+  if (chk1 and not chk2) or (chk2 and not chk1) then
     amount = -amount
   end
-  return amount
 end
 
 local function resize(direction, amount)
