@@ -397,25 +397,20 @@ map("<S-Right>", function() nvim_wezterm("l") end, "move right")
 
 -- Function to determine the correct polarity for resizing
 local function resize(direction, amount)
-  local win_id = vim.api.nvim_get_current_win()
-  local win_nr = vim.fn.winnr()                 -- get window number
-  local total_wins = vim.fn.winnr('$')          -- get total number of windows
-  local cols = math.ceil(math.sqrt(total_wins)) -- estimate number of columns based on total windows
+  local win_nr = vim.fn.winnr()        -- get window number
+  local total_wins = vim.fn.winnr('$') -- get total number of windows
 
   if direction == 'vertical' then
-    local col = (win_nr - 1) % cols + 1 -- determine the column of the window
-    if col > cols / 2 then
+    if win_nr == total_wins then
       amount = -amount
     end
-    local cmd = string.format('vertical resize%s%d', amount > 0 and '+' or '', math.abs(amount))
-    vim.cmd(cmd)
+    vim.cmd(string.format('vertical resize%s%d', amount > 0 and '+' or '', amount))
   else
-    local row = math.ceil(win_nr / cols)      -- determine the row of the window
     local rows = math.ceil(total_wins / cols) -- determine the total number of rows
     if row > rows / 2 then
       amount = -amount
     end
-    vim.cmd(string.format('resize%s%d', amount > 0 and '+' or '', math.abs(amount)))
+    vim.cmd(string.format('resize%s%d', amount > 0 and '+' or '', amount))
   end
 end
 
