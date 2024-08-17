@@ -11,41 +11,37 @@
 -- <F1> - <F12>	function keys 1 to 12
 -- <S-F1> - <S-F12> shift-function keys 1 to 12	<S-F1>
 -- <Home> home (fn-left), <End> end (fn-right), <PageUp> fn-up, <PageDown> fn-down
--- <S-…> shift-key, <C-…> control-key		
+-- <S-…> shift-key, <C-…> control-key
 -- <A-…> or <M-…> alt-key or meta-key, <D-…> command-key or "super" key
 
-
 -- helpers
-local whichkey = require('which-key')
+local whichkey = require("which-key")
 local command = vim.api.nvim_create_user_command
 local del = vim.keymap.del
 local map = function(keys, func, desc)
   vim.keymap.set("n", keys, func, { desc = desc })
 end
 
-
 -- Document existing key chains
-whichkey.add {
-  { '<leader>b', group = '+buffer' },
-  { '<leader>c', group = '+code' },
-  { '<leader>f', group = '+find/+file' },
-  { '<leader>g', group = '+git' },
-  { '<leader>h', group = '+harpoon' },
-  { '<leader>s', group = '+search' },
-  { '<leader>u', group = '+toggle' },
-  { '<leader>x', group = '+lists' },
-  { '<leader>y', group = '+yazi' }
-}
-
-
+whichkey.add({
+  { "<leader>b", group = "+buffer" },
+  { "<leader>c", group = "+code" },
+  { "<leader>f", group = "+find/+file" },
+  { "<leader>g", group = "+git" },
+  { "<leader>h", group = "+harpoon" },
+  { "<leader>s", group = "+search" },
+  { "<leader>u", group = "+toggle" },
+  { "<leader>x", group = "+lists" },
+  { "<leader>y", group = "+yazi" },
+})
 
 -- VIM KEYMAPS
 
 -- Remap Q to start/stop recording a macro (requires a register)
-vim.api.nvim_set_keymap('n', 'Q', 'q', { noremap = true })
+vim.api.nvim_set_keymap("n", "Q", "q", { noremap = true })
 
 -- Remap q to delete the current buffer
-vim.api.nvim_set_keymap('n', 'q', ':bdelete<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "q", ":bdelete<CR>", { noremap = true, silent = true })
 
 -- Insertion and Appending
 -- `a`: append after cursor
@@ -116,46 +112,43 @@ vim.api.nvim_set_keymap('n', 'q', ':bdelete<CR>', { noremap = true, silent = tru
 -- CUSTOM KEYMAPS - automatically loaded on the VeryLazy event
 --
 
-
 --
 -- DELETE unwanted LazyVim/Plugin mappings
 --
 
 -- LAZY --
-del('n', '<leader>L')          -- LazyVim Changelog
-del('n', '<leader>K')          -- man keyword lookup
-del('n', "<C-Up>")             -- Resize window
-del('n', "<C-Down>")           -- Resize window
-del('n', "<C-Left>")           -- Resize window
-del('n', "<C-Right>")          -- Resize window
-del('n', "<leader>qq")         -- quit all
+del("n", "<leader>L") -- LazyVim Changelog
+del("n", "<leader>K") -- man keyword lookup
+del("n", "<C-Up>") -- Resize window
+del("n", "<C-Down>") -- Resize window
+del("n", "<C-Left>") -- Resize window
+del("n", "<C-Right>") -- Resize window
+del("n", "<leader>qq") -- quit all
 
-del('n', "<leader><Tab>[")     -- real vim tabs
-del('n', "<leader><Tab>d")     -- real vim tabs
-del('n', "<leader><Tab>]")     -- real vim tabs
-del('n', "<leader><Tab><Tab>") -- real vim tabs
-del('n', "<leader><Tab>f")     -- real vim tabs
-del('n', "<leader><Tab>o")     -- real vim tabs
-del('n', "<leader><Tab>l")     -- real vim tabs
+del("n", "<leader><Tab>[") -- real vim tabs
+del("n", "<leader><Tab>d") -- real vim tabs
+del("n", "<leader><Tab>]") -- real vim tabs
+del("n", "<leader><Tab><Tab>") -- real vim tabs
+del("n", "<leader><Tab>f") -- real vim tabs
+del("n", "<leader><Tab>o") -- real vim tabs
+del("n", "<leader><Tab>l") -- real vim tabs
 
-del('n', "[b")                 -- Prev Buffer
-del('n', "]b")                 -- Next Buffer
-del('n', '<leader>bl')         -- Delete Buffers to the Left
-del('n', '<leader>br')         -- Delete Buffers to the Right
-del('n', '<leader>bo')         -- Delete Other Buffers
-del('n', '<leader>bP')         -- Delete Non-Pinned Buffers
-del('n', '<leader>bp')         -- Toggle Pin
+del("n", "[b") -- Prev Buffer
+del("n", "]b") -- Next Buffer
+del("n", "<leader>bl") -- Delete Buffers to the Left
+del("n", "<leader>br") -- Delete Buffers to the Right
+del("n", "<leader>bo") -- Delete Other Buffers
+del("n", "<leader>bP") -- Delete Non-Pinned Buffers
+del("n", "<leader>bp") -- Toggle Pin
 
-del('n', '<M-k>')              -- Move Code Up
-del('n', '<M-j>')              -- Move Code Down
-
+del("n", "<M-k>") -- Move Code Up
+del("n", "<M-j>") -- Move Code Down
 
 -- NEOTREE -- cannot disable - so remove keys
-del('n', '<leader>E')  -- Explorer NeoTree (cwd)
-del('n', '<leader>e')  -- Explorer NeoTree (Root Dir)
-del('n', '<leader>fE') -- Explorer NeoTree (cwd)
-del('n', '<leader>fe') -- Explorer NeoTree (Root Dir)
-
+del("n", "<leader>E") -- Explorer NeoTree (cwd)
+del("n", "<leader>e") -- Explorer NeoTree (Root Dir)
+del("n", "<leader>fE") -- Explorer NeoTree (cwd)
+del("n", "<leader>fe") -- Explorer NeoTree (Root Dir)
 
 --
 -- Add/modify key mappings
@@ -174,7 +167,9 @@ local go_right = oil_helper.go_right
 local go_left = oil_helper.go_left
 local maybe_go_right_maybe_cd = oil_helper.maybe_go_right_maybe_cd
 map("<leader><leader>", "<cmd>Oil --float<CR>", "open parent directory") -- ok
-map("gd", function() toggle_detail(detail) end, "toggle Oil details")    -- no leader
+map("gd", function()
+  toggle_detail(detail)
+end, "toggle Oil details") -- no leader
 map("<left>", mux(go_left, actions.parent.callback), "parent")
 map("<right>", mux(go_right, maybe_go_right_maybe_cd), "right")
 --   g?             actions.show_help
@@ -200,7 +195,7 @@ map("<S-Tab>", "<Cmd>BufferLineCyclePrev<CR>", "Prev Buffer")
 map("<Tab>", "<Cmd>BufferLineCycleNext<CR>", "Next Buffer")
 
 -- YAZI --
-map("<leader>y.", "<cmd>Yazi<CR>", "Open yazi at the current file")      -- ok
+map("<leader>y.", "<cmd>Yazi<CR>", "Open yazi at the current file") -- ok
 map("<leader>yy", "<cmd>Yazi cwd<CR>", "Open yazi at working directory") -- ok
 
 -- HARPOON --
@@ -214,12 +209,6 @@ map("<leader>yy", "<cmd>Yazi cwd<CR>", "Open yazi at working directory") -- ok
 -- map("<leader>hp", function() harpoon:list():prev() end, "harpoon prev")
 -- map("<leader>hn", function() harpoon:list():next() end, "harpoon next")
 
-
-
-
-
-
-
 -- CONFORM -- autoformat
 -- <leader>cF                         No command                                 Format Injected Langs
 -- <leader>cf    --ok                 No command                                 Format Code
@@ -230,9 +219,10 @@ map("<leader>yy", "<cmd>Yazi cwd<CR>", "Open yazi at working directory") -- ok
 -- <M-k>                 <Cmd>m .-2<CR>==                         Move Code Up
 -- <M-j>                 <Cmd>m .+1<CR>==                         Move Code Down
 
-
 -- custom quit command because using bufferline
-command('Q', function() vim.api.nvim_buf_delete(0, {}) end, {})
+command("Q", function()
+  vim.api.nvim_buf_delete(0, {})
+end, {})
 
 -- <Esc>                       <Cmd>noh<CR><Esc>                                  Escape and Clear hlsearch
 -- <leader>fn -- ok            <Cmd>enew<CR>                                      New File
@@ -272,16 +262,16 @@ command('Q', function() vim.api.nvim_buf_delete(0, {}) end, {})
 
 -- TELESCOPE -- ok -- See `:help telescope.builtin`
 local builtin = require("telescope.builtin")
-map("<leader>sh", builtin.help_tags, "search [H]elp")                       -- ok
-map("<leader>sk", builtin.keymaps, "search [K]eymaps")                      -- ok
-map("<leader>sf", builtin.find_files, "search [F]iles")                     -- ok
-map("<leader>ss", builtin.builtin, "search [S]elect Telescope")             -- ok
-map("<leader>sw", builtin.grep_string, "search current [W]ord")             -- ok
-map("<leader>sg", builtin.live_grep, "search by [G]rep")                    -- ok
-map("<leader>sd", builtin.diagnostics, "search [D]iagnostics")              -- ok
-map("<leader>sr", builtin.resume, "search [R]esume")                        -- ok
+map("<leader>sh", builtin.help_tags, "search [H]elp") -- ok
+map("<leader>sk", builtin.keymaps, "search [K]eymaps") -- ok
+map("<leader>sf", builtin.find_files, "search [F]iles") -- ok
+map("<leader>ss", builtin.builtin, "search [S]elect Telescope") -- ok
+map("<leader>sw", builtin.grep_string, "search current [W]ord") -- ok
+map("<leader>sg", builtin.live_grep, "search by [G]rep") -- ok
+map("<leader>sd", builtin.diagnostics, "search [D]iagnostics") -- ok
+map("<leader>sr", builtin.resume, "search [R]esume") -- ok
 map("<leader>s.", builtin.oldfiles, 'search Recent Files ("." for repeat)') -- ok
-map("<leader>fb", builtin.buffers, "[F]ind existing [B]uffers")             -- ok
+map("<leader>fb", builtin.buffers, "[F]ind existing [B]uffers") -- ok
 
 -- defined in lsp-nvim-lspconfig.lua as autocmd
 --
@@ -386,20 +376,34 @@ map("<leader>fr", require("config.helpers.grug_far").find_replace, "Find and Rep
 -- <C-J>                 <C-W>j                                             Go to Lower Window
 -- <C-H>                 <C-W>h                                             Go to Left Window
 
-
 -- navigate splits   -- ok
 local nw = require("config.helpers.nvim_wezterm")
 
-map("<S-Left>", function() nw.navigate("h") end, "navigate left")
-map("<S-Down>", function() nw.navigate("j") end, "navigate down")
-map("<S-Up>", function() nw.navigate("k") end, "navigate up")
-map("<S-Right>", function() nw.navigate("l") end, "navigate right")
+map("<S-Left>", function()
+  nw.navigate("h")
+end, "navigate left")
+map("<S-Down>", function()
+  nw.navigate("j")
+end, "navigate down")
+map("<S-Up>", function()
+  nw.navigate("k")
+end, "navigate up")
+map("<S-Right>", function()
+  nw.navigate("l")
+end, "navigate right")
 
-map('<M-Left>', function() nw.resize("h", -2) end, "resize left")
-map('<M-Down>', function() nw.resize("j", 2) end, "resize down")
-map('<M-Up>', function() nw.resize("k", -2) end, "resize up")
-map('<M-Right>', function() nw.resize("l", 2) end, "resize right")
-
+map("<M-Left>", function()
+  nw.resize("h", -2)
+end, "resize left")
+map("<M-Down>", function()
+  nw.resize("j", 2)
+end, "resize down")
+map("<M-Up>", function()
+  nw.resize("k", -2)
+end, "resize up")
+map("<M-Right>", function()
+  nw.resize("l", 2)
+end, "resize right")
 
 -- TERMINAL --
 -- fT                                     No command                                         Terminal (cwd)
@@ -445,7 +449,6 @@ map("<leader>xf", vim.diagnostic.setloclist, "Open diagnostic [Q]uickfix list")
 -- %                                      <Plug>(MatchitNormalForward)                       No description
 -- [%                                     <Plug>(MatchitNormalMultiBackward)                 No description
 
-
 --
 -- Log the keys
 --
@@ -456,7 +459,6 @@ local function logit()
 end
 
 map("<leader>gz", logit, "logit")
-
 
 -- OVERLAPPING KEYMAPS --
 --------------------------------------------------------------

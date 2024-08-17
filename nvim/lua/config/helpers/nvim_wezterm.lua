@@ -49,8 +49,12 @@ end
 -- resize splits - nvim and wezterm
 --
 
+local function is_vertical_split(direction)
+  return direction == 'h' or direction == 'l'
+end
+
 local function no_nvim_split(direction)
-  if direction == 'vertical' then
+  if is_vertical_split(direction) then
     return vim.fn.winnr() == vim.fn.winnr('h') and vim.fn.winnr() == vim.fn.winnr('l')
   else
     return vim.fn.winnr() == vim.fn.winnr('j') and vim.fn.winnr() == vim.fn.winnr('k')
@@ -59,7 +63,7 @@ end
 
 local function resize_vim_split(direction, amount)
   local cmd = 'resize' .. (amount > 0 and '+' or '') .. amount
-  if direction == 'h' or direction == 'l' then
+  if is_vertical_split(direction) then
     cmd = 'vertical ' .. cmd
   end
   vim.cmd(cmd)
@@ -68,7 +72,7 @@ end
 -- rightmost and bottom-most windows are resized in the opposite direction
 local function maybe_invert(direction, amount)
   local check = 'j'
-  if direction == 'h' or direction == 'l' then
+  if is_vertical_split(direction) then
     check = 'l'
   end
   -- if going right doesn't change your window number, then you're at the right edge
