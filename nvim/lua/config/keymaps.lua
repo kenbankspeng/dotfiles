@@ -397,28 +397,30 @@ map("<S-Right>", function() nvim_wezterm("l") end, "move right")
 
 -- Function to determine the correct polarity for resizing
 local function resize(direction, amount)
-  local win_nr = vim.fn.winnr()        -- get window number
-  local total_wins = vim.fn.winnr('$') -- get total number of windows
+  local win_nr = vim.fn.winnr() -- get window number
 
   if direction == 'vertical' then
-    if win_nr == total_wins then
+    -- invert if rightmost window
+    if win_nr == vim.fn.winnr('l') then
       amount = -amount
     end
     vim.cmd(string.format('vertical resize%s%d', amount > 0 and '+' or '', amount))
   else
-    local rows = math.ceil(total_wins / cols) -- determine the total number of rows
-    if row > rows / 2 then
-      amount = -amount
+    -- don't resize if window is full height (no horizontal split)
+    if win_nr ~= vim.fn.winnr('j') or win_nr ~= vim.fn.winnr('k') then
+      if win_nr == vim.fn.winnr('j') then
+        amount = -amount
+      end
+      vim.cmd(string.format('resize%s%d', amount > 0 and '+' or '', amount))
     end
-    vim.cmd(string.format('resize%s%d', amount > 0 and '+' or '', amount))
   end
 end
 
 -- Key mappings using vim.keymap.set
 vim.keymap.set('n', '<M-Left>', function() resize("vertical", -2) end, { noremap = true, silent = true })
 vim.keymap.set('n', '<M-Right>', function() resize("vertical", 2) end, { noremap = true, silent = true })
-vim.keymap.set('n', '<M-Up>', function() resize("horizontal", 2) end, { noremap = true, silent = true })
-vim.keymap.set('n', '<M-Down>', function() resize("horizontal", -2) end, { noremap = true, silent = true })
+vim.keymap.set('n', '<M-Up>', function() resize("horizontal", -2) end, { noremap = true, silent = true })
+vim.keymap.set('n', '<M-Down>', function() resize("horizontal", 2) end, { noremap = true, silent = true })
 
 
 -- TERMINAL --
