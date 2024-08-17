@@ -388,19 +388,17 @@ map("<leader>fr", require("config.helpers.grug_far").find_replace, "Find and Rep
 
 
 -- navigate splits   -- ok
-local nvim_wezterm = require("config.helpers.nvim_wezterm")
-local navigate = nvim_wezterm.navigate
-local resize = nvim_wezterm.resize
+local nw = require("config.helpers.nvim_wezterm")
 
-map("<S-Left>", function() navigate("h") end, "navigate left")
-map("<S-Down>", function() navigate("j") end, "navigate down")
-map("<S-Up>", function() navigate("k") end, "navigate up")
-map("<S-Right>", function() navigate("l") end, "navigate right")
+map("<S-Left>", function() nw.navigate("h") end, "navigate left")
+map("<S-Down>", function() nw.navigate("j") end, "navigate down")
+map("<S-Up>", function() nw.navigate("k") end, "navigate up")
+map("<S-Right>", function() nw.navigate("l") end, "navigate right")
 
-map('<M-Left>', function() resize("vertical", -2) end, "resize left")
-map('<M-Right>', function() resize("vertical", 2) end, "resize right")
-map('<M-Up>', function() resize("horizontal", -2) end, "resize up")
-map('<M-Down>', function() resize("horizontal", 2) end, "resize down")
+map('<M-Left>', function() nw.resize("vertical", -2) end, "resize left")
+map('<M-Right>', function() nw.resize("vertical", 2) end, "resize right")
+map('<M-Up>', function() nw.resize("horizontal", -2) end, "resize up")
+map('<M-Down>', function() nw.resize("horizontal", 2) end, "resize down")
 
 
 -- TERMINAL --

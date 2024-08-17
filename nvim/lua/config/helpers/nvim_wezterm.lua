@@ -70,6 +70,6 @@ local function resize(direction, amount)
 end
 
 return {
-  navigage = navigate,
+  navigate = navigate,
   resize = resize
 }
