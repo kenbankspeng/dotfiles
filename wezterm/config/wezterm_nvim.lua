@@ -73,10 +73,6 @@ local nav_keys = {
   resize("META", "RightArrow"),
 }
 
---
--- custom background
---
-
 return {
   nav_keys = nav_keys,
 }
