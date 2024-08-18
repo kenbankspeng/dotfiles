@@ -22,18 +22,23 @@ local map = function(keys, func, desc)
   vim.keymap.set("n", keys, func, { desc = desc })
 end
 
+
+local icon = require('mini.icons').get
+local test = icon('filetype', 'groff')
+
 -- Document existing key chains
 whichkey.add({
   { "<leader>b", group = "+buffer" },
   { "<leader>c", group = "+code" },
   { "<leader>f", group = "+find/+file" },
   { "<leader>g", group = "+git" },
-  { "<leader>h", group = "+harpoon" },
   { "<leader>s", group = "+search" },
   { "<leader>u", group = "+toggle" },
   { "<leader>x", group = "+lists" },
-  { "<leader>y", group = "+yazi" },
+  { "<leader>y", group = "+yazi",      icon = test },
 })
+
+
 
 -- Remap Q to start/stop recording a macro (requires a register)
 vim.keymap.set("n", "Q", "q", { noremap = true })
