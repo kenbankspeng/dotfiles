@@ -1,5 +1,9 @@
 local wezterm = require("wezterm")
 
+--
+-- wezterm/nvim integration of window splits
+--
+
 local function is_vim(pane)
   local process_info = pane:get_foreground_process_info()
   local process_name = process_info and process_info.name
@@ -69,5 +73,10 @@ local nav_keys = {
   resize("META", "RightArrow"),
 }
 
-print(wezterm.to_string(nav_keys))
-return nav_keys
+--
+-- custom background
+--
+
+return {
+  nav_keys = nav_keys,
+}
