@@ -19,5 +19,6 @@ end
 
 return {
   fzf_current_buffer = fzf_current_buffer,
-  live_grep = live_grep
+  live_grep = live_grep,
+  find_files = find_files,
 }

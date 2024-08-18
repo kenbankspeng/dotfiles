@@ -235,7 +235,7 @@ map("<leader>fb", builtin.buffers, "find in buffers")                       -- o
 -- You can pass additional configuration to Telescope to change the theme, layout, etc.
 local tele = require("config.helpers.telescope")
 map("<leader>/", tele.fzf_current_buffer, "fuzzy search current buffer")
-map("<leader>s/", builtin.live_grep, "search in open files")
+map("<leader>s/", tele.live_grep, "search in open files")
 map("<leader>sn", tele.find_files, "search neovim files")
 
 --  :                    <Cmd>Telescope command_history<CR>       Command History
