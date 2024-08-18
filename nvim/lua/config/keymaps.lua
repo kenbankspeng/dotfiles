@@ -23,19 +23,17 @@ local map = function(keys, func, desc)
 end
 
 
-local icon = require('mini.icons').get
-local test = icon('filetype', 'groff')
-
 -- Document existing key chains
 whichkey.add({
   { "<leader>b", group = "+buffer" },
   { "<leader>c", group = "+code" },
+  { "<leader>d", group = "+lsp", icon = '' },
   { "<leader>f", group = "+find/+file" },
   { "<leader>g", group = "+git" },
   { "<leader>s", group = "+search" },
   { "<leader>u", group = "+toggle" },
-  { "<leader>x", group = "+lists" },
-  { "<leader>y", group = "+yazi",      icon = test },
+  { "<leader>x", group = "+lists", icon = '' },
+  { "<leader>y", group = "+yazi", icon = '󰇥' },
 })
 
 
@@ -225,15 +223,15 @@ map("<leader>fb", builtin.buffers, "find in buffers")                       -- o
 
 -- defined in lsp-config.lua as autocmd associated with file type
 --
--- gd                   telescope lsp_definitions                -- [G]oto [D]efinition
--- gr                   telescope lsp_references                 -- [G]oto [R]eferences
--- gI                   telescope lsp_implementations            -- [G]oto [I]mplementation
--- <leader>D            telescope lsp_type_definitions           -- Type [D]efinition
--- <leader>ds           telescope lsp_document_symbols           -- [D]ocument [S]ymbols
--- <leader>ws           telescope lsp_dynamic_workspace_symbols  -- [W]orkspace [S]ymbols
--- <leader>rn           vim.lsp.buf.rename                       -- [R]e[n]ame
--- <leader>ca           vim.lsp.buf.code_action                  -- [C]ode [A]ction
--- gD                   vim.lsp.buf.declaration                  -- [G]oto [D]eclaration
+-- gd                   telescope lsp_definitions                -- definition
+-- gr                   telescope lsp_references                 -- references
+-- gI                   telescope lsp_implementations            -- implementation
+-- <leader>D            telescope lsp_type_definitions           -- Type ddefinition
+-- <leader>ds           telescope lsp_document_symbols           -- document symbols
+-- <leader>ws           telescope lsp_dynamic_workspace_symbols  -- workspace symbols
+-- <leader>dr           vim.lsp.buf.rename                       -- rename
+-- <leader>ca           vim.lsp.buf.code_action                  -- code action
+-- gD                   vim.lsp.buf.declaration                  -- declaration
 
 -- You can pass additional configuration to Telescope to change the theme, layout, etc.
 local tele = require("config.helpers.telescope")
