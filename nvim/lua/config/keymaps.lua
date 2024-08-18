@@ -35,8 +35,6 @@ whichkey.add({
   { "<leader>y", group = "+yazi" },
 })
 
-
-
 -- Remap Q to start/stop recording a macro (requires a register)
 vim.keymap.set("n", "Q", "q", { noremap = true })
 
