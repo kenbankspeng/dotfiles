@@ -14,7 +14,6 @@
 -- <S-…> shift-key, <C-…> control-key
 -- <A-…> or <M-…> alt-key or meta-key, <D-…> command-key or "super" key
 
--- helpers
 local whichkey = require("which-key")
 local command = vim.api.nvim_create_user_command
 local del = vim.keymap.del
@@ -22,28 +21,27 @@ local map = function(keys, func, desc)
   vim.keymap.set("n", keys, func, { desc = desc })
 end
 
-
 -- Document existing key chains
 whichkey.add({
   { "<leader>b", group = "+buffer" },
   { "<leader>c", group = "+code" },
-  { "<leader>d", group = "+lsp", icon = '' },
+  { "<leader>d", group = "+lsp", icon = "" },
   { "<leader>f", group = "+find/+file" },
   { "<leader>g", group = "+git" },
   { "<leader>q", group = "+session" },
   { "<leader>s", group = "+search" },
   { "<leader>u", group = "+toggle" },
-  { "<leader>x", group = "+lists", icon = '' },
-  { "<leader>y", group = "+yazi", icon = '󰇥' },
+  { "<leader>x", group = "+lists", icon = "" },
+  { "<leader>y", group = "+yazi", icon = "󰇥" },
 })
-
-
 
 -- Remap Q to start/stop recording a macro (requires a register)
 vim.keymap.set("n", "Q", "q", { noremap = true })
 
 -- custom quit command because using bufferline
-command("Q", function() vim.api.nvim_buf_delete(0, {}) end, {})
+command("Q", function()
+  vim.api.nvim_buf_delete(0, {})
+end, {})
 
 -- close split or buffer
 local smart_close = require("config.helpers.window").smart_close
@@ -125,39 +123,39 @@ vim.keymap.set("n", "q", smart_close, { noremap = true, silent = true })
 --
 
 -- LAZY --
-del("n", "<leader>L")          -- LazyVim Changelog
-del("n", "<leader>K")          -- man keyword lookup
-del("n", "<C-Up>")             -- Resize window
-del("n", "<C-Down>")           -- Resize window
-del("n", "<C-Left>")           -- Resize window
-del("n", "<C-Right>")          -- Resize window
-del("n", "<leader>qq")         -- quit all
+del("n", "<leader>L") -- LazyVim Changelog
+del("n", "<leader>K") -- man keyword lookup
+del("n", "<C-Up>") -- Resize window
+del("n", "<C-Down>") -- Resize window
+del("n", "<C-Left>") -- Resize window
+del("n", "<C-Right>") -- Resize window
+del("n", "<leader>qq") -- quit all
 
-del("n", "<leader><Tab>[")     -- real vim tabs
-del("n", "<leader><Tab>d")     -- real vim tabs
-del("n", "<leader><Tab>]")     -- real vim tabs
+del("n", "<leader><Tab>[") -- real vim tabs
+del("n", "<leader><Tab>d") -- real vim tabs
+del("n", "<leader><Tab>]") -- real vim tabs
 del("n", "<leader><Tab><Tab>") -- real vim tabs
-del("n", "<leader><Tab>f")     -- real vim tabs
-del("n", "<leader><Tab>o")     -- real vim tabs
-del("n", "<leader><Tab>l")     -- real vim tabs
+del("n", "<leader><Tab>f") -- real vim tabs
+del("n", "<leader><Tab>o") -- real vim tabs
+del("n", "<leader><Tab>l") -- real vim tabs
 
-del("n", "[b")                 -- Prev Buffer
-del("n", "]b")                 -- Next Buffer
-del("n", "<leader>bl")         -- Delete Buffers to the Left
-del("n", "<leader>br")         -- Delete Buffers to the Right
-del("n", "<leader>bo")         -- Delete Other Buffers
-del("n", "<leader>bP")         -- Delete Non-Pinned Buffers
-del("n", "<leader>bp")         -- Toggle Pin
+del("n", "[b") -- Prev Buffer
+del("n", "]b") -- Next Buffer
+del("n", "<leader>bl") -- Delete Buffers to the Left
+del("n", "<leader>br") -- Delete Buffers to the Right
+del("n", "<leader>bo") -- Delete Other Buffers
+del("n", "<leader>bP") -- Delete Non-Pinned Buffers
+del("n", "<leader>bp") -- Toggle Pin
 
-del("n", "<M-k>")              -- Move Code Up
-del("n", "<M-j>")              -- Move Code Down
+del("n", "<M-k>") -- Move Code Up
+del("n", "<M-j>") -- Move Code Down
 
-del("n", "<leader>|")          -- Split Window Right <C-W>v                                             Split Window Right
-del("n", "<leader>-")          -- Split Window Below <C-W>s                                             Split Window Below
+del("n", "<leader>|") -- Split Window Right <C-W>v                                             Split Window Right
+del("n", "<leader>-") -- Split Window Below <C-W>s                                             Split Window Below
 
 -- NEOTREE -- cannot disable - so remove keys
-del("n", "<leader>E")  -- Explorer NeoTree (cwd)
-del("n", "<leader>e")  -- Explorer NeoTree (Root Dir)
+del("n", "<leader>E") -- Explorer NeoTree (cwd)
+del("n", "<leader>e") -- Explorer NeoTree (Root Dir)
 del("n", "<leader>fE") -- Explorer NeoTree (cwd)
 del("n", "<leader>fe") -- Explorer NeoTree (Root Dir)
 
@@ -206,21 +204,21 @@ map("<S-Tab>", "<Cmd>BufferLineCyclePrev<CR>", "Prev Buffer")
 map("<Tab>", "<Cmd>BufferLineCycleNext<CR>", "Next Buffer")
 
 -- YAZI --
-map("<leader>y.", "<cmd>Yazi<CR>", "Open yazi at the current file")      -- ok
+map("<leader>y.", "<cmd>Yazi<CR>", "Open yazi at the current file") -- ok
 map("<leader>yy", "<cmd>Yazi cwd<CR>", "Open yazi at working directory") -- ok
 
 -- TELESCOPE -- ok -- See `:help telescope.builtin`
 local builtin = require("telescope.builtin")
-map("<leader>sh", builtin.help_tags, "search help")                         -- ok
-map("<leader>sk", builtin.keymaps, "search keymaps")                        -- ok
-map("<leader>sf", builtin.find_files, "search files")                       -- ok
-map("<leader>ss", builtin.builtin, "search select telescope")               -- ok
-map("<leader>sw", builtin.grep_string, "search current word")               -- ok
-map("<leader>sg", builtin.live_grep, "search by grep")                      -- ok
-map("<leader>sd", builtin.diagnostics, "search diagnostics")                -- ok
-map("<leader>sr", builtin.resume, "search resume")                          -- ok
+map("<leader>sh", builtin.help_tags, "search help") -- ok
+map("<leader>sk", builtin.keymaps, "search keymaps") -- ok
+map("<leader>sf", builtin.find_files, "search files") -- ok
+map("<leader>ss", builtin.builtin, "search select telescope") -- ok
+map("<leader>sw", builtin.grep_string, "search current word") -- ok
+map("<leader>sg", builtin.live_grep, "search by grep") -- ok
+map("<leader>sd", builtin.diagnostics, "search diagnostics") -- ok
+map("<leader>sr", builtin.resume, "search resume") -- ok
 map("<leader>s.", builtin.oldfiles, 'search Recent Files ("." for repeat)') -- ok
-map("<leader>fb", builtin.buffers, "find in buffers")                       -- ok
+map("<leader>fb", builtin.buffers, "find in buffers") -- ok
 
 -- defined in lsp-config.lua as autocmd associated with file type
 --
@@ -310,7 +308,6 @@ map("<leader>fr", require("config.helpers.grug_far").find_replace, "Find and Rep
 -- S                     No command                               Flash Treesitter
 -- s                     No command                               Flash
 
-
 -- TERMINAL --
 -- fT                                     No command                                         Terminal (cwd)
 -- ft                                     No command                                         Terminal (Root Dir)
@@ -355,7 +352,6 @@ map("<leader>xf", vim.diagnostic.setloclist, "Open diagnostic [Q]uickfix list")
 -- %                                      <Plug>(MatchitNormalForward)                       No description
 -- [%                                     <Plug>(MatchitNormalMultiBackward)                 No description
 
-
 -- n  <Space>cS   * <Cmd>Trouble lsp toggle<CR>
 -- n  <Space>cs   * <Cmd>Trouble symbols toggle<CR>
 -- n  <Space>sT   * <Cmd>TodoTelescope keywords=TODO,FIX,FIXME<CR>
@@ -367,8 +363,6 @@ map("<leader>xf", vim.diagnostic.setloclist, "Open diagnostic [Q]uickfix list")
 -- n  <Space>xx   * <Cmd>Trouble diagnostics toggle<CR>
 -- n  [t          * <Lua 140: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:363>
 -- n  ]t          * <Lua 141: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:362>
-
-
 
 -------------
 -- GENERAL --
@@ -418,7 +412,6 @@ map("<leader>xf", vim.diagnostic.setloclist, "Open diagnostic [Q]uickfix list")
 -- n   -- ok                                  'Nn'[v:searchforward].'zv'                         Next Search Result
 -- N   -- ok                                  'nN'[v:searchforward].'zv'                         Prev Search Result
 
-
 -- HELP --
 -- &                     :&&<CR>                                  :help &-default
 -- Y                     y$                                       :help Y-default
@@ -431,7 +424,6 @@ map("<leader>xf", vim.diagnostic.setloclist, "Open diagnostic [Q]uickfix list")
 -- g]                    No command                               Move to right "around"
 -- g[                    No command                               Move to left "around"
 -- <C-F> -- page down
-
 
 -- BUFFERS / WINDOWS --
 -- bD                    <Cmd>:bd<CR>                                       Delete Buffer and Window
@@ -449,7 +441,6 @@ map("<leader>`", "<Cmd>e #<CR>", "switch buffer")
 -- <C-J>                 <C-W>j                                             Go to Lower Window
 -- <C-H>                 <C-W>h                                             Go to Left Window
 
-
 ------------------
 -- NVIM-WEZTERM --
 ------------------
@@ -461,17 +452,31 @@ map("<leader>\\", "<C-w>v", "split right")
 map("<leader>/", "<C-w>s", "split down")
 
 -- navigate splits   -- ok
-map("<S-Left>", function() unified.navigate("h") end, "navigate left")
-map("<S-Down>", function() unified.navigate("j") end, "navigate down")
-map("<S-Up>", function() unified.navigate("k") end, "navigate up")
-map("<S-Right>", function() unified.navigate("l") end, "navigate right")
+map("<S-Left>", function()
+  unified.navigate("h")
+end, "navigate left")
+map("<S-Down>", function()
+  unified.navigate("j")
+end, "navigate down")
+map("<S-Up>", function()
+  unified.navigate("k")
+end, "navigate up")
+map("<S-Right>", function()
+  unified.navigate("l")
+end, "navigate right")
 -- resize splits   -- ok
-map("<M-Left>", function() unified.resize("h", 2) end, "resize left")
-map("<M-Down>", function() unified.resize("j", 2) end, "resize down")
-map("<M-Up>", function() unified.resize("k", 2) end, "resize up")
-map("<M-Right>", function() unified.resize("l", 2) end, "resize right")
-
-
+map("<M-Left>", function()
+  unified.resize("h", 2)
+end, "resize left")
+map("<M-Down>", function()
+  unified.resize("j", 2)
+end, "resize down")
+map("<M-Up>", function()
+  unified.resize("k", 2)
+end, "resize up")
+map("<M-Right>", function()
+  unified.resize("l", 2)
+end, "resize right")
 
 -------------------------
 -- OVERLAPPING KEYMAPS --
