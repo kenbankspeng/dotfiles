@@ -1,0 +1,5 @@
+return {
+  {
+    'nvimdev/dashboard-nvim',
+  }
+}

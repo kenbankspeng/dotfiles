@@ -1,0 +1,11 @@
+n  <Space>cS   * <Cmd>Trouble lsp toggle<CR>
+n  <Space>cs   * <Cmd>Trouble symbols toggle<CR>
+n  <Space>sT   * <Cmd>TodoTelescope keywords=TODO,FIX,FIXME<CR>
+n  <Space>xL   * <Cmd>Trouble loclist toggle<CR>
+n  <Space>xQ   * <Cmd>Trouble qflist toggle<CR>
+n  <Space>xT   * <Cmd>Trouble todo toggle filter = {tag = {TODO,FIX,FIXME}}<CR>
+n  <Space>xX   * <Cmd>Trouble diagnostics toggle filter.buf=0<CR>
+n  <Space>xt   * <Cmd>Trouble todo toggle<CR>
+n  <Space>xx   * <Cmd>Trouble diagnostics toggle<CR>
+n  [t          * <Lua 140: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:363>
+n  ]t          * <Lua 141: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:362>

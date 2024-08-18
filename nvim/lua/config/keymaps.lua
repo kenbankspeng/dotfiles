@@ -30,6 +30,7 @@ whichkey.add({
   { "<leader>d", group = "+lsp", icon = '' },
   { "<leader>f", group = "+find/+file" },
   { "<leader>g", group = "+git" },
+  { "<leader>q", group = "+session" },
   { "<leader>s", group = "+search" },
   { "<leader>u", group = "+toggle" },
   { "<leader>x", group = "+lists", icon = '' },
@@ -268,6 +269,15 @@ map("<leader>sn", tele.find_files, "search neovim files")
 --  <leader>ff           No command                               Find Files (Root Dir)
 --  <leader>fc           No command                               Find Config File
 
+-- MASON --
+-- <Space>cm -- code mason
+
+-- NOICE --
+-- <Space>sna            search neovim files
+-- <Space>snd            search neovim files
+-- <Space>snh            search neovim files
+-- <Space>snl            search neovim files
+-- <Space>snt            search neovim files
 
 -- HARPOON --
 -- local harpoon = require("harpoon")
@@ -283,49 +293,6 @@ map("<leader>sn", tele.find_files, "search neovim files")
 -- CONFORM -- autoformat
 -- <leader>cF                         No command                                 Format Injected Langs
 -- <leader>cf    --ok                 No command                                 Format Code
-
--- GENERAL --
-
--- removed, but put under new keys
--- <M-k>                 <Cmd>m .-2<CR>==                         Move Code Up
--- <M-j>                 <Cmd>m .+1<CR>==                         Move Code Down
-
--- <Esc>                       <Cmd>noh<CR><Esc>                                  Escape and Clear hlsearch
--- <leader>fn -- ok            <Cmd>enew<CR>                                      New File
--- <C-S> -- ok                 <Cmd>w<CR><Esc>                                    Save File                                    Quit All
--- ul                          No command                                         Toggle Line Numbers
--- uL                          No command                                         Toggle Relative Number
--- uw                          No command                                         Toggle Wrap
--- us                          No command                                         Toggle Spelling
--- uF                          No command                                         Toggle Auto Format (Buffer)
--- uf                          No command                                         Toggle Auto Format (Global)
--- uh                          No command                                         Toggle Inlay Hints
--- ub                          No command                                         Toggle Background
--- uT                          No command                                         Toggle Treesitter Highlight
--- uc                          No command                                         Toggle conceallevel
--- up                          No command                                         Toggle Mini Pairs
-
--- NOT_SURE --
--- uI                          <Cmd>InspectTree<CR>                               Inspect Tree
--- ui                          No command                                         Inspect Pos
--- xq                          <Cmd>copen<CR>                                     Quickfix List
--- xl                          <Cmd>lopen<CR>                                     Location List
--- K                           <Cmd>norm! K<CR>                                   Keywordprg
--- ur                          <Cmd>nohlsearch|diffupdate|normal! <C-L><CR>       Redraw / Clear hlsearch / Diff Update
--- ,                           No command                                         No description
--- ;                           No command                                         No description
--- F                           No command                                         No description
--- T                           No command                                         No description
--- f                           No command                                         No description
--- t                           No command                                         No description
--- <C-_>                       No command                                         which_key_ignore
--- gx                          No command                                         Opens filepath or URI under cursor with the system handler (file explorer, web browser, …)
-
--- SEARCH -- ok
--- ?   -- ok
--- n   -- ok                                  'Nn'[v:searchforward].'zv'                         Next Search Result
--- N   -- ok                                  'nN'[v:searchforward].'zv'                         Prev Search Result
-
 
 -- GRUG-FAR -- ** conflict with Telescope
 map("<leader>fr", require("config.helpers.grug_far").find_replace, "Find and Replace")
@@ -343,50 +310,6 @@ map("<leader>fr", require("config.helpers.grug_far").find_replace, "Find and Rep
 -- S                     No command                               Flash Treesitter
 -- s                     No command                               Flash
 
--- HELP --
--- &                     :&&<CR>                                  :help &-default
--- Y                     y$                                       :help Y-default
-
--- NAVIGATION --
--- j                     v:count == 0 ? 'gj' : 'j'                Down
--- k                     v:count == 0 ? 'gk' : 'k'                Up
--- <Up>                  v:count == 0 ? 'gk' : 'k'                Up
--- <Down>                v:count == 0 ? 'gj' : 'j'                Down
--- g]                    No command                               Move to right "around"
--- g[                    No command                               Move to left "around"
-
--- BUFFERS / WINDOWS --
--- bD                    <Cmd>:bd<CR>                                       Delete Buffer and Window
--- bd                    No command                                         Delete Buffer
--- `                     <Cmd>e #<CR>                                       Switch to Other Buffer
--- bb                    <Cmd>e #<CR>                                       Switch to Other Buffer
--- w                     <C-W>                                              Windows
--- <leader>|             <C-W>v                                             Split Window Right
--- <leader>-             <C-W>s                                             Split Window Below
--- wm                    No command                                         Toggle Maximize
--- wd                    <C-W>c                                             Delete Window
--- <C-L>                 <C-W>l                                             Go to Right Window
--- <C-K>                 <C-W>k                                             Go to Upper Window
--- <C-J>                 <C-W>j                                             Go to Lower Window
--- <C-H>                 <C-W>h                                             Go to Left Window
-
--- depending on situation, send command to neovim or to wezterm
-local unified = require("config.helpers.nvim_wezterm")
-
--- splits
-map("<leader>\\", "<C-w>v", "split right")
-map("<leader>/", "<C-w>s", "split down")
-
--- navigate splits   -- ok
-map("<S-Left>", function() unified.navigate("h") end, "navigate left")
-map("<S-Down>", function() unified.navigate("j") end, "navigate down")
-map("<S-Up>", function() unified.navigate("k") end, "navigate up")
-map("<S-Right>", function() unified.navigate("l") end, "navigate right")
--- resize splits   -- ok
-map("<M-Left>", function() unified.resize("h", 2) end, "resize left")
-map("<M-Down>", function() unified.resize("j", 2) end, "resize down")
-map("<M-Up>", function() unified.resize("k", 2) end, "resize up")
-map("<M-Right>", function() unified.resize("l", 2) end, "resize right")
 
 -- TERMINAL --
 -- fT                                     No command                                         Terminal (cwd)
@@ -432,19 +355,127 @@ map("<leader>xf", vim.diagnostic.setloclist, "Open diagnostic [Q]uickfix list")
 -- %                                      <Plug>(MatchitNormalForward)                       No description
 -- [%                                     <Plug>(MatchitNormalMultiBackward)                 No description
 
---
--- Log the keys
---
 
-local function logit()
-  print("logit!")
-  require("config.helpers.keys").log("n", "/Users/ken/Documents/Software/DevBox/dotfiles/nvim/lua/debug.txt")
-end
+-- n  <Space>cS   * <Cmd>Trouble lsp toggle<CR>
+-- n  <Space>cs   * <Cmd>Trouble symbols toggle<CR>
+-- n  <Space>sT   * <Cmd>TodoTelescope keywords=TODO,FIX,FIXME<CR>
+-- n  <Space>xL   * <Cmd>Trouble loclist toggle<CR>
+-- n  <Space>xQ   * <Cmd>Trouble qflist toggle<CR>
+-- n  <Space>xT   * <Cmd>Trouble todo toggle filter = {tag = {TODO,FIX,FIXME}}<CR>
+-- n  <Space>xX   * <Cmd>Trouble diagnostics toggle filter.buf=0<CR>
+-- n  <Space>xt   * <Cmd>Trouble todo toggle<CR>
+-- n  <Space>xx   * <Cmd>Trouble diagnostics toggle<CR>
+-- n  [t          * <Lua 140: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:363>
+-- n  ]t          * <Lua 141: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:362>
 
-map("<leader>gz", logit, "logit")
 
+
+-------------
+-- GENERAL --
+-------------
+
+-- <Space>qd  - don't save session
+-- <Space>ql  - restore session
+-- <Space>qs  - restore last session
+
+-- removed, but put under new keys
+-- <M-k>                 <Cmd>m .-2<CR>==                         Move Code Up
+-- <M-j>                 <Cmd>m .+1<CR>==                         Move Code Down
+
+-- <Esc>                       <Cmd>noh<CR><Esc>                                  Escape and Clear hlsearch
+-- <leader>fn -- ok            <Cmd>enew<CR>                                      New File
+-- <C-S> -- ok                 <Cmd>w<CR><Esc>                                    Save File                                    Quit All
+-- ul                          No command                                         Toggle Line Numbers
+-- uL                          No command                                         Toggle Relative Number
+-- uw                          No command                                         Toggle Wrap
+-- us                          No command                                         Toggle Spelling
+-- uF                          No command                                         Toggle Auto Format (Buffer)
+-- uf                          No command                                         Toggle Auto Format (Global)
+-- uh                          No command                                         Toggle Inlay Hints
+-- ub                          No command                                         Toggle Background
+-- uT                          No command                                         Toggle Treesitter Highlight
+-- uc                          No command                                         Toggle conceallevel
+-- up                          No command                                         Toggle Mini Pairs
+
+-- NOT_SURE --
+-- uI                          <Cmd>InspectTree<CR>                               Inspect Tree
+-- ui                          No command                                         Inspect Pos
+-- xq                          <Cmd>copen<CR>                                     Quickfix List
+-- xl                          <Cmd>lopen<CR>                                     Location List
+-- K                           <Cmd>norm! K<CR>                                   Keywordprg
+-- ur                          <Cmd>nohlsearch|diffupdate|normal! <C-L><CR>       Redraw / Clear hlsearch / Diff Update
+-- ,                           No command                                         No description
+-- ;                           No command                                         No description
+-- F                           No command                                         No description
+-- T                           No command                                         No description
+-- f                           No command                                         No description
+-- t                           No command                                         No description
+-- <C-_>                       No command                                         which_key_ignore
+-- gx                          No command                                         Opens filepath or URI under cursor with the system handler (file explorer, web browser, …)
+
+-- SEARCH -- ok
+-- ?   -- ok
+-- n   -- ok                                  'Nn'[v:searchforward].'zv'                         Next Search Result
+-- N   -- ok                                  'nN'[v:searchforward].'zv'                         Prev Search Result
+
+
+-- HELP --
+-- &                     :&&<CR>                                  :help &-default
+-- Y                     y$                                       :help Y-default
+
+-- NAVIGATION --
+-- j                     v:count == 0 ? 'gj' : 'j'                Down
+-- k                     v:count == 0 ? 'gk' : 'k'                Up
+-- <Up>                  v:count == 0 ? 'gk' : 'k'                Up
+-- <Down>                v:count == 0 ? 'gj' : 'j'                Down
+-- g]                    No command                               Move to right "around"
+-- g[                    No command                               Move to left "around"
+-- <C-F> -- page down
+
+
+-- BUFFERS / WINDOWS --
+-- bD                    <Cmd>:bd<CR>                                       Delete Buffer and Window
+-- bd                    No command                                         Delete Buffer
+-- bb                    <Cmd>e #<CR>                                       Switch to Other Buffer
+-- `                     <Cmd>e #<CR>                                       Switch to Other Buffer
+map("<leader>`", "<Cmd>e #<CR>", "switch buffer")
+-- w                     <C-W>                                              Windows
+-- <leader>|             <C-W>v                                             Split Window Right
+-- <leader>-             <C-W>s                                             Split Window Below
+-- wm                    No command                                         Toggle Maximize
+-- wd                    <C-W>c                                             Delete Window
+-- <C-L>                 <C-W>l                                             Go to Right Window
+-- <C-K>                 <C-W>k                                             Go to Upper Window
+-- <C-J>                 <C-W>j                                             Go to Lower Window
+-- <C-H>                 <C-W>h                                             Go to Left Window
+
+
+------------------
+-- NVIM-WEZTERM --
+------------------
+-- depending on situation, send command to neovim or to wezterm
+local unified = require("config.helpers.nvim_wezterm")
+
+-- splits
+map("<leader>\\", "<C-w>v", "split right")
+map("<leader>/", "<C-w>s", "split down")
+
+-- navigate splits   -- ok
+map("<S-Left>", function() unified.navigate("h") end, "navigate left")
+map("<S-Down>", function() unified.navigate("j") end, "navigate down")
+map("<S-Up>", function() unified.navigate("k") end, "navigate up")
+map("<S-Right>", function() unified.navigate("l") end, "navigate right")
+-- resize splits   -- ok
+map("<M-Left>", function() unified.resize("h", 2) end, "resize left")
+map("<M-Down>", function() unified.resize("j", 2) end, "resize down")
+map("<M-Up>", function() unified.resize("k", 2) end, "resize up")
+map("<M-Right>", function() unified.resize("l", 2) end, "resize right")
+
+
+
+-------------------------
 -- OVERLAPPING KEYMAPS --
---------------------------------------------------------------
+-------------------------
 
 -- checking for overlapping keymaps ~
 -- - WARNING In mode `n`, <<Space>w> overlaps with <<Space>wm>, <<C-W><C-D>>, <<Space>wd>:
