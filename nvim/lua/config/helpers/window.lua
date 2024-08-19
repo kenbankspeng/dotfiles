@@ -30,10 +30,10 @@ local function smart_close()
     end
 
     -- If we only have 2 buffers and 2 windows, close one window and delete the current buffer
-    vim.cmd('bdelete ' .. buf)
     if num_windows > 1 then
       vim.cmd('close')
     end
+    vim.cmd('bdelete ' .. buf)
   else
     local line_count = vim.api.nvim_buf_line_count(buf)
     local has_content = line_count > 1 or (line_count == 1 and vim.api.nvim_buf_get_lines(buf, 0, 1, false)[1] ~= "")
