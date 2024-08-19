@@ -1,5 +1,0 @@
-return {
-  {
-    'sitiom/nvim-numbertoggle'
-  }
-}

@@ -123,39 +123,39 @@ vim.keymap.set("n", "q", smart_close, { noremap = true, silent = true })
 --
 
 -- LAZY --
-del("n", "<leader>L") -- LazyVim Changelog
-del("n", "<leader>K") -- man keyword lookup
-del("n", "<C-Up>") -- Resize window
-del("n", "<C-Down>") -- Resize window
-del("n", "<C-Left>") -- Resize window
-del("n", "<C-Right>") -- Resize window
-del("n", "<leader>qq") -- quit all
+del("n", "<leader>L")          -- LazyVim Changelog
+del("n", "<leader>K")          -- man keyword lookup
+del("n", "<C-Up>")             -- Resize window
+del("n", "<C-Down>")           -- Resize window
+del("n", "<C-Left>")           -- Resize window
+del("n", "<C-Right>")          -- Resize window
+del("n", "<leader>qq")         -- quit all
 
-del("n", "<leader><Tab>[") -- real vim tabs
-del("n", "<leader><Tab>d") -- real vim tabs
-del("n", "<leader><Tab>]") -- real vim tabs
+del("n", "<leader><Tab>[")     -- real vim tabs
+del("n", "<leader><Tab>d")     -- real vim tabs
+del("n", "<leader><Tab>]")     -- real vim tabs
 del("n", "<leader><Tab><Tab>") -- real vim tabs
-del("n", "<leader><Tab>f") -- real vim tabs
-del("n", "<leader><Tab>o") -- real vim tabs
-del("n", "<leader><Tab>l") -- real vim tabs
+del("n", "<leader><Tab>f")     -- real vim tabs
+del("n", "<leader><Tab>o")     -- real vim tabs
+del("n", "<leader><Tab>l")     -- real vim tabs
 
-del("n", "[b") -- Prev Buffer
-del("n", "]b") -- Next Buffer
-del("n", "<leader>bl") -- Delete Buffers to the Left
-del("n", "<leader>br") -- Delete Buffers to the Right
-del("n", "<leader>bo") -- Delete Other Buffers
-del("n", "<leader>bP") -- Delete Non-Pinned Buffers
-del("n", "<leader>bp") -- Toggle Pin
+del("n", "[b")                 -- Prev Buffer
+del("n", "]b")                 -- Next Buffer
+del("n", "<leader>bl")         -- Delete Buffers to the Left
+del("n", "<leader>br")         -- Delete Buffers to the Right
+del("n", "<leader>bo")         -- Delete Other Buffers
+del("n", "<leader>bP")         -- Delete Non-Pinned Buffers
+del("n", "<leader>bp")         -- Toggle Pin
 
-del("n", "<M-k>") -- Move Code Up
-del("n", "<M-j>") -- Move Code Down
+del("n", "<M-k>")              -- Move Code Up
+del("n", "<M-j>")              -- Move Code Down
 
-del("n", "<leader>|") -- Split Window Right <C-W>v                                             Split Window Right
-del("n", "<leader>-") -- Split Window Below <C-W>s                                             Split Window Below
+del("n", "<leader>|")          -- Split Window Right <C-W>v                                             Split Window Right
+del("n", "<leader>-")          -- Split Window Below <C-W>s                                             Split Window Below
 
 -- NEOTREE -- cannot disable - so remove keys
-del("n", "<leader>E") -- Explorer NeoTree (cwd)
-del("n", "<leader>e") -- Explorer NeoTree (Root Dir)
+del("n", "<leader>E")  -- Explorer NeoTree (cwd)
+del("n", "<leader>e")  -- Explorer NeoTree (Root Dir)
 del("n", "<leader>fE") -- Explorer NeoTree (cwd)
 del("n", "<leader>fe") -- Explorer NeoTree (Root Dir)
 
@@ -204,21 +204,21 @@ map("<S-Tab>", "<Cmd>BufferLineCyclePrev<CR>", "Prev Buffer")
 map("<Tab>", "<Cmd>BufferLineCycleNext<CR>", "Next Buffer")
 
 -- YAZI --
-map("<leader>y.", "<cmd>Yazi<CR>", "Open yazi at the current file") -- ok
+map("<leader>y.", "<cmd>Yazi<CR>", "Open yazi at the current file")      -- ok
 map("<leader>yy", "<cmd>Yazi cwd<CR>", "Open yazi at working directory") -- ok
 
 -- TELESCOPE -- ok -- See `:help telescope.builtin`
 local builtin = require("telescope.builtin")
-map("<leader>sh", builtin.help_tags, "search help") -- ok
-map("<leader>sk", builtin.keymaps, "search keymaps") -- ok
-map("<leader>sf", builtin.find_files, "search files") -- ok
-map("<leader>ss", builtin.builtin, "search select telescope") -- ok
-map("<leader>sw", builtin.grep_string, "search current word") -- ok
-map("<leader>sg", builtin.live_grep, "search by grep") -- ok
-map("<leader>sd", builtin.diagnostics, "search diagnostics") -- ok
-map("<leader>sr", builtin.resume, "search resume") -- ok
+map("<leader>sh", builtin.help_tags, "search help")                         -- ok
+map("<leader>sk", builtin.keymaps, "search keymaps")                        -- ok
+map("<leader>sf", builtin.find_files, "search files")                       -- ok
+map("<leader>ss", builtin.builtin, "search select telescope")               -- ok
+map("<leader>sw", builtin.grep_string, "search current word")               -- ok
+map("<leader>sg", builtin.live_grep, "search by grep")                      -- ok
+map("<leader>sd", builtin.diagnostics, "search diagnostics")                -- ok
+map("<leader>sr", builtin.resume, "search resume")                          -- ok
 map("<leader>s.", builtin.oldfiles, 'search Recent Files ("." for repeat)') -- ok
-map("<leader>fb", builtin.buffers, "find in buffers") -- ok
+map("<leader>fb", builtin.buffers, "find in buffers")                       -- ok
 
 -- defined in lsp-config.lua as autocmd associated with file type
 --
@@ -315,13 +315,24 @@ map("<leader>fr", require("config.helpers.grug_far").find_replace, "Find and Rep
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- TROUBLE --
--- [w                                     No command                                         Prev Warning
--- [e                                     No command                                         Prev Error
--- [q                                     No command                                         Previous Quickfix
--- [b                                     <Cmd>bprevious<CR>                                 Prev Buffer
--- ]w                                     No command                                         Next Warning
--- ]e                                     No command                                         Next Error
--- ]q                                     No command                                         Next Quickfix
+-- <Space>cS   <Cmd>Trouble lsp toggle<CR>
+-- <Space>cs   <Cmd>Trouble symbols toggle<CR>
+-- <Space>sT   <Cmd>TodoTelescope keywords=TODO,FIX,FIXME<CR>
+-- <Space>xL   <Cmd>Trouble loclist toggle<CR>
+-- <Space>xQ   <Cmd>Trouble qflist toggle<CR>
+-- <Space>xT   <Cmd>Trouble todo toggle filter = {tag = {TODO,FIX,FIXME}}<CR>
+-- <Space>xX   <Cmd>Trouble diagnostics toggle filter.buf=0<CR>
+-- <Space>xt   <Cmd>Trouble todo toggle<CR>
+-- <Space>xx   <Cmd>Trouble diagnostics toggle<CR>
+-- [t
+-- ]t
+-- [w     No command             Prev Warning
+-- [e     No command             Prev Error
+-- [q     No command             Previous Quickfix
+-- [b     <Cmd>bprevious<CR>     Prev Buffer
+-- ]w     No command             Next Warning
+-- ]e     No command             Next Error
+-- ]q     No command             Next Quickfix
 
 -- LAZY --
 -- l                                      <Cmd>Lazy<CR>                                      Lazy
@@ -352,17 +363,6 @@ map("<leader>xf", vim.diagnostic.setloclist, "Open diagnostic [Q]uickfix list")
 -- %                                      <Plug>(MatchitNormalForward)                       No description
 -- [%                                     <Plug>(MatchitNormalMultiBackward)                 No description
 
--- n  <Space>cS   * <Cmd>Trouble lsp toggle<CR>
--- n  <Space>cs   * <Cmd>Trouble symbols toggle<CR>
--- n  <Space>sT   * <Cmd>TodoTelescope keywords=TODO,FIX,FIXME<CR>
--- n  <Space>xL   * <Cmd>Trouble loclist toggle<CR>
--- n  <Space>xQ   * <Cmd>Trouble qflist toggle<CR>
--- n  <Space>xT   * <Cmd>Trouble todo toggle filter = {tag = {TODO,FIX,FIXME}}<CR>
--- n  <Space>xX   * <Cmd>Trouble diagnostics toggle filter.buf=0<CR>
--- n  <Space>xt   * <Cmd>Trouble todo toggle<CR>
--- n  <Space>xx   * <Cmd>Trouble diagnostics toggle<CR>
--- n  [t          * <Lua 140: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:363>
--- n  ]t          * <Lua 141: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:362>
 
 -------------
 -- GENERAL --
