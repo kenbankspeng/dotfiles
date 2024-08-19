@@ -205,156 +205,156 @@
                  which_key_ignore
 n  %             <Plug>(MatchitNormalForward)
 n  &           * :&&<CR>
-n  ,           * <Lua 275: ~/.local/share/nvim/lazy/flash.nvim/lua/flash/plugins/char.lua:118>
-n  ;           * <Lua 272: ~/.local/share/nvim/lazy/flash.nvim/lua/flash/plugins/char.lua:118>
-n  <C-/>       * <Lua 290: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/config/keymaps.lua:161>
-n  <C-B>       * <Lua 104: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/ui.lua:306>
-n  <C-F>       * <Lua 105: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/ui.lua:305>
+n  ,           * <Lua 290: ~/.local/share/nvim/lazy/flash.nvim/lua/flash/plugins/char.lua:118>
+n  ;           * <Lua 287: ~/.local/share/nvim/lazy/flash.nvim/lua/flash/plugins/char.lua:118>
+n  <C-/>       * <Lua 411: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/config/keymaps.lua:161>
+n  <C-B>       * <Lua 94: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/ui.lua:306>
+n  <C-F>       * <Lua 92: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/ui.lua:305>
 n  <C-H>       * <C-W>h
 n  <C-J>       * <C-W>j
 n  <C-K>       * <C-W>k
 n  <C-L>       * <C-W>l
 n  <C-S>       * <Cmd>w<CR><Esc>
-n  <C-Space>   *@<Lua 545: ~/.local/share/nvim/lazy/nvim-treesitter/lua/nvim-treesitter/incremental_selection.lua:15>
+n  <C-Space>   *@<Lua 547: ~/.local/share/nvim/lazy/nvim-treesitter/lua/nvim-treesitter/incremental_selection.lua:15>
 n  <C-W><C-D>    <C-W>d
-n  <C-W><Space> * <Lua 87: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:227>
+n  <C-W><Space> * <Lua 121: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:227>
 n  <C-W>d      * <Lua 16: vim/_defaults.lua:0>
-n  <C-_>       * <Lua 182: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/config/keymaps.lua:161>
+n  <C-_>       * <Lua 412: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/config/keymaps.lua:161>
 n  <Down>      * v:count == 0 ? 'gj' : 'j'
 n  <Esc>       * <Cmd>noh<CR><Esc>
-n  <Left>      * <Lua 93: ~/.config/nvim/lua/config/helpers/oil.lua:21>
-n  <M-Down>    * <Lua 340: ~/.config/nvim/lua/config/keymaps.lua:471>
-n  <M-Left>    * <Lua 339: ~/.config/nvim/lua/config/keymaps.lua:468>
-n  <M-Right>   * <Lua 142: ~/.config/nvim/lua/config/keymaps.lua:477>
-n  <M-Up>      * <Lua 143: ~/.config/nvim/lua/config/keymaps.lua:474>
+n  <Left>      * <Lua 125: ~/.config/nvim/lua/config/helpers/oil.lua:21>
+n  <M-Down>    * <Lua 420: ~/.config/nvim/lua/config/keymaps.lua:471>
+n  <M-Left>    * <Lua 419: ~/.config/nvim/lua/config/keymaps.lua:468>
+n  <M-Right>   * <Lua 422: ~/.config/nvim/lua/config/keymaps.lua:477>
+n  <M-Up>      * <Lua 421: ~/.config/nvim/lua/config/keymaps.lua:474>
 n  <Plug>(MatchitNormalBackward) * :<C-U>call matchit#Match_wrapper('',0,'n')<CR>
 n  <Plug>(MatchitNormalForward) * :<C-U>call matchit#Match_wrapper('',1,'n')<CR>
 n  <Plug>(MatchitNormalMultiBackward) * :<C-U>call matchit#MultiMatch("bW", "n")<CR>
 n  <Plug>(MatchitNormalMultiForward) * :<C-U>call matchit#MultiMatch("W",  "n")<CR>
 n  <Plug>PlenaryTestFile * :lua require('plenary.test_harness').test_file(vim.fn.expand("%:p"))<CR>
-n  <Right>     * <Lua 94: ~/.config/nvim/lua/config/helpers/oil.lua:21>
-n  <S-Down>    * <Lua 336: ~/.config/nvim/lua/config/keymaps.lua:458>
-n  <S-Left>    * <Lua 236: ~/.config/nvim/lua/config/keymaps.lua:455>
-n  <S-Right>   * <Lua 338: ~/.config/nvim/lua/config/keymaps.lua:464>
+n  <Right>     * <Lua 127: ~/.config/nvim/lua/config/helpers/oil.lua:21>
+n  <S-Down>    * <Lua 416: ~/.config/nvim/lua/config/keymaps.lua:458>
+n  <S-Left>    * <Lua 224: ~/.config/nvim/lua/config/keymaps.lua:455>
+n  <S-Right>   * <Lua 418: ~/.config/nvim/lua/config/keymaps.lua:464>
 n  <S-Tab>     * <Cmd>BufferLineCyclePrev<CR>
-n  <S-Up>      * <Lua 337: ~/.config/nvim/lua/config/keymaps.lua:461>
+n  <S-Up>      * <Lua 417: ~/.config/nvim/lua/config/keymaps.lua:461>
 n  <Space>,    * <Cmd>Telescope buffers sort_mru=true sort_lastused=true<CR>
 n  <Space>/    * <C-W>s
 n  <Space>:    * <Cmd>Telescope command_history<CR>
 n  <Space><Space> * <Cmd>Oil --float<CR>
-n  <Space>?    * <Lua 88: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:220>
-n  <Space>D    *@<Lua 608: ~/.local/share/nvim/lazy/telescope.nvim/lua/telescope/builtin/init.lua:502>
+n  <Space>?    * <Lua 122: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:220>
+n  <Space>D    *@<Lua 690: ~/.local/share/nvim/lazy/telescope.nvim/lua/telescope/builtin/init.lua:502>
 n  <Space>\    * <C-W>v
 n  <Space>`    * <Cmd>e #<CR>
 n  <Space>bD   * <Cmd>:bd<CR>
 n  <Space>bb   * <Cmd>e #<CR>
-n  <Space>bd   * <Lua 39: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/ui.lua:228>
-n  <Space>be   * <Lua 92: ~/.local/share/nvim/lazy/lazy.nvim/lua/lazy/core/handler/keys.lua:121>
-n  <Space>cF   * <Lua 160: ~/.local/share/nvim/lazy/lazy.nvim/lua/lazy/core/handler/keys.lua:121>
+n  <Space>bd   * <Lua 41: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/ui.lua:228>
+n  <Space>be   * <Lua 131: ~/.local/share/nvim/lazy/lazy.nvim/lua/lazy/core/handler/keys.lua:121>
+n  <Space>cF   * <Lua 105: ~/.local/share/nvim/lazy/lazy.nvim/lua/lazy/core/handler/keys.lua:121>
 n  <Space>cS   * <Cmd>Trouble lsp toggle<CR>
-n  <Space>ca   *@<Lua 464: /opt/homebrew/Cellar/neovim/0.10.1/share/nvim/runtime/lua/vim/lsp/buf.lua:830>
-n  <Space>cd   * <Lua 408: /opt/homebrew/Cellar/neovim/0.10.1/share/nvim/runtime/lua/vim/diagnostic.lua:1694>
-n  <Space>cf   * <Lua 406: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/config/keymaps.lua:95>
+n  <Space>ca   *@<Lua 123: /opt/homebrew/Cellar/neovim/0.10.1/share/nvim/runtime/lua/vim/lsp/buf.lua:830>
+n  <Space>cd   * <Lua 379: /opt/homebrew/Cellar/neovim/0.10.1/share/nvim/runtime/lua/vim/diagnostic.lua:1694>
+n  <Space>cf   * <Lua 377: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/config/keymaps.lua:95>
 n  <Space>cm   * <Cmd>Mason<CR>
 n  <Space>cs   * <Cmd>Trouble symbols toggle<CR>
-n  <Space>dr   *@<Lua 170: /opt/homebrew/Cellar/neovim/0.10.1/share/nvim/runtime/lua/vim/lsp/buf.lua:298>
-n  <Space>ds   *@<Lua 488: ~/.local/share/nvim/lazy/telescope.nvim/lua/telescope/builtin/init.lua:502>
-n  <Space>fF   * <Lua 80: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/pick.lua:82>
-n  <Space>fR   * <Lua 83: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/pick.lua:82>
-n  <Space>fT   * <Lua 289: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/config/keymaps.lua:163>
-n  <Space>fb   * <Lua 121: ~/.local/share/nvim/lazy/telescope.nvim/lua/telescope/builtin/init.lua:502>
-n  <Space>fc   * <Lua 78: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/pick.lua:82>
-n  <Space>ff   * <Lua 79: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/pick.lua:82>
+n  <Space>dr   *@<Lua 139: /opt/homebrew/Cellar/neovim/0.10.1/share/nvim/runtime/lua/vim/lsp/buf.lua:298>
+n  <Space>ds   *@<Lua 34: ~/.local/share/nvim/lazy/telescope.nvim/lua/telescope/builtin/init.lua:502>
+n  <Space>fF   * <Lua 68: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/pick.lua:82>
+n  <Space>fR   * <Lua 71: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/pick.lua:82>
+n  <Space>fT   * <Lua 410: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/config/keymaps.lua:163>
+n  <Space>fb   * <Lua 146: ~/.local/share/nvim/lazy/telescope.nvim/lua/telescope/builtin/init.lua:502>
+n  <Space>fc   * <Lua 66: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/pick.lua:82>
+n  <Space>ff   * <Lua 67: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/pick.lua:82>
 n  <Space>fg   * <Cmd>Telescope git_files<CR>
 n  <Space>fn   * <Cmd>enew<CR>
-n  <Space>fr   * <Lua 96: ~/.config/nvim/lua/config/helpers/grug_far.lua:1>
-n  <Space>ft   * <Lua 288: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/config/keymaps.lua:161>
-n  <Space>gB   * <Lua 27: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/lazygit.lua:185>
-n  <Space>gG   * <Lua 243: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/config/keymaps.lua:134>
-n  <Space>gL   * <Lua 40: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/config/keymaps.lua:146>
-n  <Space>gb   * <Lua 244: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/lazygit.lua:144>
+n  <Space>fr   * <Lua 129: ~/.config/nvim/lua/config/helpers/grug_far.lua:1>
+n  <Space>ft   * <Lua 409: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/config/keymaps.lua:161>
+n  <Space>gB   * <Lua 403: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/lazygit.lua:185>
+n  <Space>gG   * <Lua 400: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/config/keymaps.lua:134>
+n  <Space>gL   * <Lua 406: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/config/keymaps.lua:146>
+n  <Space>gb   * <Lua 401: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/lazygit.lua:144>
 n  <Space>gc   * <Cmd>Telescope git_commits<CR>
-n  <Space>ge   * <Lua 90: ~/.local/share/nvim/lazy/lazy.nvim/lua/lazy/core/handler/keys.lua:121>
-n  <Space>gf   * <Lua 42: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/config/keymaps.lua:138>
-n  <Space>gg   * <Lua 81: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/config/keymaps.lua:133>
-n  <Space>ghB  *@<Lua 598: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:296>
-n  <Space>ghD  *@<Lua 785: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:298>
-n  <Space>ghR  *@<Lua 167: ~/.local/share/nvim/lazy/gitsigns.nvim/lua/gitsigns/actions.lua:372>
-n  <Space>ghS  *@<Lua 37: ~/.local/share/nvim/lazy/gitsigns.nvim/lua/gitsigns/async.lua:200>
-n  <Space>ghb  *@<Lua 630: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:295>
-n  <Space>ghd  *@<Lua 500: ~/.local/share/nvim/lazy/gitsigns.nvim/lua/gitsigns/actions.lua:1193>
-n  <Space>ghp  *@<Lua 25: ~/.local/share/nvim/lazy/gitsigns.nvim/lua/gitsigns/async.lua:200>
+n  <Space>ge   * <Lua 130: ~/.local/share/nvim/lazy/lazy.nvim/lua/lazy/core/handler/keys.lua:121>
+n  <Space>gf   * <Lua 404: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/config/keymaps.lua:138>
+n  <Space>gg   * <Lua 399: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/config/keymaps.lua:133>
+n  <Space>ghB  *@<Lua 720: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:296>
+n  <Space>ghD  *@<Lua 637: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:298>
+n  <Space>ghR  *@<Lua 782: ~/.local/share/nvim/lazy/gitsigns.nvim/lua/gitsigns/actions.lua:372>
+n  <Space>ghS  *@<Lua 733: ~/.local/share/nvim/lazy/gitsigns.nvim/lua/gitsigns/async.lua:200>
+n  <Space>ghb  *@<Lua 876: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:295>
+n  <Space>ghd  *@<Lua 348: ~/.local/share/nvim/lazy/gitsigns.nvim/lua/gitsigns/actions.lua:1193>
+n  <Space>ghp  *@<Lua 241: ~/.local/share/nvim/lazy/gitsigns.nvim/lua/gitsigns/async.lua:200>
 n  <Space>ghr  *@:Gitsigns reset_hunk<CR>
 n  <Space>ghs  *@:Gitsigns stage_hunk<CR>
-n  <Space>ghu  *@<Lua 489: ~/.local/share/nvim/lazy/gitsigns.nvim/lua/gitsigns/async.lua:200>
-n  <Space>gl   * <Lua 43: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/config/keymaps.lua:143>
+n  <Space>ghu  *@<Lua 605: ~/.local/share/nvim/lazy/gitsigns.nvim/lua/gitsigns/async.lua:200>
+n  <Space>gl   * <Lua 405: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/config/keymaps.lua:143>
 n  <Space>gs   * <Cmd>Telescope git_status<CR>
 n  <Space>l    * <Cmd>Lazy<CR>
-n  <Space>qd   * <Lua 165: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/util.lua:14>
-n  <Space>ql   * <Lua 164: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/util.lua:13>
-n  <Space>qs   * <Lua 163: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/util.lua:12>
+n  <Space>qd   * <Lua 91: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/util.lua:14>
+n  <Space>ql   * <Lua 90: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/util.lua:13>
+n  <Space>qs   * <Lua 88: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/util.lua:12>
 n  <Space>s"   * <Cmd>Telescope registers<CR>
-n  <Space>s.   * <Lua 228: ~/.local/share/nvim/lazy/telescope.nvim/lua/telescope/builtin/init.lua:502>
-n  <Space>s/   * <Lua 237: ~/.config/nvim/lua/config/helpers/telescope.lua:9>
+n  <Space>s.   * <Lua 223: ~/.local/share/nvim/lazy/telescope.nvim/lua/telescope/builtin/init.lua:502>
+n  <Space>s/   * <Lua 228: ~/.config/nvim/lua/config/helpers/telescope.lua:9>
 n  <Space>sC   * <Cmd>Telescope commands<CR>
 n  <Space>sD   * <Cmd>Telescope diagnostics<CR>
-n  <Space>sG   * <Lua 55: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/pick.lua:82>
+n  <Space>sG   * <Lua 61: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/pick.lua:82>
 n  <Space>sH   * <Cmd>Telescope highlights<CR>
 n  <Space>sM   * <Cmd>Telescope man_pages<CR>
 n  <Space>sR   * <Cmd>Telescope resume<CR>
-n  <Space>sS   * <Lua 72: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/extras/editor/telescope.lua:143>
+n  <Space>sS   * <Lua 52: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/extras/editor/telescope.lua:143>
 n  <Space>sT   * <Cmd>TodoTelescope keywords=TODO,FIX,FIXME<CR>
-n  <Space>sW   * <Lua 67: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/pick.lua:82>
+n  <Space>sW   * <Lua 57: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/pick.lua:82>
 n  <Space>sa   * <Cmd>Telescope autocommands<CR>
 n  <Space>sb   * <Cmd>Telescope current_buffer_fuzzy_find<CR>
 n  <Space>sc   * <Cmd>Telescope command_history<CR>
-n  <Space>sd   * <Lua 66: ~/.local/share/nvim/lazy/telescope.nvim/lua/telescope/builtin/init.lua:502>
-n  <Space>sf   * <Lua 225: ~/.local/share/nvim/lazy/telescope.nvim/lua/telescope/builtin/init.lua:502>
-n  <Space>sg   * <Lua 71: ~/.local/share/nvim/lazy/telescope.nvim/lua/telescope/builtin/init.lua:502>
-n  <Space>sh   * <Lua 95: ~/.local/share/nvim/lazy/telescope.nvim/lua/telescope/builtin/init.lua:502>
+n  <Space>sd   * <Lua 58: ~/.local/share/nvim/lazy/telescope.nvim/lua/telescope/builtin/init.lua:502>
+n  <Space>sf   * <Lua 218: ~/.local/share/nvim/lazy/telescope.nvim/lua/telescope/builtin/init.lua:502>
+n  <Space>sg   * <Lua 53: ~/.local/share/nvim/lazy/telescope.nvim/lua/telescope/builtin/init.lua:502>
+n  <Space>sh   * <Lua 128: ~/.local/share/nvim/lazy/telescope.nvim/lua/telescope/builtin/init.lua:502>
 n  <Space>sj   * <Cmd>Telescope jumplist<CR>
-n  <Space>sk   * <Lua 222: ~/.local/share/nvim/lazy/telescope.nvim/lua/telescope/builtin/init.lua:502>
+n  <Space>sk   * <Lua 211: ~/.local/share/nvim/lazy/telescope.nvim/lua/telescope/builtin/init.lua:502>
 n  <Space>sl   * <Cmd>Telescope loclist<CR>
 n  <Space>sm   * <Cmd>Telescope marks<CR>
-n  <Space>sn   * <Lua 75: ~/.config/nvim/lua/config/helpers/telescope.lua:16>
-n  <Space>sna  * <Lua 97: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/ui.lua:302>
-n  <Space>snd  * <Lua 98: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/ui.lua:303>
-n  <Space>snh  * <Lua 108: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/ui.lua:301>
-n  <Space>snl  * <Lua 107: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/ui.lua:300>
-n  <Space>snt  * <Lua 99: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/ui.lua:304>
+n  <Space>sn   * <Lua 63: ~/.config/nvim/lua/config/helpers/telescope.lua:16>
+n  <Space>sna  * <Lua 98: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/ui.lua:302>
+n  <Space>snd  * <Lua 99: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/ui.lua:303>
+n  <Space>snh  * <Lua 97: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/ui.lua:301>
+n  <Space>snl  * <Lua 96: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/ui.lua:300>
+n  <Space>snt  * <Lua 100: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/ui.lua:304>
 n  <Space>so   * <Cmd>Telescope vim_options<CR>
 n  <Space>sq   * <Cmd>Telescope quickfix<CR>
-n  <Space>sr   * <Lua 54: ~/.local/share/nvim/lazy/telescope.nvim/lua/telescope/builtin/init.lua:502>
-n  <Space>ss   * <Lua 226: ~/.local/share/nvim/lazy/telescope.nvim/lua/telescope/builtin/init.lua:502>
+n  <Space>sr   * <Lua 60: ~/.local/share/nvim/lazy/telescope.nvim/lua/telescope/builtin/init.lua:502>
+n  <Space>ss   * <Lua 219: ~/.local/share/nvim/lazy/telescope.nvim/lua/telescope/builtin/init.lua:502>
 n  <Space>st   * <Cmd>TodoTelescope<CR>
-n  <Space>sw   * <Lua 227: ~/.local/share/nvim/lazy/telescope.nvim/lua/telescope/builtin/init.lua:502>
-n  <Space>uC   * <Lua 70: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/pick.lua:82>
-n  <Space>uF   * <Lua 414: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/toggle.lua:32>
+n  <Space>sw   * <Lua 220: ~/.local/share/nvim/lazy/telescope.nvim/lua/telescope/builtin/init.lua:502>
+n  <Space>uC   * <Lua 54: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/pick.lua:82>
+n  <Space>uF   * <Lua 385: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/toggle.lua:32>
 n  <Space>uI   * <Cmd>InspectTree<CR>
-n  <Space>uL   * <Lua 417: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/toggle.lua:32>
-n  <Space>uT   * <Lua 421: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/toggle.lua:32>
-n  <Space>ub   * <Lua 238: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/toggle.lua:32>
-n  <Space>uc   * <Lua 420: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/toggle.lua:32>
-n  <Space>ud   * <Lua 418: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/toggle.lua:32>
-n  <Space>uf   * <Lua 413: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/toggle.lua:32>
-n  <Space>ug   * <Lua 65: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/toggle.lua:32>
-n  <Space>uh   * <Lua 86: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/toggle.lua:32>
-n  <Space>ui   * <Lua 41: /opt/homebrew/Cellar/neovim/0.10.1/share/nvim/runtime/lua/vim/_inspector.lua:152>
-n  <Space>ul   * <Lua 419: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/toggle.lua:32>
-n  <Space>un   * <Lua 171: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/ui.lua:8>
-n  <Space>up   * <Lua 248: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/toggle.lua:32>
+n  <Space>uL   * <Lua 388: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/toggle.lua:32>
+n  <Space>uT   * <Lua 392: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/toggle.lua:32>
+n  <Space>ub   * <Lua 393: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/toggle.lua:32>
+n  <Space>uc   * <Lua 391: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/toggle.lua:32>
+n  <Space>ud   * <Lua 389: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/toggle.lua:32>
+n  <Space>uf   * <Lua 384: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/toggle.lua:32>
+n  <Space>ug   * <Lua 93: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/toggle.lua:32>
+n  <Space>uh   * <Lua 398: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/toggle.lua:32>
+n  <Space>ui   * <Lua 407: /opt/homebrew/Cellar/neovim/0.10.1/share/nvim/runtime/lua/vim/_inspector.lua:152>
+n  <Space>ul   * <Lua 390: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/toggle.lua:32>
+n  <Space>un   * <Lua 145: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/ui.lua:8>
+n  <Space>up   * <Lua 302: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/toggle.lua:32>
 n  <Space>ur   * <Cmd>nohlsearch|diffupdate|normal! <C-L><CR>
-n  <Space>us   * <Lua 415: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/toggle.lua:32>
-n  <Space>uw   * <Lua 416: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/toggle.lua:32>
+n  <Space>us   * <Lua 386: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/toggle.lua:32>
+n  <Space>uw   * <Lua 387: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/toggle.lua:32>
 n  <Space>w    * <C-W>
 n  <Space>wd   * <C-W>c
-n  <Space>wm   * <Lua 181: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/toggle.lua:32>
-n  <Space>ws   *@<Lua 768: ~/.local/share/nvim/lazy/telescope.nvim/lua/telescope/builtin/init.lua:502>
+n  <Space>wm   * <Lua 413: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/util/toggle.lua:32>
+n  <Space>ws   *@<Lua 582: ~/.local/share/nvim/lazy/telescope.nvim/lua/telescope/builtin/init.lua:502>
 n  <Space>xL   * <Cmd>Trouble loclist toggle<CR>
 n  <Space>xQ   * <Cmd>Trouble qflist toggle<CR>
 n  <Space>xT   * <Cmd>Trouble todo toggle filter = {tag = {TODO,FIX,FIXME}}<CR>
 n  <Space>xX   * <Cmd>Trouble diagnostics toggle filter.buf=0<CR>
-n  <Space>xf   * <Lua 287: /opt/homebrew/Cellar/neovim/0.10.1/share/nvim/runtime/lua/vim/diagnostic.lua:1984>
+n  <Space>xf   * <Lua 408: /opt/homebrew/Cellar/neovim/0.10.1/share/nvim/runtime/lua/vim/diagnostic.lua:1984>
 n  <Space>xl   * <Cmd>lopen<CR>
 n  <Space>xq   * <Cmd>copen<CR>
 n  <Space>xt   * <Cmd>Trouble todo toggle<CR>
@@ -363,62 +363,62 @@ n  <Space>y.   * <Cmd>Yazi<CR>
 n  <Space>yy   * <Cmd>Yazi cwd<CR>
 n  <Tab>       * <Cmd>BufferLineCycleNext<CR>
 n  <Up>        * v:count == 0 ? 'gk' : 'k'
-n  F           * <Lua 263: ~/.local/share/nvim/lazy/flash.nvim/lua/flash/plugins/char.lua:118>
+n  F           * <Lua 278: ~/.local/share/nvim/lazy/flash.nvim/lua/flash/plugins/char.lua:118>
 n  H           * <Cmd>BufferLineCyclePrev<CR>
-n  K           *@<Lua 632: /opt/homebrew/Cellar/neovim/0.10.1/share/nvim/runtime/lua/vim/lsp/buf.lua:33>
+n  K           *@<Lua 304: /opt/homebrew/Cellar/neovim/0.10.1/share/nvim/runtime/lua/vim/lsp/buf.lua:33>
 n  L           * <Cmd>BufferLineCycleNext<CR>
 n  N           * 'nN'[v:searchforward].'zv'
 n  Q           * q
-n  S           * <Lua 125: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:165>
-n  T           * <Lua 269: ~/.local/share/nvim/lazy/flash.nvim/lua/flash/plugins/char.lua:118>
+n  S           * <Lua 158: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:165>
+n  T           * <Lua 284: ~/.local/share/nvim/lazy/flash.nvim/lua/flash/plugins/char.lua:118>
 n  Y           * y$
 n  [%            <Plug>(MatchitNormalMultiBackward)
-n  [A          *@<Lua 667: ~/.local/share/nvim/lazy/nvim-treesitter-textobjects/lua/nvim-treesitter/textobjects/attach.lua:44>
+n  [A          *@<Lua 76: ~/.local/share/nvim/lazy/nvim-treesitter-textobjects/lua/nvim-treesitter/textobjects/attach.lua:44>
 n  [B          * <Cmd>BufferLineMovePrev<CR>
-n  [C          *@<Lua 712: ~/.local/share/nvim/lazy/nvim-treesitter-textobjects/lua/nvim-treesitter/textobjects/attach.lua:44>
-n  [F          *@<Lua 441: ~/.local/share/nvim/lazy/nvim-treesitter-textobjects/lua/nvim-treesitter/textobjects/attach.lua:44>
-n  [H          *@<Lua 501: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:288>
-n  [a          *@<Lua 689: ~/.local/share/nvim/lazy/nvim-treesitter-textobjects/lua/nvim-treesitter/textobjects/attach.lua:44>
-n  [c          *@<Lua 703: ~/.local/share/nvim/lazy/nvim-treesitter-textobjects/lua/nvim-treesitter/textobjects/attach.lua:44>
+n  [C          *@<Lua 679: ~/.local/share/nvim/lazy/nvim-treesitter-textobjects/lua/nvim-treesitter/textobjects/attach.lua:44>
+n  [F          *@<Lua 462: ~/.local/share/nvim/lazy/nvim-treesitter-textobjects/lua/nvim-treesitter/textobjects/attach.lua:44>
+n  [H          *@<Lua 499: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:288>
+n  [a          *@<Lua 724: ~/.local/share/nvim/lazy/nvim-treesitter-textobjects/lua/nvim-treesitter/textobjects/attach.lua:44>
+n  [c          *@<Lua 463: ~/.local/share/nvim/lazy/nvim-treesitter-textobjects/lua/nvim-treesitter/textobjects/attach.lua:44>
 n  [d          * <Lua 14: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/config/keymaps.lua:103>
-n  [e          * <Lua 410: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/config/keymaps.lua:103>
-n  [f          *@<Lua 702: ~/.local/share/nvim/lazy/nvim-treesitter-textobjects/lua/nvim-treesitter/textobjects/attach.lua:44>
-n  [h          *@<Lua 51: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:280>
-n  [q          * <Lua 139: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:324>
-n  [t          * <Lua 150: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:363>
-n  [w          * <Lua 412: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/config/keymaps.lua:103>
+n  [e          * <Lua 381: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/config/keymaps.lua:103>
+n  [f          *@<Lua 650: ~/.local/share/nvim/lazy/nvim-treesitter-textobjects/lua/nvim-treesitter/textobjects/attach.lua:44>
+n  [h          *@<Lua 244: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:280>
+n  [q          * <Lua 167: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:324>
+n  [t          * <Lua 176: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:363>
+n  [w          * <Lua 383: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/config/keymaps.lua:103>
 n  ]%            <Plug>(MatchitNormalMultiForward)
-n  ]A          *@<Lua 534: ~/.local/share/nvim/lazy/nvim-treesitter-textobjects/lua/nvim-treesitter/textobjects/attach.lua:44>
+n  ]A          *@<Lua 682: ~/.local/share/nvim/lazy/nvim-treesitter-textobjects/lua/nvim-treesitter/textobjects/attach.lua:44>
 n  ]B          * <Cmd>BufferLineMoveNext<CR>
-n  ]C          *@<Lua 675: ~/.local/share/nvim/lazy/nvim-treesitter-textobjects/lua/nvim-treesitter/textobjects/attach.lua:44>
-n  ]F          *@<Lua 430: ~/.local/share/nvim/lazy/nvim-treesitter-textobjects/lua/nvim-treesitter/textobjects/attach.lua:44>
-n  ]H          *@<Lua 62: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:287>
-n  ]a          *@<Lua 537: ~/.local/share/nvim/lazy/nvim-treesitter-textobjects/lua/nvim-treesitter/textobjects/attach.lua:44>
-n  ]c          *@<Lua 543: ~/.local/share/nvim/lazy/nvim-treesitter-textobjects/lua/nvim-treesitter/textobjects/attach.lua:44>
-n  ]d          * <Lua 409: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/config/keymaps.lua:103>
+n  ]C          *@<Lua 746: ~/.local/share/nvim/lazy/nvim-treesitter-textobjects/lua/nvim-treesitter/textobjects/attach.lua:44>
+n  ]F          *@<Lua 696: ~/.local/share/nvim/lazy/nvim-treesitter-textobjects/lua/nvim-treesitter/textobjects/attach.lua:44>
+n  ]H          *@<Lua 646: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:287>
+n  ]a          *@<Lua 541: ~/.local/share/nvim/lazy/nvim-treesitter-textobjects/lua/nvim-treesitter/textobjects/attach.lua:44>
+n  ]c          *@<Lua 247: ~/.local/share/nvim/lazy/nvim-treesitter-textobjects/lua/nvim-treesitter/textobjects/attach.lua:44>
+n  ]d          * <Lua 380: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/config/keymaps.lua:103>
 n  ]e          * <Lua 15: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/config/keymaps.lua:103>
-n  ]f          *@<Lua 540: ~/.local/share/nvim/lazy/nvim-treesitter-textobjects/lua/nvim-treesitter/textobjects/attach.lua:44>
-n  ]h          *@<Lua 728: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:273>
-n  ]q          * <Lua 140: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:338>
-n  ]t          * <Lua 151: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:362>
-n  ]w          * <Lua 411: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/config/keymaps.lua:103>
-n  f           * <Lua 256: ~/.local/share/nvim/lazy/flash.nvim/lua/flash/plugins/char.lua:118>
+n  ]f          *@<Lua 544: ~/.local/share/nvim/lazy/nvim-treesitter-textobjects/lua/nvim-treesitter/textobjects/attach.lua:44>
+n  ]h          *@<Lua 17: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:273>
+n  ]q          * <Lua 166: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:338>
+n  ]t          * <Lua 177: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:362>
+n  ]w          * <Lua 382: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/config/keymaps.lua:103>
+n  f           * <Lua 27: ~/.local/share/nvim/lazy/flash.nvim/lua/flash/plugins/char.lua:118>
 n  g%            <Plug>(MatchitNormalBackward)
-n  gD          *@<Lua 557: /opt/homebrew/Cellar/neovim/0.10.1/share/nvim/runtime/lua/vim/lsp/buf.lua:86>
-n  gI          *@<Lua 744: ~/.local/share/nvim/lazy/telescope.nvim/lua/telescope/builtin/init.lua:502>
-n  g[            <Lua 291: ~/.local/share/nvim/lazy/mini.ai/lua/mini/ai.lua:1168>
-n  g]            <Lua 294: ~/.local/share/nvim/lazy/mini.ai/lua/mini/ai.lua:1169>
+n  gD          *@<Lua 124: /opt/homebrew/Cellar/neovim/0.10.1/share/nvim/runtime/lua/vim/lsp/buf.lua:86>
+n  gI          *@<Lua 548: ~/.local/share/nvim/lazy/telescope.nvim/lua/telescope/builtin/init.lua:502>
+n  g[            <Lua 253: ~/.local/share/nvim/lazy/mini.ai/lua/mini/ai.lua:1168>
+n  g]            <Lua 256: ~/.local/share/nvim/lazy/mini.ai/lua/mini/ai.lua:1169>
 n  gc          * <Lua 10: vim/_defaults.lua:0>
 n  gcO         * O<Esc>Vcx<Esc><Cmd>normal gcc<CR>fxa<BS>
 n  gcc         * <Lua 12: vim/_defaults.lua:0>
 n  gco         * o<Esc>Vcx<Esc><Cmd>normal gcc<CR>fxa<BS>
-n  gd          * <Lua 57: ~/.config/nvim/lua/config/keymaps.lua:179>
-n  gd          *@<Lua 786: ~/.local/share/nvim/lazy/telescope.nvim/lua/telescope/builtin/init.lua:502>
-n  gr          *@<Lua 760: ~/.local/share/nvim/lazy/telescope.nvim/lua/telescope/builtin/init.lua:502>
+n  gd          * <Lua 69: ~/.config/nvim/lua/config/keymaps.lua:179>
+n  gd          *@<Lua 875: ~/.local/share/nvim/lazy/telescope.nvim/lua/telescope/builtin/init.lua:502>
+n  gr          *@<Lua 629: ~/.local/share/nvim/lazy/telescope.nvim/lua/telescope/builtin/init.lua:502>
 n  gx          * <Lua 8: vim/_defaults.lua:0>
 n  j           * v:count == 0 ? 'gj' : 'j'
 n  k           * v:count == 0 ? 'gk' : 'k'
 n  n           * 'Nn'[v:searchforward].'zv'
-n  q           * <Lua 180: ~/.config/nvim/lua/config/helpers/window.lua:3>
-n  s           * <Lua 131: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:164>
-n  t           * <Lua 266: ~/.local/share/nvim/lazy/flash.nvim/lua/flash/plugins/char.lua:118>
+n  q           * <Lua 414: ~/.config/nvim/lua/config/helpers/window.lua:3>
+n  s           * <Lua 159: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/editor.lua:164>
+n  t           * <Lua 281: ~/.local/share/nvim/lazy/flash.nvim/lua/flash/plugins/char.lua:118>
