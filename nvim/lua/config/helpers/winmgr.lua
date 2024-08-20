@@ -1,6 +1,12 @@
 local oil = require("oil")
 local actions = require("oil.actions")
 
+local detail = false
+
+local map = function(keys, func, desc)
+  vim.keymap.set("n", keys, func, { desc = desc })
+end
+
 -- toggle details
 local function toggle_detail(detail)
   detail = not detail
@@ -42,10 +48,19 @@ local function maybe_go_right_maybe_cd()
   end
 end
 
+
+local function register(key, action)
+  if action == "left" then
+    map(key, mux(go_left, actions.parent.callback), "parent")
+  elseif action == "right" then
+    map(key, mux(go_right, maybe_go_right_maybe_cd), "right")
+  elseif action == "toggle_detail" then
+    map(key, function() toggle_detail(detail) end)
+  elseif action == "open" then
+    map(key, "<cmd>Oil --float<CR>", "open parent directory")
+  end
+end
+
 return {
-  mux = mux,
-  toggle_detail = toggle_detail,
-  go_right = go_right,
-  go_left = go_left,
-  maybe_go_right_maybe_cd = maybe_go_right_maybe_cd,
+  register = register,
 }

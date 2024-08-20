@@ -167,20 +167,17 @@ del("n", "<leader>fe") -- Explorer NeoTree (Root Dir)
 -- OIL --
 -- oil has a bug which prevents me from setting all the keymaps here
 -- See :help oil-actions for a list of all available actions
-local detail = false -- used in oil_helper
-local actions = require("oil.actions")
+
+
 local winmgr = require("config.helpers.winmgr")
-local toggle_detail = winmgr.toggle_detail
-local mux = winmgr.mux
-local go_right = winmgr.go_right
-local go_left = winmgr.go_left
-local maybe_go_right_maybe_cd = winmgr.maybe_go_right_maybe_cd
-map("<leader><leader>", "<cmd>Oil --float<CR>", "open parent directory") -- ok
-map("gd", function()
-  toggle_detail(detail)
-end, "toggle Oil details") -- no leader
-map("<left>", mux(go_left, actions.parent.callback), "parent")
-map("<right>", mux(go_right, maybe_go_right_maybe_cd), "right")
+winmgr.register("<left>", "left")
+winmgr.register("<right>", "right")
+winmgr.register("gd", "toggle_detail")
+winmgr.register("<leader><leader>", "open")
+
+
+
+
 --   g?             actions.show_help
 --   g.             actions.toggle_hidden
 -- <CR>             actions.select
