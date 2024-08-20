@@ -18,7 +18,7 @@ local whichkey = require("which-key")
 local command = vim.api.nvim_create_user_command
 local del = vim.keymap.del
 local map = function(keys, func, desc)
-  vim.keymap.set("n", keys, func, { desc = desc })
+  vim.keymap.set("n", keys, func, { desc = desc, silent = true })
 end
 
 -- Document existing key chains
@@ -164,11 +164,9 @@ del("n", "<leader>fe") -- Explorer NeoTree (Root Dir)
 -- nvim/lazy defaults shown in comments
 --
 
--- OIL --
+-- winmgr - OIL --
 -- oil has a bug which prevents me from setting all the keymaps here
 -- See :help oil-actions for a list of all available actions
-
-
 local winmgr = require("config.helpers.winmgr")
 winmgr.register("<left>", "left")
 winmgr.register("<right>", "right")

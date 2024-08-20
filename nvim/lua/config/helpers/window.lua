@@ -1,7 +1,7 @@
 local function smart_close()
   local buf = vim.api.nvim_get_current_buf()
-  local num_windows = #vim.api.nvim_tabpage_list_wins(0)
   local num_buffers = #vim.fn.getbufinfo({ buflisted = 1 })
+  local num_windows = #vim.api.nvim_list_wins()
 
   if num_windows > 2 then
     vim.cmd('close')
@@ -9,12 +9,11 @@ local function smart_close()
     -- Get a list of all listed buffers and the current window
     local buffers = vim.fn.getbufinfo({ buflisted = 1 })
     local current_win = vim.api.nvim_get_current_win()
-    local other_win, other_buf
+    local other_buf
 
     -- Find the other window and its buffer
-    for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
       if win ~= current_win then
-        other_win = win
         other_buf = vim.api.nvim_win_get_buf(win)
         break
       end
