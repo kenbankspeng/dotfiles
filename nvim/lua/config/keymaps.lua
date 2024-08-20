@@ -43,9 +43,7 @@ command("Q", function()
   vim.api.nvim_buf_delete(0, {})
 end, {})
 
--- close split or buffer
-local smart_close = require("config.helpers.window").smart_close
-vim.keymap.set("n", "q", smart_close, { noremap = true, silent = true })
+
 
 -- VIM KEYMAPS
 
@@ -172,6 +170,7 @@ winmgr.register("<left>", "left")
 winmgr.register("<right>", "right")
 winmgr.register("gd", "toggle_detail")
 winmgr.register("<leader><leader>", "open")
+winmgr.register("q", "close")
 
 
 
