@@ -169,12 +169,12 @@ del("n", "<leader>fe") -- Explorer NeoTree (Root Dir)
 -- See :help oil-actions for a list of all available actions
 local detail = false -- used in oil_helper
 local actions = require("oil.actions")
-local oil_helper = require("config.helpers.oil")
-local toggle_detail = oil_helper.toggle_detail
-local mux = oil_helper.mux
-local go_right = oil_helper.go_right
-local go_left = oil_helper.go_left
-local maybe_go_right_maybe_cd = oil_helper.maybe_go_right_maybe_cd
+local winmgr = require("config.helpers.winmgr")
+local toggle_detail = winmgr.toggle_detail
+local mux = winmgr.mux
+local go_right = winmgr.go_right
+local go_left = winmgr.go_left
+local maybe_go_right_maybe_cd = winmgr.maybe_go_right_maybe_cd
 map("<leader><leader>", "<cmd>Oil --float<CR>", "open parent directory") -- ok
 map("gd", function()
   toggle_detail(detail)
