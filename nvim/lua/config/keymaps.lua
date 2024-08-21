@@ -18,7 +18,7 @@ local whichkey = require("which-key")
 local command = vim.api.nvim_create_user_command
 local del = vim.keymap.del
 local map = function(keys, func, desc)
-  vim.keymap.set("n", keys, func, { desc = desc })
+  vim.keymap.set("n", keys, func, { desc = desc, silent = true })
 end
 
 -- Document existing key chains
@@ -43,9 +43,7 @@ command("Q", function()
   vim.api.nvim_buf_delete(0, {})
 end, {})
 
--- close split or buffer
-local smart_close = require("config.helpers.window").smart_close
-vim.keymap.set("n", "q", smart_close, { noremap = true, silent = true })
+
 
 -- VIM KEYMAPS
 
@@ -164,16 +162,15 @@ del("n", "<leader>fe") -- Explorer NeoTree (Root Dir)
 -- nvim/lazy defaults shown in comments
 --
 
--- OIL --
+-- winmgr - OIL --
 -- oil has a bug which prevents me from setting all the keymaps here
 -- See :help oil-actions for a list of all available actions
-
-
-local winmgr = require("config.helpers.winmgr")
+local winmgr = require("winmgr")
 winmgr.register("<left>", "left")
 winmgr.register("<right>", "right")
 winmgr.register("gd", "toggle_detail")
 winmgr.register("<leader><leader>", "open")
+winmgr.register("q", "close")
 
 
 
