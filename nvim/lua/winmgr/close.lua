@@ -1,32 +1,3 @@
-local oil = require("oil")
-local actions = require("oil.actions")
-local mux = require("winmgr.mux")
-local mux_left = mux.left
-local mux_right = mux.right
-
-
-local map = function(keys, func, desc)
-  vim.keymap.set("n", keys, func, { desc = desc })
-end
-
-local detail = false
-local function toggle_detail()
-  detail = not detail
-  if detail then
-    require("oil").set_columns({ "icon", "permissions", "size", "mtime" })
-  else
-    require("oil").set_columns({ "icon" })
-  end
-end
-
-function is_oil_open()
-  return vim.w.is_oil_win
-end
-
-function open()
-  return vim.cmd("Oil --float")
-end
-
 local function close()
   local buf = vim.api.nvim_get_current_buf()
   local num_buffers = #vim.fn.getbufinfo({ buflisted = 1 })
@@ -70,20 +41,6 @@ local function close()
   end
 end
 
-local function register(key, action)
-  if action == "left" then
-    map(key, mux_left, "parent")
-  elseif action == "right" then
-    map(key, mux_right, "right")
-  elseif action == "toggle_detail" then
-    map(key, function() toggle_detail() end)
-  elseif action == "open" then
-    map(key, open, "open parent directory")
-  elseif action == "close" then
-    map(key, close, "close oil")
-  end
-end
-
 return {
-  register = register,
+  close = close
 }
