@@ -42,24 +42,26 @@ end
 
 local function find_next_split(layout)
   if layout[1] == "leaf" then
-    return { layout[2], "vertical" }
+    return layout[2], "vertical"
   elseif layout[1] == "row" then
     if #layout[2] % 2 == 0 then
-      return { layout[2][1][2], "horizontal" }
+      return layout[2][1][2], "horizontal"
     else
       for _, sublayout in ipairs(layout[2]) do
         if get_layout_size(sublayout) % 2 == 1 then
-          return find_next_split(sublayout)
+          local id, dir = find_next_split(sublayout)
+          if id then return id, dir end
         end
       end
     end
   elseif layout[1] == "col" then
     if #layout[2] % 2 == 0 then
-      return { layout[2][1][2], "vertical" }
+      return layout[2][1][2], "vertical"
     else
       for _, sublayout in ipairs(layout[2]) do
         if get_layout_size(sublayout) % 2 == 1 then
-          return find_next_split(sublayout)
+          local id, dir = find_next_split(sublayout)
+          if id then return id, dir end
         end
       end
     end
@@ -69,19 +71,19 @@ end
 local function next_split()
   local layout = vim.fn.winlayout()
   if #layout == 0 then
-    return { nil, "vertical" }
+    return nil, "vertical"
   elseif #layout == 2 and layout[1] == "leaf" then
-    return { layout[2], "vertical" }
+    return layout[2], "vertical"
   else
     return find_next_split(layout)
   end
 end
 
 return function()
-  local next = next_split()
-  if next then
+  local id, dir = next_split()
+  if id then
     print(vim.inspect(vim.fn.winlayout()))
-    print('next: ', next[1], 'split: ', next[2])
+    print('next: ', id, 'split: ', dir)
   end
   return require('oil').select()
 end
