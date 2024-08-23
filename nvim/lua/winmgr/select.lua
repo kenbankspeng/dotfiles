@@ -52,12 +52,14 @@ local function determine_next_split()
   local best_leaf = find_best_leaf(layout)
   local split_type = determine_split_type(layout)
 
+  print(vim.inspect(layout))
+  print('best_leaf', best_leaf[2])
+  print('split_type', split_type)
+
   return { leaf = best_leaf[2], split = split_type }
 end
 
 return function()
   local next_split_info = determine_next_split()
-  print("Next split leaf: " .. next_split_info.leaf .. " with a " .. next_split_info.split .. " split.")
-  -- print(vim.inspect(vim.fn.winlayout()))
   return require('oil').select()
 end
