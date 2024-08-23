@@ -45,30 +45,30 @@ end
 
 local function find_next_split(layout)
   if layout[1] == "leaf" then
-    return layout[2], "vertical"
+    return { layout[2], "vertical" }
   elseif layout[1] == "row" then
     for _, sublayout in ipairs(layout[2]) do
       if get_layout_size(sublayout) % 2 == 1 then
         return find_next_split(sublayout)
       end
     end
-    return layout[2][1][2], "vertical"
+    return { layout[2][1][2], "vertical" }
   elseif layout[1] == "col" then
     for _, sublayout in ipairs(layout[2]) do
       if get_layout_size(sublayout) % 2 == 1 then
         return find_next_split(sublayout)
       end
     end
-    return layout[2][1][2], "horizontal"
+    return { layout[2][1][2], "horizontal" }
   end
 end
 
 local function next_split()
   local layout = vim.fn.winlayout()
   if #layout == 0 then
-    return nil, "vertical"
+    return { nil, "vertical" }
   elseif #layout == 2 and layout[1] == "leaf" then
-    return layout[2], "vertical"
+    return { layout[2], "vertical" }
   else
     return find_next_split(layout)
   end
