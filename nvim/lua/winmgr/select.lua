@@ -28,9 +28,6 @@
 -- -- 1 2 5
 -- -- 3 4 6
 -- local a6 = { "row", { { "col", { { "leaf", 1000 }, { "leaf", 1013 } } }, { "col", { { "row", { { "leaf", 1007 }, { "leaf", 1024 } } }, { "row", { { "leaf", 1021 }, { "leaf", 1030 } } } } } } }
-
-
-
 local function get_layout_size(layout)
   if layout[1] == "leaf" then
     return 1
@@ -52,14 +49,14 @@ local function find_next_split(layout)
         return find_next_split(sublayout)
       end
     end
-    return { layout[2][1][2], "vertical" }
+    return { layout[2][#layout[2]][2], "horizontal" }
   elseif layout[1] == "col" then
     for _, sublayout in ipairs(layout[2]) do
       if get_layout_size(sublayout) % 2 == 1 then
         return find_next_split(sublayout)
       end
     end
-    return { layout[2][1][2], "horizontal" }
+    return { layout[2][#layout[2]][2], "vertical" }
   end
 end
 
