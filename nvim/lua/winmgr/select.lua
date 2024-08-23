@@ -16,36 +16,41 @@ local function calculate_depth_and_leaves(layout)
   end
 end
 
--- Function to find the best leaf and its parent layout
-local function find_best_leaf(layout, parent)
+-- Function to find the best leaf to split
+local function find_best_leaf(layout)
   if layout[1] == "leaf" then
-    return layout, parent
+    return layout
   end
 
-  local min_leaves = math.huge
   local best_leaf = nil
-  local best_parent = nil
+  local min_leaves = math.huge
 
   for _, sub_layout in ipairs(layout[2]) do
     local _, leaves = calculate_depth_and_leaves(sub_layout)
     if leaves < min_leaves then
       min_leaves = leaves
-      best_leaf, best_parent = find_best_leaf(sub_layout, layout)
+      best_leaf = sub_layout
     end
   end
 
-  return best_leaf, best_parent
+  return find_best_leaf(best_leaf)
+end
+
+-- Function to determine the next split type based on the current layout
+local function determine_split_type(layout)
+  if layout[1] == "row" then
+    return "vertical"
+  elseif layout[1] == "col" then
+    return "horizontal"
+  end
+  return "horizontal"
 end
 
 -- Function to determine the next split
 local function determine_next_split()
   local layout = vim.fn.winlayout()
-  local best_leaf, parent_layout = find_best_leaf(layout, nil)
-
-  local split_type = "horizontal"
-  if parent_layout and parent_layout[1] == "row" then
-    split_type = "vertical"
-  end
+  local best_leaf = find_best_leaf(layout)
+  local split_type = determine_split_type(layout)
 
   return { leaf = best_leaf[2], split = split_type }
 end
