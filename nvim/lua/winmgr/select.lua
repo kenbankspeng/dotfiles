@@ -16,63 +16,42 @@ local function calculate_depth_and_leaves(layout)
   end
 end
 
--- Function to find the most balanced split
-local function find_balanced_split(layout)
+-- Function to find the best leaf and its parent layout
+local function find_best_leaf(layout, parent)
   if layout[1] == "leaf" then
-    return { leaf = layout[2], split = "horizontal" }
+    return layout, parent
   end
 
   local min_leaves = math.huge
   local best_leaf = nil
-  local split_type = layout[1] == "row" and "vertical" or "horizontal"
+  local best_parent = nil
 
   for _, sub_layout in ipairs(layout[2]) do
     local _, leaves = calculate_depth_and_leaves(sub_layout)
     if leaves < min_leaves then
       min_leaves = leaves
-      best_leaf = sub_layout
+      best_leaf, best_parent = find_best_leaf(sub_layout, layout)
     end
   end
 
-  local result = find_balanced_split(best_leaf)
-  result.split = split_type
-  return result
+  return best_leaf, best_parent
 end
 
 -- Function to determine the next split
-local function determine_next_split(layout)
-  if layout[1] == "leaf" then
-    return { leaf = layout[2], split = "horizontal" }
-  elseif layout[1] == "row" then
-    local col_leaves = 0
-    for _, sub_layout in ipairs(layout[2]) do
-      if sub_layout[1] == "col" then
-        col_leaves = col_leaves + 1
-      end
-    end
-    if col_leaves < #layout[2] then
-      return { leaf = layout[2][1][2], split = "vertical" }
-    else
-      return find_balanced_split(layout)
-    end
-  elseif layout[1] == "col" then
-    local row_leaves = 0
-    for _, sub_layout in ipairs(layout[2]) do
-      if sub_layout[1] == "row" then
-        row_leaves = row_leaves + 1
-      end
-    end
-    if row_leaves < #layout[2] then
-      return { leaf = layout[2][1][2], split = "horizontal" }
-    else
-      return find_balanced_split(layout)
-    end
+local function determine_next_split()
+  local layout = vim.fn.winlayout()
+  local best_leaf, parent_layout = find_best_leaf(layout, nil)
+
+  local split_type = "horizontal"
+  if parent_layout and parent_layout[1] == "row" then
+    split_type = "vertical"
   end
+
+  return { leaf = best_leaf[2], split = split_type }
 end
 
 return function()
-  local layout = vim.fn.winlayout()
-  local next_split_info = determine_next_split(layout)
+  local next_split_info = determine_next_split()
   print("Next split leaf: " .. next_split_info.leaf .. " with a " .. next_split_info.split .. " split.")
   -- print(vim.inspect(vim.fn.winlayout()))
   return require('oil').select()
