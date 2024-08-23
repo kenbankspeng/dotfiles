@@ -1,16 +1,18 @@
--- Function to calculate the depth of the layout
-local function calculate_depth(layout)
+-- Function to calculate the depth and count of leaves in the layout
+local function calculate_depth_and_leaves(layout)
   if layout[1] == "leaf" then
-    return 1
+    return 1, 1
   elseif layout[1] == "row" or layout[1] == "col" then
     local max_depth = 0
+    local total_leaves = 0
     for _, sub_layout in ipairs(layout[2]) do
-      local depth = calculate_depth(sub_layout)
+      local depth, leaves = calculate_depth_and_leaves(sub_layout)
       if depth > max_depth then
         max_depth = depth
       end
+      total_leaves = total_leaves + leaves
     end
-    return max_depth + 1
+    return max_depth + 1, total_leaves
   end
 end
 
@@ -18,33 +20,23 @@ end
 local function find_balanced_split(layout)
   if layout[1] == "leaf" then
     return { leaf = layout[2], split = "horizontal" }
-  elseif layout[1] == "row" then
-    local min_depth = math.huge
-    local best_leaf = nil
-    for _, sub_layout in ipairs(layout[2]) do
-      local depth = calculate_depth(sub_layout)
-      if depth < min_depth then
-        min_depth = depth
-        best_leaf = sub_layout
-      end
-    end
-    local result = find_balanced_split(best_leaf)
-    result.split = "vertical"
-    return result
-  elseif layout[1] == "col" then
-    local min_depth = math.huge
-    local best_leaf = nil
-    for _, sub_layout in ipairs(layout[2]) do
-      local depth = calculate_depth(sub_layout)
-      if depth < min_depth then
-        min_depth = depth
-        best_leaf = sub_layout
-      end
-    end
-    local result = find_balanced_split(best_leaf)
-    result.split = "horizontal"
-    return result
   end
+
+  local min_leaves = math.huge
+  local best_leaf = nil
+  local split_type = layout[1] == "row" and "vertical" or "horizontal"
+
+  for _, sub_layout in ipairs(layout[2]) do
+    local _, leaves = calculate_depth_and_leaves(sub_layout)
+    if leaves < min_leaves then
+      min_leaves = leaves
+      best_leaf = sub_layout
+    end
+  end
+
+  local result = find_balanced_split(best_leaf)
+  result.split = split_type
+  return result
 end
 
 -- Function to determine the next split
