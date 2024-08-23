@@ -18,5 +18,5 @@ end
 
 return {
   register = register,
-  select = require("winmgr.select").select,
+  select = require("winmgr.select"),
 }
