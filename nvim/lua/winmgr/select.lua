@@ -44,19 +44,25 @@ local function find_next_split(layout)
   if layout[1] == "leaf" then
     return { layout[2], "vertical" }
   elseif layout[1] == "row" then
-    for _, sublayout in ipairs(layout[2]) do
-      if get_layout_size(sublayout) % 2 == 1 then
-        return find_next_split(sublayout)
+    if #layout[2] % 2 == 0 then
+      return { layout[2][1][2], "horizontal" }
+    else
+      for _, sublayout in ipairs(layout[2]) do
+        if get_layout_size(sublayout) % 2 == 1 then
+          return find_next_split(sublayout)
+        end
       end
     end
-    return { layout[2][#layout[2]][2], "horizontal" }
   elseif layout[1] == "col" then
-    for _, sublayout in ipairs(layout[2]) do
-      if get_layout_size(sublayout) % 2 == 1 then
-        return find_next_split(sublayout)
+    if #layout[2] % 2 == 0 then
+      return { layout[2][1][2], "vertical" }
+    else
+      for _, sublayout in ipairs(layout[2]) do
+        if get_layout_size(sublayout) % 2 == 1 then
+          return find_next_split(sublayout)
+        end
       end
     end
-    return { layout[2][#layout[2]][2], "vertical" }
   end
 end
 
