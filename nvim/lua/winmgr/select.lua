@@ -49,8 +49,7 @@ local function find_next_split(layout)
     else
       for _, sublayout in ipairs(layout[2]) do
         if get_layout_size(sublayout) % 2 == 1 then
-          local id, dir = find_next_split(sublayout)
-          if id then return id, dir end
+          return find_next_split(sublayout)
         end
       end
     end
@@ -60,8 +59,7 @@ local function find_next_split(layout)
     else
       for _, sublayout in ipairs(layout[2]) do
         if get_layout_size(sublayout) % 2 == 1 then
-          local id, dir = find_next_split(sublayout)
-          if id then return id, dir end
+          return find_next_split(sublayout)
         end
       end
     end
@@ -75,7 +73,11 @@ local function next_split()
   elseif #layout == 2 and layout[1] == "leaf" then
     return layout[2], "vertical"
   else
-    return find_next_split(layout)
+    local id, dir = find_next_split(layout)
+    if type(id) == "table" then
+      id = id[2]
+    end
+    return id, dir
   end
 end
 
