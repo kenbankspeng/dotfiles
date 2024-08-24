@@ -53,11 +53,16 @@ return function()
     return require('oil').select()
   end
 
-  local id, dir = next_split()
   local winid = vim.api.nvim_get_current_win()
-  if id then vim.api.nvim_set_current_win(id) end
-  if dir == "vertical" then vim.cmd('vsplit') end
-  if dir == "horizontal" then vim.cmd('split') end
-  vim.api.nvim_set_current_win(winid)
+  local id, dir = next_split()
+  if id then
+    vim.api.nvim_set_current_win(id)
+    if dir == "vertical" then
+      vim.cmd('vsplit')
+    elseif dir == "horizontal" then
+      vim.cmd('split')
+    end
+    vim.api.nvim_set_current_win(winid)
+  end
   return require('oil').select()
 end
