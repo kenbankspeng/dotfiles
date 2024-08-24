@@ -48,8 +48,10 @@ local function find_next_split(layout, depth)
   end
 end
 
+
 local function next_split()
   local layout = vim.fn.winlayout()
+
   if #layout == 0 then
     return nil, nil
   elseif #layout == 2 and layout[1] == "leaf" then
@@ -63,13 +65,14 @@ local function next_split()
   end
 end
 
+local singleton = false
 return function()
+  if not singleton then
+    singleton = true
+    return require('oil').select()
+  end
+
   local id, dir = next_split()
-
-  print('----')
-  print(vim.inspect(vim.fn.winlayout()))
-  print('next: ', id, 'split: ', dir)
-
   if id then vim.api.nvim_set_current_win(id) end
   return require('oil').select({
     vertical = dir == "vertical",
