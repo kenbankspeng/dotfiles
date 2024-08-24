@@ -1,22 +1,3 @@
--- 1000
--- { "leaf", 1000 }
--- next:  1000 split:  vertical
--- 1000 N
--- { "row", { { "leaf", 1000 }, { "leaf", 1007 } } }
--- next:  1000 split:  horizontal
--- 1000 1007
--- N
--- { "row", { { "col", { { "leaf", 1000 }, { "leaf", 1013 } } }, { "leaf", 1007 } } }
--- next:  1007 split:  horizontal
--- 1000 1007
--- 1013
--- { "row", { { "col", { { "leaf", 1000 }, { "leaf", 1013 } } }, { "col", { { "leaf", 1007 }, { "leaf", 1016 } } } } }
--- next:  1000 split:  vertical
--- 1000 1007
--- 1013 1016
--- { "row", { { "col", { { "row", { { "leaf", 1000 }, { "leaf", 1019 } } }, { "leaf", 1013 } } }, { "col", { { "leaf", 1007 }, { "leaf", 1016 } } } } }
--- next:  1007 split:  vertical
-
 local function get_layout_size(layout)
   if layout[1] == "leaf" then
     return 1
@@ -73,10 +54,10 @@ return function()
   end
 
   local id, dir = next_split()
+  local winid = vim.api.nvim_get_current_win()
   if id then vim.api.nvim_set_current_win(id) end
-  return require('oil').select({
-    vertical = dir == "vertical",
-    horizontal = dir == "horizontal",
-    close = true,
-  })
+  if dir == "vertical" then vim.cmd('vsplit') end
+  if dir == "horizontal" then vim.cmd('split') end
+  vim.api.nvim_set_current_win(winid)
+  return require('oil').select()
 end
