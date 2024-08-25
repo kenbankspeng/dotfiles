@@ -1,3 +1,28 @@
+-- local a = {
+--   "row",
+--   {
+--     {
+--       "col",
+--       {
+--         {
+--           "row",
+--           {
+--             { "leaf", 1000 },
+--             { "leaf", 1014 }
+--           }
+--         },
+--         { "leaf", 1010 }
+--       }
+--     },
+--     { "col",
+--       {
+--         { "leaf", 1007 },
+--         { "leaf", 1012 }
+--       }
+--     }
+--   }
+-- }
+
 local function get_layout_size(layout)
   if layout[1] == "leaf" then
     return 1
@@ -32,6 +57,8 @@ end
 
 local function next_split()
   local layout = vim.fn.winlayout()
+
+  -- print(vim.inspect(layout))
 
   if #layout == 0 then
     return nil, nil
