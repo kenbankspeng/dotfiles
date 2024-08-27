@@ -172,13 +172,11 @@ winmgr.register("gd", "toggle_detail")
 winmgr.register("<leader><leader>", "open")
 winmgr.register("q", "close")
 
-
-
-
 --   g?             actions.show_help
 --   g.             actions.toggle_hidden
 -- <CR>             actions.select
--- <C-h>            actions.select  opts = { horizontal = true }   Open the entry in a horizontal split
+--   \              actions.select  opts = { vertical = true }     Open the entry in a horizontal split
+--   /              actions.select  opts = { horizontal = true }   Open the entry in a horizontal split
 -- <C-t>            actions.select  opts = { tab = true }          Open the entry in new tab
 -- <C-p>            actions.preview
 -- <C-c>            actions.close

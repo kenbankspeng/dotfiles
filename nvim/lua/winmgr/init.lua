@@ -18,5 +18,4 @@ end
 
 return {
   register = register,
-  select = require("winmgr.select"),
 }
