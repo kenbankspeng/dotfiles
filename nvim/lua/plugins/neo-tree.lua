@@ -1,5 +1,18 @@
 local filecmds = require('neo-tree.sources.filesystem.commands')
 
+local project_root = nil
+local function set_root(state)
+  if not project_root then project_root = state.path end
+  filecmds.set_root(state)
+end
+
+-- Function to reset the root to the original path
+local function reset_root(state)
+  if project_root then
+    filecmds.set_root({ path = project_root })
+  end
+end
+
 local function up(state)
   -- must get parent id before navigating up
   local parent_id = state.tree:get_node():get_parent_id()
@@ -161,8 +174,9 @@ return {
             nowait = true,
           },
           mappings = {
+            ["."] = reset_root,
             ["<left>"] = up,
-            ["<right>"] = "set_root",
+            ["<right>"] = set_root,
             ["<space>"] = {
               "toggle_node",
               nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use
