@@ -1,15 +1,15 @@
 local filecmds = require('neo-tree.sources.filesystem.commands')
 
-local root_state = nil
+local project_root = nil
 local function set_root(state)
-  if not root_state then root_state = state end
+  if not project_root then project_root = state end
   filecmds.set_root(state)
 end
 
 -- Function to reset the root to the original path
 local function reset_root(state)
-  if root_state then
-    filecmds.set_root(root_state)
+  if project_root then
+    filecmds.set_root(project_root)
   end
 end
 
