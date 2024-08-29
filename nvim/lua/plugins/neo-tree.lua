@@ -8,6 +8,7 @@ end
 
 -- Function to reset the root to the original path
 local function reset_root(state)
+  print("reset_root")
   if project_root then
     filecmds.set_root({ path = project_root })
   end
@@ -272,7 +273,6 @@ return {
           window = {
             mappings = {
               ["<bs>"] = "navigate_up",
-              ["."] = "set_root",
               ["H"] = "toggle_hidden",
               ["/"] = "fuzzy_finder",
               ["D"] = "fuzzy_finder_directory",
@@ -315,7 +315,6 @@ return {
             mappings = {
               ["bd"] = "buffer_delete",
               ["<bs>"] = "navigate_up",
-              ["."] = "set_root",
               ["o"] = { "show_help", nowait = false, config = { title = "Order by", prefix_key = "o" } },
               ["oc"] = { "order_by_created", nowait = false },
               ["od"] = { "order_by_diagnostics", nowait = false },
