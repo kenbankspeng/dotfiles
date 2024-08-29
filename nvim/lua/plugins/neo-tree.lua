@@ -1,16 +1,15 @@
 local filecmds = require('neo-tree.sources.filesystem.commands')
 
-local project_root = nil
+local root_state = nil
 local function set_root(state)
-  if not project_root then project_root = state.path end
+  if not root_state then root_state = state end
   filecmds.set_root(state)
 end
 
 -- Function to reset the root to the original path
 local function reset_root(state)
-  print("reset_root")
-  if project_root then
-    filecmds.set_root({ path = project_root })
+  if root_state then
+    filecmds.set_root(root_state)
   end
 end
 
@@ -272,6 +271,7 @@ return {
           -- instead of relying on nvim autocmd events.
           window = {
             mappings = {
+              ["."] = reset_root,
               ["<bs>"] = "navigate_up",
               ["H"] = "toggle_hidden",
               ["/"] = "fuzzy_finder",
@@ -313,6 +313,7 @@ return {
           show_unloaded = true,
           window = {
             mappings = {
+              ["."] = reset_root,
               ["bd"] = "buffer_delete",
               ["<bs>"] = "navigate_up",
               ["o"] = { "show_help", nowait = false, config = { title = "Order by", prefix_key = "o" } },
