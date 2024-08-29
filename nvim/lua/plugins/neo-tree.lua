@@ -23,11 +23,9 @@ local function up(state)
   end, 40) -- ensure navigate up is finished
 end
 
-
 local function autoclose()
   require("neo-tree.command").execute({ action = "close" })
 end
-
 
 return {
   {
