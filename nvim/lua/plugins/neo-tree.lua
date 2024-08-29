@@ -9,7 +9,7 @@ local function up(state)
 
   vim.defer_fn(function()
     require('neo-tree.ui.renderer').focus_node(state, parent_node_id)
-  end, 40)
+  end, 40) -- ensure navigate up is finished
 end
 
 
