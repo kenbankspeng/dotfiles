@@ -1,22 +1,15 @@
 local filecmds = require('neo-tree.sources.filesystem.commands')
 
 local function up(state)
-  local renderer = require('neo-tree.ui.renderer')
+  -- must occur before navigating up
   local parent_node_id = state.tree:get_node():get_parent_id()
 
   filecmds.navigate_up(state)
   filecmds.close_all_nodes(state)
 
   vim.defer_fn(function()
-    local parent_node = state.tree:get_node(parent_node_id)
-    if parent_node then
-      renderer.focus_node(state, parent_node_id)
-      -- Additional small delay to ensure the cursor positioning is applied
-      vim.defer_fn(function()
-        renderer.focus_node(state, parent_node_id)
-      end, 20)
-    end
-  end, 20) -- Slightly increased delay to ensure navigate_up and close_all_nodes complete
+    require('neo-tree.ui.renderer').focus_node(state, parent_node_id)
+  end, 40)
 end
 
 
