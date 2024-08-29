@@ -172,7 +172,7 @@ return {
             nowait = true,
           },
           mappings = {
-            ["."] = reset_root,
+            [","] = reset_root,
             ["<left>"] = up,
             ["<right>"] = set_root,
             ["<space>"] = {
@@ -271,7 +271,7 @@ return {
           -- instead of relying on nvim autocmd events.
           window = {
             mappings = {
-              ["."] = reset_root,
+              [","] = reset_root,
               ["<bs>"] = "navigate_up",
               ["H"] = "toggle_hidden",
               ["/"] = "fuzzy_finder",
@@ -313,7 +313,7 @@ return {
           show_unloaded = true,
           window = {
             mappings = {
-              ["."] = reset_root,
+              [","] = reset_root,
               ["bd"] = "buffer_delete",
               ["<bs>"] = "navigate_up",
               ["o"] = { "show_help", nowait = false, config = { title = "Order by", prefix_key = "o" } },
