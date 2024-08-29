@@ -162,15 +162,19 @@ del("n", "<leader>fe") -- Explorer NeoTree (Root Dir)
 -- nvim/lazy defaults shown in comments
 --
 
+-- NEOTREE --
+map("<leader><leader>", "<cmd>Neotree toggle<CR>", "toggle neotree")
+
 -- winmgr - OIL --
 -- oil has a bug which prevents me from setting all the keymaps here
 -- See :help oil-actions for a list of all available actions
 local winmgr = require("winmgr")
-winmgr.register("<left>", "left")
-winmgr.register("<right>", "right")
-winmgr.register("gd", "toggle_detail")
-winmgr.register("<leader><leader>", "open")
 winmgr.register("q", "close")
+-- winmgr.register("<left>", "left")
+-- winmgr.register("<right>", "right")
+-- winmgr.register("gd", "toggle_detail")
+-- winmgr.register("<leader><leader>", "open")
+
 
 --   g?             actions.show_help
 --   g.             actions.toggle_hidden
