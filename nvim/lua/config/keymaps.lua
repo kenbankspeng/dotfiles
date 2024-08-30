@@ -164,34 +164,7 @@ del("n", "<leader>fe") -- Explorer NeoTree (Root Dir)
 
 -- NEOTREE --
 map("<leader><leader>", "<cmd>Neotree toggle<CR>", "toggle neotree")
-
--- winmgr - OIL --
--- oil has a bug which prevents me from setting all the keymaps here
--- See :help oil-actions for a list of all available actions
-local winmgr = require("winmgr")
-winmgr.register("q", "close")
--- winmgr.register("<left>", "left")
--- winmgr.register("<right>", "right")
--- winmgr.register("gd", "toggle_detail")
--- winmgr.register("<leader><leader>", "open")
-
-
---   g?             actions.show_help
---   g.             actions.toggle_hidden
--- <CR>             actions.select
---   \              actions.select  opts = { vertical = true }     Open the entry in a horizontal split
---   /              actions.select  opts = { horizontal = true }   Open the entry in a horizontal split
--- <C-t>            actions.select  opts = { tab = true }          Open the entry in new tab
--- <C-p>            actions.preview
--- <C-c>            actions.close
--- <C-l>            actions.refresh
---   -              actions.parent
---   _              actions.open_cwd
---   `              actions.cd
---   ~              actions.cd opts = { scope = "tab" }            :tcd to the current oil directory
---   gs             actions.change_sort
---   gx             actions.open_external
---   g\\            actions.toggle_trash
+map("q", require("custom.winmgr").close, "close window")
 
 -- BUFFERS (using bufferline, emulating tabs)
 map("H", "<Cmd>BufferLineCyclePrev<CR>", "Prev Buffer")

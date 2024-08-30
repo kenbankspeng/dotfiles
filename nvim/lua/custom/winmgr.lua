@@ -42,5 +42,5 @@ local function close()
 end
 
 return {
-  close = close
+  close = close,
 }

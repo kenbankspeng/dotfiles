@@ -167,15 +167,8 @@ return {
             ["l"] = "focus_preview",
             ["/"] = "open_split",
             ["\\"] = "open_vsplit",
-            ["t"] = "open_tabnew",
-            -- ["<cr>"] = "open_drop",
-            -- ["t"] = "open_tab_drop",
-            ["w"] = "open_with_window_picker",
-            --["P"] = "toggle_preview", -- enter preview mode, which shows the current node without focusing
-            ["C"] = "close_node",
-            -- ['C'] = 'close_all_subnodes',
             ["z"] = "close_all_nodes",
-            --["Z"] = "expand_all_nodes",
+            ["Z"] = "expand_all_nodes",
             ["a"] = {
               "add",
               -- this command supports BASH style brace expansion ("x{a,b,c}" -> xa,xb,xc). see `:h neo-tree-file-actions` for details
