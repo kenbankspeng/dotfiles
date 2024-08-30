@@ -36,25 +36,6 @@ return {
       "nvim-tree/nvim-web-devicons",
       "MunifTanjim/nui.nvim",
       "3rd/image.nvim",
-      {
-        's1n7ax/nvim-window-picker',
-        version = '2.*',
-        config = function()
-          require 'window-picker'.setup({
-            filter_rules = {
-              include_current_win = false,
-              autoselect_one = true,
-              -- filter using buffer options
-              bo = {
-                -- if the file type is one of following, the window will be ignored
-                filetype = { 'neo-tree', "neo-tree-popup", "notify" },
-                -- if the buffer type is one of following, the window will be ignored
-                buftype = { 'terminal', "quickfix" },
-              },
-            },
-          })
-        end,
-      },
     },
     config = function()
       -- If you want icons for diagnostic errors, you'll need to define them somewhere:
@@ -165,7 +146,7 @@ return {
           },
         },
         window = {
-          position = "float",
+          position = "float", -- "left" | "right" | "float"
           width = 40,
           mapping_options = {
             noremap = true,
@@ -179,16 +160,13 @@ return {
               "toggle_node",
               nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use
             },
-            ["<2-LeftMouse>"] = "open",
             ["<cr>"] = "open",
             ["<esc>"] = "cancel", -- close preview or floating neo-tree window
             ["P"] = { "toggle_preview", config = { use_float = true, use_image_nvim = true } },
             -- Read `# Preview Mode` for more information
             ["l"] = "focus_preview",
-            ["S"] = "open_split",
-            ["s"] = "open_vsplit",
-            -- ["S"] = "split_with_window_picker",
-            -- ["s"] = "vsplit_with_window_picker",
+            ["/"] = "open_split",
+            ["\\"] = "open_vsplit",
             ["t"] = "open_tabnew",
             -- ["<cr>"] = "open_drop",
             -- ["t"] = "open_tab_drop",
@@ -274,7 +252,7 @@ return {
               ["."] = reset_root,
               ["<bs>"] = "navigate_up",
               ["H"] = "toggle_hidden",
-              ["/"] = "fuzzy_finder",
+              ["s"] = "fuzzy_finder",
               ["D"] = "fuzzy_finder_directory",
               ["#"] = "fuzzy_sorter", -- fuzzy sorting using the fzy algorithm
               -- ["D"] = "fuzzy_sorter_directory",
