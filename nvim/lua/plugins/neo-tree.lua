@@ -33,9 +33,9 @@ return {
     branch = "v3.x",
     requires = {
       "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "nvim-tree/nvim-web-devicons",
       "MunifTanjim/nui.nvim",
-      -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+      "3rd/image.nvim",
       {
         's1n7ax/nvim-window-picker',
         version = '2.*',
@@ -68,8 +68,8 @@ return {
         { text = "󰌵", texthl = "DiagnosticSignHint" })
 
       require("neo-tree").setup({
-        close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
-        popup_border_style = "rounded",
+        close_if_last_window = false,   -- Close Neo-tree if it is the last window left in the tab
+        popup_border_style = "rounded", -- "single" | "double" | "rounded" | "solid" | NC
         enable_git_status = true,
         enable_diagnostics = true,
         open_files_do_not_replace_types = { "terminal", "trouble", "qf" }, -- when opening files, do not use windows containing these filetypes or buftypes
@@ -165,7 +165,7 @@ return {
           },
         },
         window = {
-          position = "left",
+          position = "float",
           width = 40,
           mapping_options = {
             noremap = true,
