@@ -23,8 +23,11 @@ local function up(state)
   end, 40) -- ensure navigate up is finished
 end
 
+-- autoclose for neotree float only
 local function autoclose()
-  require("neo-tree.command").execute({ action = "close" })
+  if require("custom.winmgr").get_autoclose() then
+    require("neo-tree.command").execute({ action = "close" })
+  end
 end
 
 return {

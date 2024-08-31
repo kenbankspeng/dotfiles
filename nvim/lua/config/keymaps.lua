@@ -163,7 +163,8 @@ del("n", "<leader>fe") -- Explorer NeoTree (Root Dir)
 --
 
 -- NEOTREE --
-map("<leader><leader>", "<cmd>Neotree toggle<CR>", "toggle neotree")
+map("<leader><leader>", require("custom.winmgr").neotree_float, "toggle neotree")
+map(",,", require("custom.winmgr").neotree_left, "toggle neotree left")
 map("q", require("custom.winmgr").close, "close window")
 
 -- BUFFERS (using bufferline, emulating tabs)
@@ -173,8 +174,8 @@ map("<S-Tab>", "<Cmd>BufferLineCyclePrev<CR>", "Prev Buffer")
 map("<Tab>", "<Cmd>BufferLineCycleNext<CR>", "Next Buffer")
 
 -- YAZI --
-map("<leader>y.", "<cmd>Yazi<CR>", "Open yazi at the current file")      -- ok
-map("<leader>yy", "<cmd>Yazi cwd<CR>", "Open yazi at working directory") -- ok
+-- map("<leader>y.", "<cmd>Yazi<CR>", "Open yazi at the current file")      -- ok
+-- map("<leader>yy", "<cmd>Yazi cwd<CR>", "Open yazi at working directory") -- ok
 
 -- TELESCOPE -- ok -- See `:help telescope.builtin`
 local builtin = require("telescope.builtin")

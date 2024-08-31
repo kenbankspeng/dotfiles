@@ -1,3 +1,20 @@
+local autoclose = false
+
+local function get_autoclose()
+  return autoclose
+end
+
+local function neotree_float()
+  autoclose = true
+  vim.cmd("Neotree toggle")
+end
+
+local function neotree_left()
+  autoclose = false
+  vim.cmd("Neotree left toggle")
+end
+
+
 local function close()
   local buf = vim.api.nvim_get_current_buf()
   local num_buffers = #vim.fn.getbufinfo({ buflisted = 1 })
@@ -43,4 +60,7 @@ end
 
 return {
   close = close,
+  get_autoclose = get_autoclose,
+  neotree_float = neotree_float,
+  neotree_left = neotree_left,
 }
