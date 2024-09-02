@@ -30,7 +30,26 @@ local function autoclose()
   end
 end
 
-local function view_file(state)
+local preview_bufnr = nil
+
+local function preview_file(state)
+  local node = state.tree:get_node()
+  if not require("neo-tree.utils").is_expandable(node) then
+    local filepath = node.path
+    if preview_bufnr == nil or not vim.api.nvim_buf_is_valid(preview_bufnr) then
+      -- Create a new buffer if it doesn't exist or is invalid
+      preview_bufnr = vim.api.nvim_create_buf(false, true)
+    end
+    -- Open the file in the preview buffer
+    vim.api.nvim_buf_set_option(preview_bufnr, 'bufhidden', 'wipe')
+    vim.api.nvim_win_set_buf(0, preview_bufnr) -- Set the buffer to the current window temporarily to open the file
+    vim.api.nvim_command('edit ' .. filepath)
+    vim.api.nvim_win_set_buf(0, preview_bufnr)
+    vim.cmd('Neotree reveal')
+  end
+end
+
+local function preview_file(state)
   local node = state.tree:get_node()
   if not require("neo-tree.utils").is_expandable(node) then
     state.commands['open'](state)
@@ -38,14 +57,14 @@ local function view_file(state)
   end
 end
 
-local function view_file_up(state)
+local function preview_file_up(state)
   vim.api.nvim_command('normal! k')
-  view_file(state)
+  preview_file(state)
 end
 
-local function view_file_down(state)
+local function preview_file_down(state)
   vim.api.nvim_command('normal! j')
-  view_file(state)
+  preview_file(state)
 end
 
 return {
@@ -174,8 +193,8 @@ return {
             nowait = true,
           },
           mappings = {
-            ['<up>'] = view_file_up,
-            ['<down>'] = view_file_down,
+            ['<up>'] = preview_file_up,
+            ['<down>'] = preview_file_down,
             ["."] = reset_root,
             ["<left>"] = up,
             ["<right>"] = set_root,
