@@ -1,16 +1,20 @@
-local float = false
+local treeMode
+
+local function is_sidebar()
+  return treeMode == 'sidebar'
+end
 
 local function is_float()
-  return float
+  return treeMode == 'float'
 end
 
 local function neotree_float()
-  float = true
+  treeMode = 'float'
   vim.cmd("Neotree float toggle")
 end
 
 local function neotree_left()
-  float = false
+  treeMode = 'sidebar'
   vim.cmd("Neotree left toggle")
 end
 
@@ -61,6 +65,7 @@ end
 return {
   close = close,
   is_float = is_float,
+  is_sidebar = is_sidebar,
   neotree_float = neotree_float,
   neotree_left = neotree_left,
 }

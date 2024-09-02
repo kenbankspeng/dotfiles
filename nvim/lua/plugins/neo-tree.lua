@@ -77,20 +77,20 @@ end
 
 local function preview_file_above(state)
   vim.api.nvim_command('normal! k')
-  if not require("custom.winmgr").is_float() then
+  if require("custom.winmgr").is_sidebar() then
     preview_file(state)
   end
 end
 
 local function preview_file_below(state)
   vim.api.nvim_command('normal! j')
-  if not require("custom.winmgr").is_float() then
+  if require("custom.winmgr").is_sidebar() then
     preview_file(state)
   end
 end
 
 local function preview_enter(state)
-  if not require("custom.winmgr").is_float() then
+  if require("custom.winmgr").is_sidebar() then
     -- Get the selected node and open the file in a new buffer
     local node = state.tree:get_node()
     if not require("neo-tree.utils").is_expandable(node) then
