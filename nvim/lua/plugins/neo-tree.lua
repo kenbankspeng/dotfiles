@@ -32,6 +32,7 @@ end
 
 --
 --
+
 local preview_bufnr = nil
 local initial_bufnr = vim.api.nvim_get_current_buf()
 
@@ -46,14 +47,25 @@ local function open_preview_buffer(filepath)
   -- Create or reuse the preview buffer
   if preview_bufnr == nil or not vim.api.nvim_buf_is_valid(preview_bufnr) then
     preview_bufnr = vim.api.nvim_create_buf(false, true)
-    vim.api.nvim_buf_set_option(preview_bufnr, 'bufhidden', 'hide') -- Set to 'hide' to prevent closing
+    vim.api.nvim_buf_set_option(preview_bufnr, 'bufhidden', 'hide')
   end
 
   -- Set the content of the preview buffer
   vim.api.nvim_buf_set_lines(preview_bufnr, 0, -1, false, vim.fn.readfile(filepath))
 
-  -- Open the preview buffer in the current window
-  vim.api.nvim_set_current_buf(preview_bufnr)
+  -- Open the preview buffer in a split window if not already displayed
+  local preview_win = nil
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    if vim.api.nvim_win_get_buf(win) == preview_bufnr then
+      preview_win = win
+      break
+    end
+  end
+
+  if preview_win == nil then
+    vim.cmd('vsplit')
+    vim.api.nvim_set_current_buf(preview_bufnr)
+  end
 end
 
 local function preview_file(state)
@@ -80,7 +92,7 @@ local function preview_file_down(state)
 end
 
 local function preview_enter(state)
-  preview_bufnr = nil
+  -- Do nothing here to avoid resetting preview_bufnr
 end
 
 
