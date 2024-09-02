@@ -36,6 +36,7 @@ end
 local preview_bufnr = nil
 local initial_bufnr = vim.api.nvim_get_current_buf()
 local preview_win = nil
+local reset_buffer = false
 
 local function close_initial_dashboard()
   if initial_bufnr and vim.api.nvim_buf_is_valid(initial_bufnr) then
@@ -46,9 +47,10 @@ end
 
 local function open_preview_buffer(filepath)
   -- Create or reuse the preview buffer
-  if preview_bufnr == nil or not vim.api.nvim_buf_is_valid(preview_bufnr) then
+  if reset_buffer or preview_bufnr == nil or not vim.api.nvim_buf_is_valid(preview_bufnr) then
     preview_bufnr = vim.api.nvim_create_buf(false, true)
     vim.api.nvim_buf_set_option(preview_bufnr, 'bufhidden', 'hide')
+    reset_buffer = false -- Reset the flag after creating a new buffer
   end
 
   -- Set the content of the preview buffer
@@ -93,14 +95,9 @@ local function preview_enter(state)
   if preview_win and vim.api.nvim_win_is_valid(preview_win) then
     vim.api.nvim_set_current_win(preview_win)
   end
-  preview_bufnr = nil -- Reset preview_bufnr to indicate the buffer is in use
+  reset_buffer = true -- Set the flag to reset buffer for next preview
 end
 
-local function preview_leave(state)
-  -- Reset the preview buffer and window when leaving the tree
-  preview_bufnr = nil
-  preview_win = nil
-end
 
 return {
   {
