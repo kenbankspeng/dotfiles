@@ -30,7 +30,8 @@ local function autoclose()
   end
 end
 
-local preview_win_id = nil
+--
+--
 local preview_bufnr = nil
 local initial_bufnr = vim.api.nvim_get_current_buf()
 
@@ -45,21 +46,15 @@ local function open_preview_buffer(filepath)
   -- Create or reuse the preview buffer
   if preview_bufnr == nil or not vim.api.nvim_buf_is_valid(preview_bufnr) then
     preview_bufnr = vim.api.nvim_create_buf(false, true)
-    vim.api.nvim_buf_set_option(preview_bufnr, 'bufhidden', 'wipe')
+    vim.api.nvim_buf_set_option(preview_bufnr, 'bufhidden', 'hide') -- Set to 'hide' to prevent closing
   end
-
-  -- Open the preview buffer in a specific window
-  if preview_win_id == nil or not vim.api.nvim_win_is_valid(preview_win_id) then
-    vim.cmd('vsplit')
-    preview_win_id = vim.api.nvim_get_current_win()
-  end
-
-  vim.api.nvim_win_set_buf(preview_win_id, preview_bufnr)
 
   -- Set the content of the preview buffer
   vim.api.nvim_buf_set_lines(preview_bufnr, 0, -1, false, vim.fn.readfile(filepath))
-end
 
+  -- Open the preview buffer in the current window
+  vim.api.nvim_set_current_buf(preview_bufnr)
+end
 
 local function preview_file(state)
   local node = state.tree:get_node()
@@ -85,7 +80,6 @@ local function preview_file_down(state)
 end
 
 local function preview_enter(state)
-  preview_win_id = nil
   preview_bufnr = nil
 end
 
