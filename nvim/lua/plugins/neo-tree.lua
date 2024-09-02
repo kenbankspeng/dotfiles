@@ -85,11 +85,12 @@ end
 local function preview_enter(state)
   -- Create a new buffer for the next file preview
   reset_buffer = true
-  -- Focus remains in the same window, no need to switch windows
 
-  -- Set the current buffer to the preview buffer
-  if preview_bufnr and vim.api.nvim_buf_is_valid(preview_bufnr) then
-    vim.api.nvim_set_current_buf(preview_bufnr)
+  -- Keep focus on the tree window but set the buffer to the selected file
+  local node = state.tree:get_node()
+  if not require("neo-tree.utils").is_expandable(node) then
+    local filepath = node.path
+    vim.cmd('edit ' .. filepath)
   end
 
   -- Set state for the next preview
