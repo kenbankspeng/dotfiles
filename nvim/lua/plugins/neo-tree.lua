@@ -35,7 +35,7 @@ end
 
 local preview_bufnr = nil
 local initial_bufnr = vim.api.nvim_get_current_buf()
-local reset_buffer = false
+local neo_tree_win = nil
 
 local function close_initial_dashboard()
   if initial_bufnr and vim.api.nvim_buf_is_valid(initial_bufnr) then
@@ -45,17 +45,16 @@ local function close_initial_dashboard()
 end
 
 local function open_preview_buffer(filepath)
-  -- Create a new preview buffer if reset_buffer is true or the buffer is invalid
-  if reset_buffer or preview_bufnr == nil or not vim.api.nvim_buf_is_valid(preview_bufnr) then
+  -- Create a new preview buffer if invalid or non-existent
+  if preview_bufnr == nil or not vim.api.nvim_buf_is_valid(preview_bufnr) then
     preview_bufnr = vim.api.nvim_create_buf(false, true)
     vim.api.nvim_buf_set_option(preview_bufnr, 'bufhidden', 'hide')
-    reset_buffer = false -- Reset the flag after creating a new buffer
   end
 
   -- Set the content of the preview buffer
   vim.api.nvim_buf_set_lines(preview_bufnr, 0, -1, false, vim.fn.readfile(filepath))
 
-  -- Set the current buffer to the preview buffer
+  -- Ensure the preview buffer is displayed
   vim.api.nvim_set_current_buf(preview_bufnr)
 end
 
@@ -67,6 +66,10 @@ local function preview_file(state)
     open_preview_buffer(filepath)
     -- Reveal the Neo-tree window
     vim.cmd('Neotree reveal')
+    -- Save the Neo-tree window id
+    neo_tree_win = state.winid
+    -- Return focus to the Neo-tree window
+    vim.api.nvim_set_current_win(neo_tree_win)
   end
 end
 
@@ -81,29 +84,13 @@ local function preview_file_down(state)
 end
 
 local function preview_enter(state)
-  -- Create a new buffer for the next file preview
-  reset_buffer = true
-
   -- Get the selected node and open the file in the current buffer
   local node = state.tree:get_node()
   if not require("neo-tree.utils").is_expandable(node) then
     local filepath = node.path
-    vim.cmd('buffer ' .. preview_bufnr)
     vim.cmd('edit ' .. filepath)
   end
 end
-
-require("neo-tree").setup({
-  window = {
-    mappings = {
-      ['<up>'] = preview_file_up,
-      ['<down>'] = preview_file_down,
-      ["<cr>"] = preview_enter,
-      ["<esc>"] = "cancel",
-      -- more mappings
-    },
-  },
-})
 
 
 return {
