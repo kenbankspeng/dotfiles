@@ -60,8 +60,9 @@ local function open_preview_buffer(filepath)
   if preview_win == nil or not vim.api.nvim_win_is_valid(preview_win) then
     vim.cmd('vsplit')
     preview_win = vim.api.nvim_get_current_win()
+  else
+    vim.api.nvim_set_current_win(preview_win)
   end
-  vim.api.nvim_set_current_win(preview_win)
   vim.api.nvim_set_current_buf(preview_bufnr)
 end
 
@@ -89,13 +90,13 @@ local function preview_file_down(state)
 end
 
 local function preview_enter(state)
+  -- Create a new buffer for the next file preview
+  reset_buffer = true
   -- Change focus to the preview window when enter is pressed
   if preview_win and vim.api.nvim_win_is_valid(preview_win) then
     vim.api.nvim_set_current_win(preview_win)
   end
-  reset_buffer = true -- Set the flag to create a new buffer for next preview
 end
-
 
 return {
   {
