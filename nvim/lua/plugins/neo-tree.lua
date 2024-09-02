@@ -35,7 +35,7 @@ end
 
 local preview_bufnr = nil
 local initial_bufnr = vim.api.nvim_get_current_buf()
-local neo_tree_win = nil
+local preview_winid = nil
 
 local function close_initial_dashboard()
   if initial_bufnr and vim.api.nvim_buf_is_valid(initial_bufnr) then
@@ -45,7 +45,7 @@ local function close_initial_dashboard()
 end
 
 local function open_preview_buffer(filepath)
-  -- Create a new preview buffer if invalid or non-existent
+  -- Create a new preview buffer if it's invalid or doesn't exist
   if preview_bufnr == nil or not vim.api.nvim_buf_is_valid(preview_bufnr) then
     preview_bufnr = vim.api.nvim_create_buf(false, true)
     vim.api.nvim_buf_set_option(preview_bufnr, 'bufhidden', 'hide')
@@ -54,8 +54,14 @@ local function open_preview_buffer(filepath)
   -- Set the content of the preview buffer
   vim.api.nvim_buf_set_lines(preview_bufnr, 0, -1, false, vim.fn.readfile(filepath))
 
-  -- Ensure the preview buffer is displayed
-  vim.api.nvim_set_current_buf(preview_bufnr)
+  -- If the preview window doesn't exist, create it
+  if preview_winid == nil or not vim.api.nvim_win_is_valid(preview_winid) then
+    vim.cmd('vsplit') -- Open a vertical split for the preview
+    preview_winid = vim.api.nvim_get_current_win()
+  end
+
+  -- Set the preview buffer in the preview window
+  vim.api.nvim_win_set_buf(preview_winid, preview_bufnr)
 end
 
 local function preview_file(state)
@@ -64,12 +70,8 @@ local function preview_file(state)
     local filepath = node.path
     close_initial_dashboard()
     open_preview_buffer(filepath)
-    -- Reveal the Neo-tree window
-    vim.cmd('Neotree reveal')
-    -- Save the Neo-tree window id
-    neo_tree_win = state.winid
     -- Return focus to the Neo-tree window
-    vim.api.nvim_set_current_win(neo_tree_win)
+    vim.api.nvim_set_current_win(state.winid)
   end
 end
 
@@ -84,7 +86,7 @@ local function preview_file_down(state)
 end
 
 local function preview_enter(state)
-  -- Get the selected node and open the file in the current buffer
+  -- Open the selected file in the current window
   local node = state.tree:get_node()
   if not require("neo-tree.utils").is_expandable(node) then
     local filepath = node.path
