@@ -39,12 +39,12 @@ local function view_file(state)
 end
 
 local function view_file_up(state)
-  vim.api.nvim_command('normal! j')
+  vim.api.nvim_command('normal! k')
   view_file(state)
 end
 
 local function view_file_down(state)
-  vim.api.nvim_command('normal! k')
+  vim.api.nvim_command('normal! j')
   view_file(state)
 end
 
