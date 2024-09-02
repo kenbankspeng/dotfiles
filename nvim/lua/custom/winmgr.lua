@@ -1,16 +1,16 @@
-local autoclose = false
+local float = false
 
-local function get_autoclose()
-  return autoclose
+local function is_float()
+  return float
 end
 
 local function neotree_float()
-  autoclose = true
-  vim.cmd("Neotree toggle")
+  float = true
+  vim.cmd("Neotree float toggle")
 end
 
 local function neotree_left()
-  autoclose = false
+  float = false
   vim.cmd("Neotree left toggle")
 end
 
@@ -60,7 +60,7 @@ end
 
 return {
   close = close,
-  get_autoclose = get_autoclose,
+  is_float = is_float,
   neotree_float = neotree_float,
   neotree_left = neotree_left,
 }

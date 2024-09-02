@@ -25,7 +25,7 @@ end
 
 -- autoclose for neotree float only
 local function autoclose()
-  if require("custom.winmgr").get_autoclose() then
+  if require("custom.winmgr").is_float() then
     require("neo-tree.command").execute({ action = "close" })
   end
 end
@@ -77,24 +77,32 @@ end
 
 local function preview_file_above(state)
   vim.api.nvim_command('normal! k')
-  preview_file(state)
+  if not require("custom.winmgr").is_float() then
+    preview_file(state)
+  end
 end
 
 local function preview_file_below(state)
   vim.api.nvim_command('normal! j')
-  preview_file(state)
+  if not require("custom.winmgr").is_float() then
+    preview_file(state)
+  end
 end
 
 local function preview_enter(state)
-  -- Get the selected node and open the file in a new buffer
-  local node = state.tree:get_node()
-  if not require("neo-tree.utils").is_expandable(node) then
-    local filepath = node.path
-    -- Ensure a new buffer is created for the file
-    vim.cmd('badd ' .. filepath)
-    vim.cmd('buffer ' .. filepath)
-    -- Invalidate the preview buffer
-    preview_bufnr = nil
+  if not require("custom.winmgr").is_float() then
+    -- Get the selected node and open the file in a new buffer
+    local node = state.tree:get_node()
+    if not require("neo-tree.utils").is_expandable(node) then
+      local filepath = node.path
+      -- Ensure a new buffer is created for the file
+      vim.cmd('badd ' .. filepath)
+      vim.cmd('buffer ' .. filepath)
+      -- Invalidate the preview buffer
+      preview_bufnr = nil
+    end
+  else
+    filecmds.open(state)
   end
 end
 
@@ -218,7 +226,7 @@ return {
           },
         },
         window = {
-          position = "float", -- "left" | "right" | "float"
+          position = "left", -- "left" | "right" | "float"
           width = 40,
           mapping_options = {
             noremap = true,
