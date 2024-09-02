@@ -85,14 +85,10 @@ local function preview_file_down(state)
 end
 
 local function preview_enter(state)
-  local node = state.tree:get_node()
-  if not require("neo-tree.utils").is_expandable(node) then
-    local filepath = node.path
-    close_initial_dashboard()
-    preview_win_id = nil -- Reset preview_win_id to nil
-    open_preview_buffer(filepath)
-  end
+  preview_win_id = nil
+  preview_bufnr = nil
 end
+
 
 return {
   {
