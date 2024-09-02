@@ -13,7 +13,7 @@ local function reset_root()
   end
 end
 
-local function up(state)
+local function parent(state)
   -- must get parent id before navigating up
   local parent_id = state.tree:get_node():get_parent_id()
   filecmds.navigate_up(state)
@@ -75,12 +75,12 @@ local function preview_file(state)
   end
 end
 
-local function preview_file_up(state)
+local function preview_file_above(state)
   vim.api.nvim_command('normal! k')
   preview_file(state)
 end
 
-local function preview_file_down(state)
+local function preview_file_below(state)
   vim.api.nvim_command('normal! j')
   preview_file(state)
 end
@@ -225,10 +225,10 @@ return {
             nowait = true,
           },
           mappings = {
-            ['<up>'] = preview_file_up,
-            ['<down>'] = preview_file_down,
+            ['<up>'] = preview_file_above,
+            ['<down>'] = preview_file_below,
             ["."] = reset_root,
-            ["<left>"] = up,
+            ["<left>"] = parent,
             ["<right>"] = set_root,
             ["<space>"] = {
               "toggle_node",
