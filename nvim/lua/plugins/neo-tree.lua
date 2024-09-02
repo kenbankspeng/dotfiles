@@ -46,7 +46,7 @@ local function close_initial_dashboard()
 end
 
 local function open_preview_buffer(filepath)
-  -- Create or reuse the preview buffer
+  -- Create a new preview buffer if needed or reset_buffer is true
   if reset_buffer or preview_bufnr == nil or not vim.api.nvim_buf_is_valid(preview_bufnr) then
     preview_bufnr = vim.api.nvim_create_buf(false, true)
     vim.api.nvim_buf_set_option(preview_bufnr, 'bufhidden', 'hide')
@@ -56,15 +56,10 @@ local function open_preview_buffer(filepath)
   -- Set the content of the preview buffer
   vim.api.nvim_buf_set_lines(preview_bufnr, 0, -1, false, vim.fn.readfile(filepath))
 
-  -- Open the preview buffer in a split window if not already displayed
-  if preview_win == nil or not vim.api.nvim_win_is_valid(preview_win) then
-    vim.cmd('vsplit')
-    preview_win = vim.api.nvim_get_current_win()
-    vim.api.nvim_set_current_buf(preview_bufnr)
-  else
-    vim.api.nvim_set_current_win(preview_win)
-    vim.api.nvim_set_current_buf(preview_bufnr)
-  end
+  -- Open the preview buffer in a new split window
+  vim.cmd('vsplit')
+  preview_win = vim.api.nvim_get_current_win()
+  vim.api.nvim_set_current_buf(preview_bufnr)
 end
 
 local function preview_file(state)
@@ -95,7 +90,7 @@ local function preview_enter(state)
   if preview_win and vim.api.nvim_win_is_valid(preview_win) then
     vim.api.nvim_set_current_win(preview_win)
   end
-  reset_buffer = true -- Set the flag to reset buffer for next preview
+  reset_buffer = true -- Set the flag to create a new buffer and window for next preview
 end
 
 
