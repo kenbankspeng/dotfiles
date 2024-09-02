@@ -65,7 +65,7 @@ local function preview_file(state)
     local filepath = node.path
     close_initial_dashboard()
     open_preview_buffer(filepath)
-    -- Ensure the Neo-tree window is revealed
+    -- Reveal the Neo-tree window
     vim.cmd('Neotree reveal')
   end
 end
@@ -83,18 +83,27 @@ end
 local function preview_enter(state)
   -- Create a new buffer for the next file preview
   reset_buffer = true
-  -- Focus remains in the same window, no need to switch windows
 
-  -- Get the selected node and open the file in the current window
+  -- Get the selected node and open the file in the current buffer
   local node = state.tree:get_node()
   if not require("neo-tree.utils").is_expandable(node) then
     local filepath = node.path
+    vim.cmd('buffer ' .. preview_bufnr)
     vim.cmd('edit ' .. filepath)
   end
-
-  -- Set state for the next preview
-  preview_bufnr = nil
 end
+
+require("neo-tree").setup({
+  window = {
+    mappings = {
+      ['<up>'] = preview_file_up,
+      ['<down>'] = preview_file_down,
+      ["<cr>"] = preview_enter,
+      ["<esc>"] = "cancel",
+      -- more mappings
+    },
+  },
+})
 
 
 return {
