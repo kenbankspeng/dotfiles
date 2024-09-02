@@ -29,14 +29,15 @@ local function autoclose()
     require("neo-tree.command").execute({ action = "close" })
   end
 end
+
 local preview_win_id = nil
 local preview_bufnr = nil
-local initial_dashboard_closed = false
+local initial_bufnr = vim.api.nvim_get_current_buf()
 
 local function close_initial_dashboard()
-  if not initial_dashboard_closed then
-    vim.cmd('bd') -- Close the initial dashboard buffer
-    initial_dashboard_closed = true
+  if initial_bufnr and vim.api.nvim_buf_is_valid(initial_bufnr) then
+    vim.api.nvim_buf_delete(initial_bufnr, { force = true })
+    initial_bufnr = nil
   end
 end
 
@@ -51,10 +52,9 @@ local function open_preview_buffer(filepath)
   if preview_win_id == nil or not vim.api.nvim_win_is_valid(preview_win_id) then
     vim.cmd('vsplit')
     preview_win_id = vim.api.nvim_get_current_win()
-    vim.api.nvim_win_set_buf(preview_win_id, preview_bufnr)
-  else
-    vim.api.nvim_win_set_buf(preview_win_id, preview_bufnr)
   end
+
+  vim.api.nvim_win_set_buf(preview_win_id, preview_bufnr)
 
   -- Set the content of the preview buffer
   vim.api.nvim_buf_set_name(preview_bufnr, filepath)
@@ -83,6 +83,16 @@ local function preview_file_down(state)
   vim.api.nvim_command('normal! j')
   preview_file(state)
 end
+
+local function preview_enter(state)
+  local node = state.tree:get_node()
+  if not require("neo-tree.utils").is_expandable(node) then
+    local filepath = node.path
+    close_initial_dashboard()
+    open_preview_buffer(filepath)
+  end
+end
+
 
 return {
   {
@@ -219,7 +229,7 @@ return {
               "toggle_node",
               nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use
             },
-            ["<cr>"] = "open",
+            ["<cr>"] = preview_enter,
             ["<esc>"] = "cancel", -- close preview or floating neo-tree window
             ["P"] = { "toggle_preview", config = { use_float = true, use_image_nvim = true } },
             -- Read `# Preview Mode` for more information
