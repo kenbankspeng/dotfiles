@@ -56,8 +56,11 @@ local function open_preview_buffer(filepath)
 
   vim.api.nvim_win_set_buf(preview_win_id, preview_bufnr)
 
-  -- Set the content of the preview buffer
-  vim.api.nvim_buf_set_name(preview_bufnr, filepath)
+  -- Set the content of the preview buffer if it doesn't already have a name
+  local current_name = vim.api.nvim_buf_get_name(preview_bufnr)
+  if current_name == "" then
+    vim.api.nvim_buf_set_name(preview_bufnr, filepath)
+  end
   vim.api.nvim_buf_set_lines(preview_bufnr, 0, -1, false, vim.fn.readfile(filepath))
 end
 
