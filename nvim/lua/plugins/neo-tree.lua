@@ -71,6 +71,9 @@ local function preview_file(state)
 
     -- Return focus to the tree window
     vim.api.nvim_set_current_win(state.winid)
+
+    -- Reset preview_win_id to nil for the next preview
+    preview_win_id = nil
   end
 end
 
@@ -90,6 +93,9 @@ local function preview_enter(state)
     local filepath = node.path
     close_initial_dashboard()
     open_preview_buffer(filepath)
+
+    -- Reset preview_win_id to nil for the next preview
+    preview_win_id = nil
   end
 end
 
