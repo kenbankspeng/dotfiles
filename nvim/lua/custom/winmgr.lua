@@ -26,12 +26,11 @@ local function close()
   local is_neo_tree = string.match(bufname, "neo%-tree") ~= nil
 
   if is_neo_tree then
-    -- If the current buffer is a neo-tree buffer, find another buffer to close
+    -- If the current buffer is a neo-tree buffer, find another buffer to switch to
     local buffers = vim.fn.getbufinfo({ buflisted = 1 })
     for _, buffer in ipairs(buffers) do
       if not string.match(buffer.name, "neo%-tree") then
         vim.api.nvim_set_current_buf(buffer.bufnr)
-        vim.api.nvim_buf_delete(buf, {})
         return
       end
     end
@@ -74,7 +73,6 @@ local function close()
     end
   end
 end
-
 
 
 return {
