@@ -29,33 +29,44 @@ local function autoclose()
     require("neo-tree.command").execute({ action = "close" })
   end
 end
-
 local preview_win_id = nil
 local preview_bufnr = nil
+local initial_dashboard_closed = false
+
+local function close_initial_dashboard()
+  if not initial_dashboard_closed then
+    vim.cmd('bd') -- Close the initial dashboard buffer
+    initial_dashboard_closed = true
+  end
+end
+
+local function open_preview_buffer(filepath)
+  -- Create or reuse the preview buffer
+  if preview_bufnr == nil or not vim.api.nvim_buf_is_valid(preview_bufnr) then
+    preview_bufnr = vim.api.nvim_create_buf(false, true)
+    vim.api.nvim_buf_set_option(preview_bufnr, 'bufhidden', 'wipe')
+  end
+
+  -- Open the preview buffer in a specific window
+  if preview_win_id == nil or not vim.api.nvim_win_is_valid(preview_win_id) then
+    vim.cmd('vsplit')
+    preview_win_id = vim.api.nvim_get_current_win()
+    vim.api.nvim_win_set_buf(preview_win_id, preview_bufnr)
+  else
+    vim.api.nvim_win_set_buf(preview_win_id, preview_bufnr)
+  end
+
+  -- Set the content of the preview buffer
+  vim.api.nvim_buf_set_name(preview_bufnr, filepath)
+  vim.api.nvim_buf_set_lines(preview_bufnr, 0, -1, false, vim.fn.readfile(filepath))
+end
 
 local function preview_file(state)
   local node = state.tree:get_node()
   if not require("neo-tree.utils").is_expandable(node) then
     local filepath = node.path
-
-    -- Create or reuse the preview buffer
-    if preview_bufnr == nil or not vim.api.nvim_buf_is_valid(preview_bufnr) then
-      preview_bufnr = vim.api.nvim_create_buf(false, true)
-      vim.api.nvim_buf_set_option(preview_bufnr, 'bufhidden', 'wipe')
-    end
-
-    -- Open the preview buffer in a specific window
-    if preview_win_id == nil or not vim.api.nvim_win_is_valid(preview_win_id) then
-      vim.cmd('vsplit')
-      preview_win_id = vim.api.nvim_get_current_win()
-      vim.api.nvim_win_set_buf(preview_win_id, preview_bufnr)
-    else
-      vim.api.nvim_win_set_buf(preview_win_id, preview_bufnr)
-    end
-
-    -- Set the content of the preview buffer
-    vim.api.nvim_buf_set_name(preview_bufnr, filepath)
-    vim.api.nvim_buf_set_lines(preview_bufnr, 0, -1, false, vim.fn.readfile(filepath))
+    close_initial_dashboard()
+    open_preview_buffer(filepath)
     vim.cmd('Neotree reveal')
 
     -- Return focus to the tree window
