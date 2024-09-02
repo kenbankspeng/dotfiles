@@ -30,6 +30,24 @@ local function autoclose()
   end
 end
 
+local function view_file(state)
+  local node = state.tree:get_node()
+  if not require("neo-tree.utils").is_expandable(node) then
+    state.commands['open'](state)
+    vim.cmd('Neotree reveal')
+  end
+end
+
+local function view_file_up(state)
+  vim.api.nvim_command('normal! j')
+  view_file(state)
+end
+
+local function view_file_down(state)
+  vim.api.nvim_command('normal! k')
+  view_file(state)
+end
+
 return {
   {
     "nvim-neo-tree/neo-tree.nvim",
@@ -156,15 +174,8 @@ return {
             nowait = true,
           },
           mappings = {
-            ['<tab>'] = function(state)
-              local node = state.tree:get_node()
-              if require("neo-tree.utils").is_expandable(node) then
-                state.commands["toggle_node"](state)
-              else
-                state.commands['open'](state)
-                vim.cmd('Neotree reveal')
-              end
-            end,
+            ['<up>'] = view_file_up,
+            ['<down>'] = view_file_down,
             ["."] = reset_root,
             ["<left>"] = up,
             ["<right>"] = set_root,
