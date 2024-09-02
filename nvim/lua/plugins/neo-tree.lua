@@ -35,6 +35,7 @@ end
 
 local preview_bufnr = nil
 local initial_bufnr = vim.api.nvim_get_current_buf()
+local preview_win = nil
 
 local function close_initial_dashboard()
   if initial_bufnr and vim.api.nvim_buf_is_valid(initial_bufnr) then
@@ -54,16 +55,12 @@ local function open_preview_buffer(filepath)
   vim.api.nvim_buf_set_lines(preview_bufnr, 0, -1, false, vim.fn.readfile(filepath))
 
   -- Open the preview buffer in a split window if not already displayed
-  local preview_win = nil
-  for _, win in ipairs(vim.api.nvim_list_wins()) do
-    if vim.api.nvim_win_get_buf(win) == preview_bufnr then
-      preview_win = win
-      break
-    end
-  end
-
-  if preview_win == nil then
+  if preview_win == nil or not vim.api.nvim_win_is_valid(preview_win) then
     vim.cmd('vsplit')
+    preview_win = vim.api.nvim_get_current_win()
+    vim.api.nvim_set_current_buf(preview_bufnr)
+  else
+    vim.api.nvim_set_current_win(preview_win)
     vim.api.nvim_set_current_buf(preview_bufnr)
   end
 end
@@ -92,7 +89,11 @@ local function preview_file_down(state)
 end
 
 local function preview_enter(state)
-  -- Do nothing here to avoid resetting preview_bufnr
+  -- Change focus to the preview window when enter is pressed
+  if preview_win and vim.api.nvim_win_is_valid(preview_win) then
+    vim.api.nvim_set_current_win(preview_win)
+  end
+  preview_bufnr = nil -- Reset preview_bufnr to indicate the buffer is in use
 end
 
 
