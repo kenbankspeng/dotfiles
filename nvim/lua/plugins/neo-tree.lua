@@ -49,14 +49,6 @@ local function preview_file(state)
   end
 end
 
-local function preview_file(state)
-  local node = state.tree:get_node()
-  if not require("neo-tree.utils").is_expandable(node) then
-    state.commands['open'](state)
-    vim.cmd('Neotree reveal')
-  end
-end
-
 local function preview_file_up(state)
   vim.api.nvim_command('normal! k')
   preview_file(state)
