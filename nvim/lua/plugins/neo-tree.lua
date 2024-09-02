@@ -36,15 +36,15 @@ local function preview_file(state)
   local node = state.tree:get_node()
   if not require("neo-tree.utils").is_expandable(node) then
     local filepath = node.path
+    -- Create or reuse the preview buffer
     if preview_bufnr == nil or not vim.api.nvim_buf_is_valid(preview_bufnr) then
-      -- Create a new buffer if it doesn't exist or is invalid
       preview_bufnr = vim.api.nvim_create_buf(false, true)
+      vim.api.nvim_buf_set_option(preview_bufnr, 'bufhidden', 'wipe')
     end
     -- Open the file in the preview buffer
-    vim.api.nvim_buf_set_option(preview_bufnr, 'bufhidden', 'wipe')
-    vim.api.nvim_win_set_buf(0, preview_bufnr) -- Set the buffer to the current window temporarily to open the file
-    vim.api.nvim_command('edit ' .. filepath)
-    vim.api.nvim_win_set_buf(0, preview_bufnr)
+    vim.api.nvim_buf_set_name(preview_bufnr, filepath)
+    vim.api.nvim_buf_set_lines(preview_bufnr, 0, -1, false, vim.fn.readfile(filepath))
+    vim.api.nvim_set_current_buf(preview_bufnr)
     vim.cmd('Neotree reveal')
   end
 end
