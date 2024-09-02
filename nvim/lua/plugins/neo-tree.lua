@@ -89,10 +89,7 @@ local function preview_enter(state)
   if not require("neo-tree.utils").is_expandable(node) then
     local filepath = node.path
     close_initial_dashboard()
-
-    -- Reset preview_win_id to nil
-    preview_win_id = nil
-
+    preview_win_id = nil -- Reset preview_win_id to nil
     open_preview_buffer(filepath)
   end
 end
