@@ -36,7 +36,6 @@ end
 local preview_bufnr = nil
 local initial_bufnr = vim.api.nvim_get_current_buf()
 local preview_winid = nil
-local reset_preview_buffer = false
 
 local function close_initial_dashboard()
   if initial_bufnr and vim.api.nvim_buf_is_valid(initial_bufnr) then
@@ -46,11 +45,10 @@ local function close_initial_dashboard()
 end
 
 local function open_preview_buffer(filepath)
-  -- Create a new preview buffer if it's invalid or doesn't exist
-  if reset_preview_buffer or preview_bufnr == nil or not vim.api.nvim_buf_is_valid(preview_bufnr) then
+  -- Create a new preview buffer if invalid or non-existent
+  if preview_bufnr == nil or not vim.api.nvim_buf_is_valid(preview_bufnr) then
     preview_bufnr = vim.api.nvim_create_buf(false, true)
     vim.api.nvim_buf_set_option(preview_bufnr, 'bufhidden', 'hide')
-    reset_preview_buffer = false
   end
 
   -- Set the content of the preview buffer
@@ -88,16 +86,18 @@ local function preview_file_down(state)
 end
 
 local function preview_enter(state)
-  -- Create a new buffer for the currently opened file
-  reset_preview_buffer = true
-
   -- Get the selected node and open the file in a new buffer
   local node = state.tree:get_node()
   if not require("neo-tree.utils").is_expandable(node) then
     local filepath = node.path
-    vim.cmd('edit ' .. filepath)
+    -- Ensure a new buffer is created for the file
+    vim.cmd('badd ' .. filepath)
+    vim.cmd('buffer ' .. filepath)
+    -- Invalidate the preview buffer
+    preview_bufnr = nil
   end
 end
+
 
 
 return {
