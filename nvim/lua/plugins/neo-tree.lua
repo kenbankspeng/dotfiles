@@ -13,7 +13,7 @@ local function reset_root()
   end
 end
 
-local function up(state)
+local function parent(state)
   -- must get parent id before navigating up
   local parent_id = state.tree:get_node():get_parent_id()
   filecmds.navigate_up(state)
@@ -25,7 +25,7 @@ end
 
 -- autoclose for neotree float only
 local function autoclose()
-  if require("custom.winmgr").get_autoclose() then
+  if require("custom.winmgr").is_float() then
     require("neo-tree.command").execute({ action = "close" })
   end
 end
@@ -75,26 +75,34 @@ local function preview_file(state)
   end
 end
 
-local function preview_file_up(state)
+local function preview_file_above(state)
   vim.api.nvim_command('normal! k')
-  preview_file(state)
+  if require("custom.winmgr").is_sidebar() then
+    preview_file(state)
+  end
 end
 
-local function preview_file_down(state)
+local function preview_file_below(state)
   vim.api.nvim_command('normal! j')
-  preview_file(state)
+  if require("custom.winmgr").is_sidebar() then
+    preview_file(state)
+  end
 end
 
 local function preview_enter(state)
-  -- Get the selected node and open the file in a new buffer
-  local node = state.tree:get_node()
-  if not require("neo-tree.utils").is_expandable(node) then
-    local filepath = node.path
-    -- Ensure a new buffer is created for the file
-    vim.cmd('badd ' .. filepath)
-    vim.cmd('buffer ' .. filepath)
-    -- Invalidate the preview buffer
-    preview_bufnr = nil
+  if require("custom.winmgr").is_sidebar() then
+    -- Get the selected node and open the file in a new buffer
+    local node = state.tree:get_node()
+    if not require("neo-tree.utils").is_expandable(node) then
+      local filepath = node.path
+      -- Ensure a new buffer is created for the file
+      vim.cmd('badd ' .. filepath)
+      vim.cmd('buffer ' .. filepath)
+      -- Invalidate the preview buffer
+      preview_bufnr = nil
+    end
+  else
+    filecmds.open(state)
   end
 end
 
@@ -218,17 +226,17 @@ return {
           },
         },
         window = {
-          position = "float", -- "left" | "right" | "float"
+          position = "left", -- "left" | "right" | "float"
           width = 40,
           mapping_options = {
             noremap = true,
             nowait = true,
           },
           mappings = {
-            ['<up>'] = preview_file_up,
-            ['<down>'] = preview_file_down,
+            ['<up>'] = preview_file_above,
+            ['<down>'] = preview_file_below,
             ["."] = reset_root,
-            ["<left>"] = up,
+            ["<left>"] = parent,
             ["<right>"] = set_root,
             ["<space>"] = {
               "toggle_node",
@@ -265,7 +273,7 @@ return {
             --  }
             --}
             ["m"] = "move", -- takes text input for destination, also accepts the optional config.show_path option like "add".
-            ["q"] = "close_window",
+            ["q"] = require("custom.winmgr").close,
             ["R"] = "refresh",
             ["?"] = "show_help",
             ["<"] = "prev_source",
