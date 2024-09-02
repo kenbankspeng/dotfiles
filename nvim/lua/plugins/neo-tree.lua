@@ -96,6 +96,11 @@ local function preview_enter(state)
   preview_bufnr = nil -- Reset preview_bufnr to indicate the buffer is in use
 end
 
+local function preview_leave(state)
+  -- Reset the preview buffer and window when leaving the tree
+  preview_bufnr = nil
+  preview_win = nil
+end
 
 return {
   {
