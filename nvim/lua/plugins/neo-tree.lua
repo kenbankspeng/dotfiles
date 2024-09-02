@@ -92,10 +92,20 @@ end
 local function preview_enter(state)
   -- Create a new buffer for the next file preview
   reset_buffer = true
+
   -- Change focus to the preview window when enter is pressed
   if preview_win and vim.api.nvim_win_is_valid(preview_win) then
     vim.api.nvim_set_current_win(preview_win)
   end
+
+  -- Set the current buffer to the preview buffer
+  if preview_bufnr and vim.api.nvim_buf_is_valid(preview_bufnr) then
+    vim.api.nvim_set_current_buf(preview_bufnr)
+  end
+
+  -- Set state for the next preview
+  preview_bufnr = nil
+  preview_win = nil
 end
 
 return {
