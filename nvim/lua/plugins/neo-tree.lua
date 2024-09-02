@@ -147,22 +147,6 @@ return {
             event = "file_open_requested",
             handler = autoclose, -- auto close
           },
-          {
-            event = "neo_tree_buffer_enter",
-            handler = function()
-              vim.api.nvim_create_autocmd("CursorMoved", {
-                buffer = 0,
-                callback = function()
-                  local renderer = require("neo-tree.ui.renderer")
-                  local node = renderer.get_node_at_cursor()
-                  if node and node.type == "file" then
-                    vim.cmd('edit ' .. vim.fn.fnameescape(node.path))
-                  end
-                end,
-                desc = 'Preview file in the current window when cursor moves over it in Neo-tree',
-              })
-            end
-          },
         },
         window = {
           position = "float", -- "left" | "right" | "float"
@@ -172,6 +156,15 @@ return {
             nowait = true,
           },
           mappings = {
+            ['<tab>'] = function(state)
+              local node = state.tree:get_node()
+              if require("neo-tree.utils").is_expandable(node) then
+                state.commands["toggle_node"](state)
+              else
+                state.commands['open'](state)
+                vim.cmd('Neotree reveal')
+              end
+            end,
             ["."] = reset_root,
             ["<left>"] = up,
             ["<right>"] = set_root,
