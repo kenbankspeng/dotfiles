@@ -56,11 +56,17 @@ local function open_preview_buffer(filepath)
 
   vim.api.nvim_win_set_buf(preview_win_id, preview_bufnr)
 
-  -- Set the content of the preview buffer if it doesn't already have a name
-  local current_name = vim.api.nvim_buf_get_name(preview_bufnr)
-  if current_name == "" then
-    vim.api.nvim_buf_set_name(preview_bufnr, filepath)
+  -- Ensure the buffer is unnamed before renaming
+  vim.api.nvim_buf_set_name(preview_bufnr, '')
+
+  -- Try renaming the buffer with error handling
+  local success, err = pcall(vim.api.nvim_buf_set_name, preview_bufnr, filepath)
+  if not success then
+    print("Error renaming buffer:", err)
+    return
   end
+
+  -- Set the content of the preview buffer
   vim.api.nvim_buf_set_lines(preview_bufnr, 0, -1, false, vim.fn.readfile(filepath))
 end
 
