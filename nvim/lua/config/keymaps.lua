@@ -163,8 +163,8 @@ del("n", "<leader>fe") -- Explorer NeoTree (Root Dir)
 --
 
 -- NEOTREE --
-map("<leader><leader>", require("custom.winmgr").neotree_float, "toggle neotree")
-map(",,", require("custom.winmgr").neotree_left, "toggle neotree left")
+map("<leader><leader>", require("custom.winmgr").neotree_left, "toggle neotree left")
+map(",,", require("custom.winmgr").neotree_float, "toggle neotree")
 map("q", require("custom.winmgr").close, "close window")
 
 -- BUFFERS (using bufferline, emulating tabs)
