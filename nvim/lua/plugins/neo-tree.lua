@@ -49,7 +49,7 @@ local function close_initial_dashboard()
 end
 
 local function open_preview_buffer(filepath)
-  -- Create a new preview buffer if invalid or non-existent
+  -- Create a new preiew buffer if invalid or non-existent
   if preview_bufnr == nil or not vim.api.nvim_buf_is_valid(preview_bufnr) then
     preview_bufnr = vim.api.nvim_create_buf(false, true)
     vim.bo[preview_bufnr].bufhidden = "hide"
@@ -94,17 +94,15 @@ local function preview_file_below(state)
 end
 
 local function preview_enter(state)
-  if require("custom.winmgr").is_sidebar() then
+  local node = state.tree:get_node()
+  if require("custom.winmgr").is_sidebar() and not require("neo-tree.utils").is_expandable(node) then
     -- Get the selected node and open the file in a new buffer
-    local node = state.tree:get_node()
-    if not require("neo-tree.utils").is_expandable(node) then
-      local filepath = node.path
-      -- Ensure a new buffer is created for the file
-      vim.cmd("badd " .. filepath)
-      vim.cmd("buffer " .. filepath)
-      -- Invalidate the preview buffer
-      preview_bufnr = nil
-    end
+    local filepath = node.path
+    -- Ensure a new buffer is created for the file
+    vim.cmd("badd " .. filepath)
+    vim.cmd("buffer " .. filepath)
+    -- Invalidate the preview buffer
+    preview_bufnr = nil
   else
     filecmds.open(state)
   end
@@ -232,15 +230,12 @@ return {
             nowait = true,
           },
           mappings = {
+            ["<space>"] = "none",
             ["<up>"] = preview_file_above,
             ["<down>"] = preview_file_below,
             ["."] = reset_root,
             ["<left>"] = parent,
             ["<right>"] = set_root,
-            ["<space>"] = {
-              "toggle_node",
-              nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use
-            },
             ["<cr>"] = preview_enter,
             ["<esc>"] = "cancel", -- close preview or floating neo-tree window
             ["P"] = { "toggle_preview", config = { use_float = true, use_image_nvim = true } },
