@@ -1,15 +1,17 @@
-local filecmds = require('neo-tree.sources.filesystem.commands')
+local filecmds = require("neo-tree.sources.filesystem.commands")
 
 local project_root = nil
 local function set_root(state)
-  if not project_root then project_root = state.path end
+  if not project_root then
+    project_root = state.path
+  end
   filecmds.set_root(state)
 end
 
 -- Function to reset the root to the original path
 local function reset_root()
   if project_root then
-    vim.cmd('Neotree ' .. project_root)
+    vim.cmd("Neotree " .. project_root)
   end
 end
 
@@ -19,7 +21,7 @@ local function parent(state)
   filecmds.navigate_up(state)
 
   vim.defer_fn(function()
-    require('neo-tree.ui.renderer').focus_node(state, parent_id)
+    require("neo-tree.ui.renderer").focus_node(state, parent_id)
   end, 40) -- ensure navigate up is finished
 end
 
@@ -33,9 +35,11 @@ end
 --
 --
 
+local initial_bufnr = nil
 local preview_bufnr = nil
-local initial_bufnr = vim.api.nvim_get_current_buf()
 local preview_winid = nil
+
+initial_bufnr = vim.api.nvim_get_current_buf()
 
 local function close_initial_dashboard()
   if initial_bufnr and vim.api.nvim_buf_is_valid(initial_bufnr) then
@@ -48,7 +52,7 @@ local function open_preview_buffer(filepath)
   -- Create a new preview buffer if invalid or non-existent
   if preview_bufnr == nil or not vim.api.nvim_buf_is_valid(preview_bufnr) then
     preview_bufnr = vim.api.nvim_create_buf(false, true)
-    vim.api.nvim_buf_set_option(preview_bufnr, 'bufhidden', 'hide')
+    vim.bo[preview_bufnr].bufhidden = "hide"
   end
 
   -- Set the content of the preview buffer
@@ -56,7 +60,7 @@ local function open_preview_buffer(filepath)
 
   -- If the preview window doesn't exist, create it
   if preview_winid == nil or not vim.api.nvim_win_is_valid(preview_winid) then
-    vim.cmd('vsplit') -- Open a vertical split for the preview
+    vim.cmd("vsplit") -- Open a vertical split for the preview
     preview_winid = vim.api.nvim_get_current_win()
   end
 
@@ -76,14 +80,14 @@ local function preview_file(state)
 end
 
 local function preview_file_above(state)
-  vim.api.nvim_command('normal! k')
+  vim.api.nvim_command("normal! k")
   if require("custom.winmgr").is_sidebar() then
     preview_file(state)
   end
 end
 
 local function preview_file_below(state)
-  vim.api.nvim_command('normal! j')
+  vim.api.nvim_command("normal! j")
   if require("custom.winmgr").is_sidebar() then
     preview_file(state)
   end
@@ -96,8 +100,8 @@ local function preview_enter(state)
     if not require("neo-tree.utils").is_expandable(node) then
       local filepath = node.path
       -- Ensure a new buffer is created for the file
-      vim.cmd('badd ' .. filepath)
-      vim.cmd('buffer ' .. filepath)
+      vim.cmd("badd " .. filepath)
+      vim.cmd("buffer " .. filepath)
       -- Invalidate the preview buffer
       preview_bufnr = nil
     end
@@ -105,7 +109,6 @@ local function preview_enter(state)
     filecmds.open(state)
   end
 end
-
 
 return {
   {
@@ -119,23 +122,19 @@ return {
     },
     config = function()
       -- If you want icons for diagnostic errors, you'll need to define them somewhere:
-      vim.fn.sign_define("DiagnosticSignError",
-        { text = " ", texthl = "DiagnosticSignError" })
-      vim.fn.sign_define("DiagnosticSignWarn",
-        { text = " ", texthl = "DiagnosticSignWarn" })
-      vim.fn.sign_define("DiagnosticSignInfo",
-        { text = " ", texthl = "DiagnosticSignInfo" })
-      vim.fn.sign_define("DiagnosticSignHint",
-        { text = "󰌵", texthl = "DiagnosticSignHint" })
+      vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError" })
+      vim.fn.sign_define("DiagnosticSignWarn", { text = " ", texthl = "DiagnosticSignWarn" })
+      vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSignInfo" })
+      vim.fn.sign_define("DiagnosticSignHint", { text = "󰌵", texthl = "DiagnosticSignHint" })
 
       require("neo-tree").setup({
-        close_if_last_window = false,   -- Close Neo-tree if it is the last window left in the tab
+        close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
         popup_border_style = "rounded", -- "single" | "double" | "rounded" | "solid" | NC
         enable_git_status = true,
         enable_diagnostics = true,
         open_files_do_not_replace_types = { "terminal", "trouble", "qf" }, -- when opening files, do not use windows containing these filetypes or buftypes
-        sort_case_insensitive = false,                                     -- used when sorting files and directories in the tree
-        sort_function = nil,                                               -- use a custom function for sorting files and directories in the tree
+        sort_case_insensitive = false, -- used when sorting files and directories in the tree
+        sort_function = nil, -- use a custom function for sorting files and directories in the tree
         -- sort_function = function (a,b)
         --       if a.type == b.type then
         --           return a.path > b.path
@@ -145,7 +144,7 @@ return {
         --   end , -- this sorts files and directories descendantly
         default_component_configs = {
           container = {
-            enable_character_fade = true
+            enable_character_fade = true,
           },
           indent = {
             indent_size = 2,
@@ -168,7 +167,7 @@ return {
             -- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
             -- then these will never be used.
             default = "*",
-            highlight = "NeoTreeFileIcon"
+            highlight = "NeoTreeFileIcon",
           },
           modified = {
             symbol = "[+]",
@@ -182,17 +181,17 @@ return {
           git_status = {
             symbols = {
               -- Change type
-              added     = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
-              modified  = "", -- or "", but this is redundant info if you use git_status_colors on the name
-              deleted   = "✖", -- this can only be used in the git_status source
-              renamed   = "󰁕", -- this can only be used in the git_status source
+              added = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
+              modified = "", -- or "", but this is redundant info if you use git_status_colors on the name
+              deleted = "✖", -- this can only be used in the git_status source
+              renamed = "󰁕", -- this can only be used in the git_status source
               -- Status type
               untracked = "",
-              ignored   = "",
-              unstaged  = "󰄱",
-              staged    = "",
-              conflict  = "",
-            }
+              ignored = "",
+              unstaged = "󰄱",
+              staged = "",
+              conflict = "",
+            },
           },
           -- If you don't want to use these columns, you can set `enabled = false` for each of them individually
           file_size = {
@@ -233,8 +232,8 @@ return {
             nowait = true,
           },
           mappings = {
-            ['<up>'] = preview_file_above,
-            ['<down>'] = preview_file_below,
+            ["<up>"] = preview_file_above,
+            ["<down>"] = preview_file_below,
             ["."] = reset_root,
             ["<left>"] = parent,
             ["<right>"] = set_root,
@@ -256,8 +255,8 @@ return {
               -- this command supports BASH style brace expansion ("x{a,b,c}" -> xa,xb,xc). see `:h neo-tree-file-actions` for details
               -- some commands may take optional config options, see `:h neo-tree-mappings` for details
               config = {
-                show_path = "none" -- "none", "relative", "absolute"
-              }
+                show_path = "none", -- "none", "relative", "absolute"
+              },
             },
             ["A"] = "add_directory", -- also accepts the optional config.show_path option like "add". this also supports BASH style brace expansion.
             ["d"] = "delete",
@@ -279,7 +278,7 @@ return {
             ["<"] = "prev_source",
             [">"] = "next_source",
             ["i"] = "show_file_details",
-          }
+          },
         },
         nesting_rules = {},
         filesystem = {
@@ -310,11 +309,11 @@ return {
             },
           },
           follow_current_file = {
-            enabled = false,                      -- This will find and focus the file in the active buffer every time
+            enabled = false, -- This will find and focus the file in the active buffer every time
             --               -- the current file is changed while the tree is open.
-            leave_dirs_open = false,              -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+            leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
           },
-          group_empty_dirs = false,               -- when true, empty folders will be grouped together
+          group_empty_dirs = false, -- when true, empty folders will be grouped together
           hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
           -- in whatever position is specified in window.position
           -- "open_current",  -- netrw disabled, opening a directory opens within the
@@ -354,15 +353,15 @@ return {
             },
           },
 
-          commands = {} -- Add a custom command or override a global one using the same function name
+          commands = {}, -- Add a custom command or override a global one using the same function name
         },
         buffers = {
           follow_current_file = {
-            enabled = true,          -- This will find and focus the file in the active buffer every time
+            enabled = true, -- This will find and focus the file in the active buffer every time
             --              -- the current file is changed while the tree is open.
             leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
           },
-          group_empty_dirs = true,   -- when true, empty folders will be grouped together
+          group_empty_dirs = true, -- when true, empty folders will be grouped together
           show_unloaded = true,
           window = {
             mappings = {
@@ -376,33 +375,33 @@ return {
               ["on"] = { "order_by_name", nowait = false },
               ["os"] = { "order_by_size", nowait = false },
               ["ot"] = { "order_by_type", nowait = false },
-            }
+            },
           },
         },
         git_status = {
           window = {
             position = "float",
             mappings = {
-              ["A"]  = "git_add_all",
+              ["A"] = "git_add_all",
               ["gu"] = "git_unstage_file",
               ["ga"] = "git_add_file",
               ["gr"] = "git_revert_file",
               ["gc"] = "git_commit",
               ["gp"] = "git_push",
               ["gg"] = "git_commit_and_push",
-              ["o"]  = { "show_help", nowait = false, config = { title = "Order by", prefix_key = "o" } },
+              ["o"] = { "show_help", nowait = false, config = { title = "Order by", prefix_key = "o" } },
               ["oc"] = { "order_by_created", nowait = false },
               ["od"] = { "order_by_diagnostics", nowait = false },
               ["om"] = { "order_by_modified", nowait = false },
               ["on"] = { "order_by_name", nowait = false },
               ["os"] = { "order_by_size", nowait = false },
               ["ot"] = { "order_by_type", nowait = false },
-            }
-          }
-        }
+            },
+          },
+        },
       })
 
       vim.cmd([[nnoremap \ :Neotree reveal<cr>]])
-    end
-  }
+    end,
+  },
 }
