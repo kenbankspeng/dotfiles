@@ -167,6 +167,11 @@ map("<leader><leader>", require("custom.winmgr").neotree_left, "toggle neotree l
 map(",,", "<cmd>Oil --float<CR>", "open parent directory")
 map("q", require("custom.winmgr").close, "close window")
 
+-- DIFFVIEW --
+map("<leader>dv", "<cmd>DiffviewOpen<CR>", "Diff view")
+map("<leader>dh", "<cmd>DiffviewFileHistory<CR>", "Diff history")
+
+
 -- BUFFERS (using bufferline, emulating tabs)
 map("H", "<Cmd>BufferLineCyclePrev<CR>", "Prev Buffer")
 map("L", "<Cmd>BufferLineCycleNext<CR>", "Next Buffer")
