@@ -162,23 +162,6 @@ del("n", "<leader>fe") -- Explorer NeoTree (Root Dir)
 -- nvim/lazy defaults shown in comments
 --
 
--- OIL --
--- oil has a bug which prevents me from setting all the keymaps here
--- See :help oil-actions for a list of all available actions
--- local detail = false -- used in oil_helper
--- local actions = require("oil.actions")
--- local oil_helper = require("config.helpers.oil")
--- local toggle_detail = oil_helper.toggle_detail
--- local mux = oil_helper.mux
--- local go_right = oil_helper.go_right
--- local go_left = oil_helper.go_left
--- local maybe_go_right_maybe_cd = oil_helper.maybe_go_right_maybe_cd
-
--- map("gd", function() toggle_detail(detail) end, "toggle Oil details")    -- no leader
--- map("<left>", mux(go_left, actions.parent.callback), "parent")
--- map("<right>", mux(go_right, maybe_go_right_maybe_cd), "right")
-
-
 -- NEOTREE & OIL --
 map("<leader><leader>", require("custom.winmgr").neotree_left, "toggle neotree left")
 map(",,", "<cmd>Oil --float<CR>", "open parent directory")
