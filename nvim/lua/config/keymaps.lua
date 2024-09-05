@@ -18,7 +18,7 @@ local whichkey = require("which-key")
 local command = vim.api.nvim_create_user_command
 local del = vim.keymap.del
 local map = function(keys, func, desc)
-  vim.keymap.set("n", keys, func, { desc = desc, silent = true })
+  vim.keymap.set("n", keys, func, { desc = desc, silent = true, noremap = true })
 end
 
 -- Document existing key chains
