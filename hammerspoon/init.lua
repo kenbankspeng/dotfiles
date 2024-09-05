@@ -132,4 +132,5 @@ Alert:start({
 })
 
 -- capslock key remapped to f20 using Karabiner Elements
-Modal:bindHotkeys({ toggle = { {}, "f20" } })
+-- fn capslock key remapped to f12 using BetterTouchTool
+Modal:bindHotkeys({ toggle = { {}, "f12" } })
