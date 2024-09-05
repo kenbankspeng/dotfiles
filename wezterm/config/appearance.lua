@@ -37,7 +37,7 @@ return {
    switch_to_last_active_tab_when_closing_tab = true,
 
    -- window
-   window_decorations = 'RESIZE',
+   window_decorations = 'RESIZE', -- NONE, TITLE, RESIZE, TITLE|RESIZE
    window_padding = {
       top = 40,
       right = 5, -- scrollbar width
