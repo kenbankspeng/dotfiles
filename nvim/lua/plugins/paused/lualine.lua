@@ -26,7 +26,7 @@
 --   .lualine_y: progress, location
 --   .lualine_z: clock
 
--- opts.sections - lualine
+-- opts.sections - statusline
 -- opts.tabline.sections - tabline
 -- opts.winbar.sections - winbar
 
@@ -35,29 +35,9 @@ return {
     "nvim-lualine/lualine.nvim",
     opts = function(_, opts)
       opts.winbar = {
-        lualine_a = {
+        lualine_z = {
           {
-            'mode',
-            --   tab_max_length = 40,
-            --   max_length = vim.o.columns / 3,
-            --   mode = 1,
-            --   path = 0,
-            --   use_mode_colors = true,
-            --   tabs_color = {
-            --     active = 'lualine_a_normal',
-            --     inactive = 'lualine_a_inactive',
-            --   },
-            --   show_modified_status = true,
-            --   symbols = {
-            --     modified = '[+]',
-            --   },
-            --   fmt = function(name, context)
-            --     local buflist = vim.fn.tabpagebuflist(context.tabnr)
-            --     local winnr = vim.fn.tabpagewinnr(context.tabnr)
-            --     local bufnr = buflist[winnr]
-            --     local mod = vim.fn.getbufvar(bufnr, '&mod')
-            --     return name .. (mod == 1 and ' +' or '')
-            --   end
+            'selectioncount',
           }
         }
       }
