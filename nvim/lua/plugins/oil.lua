@@ -1,3 +1,14 @@
+local function maybe_go_right_maybe_cd()
+  local oil = require("oil") -- loads oil after it is initialized
+  local actions = require("oil.actions")
+  local entry = oil.get_cursor_entry()
+  if entry ~= nil and entry.type == "directory" then
+    actions.select.callback()              -- cd into the directory
+  else
+    vim.api.nvim_feedkeys('l', 'n', false) -- go right
+  end
+end
+
 local git_ignored = setmetatable({}, {
   __index = function(self, key)
     local proc = vim.system(
@@ -84,6 +95,8 @@ return {
       keymaps = {
         ["g?"] = "actions.show_help",
         ["<CR>"] = "actions.select",
+        ["<left>"] = "actions.parent",
+        ["<right>"] = maybe_go_right_maybe_cd,
         ["\\"] = { "actions.select", opts = { vertical = true }, desc = "Open the entry in a vertical split" },
         ["/"] = { "actions.select", opts = { horizontal = true }, desc = "Open the entry in a horizontal split" },
         ["<C-p>"] = "actions.preview",
