@@ -1,3 +1,5 @@
+-- TODO: add keymaps for lazyvim telescope
+
 --
 -- KEYMAP CONSTANTS
 --
