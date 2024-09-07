@@ -242,6 +242,12 @@ map("<leader>sn", tele.find_files, "search neovim files")
 --  <leader>ff           No command                               Find Files (Root Dir)
 --  <leader>fc           No command                               Find Config File
 
+-- MARKDOWN PREVIEW --
+map("<leader>mp", "<Cmd>MarkdownPreview<CR>", "Markdown Preview")
+map("<leader>mt", "<Cmd>MarkdownPreviewToggle<CR>", "Markdown Preview Toggle")
+map("<leader>ms", "<Cmd>MarkdownPreviewStop<CR>", "Markdown Preview Stop")
+
+
 -- MASON --
 -- <Space>cm -- code mason
 

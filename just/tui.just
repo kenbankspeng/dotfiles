@@ -8,6 +8,10 @@ default:
 @edit *args:
   neovide {{ args }}
 
+# markdown viewer
+@glo *args:
+  glow {{ args }}
+
 # tui git
 @g *args:
   lazygit {{ args }}
