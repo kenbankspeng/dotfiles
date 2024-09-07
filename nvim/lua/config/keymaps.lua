@@ -181,18 +181,18 @@ map("<Tab>", "<Cmd>BufferLineCycleNext<CR>", "Next Buffer")
 map("<leader>y.", "<cmd>Yazi<CR>", "Open yazi at the current file")      -- ok
 map("<leader>yy", "<cmd>Yazi cwd<CR>", "Open yazi at working directory") -- ok
 
--- TELESCOPE -- ok -- See `:help telescope.builtin`
-local builtin = require("telescope.builtin")
-map("<leader>sh", builtin.help_tags, "search help")                         -- ok
-map("<leader>sk", builtin.keymaps, "search keymaps")                        -- ok
-map("<leader>sf", builtin.find_files, "search files")                       -- ok
-map("<leader>ss", builtin.builtin, "search select telescope")               -- ok
-map("<leader>sw", builtin.grep_string, "search current word")               -- ok
-map("<leader>sg", builtin.live_grep, "search by grep")                      -- ok
-map("<leader>sd", builtin.diagnostics, "search diagnostics")                -- ok
-map("<leader>sr", builtin.resume, "search resume")                          -- ok
-map("<leader>s.", builtin.oldfiles, 'search Recent Files ("." for repeat)') -- ok
-map("<leader>fb", builtin.buffers, "find in buffers")                       -- ok
+-- -- TELESCOPE -- ok -- See `:help telescope.builtin`
+-- local builtin = require("telescope.builtin")
+-- map("<leader>sh", builtin.help_tags, "search help")                         -- ok
+-- map("<leader>sk", builtin.keymaps, "search keymaps")                        -- ok
+-- map("<leader>sf", builtin.find_files, "search files")                       -- ok
+-- map("<leader>ss", builtin.builtin, "search select telescope")               -- ok
+-- map("<leader>sw", builtin.grep_string, "search current word")               -- ok
+-- map("<leader>sg", builtin.live_grep, "search by grep")                      -- ok
+-- map("<leader>sd", builtin.diagnostics, "search diagnostics")                -- ok
+-- map("<leader>sr", builtin.resume, "search resume")                          -- ok
+-- map("<leader>s.", builtin.oldfiles, 'search Recent Files ("." for repeat)') -- ok
+-- map("<leader>fb", builtin.buffers, "find in buffers")                       -- ok
 
 -- defined in lsp-config.lua as autocmd associated with file type
 --
@@ -206,11 +206,11 @@ map("<leader>fb", builtin.buffers, "find in buffers")                       -- o
 -- <leader>ca           vim.lsp.buf.code_action                  -- code action
 -- gD                   vim.lsp.buf.declaration                  -- declaration
 
--- You can pass additional configuration to Telescope to change the theme, layout, etc.
-local tele = require("config.helpers.telescope")
-map("<leader>/", tele.fzf_current_buffer, "fuzzy search current buffer")
-map("<leader>s/", tele.live_grep, "search in open files")
-map("<leader>sn", tele.find_files, "search neovim files")
+-- -- You can pass additional configuration to Telescope to change the theme, layout, etc.
+-- local tele = require("config.helpers.telescope")
+-- map("<leader>/", tele.fzf_current_buffer, "fuzzy search current buffer")
+-- map("<leader>s/", tele.live_grep, "search in open files")
+-- map("<leader>sn", tele.find_files, "search neovim files")
 --  :                    <Cmd>Telescope command_history<CR>       Command History
 --  ,                    <Cmd>Telescope buffers sort...<CR>       Switch Buffer
 --  <leader>sR           <Cmd>Telescope resume<CR>                Resume
@@ -472,15 +472,3 @@ map("<M-Right>", function() unified.resize("l", 2) end, "resize right")
 --   - <a>: around
 --   - <al>: last
 --   - <an>: next
-
-local sorters = require('telescope.sorters')
-
--- Map <leader>sC to a non-fuzzy command search
-map('<leader>:', function()
-  require('telescope.builtin').commands({
-    sorter = sorters.get_generic_fuzzy_sorter({
-      fuzzy = false,
-      override_generic_sorter = true,
-    })
-  })
-end, '[S]earch [C]ommands (non-fuzzy)')
