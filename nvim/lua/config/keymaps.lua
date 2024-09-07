@@ -44,7 +44,6 @@ command("Q", function()
 end, {})
 
 
-
 -- VIM KEYMAPS
 
 -- Insertion and Appending
@@ -212,7 +211,6 @@ local tele = require("config.helpers.telescope")
 map("<leader>/", tele.fzf_current_buffer, "fuzzy search current buffer")
 map("<leader>s/", tele.live_grep, "search in open files")
 map("<leader>sn", tele.find_files, "search neovim files")
-
 --  :                    <Cmd>Telescope command_history<CR>       Command History
 --  ,                    <Cmd>Telescope buffers sort...<CR>       Switch Buffer
 --  <leader>sR           <Cmd>Telescope resume<CR>                Resume
@@ -433,31 +431,15 @@ map("<leader>\\", "<C-w>v", "split right")
 map("<leader>/", "<C-w>s", "split down")
 
 -- navigate splits   -- ok
-map("<S-Left>", function()
-  unified.navigate("h")
-end, "navigate left")
-map("<S-Down>", function()
-  unified.navigate("j")
-end, "navigate down")
-map("<S-Up>", function()
-  unified.navigate("k")
-end, "navigate up")
-map("<S-Right>", function()
-  unified.navigate("l")
-end, "navigate right")
+map("<S-Left>", function() unified.navigate("h") end, "navigate left")
+map("<S-Down>", function() unified.navigate("j") end, "navigate down")
+map("<S-Up>", function() unified.navigate("k") end, "navigate up")
+map("<S-Right>", function() unified.navigate("l") end, "navigate right")
 -- resize splits   -- ok
-map("<M-Left>", function()
-  unified.resize("h", 2)
-end, "resize left")
-map("<M-Down>", function()
-  unified.resize("j", 2)
-end, "resize down")
-map("<M-Up>", function()
-  unified.resize("k", 2)
-end, "resize up")
-map("<M-Right>", function()
-  unified.resize("l", 2)
-end, "resize right")
+map("<M-Left>", function() unified.resize("h", 2) end, "resize left")
+map("<M-Down>", function() unified.resize("j", 2) end, "resize down")
+map("<M-Up>", function() unified.resize("k", 2) end, "resize up")
+map("<M-Right>", function() unified.resize("l", 2) end, "resize right")
 
 -------------------------
 -- OVERLAPPING KEYMAPS --
@@ -490,3 +472,15 @@ end, "resize right")
 --   - <a>: around
 --   - <al>: last
 --   - <an>: next
+
+local sorters = require('telescope.sorters')
+
+-- Map <leader>sC to a non-fuzzy command search
+map('<leader>:', function()
+  require('telescope.builtin').commands({
+    sorter = sorters.get_generic_fuzzy_sorter({
+      fuzzy = false,
+      override_generic_sorter = true,
+    })
+  })
+end, '[S]earch [C]ommands (non-fuzzy)')

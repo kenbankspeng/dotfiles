@@ -28,5 +28,7 @@ ls -al
 > [!QUOTE] And I quote
 > To be or not to be...
 
+[cbc](cvbcv.cv)
 
+[[nvim/plugins.md]]
 
