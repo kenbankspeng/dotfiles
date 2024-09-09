@@ -1,6 +1,3 @@
---
--- this is a test
---
 local function maybe_go_right_maybe_cd()
   local oil = require("oil") -- loads oil after it is initialized
   local actions = require("oil.actions")
