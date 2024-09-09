@@ -16,35 +16,30 @@
 -- <S-…> shift-key, <C-…> control-key
 -- <A-…> or <M-…> alt-key or meta-key, <D-…> command-key or "super" key
 
-local whichkey = require("which-key")
+local whichkey = require('which-key')
 local command = vim.api.nvim_create_user_command
 local del = vim.keymap.del
-local map = function(keys, func, desc)
-  vim.keymap.set("n", keys, func, { desc = desc, silent = true, noremap = true })
-end
+local map = function(keys, func, desc) vim.keymap.set('n', keys, func, { desc = desc, silent = true, noremap = true }) end
 
 -- Document existing key chains
 whichkey.add({
-  { "<leader>b", group = "+buffer" },
-  { "<leader>c", group = "+code" },
-  { "<leader>d", group = "+lsp", icon = "" },
-  { "<leader>f", group = "+find/+file" },
-  { "<leader>g", group = "+git" },
-  { "<leader>q", group = "+session" },
-  { "<leader>s", group = "+search" },
-  { "<leader>u", group = "+toggle" },
-  { "<leader>x", group = "+lists", icon = "" },
-  { "<leader>y", group = "+yazi", icon = "󰇥" },
+  { '<leader>b', group = '+buffer' },
+  { '<leader>c', group = '+code' },
+  { '<leader>d', group = '+lsp', icon = '' },
+  { '<leader>f', group = '+find/+file' },
+  { '<leader>g', group = '+git' },
+  { '<leader>q', group = '+session' },
+  { '<leader>s', group = '+search' },
+  { '<leader>u', group = '+toggle' },
+  { '<leader>x', group = '+lists', icon = '' },
+  { '<leader>y', group = '+yazi', icon = '󰇥' },
 })
 
 -- Remap Q to start/stop recording a macro (requires a register)
-vim.keymap.set("n", "Q", "q", { noremap = true })
+vim.keymap.set('n', 'Q', 'q', { noremap = true })
 
 -- custom quit command because using bufferline
-command("Q", function()
-  vim.api.nvim_buf_delete(0, {})
-end, {})
-
+command('Q', function() vim.api.nvim_buf_delete(0, {}) end, {})
 
 -- VIM KEYMAPS
 
@@ -122,41 +117,41 @@ end, {})
 --
 
 -- LAZY --
-del("n", "<leader>L")          -- LazyVim Changelog
-del("n", "<leader>K")          -- man keyword lookup
-del("n", "<C-Up>")             -- Resize window
-del("n", "<C-Down>")           -- Resize window
-del("n", "<C-Left>")           -- Resize window
-del("n", "<C-Right>")          -- Resize window
-del("n", "<leader>qq")         -- quit all
+del('n', '<leader>L') -- LazyVim Changelog
+del('n', '<leader>K') -- man keyword lookup
+del('n', '<C-Up>') -- Resize window
+del('n', '<C-Down>') -- Resize window
+del('n', '<C-Left>') -- Resize window
+del('n', '<C-Right>') -- Resize window
+del('n', '<leader>qq') -- quit all
 
-del("n", "<leader><Tab>[")     -- real vim tabs
-del("n", "<leader><Tab>d")     -- real vim tabs
-del("n", "<leader><Tab>]")     -- real vim tabs
-del("n", "<leader><Tab><Tab>") -- real vim tabs
-del("n", "<leader><Tab>f")     -- real vim tabs
-del("n", "<leader><Tab>o")     -- real vim tabs
-del("n", "<leader><Tab>l")     -- real vim tabs
+del('n', '<leader><Tab>[') -- real vim tabs
+del('n', '<leader><Tab>d') -- real vim tabs
+del('n', '<leader><Tab>]') -- real vim tabs
+del('n', '<leader><Tab><Tab>') -- real vim tabs
+del('n', '<leader><Tab>f') -- real vim tabs
+del('n', '<leader><Tab>o') -- real vim tabs
+del('n', '<leader><Tab>l') -- real vim tabs
 
-del("n", "[b")                 -- Prev Buffer
-del("n", "]b")                 -- Next Buffer
-del("n", "<leader>bl")         -- Delete Buffers to the Left
-del("n", "<leader>br")         -- Delete Buffers to the Right
-del("n", "<leader>bo")         -- Delete Other Buffers
-del("n", "<leader>bP")         -- Delete Non-Pinned Buffers
-del("n", "<leader>bp")         -- Toggle Pin
+del('n', '[b') -- Prev Buffer
+del('n', ']b') -- Next Buffer
+del('n', '<leader>bl') -- Delete Buffers to the Left
+del('n', '<leader>br') -- Delete Buffers to the Right
+del('n', '<leader>bo') -- Delete Other Buffers
+del('n', '<leader>bP') -- Delete Non-Pinned Buffers
+del('n', '<leader>bp') -- Toggle Pin
 
-del("n", "<M-k>")              -- Move Code Up
-del("n", "<M-j>")              -- Move Code Down
+del('n', '<M-k>') -- Move Code Up
+del('n', '<M-j>') -- Move Code Down
 
-del("n", "<leader>|")          -- Split Window Right <C-W>v                                             Split Window Right
-del("n", "<leader>-")          -- Split Window Below <C-W>s                                             Split Window Below
+del('n', '<leader>|') -- Split Window Right <C-W>v                                             Split Window Right
+del('n', '<leader>-') -- Split Window Below <C-W>s                                             Split Window Below
 
 -- NEOTREE -- cannot disable - so remove keys
-del("n", "<leader>E")  -- Explorer NeoTree (cwd)
-del("n", "<leader>e")  -- Explorer NeoTree (Root Dir)
-del("n", "<leader>fE") -- Explorer NeoTree (cwd)
-del("n", "<leader>fe") -- Explorer NeoTree (Root Dir)
+del('n', '<leader>E') -- Explorer NeoTree (cwd)
+del('n', '<leader>e') -- Explorer NeoTree (Root Dir)
+del('n', '<leader>fE') -- Explorer NeoTree (cwd)
+del('n', '<leader>fe') -- Explorer NeoTree (Root Dir)
 
 --
 -- Add/modify key mappings
@@ -164,29 +159,28 @@ del("n", "<leader>fe") -- Explorer NeoTree (Root Dir)
 --
 
 -- NEOTREE & OIL --
-map("<leader><leader>", require("custom.winmgr").neotree_left, "toggle neotree left")
-map(",,", "<cmd>Oil --float<CR>", "open parent directory")
-map("q", require("custom.winmgr").close, "close window")
+map('<leader><leader>', require('custom.winmgr').neotree_left, 'toggle neotree left')
+map(',,', '<cmd>Oil --float<CR>', 'open parent directory')
+map('q', require('custom.winmgr').close, 'close window')
 
 -- DIFFVIEW --
-map("<leader>dv", "<cmd>DiffviewOpen<CR>", "Diff view")
-map("<leader>dh", "<cmd>DiffviewFileHistory<CR>", "Diff history")
-
+map('<leader>dv', '<cmd>DiffviewOpen<CR>', 'Diff view')
+map('<leader>dh', '<cmd>DiffviewFileHistory<CR>', 'Diff history')
 
 -- BUFFERS (using bufferline, emulating tabs)
-map("H", "<Cmd>BufferLineCyclePrev<CR>", "Prev Buffer")
-map("L", "<Cmd>BufferLineCycleNext<CR>", "Next Buffer")
-map("<S-Tab>", "<Cmd>BufferLineCyclePrev<CR>", "Prev Buffer")
-map("<Tab>", "<Cmd>BufferLineCycleNext<CR>", "Next Buffer")
+map('H', '<Cmd>BufferLineCyclePrev<CR>', 'Prev Buffer')
+map('L', '<Cmd>BufferLineCycleNext<CR>', 'Next Buffer')
+map('<S-Tab>', '<Cmd>BufferLineCyclePrev<CR>', 'Prev Buffer')
+map('<Tab>', '<Cmd>BufferLineCycleNext<CR>', 'Next Buffer')
 
 -- YAZI --
-map("<leader>y.", "<cmd>Yazi<CR>", "Open yazi at the current file")      -- ok
-map("<leader>yy", "<cmd>Yazi cwd<CR>", "Open yazi at working directory") -- ok
+map('<leader>y.', '<cmd>Yazi<CR>', 'Open yazi at the current file') -- ok
+map('<leader>yy', '<cmd>Yazi cwd<CR>', 'Open yazi at working directory') -- ok
 
 -- MARKDOWN PREVIEW --
-map("<leader>mp", "<Cmd>MarkdownPreview<CR>", "Markdown Preview")
-map("<leader>mt", "<Cmd>MarkdownPreviewToggle<CR>", "Markdown Preview Toggle")
-map("<leader>ms", "<Cmd>MarkdownPreviewStop<CR>", "Markdown Preview Stop")
+map('<leader>mp', '<Cmd>MarkdownPreview<CR>', 'Markdown Preview')
+map('<leader>mt', '<Cmd>MarkdownPreviewToggle<CR>', 'Markdown Preview Toggle')
+map('<leader>ms', '<Cmd>MarkdownPreviewStop<CR>', 'Markdown Preview Stop')
 
 -- TELESCOPE -- ok -- See `:help telescope.builtin`
 -- ? :                   <Cmd>Telescope command_history<CR>       Command History
@@ -235,7 +229,6 @@ map("<leader>ms", "<Cmd>MarkdownPreviewStop<CR>", "Markdown Preview Stop")
 -- ? map("<leader>s/", tele.live_grep, "search in open files")
 -- ? map("<leader>sn", tele.find_files, "search neovim files")
 
-
 -- <leader>sr search replace
 
 -- <leader>dr           vim.lsp.buf.rename                       -- rename
@@ -267,7 +260,7 @@ map("<leader>ms", "<Cmd>MarkdownPreviewStop<CR>", "Markdown Preview Stop")
 -- <leader>cf    --ok                 No command                                 Format Code
 
 -- GRUG-FAR -- ** conflict with Telescope
-map("<leader>fr", require("config.helpers.grug_far").find_replace, "Find and Replace")
+map('<leader>fr', require('config.helpers.grug_far').find_replace, 'Find and Replace')
 
 -- GIT -- ok
 -- gB                    No command                               Git Browse
@@ -286,7 +279,7 @@ map("<leader>fr", require("config.helpers.grug_far").find_replace, "Find and Rep
 -- fT                                     No command                                         Terminal (cwd)
 -- ft                                     No command                                         Terminal (Root Dir)
 -- <C-/>                                  No command                                         Terminal (Root Dir)
-vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- TROUBLE --
 -- <Space>cS   <Cmd>Trouble lsp toggle<CR>
@@ -325,7 +318,7 @@ vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" }
 -- ]d                                     No command                                         Jump to the next diagnostic
 -- <C-W><C-D>                             <C-W>d                                             Show diagnostics under the cursor
 -- <C-W>d                                 No command                                         Show diagnostics under the cursor
-map("<leader>xf", vim.diagnostic.setloclist, "Open diagnostic [Q]uickfix list")
+map('<leader>xf', vim.diagnostic.setloclist, 'Open diagnostic [Q]uickfix list')
 
 -- MATCHIT --
 -- <Plug>(MatchitNormalMultiForward)      :<C-U>call matchit#MultiMatch("W",  "n")<CR>       No description
@@ -336,7 +329,6 @@ map("<leader>xf", vim.diagnostic.setloclist, "Open diagnostic [Q]uickfix list")
 -- ]%                                     <Plug>(MatchitNormalMultiForward)                  No description
 -- %                                      <Plug>(MatchitNormalForward)                       No description
 -- [%                                     <Plug>(MatchitNormalMultiBackward)                 No description
-
 
 -------------
 -- GENERAL --
@@ -404,7 +396,7 @@ map("<leader>xf", vim.diagnostic.setloclist, "Open diagnostic [Q]uickfix list")
 -- bd                    No command                                         Delete Buffer
 -- bb                    <Cmd>e #<CR>                                       Switch to Other Buffer
 -- `                     <Cmd>e #<CR>                                       Switch to Other Buffer
-map("<leader>`", "<Cmd>e #<CR>", "switch buffer")
+map('<leader>`', '<Cmd>e #<CR>', 'switch buffer')
 -- w                     <C-W>                                              Windows
 -- <leader>|             <C-W>v                                             Split Window Right
 -- <leader>-             <C-W>s                                             Split Window Below
@@ -419,22 +411,22 @@ map("<leader>`", "<Cmd>e #<CR>", "switch buffer")
 -- NVIM-WEZTERM --
 ------------------
 -- depending on situation, send command to neovim or to wezterm
-local unified = require("config.helpers.nvim_wezterm")
+local unified = require('config.helpers.nvim_wezterm')
 
 -- splits
-map("<leader>\\", "<C-w>v", "split right")
-map("<leader>/", "<C-w>s", "split down")
+map('<leader>\\', '<C-w>v', 'split right')
+map('<leader>/', '<C-w>s', 'split down')
 
 -- navigate splits   -- ok
-map("<S-Left>", function() unified.navigate("h") end, "navigate left")
-map("<S-Down>", function() unified.navigate("j") end, "navigate down")
-map("<S-Up>", function() unified.navigate("k") end, "navigate up")
-map("<S-Right>", function() unified.navigate("l") end, "navigate right")
+map('<S-Left>', function() unified.navigate('h') end, 'navigate left')
+map('<S-Down>', function() unified.navigate('j') end, 'navigate down')
+map('<S-Up>', function() unified.navigate('k') end, 'navigate up')
+map('<S-Right>', function() unified.navigate('l') end, 'navigate right')
 -- resize splits   -- ok
-map("<M-Left>", function() unified.resize("h", 2) end, "resize left")
-map("<M-Down>", function() unified.resize("j", 2) end, "resize down")
-map("<M-Up>", function() unified.resize("k", 2) end, "resize up")
-map("<M-Right>", function() unified.resize("l", 2) end, "resize right")
+map('<M-Left>', function() unified.resize('h', 2) end, 'resize left')
+map('<M-Down>', function() unified.resize('j', 2) end, 'resize down')
+map('<M-Up>', function() unified.resize('k', 2) end, 'resize up')
+map('<M-Right>', function() unified.resize('l', 2) end, 'resize right')
 
 -------------------------
 -- OVERLAPPING KEYMAPS --
