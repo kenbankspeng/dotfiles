@@ -259,9 +259,6 @@ map('<leader>ms', '<Cmd>MarkdownPreviewStop<CR>', 'Markdown Preview Stop')
 -- <leader>cF                         No command                                 Format Injected Langs
 -- <leader>cf    --ok                 No command                                 Format Code
 
--- GRUG-FAR -- ** conflict with Telescope
-map('<leader>fr', require('config.helpers.grug_far').find_replace, 'Find and Replace')
-
 -- GIT -- ok
 -- gB                    No command                               Git Browse
 -- gb                    No command                               Git Blame Line
