@@ -1,23 +1,23 @@
+--
+-- this is a test
+--
 local function maybe_go_right_maybe_cd()
   local oil = require("oil") -- loads oil after it is initialized
   local actions = require("oil.actions")
   local entry = oil.get_cursor_entry()
   if entry ~= nil and entry.type == "directory" then
-    actions.select.callback()              -- cd into the directory
+    actions.select.callback() -- cd into the directory
   else
-    vim.api.nvim_feedkeys('l', 'n', false) -- go right
+    vim.api.nvim_feedkeys("l", "n", false) -- go right
   end
 end
 
 local git_ignored = setmetatable({}, {
   __index = function(self, key)
-    local proc = vim.system(
-      { "git", "ls-files", "--ignored", "--exclude-standard", "--others", "--directory" },
-      {
-        cwd = key,
-        text = true,
-      }
-    )
+    local proc = vim.system({ "git", "ls-files", "--ignored", "--exclude-standard", "--others", "--directory" }, {
+      cwd = key,
+      text = true,
+    })
     local result = proc:wait()
     local ret = {}
     if result.code == 0 then
