@@ -183,70 +183,63 @@ map("<Tab>", "<Cmd>BufferLineCycleNext<CR>", "Next Buffer")
 map("<leader>y.", "<cmd>Yazi<CR>", "Open yazi at the current file")      -- ok
 map("<leader>yy", "<cmd>Yazi cwd<CR>", "Open yazi at working directory") -- ok
 
--- -- TELESCOPE -- ok -- See `:help telescope.builtin`
--- local builtin = require("telescope.builtin")
--- map("<leader>sh", builtin.help_tags, "search help")                         -- ok
--- map("<leader>sk", builtin.keymaps, "search keymaps")                        -- ok
--- map("<leader>sf", builtin.find_files, "search files")                       -- ok
--- map("<leader>ss", builtin.builtin, "search select telescope")               -- ok
--- map("<leader>sw", builtin.grep_string, "search current word")               -- ok
--- map("<leader>sg", builtin.live_grep, "search by grep")                      -- ok
--- map("<leader>sd", builtin.diagnostics, "search diagnostics")                -- ok
--- map("<leader>sr", builtin.resume, "search resume")                          -- ok
--- map("<leader>s.", builtin.oldfiles, 'search Recent Files ("." for repeat)') -- ok
--- map("<leader>fb", builtin.buffers, "find in buffers")                       -- ok
-
--- defined in lsp-config.lua as autocmd associated with file type
---
--- gd                   telescope lsp_definitions                -- definition
--- gr                   telescope lsp_references                 -- references
--- gI                   telescope lsp_implementations            -- implementation
--- <leader>D            telescope lsp_type_definitions           -- Type ddefinition
--- <leader>ds           telescope lsp_document_symbols           -- document symbols
--- <leader>ws           telescope lsp_dynamic_workspace_symbols  -- workspace symbols
--- <leader>dr           vim.lsp.buf.rename                       -- rename
--- <leader>ca           vim.lsp.buf.code_action                  -- code action
--- gD                   vim.lsp.buf.declaration                  -- declaration
-
--- -- You can pass additional configuration to Telescope to change the theme, layout, etc.
--- local tele = require("config.helpers.telescope")
--- map("<leader>/", tele.fzf_current_buffer, "fuzzy search current buffer")
--- map("<leader>s/", tele.live_grep, "search in open files")
--- map("<leader>sn", tele.find_files, "search neovim files")
---  :                    <Cmd>Telescope command_history<CR>       Command History
---  ,                    <Cmd>Telescope buffers sort...<CR>       Switch Buffer
---  <leader>sR           <Cmd>Telescope resume<CR>                Resume
---  <leader>so           <Cmd>Telescope vim_options<CR>           Options
---  <leader>sm           <Cmd>Telescope marks<CR>                 Jump to Mark
---  <leader>sM           <Cmd>Telescope man_pages<CR>             Man Pages
---  <leader>sl           <Cmd>Telescope loclist<CR>               Location List
---  <leader>sj           <Cmd>Telescope jumplist<CR>              Jumplist
---  <leader>sH           <Cmd>Telescope highlights<CR>            Search Highlight Groups
---  <leader>sD           <Cmd>Telescope diagnostics<CR>           Workspace Diagnostics
---  <leader>sC           <Cmd>Telescope commands<CR>              Commands
---  <leader>sc           <Cmd>Telescope command_history<CR>       Command History
---  <leader>sb           <Cmd>Telescope current_buffer_ff<CR>     Buffer
---  <leader>sa           <Cmd>Telescope autocommands<CR>          Auto Commands
---  <leader>s"           <Cmd>Telescope registers<CR>             Registers
---  <leader>gs           <Cmd>Telescope git_status<CR>            Status
---  <leader>gc           <Cmd>Telescope git_commits<CR>           Commits
---  <leader>fr    **     <Cmd>Telescope oldfiles<CR>              Recent
---  <leader>fg           <Cmd>Telescope git_files<CR>             Find Files (git-files)
---  <leader>sq           <Cmd>Telescope quickfix<CR>              Quickfix List
---  <leader>sW           No command                               Word (cwd)
---  <leader>sG           No command                               Grep (cwd)
---  <leader>fR           No command                               Recent (cwd)
---  <leader>uC           No command                               Colorscheme with Preview
---  <leader>sS           No command                               Goto Symbol (Workspace)
---  <leader>fF           No command                               Find Files (cwd)
---  <leader>ff           No command                               Find Files (Root Dir)
---  <leader>fc           No command                               Find Config File
-
 -- MARKDOWN PREVIEW --
 map("<leader>mp", "<Cmd>MarkdownPreview<CR>", "Markdown Preview")
 map("<leader>mt", "<Cmd>MarkdownPreviewToggle<CR>", "Markdown Preview Toggle")
 map("<leader>ms", "<Cmd>MarkdownPreviewStop<CR>", "Markdown Preview Stop")
 
+-- TELESCOPE -- ok -- See `:help telescope.builtin`
+-- ? :                   <Cmd>Telescope command_history<CR>       Command History
+-- map("<leader>sh",    builtin.help_tags, "search help")                         -- ok
+-- map("<leader>sk",    builtin.keymaps, "search keymaps")                        -- o                  -- ok
+-- map("<leader>sw",    builtin.grep_string, "search current word")               -- ok
+-- map("<leader>sg",    builtin.live_grep, "search by grep")                      -- ok
+-- map("<leader>sd",    builtin.diagnostics, "search diagnostics")                -- ok
+-- <leader>sR           <Cmd>Telescope resume<CR>                Resume                        -- ok
+-- map("<leader>fb",    builtin.buffers, "find in buffers")                       -- ok
+-- gD                   vim.lsp.buf.declaration                  -- declaration
+-- gd                   telescope lsp_definitions                -- definition
+-- gr                   telescope lsp_references                 -- references
+-- gI                   telescope lsp_implementations            -- implementation
+-- <leader>sS           No command                               Goto Symbol (Workspace)
+-- <leader>ds(ss)       telescope lsp_document_symbols           -- document symbols
+-- <leader>ws           telescope lsp_dynamic_workspace_symbols  -- workspace symbols
+-- <leader>,            <Cmd>Telescope buffers sort...<CR>       Switch Buffer
+-- <leader>so           <Cmd>Telescope vim_options<CR>           Options
+-- <leader>sm           <Cmd>Telescope marks<CR>                 Jump to Mark
+-- <leader>sM           <Cmd>Telescope man_pages<CR>             Man Pages
+-- <leader>sl           <Cmd>Telescope loclist<CR>               Location List
+-- <leader>sj           <Cmd>Telescope jumplist<CR>              Jumplist
+-- <leader>sH           <Cmd>Telescope highlights<CR>            Search Highlight Groups
+-- <leader>sD           <Cmd>Telescope diagnostics<CR>           Workspace Diagnostics
+-- <leader>sC           <Cmd>Telescope commands<CR>              Commands
+-- <leader>sc           <Cmd>Telescope command_history<CR>       Command History
+-- <leader>sb           <Cmd>Telescope current_buffer_ff<CR>     Buffer
+-- <leader>sa           <Cmd>Telescope autocommands<CR>          Auto Commands
+-- <leader>s"           <Cmd>Telescope registers<CR>             Registers
+-- <leader>sq           <Cmd>Telescope quickfix<CR>              Quickfix List
+-- <leader>gs           <Cmd>Telescope git_status<CR>            Status
+-- <leader>gc           <Cmd>Telescope git_commits<CR>           Commits
+-- <leader>fr    **     <Cmd>Telescope oldfiles<CR>              Recent
+-- <leader>fR           No command                               Recent (cwd)
+-- <leader>fg           <Cmd>Telescope git_files<CR>             Find Files (git-files)
+-- <leader>sW           No command                               Word (cwd)
+-- <leader>sG           No command                               Grep (cwd)
+-- <leader>uC           No command                               Colorscheme with Preview
+-- <leader>fF           No command                               Find Files (cwd)
+-- <leader>ff           No command                               Find Files (Root Dir)
+-- <leader>fc           No command                               Find Config File
+-- You can pass additional configuration to Telescope to change the theme, layout, etc.
+-- local tele = require("config.helpers.telescope")
+-- ? map("<leader>/", tele.fzf_current_buffer, "fuzzy search current buffer")
+-- ? map("<leader>s/", tele.live_grep, "search in open files")
+-- ? map("<leader>sn", tele.find_files, "search neovim files")
+
+
+-- <leader>sr search replace
+
+-- <leader>dr           vim.lsp.buf.rename                       -- rename
+-- <leader>ca           vim.lsp.buf.code_action                  -- code action
 
 -- MASON --
 -- <Space>cm -- code mason
