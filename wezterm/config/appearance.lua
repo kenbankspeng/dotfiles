@@ -45,9 +45,6 @@ return {
       left = 30,
    },
    window_close_confirmation = 'NeverPrompt',
-   window_frame = {
-      active_titlebar_bg = '#090909',
-   },
    inactive_pane_hsb = {
       saturation = 0.9,
       brightness = 0.65,
