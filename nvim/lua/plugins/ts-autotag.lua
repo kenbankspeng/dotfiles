@@ -1,5 +1,5 @@
 return {
   {
     'nvim-ts-autotag',
-  }
+  },
 }

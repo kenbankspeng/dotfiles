@@ -17,7 +17,6 @@
 -- tabs (shows currently available tabs)
 -- windows (shows currently available windows)
 
-
 -- lazyvim config: opts.sections
 --   .lualine_a: mode
 --   .lualine_b: branch
@@ -32,17 +31,17 @@
 
 return {
   {
-    "nvim-lualine/lualine.nvim",
+    'nvim-lualine/lualine.nvim',
     opts = function(_, opts)
       -- opts.options.theme = "powerline_dark"
       opts.winbar = {
         lualine_z = {
           {
             'selectioncount',
-          }
-        }
+          },
+        },
       }
       return opts
     end,
-  }
+  },
 }

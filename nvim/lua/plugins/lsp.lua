@@ -21,7 +21,6 @@ return {
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 
-
       local servers = {
         -- See `:help lspconfig-all` for a list of all the pre-configured LSPs
 
@@ -35,7 +34,7 @@ return {
         --   },
         -- },
 
-        marksman = {}
+        marksman = {},
         -- equivalent to nvim-lspconfig defaults:
         --   require 'lspconfig'.marksman.setup({
         --     cmd = { "marksman", "server" },
@@ -46,7 +45,7 @@ return {
       }
 
       -- keep: use left, force: use right
-      opts.servers = vim.tbl_deep_extend("force", opts.servers, servers)
-    end
-  }
+      opts.servers = vim.tbl_deep_extend('force', opts.servers, servers)
+    end,
+  },
 }

@@ -100,5 +100,5 @@ return {
       --   resolve_relative_path_application = '',
       -- },
     },
-  }
+  },
 }
