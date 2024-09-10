@@ -39,7 +39,7 @@ whichkey.add({
 vim.keymap.set('n', 'Q', 'q', { noremap = true })
 
 -- custom quit command because using bufferline
-command('Q', function() vim.api.nvim_buf_delete(0, {}) end, {})
+-- command('Q', function() vim.api.nvim_buf_delete(0, {}) end, {})
 
 -- VIM KEYMAPS
 
@@ -117,39 +117,39 @@ command('Q', function() vim.api.nvim_buf_delete(0, {}) end, {})
 --
 
 -- LAZY --
-del('n', '<leader>L') -- LazyVim Changelog
-del('n', '<leader>K') -- man keyword lookup
-del('n', '<C-Up>') -- Resize window
-del('n', '<C-Down>') -- Resize window
-del('n', '<C-Left>') -- Resize window
-del('n', '<C-Right>') -- Resize window
-del('n', '<leader>qq') -- quit all
+del('n', '<leader>L')          -- LazyVim Changelog
+del('n', '<leader>K')          -- man keyword lookup
+del('n', '<C-Up>')             -- Resize window
+del('n', '<C-Down>')           -- Resize window
+del('n', '<C-Left>')           -- Resize window
+del('n', '<C-Right>')          -- Resize window
+del('n', '<leader>qq')         -- quit all
 
-del('n', '<leader><Tab>[') -- real vim tabs
-del('n', '<leader><Tab>d') -- real vim tabs
-del('n', '<leader><Tab>]') -- real vim tabs
+del('n', '<leader><Tab>[')     -- real vim tabs
+del('n', '<leader><Tab>d')     -- real vim tabs
+del('n', '<leader><Tab>]')     -- real vim tabs
 del('n', '<leader><Tab><Tab>') -- real vim tabs
-del('n', '<leader><Tab>f') -- real vim tabs
-del('n', '<leader><Tab>o') -- real vim tabs
-del('n', '<leader><Tab>l') -- real vim tabs
+del('n', '<leader><Tab>f')     -- real vim tabs
+del('n', '<leader><Tab>o')     -- real vim tabs
+del('n', '<leader><Tab>l')     -- real vim tabs
 
-del('n', '[b') -- Prev Buffer
-del('n', ']b') -- Next Buffer
-del('n', '<leader>bl') -- Delete Buffers to the Left
-del('n', '<leader>br') -- Delete Buffers to the Right
-del('n', '<leader>bo') -- Delete Other Buffers
-del('n', '<leader>bP') -- Delete Non-Pinned Buffers
-del('n', '<leader>bp') -- Toggle Pin
+-- del('n', '[b')                 -- Prev Buffer
+-- del('n', ']b')                 -- Next Buffer
+-- del('n', '<leader>bl')         -- Delete Buffers to the Left
+-- del('n', '<leader>br')         -- Delete Buffers to the Right
+-- del('n', '<leader>bo')         -- Delete Other Buffers
+-- del('n', '<leader>bP')         -- Delete Non-Pinned Buffers
+-- del('n', '<leader>bp')         -- Toggle Pin
 
-del('n', '<M-k>') -- Move Code Up
-del('n', '<M-j>') -- Move Code Down
+del('n', '<M-k>')     -- Move Code Up
+del('n', '<M-j>')     -- Move Code Down
 
 del('n', '<leader>|') -- Split Window Right <C-W>v                                             Split Window Right
 del('n', '<leader>-') -- Split Window Below <C-W>s                                             Split Window Below
 
 -- NEOTREE -- cannot disable - so remove keys
-del('n', '<leader>E') -- Explorer NeoTree (cwd)
-del('n', '<leader>e') -- Explorer NeoTree (Root Dir)
+del('n', '<leader>E')  -- Explorer NeoTree (cwd)
+del('n', '<leader>e')  -- Explorer NeoTree (Root Dir)
 del('n', '<leader>fE') -- Explorer NeoTree (cwd)
 del('n', '<leader>fe') -- Explorer NeoTree (Root Dir)
 
@@ -167,14 +167,8 @@ map('q', require('custom.winmgr').close, 'close window')
 map('<leader>dv', '<cmd>DiffviewOpen<CR>', 'Diff view')
 map('<leader>dh', '<cmd>DiffviewFileHistory<CR>', 'Diff history')
 
--- BUFFERS (using bufferline, emulating tabs)
-map('H', '<Cmd>BufferLineCyclePrev<CR>', 'Prev Buffer')
-map('L', '<Cmd>BufferLineCycleNext<CR>', 'Next Buffer')
-map('<S-Tab>', '<Cmd>BufferLineCyclePrev<CR>', 'Prev Buffer')
-map('<Tab>', '<Cmd>BufferLineCycleNext<CR>', 'Next Buffer')
-
 -- YAZI --
-map('<leader>y.', '<cmd>Yazi<CR>', 'Open yazi at the current file') -- ok
+map('<leader>y.', '<cmd>Yazi<CR>', 'Open yazi at the current file')      -- ok
 map('<leader>yy', '<cmd>Yazi cwd<CR>', 'Open yazi at working directory') -- ok
 
 -- MARKDOWN PREVIEW --
@@ -319,6 +313,50 @@ map('<leader>xf', vim.diagnostic.setloclist, 'Open diagnostic [Q]uickfix list')
 -- ]%                                     <Plug>(MatchitNormalMultiForward)                  No description
 -- %                                      <Plug>(MatchitNormalForward)                       No description
 -- [%                                     <Plug>(MatchitNormalMultiBackward)                 No description
+
+
+
+-- -- BUFFERS (using bufferline, emulating tabs)
+-- map('H', '<Cmd>BufferLineCyclePrev<CR>', 'Prev Buffer')
+-- map('L', '<Cmd>BufferLineCycleNext<CR>', 'Next Buffer')
+-- map('<S-Tab>', '<Cmd>BufferLineCyclePrev<CR>', 'Prev Buffer')
+-- map('<Tab>', '<Cmd>BufferLineCycleNext<CR>', 'Next Buffer')
+
+
+-- BARBAR --
+
+-- Move to previous/next
+map('<S-Tab>', '<Cmd>BufferPrevious<CR>', 'move to previous buffer')
+map('<Tab>', '<Cmd>BufferNext<CR>', 'move to next buffer')
+-- Re-order to previous/next
+map('<A-<>', '<Cmd>BufferMovePrevious<CR>', 'reorder to previous buffer')
+map('<A->>', '<Cmd>BufferMoveNext<CR>', 'reorder to next buffer')
+
+-- Pin/unpin buffer
+map('<A-p>', '<Cmd>BufferPin<CR>', 'pin buffer')
+-- Goto pinned/unpinned buffer
+--                 :BufferGotoPinned
+--                 :BufferGotoUnpinned
+-- Close buffer
+map('q', '<Cmd>BufferClose<CR>', 'close buffer')
+-- Wipeout buffer
+--                 :BufferWipeout
+-- Close commands
+--                 :BufferCloseAllButCurrent
+--                 :BufferCloseAllButPinned
+--                 :BufferCloseAllButCurrentOrPinned
+--                 :BufferCloseBuffersLeft
+--                 :BufferCloseBuffersRight
+-- Magic buffer-picking mode
+map('<C-p>', '<Cmd>BufferPick<CR>', 'magic buffer-picking mode')
+-- Sort automatically by...
+map('<Space>bb', '<Cmd>BufferOrderByBufferNumber<CR>', 'sort automatically by buffer number')
+map('<Space>bn', '<Cmd>BufferOrderByName<CR>', 'sort automatically by name')
+map('<Space>bd', '<Cmd>BufferOrderByDirectory<CR>', 'sort automatically by directory')
+map('<Space>bl', '<Cmd>BufferOrderByLanguage<CR>', 'sort automatically by language')
+map('<Space>bw', '<Cmd>BufferOrderByWindowNumber<CR>', 'sort automatically by window number')
+
+
 
 -------------
 -- GENERAL --
