@@ -117,39 +117,39 @@ command('Q', function() vim.api.nvim_buf_delete(0, {}) end, {})
 --
 
 -- LAZY --
-del('n', '<leader>L')          -- LazyVim Changelog
-del('n', '<leader>K')          -- man keyword lookup
-del('n', '<C-Up>')             -- Resize window
-del('n', '<C-Down>')           -- Resize window
-del('n', '<C-Left>')           -- Resize window
-del('n', '<C-Right>')          -- Resize window
-del('n', '<leader>qq')         -- quit all
+del('n', '<leader>L') -- LazyVim Changelog
+del('n', '<leader>K') -- man keyword lookup
+del('n', '<C-Up>') -- Resize window
+del('n', '<C-Down>') -- Resize window
+del('n', '<C-Left>') -- Resize window
+del('n', '<C-Right>') -- Resize window
+del('n', '<leader>qq') -- quit all
 
-del('n', '<leader><Tab>[')     -- real vim tabs
-del('n', '<leader><Tab>d')     -- real vim tabs
-del('n', '<leader><Tab>]')     -- real vim tabs
+del('n', '<leader><Tab>[') -- real vim tabs
+del('n', '<leader><Tab>d') -- real vim tabs
+del('n', '<leader><Tab>]') -- real vim tabs
 del('n', '<leader><Tab><Tab>') -- real vim tabs
-del('n', '<leader><Tab>f')     -- real vim tabs
-del('n', '<leader><Tab>o')     -- real vim tabs
-del('n', '<leader><Tab>l')     -- real vim tabs
+del('n', '<leader><Tab>f') -- real vim tabs
+del('n', '<leader><Tab>o') -- real vim tabs
+del('n', '<leader><Tab>l') -- real vim tabs
 
-del('n', '[b')                 -- Prev Buffer
-del('n', ']b')                 -- Next Buffer
-del('n', '<leader>bl')         -- Delete Buffers to the Left
-del('n', '<leader>br')         -- Delete Buffers to the Right
-del('n', '<leader>bo')         -- Delete Other Buffers
-del('n', '<leader>bP')         -- Delete Non-Pinned Buffers
-del('n', '<leader>bp')         -- Toggle Pin
+del('n', '[b') -- Prev Buffer
+del('n', ']b') -- Next Buffer
+del('n', '<leader>bl') -- Delete Buffers to the Left
+del('n', '<leader>br') -- Delete Buffers to the Right
+del('n', '<leader>bo') -- Delete Other Buffers
+del('n', '<leader>bP') -- Delete Non-Pinned Buffers
+del('n', '<leader>bp') -- Toggle Pin
 
-del('n', '<M-k>')              -- Move Code Up
-del('n', '<M-j>')              -- Move Code Down
+del('n', '<M-k>') -- Move Code Up
+del('n', '<M-j>') -- Move Code Down
 
-del('n', '<leader>|')          -- Split Window Right <C-W>v                                             Split Window Right
-del('n', '<leader>-')          -- Split Window Below <C-W>s                                             Split Window Below
+del('n', '<leader>|') -- Split Window Right <C-W>v                                             Split Window Right
+del('n', '<leader>-') -- Split Window Below <C-W>s                                             Split Window Below
 
 -- NEOTREE -- cannot disable - so remove keys
-del('n', '<leader>E')  -- Explorer NeoTree (cwd)
-del('n', '<leader>e')  -- Explorer NeoTree (Root Dir)
+del('n', '<leader>E') -- Explorer NeoTree (cwd)
+del('n', '<leader>e') -- Explorer NeoTree (Root Dir)
 del('n', '<leader>fE') -- Explorer NeoTree (cwd)
 del('n', '<leader>fe') -- Explorer NeoTree (Root Dir)
 
@@ -174,7 +174,7 @@ map('<S-Tab>', '<Cmd>BufferLineCyclePrev<CR>', 'Prev Buffer')
 map('<Tab>', '<Cmd>BufferLineCycleNext<CR>', 'Next Buffer')
 
 -- YAZI --
-map('<leader>y.', '<cmd>Yazi<CR>', 'Open yazi at the current file')      -- ok
+map('<leader>y.', '<cmd>Yazi<CR>', 'Open yazi at the current file') -- ok
 map('<leader>yy', '<cmd>Yazi cwd<CR>', 'Open yazi at working directory') -- ok
 
 -- MARKDOWN PREVIEW --
@@ -221,14 +221,9 @@ map('<leader>yy', '<cmd>Yazi cwd<CR>', 'Open yazi at working directory') -- ok
 -- <leader>fF           No command                               Find Files (cwd)
 -- <leader>ff           No command                               Find Files (Root Dir)
 -- <leader>fc           No command                               Find Config File
--- You can pass additional configuration to Telescope to change the theme, layout, etc.
--- local tele = require("config.helpers.telescope")
--- ? map("<leader>/", tele.fzf_current_buffer, "fuzzy search current buffer")
--- ? map("<leader>s/", tele.live_grep, "search in open files")
--- ? map("<leader>sn", tele.find_files, "search neovim files")
 
+-- ?? --
 -- <leader>sr search replace
-
 -- <leader>dr           vim.lsp.buf.rename                       -- rename
 -- <leader>ca           vim.lsp.buf.code_action                  -- code action
 
