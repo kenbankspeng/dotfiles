@@ -23,10 +23,7 @@ ls -al
 
 > [!NOTE] Please note
 > ok
-.
 > [!TIP] Tip
 > Here is a tip for you
-.
 > [!QUOTE] And I quote
 > To be or not to be...
-.

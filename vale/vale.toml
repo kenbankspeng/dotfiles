@@ -1,0 +1,8 @@
+# tbd
+#
+# You have to sync the vale package for the first usage:
+# You can create a ~/.config/vale/.vale.ini file
+# Then use full path to sync the mason package with the global config.
+#
+# ~/.local/share/nvim/mason/packages/vale/vale --config=$HOME/.config/vale/vale.toml sync
+#
