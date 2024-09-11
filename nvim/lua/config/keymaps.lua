@@ -80,12 +80,6 @@ vim.keymap.set('n', 'Q', 'q', { noremap = true })
 -- `L`: move to the bottom of the screen
 -- `M`: move to the middle of the screen
 
--- Yanking and Pasting
--- `y`: yank (requires a motion)
--- `Y`: yank line
--- `p`: paste after cursor
--- `P`: paste before cursor
-
 -- Searching and Repeating
 -- `n`: repeat search forward
 -- `N`: repeat search backward
@@ -174,7 +168,27 @@ map('<S-Tab>', '<cmd>BufferLineCyclePrev<CR>', 'Prev Buffer')
 map('<Tab>', '<cmd>BufferLineCycleNext<CR>', 'Next Buffer')
 map('<C-S-Tab>', '<cmd>tabnew %<CR>', 'New Tab')
 
-
+-- YANKY --
+-- <leader>p    - paste from history
+--  y(motion)   - yank
+--  Y           - yank line
+--  P           - paste before cursor
+--  p           - paste after cursor
+-- [p           - paste prev line
+-- ]p           - paste next line
+---------------------------------------
+-- [y           - prev yank
+-- ]y           - next yank
+-- gP           - paste before cursor but leave cursor after
+-- [P           - paste prev line
+-- <P           - paste before shift left
+-- >P           - paste before shift right
+-- =P           - paste before filter
+-- gp           - paste after cursor but leave cursor after
+-- ]p           - paste next line
+-- <p           - paste after shift left
+-- >p           - paste after shift right
+-- =p           - paste after filter
 
 -- MARKDOWN PREVIEW --
 -- map('<leader>cp', '<Cmd>MarkdownPreviewToggle<CR>', 'Markdown Preview Toggle')
