@@ -193,6 +193,7 @@ map('<C-S-Tab>', '<cmd>tabnew %<CR>', 'New Tab')
 -- MARKDOWN PREVIEW --
 -- map('<leader>cp', '<Cmd>MarkdownPreviewToggle<CR>', 'Markdown Preview Toggle')
 
+-- FZF-LUA -- ui seems better than telescope
 -- TELESCOPE -- ok -- See `:help telescope.builtin`
 -- ? :                   <Cmd>Telescope command_history<CR>       Command History
 -- map("<leader>sh",    builtin.help_tags, "search help")                         -- ok
@@ -332,6 +333,14 @@ map('<leader>xf', vim.diagnostic.setloclist, 'Open diagnostic [Q]uickfix list')
 -- ]%                                     <Plug>(MatchitNormalMultiForward)                  No description
 -- %                                      <Plug>(MatchitNormalForward)                       No description
 -- [%                                     <Plug>(MatchitNormalMultiBackward)                 No description
+
+-- DIAL --
+-- <C-x>  - decrement
+-- <C-a>  - increment
+-- g<C-x> - decrement
+-- g<C-a> - increment
+
+
 
 
 -------------
