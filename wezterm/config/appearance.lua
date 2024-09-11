@@ -37,7 +37,7 @@ return {
    switch_to_last_active_tab_when_closing_tab = true,
 
    -- window
-   window_decorations = 'RESIZE',
+   window_decorations = 'RESIZE', -- NONE, TITLE, RESIZE, TITLE|RESIZE
    window_padding = {
       top = 40,
       right = 5, -- scrollbar width
@@ -45,11 +45,6 @@ return {
       left = 30,
    },
    window_close_confirmation = 'NeverPrompt',
-   window_frame = {
-      active_titlebar_bg = '#090909',
-      -- font = fonts.font,
-      -- font_size = fonts.font_size,
-   },
    inactive_pane_hsb = {
       saturation = 0.9,
       brightness = 0.65,

@@ -1,3 +1,5 @@
+-- TODO: add keymaps for lazyvim telescope
+
 --
 -- KEYMAP CONSTANTS
 --
@@ -14,36 +16,26 @@
 -- <S-…> shift-key, <C-…> control-key
 -- <A-…> or <M-…> alt-key or meta-key, <D-…> command-key or "super" key
 
-local whichkey = require("which-key")
-local command = vim.api.nvim_create_user_command
+local whichkey = require('which-key')
 local del = vim.keymap.del
-local map = function(keys, func, desc)
-  vim.keymap.set("n", keys, func, { desc = desc, silent = true })
-end
+local map = function(keys, func, desc) vim.keymap.set('n', keys, func, { desc = desc, silent = true, noremap = true }) end
 
 -- Document existing key chains
 whichkey.add({
-  { "<leader>b", group = "+buffer" },
-  { "<leader>c", group = "+code" },
-  { "<leader>d", group = "+lsp", icon = "" },
-  { "<leader>f", group = "+find/+file" },
-  { "<leader>g", group = "+git" },
-  { "<leader>q", group = "+session" },
-  { "<leader>s", group = "+search" },
-  { "<leader>u", group = "+toggle" },
-  { "<leader>x", group = "+lists", icon = "" },
-  { "<leader>y", group = "+yazi", icon = "󰇥" },
+  { '<leader>b', group = '+buffer' },
+  { '<leader>c', group = '+code' },
+  { '<leader>d', group = '+lsp', icon = '' },
+  { '<leader>f', group = '+find/+file' },
+  { '<leader>g', group = '+git' },
+  { '<leader>q', group = '+session' },
+  { '<leader>s', group = '+search' },
+  { '<leader>u', group = '+toggle' },
+  { '<leader>x', group = '+lists', icon = '' },
+  { '<leader>y', group = '+yazi', icon = '󰇥' },
 })
 
 -- Remap Q to start/stop recording a macro (requires a register)
-vim.keymap.set("n", "Q", "q", { noremap = true })
-
--- custom quit command because using bufferline
-command("Q", function()
-  vim.api.nvim_buf_delete(0, {})
-end, {})
-
-
+vim.keymap.set('n', 'Q', 'q', { noremap = true })
 
 -- VIM KEYMAPS
 
@@ -121,121 +113,117 @@ end, {})
 --
 
 -- LAZY --
-del("n", "<leader>L")          -- LazyVim Changelog
-del("n", "<leader>K")          -- man keyword lookup
-del("n", "<C-Up>")             -- Resize window
-del("n", "<C-Down>")           -- Resize window
-del("n", "<C-Left>")           -- Resize window
-del("n", "<C-Right>")          -- Resize window
-del("n", "<leader>qq")         -- quit all
+del('n', '<leader>L')          -- LazyVim Changelog
+del('n', '<leader>K')          -- man keyword lookup
+del('n', '<C-Up>')             -- Resize window
+del('n', '<C-Down>')           -- Resize window
+del('n', '<C-Left>')           -- Resize window
+del('n', '<C-Right>')          -- Resize window
+del('n', '<leader>qq')         -- quit all
 
-del("n", "<leader><Tab>[")     -- real vim tabs
-del("n", "<leader><Tab>d")     -- real vim tabs
-del("n", "<leader><Tab>]")     -- real vim tabs
-del("n", "<leader><Tab><Tab>") -- real vim tabs
-del("n", "<leader><Tab>f")     -- real vim tabs
-del("n", "<leader><Tab>o")     -- real vim tabs
-del("n", "<leader><Tab>l")     -- real vim tabs
+del('n', '<leader><Tab>[')     -- real vim tabs
+del('n', '<leader><Tab>d')     -- real vim tabs
+del('n', '<leader><Tab>]')     -- real vim tabs
+del('n', '<leader><Tab><Tab>') -- real vim tabs
+del('n', '<leader><Tab>f')     -- real vim tabs
+del('n', '<leader><Tab>o')     -- real vim tabs
+del('n', '<leader><Tab>l')     -- real vim tabs
 
-del("n", "[b")                 -- Prev Buffer
-del("n", "]b")                 -- Next Buffer
-del("n", "<leader>bl")         -- Delete Buffers to the Left
-del("n", "<leader>br")         -- Delete Buffers to the Right
-del("n", "<leader>bo")         -- Delete Other Buffers
-del("n", "<leader>bP")         -- Delete Non-Pinned Buffers
-del("n", "<leader>bp")         -- Toggle Pin
+del('n', '[b')                 -- Prev Buffer
+del('n', ']b')                 -- Next Buffer
+del('n', '<leader>bl')         -- Delete Buffers to the Left
+del('n', '<leader>br')         -- Delete Buffers to the Right
+del('n', '<leader>bo')         -- Delete Other Buffers
+del('n', '<leader>bP')         -- Delete Non-Pinned Buffers
+del('n', '<leader>bp')         -- Toggle Pin
 
-del("n", "<M-k>")              -- Move Code Up
-del("n", "<M-j>")              -- Move Code Down
+del('n', '<M-k>')              -- Move Code Up
+del('n', '<M-j>')              -- Move Code Down
 
-del("n", "<leader>|")          -- Split Window Right <C-W>v                                             Split Window Right
-del("n", "<leader>-")          -- Split Window Below <C-W>s                                             Split Window Below
+del('n', '<leader>|')          -- Split Window Right <C-W>v                                             Split Window Right
+del('n', '<leader>-')          -- Split Window Below <C-W>s                                             Split Window Below
 
 -- NEOTREE -- cannot disable - so remove keys
-del("n", "<leader>E")  -- Explorer NeoTree (cwd)
-del("n", "<leader>e")  -- Explorer NeoTree (Root Dir)
-del("n", "<leader>fE") -- Explorer NeoTree (cwd)
-del("n", "<leader>fe") -- Explorer NeoTree (Root Dir)
+del('n', '<leader>E')  -- Explorer NeoTree (cwd)
+del('n', '<leader>e')  -- Explorer NeoTree (Root Dir)
+del('n', '<leader>fE') -- Explorer NeoTree (cwd)
+del('n', '<leader>fe') -- Explorer NeoTree (Root Dir)
 
 --
 -- Add/modify key mappings
 -- nvim/lazy defaults shown in comments
 --
 
--- NEOTREE --
-map("<leader><leader>", require("custom.winmgr").neotree_float, "toggle neotree")
-map(",,", require("custom.winmgr").neotree_left, "toggle neotree left")
-map("q", require("custom.winmgr").close, "close window")
+-- NEOTREE & OIL --
+map('<leader><leader>', require('custom.winmgr').neotree_left, 'toggle neotree left')
+map(',,', '<cmd>Oil --float<CR>', 'open parent directory')
+map('q', require('custom.winmgr').close, 'close window')
 
--- BUFFERS (using bufferline, emulating tabs)
-map("H", "<Cmd>BufferLineCyclePrev<CR>", "Prev Buffer")
-map("L", "<Cmd>BufferLineCycleNext<CR>", "Next Buffer")
-map("<S-Tab>", "<Cmd>BufferLineCyclePrev<CR>", "Prev Buffer")
-map("<Tab>", "<Cmd>BufferLineCycleNext<CR>", "Next Buffer")
+-- DIFFVIEW --
+map('<leader>dv', '<cmd>DiffviewOpen<CR>', 'Diff view')
+map('<leader>dh', '<cmd>DiffviewFileHistory<CR>', 'Diff history')
 
 -- YAZI --
--- map("<leader>y.", "<cmd>Yazi<CR>", "Open yazi at the current file")      -- ok
--- map("<leader>yy", "<cmd>Yazi cwd<CR>", "Open yazi at working directory") -- ok
+map('<leader>y.', '<cmd>Yazi<CR>', 'Open yazi at the current file')      -- ok
+map('<leader>yy', '<cmd>Yazi cwd<CR>', 'Open yazi at working directory') -- ok
+
+-- BUFFERLINE --
+map('H', '<cmd>BufferLineCyclePrev<CR>', 'Prev Buffer')
+map('L', '<cmd>BufferLineCycleNext<CR>', 'Next Buffer')
+map('<S-Tab>', '<cmd>BufferLineCyclePrev<CR>', 'Prev Buffer')
+map('<Tab>', '<cmd>BufferLineCycleNext<CR>', 'Next Buffer')
+map('<C-S-Tab>', '<cmd>tabnew<CR>', 'New Tab')
+
+
+-- MARKDOWN PREVIEW --
+-- map('<leader>cp', '<Cmd>MarkdownPreviewToggle<CR>', 'Markdown Preview Toggle')
 
 -- TELESCOPE -- ok -- See `:help telescope.builtin`
-local builtin = require("telescope.builtin")
-map("<leader>sh", builtin.help_tags, "search help")                         -- ok
-map("<leader>sk", builtin.keymaps, "search keymaps")                        -- ok
-map("<leader>sf", builtin.find_files, "search files")                       -- ok
-map("<leader>ss", builtin.builtin, "search select telescope")               -- ok
-map("<leader>sw", builtin.grep_string, "search current word")               -- ok
-map("<leader>sg", builtin.live_grep, "search by grep")                      -- ok
-map("<leader>sd", builtin.diagnostics, "search diagnostics")                -- ok
-map("<leader>sr", builtin.resume, "search resume")                          -- ok
-map("<leader>s.", builtin.oldfiles, 'search Recent Files ("." for repeat)') -- ok
-map("<leader>fb", builtin.buffers, "find in buffers")                       -- ok
-
--- defined in lsp-config.lua as autocmd associated with file type
---
+-- ? :                   <Cmd>Telescope command_history<CR>       Command History
+-- map("<leader>sh",    builtin.help_tags, "search help")                         -- ok
+-- map("<leader>sk",    builtin.keymaps, "search keymaps")                        -- o                  -- ok
+-- map("<leader>sw",    builtin.grep_string, "search current word")               -- ok
+-- map("<leader>sg",    builtin.live_grep, "search by grep")                      -- ok
+-- map("<leader>sd",    builtin.diagnostics, "search diagnostics")                -- ok
+-- <leader>sR           <Cmd>Telescope resume<CR>                Resume                        -- ok
+-- map("<leader>fb",    builtin.buffers, "find in buffers")                       -- ok
+-- gD                   vim.lsp.buf.declaration                  -- declaration
 -- gd                   telescope lsp_definitions                -- definition
 -- gr                   telescope lsp_references                 -- references
 -- gI                   telescope lsp_implementations            -- implementation
--- <leader>D            telescope lsp_type_definitions           -- Type ddefinition
--- <leader>ds           telescope lsp_document_symbols           -- document symbols
+-- <leader>sS           No command                               Goto Symbol (Workspace)
+-- <leader>ds(ss)       telescope lsp_document_symbols           -- document symbols
 -- <leader>ws           telescope lsp_dynamic_workspace_symbols  -- workspace symbols
+-- <leader>,            <Cmd>Telescope buffers sort...<CR>       Switch Buffer
+-- <leader>so           <Cmd>Telescope vim_options<CR>           Options
+-- <leader>sm           <Cmd>Telescope marks<CR>                 Jump to Mark
+-- <leader>sM           <Cmd>Telescope man_pages<CR>             Man Pages
+-- <leader>sl           <Cmd>Telescope loclist<CR>               Location List
+-- <leader>sj           <Cmd>Telescope jumplist<CR>              Jumplist
+-- <leader>sH           <Cmd>Telescope highlights<CR>            Search Highlight Groups
+-- <leader>sD           <Cmd>Telescope diagnostics<CR>           Workspace Diagnostics
+-- <leader>sC           <Cmd>Telescope commands<CR>              Commands
+-- <leader>sc           <Cmd>Telescope command_history<CR>       Command History
+-- <leader>sb           <Cmd>Telescope current_buffer_ff<CR>     Buffer
+-- <leader>sa           <Cmd>Telescope autocommands<CR>          Auto Commands
+-- <leader>s"           <Cmd>Telescope registers<CR>             Registers
+-- <leader>sq           <Cmd>Telescope quickfix<CR>              Quickfix List
+-- <leader>gs           <Cmd>Telescope git_status<CR>            Status
+-- <leader>gc           <Cmd>Telescope git_commits<CR>           Commits
+-- <leader>fr    **     <Cmd>Telescope oldfiles<CR>              Recent
+-- <leader>fR           No command                               Recent (cwd)
+-- <leader>fg           <Cmd>Telescope git_files<CR>             Find Files (git-files)
+-- <leader>sW           No command                               Word (cwd)
+-- <leader>sG           No command                               Grep (cwd)
+-- <leader>uC           No command                               Colorscheme with Preview
+-- <leader>fF           No command                               Find Files (cwd)
+-- <leader>ff           No command                               Find Files (Root Dir)
+-- <leader>fc           No command                               Find Config File
+
+-- ?? --
+-- <leader>sr search replace
 -- <leader>dr           vim.lsp.buf.rename                       -- rename
 -- <leader>ca           vim.lsp.buf.code_action                  -- code action
--- gD                   vim.lsp.buf.declaration                  -- declaration
-
--- You can pass additional configuration to Telescope to change the theme, layout, etc.
-local tele = require("config.helpers.telescope")
-map("<leader>/", tele.fzf_current_buffer, "fuzzy search current buffer")
-map("<leader>s/", tele.live_grep, "search in open files")
-map("<leader>sn", tele.find_files, "search neovim files")
-
---  :                    <Cmd>Telescope command_history<CR>       Command History
---  ,                    <Cmd>Telescope buffers sort...<CR>       Switch Buffer
---  <leader>sR           <Cmd>Telescope resume<CR>                Resume
---  <leader>so           <Cmd>Telescope vim_options<CR>           Options
---  <leader>sm           <Cmd>Telescope marks<CR>                 Jump to Mark
---  <leader>sM           <Cmd>Telescope man_pages<CR>             Man Pages
---  <leader>sl           <Cmd>Telescope loclist<CR>               Location List
---  <leader>sj           <Cmd>Telescope jumplist<CR>              Jumplist
---  <leader>sH           <Cmd>Telescope highlights<CR>            Search Highlight Groups
---  <leader>sD           <Cmd>Telescope diagnostics<CR>           Workspace Diagnostics
---  <leader>sC           <Cmd>Telescope commands<CR>              Commands
---  <leader>sc           <Cmd>Telescope command_history<CR>       Command History
---  <leader>sb           <Cmd>Telescope current_buffer_ff<CR>     Buffer
---  <leader>sa           <Cmd>Telescope autocommands<CR>          Auto Commands
---  <leader>s"           <Cmd>Telescope registers<CR>             Registers
---  <leader>gs           <Cmd>Telescope git_status<CR>            Status
---  <leader>gc           <Cmd>Telescope git_commits<CR>           Commits
---  <leader>fr    **     <Cmd>Telescope oldfiles<CR>              Recent
---  <leader>fg           <Cmd>Telescope git_files<CR>             Find Files (git-files)
---  <leader>sq           <Cmd>Telescope quickfix<CR>              Quickfix List
---  <leader>sW           No command                               Word (cwd)
---  <leader>sG           No command                               Grep (cwd)
---  <leader>fR           No command                               Recent (cwd)
---  <leader>uC           No command                               Colorscheme with Preview
---  <leader>sS           No command                               Goto Symbol (Workspace)
---  <leader>fF           No command                               Find Files (cwd)
---  <leader>ff           No command                               Find Files (Root Dir)
---  <leader>fc           No command                               Find Config File
 
 -- MASON --
 -- <Space>cm -- code mason
@@ -262,9 +250,6 @@ map("<leader>sn", tele.find_files, "search neovim files")
 -- <leader>cF                         No command                                 Format Injected Langs
 -- <leader>cf    --ok                 No command                                 Format Code
 
--- GRUG-FAR -- ** conflict with Telescope
-map("<leader>fr", require("config.helpers.grug_far").find_replace, "Find and Replace")
-
 -- GIT -- ok
 -- gB                    No command                               Git Browse
 -- gb                    No command                               Git Blame Line
@@ -282,7 +267,7 @@ map("<leader>fr", require("config.helpers.grug_far").find_replace, "Find and Rep
 -- fT                                     No command                                         Terminal (cwd)
 -- ft                                     No command                                         Terminal (Root Dir)
 -- <C-/>                                  No command                                         Terminal (Root Dir)
-vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- TROUBLE --
 -- <Space>cS   <Cmd>Trouble lsp toggle<CR>
@@ -321,7 +306,7 @@ vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" }
 -- ]d                                     No command                                         Jump to the next diagnostic
 -- <C-W><C-D>                             <C-W>d                                             Show diagnostics under the cursor
 -- <C-W>d                                 No command                                         Show diagnostics under the cursor
-map("<leader>xf", vim.diagnostic.setloclist, "Open diagnostic [Q]uickfix list")
+map('<leader>xf', vim.diagnostic.setloclist, 'Open diagnostic [Q]uickfix list')
 
 -- MATCHIT --
 -- <Plug>(MatchitNormalMultiForward)      :<C-U>call matchit#MultiMatch("W",  "n")<CR>       No description
@@ -400,7 +385,7 @@ map("<leader>xf", vim.diagnostic.setloclist, "Open diagnostic [Q]uickfix list")
 -- bd                    No command                                         Delete Buffer
 -- bb                    <Cmd>e #<CR>                                       Switch to Other Buffer
 -- `                     <Cmd>e #<CR>                                       Switch to Other Buffer
-map("<leader>`", "<Cmd>e #<CR>", "switch buffer")
+map('<leader>`', '<Cmd>e #<CR>', 'switch buffer')
 -- w                     <C-W>                                              Windows
 -- <leader>|             <C-W>v                                             Split Window Right
 -- <leader>-             <C-W>s                                             Split Window Below
@@ -415,59 +400,63 @@ map("<leader>`", "<Cmd>e #<CR>", "switch buffer")
 -- NVIM-WEZTERM --
 ------------------
 -- depending on situation, send command to neovim or to wezterm
-local unified = require("config.helpers.nvim_wezterm")
+local unified = require('config.helpers.nvim_wezterm')
 
 -- splits
-map("<leader>\\", "<C-w>v", "split right")
-map("<leader>/", "<C-w>s", "split down")
+map('<leader>\\', '<C-w>v', 'split right')
+map('<leader>/', '<C-w>s', 'split down')
 
 -- navigate splits   -- ok
-map("<S-Left>", function()
-  unified.navigate("h")
-end, "navigate left")
-map("<S-Down>", function()
-  unified.navigate("j")
-end, "navigate down")
-map("<S-Up>", function()
-  unified.navigate("k")
-end, "navigate up")
-map("<S-Right>", function()
-  unified.navigate("l")
-end, "navigate right")
+map('<S-Left>', function() unified.navigate('h') end, 'navigate left')
+map('<S-Down>', function() unified.navigate('j') end, 'navigate down')
+map('<S-Up>', function() unified.navigate('k') end, 'navigate up')
+map('<S-Right>', function() unified.navigate('l') end, 'navigate right')
 -- resize splits   -- ok
-map("<M-Left>", function()
-  unified.resize("h", 2)
-end, "resize left")
-map("<M-Down>", function()
-  unified.resize("j", 2)
-end, "resize down")
-map("<M-Up>", function()
-  unified.resize("k", 2)
-end, "resize up")
-map("<M-Right>", function()
-  unified.resize("l", 2)
-end, "resize right")
+map('<M-Left>', function() unified.resize('h', 2) end, 'resize left')
+map('<M-Down>', function() unified.resize('j', 2) end, 'resize down')
+map('<M-Up>', function() unified.resize('k', 2) end, 'resize up')
+map('<M-Right>', function() unified.resize('l', 2) end, 'resize right')
 
 -------------------------
--- OVERLAPPING KEYMAPS --
+-- OVERLAPPING KEYMAPS -- using :checkhealth
 -------------------------
+
+-- Checking your config ~
+-- - OK |mini.icons| is installed
+-- - OK |nvim-web-devicons| is installed
+
+-- Checking for issues with your mappings ~
+-- - OK No issues reported
 
 -- checking for overlapping keymaps ~
--- - WARNING In mode `n`, <<Space>w> overlaps with <<Space>wm>, <<C-W><C-D>>, <<Space>wd>:
---   - <<Space>w>: windows
---   - <<Space>wm>: Enable Maximize
---   - <<C-W><C-D>>: Show diagnostics under the cursor
---   - <<Space>wd>: Delete Window
--- - WARNING In mode `n`, <gc> overlaps with <gco>, <gcO>, <gcc>:
+-- - WARNING In mode `n`, <g> overlaps with <g%>, <gx>, <g[>, <g]>, <gc>, <gcO>, <gcc>, <gco>:
+--   - <g>: goto
+--   - <g%>: Cycle backwards through results
+--   - <gx>: Open with system app
+--   - <g[>: Move to left "around"
+--   - <g]>: Move to right "around"
 --   - <gc>: Toggle comment
---   - <gco>: Add Comment Below
 --   - <gcO>: Add Comment Above
 --   - <gcc>: Toggle comment line
+--   - <gco>: Add Comment Below
+-- - WARNING In mode `n`, <,> overlaps with <,,>:
+--   - <,>: Prev ftFT
+--   - <,,>: open parent directory
+-- - WARNING In mode `n`, <<Space>w> overlaps with <<C-W><Space>>, <<Space>wd>, <<Space>wm>, <<C-W><C-D>>:
+--   - <<Space>w>: windows
+--   - <<C-W><Space>>: Window Hydra Mode (which-key)
+--   - <<Space>wd>: Delete Window
+--   - <<Space>wm>: Enable Maximize
+--   - <<C-W><C-D>>: Show diagnostics under the cursor
 -- - WARNING In mode `x`, <i> overlaps with <il>, <in>:
 --   - <i>: inside
 --   - <il>: last
 --   - <in>: next
--- - WARNING In mode `x`, <a> overlaps with <a%>, <al>, <an>:
+-- - WARNING In mode `x`, <a> overlaps with <al>, <an>, <a%>:
+--   - <a>: around
+--   - <al>: last
+--   - <an>: next
+-- - WARNING In mode `o`, <a> overlaps with <al>, <an>:
 --   - <a>: around
 --   - <al>: last
 --   - <an>: next
@@ -475,7 +464,54 @@ end, "resize right")
 --   - <i>: inside
 --   - <il>: last
 --   - <in>: next
--- - WARNING In mode `o`, <a> overlaps with <al>, <an>:
---   - <a>: around
---   - <al>: last
---   - <an>: next
+-- - WARNING In mode `n`, <gc> overlaps with <gcO>, <gcc>, <gco>:
+--   - <gc>: Toggle comment
+--   - <gcO>: Add Comment Above
+--   - <gcc>: Toggle comment line
+--   - <gco>: Add Comment Below
+-- - OK Overlapping keymaps are only reported for informational purposes.
+--   This doesn't necessarily mean there is a problem with your config.
+
+-- Checking for duplicate mappings ~
+-- - WARNING Duplicates for <<leader>f> in mode `n`:
+--   * file/find: `{ group = true }`
+--   * find/+file: `{ group = true }`
+-- - WARNING Duplicates for <<leader>g> in mode `n`:
+--   * git: `{ group = true }`
+--   * git: `{ group = true }`
+-- - WARNING Duplicates for <<leader>b> in mode `n`:
+--   * buffer: `{ expand = <function 1>, group = true }`
+--   * buffer: `{ group = true }`
+-- - WARNING Duplicates for <<leader>x> in mode `n`:
+--   * diagnostics/quickfix: `{ group = true, icon = { color = "green", icon = "󱖫 " } }`
+--   * lists: `{ group = true, icon = "" }`
+-- - WARNING Duplicates for <<leader>q> in mode `n`:
+--   * quit/session: `{ group = true }`
+--   * session: `{ group = true }`
+-- - WARNING Duplicates for <<leader>s> in mode `n`:
+--   * search: `{ group = true }`
+--   * search: `{ group = true }`
+-- - WARNING Duplicates for <<leader>u> in mode `n`:
+--   * ui: `{ group = true, icon = { color = "cyan", icon = "󰙵 " } }`
+--   * toggle: `{ group = true }`
+-- - WARNING Duplicates for <<leader>c> in mode `n`:
+--   * code: `{ group = true }`
+--   * code: `{ group = true }`
+-- - OK Duplicate mappings are only reported for informational purposes.
+--   This doesn't necessarily mean there is a problem with your config.
+
+-- ==============================================================================
+-- yazi: require("yazi.health").check()
+
+-- yazi ~
+-- - Running yazi.nvim version 6.0.7
+-- - Found `yazi` version `Yazi 0.3.3 (Homebrew 2024-09-04)` 👍
+-- - yazi.nvim log file is at /Users/ken/.local/state/nvim/yazi.log
+-- -     hint: use `gf` to open the file path under the cursor
+-- - Found `ya` version `Ya 0.3.3 (Homebrew 2024-09-04)` 👍
+
+-- yazi.config ~
+-- - hint: execute the following command to see your configuration: >
+--   :lua =require('yazi').config
+
+-- - OK yazi

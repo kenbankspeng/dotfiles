@@ -1,18 +1,26 @@
+local function maybe_go_right_maybe_cd()
+  local oil = require('oil') -- loads oil after it is initialized
+  local actions = require('oil.actions')
+  local entry = oil.get_cursor_entry()
+  if entry ~= nil and entry.type == 'directory' then
+    actions.select.callback() -- cd into the directory
+  else
+    vim.api.nvim_feedkeys('l', 'n', false) -- go right
+  end
+end
+
 local git_ignored = setmetatable({}, {
   __index = function(self, key)
-    local proc = vim.system(
-      { "git", "ls-files", "--ignored", "--exclude-standard", "--others", "--directory" },
-      {
-        cwd = key,
-        text = true,
-      }
-    )
+    local proc = vim.system({ 'git', 'ls-files', '--ignored', '--exclude-standard', '--others', '--directory' }, {
+      cwd = key,
+      text = true,
+    })
     local result = proc:wait()
     local ret = {}
     if result.code == 0 then
-      for line in vim.gsplit(result.stdout, "\n", { plain = true, trimempty = true }) do
+      for line in vim.gsplit(result.stdout, '\n', { plain = true, trimempty = true }) do
         -- Remove trailing slash
-        line = line:gsub("/$", "")
+        line = line:gsub('/$', '')
         table.insert(ret, line)
       end
     end
@@ -24,14 +32,14 @@ local git_ignored = setmetatable({}, {
 
 return {
   {
-    "stevearc/oil.nvim",
+    'stevearc/oil.nvim',
     opts = { -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`)
       -- Set to false if you want some other plugin (e.g. netrw) to open when you edit directories.
       default_file_explorer = true,
       -- Id is automatically added at the beginning, and name at the end
       -- See :help oil-columns
       columns = {
-        "icon",
+        'icon',
         -- "permissions",
         -- "size",
         -- "mtime",
@@ -39,18 +47,18 @@ return {
       -- Buffer-local options to use for oil buffers
       buf_options = {
         buflisted = false,
-        bufhidden = "hide",
+        bufhidden = 'hide',
       },
       -- Window-local options to use for oil buffers
       win_options = {
         wrap = false,
-        signcolumn = "yes:2",
+        signcolumn = 'yes:2',
         cursorcolumn = false,
-        foldcolumn = "0",
+        foldcolumn = '0',
         spell = false,
         list = false,
         conceallevel = 3,
-        concealcursor = "nvic",
+        concealcursor = 'nvic',
       },
       -- Send deleted files to the trash instead of permanently deleting them (:help oil-trash)
       delete_to_trash = false,
@@ -72,7 +80,7 @@ return {
       },
       -- Constrain the cursor to the editable parts of the oil buffer
       -- Set to `false` to disable, or "name" to keep it on the file names
-      constrain_cursor = "editable",
+      constrain_cursor = 'editable',
       -- Set to true to watch the filesystem for changes and reload oil
       watch_for_changes = false,
       -- Keymaps in oil buffer. Can be any value that `vim.keymap.set` accepts OR a table of keymap
@@ -82,21 +90,23 @@ return {
       -- Set to `false` to remove a keymap
       -- See :help oil-actions for a list of all available actions
       keymaps = {
-        ["g?"] = "actions.show_help",
-        ["<CR>"] = "actions.select",
-        ["\\"] = { "actions.select", opts = { vertical = true }, desc = "Open the entry in a vertical split" },
-        ["/"] = { "actions.select", opts = { horizontal = true }, desc = "Open the entry in a horizontal split" },
-        ["<C-p>"] = "actions.preview",
-        ["<C-c>"] = "actions.close",
-        ["<C-l>"] = "actions.refresh",
-        ["-"] = "actions.parent",
-        ["_"] = "actions.open_cwd",
-        ["`"] = "actions.cd",
-        ["~"] = { "actions.cd", opts = { scope = "tab" }, desc = ":tcd to the current oil directory" },
-        ["gs"] = "actions.change_sort",
-        ["gx"] = "actions.open_external",
-        ["g."] = "actions.toggle_hidden",
-        ["g\\"] = "actions.toggle_trash",
+        ['g?'] = 'actions.show_help',
+        ['<CR>'] = 'actions.select',
+        ['<left>'] = 'actions.parent',
+        ['<right>'] = maybe_go_right_maybe_cd,
+        ['\\'] = { 'actions.select', opts = { vertical = true }, desc = 'Open the entry in a vertical split' },
+        ['/'] = { 'actions.select', opts = { horizontal = true }, desc = 'Open the entry in a horizontal split' },
+        ['<C-p>'] = 'actions.preview',
+        ['<C-c>'] = 'actions.close',
+        ['<C-l>'] = 'actions.refresh',
+        ['-'] = 'actions.parent',
+        ['_'] = 'actions.open_cwd',
+        ['`'] = 'actions.cd',
+        ['~'] = { 'actions.cd', opts = { scope = 'tab' }, desc = ':tcd to the current oil directory' },
+        ['gs'] = 'actions.change_sort',
+        ['gx'] = 'actions.open_external',
+        ['g.'] = 'actions.toggle_hidden',
+        ['g\\'] = 'actions.toggle_trash',
       },
       -- Set to false to disable all of the above keymaps
       use_default_keymaps = true,
@@ -106,22 +116,16 @@ return {
 
         is_hidden_file = function(name, bufnr)
           -- dotfiles are always considered hidden
-          if vim.startswith(name, ".") then
-            return true
-          end
-          local dir = require("oil").get_current_dir()
+          if vim.startswith(name, '.') then return true end
+          local dir = require('oil').get_current_dir()
           -- if no local directory (e.g. for ssh connections), always show
-          if not dir then
-            return false
-          end
+          if not dir then return false end
           -- Check if file is gitignored
           return vim.list_contains(git_ignored[dir], name)
         end,
 
         -- This function defines what will never be shown, even when `show_hidden` is set
-        is_always_hidden = function(name, bufnr)
-          return false
-        end,
+        is_always_hidden = function(name, bufnr) return false end,
 
         -- Sort file names in a more intuitive order for humans. Is less performant,
         -- so you may want to set to false if you work with large directories.
@@ -131,8 +135,8 @@ return {
         sort = {
           -- sort order can be "asc" or "desc"
           -- see :help oil-columns to see which columns are sortable
-          { "type", "asc" },
-          { "name", "asc" },
+          { 'type', 'asc' },
+          { 'name', 'asc' },
         },
       },
       -- Extra arguments to pass to SCP when moving/copying files over SSH
@@ -140,15 +144,9 @@ return {
       -- EXPERIMENTAL support for performing file operations with git
       git = {
         -- Return true to automatically git add/mv/rm files
-        add = function(path)
-          return false
-        end,
-        mv = function(src_path, dest_path)
-          return false
-        end,
-        rm = function(path)
-          return false
-        end,
+        add = function(path) return false end,
+        mv = function(src_path, dest_path) return false end,
+        rm = function(path) return false end,
       },
       -- Configuration for the floating window in oil.open_float
       float = {
@@ -156,17 +154,15 @@ return {
         padding = 2,
         max_width = 35,
         max_height = 25,
-        border = "rounded",
+        border = 'rounded',
         win_options = {
           winblend = 0,
         },
         -- preview_split: Split direction: "auto", "left", "right", "above", "below".
-        preview_split = "auto",
+        preview_split = 'auto',
         -- This is the config that will be passed to nvim_open_win.
         -- Change values here to customize the layout
-        override = function(conf)
-          return conf
-        end,
+        override = function(conf) return conf end,
       },
       -- Configuration for the actions floating preview window
       preview = {
@@ -186,7 +182,7 @@ return {
         min_height = { 5, 0.1 },
         -- optionally define an integer/float for the exact height of the preview window
         height = nil,
-        border = "rounded",
+        border = 'rounded',
         win_options = {
           winblend = 0,
         },
@@ -201,21 +197,21 @@ return {
         max_height = { 10, 0.9 },
         min_height = { 5, 0.1 },
         height = nil,
-        border = "rounded",
-        minimized_border = "none",
+        border = 'rounded',
+        minimized_border = 'none',
         win_options = {
           winblend = 0,
         },
       },
       -- Configuration for the floating SSH window
       ssh = {
-        border = "rounded",
+        border = 'rounded',
       },
       -- Configuration for the floating keymaps help window
       keymaps_help = {
-        border = "rounded",
+        border = 'rounded',
       },
     },
-    dependencies = { { "echasnovski/mini.icons", opts = {} } },
+    dependencies = { { 'echasnovski/mini.icons', opts = {} } },
   },
 }

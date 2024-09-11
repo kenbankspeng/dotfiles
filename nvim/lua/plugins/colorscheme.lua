@@ -5,7 +5,7 @@ return {
     'catppuccin/nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     init = function()
-      vim.cmd.colorscheme 'catppuccin-mocha'
+      vim.cmd.colorscheme('catppuccin-mocha')
 
       --
       -- put custom gui formatting here inside a defer_fn
@@ -21,9 +21,7 @@ return {
       -- surface2: #585b70,  surface1: #45475a,  surface0: #313244,
       -- base: #1e1e2e,  mantle: #181825,  crust: #11111b,
 
-      vim.defer_fn(function()
-        vim.api.nvim_set_hl(0, 'WinSeparator', { fg = '#255565' })
-      end, 0)
+      vim.defer_fn(function() vim.api.nvim_set_hl(0, 'WinSeparator', { fg = '#255565' }) end, 0)
     end,
-  }
+  },
 }

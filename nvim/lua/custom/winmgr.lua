@@ -18,58 +18,105 @@ local function neotree_left()
   vim.cmd("Neotree left toggle")
 end
 
+local function count_non_ui_windows()
+  local count = 0
+  for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+    local win_config = vim.api.nvim_win_get_config(win)
+    if not win_config.relative or win_config.relative == '' then
+      count = count + 1
+    end
+  end
+  return count
+end
+
 local function close()
   local buf = vim.api.nvim_get_current_buf()
-  local bufname = vim.api.nvim_buf_get_name(buf)
   local num_buffers = #vim.fn.getbufinfo({ buflisted = 1 })
-  local num_windows = #vim.api.nvim_tabpage_list_wins(0)
-  local is_neo_tree = string.match(bufname, "neo%-tree") ~= nil
+  local num_windows = count_non_ui_windows() -- Count only non-UI windows
 
-  if is_neo_tree then
-    -- If the current buffer is a neo-tree buffer, find another buffer to switch to
+  -- close window if the buffer is displayed in another window
+  local current_window_id = vim.api.nvim_get_current_win()
+  for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+    if vim.api.nvim_win_get_buf(win) == buf and win ~= current_window_id then
+      vim.api.nvim_win_close(current_window_id, true)
+      return
+    end
+  end
+
+  -- if more buffers than windows
+  if num_buffers > num_windows then
+    local current_window_count = 0
     local buffers = vim.fn.getbufinfo({ buflisted = 1 })
-    for _, buffer in ipairs(buffers) do
-      if not string.match(buffer.name, "neo%-tree") then
-        vim.api.nvim_set_current_buf(buffer.bufnr)
-        return
+
+    for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+      local win_buf = vim.api.nvim_win_get_buf(win)
+      if win_buf == buf then
+        current_window_count = current_window_count + 1
+      end
+    end
+
+    -- if buffer in multiple windows
+    if current_window_count > 1 then
+      -- place inactive buffer in the current window
+      for _, buffer in ipairs(buffers) do
+        if buffer.bufnr ~= buf and vim.fn.buflisted(buffer.bufnr) == 1 then
+          local is_in_window = false
+          for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+            if vim.api.nvim_win_get_buf(win) == buffer.bufnr then
+              is_in_window = true
+              break
+            end
+          end
+          if not is_in_window then
+            vim.api.nvim_set_current_buf(buffer.bufnr)
+            return
+          end
+        end
+      end
+    else
+      -- if buffer is only in the current window
+      for _, buffer in ipairs(buffers) do
+        if buffer.bufnr ~= buf and vim.fn.buflisted(buffer.bufnr) == 1 then
+          local is_in_window = false
+          for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+            if vim.api.nvim_win_get_buf(win) == buffer.bufnr then
+              is_in_window = true
+              break
+            end
+          end
+          if not is_in_window then
+            -- switch to inactive buffer
+            vim.api.nvim_set_current_buf(buffer.bufnr)
+            -- delete current buffer
+            vim.api.nvim_buf_delete(buf, { force = true }) -- Use force to avoid errors
+            return
+          end
+        end
       end
     end
   else
-    if num_windows > 2 then
-      vim.cmd('close')
-    elseif num_buffers > 1 then
-      local buffers = vim.fn.getbufinfo({ buflisted = 1 })
-      local current_win = vim.api.nvim_get_current_win()
-      local other_buf
+    -- if not more buffers than windows
+    if num_windows == 1 and num_buffers == 1 then
+      -- if last window and buffer, quit
+      vim.cmd('q')
+      return
+    end
 
-      for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
-        if win ~= current_win then
-          other_buf = vim.api.nvim_win_get_buf(win)
-          break
-        end
+    local current_window_count = 0
+    for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+      local win_buf = vim.api.nvim_win_get_buf(win)
+      if win_buf == buf then
+        current_window_count = current_window_count + 1
       end
+    end
 
-      for _, buffer in ipairs(buffers) do
-        if buffer.bufnr ~= buf and buffer.bufnr ~= other_buf then
-          vim.api.nvim_set_current_buf(buffer.bufnr)
-          vim.api.nvim_buf_delete(buf, {})
-          return
-        end
-      end
-
-      vim.api.nvim_buf_delete(buf, {})
-      if num_windows > 1 then
-        vim.cmd('close')
-      end
+    -- if buffer in more than one window, close current window
+    if current_window_count > 1 then
+      vim.api.nvim_win_close(0, true)
     else
-      local line_count = vim.api.nvim_buf_line_count(buf)
-      local has_content = line_count > 1 or (line_count == 1 and vim.api.nvim_buf_get_lines(buf, 0, 1, false)[1] ~= "")
-
-      if has_content then
-        vim.api.nvim_buf_delete(buf, {})
-      else
-        vim.cmd('q')
-      end
+      -- close current window and delete buffer
+      vim.api.nvim_win_close(0, true)
+      vim.api.nvim_buf_delete(buf, { force = true }) -- Use force to avoid errors
     end
   end
 end
