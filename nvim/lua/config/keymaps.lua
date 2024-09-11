@@ -418,25 +418,45 @@ map('<M-Up>', function() unified.resize('k', 2) end, 'resize up')
 map('<M-Right>', function() unified.resize('l', 2) end, 'resize right')
 
 -------------------------
--- OVERLAPPING KEYMAPS --
+-- OVERLAPPING KEYMAPS -- using :checkhealth
 -------------------------
 
+-- Checking your config ~
+-- - OK |mini.icons| is installed
+-- - OK |nvim-web-devicons| is installed
+
+-- Checking for issues with your mappings ~
+-- - OK No issues reported
+
 -- checking for overlapping keymaps ~
--- - WARNING In mode `n`, <<Space>w> overlaps with <<Space>wm>, <<C-W><C-D>>, <<Space>wd>:
---   - <<Space>w>: windows
---   - <<Space>wm>: Enable Maximize
---   - <<C-W><C-D>>: Show diagnostics under the cursor
---   - <<Space>wd>: Delete Window
--- - WARNING In mode `n`, <gc> overlaps with <gco>, <gcO>, <gcc>:
+-- - WARNING In mode `n`, <g> overlaps with <g%>, <gx>, <g[>, <g]>, <gc>, <gcO>, <gcc>, <gco>:
+--   - <g>: goto
+--   - <g%>: Cycle backwards through results
+--   - <gx>: Open with system app
+--   - <g[>: Move to left "around"
+--   - <g]>: Move to right "around"
 --   - <gc>: Toggle comment
---   - <gco>: Add Comment Below
 --   - <gcO>: Add Comment Above
 --   - <gcc>: Toggle comment line
+--   - <gco>: Add Comment Below
+-- - WARNING In mode `n`, <,> overlaps with <,,>:
+--   - <,>: Prev ftFT
+--   - <,,>: open parent directory
+-- - WARNING In mode `n`, <<Space>w> overlaps with <<C-W><Space>>, <<Space>wd>, <<Space>wm>, <<C-W><C-D>>:
+--   - <<Space>w>: windows
+--   - <<C-W><Space>>: Window Hydra Mode (which-key)
+--   - <<Space>wd>: Delete Window
+--   - <<Space>wm>: Enable Maximize
+--   - <<C-W><C-D>>: Show diagnostics under the cursor
 -- - WARNING In mode `x`, <i> overlaps with <il>, <in>:
 --   - <i>: inside
 --   - <il>: last
 --   - <in>: next
--- - WARNING In mode `x`, <a> overlaps with <a%>, <al>, <an>:
+-- - WARNING In mode `x`, <a> overlaps with <al>, <an>, <a%>:
+--   - <a>: around
+--   - <al>: last
+--   - <an>: next
+-- - WARNING In mode `o`, <a> overlaps with <al>, <an>:
 --   - <a>: around
 --   - <al>: last
 --   - <an>: next
@@ -444,7 +464,54 @@ map('<M-Right>', function() unified.resize('l', 2) end, 'resize right')
 --   - <i>: inside
 --   - <il>: last
 --   - <in>: next
--- - WARNING In mode `o`, <a> overlaps with <al>, <an>:
---   - <a>: around
---   - <al>: last
---   - <an>: next
+-- - WARNING In mode `n`, <gc> overlaps with <gcO>, <gcc>, <gco>:
+--   - <gc>: Toggle comment
+--   - <gcO>: Add Comment Above
+--   - <gcc>: Toggle comment line
+--   - <gco>: Add Comment Below
+-- - OK Overlapping keymaps are only reported for informational purposes.
+--   This doesn't necessarily mean there is a problem with your config.
+
+-- Checking for duplicate mappings ~
+-- - WARNING Duplicates for <<leader>f> in mode `n`:
+--   * file/find: `{ group = true }`
+--   * find/+file: `{ group = true }`
+-- - WARNING Duplicates for <<leader>g> in mode `n`:
+--   * git: `{ group = true }`
+--   * git: `{ group = true }`
+-- - WARNING Duplicates for <<leader>b> in mode `n`:
+--   * buffer: `{ expand = <function 1>, group = true }`
+--   * buffer: `{ group = true }`
+-- - WARNING Duplicates for <<leader>x> in mode `n`:
+--   * diagnostics/quickfix: `{ group = true, icon = { color = "green", icon = "󱖫 " } }`
+--   * lists: `{ group = true, icon = "" }`
+-- - WARNING Duplicates for <<leader>q> in mode `n`:
+--   * quit/session: `{ group = true }`
+--   * session: `{ group = true }`
+-- - WARNING Duplicates for <<leader>s> in mode `n`:
+--   * search: `{ group = true }`
+--   * search: `{ group = true }`
+-- - WARNING Duplicates for <<leader>u> in mode `n`:
+--   * ui: `{ group = true, icon = { color = "cyan", icon = "󰙵 " } }`
+--   * toggle: `{ group = true }`
+-- - WARNING Duplicates for <<leader>c> in mode `n`:
+--   * code: `{ group = true }`
+--   * code: `{ group = true }`
+-- - OK Duplicate mappings are only reported for informational purposes.
+--   This doesn't necessarily mean there is a problem with your config.
+
+-- ==============================================================================
+-- yazi: require("yazi.health").check()
+
+-- yazi ~
+-- - Running yazi.nvim version 6.0.7
+-- - Found `yazi` version `Yazi 0.3.3 (Homebrew 2024-09-04)` 👍
+-- - yazi.nvim log file is at /Users/ken/.local/state/nvim/yazi.log
+-- -     hint: use `gf` to open the file path under the cursor
+-- - Found `ya` version `Ya 0.3.3 (Homebrew 2024-09-04)` 👍
+
+-- yazi.config ~
+-- - hint: execute the following command to see your configuration: >
+--   :lua =require('yazi').config
+
+-- - OK yazi
