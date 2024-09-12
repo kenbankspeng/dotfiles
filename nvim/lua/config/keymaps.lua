@@ -424,7 +424,7 @@ map('<leader>`', '<Cmd>e #<CR>', 'switch buffer')
 -- NVIM-WEZTERM --
 ------------------
 -- depending on situation, send command to neovim or to wezterm
-local unified = require('config.helpers.nvim_wezterm')
+local unified = require('custom.nvim_wezterm')
 
 -- splits
 map('<leader>\\', '<C-w>v', 'split right')

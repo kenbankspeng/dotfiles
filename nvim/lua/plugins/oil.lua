@@ -3,7 +3,7 @@ local function maybe_go_right_maybe_cd()
   local actions = require('oil.actions')
   local entry = oil.get_cursor_entry()
   if entry ~= nil and entry.type == 'directory' then
-    actions.select.callback() -- cd into the directory
+    actions.select.callback()              -- cd into the directory
   else
     vim.api.nvim_feedkeys('l', 'n', false) -- go right
   end
@@ -213,5 +213,10 @@ return {
       },
     },
     dependencies = { { 'echasnovski/mini.icons', opts = {} } },
+  },
+  {
+    'refractalize/oil-git-status.nvim',
+    dependencies = { 'stevearc/oil.nvim' },
+    config = true,
   },
 }
