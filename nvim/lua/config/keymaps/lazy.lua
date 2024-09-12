@@ -1,8 +1,9 @@
---
--- LAZY -- delete unwanted LazyVim/Plugin mappings
---
+-- LAZY --
+return function(map)
+  -- <leader>l    <Cmd>Lazy<CR>             Lazy
+  -- L            No command                LazyVim Changelog
 
-return function()
+  -- delete unwanted LazyVim/Plugin mappings
   local del = vim.keymap.del
 
   del('n', '<leader>L')          -- LazyVim Changelog

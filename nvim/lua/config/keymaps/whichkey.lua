@@ -1,9 +1,7 @@
 -- WHICHKEY -- document existing key chains
 
-return function()
-  local whichkey = require('which-key')
-
-  whichkey.add({
+return function(map)
+  require('which-key').add({
     { '<leader>b', group = '+buffer' },
     { '<leader>c', group = '+code' },
     { '<leader>d', group = '+lsp', icon = '' },
