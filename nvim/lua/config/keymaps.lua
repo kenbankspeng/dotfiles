@@ -1,5 +1,3 @@
--- TODO: add keymaps for lazyvim telescope
-
 --
 -- KEYMAP CONSTANTS
 --
@@ -16,92 +14,19 @@
 -- <S-…> shift-key, <C-…> control-key
 -- <A-…> or <M-…> alt-key or meta-key, <D-…> command-key or "super" key
 
-local whichkey = require('which-key')
 local map = function(keys, func, desc) vim.keymap.set('n', keys, func, { desc = desc, silent = true, noremap = true }) end
 
--- Document existing key chains
-whichkey.add({
-  { '<leader>b', group = '+buffer' },
-  { '<leader>c', group = '+code' },
-  { '<leader>d', group = '+lsp', icon = '' },
-  { '<leader>f', group = '+find/+file' },
-  { '<leader>g', group = '+git' },
-  { '<leader>q', group = '+session' },
-  { '<leader>s', group = '+search' },
-  { '<leader>u', group = '+toggle' },
-  { '<leader>x', group = '+lists', icon = '' },
-  { '<leader>y', group = '+yazi', icon = '󰇥' },
-})
-
--- Remap Q to start/stop recording a macro (requires a register)
-vim.keymap.set('n', 'Q', 'q', { noremap = true })
-
--- VIM KEYMAPS
-
--- Insertion and Appending
--- `a`: append after cursor
--- `A`: append at end of line
--- `i`: insert before cursor
--- `I`: insert at beginning of line
--- `o`: open a new line below
--- `O`: open a new line above
-
--- Deletion
--- `d`: delete (requires a motion)
--- `D`: delete to the end of the line
--- `x`: delete character
--- `X`: delete character before cursor
-
--- Change
--- `c`: change (requires a motion)
--- `C`: change to the end of the line
--- `s`: substitute character
--- `S`: substitute line
-
--- Movement
--- `h`: move left
--- `j`: move down
--- `k`: move up
--- `l`: move right
--- `w`: move forward by word
--- `W`: move forward by WORD
--- `b`: move backward by word
--- `B`: move backward by WORD
--- `e`: move to the end of a word
--- `E`: move to the end of a WORD
--- `f`: find character forward (requires a character)
--- `F`: find character backward (requires a character)
--- `t`: move until character forward (requires a character)
--- `T`: move until character backward (requires a character)
--- `g`: various commands (requires another key)
--- `G`: go to the last line of the file
--- `H`: move to the top of the screen
--- `L`: move to the bottom of the screen
--- `M`: move to the middle of the screen
-
--- Searching and Repeating
--- `n`: repeat search forward
--- `N`: repeat search backward
-
--- Miscellaneous
--- 'q': delete current buffer (with bufferline, acts like a quit)
--- `u`: undo
--- `U`: redo
--- `r`: replace character (requires a character)
--- `R`: replace mode
--- `v`: visual mode
--- `V`: visual line mode
--- `Q`: record macro (requires a register)
--- `m`: mark (requires a character)
--- `z`: various commands (requires another key)
--- `J`: join lines
--- `K`: look up keyword under the cursor
 
 --
 -- CUSTOM KEYMAPS - automatically loaded on the VeryLazy event
 --
-local keymaps = require('keymaps')
-keymaps.lazy()
+local keymaps = require('config.keymaps.init')
+keymaps.lazy() -- must be first
+keymaps.whichkey()
+
+-- Remap Q to start/stop recording a macro (requires a register)
+vim.keymap.set('n', 'Q', 'q', { noremap = true })
+
 
 --
 -- Add/modify key mappings
