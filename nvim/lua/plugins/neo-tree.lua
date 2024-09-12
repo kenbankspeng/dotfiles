@@ -1,4 +1,5 @@
 local filecmds = require('neo-tree.sources.filesystem.commands')
+local winmgr = require('config.custom.winmgr')
 
 local project_root = nil
 local function set_root(state)
@@ -21,7 +22,7 @@ end
 
 -- autoclose for neotree float only
 local function autoclose()
-  if require('custom.winmgr').is_float() then require('neo-tree.command').execute({ action = 'close' }) end
+  if winmgr.is_float() then require('neo-tree.command').execute({ action = 'close' }) end
 end
 
 --
@@ -73,12 +74,12 @@ end
 
 local function preview_file_above(state)
   vim.api.nvim_command('normal! k')
-  if require('custom.winmgr').is_sidebar() then preview_file(state) end
+  if require('config.winmgr').is_sidebar() then preview_file(state) end
 end
 
 local function preview_file_below(state)
   vim.api.nvim_command('normal! j')
-  if require('custom.winmgr').is_sidebar() then preview_file(state) end
+  if winmgr.is_sidebar() then preview_file(state) end
 end
 
 local function preview_enter(state)
@@ -114,13 +115,13 @@ return {
       vim.fn.sign_define('DiagnosticSignHint', { text = '󰌵', texthl = 'DiagnosticSignHint' })
 
       require('neo-tree').setup({
-        close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
+        close_if_last_window = false,   -- Close Neo-tree if it is the last window left in the tab
         popup_border_style = 'rounded', -- "single" | "double" | "rounded" | "solid" | NC
         enable_git_status = true,
         enable_diagnostics = true,
         open_files_do_not_replace_types = { 'terminal', 'trouble', 'qf' }, -- when opening files, do not use windows containing these filetypes or buftypes
-        sort_case_insensitive = false, -- used when sorting files and directories in the tree
-        sort_function = nil, -- use a custom function for sorting files and directories in the tree
+        sort_case_insensitive = false,                                     -- used when sorting files and directories in the tree
+        sort_function = nil,                                               -- use a custom function for sorting files and directories in the tree
         -- sort_function = function (a,b)
         --       if a.type == b.type then
         --           return a.path > b.path
@@ -255,7 +256,7 @@ return {
             --  }
             --}
             ['m'] = 'move', -- takes text input for destination, also accepts the optional config.show_path option like "add".
-            ['q'] = require('custom.winmgr').close,
+            ['q'] = winmgr.close,
             ['R'] = 'refresh',
             ['?'] = 'show_help',
             ['<'] = 'prev_source',
@@ -292,11 +293,11 @@ return {
             },
           },
           follow_current_file = {
-            enabled = false, -- This will find and focus the file in the active buffer every time
+            enabled = false,                      -- This will find and focus the file in the active buffer every time
             --               -- the current file is changed while the tree is open.
-            leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+            leave_dirs_open = false,              -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
           },
-          group_empty_dirs = false, -- when true, empty folders will be grouped together
+          group_empty_dirs = false,               -- when true, empty folders will be grouped together
           hijack_netrw_behavior = 'open_default', -- netrw disabled, opening a directory opens neo-tree
           -- in whatever position is specified in window.position
           -- "open_current",  -- netrw disabled, opening a directory opens within the
@@ -340,11 +341,11 @@ return {
         },
         buffers = {
           follow_current_file = {
-            enabled = true, -- This will find and focus the file in the active buffer every time
+            enabled = true,          -- This will find and focus the file in the active buffer every time
             --              -- the current file is changed while the tree is open.
             leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
           },
-          group_empty_dirs = true, -- when true, empty folders will be grouped together
+          group_empty_dirs = true,   -- when true, empty folders will be grouped together
           show_unloaded = true,
           window = {
             mappings = {
