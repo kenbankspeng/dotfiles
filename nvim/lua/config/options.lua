@@ -13,7 +13,7 @@ local env = vim.env
 
 -- g.base46_cache = vim.fn.stdpath "data" .. "/lazy/"
 g.mapleader = ' ' -- `:help mapleader`. NOTE: must be before plugins loaded
-g.maplocalleader = ' '
+g.maplocalleader = ','
 g.have_nerd_font = true
 
 ------- options -------
@@ -33,13 +33,13 @@ o.number = true -- line numbers
 o.numberwidth = 2
 o.ruler = false
 o.relativenumber = true -- relative line numbers
-o.cursorline = true -- Show which line your cursor is on
+o.cursorline = true     -- Show which line your cursor is on
 o.cursorlineopt = 'number'
 
 o.laststatus = 3
 o.showmode = false -- mode already in the status line
 
-o.mouse = 'a' -- Enable mouse mode
+o.mouse = 'a'      -- Enable mouse mode
 
 opt.fillchars = { eob = ' ' }
 o.ignorecase = true -- unless \C or one or more capital letters used
@@ -49,7 +49,7 @@ o.signcolumn = 'yes'
 o.splitbelow = true -- how new splits should be opened
 o.splitright = true
 
-o.undofile = true -- Save undo history
+o.undofile = true  -- Save undo history
 
 o.timeoutlen = 300 -- to display which-key popup sooner
 o.updatetime = 250 -- interval for writing swap file to disk
@@ -59,9 +59,9 @@ schedule(function()
   o.clipboard = 'unnamedplus' -- -- Sync clipboard between OS and Neovim.`:help 'clipboard'`
 end)
 
-o.breakindent = true -- Enable break indent
+o.breakindent = true   -- Enable break indent
 o.inccommand = 'split' -- Preview substitutions live, as you type!
-o.scrolloff = 10 -- Minimal number of screen lines to keep above and below the cursor.
+o.scrolloff = 10       -- Minimal number of screen lines to keep above and below the cursor.
 
 -- go to previous/next line with h,l,left arrow and right arrow
 -- when cursor reaches end/beginning of line

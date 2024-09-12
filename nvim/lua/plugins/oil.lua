@@ -121,7 +121,8 @@ return {
           -- if no local directory (e.g. for ssh connections), always show
           if not dir then return false end
           -- Check if file is gitignored
-          return vim.list_contains(git_ignored[dir], name)
+          -- return vim.list_contains(git_ignored[dir], name)
+          return false
         end,
 
         -- This function defines what will never be shown, even when `show_hidden` is set
