@@ -30,9 +30,14 @@ local git_ignored = setmetatable({}, {
   end,
 })
 
+local winmgr = require('config.custom.winmgr')
 return {
   {
     'stevearc/oil.nvim',
+    keys = {
+      { ',,', '<cmd>Oil --float<CR>', 'open parent directory' },
+      { 'q',  winmgr.close,           'close window' }
+    },
     opts = { -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`)
       -- Set to false if you want some other plugin (e.g. netrw) to open when you edit directories.
       default_file_explorer = true,

@@ -4,13 +4,10 @@ local map = function(keys, func, desc) vim.keymap.set('n', keys, func, { desc = 
 
 local keymapModules = {
   'lazy', -- must be first
-  'tree',
-  'diff',
   'nvim-wezterm',
   'nvim',
   'terminal',
   'diagnostics',
-  'buffers',
   -- 'markdown',
 }
 

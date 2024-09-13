@@ -84,7 +84,7 @@ end
 
 local function preview_enter(state)
   local node = state.tree:get_node()
-  if require('custom.winmgr').is_sidebar() and not require('neo-tree.utils').is_expandable(node) then
+  if winmgr.is_sidebar() and not require('neo-tree.utils').is_expandable(node) then
     -- Get the selected node and open the file in a new buffer
     local filepath = node.path
     -- Ensure a new buffer is created for the file
@@ -106,6 +106,10 @@ return {
       'nvim-tree/nvim-web-devicons',
       'MunifTanjim/nui.nvim',
       '3rd/image.nvim',
+    },
+    keys = {
+      { '<leader><leader>', winmgr.neotree_left, 'toggle neotree left' },
+      { 'q',                winmgr.close,        'close window' }
     },
     config = function()
       -- If you want icons for diagnostic errors, you'll need to define them somewhere:
