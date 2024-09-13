@@ -7,6 +7,7 @@ local keymapModules = {
   'nvim',
   'terminal',
   'diagnostics',
+  'wezterm',
 }
 
 for _, moduleName in ipairs(keymapModules) do
