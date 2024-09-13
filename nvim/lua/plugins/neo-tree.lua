@@ -1,5 +1,5 @@
 local filecmds = require('neo-tree.sources.filesystem.commands')
-local winmgr = require('config.custom.winmgr')
+local file_manager = require('custom.file-manager')
 
 local project_root = nil
 local function set_root(state)
@@ -22,7 +22,7 @@ end
 
 -- autoclose for neotree float only
 local function autoclose()
-  if winmgr.is_float() then require('neo-tree.command').execute({ action = 'close' }) end
+  if file_manager.is_float() then require('neo-tree.command').execute({ action = 'close' }) end
 end
 
 --
@@ -74,17 +74,17 @@ end
 
 local function preview_file_above(state)
   vim.api.nvim_command('normal! k')
-  if winmgr.is_sidebar() then preview_file(state) end
+  if file_manager.is_sidebar() then preview_file(state) end
 end
 
 local function preview_file_below(state)
   vim.api.nvim_command('normal! j')
-  if winmgr.is_sidebar() then preview_file(state) end
+  if file_manager.is_sidebar() then preview_file(state) end
 end
 
 local function preview_enter(state)
   local node = state.tree:get_node()
-  if winmgr.is_sidebar() and not require('neo-tree.utils').is_expandable(node) then
+  if file_manager.is_sidebar() and not require('neo-tree.utils').is_expandable(node) then
     -- Get the selected node and open the file in a new buffer
     local filepath = node.path
     -- Ensure a new buffer is created for the file
@@ -108,8 +108,8 @@ return {
       '3rd/image.nvim',
     },
     keys = {
-      { '<leader><leader>', winmgr.neotree_left, 'toggle neotree left' },
-      { 'q',                winmgr.close,        'close window' }
+      { '<leader><leader>', file_manager.neotree_left, 'toggle neotree left' },
+      { 'q',                file_manager.close,        'close window' }
     },
     config = function()
       -- If you want icons for diagnostic errors, you'll need to define them somewhere:
@@ -260,7 +260,7 @@ return {
             --  }
             --}
             ['m'] = 'move', -- takes text input for destination, also accepts the optional config.show_path option like "add".
-            ['q'] = winmgr.close,
+            ['q'] = file_manager.close,
             ['R'] = 'refresh',
             ['?'] = 'show_help',
             ['<'] = 'prev_source',

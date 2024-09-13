@@ -3,6 +3,9 @@ return {
     -- Install markdown preview, use npm if available.
     -- if this fails, manually install using :call mkdp#util#install()
     'iamcco/markdown-preview.nvim',
+    keys = {
+      { '<leader>cp', '<Cmd>MarkdownPreviewToggle<CR>', 'Markdown Preview Toggle' },
+    },
     cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
     ft = { 'markdown' },
     build = function(plugin)
@@ -16,13 +19,5 @@ return {
     init = function()
       if vim.fn.executable('npm') then vim.g.mkdp_filetypes = { 'markdown' } end
     end,
-    keys = {
-      {
-        "<leader>cp",
-        ft = "markdown",
-        "<cmd>MarkdownPreviewToggle<cr>",
-        desc = "Markdown Preview",
-      },
-    },
   },
 }
