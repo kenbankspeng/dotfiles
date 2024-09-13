@@ -19,6 +19,20 @@ return {
           -- winblend = 10, -- value between 0-100 0 for fully opaque and 100 for fully transparent
         },
       },
-    }
+    },
+    config = function()
+      require('which-key').add({
+        { '<leader>b', group = '+buffer' },
+        { '<leader>c', group = '+code' },
+        { '<leader>d', group = '+lsp', icon = '' },
+        { '<leader>f', group = '+find/+file' },
+        { '<leader>g', group = '+git' },
+        { '<leader>q', group = '+session' },
+        { '<leader>s', group = '+search' },
+        { '<leader>u', group = '+toggle' },
+        { '<leader>x', group = '+lists', icon = '' },
+        { '<leader>y', group = '+yazi', icon = '󰇥' },
+      })
+    end
   },
 }
