@@ -6,7 +6,6 @@ local keymapModules = {
   'lazy', -- must be first
   'tree',
   'diff',
-  'bufferline',
   'nvim-wezterm',
   'nvim',
   'terminal',
