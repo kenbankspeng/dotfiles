@@ -74,7 +74,7 @@ end
 
 local function preview_file_above(state)
   vim.api.nvim_command('normal! k')
-  if require('config.winmgr').is_sidebar() then preview_file(state) end
+  if winmgr.is_sidebar() then preview_file(state) end
 end
 
 local function preview_file_below(state)
