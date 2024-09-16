@@ -19,3 +19,6 @@ mod alias
 
 # tui apps
 mod tui
+
+# outdated
+mod outdated
