@@ -5,4 +5,4 @@ python = "latest"
 bun = "latest"
 
 [settings]
-experimental = false
+experimental = true

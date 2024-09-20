@@ -97,8 +97,13 @@ local function close()
   else
     -- if not more buffers than windows
     if num_windows == 1 and num_buffers == 1 then
-      -- if last window and buffer, quit
-      vim.cmd('q')
+      -- if last window and buffer, check if buffer is empty
+      local buffer_lines = vim.fn.getbufline('%', 1, '$')
+      if #buffer_lines == 1 and buffer_lines[1] == '' then
+        vim.cmd('q')
+      else
+        vim.cmd('bdelete')
+      end
       return
     end
 
