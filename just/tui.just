@@ -28,3 +28,7 @@ default:
 @a:
   atac --directory "$HOME"/.local/share/atac
 
+# terminal mux
+@z:
+  zellij
+

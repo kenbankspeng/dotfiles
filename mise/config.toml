@@ -3,6 +3,8 @@ node = "latest"
 git = "latest"
 python = "latest"
 bun = "latest"
+go = "latest"
+pipx = "latest"
 
 [settings]
 experimental = true
