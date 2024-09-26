@@ -84,4 +84,10 @@ path:
 # use pastel color <color> instead
 @color *args:
   pastel color {{ args }}
-  
+
+#####################    RUBY    #####################
+
+# ascii doc
+@ascii *args:
+  asciidoc {{args}}
+
