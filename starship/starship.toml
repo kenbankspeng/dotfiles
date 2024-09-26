@@ -6,6 +6,7 @@ format = """
 [](fg:color_shell bg:color_directory)\
 $directory\
 [](fg:color_directory bg:color_lang)\
+$nodejs\
 $deno\
 $python\
 $lua\
@@ -46,7 +47,7 @@ format = '[ $symbol ($version) ]($style)'
 symbol = ""
 style = "bg:color_lang fg:color_lang_text"
 format = '[ $symbol ($version) ]($style)'
-
+detect_extensions = []
 [deno]
 symbol = "┓"
 style = "bg:color_lang fg:color_lang_text"
