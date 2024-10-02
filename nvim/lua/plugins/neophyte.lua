@@ -20,7 +20,7 @@ return {
         },
         -- Shorthand for no features or variations
         'Symbols Nerd Font',
-        'Noto Color Emoji',
+        'Apple Color Emoji',
       },
       font_size = {
         kind = 'width', -- 'width' | 'height'

@@ -37,8 +37,7 @@ default:
 
 # upgrade
 @brew-upgrade:
-  brew cu --all --cleanup --force
-  brew upgrade --formula
+  brew upgrade --greedy
   brew cleanup
 
 # remove with autoremove and cleanup

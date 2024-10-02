@@ -4,9 +4,9 @@ set shell := ['zsh', '-cu']
 default:
   @just --justfile "$JUST"/tui.just --list | zsh -c "$JUSTGREP"
 
-# tui neovide editor
+# tui neophyte editor
 @edit *args:
-  neovide {{ args }}
+  neophyte {{ args }}
 
 # markdown viewer
 @glo *args:
