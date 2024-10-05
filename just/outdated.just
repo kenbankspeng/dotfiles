@@ -29,7 +29,7 @@ default:
   echo "---------------"
   echo "     CARGO"
   echo "---------------"
-  cargo install-update --list
+  cargo install-update -a
   echo
   echo "---------------"
   echo "     BUN"
