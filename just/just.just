@@ -14,11 +14,8 @@ mod brew
 # utilities
 mod util
 
-# aliases
-mod alias
-
 # tui apps
 mod tui
 
 # outdated
-mod outdated
+mod quick 

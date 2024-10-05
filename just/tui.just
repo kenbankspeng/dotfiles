@@ -4,31 +4,23 @@ set shell := ['zsh', '-cu']
 default:
   @just --justfile "$JUST"/tui.just --list | zsh -c "$JUSTGREP"
 
-# tui neophyte editor
-@edit *args:
-  neophyte {{ args }}
-
 # markdown viewer
-@glo *args:
-  glow {{ args }}
-
-# tui git
-@g *args:
-  lazygit {{ args }}
+@glo:
+  glow
 
 # tui ssh client
-@s *args:
-  sshs {{ args }}
+@ss:
+  sshs
 
 # tui file transfer (portal)
-@p *args:
-  portal {{ args }}
+@pl:
+  portal
 
 # tui api client (atac)
-@a:
+@at:
   atac --directory "$HOME"/.local/share/atac
 
-# terminal mux
-@z:
-  zellij
+# top tui
+@top:
+  htop
 

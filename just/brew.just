@@ -5,8 +5,10 @@ import 'colors.just'
 default:
   @just --justfile "$JUST/brew.just" --list | zsh -c "$JUSTGREP"
 
-# tree of casks and formulas
-@brew-tree:
+#############  BREW  ##############
+
+# brew tree of casks and formulas
+@bt:
   echo "{{BrightMagenta}}CASK APPS"
   echo "---------{{BrightBlue}}"
   brew list --cask
@@ -15,8 +17,8 @@ default:
   echo "--------{{BrightCyan}}"
   brew leaves | xargs brew deps --tree
 
-# versions
-@brew-versions: 
+# brew versions
+@bv: 
   echo "{{BrightMagenta}}CASK APPS"
   echo "---------{{BrightBlue}}"
   brew list --versions --cask
@@ -25,23 +27,23 @@ default:
   echo "------------{{BrightCyan}}"
   brew list --versions --formula
 
-# installed by user
-@brew-leaves:
-  echo "{{BrightMagenta}}FORMULAS INSTALLED ON REQUEST"
-  echo "-----------------------------{{BrightCyan}}"
+# brew list installed by user
+@bl:
+  echo "{{BrightMagenta}}LEAF FORMULAS INSTALLED BY USER"
+  echo "-------------------------------{{BrightCyan}}"
   brew leaves --installed-on-request
 
-# outdated
-@brew-outdated:
+# brew outdated
+@bo:
   brew outdated --greedy --verbose
 
-# upgrade
-@brew-upgrade:
+# brew upgrade
+@bu:
   brew upgrade --greedy
   brew cleanup
 
-# remove with autoremove and cleanup
-@brew-remove arg:
+# brew remove + autoremove + cleanup
+@br arg:
   brew remove {{ arg }}
   brew autoremove
   brew cleanup

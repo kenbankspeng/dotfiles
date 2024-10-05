@@ -20,8 +20,24 @@ default:
   . "$ZSH_SCRIPTS/secure.zsh"
   
 # disk usage
-@disk *args:
-  dust {{args}} 
+@disk:
+  dust
+
+# awk for processing delimited files
+@gawk:
+  awk
+ 
+# sed alternative for find/replace withing files
+@sed:
+  sd
+
+# shell linter
+@sc:
+  shellcheck
+
+# grep for find within glob pattern
+@rep:
+  grep
 
 # multiplex github accounts
 @github:
@@ -40,6 +56,34 @@ default:
 # get directory path
 @gd *args:
   echo $(command tere "$@")
+
+# json processing
+jjq:
+  jq
+
+# ps alternative
+@pr:
+  procs
+
+# git origin
+@gr:
+  git remote -v
+
+# edit scripts in cursor
+@scripts:
+  cursor "$DEV_BOX"
+
+# new ls
+@ls:
+  lsd
+
+# new ls -al
+@la *args:
+  lsd -al {{ args }}
+
+# new cat
+@cat:
+  bat
 
 # more readable path. duplicates in red.
 path:
@@ -91,6 +135,6 @@ path:
 #####################    RUBY    #####################
 
 # ascii doc
-@ascii *args:
-  asciidoc {{args}}
+@ascii:
+  asciidoc
 
