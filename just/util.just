@@ -11,7 +11,7 @@ default:
 #   cat file | key-enc <publickey> 
 #   cat encrypted
 #   cat encrypted | key-dec secret.key -> decrypted
-#s
+#
 # optional --armor formatting, -p passwords
 #
 
@@ -19,6 +19,9 @@ default:
 @secure:
   . "$ZSH_SCRIPTS/secure.zsh"
   
+# disk usage
+@disk *args:
+  dust {{args}} 
 
 # multiplex github accounts
 @github:
