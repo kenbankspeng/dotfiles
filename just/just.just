@@ -8,6 +8,9 @@ set shell := ['zsh', '-cu']
 default:
   @just --justfile "$JUST"/just.just --list | zsh -c "$JUSTGREP"
 
+# quick launch 
+mod q
+
 # homebrew
 mod brew
 
@@ -17,5 +20,3 @@ mod util
 # tui apps
 mod tui
 
-# outdated
-mod quick 

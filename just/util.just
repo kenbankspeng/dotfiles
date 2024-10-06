@@ -61,6 +61,10 @@ default:
 jjq:
   jq
 
+# jq-like for yaml, json, xml, properties, csv and tsv
+@yyq:
+  yq
+
 # ps alternative
 @pr:
   procs

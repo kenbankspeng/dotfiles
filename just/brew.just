@@ -7,7 +7,7 @@ default:
 
 #############  BREW  ##############
 
-# brew tree of casks and formulas
+# brew tree (casks and formulas)
 @bt:
   echo "{{BrightMagenta}}CASK APPS"
   echo "---------{{BrightBlue}}"
@@ -27,22 +27,22 @@ default:
   echo "------------{{BrightCyan}}"
   brew list --versions --formula
 
-# brew list installed by user
+# brew list (leaves)
 @bl:
   echo "{{BrightMagenta}}LEAF FORMULAS INSTALLED BY USER"
   echo "-------------------------------{{BrightCyan}}"
   brew leaves --installed-on-request
 
-# brew outdated
+# brew outdated (greedy)
 @bo:
   brew outdated --greedy --verbose
 
-# brew upgrade
+# brew upgrade (greedy)
 @bu:
   brew upgrade --greedy
   brew cleanup
 
-# brew remove + autoremove + cleanup
+# brew remove (w/ autoremove, cleanup)
 @br arg:
   brew remove {{ arg }}
   brew autoremove

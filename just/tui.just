@@ -4,19 +4,17 @@ set shell := ['zsh', '-cu']
 default:
   @just --justfile "$JUST"/tui.just --list | zsh -c "$JUSTGREP"
 
-# markdown viewer
-@glo:
-  glow
+##################  TUIs  ####################
 
-# tui ssh client
+# ssh client tui
 @ss:
   sshs
 
-# tui file transfer (portal)
+# file transfer (portal) tui
 @pl:
   portal
 
-# tui api client (atac)
+# api client (atac) tui
 @at:
   atac --directory "$HOME"/.local/share/atac
 

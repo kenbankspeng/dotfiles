@@ -1,9 +1,11 @@
 #set shell := ['zsh', '-cu']
 
 default:
-  @just --justfile "$JUST/quick.just" --list | zsh -c "$JUSTGREP"
+  @just --justfile "$JUST/q.just" --list | zsh -c "$JUSTGREP"
 
 #####################   EDITORS   #####################
+
+# list just modules
 
 # new vscode
 @code:
@@ -16,6 +18,10 @@ default:
 # neophyte editor
 @edit:
   neophyte
+
+# markdown tui
+@m:
+  glow
 
 # nvim tui
 @n:
@@ -73,9 +79,9 @@ default:
 @x:
   xh
 
-# jq-like for yaml, json, xml, properties, csv and tsv
+# yazi file manager tui
 @y:
-  yq
+  yazi
 
 # terminal mux
 @z:
