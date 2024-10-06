@@ -58,16 +58,20 @@ local function is_previewable(filepath)
 end
 
 local function open_preview_buffer(filepath)
-  if not is_previewable(filepath) then return end
-
   -- Create a new preview buffer if invalid or non-existent
   if preview_bufnr == nil or not vim.api.nvim_buf_is_valid(preview_bufnr) then
     preview_bufnr = vim.api.nvim_create_buf(false, true)
     vim.bo[preview_bufnr].bufhidden = 'hide'
   end
 
-  -- Set the content of the preview buffer
-  vim.api.nvim_buf_set_lines(preview_bufnr, 0, -1, false, vim.fn.readfile(filepath))
+  -- Check if the file is previewable
+  if not is_previewable(filepath) then
+    -- Set 'Binary File' text or blank content in the preview buffer
+    vim.api.nvim_buf_set_lines(preview_bufnr, 0, -1, false, { 'Binary File' })
+  else
+    -- Set the content of the preview buffer
+    vim.api.nvim_buf_set_lines(preview_bufnr, 0, -1, false, vim.fn.readfile(filepath))
+  end
 
   -- If the preview window doesn't exist, create it
   if preview_winid == nil or not vim.api.nvim_win_is_valid(preview_winid) then
