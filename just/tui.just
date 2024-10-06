@@ -7,18 +7,18 @@ default:
 ##################  TUIs  ####################
 
 # ssh client tui
-@ss:
+ss:
   sshs
 
 # file transfer (portal) tui
-@pl:
+pl:
   portal
 
 # api client (atac) tui
-@at:
+at:
   atac --directory "$HOME"/.local/share/atac
 
 # top tui
-@top:
+top:
   htop
 

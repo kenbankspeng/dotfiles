@@ -27,23 +27,23 @@ default:
   echo "------------{{BrightCyan}}"
   brew list --versions --formula
 
-# brew list (leaves)
+# brew leaves
 @bl:
   echo "{{BrightMagenta}}LEAF FORMULAS INSTALLED BY USER"
   echo "-------------------------------{{BrightCyan}}"
   brew leaves --installed-on-request
 
 # brew outdated (greedy)
-@bo:
+bo:
   brew outdated --greedy --verbose
 
 # brew upgrade (greedy)
-@bu:
+bu:
   brew upgrade --greedy
   brew cleanup
 
 # brew remove (w/ autoremove, cleanup)
-@br arg:
+br arg:
   brew remove {{ arg }}
   brew autoremove
   brew cleanup

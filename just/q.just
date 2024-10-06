@@ -8,23 +8,23 @@ default:
 # list just modules
 
 # new vscode
-@code:
+code:
   cursor .
 
 # git tui
-@g:
+g:
   lazygit
 
 # neophyte editor
-@edit:
+edit:
   neophyte
 
 # markdown tui
-@m:
+m:
   glow
 
 # nvim tui
-@n:
+n:
   nvim
 
 # nano tui
@@ -34,7 +34,7 @@ default:
 #####################   QUICKIES   #####################
 
 # disk usage tui
-@d:
+d:
   ncdu
 
 # outdated
@@ -71,19 +71,19 @@ default:
   echo "---------------"
 
 # watch a directory/file for changes 
-@w:
+w:
   watch
 
 # x GET 'https://api.open-meteo.com/v1/forecast' latitude==42.9849 longitude==-81.2453 current_weather==true
 # send http requests
-@x:
+x:
   xh
 
 # yazi file manager tui
-@y:
+y:
   yazi
 
 # terminal mux
-@z:
+z:
   zellij
 
