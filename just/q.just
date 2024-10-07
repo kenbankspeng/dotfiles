@@ -39,36 +39,36 @@ d:
 
 # outdated
 @o:
-  echo "---------------"
-  echo "     BREW"
-  echo "---------------"
+  print "---------------"
+  print "     BREW"
+  print "---------------"
   brew outdated --greedy
-  echo
-  echo "---------------"
-  echo "     MISE"
-  echo "---------------"
+  print
+  print "---------------"
+  print "     MISE"
+  print "---------------"
   mise list
-  echo
-  echo "---------------"
-  echo "     RYE"
-  echo "---------------"
+  print
+  print "---------------"
+  print "     RYE"
+  print "---------------"
   rye self update
-  echo
-  echo "---------------"
-  echo "     RUSTUP"
-  echo "---------------"
+  print
+  print "---------------"
+  print "     RUSTUP"
+  print "---------------"
   rustup check
-  echo
-  echo "---------------"
-  echo "     CARGO"
-  echo "---------------"
+  print
+  print "---------------"
+  print "     CARGO"
+  print "---------------"
   cargo install-update -a
-  echo
-  echo "---------------"
-  echo "     BUN"
-  echo "---------------"
+  print
+  print "---------------"
+  print "     BUN"
+  print "---------------"
   bun -g pm ls
-  echo "---------------"
+  print "---------------"
 
 # watch a directory/file for changes 
 w:

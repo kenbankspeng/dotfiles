@@ -55,7 +55,7 @@ default:
 
 # get directory path
 @gd *args:
-  echo $(command tere "$@")
+  print $(command tere "$@")
 
 # json processing
 jjq:
@@ -92,7 +92,7 @@ jjq:
 # more readable path. duplicates in red.
 path:
   #!/usr/bin/env zsh
-  echo $PATH | tr ':' '\n' | awk '{
+  print $PATH | tr ':' '\n' | awk '{
     count[$0]++
     paths[NR] = $0
   }
