@@ -10,6 +10,7 @@ default:
 # brew tree (casks and formulas)
 @bt:
   print "brew tree"
+  print
   print "{{BrightMagenta}}CASK APPS"
   print -- "--------{{BrightBlue}}" # -- because "-..." interpreted as flag
   brew list --cask
@@ -20,31 +21,41 @@ default:
 
 # brew versions
 @bv: 
+  print "brew list --versions"
+  print
   print "{{BrightMagenta}}CASK APPS"
-  print "---------{{BrightBlue}}"
+  print -- "---------{{BrightBlue}}"
   brew list --versions --cask
   print
   print "{{BrightMagenta}}FORMULA APPS"
-  print "------------{{BrightCyan}}"
+  print -- "------------{{BrightCyan}}"
   brew list --versions --formula
 
 # brew leaves
 @bl:
-  print "{{BrightMagenta}}LEAF FORMULAS INSTALLED BY USER"
-  print "-------------------------------{{BrightCyan}}"
+  print "brew leaves"
+  print
+  print "{{BrightMagenta}}USER-INSTALLED LEAF FORMULAS"
+  print -- "----------------------------{{BrightCyan}}"
   brew leaves --installed-on-request
 
 # brew outdated (greedy)
-bo:
+@bo:
+  print "brew outdated (greedy)"
+  print
   brew outdated --greedy --verbose
 
 # brew upgrade (greedy)
-bu:
+@bu:
+  print "brew upgrade (greedy) /w cleanup"
+  print
   brew upgrade --greedy
   brew cleanup
 
 # brew remove (w/ autoremove, cleanup)
-br arg:
+@br arg:
+  print "brew remove /w autoremove and cleanup"
+  print
   brew remove {{ arg }}
   brew autoremove
   brew cleanup

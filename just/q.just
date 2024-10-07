@@ -1,4 +1,4 @@
-#set shell := ['zsh', '-cu']
+set shell := ['zsh', '-cu']
 
 default:
   @just --justfile "$JUST/q.just" --list | zsh -c "$JUSTGREP"
@@ -39,36 +39,36 @@ d:
 
 # outdated
 @o:
-  print "---------------"
+  print -- "---------------"
   print "     BREW"
-  print "---------------"
+  print -- "---------------"
   brew outdated --greedy
   print
-  print "---------------"
+  print -- "---------------"
   print "     MISE"
-  print "---------------"
+  print -- "---------------"
   mise list
   print
-  print "---------------"
+  print -- "---------------"
   print "     RYE"
-  print "---------------"
+  print -- "---------------"
   rye self update
   print
-  print "---------------"
+  print -- "---------------"
   print "     RUSTUP"
-  print "---------------"
+  print -- "---------------"
   rustup check
   print
-  print "---------------"
+  print -- "---------------"
   print "     CARGO"
-  print "---------------"
+  print -- "---------------"
   cargo install-update -a
   print
-  print "---------------"
+  print -- "---------------"
   print "     BUN"
-  print "---------------"
+  print -- "---------------"
   bun -g pm ls
-  print "---------------"
+  print -- "---------------"
 
 # watch a directory/file for changes 
 w:

@@ -20,24 +20,26 @@ default:
   . "$ZSH_SCRIPTS/secure.zsh"
   
 # disk usage
-@disk:
+disk:
   dust
 
 # awk for processing delimited files
-@gawk:
+gawk:
   awk
  
 # sed alternative for find/replace withing files
-@sed:
+sed:
   sd
 
 # shell linter
-@sc:
+sc:
   shellcheck
 
-# grep for find within glob pattern
-@rep:
-  grep
+# new grep for find within glob pattern
+@grep *args:
+  print "rg (ripgrep)"
+  print
+  rg {{args}}
 
 # multiplex github accounts
 @github:
@@ -51,6 +53,8 @@ default:
 
 # new man
 @man *args:
+  print "tldr"
+  print
   tldr --config $XDG_CONFIG_HOME/tlrc/config.toml {{ args }}
 
 # get directory path
@@ -66,11 +70,11 @@ jjq:
   yq
 
 # ps alternative
-@pr:
+pr:
   procs
 
 # git origin
-@gr:
+gr:
   git remote -v
 
 # edit scripts in cursor
