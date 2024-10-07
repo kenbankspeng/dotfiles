@@ -20,3 +20,8 @@ mod util
 # tui apps
 mod tui
 
+# linux file util
+mod unix
+
+# json util
+mod json

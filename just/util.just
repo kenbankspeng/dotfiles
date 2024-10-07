@@ -23,23 +23,9 @@ default:
 disk:
   dust
 
-# awk for processing delimited files
-gawk:
-  awk
- 
-# sed alternative for find/replace withing files
-sed:
-  sd
-
 # shell linter
 sc:
   shellcheck
-
-# new grep for find within glob pattern
-@grep *args:
-  print "rg (ripgrep)"
-  print
-  rg {{args}}
 
 # multiplex github accounts
 @github:
@@ -51,27 +37,6 @@ sc:
   osascript -e 'id of app "{{arg}}"'
   # mdls -name kMDItemCFBundleIdentifier "{{arg}}"
 
-# new man
-@man *args:
-  print "tldr"
-  print
-  tldr --config $XDG_CONFIG_HOME/tlrc/config.toml {{ args }}
-
-# get directory path
-@gd *args:
-  print $(command tere "$@")
-
-# json processing
-jjq:
-  jq
-
-# jq-like for yaml, json, xml, properties, csv and tsv
-@yyq:
-  yq
-
-# ps alternative
-pr:
-  procs
 
 # git origin
 gr:
@@ -81,34 +46,19 @@ gr:
 @scripts:
   cursor "$DEV_BOX"
 
-# new ls
-@ls:
-  lsd
 
-# new ls -al
-@la *args:
-  lsd -al {{ args }}
 
-# new cat
-@cat:
-  bat
+# melody language to regex
+@mel:
+  melody
 
-# more readable path. duplicates in red.
-path:
-  #!/usr/bin/env zsh
-  print $PATH | tr ':' '\n' | awk '{
-    count[$0]++
-    paths[NR] = $0
-  }
-  END {
-      for (i = 1; i <= NR; i++) {
-          if (count[paths[i]] > 1) {
-              printf "\033[31m%s\033[0m\n", paths[i]
-          } else {
-              print paths[i]
-          }
-      }
-  }'
+# code refactoring
+ast:
+  ast-grep
+
+# local task mgr
+tsk:
+  task
 
 #####################   PYTHON   #####################
 
@@ -136,7 +86,11 @@ path:
 @mycolor arg:
   zx "$NODE_SCRIPTS"/color/color.mjs -c "{{ arg }}"
 
-# use pastel color <color> instead
+# color utils
+pas *args:
+  pastel {{args}}
+
+# pastel color <color>
 color *args:
   pastel color {{ args }}
 

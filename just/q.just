@@ -1,5 +1,7 @@
 set shell := ['zsh', '-cu']
 
+import 'colors.just'
+
 default:
   @just --justfile "$JUST/q.just" --list | zsh -c "$JUSTGREP"
 
@@ -24,8 +26,8 @@ m:
   glow
 
 # nvim tui
-n:
-  nvim
+n *args:
+  nvim {{args}}
 
 # nano tui
 @nano:
@@ -39,36 +41,29 @@ d:
 
 # outdated
 @o:
-  print -- "---------------"
-  print "     BREW"
-  print -- "---------------"
+  print "{{BrightMagenta}}BREW"
+  print -- "----{{BrightBlue}}"
   brew outdated --greedy
   print
-  print -- "---------------"
-  print "     MISE"
-  print -- "---------------"
-  mise list
+  print "{{BrightMagenta}}MISE"
+  print -- "----{{BrightBlue}}"
+  mise outdated
   print
-  print -- "---------------"
-  print "     RYE"
-  print -- "---------------"
+  print "{{BrightMagenta}}RYE"
+  print -- "---{{BrightBlue}}"
   rye self update
   print
-  print -- "---------------"
-  print "     RUSTUP"
-  print -- "---------------"
+  print "{{BrightMagenta}}RUSTUP"
+  print -- "------{{BrightBlue}}"
   rustup check
   print
-  print -- "---------------"
-  print "     CARGO"
-  print -- "---------------"
+  print "{{BrightMagenta}}CARGO"
+  print -- "-----{{BrightBlue}}"
   cargo install-update -a
   print
-  print -- "---------------"
-  print "     BUN"
-  print -- "---------------"
+  print "{{BrightMagenta}}BUN"
+  print -- "---{{BrightBlue}}"
   bun -g pm ls
-  print -- "---------------"
 
 # watch a directory/file for changes 
 w:
