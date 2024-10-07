@@ -137,12 +137,12 @@ path:
   zx "$NODE_SCRIPTS"/color/color.mjs -c "{{ arg }}"
 
 # use pastel color <color> instead
-@color *args:
+color *args:
   pastel color {{ args }}
 
 #####################    RUBY    #####################
 
 # ascii doc
-@ascii:
-  asciidoc
+ad:
+  asciidoctor
 
