@@ -29,9 +29,9 @@ m:
 n *args:
   nvim {{args}}
 
-# nano tui
-@nano:
-  nano
+# micro tui
+@mic:
+  micro
 
 #####################   QUICKIES   #####################
 

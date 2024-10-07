@@ -1,17 +1,17 @@
 set shell := ['zsh', '-cu']
 
 default:
-  @just --justfile "$JUST/json.just" --list | zsh -c "$JUSTGREP"
+  @just --justfile "$JUST/unix.just" --list | zsh -c "$JUSTGREP"
 
 ############  UNIX UTIL  ############
 
 # awk for processing delimited files
-gawk:
-  awk
+gawk *args:
+  awk {{args}}
  
 # sed alternative for find/replace withing files
-sed:
-  sd
+sed *args:
+  sd {{args}}
 
 # new grep for find within glob pattern
 @grep *args:
@@ -30,20 +30,20 @@ sed:
   print $(command tere "$@")
 
 # new ls
-@ls:
-  lsd
+@ls *args:
+  lsd {{args}}
 
 # new ls -al
 @la *args:
   lsd -al {{ args }}
 
 # new cat
-@cat:
-  bat
+@cat *args:
+  bat {{args}}
 
 # ps alternative
-pr:
-  procs
+pr *args:
+  procs {{args}}
 
 # more readable path. duplicates in red.
 path:

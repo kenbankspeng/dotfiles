@@ -6,19 +6,23 @@ default:
 ############  JSON UTIL  ############
 
 # jq json processing
-jsn:
-  jq
+jsn *args:
+  jq {{args}}
 
 # yq: jq-like for yaml, json, xml, properties, csv and tsv
-yaml:
-  yq
+yaml *args:
+  yq {{args}}
 
-# json viewer
-json:
-  fx
+# jid: json interactive digger
+jd *args:
+  jid {{args}}
 
-# json navigator
-jnav:
-  jnv
+# fx json viewer
+jv *args:
+  fx {{args}}
+
+# jnv json navigator
+jnav *args:
+  jnv {{args}}
 
 

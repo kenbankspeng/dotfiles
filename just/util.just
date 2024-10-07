@@ -24,8 +24,8 @@ disk:
   dust
 
 # shell linter
-sc:
-  shellcheck
+sc *args:
+  shellcheck {{args}}
 
 # multiplex github accounts
 @github:
@@ -46,19 +46,17 @@ gr:
 @scripts:
   cursor "$DEV_BOX"
 
-
-
 # melody language to regex
-@mel:
-  melody
+mel *args:
+  melody {{args}}
 
 # code refactoring
-ast:
-  ast-grep
+ast *args:
+  ast-grep {{args}}
 
 # local task mgr
-tsk:
-  task
+tsk *args:
+  task {{args}}
 
 #####################   PYTHON   #####################
 
@@ -97,6 +95,6 @@ color *args:
 #####################    RUBY    #####################
 
 # ascii doc
-ad:
-  asciidoctor
+ad *args:
+  asciidoctor {{args}}
 
