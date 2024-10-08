@@ -7,10 +7,6 @@ default:
 
 #####################   QUICKIES   #####################
 
-# disk usage tui
-d:
-  ncdu
-
 # outdated
 @o:
   print "{{BrightMagenta}}BREW"

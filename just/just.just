@@ -28,3 +28,6 @@ mod unix
 
 # json util
 mod json
+
+# disk util
+mod disk

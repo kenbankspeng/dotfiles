@@ -18,10 +18,6 @@ pl:
 at:
   atac --directory "$HOME"/.local/share/atac
 
-# top tui
-top:
-  htop
-
 # visidata
 vd *args:
   visidata {{args}}

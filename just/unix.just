@@ -44,6 +44,18 @@ sed *args:
 pr *args:
   procs {{args}}
 
+# top tui
+top:
+  htop
+
+# top tui
+top2:
+  btm
+
+# bandwidth util
+bw:
+  bandwich
+
 # more readable path. duplicates in red.
 path:
   #!/usr/bin/env zsh

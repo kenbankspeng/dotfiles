@@ -19,10 +19,6 @@ default:
 @secure:
   . "$ZSH_SCRIPTS/secure.zsh"
   
-# disk usage
-disk:
-  dust
-
 # shell linter
 sc *args:
   shellcheck {{args}}
@@ -60,6 +56,25 @@ tsk *args:
 # rainbow text
 lc *args:
   lolcat {{args}}
+
+# count lines of code
+cloc:
+  tokei
+
+# hyperfine 'sleep 0.3' - OK
+# bm 'sleep 0.3' -- ERROR
+# benchmarks
+bm *args:
+  hyperfine {{args}}
+
+# generate regex
+regex *args:
+  greg {{args}}
+
+# needs to be hooked into git
+# git delta viewer
+gdelta *args:
+  delta {{args}}
 
 #####################   PYTHON   #####################
 
