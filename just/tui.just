@@ -22,3 +22,14 @@ at:
 top:
   htop
 
+# visidata
+vd *args:
+  visidata {{args}}
+
+# lazydocker
+ld:
+  lazydocker
+
+# shell cheatsheet
+cs:
+  navi

@@ -5,34 +5,6 @@ import 'colors.just'
 default:
   @just --justfile "$JUST/q.just" --list | zsh -c "$JUSTGREP"
 
-#####################   EDITORS   #####################
-
-# list just modules
-
-# new vscode
-code:
-  cursor .
-
-# git tui
-g:
-  lazygit
-
-# neophyte editor
-edit:
-  neophyte
-
-# markdown tui
-m:
-  glow
-
-# nvim tui
-n *args:
-  nvim {{args}}
-
-# micro tui
-@mic:
-  micro
-
 #####################   QUICKIES   #####################
 
 # disk usage tui
@@ -74,9 +46,6 @@ w:
 x:
   xh
 
-# yazi file manager tui
-y:
-  yazi
 
 # terminal mux
 z:

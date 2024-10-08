@@ -8,6 +8,9 @@ set shell := ['zsh', '-cu']
 default:
   @just --justfile "$JUST"/just.just --list | zsh -c "$JUSTGREP"
 
+# editors
+mod edit
+
 # quick launch 
 mod q
 

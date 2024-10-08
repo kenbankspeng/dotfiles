@@ -53,9 +53,9 @@ default:
   brew cleanup
 
 # brew remove (w/ autoremove, cleanup)
-@br arg:
+@br *args:
   print "brew remove /w autoremove and cleanup"
   print
-  brew remove {{ arg }}
+  brew remove {{ args }}
   brew autoremove
   brew cleanup

@@ -37,7 +37,6 @@ sc *args:
   osascript -e 'id of app "{{arg}}"'
   # mdls -name kMDItemCFBundleIdentifier "{{arg}}"
 
-
 # git origin
 gr:
   git remote -v
@@ -57,6 +56,10 @@ ast *args:
 # local task mgr
 tsk *args:
   task {{args}}
+
+# rainbow text
+lc *args:
+  lolcat {{args}}
 
 #####################   PYTHON   #####################
 

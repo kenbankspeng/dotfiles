@@ -13,6 +13,10 @@ jsn *args:
 yaml *args:
   yq {{args}}
 
+# CLI output to json
+toj *args:
+  jc {{args}}
+
 # jid: json interactive digger
 jd *args:
   jid {{args}}
