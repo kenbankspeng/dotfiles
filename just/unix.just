@@ -21,9 +21,8 @@ sed *args:
 
 # new man
 @man *args:
-  print "tldr"
-  print
-  tldr --config $XDG_CONFIG_HOME/tlrc/config.toml {{ args }}
+  print "tldr (tealdeer)"
+  tldr {{ args }}
 
 # get directory path
 @gd *args:
