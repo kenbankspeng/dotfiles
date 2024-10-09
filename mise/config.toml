@@ -9,3 +9,4 @@ deno = "latest"
 
 [settings]
 experimental = true
+python_compile = false
