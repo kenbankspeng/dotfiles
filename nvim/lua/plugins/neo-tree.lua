@@ -111,9 +111,17 @@ local function preview_enter(state)
   if file_manager.is_sidebar() and not require('neo-tree.utils').is_expandable(node) then
     -- Get the selected node and open the file in a new buffer
     local filepath = node.path
+
+    -- Save the current window ID (Neo-tree window)
+    local neo_tree_winnr = vim.api.nvim_get_current_win()
+
     -- Ensure a new buffer is created for the file
     vim.cmd('badd ' .. filepath)
     vim.cmd('buffer ' .. filepath)
+
+    -- Switch back to the Neo-tree window
+    vim.schedule(function() vim.api.nvim_set_current_win(neo_tree_winnr) end)
+
     -- Invalidate the preview buffer
     preview_bufnr = nil
   else
