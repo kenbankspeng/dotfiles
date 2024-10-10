@@ -57,7 +57,7 @@ local function is_previewable(filepath)
   return true
 end
 
-local function open_preview_buffer(filepath)
+local function open_preview_buffer(filepath, state)
   -- Create a new preview buffer if invalid or non-existent
   if preview_bufnr == nil or not vim.api.nvim_buf_is_valid(preview_bufnr) then
     preview_bufnr = vim.api.nvim_create_buf(false, true)
@@ -79,9 +79,21 @@ local function open_preview_buffer(filepath)
     preview_winid = vim.api.nvim_get_current_win()
   end
 
+  -- Set the Neo-tree window width to 30% of the total columns
+  local total_cols = vim.o.columns
+  local neo_tree_width = math.floor(total_cols * 0.3)
+
+  -- Focus on the Neo-tree window and resize it
+  vim.api.nvim_set_current_win(state.winid)
+  vim.cmd('vertical resize ' .. neo_tree_width)
+
+  -- Return to the preview window
+  vim.api.nvim_set_current_win(preview_winid)
+
   -- Set the preview buffer in the preview window
   vim.api.nvim_win_set_buf(preview_winid, preview_bufnr)
 end
+
 
 local function preview_file(state)
   local node = state.tree:get_node()
@@ -89,7 +101,7 @@ local function preview_file(state)
     local filepath = node.path
     if filepath ~= nil then
       close_initial_dashboard()
-      open_preview_buffer(filepath)
+      open_preview_buffer(filepath, state)
       -- Return focus to the Neo-tree window
       vim.api.nvim_set_current_win(state.winid)
     end
@@ -141,7 +153,7 @@ return {
     },
     keys = {
       { '<leader><leader>', file_manager.neotree_left, 'toggle neotree left' },
-      { 'q', file_manager.close, 'close window' },
+      { 'q',                file_manager.close,        'close window' },
     },
     config = function()
       -- If you want icons for diagnostic errors, you'll need to define them somewhere:
@@ -151,13 +163,13 @@ return {
       vim.fn.sign_define('DiagnosticSignHint', { text = '󰌵', texthl = 'DiagnosticSignHint' })
 
       require('neo-tree').setup({
-        close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
+        close_if_last_window = false,   -- Close Neo-tree if it is the last window left in the tab
         popup_border_style = 'rounded', -- "single" | "double" | "rounded" | "solid" | NC
         enable_git_status = true,
         enable_diagnostics = true,
         open_files_do_not_replace_types = { 'terminal', 'trouble', 'qf' }, -- when opening files, do not use windows containing these filetypes or buftypes
-        sort_case_insensitive = false, -- used when sorting files and directories in the tree
-        sort_function = nil, -- use a custom function for sorting files and directories in the tree
+        sort_case_insensitive = false,                                     -- used when sorting files and directories in the tree
+        sort_function = nil,                                               -- use a custom function for sorting files and directories in the tree
         -- sort_function = function (a,b)
         --       if a.type == b.type then
         --           return a.path > b.path
@@ -329,11 +341,11 @@ return {
             },
           },
           follow_current_file = {
-            enabled = false, -- This will find and focus the file in the active buffer every time
+            enabled = false,                      -- This will find and focus the file in the active buffer every time
             --               -- the current file is changed while the tree is open.
-            leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+            leave_dirs_open = false,              -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
           },
-          group_empty_dirs = false, -- when true, empty folders will be grouped together
+          group_empty_dirs = false,               -- when true, empty folders will be grouped together
           hijack_netrw_behavior = 'open_default', -- netrw disabled, opening a directory opens neo-tree
           -- in whatever position is specified in window.position
           -- "open_current",  -- netrw disabled, opening a directory opens within the
@@ -377,11 +389,11 @@ return {
         },
         buffers = {
           follow_current_file = {
-            enabled = true, -- This will find and focus the file in the active buffer every time
+            enabled = true,          -- This will find and focus the file in the active buffer every time
             --              -- the current file is changed while the tree is open.
             leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
           },
-          group_empty_dirs = true, -- when true, empty folders will be grouped together
+          group_empty_dirs = true,   -- when true, empty folders will be grouped together
           show_unloaded = true,
           window = {
             mappings = {
