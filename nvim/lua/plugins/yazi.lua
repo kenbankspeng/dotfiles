@@ -3,9 +3,9 @@ return {
     'mikavilpas/yazi.nvim',
     event = 'VeryLazy',
     keys = {
-      { "<leader>ys", "<cmd>Yazi<cr>",        desc = "yazi same", },
-      { "<leader>yr", "<cmd>Yazi cwd<cr>",    desc = "yazi root", },
-      { '<leader>yt', "<cmd>Yazi toggle<cr>", desc = "yazi toggle", },
+      { '<leader>ys', '<cmd>Yazi<cr>', desc = 'yazi same' },
+      { '<leader>yr', '<cmd>Yazi cwd<cr>', desc = 'yazi root' },
+      { '<leader><leader>', '<cmd>Yazi toggle<cr>', desc = 'yazi toggle' },
     },
     opts = {
       -- hitting enter on a directory usually pulls up netrw

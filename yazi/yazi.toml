@@ -3,41 +3,39 @@
 "$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
 
 [manager]
-ratio          = [ 2, 3, 6 ]
-sort_by        = "alphabetical"
+ratio = [2, 3, 6]
+sort_by = "alphabetical"
 sort_sensitive = false
-sort_reverse 	 = false
+sort_reverse = false
 sort_dir_first = true
-sort_translit  = false
-linemode       = "none"
-show_hidden    = true
-show_symlink   = true
-scrolloff      = 5
-mouse_events   = [ "click", "scroll" ]
+sort_translit = false
+linemode = "none"
+show_hidden = true
+show_symlink = true
+scrolloff = 5
+mouse_events = ["click", "scroll"]
 
 [preview]
-tab_size        = 2
-max_width       = 600
-max_height      = 900
-cache_dir       = ""
-image_filter    = "triangle"
-image_quality   = 75
-sixel_fraction  = 15
-ueberzug_scale  = 1
-ueberzug_offset = [ 0, 0, 0, 0 ]
+tab_size = 2
+max_width = 600
+max_height = 900
+cache_dir = ""
+image_filter = "triangle"
+image_quality = 75
+sixel_fraction = 15
+ueberzug_scale = 1
+ueberzug_offset = [0, 0, 0, 0]
 
 [opener]
 edit = [
 	{ run = '${EDITOR:=nvim} "$@"', desc = "$EDITOR", block = true, for = "macos" },
 ]
-open = [
-	{ run = 'open "$@"',                    desc = "Open", for = "macos" },
-]
+open = [{ run = 'open "$@"', desc = "Open", for = "macos" }]
 read = [
-  { run = 'nvim -R +":set nomodifiable" "$@"',                desc = "Read", block = true, for = "macos" },
+	{ run = 'nvim -R +":set nomodifiable" "$@"', desc = "Read", block = true, for = "macos" },
 ]
 reveal = [
-	{ run = 'open -R "$1"',                         desc = "Reveal", for = "macos" },
+	{ run = 'open -R "$1"', desc = "Reveal", for = "macos" },
 	{ run = '''exiftool "$1"; echo "Press enter to exit"; read _''', block = true, desc = "meta info", for = "unix" },
 ]
 extract = [
@@ -51,31 +49,63 @@ play = [
 [open]
 rules = [
 	# Folder
-	{ name = "*/", use = [ "edit", "open", "reveal" ] },
+	{ name = "*/", use = [
+		"edit",
+		"open",
+		"reveal",
+	] },
 	# Text
-	{ mime = "text/*", use = [ "edit", "read", "reveal" ] },
+	{ mime = "text/*", use = [
+		"edit",
+		"read",
+		"reveal",
+	] },
 	# Image
-	{ mime = "image/*", use = [ "open", "reveal" ] },
+	{ mime = "image/*", use = [
+		"open",
+		"reveal",
+	] },
 	# Media
-	{ mime = "{audio,video}/*", use = [ "play", "reveal" ] },
+	{ mime = "{audio,video}/*", use = [
+		"play",
+		"reveal",
+	] },
 	# Archive
-	{ mime = "application/{,g}zip", use = [ "extract", "reveal" ] },
-	{ mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}", use = [ "extract", "reveal" ] },
+	{ mime = "application/{,g}zip", use = [
+		"extract",
+		"reveal",
+	] },
+	{ mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}", use = [
+		"extract",
+		"reveal",
+	] },
 	# JSON
-	{ mime = "application/{json,x-ndjson}", use = [ "edit", "reveal" ] },
-	{ mime = "*/javascript", use = [ "edit", "reveal" ] },
+	{ mime = "application/{json,x-ndjson}", use = [
+		"edit",
+		"reveal",
+	] },
+	{ mime = "*/javascript", use = [
+		"edit",
+		"reveal",
+	] },
 	# Empty file
-	{ mime = "inode/x-empty", use = [ "edit", "reveal" ] },
+	{ mime = "inode/x-empty", use = [
+		"edit",
+		"reveal",
+	] },
 	# Fallback
-	{ name = "*", use = [ "open", "reveal" ] },
+	{ name = "*", use = [
+		"open",
+		"reveal",
+	] },
 ]
 
 [tasks]
-micro_workers    = 10
-macro_workers    = 25
-bizarre_retry    = 5
-image_alloc      = 536870912  # 512MB
-image_bound      = [ 0, 0 ]
+micro_workers = 10
+macro_workers = 25
+bizarre_retry = 5
+image_alloc = 536870912  # 512MB
+image_bound = [0, 0]
 suppress_preload = false
 
 [plugin]
@@ -124,70 +154,70 @@ previewers = [
 cursor_blink = false
 
 # cd
-cd_title  = "Change directory:"
+cd_title = "Change directory:"
 cd_origin = "top-center"
-cd_offset = [ 0, 2, 50, 3 ]
+cd_offset = [0, 2, 50, 3]
 
 # create
-create_title  = "Create:"
+create_title = "Create:"
 create_origin = "top-center"
-create_offset = [ 0, 2, 50, 3 ]
+create_offset = [0, 2, 50, 3]
 
 # rename
-rename_title  = "Rename:"
+rename_title = "Rename:"
 rename_origin = "hovered"
-rename_offset = [ 0, 1, 50, 3 ]
+rename_offset = [0, 1, 50, 3]
 
 # trash
-trash_title 	= "Move {n} selected file{s} to trash? (y/N)"
-trash_origin	= "top-center"
-trash_offset	= [ 0, 2, 50, 3 ]
+trash_title = "Move {n} selected file{s} to trash? (y/N)"
+trash_origin = "top-center"
+trash_offset = [0, 2, 50, 3]
 
 # delete
-delete_title 	= "Delete {n} selected file{s} permanently? (y/N)"
-delete_origin	= "top-center"
-delete_offset	= [ 0, 2, 50, 3 ]
+delete_title = "Delete {n} selected file{s} permanently? (y/N)"
+delete_origin = "top-center"
+delete_offset = [0, 2, 50, 3]
 
 # filter
-filter_title  = "Filter:"
+filter_title = "Filter:"
 filter_origin = "top-center"
-filter_offset = [ 0, 2, 50, 3 ]
+filter_offset = [0, 2, 50, 3]
 
 # find
-find_title  = [ "Find next:", "Find previous:" ]
+find_title = ["Find next:", "Find previous:"]
 find_origin = "top-center"
-find_offset = [ 0, 2, 50, 3 ]
+find_offset = [0, 2, 50, 3]
 
 # search
-search_title  = "Search via {n}:"
+search_title = "Search via {n}:"
 search_origin = "top-center"
-search_offset = [ 0, 2, 50, 3 ]
+search_offset = [0, 2, 50, 3]
 
 # shell
-shell_title  = [ "Shell:", "Shell (block):" ]
+shell_title = ["Shell:", "Shell (block):"]
 shell_origin = "top-center"
-shell_offset = [ 0, 2, 50, 3 ]
+shell_offset = [0, 2, 50, 3]
 
 # overwrite
-overwrite_title  = "Overwrite an existing file? (y/N)"
+overwrite_title = "Overwrite an existing file? (y/N)"
 overwrite_origin = "top-center"
-overwrite_offset = [ 0, 2, 50, 3 ]
+overwrite_offset = [0, 2, 50, 3]
 
 # quit
-quit_title  = "{n} task{s} running, sure to quit? (y/N)"
+quit_title = "{n} task{s} running, sure to quit? (y/N)"
 quit_origin = "top-center"
-quit_offset = [ 0, 2, 50, 3 ]
+quit_offset = [0, 2, 50, 3]
 
 [select]
-open_title  = "Open with:"
+open_title = "Open with:"
 open_origin = "hovered"
-open_offset = [ 0, 1, 50, 7 ]
+open_offset = [0, 1, 50, 7]
 
 [which]
-sort_by      	 = "none"
+sort_by = "none"
 sort_sensitive = false
-sort_reverse 	 = false
-sort_translit  = false
+sort_reverse = false
+sort_translit = false
 
 [log]
 enabled = false
