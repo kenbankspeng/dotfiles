@@ -2,13 +2,6 @@
 
 local map = function(keys, func, desc) vim.keymap.set('n', keys, func, { desc = desc, silent = true, noremap = true }) end
 
--------------------
---     LAZY      --
--------------------
-
--- <leader>l    <Cmd>Lazy<CR>             Lazy
--- L            No command                LazyVim Changelog
-
 -- delete unwanted LazyVim/Plugin mappings
 local del = vim.keymap.del
 
@@ -82,11 +75,3 @@ map('<M-Left>', function() wezterm.resize('h', 2) end, 'resize left')
 map('<M-Down>', function() wezterm.resize('j', 2) end, 'resize down')
 map('<M-Up>', function() wezterm.resize('k', 2) end, 'resize up')
 map('<M-Right>', function() wezterm.resize('l', 2) end, 'resize right')
-
----------------------
---  OIL / NEOTREE  --
----------------------
-local file_manager = require('custom.file-manager')
--- map('<leader><leader>', file_manager.neotree_left, 'toggle neotree left')
-map(',,', '<cmd>Oil --float<CR>', 'open parent directory')
-map('q', file_manager.close, 'close window')
