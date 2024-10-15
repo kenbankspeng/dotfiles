@@ -1,4 +1,4 @@
-## fzf-lua or telescope
+# fzf-lua or telescope
 
 - FZF-LUA -- ui seems better than telescope
 - TELESCOPE -- See `:help telescope.builtin`

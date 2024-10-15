@@ -75,3 +75,8 @@ map('<M-Left>', function() wezterm.resize('h', 2) end, 'resize left')
 map('<M-Down>', function() wezterm.resize('j', 2) end, 'resize down')
 map('<M-Up>', function() wezterm.resize('k', 2) end, 'resize up')
 map('<M-Right>', function() wezterm.resize('l', 2) end, 'resize right')
+
+-- manage conflict instead of depending on lazy load order
+local builtin = require('telescope.builtin')
+map('<leader>sf', builtin.find_files, 'telescope search files')
+map('<leader><space>', '<cmd>Yazi toggle<cr>', 'yazi toggle')
