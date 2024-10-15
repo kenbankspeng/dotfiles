@@ -31,3 +31,6 @@ mod json
 
 # disk util
 mod disk
+
+# curl
+mod curl
