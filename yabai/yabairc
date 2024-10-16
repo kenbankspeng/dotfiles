@@ -5,6 +5,7 @@ set -x
 #
 # VARIABLES
 #
+# seems macOS Sequoia uses 7 as gap
 gap_top=20
 gap_bottom=20
 gap_left=20

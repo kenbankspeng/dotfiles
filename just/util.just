@@ -76,6 +76,9 @@ regex *args:
 gdelta *args:
   delta {{args}}
 
+# TBD: batgrep, batman, batpipe, batwatch, batdiff, prettybat
+
+
 #####################   PYTHON   #####################
 
 # create symbolic link
