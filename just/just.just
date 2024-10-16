@@ -34,3 +34,7 @@ mod disk
 
 # curl
 mod curl
+
+# sql
+mod sql
+

@@ -1,3 +1,23 @@
+local function close_empty_non_ui_buffers()
+  local bufs = vim.api.nvim_list_bufs()
+
+  for _, bufnr in ipairs(bufs) do
+    local name = vim.api.nvim_buf_get_name(bufnr)
+    local line_count = vim.api.nvim_buf_line_count(bufnr)
+    local is_empty = (line_count == 1 and vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)[1] == '')
+
+    if name == '' and is_empty then
+      vim.api.nvim_buf_delete(bufnr, { force = true })
+    end
+  end
+end
+
+local function select_and_close_buffers()
+  require('oil.actions').select.callback()
+  vim.defer_fn(close_empty_non_ui_buffers, 100) -- Delay of 100 milliseconds
+end
+
+
 local function maybe_go_right_maybe_cd()
   local oil = require('oil') -- loads oil after it is initialized
   local actions = require('oil.actions')
@@ -8,27 +28,6 @@ local function maybe_go_right_maybe_cd()
     vim.api.nvim_feedkeys('l', 'n', false) -- go right
   end
 end
-
-local git_ignored = setmetatable({}, {
-  __index = function(self, key)
-    local proc = vim.system({ 'git', 'ls-files', '--ignored', '--exclude-standard', '--others', '--directory' }, {
-      cwd = key,
-      text = true,
-    })
-    local result = proc:wait()
-    local ret = {}
-    if result.code == 0 then
-      for line in vim.gsplit(result.stdout, '\n', { plain = true, trimempty = true }) do
-        -- Remove trailing slash
-        line = line:gsub('/$', '')
-        table.insert(ret, line)
-      end
-    end
-
-    rawset(self, key, ret)
-    return ret
-  end,
-})
 
 local file_manager = require('custom.file-manager')
 return {
@@ -96,7 +95,7 @@ return {
       -- See :help oil-actions for a list of all available actions
       keymaps = {
         ['g?'] = 'actions.show_help',
-        ['<CR>'] = 'actions.select',
+        ['<CR>'] = select_and_close_buffers,
         ['<left>'] = 'actions.parent',
         ['<right>'] = maybe_go_right_maybe_cd,
         ['\\'] = { 'actions.select', opts = { vertical = true }, desc = 'Open the entry in a vertical split' },
