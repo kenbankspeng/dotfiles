@@ -12,8 +12,10 @@ $python\
 $lua\
 [](fg:color_lang bg:color_git)\
 $git_branch\
-$git_status\
+$git_commit\
+$git_state\
 $git_metrics\
+$git_status\
 [](fg:color_git bg:color_tip)\
 $fill\
 $character\
@@ -57,21 +59,26 @@ detect_files = ["deno.json"]
 symbol = ""
 style = "bg:color_lang fg:color_lang_text"
 format = '[ $symbol ($version )($virtualenv )]($style)'
-########################
-# 
+######################## --  󰊤  
 [git_branch]
+symbol = ""
 style = "bg:color_git fg:color_git_text"
-symbol = ""                                            # 󰊤
-format = '[ $symbol $branch(:$remote_branch) ]($style)'
-[git_status]
+format = '[ $symbol$branch ]($style)'
+[git_commit]
 style = "bg:color_git fg:color_git_text"
-format = '[$all_status$ahead_behind ]($style)'
+format = '[\($hash$tag\) ]($style)'
+tag_disabled = false
+[git_state]
+style = "bg:color_git fg:color_git_text"
 [git_metrics]
 format = "([+$added]($added_style))[]($added_style)"
 added_style = "bg:color_git fg:color_git_text"
 deleted_style = "bg:235 fg:bright-red"
-disabled = false
-########################
+disabled = true
+[git_status]
+style = "bg:color_git fg:color_git_text"
+format = '[$all_status$ahead_behind ]($style)'
+#######################
 [cmd_duration]
 format = "[ $duration]($style)"
 style = "fg:bright-white"
