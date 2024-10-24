@@ -14,8 +14,8 @@ blocks:
   - user
   - size
   - date
-  - name
   - git
+  - name
 
 # == Color ==
 # This has various color options. (Will be expanded in the future.)
@@ -59,7 +59,7 @@ icons:
   theme: fancy
   # Separator between icon and the name
   # Default to 1 space
-  separator: ' '
+  separator: " "
 
 # == Ignore Globs ==
 # A list of globs to ignore when listing.
@@ -69,7 +69,7 @@ icons:
 # == Indicators ==
 # Whether to add indicator characters to certain listed files.
 # Possible values: false, true
-indicators: false
+indicators: true
 
 # == Layout ==
 # Which layout to use. "oneline" might be a bit confusing here and should be
@@ -145,4 +145,4 @@ truncate-owner:
   # Number of characters to keep. By default, no truncation is done (empty value).
   after:
   # String to be appended to a name if truncated.
-  marker: ''
+  marker: ""
