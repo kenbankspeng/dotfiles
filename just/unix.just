@@ -28,13 +28,22 @@ sed *args:
 @gd *args:
   print $(command tere "$@")
 
-# new ls
-@ls *args:
-  lsd {{args}}
+# new ls (git aware)
+ls *args:
+  #!/usr/bin/env zsh
+  if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+    lsd -al --blocks name --blocks git {{args}}
+  else
+    lsd {{args}}
+  fi
+  
+# new ls (tree + git)
+@lt *args:
+  lsd --tree --no-symlink --depth 2 -al --blocks name --blocks git {{args}}
 
-# new ls -al + git markers
-@lsg *args:
-  lsd -al {{ args }}
+# new ls (long + all + git)
+@ll *args:
+  lsd -al --no-symlink --blocks name --blocks git --blocks permission --blocks user --blocks size --blocks date {{args}}
 
 # new cat
 @cat *args:

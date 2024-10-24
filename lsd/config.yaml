@@ -63,19 +63,19 @@ icons:
 
 # == Ignore Globs ==
 # A list of globs to ignore when listing.
-# ignore-globs:
-#   - .git
+ignore-globs:
+  - .git
 
 # == Indicators ==
 # Whether to add indicator characters to certain listed files.
 # Possible values: false, true
-indicators: true
+indicators: false
 
 # == Layout ==
 # Which layout to use. "oneline" might be a bit confusing here and should be
 # called "one-per-line". It might be changed in the future.
 # Possible values: grid, tree, oneline
-layout: tree
+layout: oneline
 
 # == Recursion ==
 recursion:
