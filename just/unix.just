@@ -32,8 +32,8 @@ sed *args:
 @ls *args:
   lsd {{args}}
 
-# new ls -al
-@la *args:
+# new ls -al + git markers
+@lsg *args:
   lsd -al {{ args }}
 
 # new cat

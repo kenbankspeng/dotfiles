@@ -76,6 +76,8 @@ added_style = "bg:color_git fg:color_git_text"
 deleted_style = "bg:235 fg:bright-red"
 disabled = true
 [git_status]
+behind = ""
+ahead = ""
 style = "bg:color_git fg:color_git_text"
 format = '[$all_status$ahead_behind ]($style)'
 #######################
