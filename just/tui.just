@@ -29,3 +29,8 @@ ld:
 # shell cheatsheet
 cs:
   navi
+
+# terminal mux
+tm:
+  zellij
+

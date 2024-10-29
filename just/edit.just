@@ -30,10 +30,14 @@ n *args:
   nvim {{args}}
 
 # micro tui
-@mic *args:
+mic *args:
   micro {{args}}
 
 # yazi file manager tui
 y *args:
   yazi {{args}}
+
+# zed editor
+z *args:
+  zed {{args}}
 

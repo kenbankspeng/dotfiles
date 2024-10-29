@@ -7,6 +7,32 @@ default:
 
 #############  BREW  ##############
 
+# outdated
+@o:
+  print "{{BrightMagenta}}BREW"
+  print -- "----{{BrightBlue}}"
+  brew outdated --greedy
+  print
+  print "{{BrightMagenta}}MISE"
+  print -- "----{{BrightBlue}}"
+  mise outdated
+  print
+  print "{{BrightMagenta}}RYE"
+  print -- "---{{BrightBlue}}"
+  rye self update
+  print
+  print "{{BrightMagenta}}RUSTUP"
+  print -- "------{{BrightBlue}}"
+  rustup check
+  print
+  print "{{BrightMagenta}}CARGO"
+  print -- "-----{{BrightBlue}}"
+  cargo install-update -a
+  print
+  print "{{BrightMagenta}}BUN"
+  print -- "---{{BrightBlue}}"
+  bun -g outdated 
+
 # brew tree (casks and formulas)
 @bt:
   print "brew tree"

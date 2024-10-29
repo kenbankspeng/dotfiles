@@ -11,9 +11,6 @@ default:
 # editors
 mod edit
 
-# quick launch 
-mod q
-
 # homebrew
 mod brew
 

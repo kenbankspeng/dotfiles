@@ -82,4 +82,12 @@ path:
       }
   }'
 
+# watch a directory/file for changes 
+w:
+  watch
+
+# x GET 'https://api.open-meteo.com/v1/forecast' latitude==42.9849 longitude==-81.2453 current_weather==true
+# send http requests
+x:
+  xh
 
