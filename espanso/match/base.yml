@@ -1,0 +1,22 @@
+# espanso snippets file - yaml indent is 2 spaces
+# https://espanso.org/docs/
+
+matches:
+  # Simple text replacement
+  - trigger: ':espanso'
+    replace: 'Hi there!'
+
+  # Dynamic replacement
+  - trigger: ':date'
+    replace: '{{mydate}}'
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: '%m/%d/%Y'
+
+  - trigger: ':note'
+    replace: |
+      ---
+      tags: note
+      ---
