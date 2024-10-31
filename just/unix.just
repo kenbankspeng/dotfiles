@@ -107,9 +107,9 @@ x:
 # remove .DS_store
 @clean:
   print "recursively remove .DS_store"
-  fd --hidden '^\.DS_Store$' --type f --exec-batch rm
+  fd --hidden '^\.DS_Store$' --type file --exec-batch rm
 
 # remove .DS_store
 @sudoclean:
   print "powerfully recursively remove .DS_store"
-  sudo fd --hidden '^\.DS_Store$' --type f --exec-batch rm
+  sudo fd --hidden '^\.DS_Store$' --type file --exec-batch rm
