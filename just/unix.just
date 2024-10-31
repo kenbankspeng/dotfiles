@@ -29,6 +29,19 @@ sed *args:
   print $(command tere "$@")
 
 # new ls (git aware)
+#
+# git symbols
+# -----------
+# - : default
+# . : unmodified
+# N : new in index
+# ? : new in work directory
+# D : deleted
+# M : modified
+# R : renamed
+# I : ignored
+# T : type change
+# C : conflict
 ls *args:
   #!/usr/bin/env zsh
   if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
