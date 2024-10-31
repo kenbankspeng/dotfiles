@@ -6,7 +6,7 @@ matches:
   - trigger: ":tag"
     replace: |
       ---
-      tags: 
+      tags: $|$ 
       ---
 
   # Dynamic replacement
@@ -17,3 +17,9 @@ matches:
         type: date
         params:
           format: "%m/%d/%Y"
+
+  - trigger: ":test"
+    replace: "123"
+
+  - trigger: ":test"
+    replace: "456"

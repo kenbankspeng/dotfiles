@@ -6,4 +6,9 @@
 # These are the parameters that will be used by default on every application,
 # but you can also override them on a per-application basis.
 
-search_shortcut: off
+# search_shortcut: off
+search_shortcut: ALT+SPACE
+
+search_trigger: ":search"
+
+show_icon: false
