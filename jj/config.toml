@@ -1,0 +1,11 @@
+[user]
+name = "Ken Banks"
+email = "kenbanks.peng@gmail.com"
+
+[colors]
+"commit_id" = { fg = "blue", bold = false }
+"change_id" = { fg = "blue", bold = false }
+"prefix" = { bold = false }
+"rest" = "blue"
+"divergent rest" = "yellow"
+"divergent prefix" = { fg = "yellow", underline = true }
