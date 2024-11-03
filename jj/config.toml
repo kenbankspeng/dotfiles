@@ -3,9 +3,9 @@ name = "Ken Banks"
 email = "kenbanks.peng@gmail.com"
 
 [colors]
-"commit_id" = { fg = "blue", bold = false }
-"change_id" = { fg = "blue", bold = false }
+"commit_id" = { fg = "yellow", bold = false }
+"change_id" = { fg = "yellow", bold = false }
 "prefix" = { bold = false }
-"rest" = "blue"
+"rest" = "#707070"
 "divergent rest" = "yellow"
 "divergent prefix" = { fg = "yellow", underline = true }
