@@ -28,6 +28,10 @@ sed *args:
 @gd *args:
   print $(command tere "$@")
 
+# /bin/ls
+@l *args:
+  /bin/ls {{args}}
+
 # new ls (git aware)
 #
 # git symbols
@@ -113,3 +117,8 @@ x:
 @sudoclean:
   print "powerfully recursively remove .DS_store"
   sudo fd --hidden '^\.DS_Store$' --type file --exec-batch rm
+
+# rm -rf
+@zap *args:
+  rm -rf {{args}}
+
