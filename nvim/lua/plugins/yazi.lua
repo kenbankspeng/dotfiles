@@ -26,7 +26,7 @@ return {
       -- },
 
       -- the floating window scaling factor. 1 means 100%, 0.9 means 90%, etc.
-      floating_window_scaling_factor = 0.9,
+      floating_window_scaling_factor = 1.0,
 
       -- the transparency of the yazi floating window (0-100). See :h winblend
       yazi_floating_window_winblend = 0,
