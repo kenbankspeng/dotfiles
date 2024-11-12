@@ -23,6 +23,7 @@ default:
   print
   print "{{BrightMagenta}}GO"
   print -- "------{{BrightBlue}}"
+  print "gotools"
   gotools
   print
   print "{{BrightMagenta}}RUSTUP"
