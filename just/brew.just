@@ -21,6 +21,10 @@ default:
   print -- "---{{BrightBlue}}"
   rye self update
   print
+  print "{{BrightMagenta}}GO"
+  print -- "------{{BrightBlue}}"
+  gotools
+  print
   print "{{BrightMagenta}}RUSTUP"
   print -- "------{{BrightBlue}}"
   rustup check

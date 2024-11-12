@@ -3,9 +3,9 @@ node = "latest"
 git = "latest"
 python = "latest"
 bun = "latest"
-go = "latest"
 pipx = "latest"
 deno = "latest"
+go = "latest"
 
 [settings]
 experimental = true

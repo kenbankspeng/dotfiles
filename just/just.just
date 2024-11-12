@@ -35,3 +35,5 @@ mod curl
 # sql
 mod sql
 
+# go
+mod go
