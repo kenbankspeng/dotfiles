@@ -37,3 +37,6 @@ mod sql
 
 # go
 mod go
+
+# dev
+mod dev

@@ -6,6 +6,9 @@ default:
 ############  SQL  ############
 
 # sqlite3 db
-sql3 *args:
+sqlite *args:
   sqlite3 {{args}}
 
+# libsql
+sql *args:
+  sqld {{args}}
