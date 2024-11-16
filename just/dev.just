@@ -35,5 +35,8 @@ uii:
 uia component:
   bunx --bun shadcn@latest add {{component}}
 
-
+# bun install
+[no-cd]
+i *libs:
+  bun install {{libs}}
 
