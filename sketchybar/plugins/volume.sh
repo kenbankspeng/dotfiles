@@ -28,6 +28,7 @@ if [ "$SENDER" = "volume_change" ]; then
     label.color=$LAVENDER
     icon.align="left"
     icon.padding_left=8
+    background.height=$ITEM_HEIGHT_WITH_LABEL
   )
   sketchybar --set $NAME "${props[@]}"
 fi

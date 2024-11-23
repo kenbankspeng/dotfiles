@@ -9,6 +9,7 @@ props=(
   icon.color=$SAPPHIRE
   label="$cpu"
   label.color=$SAPPHIRE
+  background.height=$ITEM_HEIGHT_WITH_LABEL
 )
 
 if [ -n "$cpu" ]; then

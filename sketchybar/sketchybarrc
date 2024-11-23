@@ -51,7 +51,6 @@ sketchybar --bar "${bar[@]}"
 
 ##### Changing Defaults #####
 default=(
-  width=$ITEM_HEIGHT
   background.height=$ITEM_HEIGHT
   background.color=$TRANSPARENT
   background.corner_radius=5
