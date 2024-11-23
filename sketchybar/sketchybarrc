@@ -36,8 +36,8 @@ bar=(
   y_offset=0
   corner_radius=0
   blur_radius=0
-  padding_left=20
-  padding_right=0
+  padding_left=5
+  padding_right=5
   notch_width=0
   notch_offset=0
   display=all
@@ -84,11 +84,16 @@ source $ITEM_DIR/disk.sh
 source $ITEM_DIR/cpu.sh
 
 # HACK Virtual Section
+
 source $ITEM_DIR/outdated.sh
 
 # HACK Virtual Section
+
 source $ITEM_DIR/stack.sh
 source $ITEM_DIR/mouse.sh
+
+source $ITEM_DIR/clock.sh
+source $ITEM_DIR/wifi.sh
 
 # source $ITEM_DIR/windows.sh
 
@@ -99,8 +104,7 @@ source $ITEM_DIR/mouse.sh
 # not relevant on vertical layout
 
 ##### Right Side Items #####
-source $ITEM_DIR/clock.sh
-source $ITEM_DIR/wifi.sh
+# these are now bottom items
 
 ##### Finalizing Setup #####
 sketchybar --update

@@ -20,16 +20,11 @@ props=(
   background.color=$bg
   background.padding_left=0
   background.padding_right=0
-  icon.drawing=off
-  label.align="left"
-  label.padding_left=10
-  label.padding_right=10
+  icon.drawing=on
   label="$text"
   label.color=$color
-  label.font="$FONT:12"
-  width=75
 )
 
 # update wifi_alias and ip_address
 sketchybar --set wifi_alias alias.color="$color"
-sketchybar --set ip_address "${props[@]}"
+sketchybar --set wifi_alias "${props[@]}"
