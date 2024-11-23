@@ -61,11 +61,17 @@ default=(
   label.color=$TEXT
   padding_left=0
   padding_right=0
-  icon.padding_left=$ICON_PADDING_L
+
+  icon.width=$BAR_WIDTH
+  icon.align="center"
+  icon.padding_left=0
   icon.padding_right=0
+
+  label.width=$BAR_WIDTH
+  label.align="center"
   label.y_offset=$LABEL_Y_OFFSET # hack since on next line
-  label.padding_left=0           # each item needs to be tuned with negative number
-  label.padding_right=0
+  label.padding_left=-$BAR_WIDTH # each item needs to be pulled left using negative number
+  label.padding_right=$BAR_WIDTH # but needs to double in width because center aligned
 )
 sketchybar --default "${default[@]}"
 

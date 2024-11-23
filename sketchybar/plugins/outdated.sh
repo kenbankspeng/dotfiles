@@ -3,18 +3,22 @@
 source "$CONFIG_DIR/env.sh"
 
 # reprocess on mouse click
-sketchybar --set "$NAME" label=Check icon.color="$BLUE"
+sketchybar --set "$NAME" label="?" icon.color="$BLUE"
+
+sum=0
 
 count=$(mise list | grep -o '\boutdated\b' | wc -l | tr -d '[:space:]')
 sleep 3
+sum=$((sum + count))
 
-count="$(brew outdated | wc -l | tr -d ' ')"
-sleep 10
+count=$(brew outdated | wc -l | tr -d ' ')
+sleep 1
+sum=$((sum + count))
 
-case "$count" in
+case "$sum" in
 0)
 	color=$GREEN
-	count=􀆅
+	sum=􀆅
 	;;
 [1-2])
 	color=$YELLOW
@@ -28,10 +32,8 @@ case "$count" in
 esac
 
 props=(
-	label="$count"
+	label="$sum"
 	icon.color="$color"
 	label.color="$color"
-	icon.padding_left=8    # fine tuning hack
-	label.padding_left=-19 # fine tuning hack
 )
 sketchybar --set "$NAME" "${props[@]}"

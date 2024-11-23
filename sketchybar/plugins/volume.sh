@@ -26,8 +26,8 @@ if [ "$SENDER" = "volume_change" ]; then
     icon.color=$LAVENDER
     label="$volume%"
     label.color=$LAVENDER
-    icon.padding_left=8    # fine tuning hack
-    label.padding_left=-23 # fine tuning hack
+    icon.align="left"
+    icon.padding_left=8
   )
   sketchybar --set $NAME "${props[@]}"
 fi
