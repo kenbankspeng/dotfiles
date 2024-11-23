@@ -1,5 +1,6 @@
-\.DS_Store
-\.vscode
-\.git
-\.gitignore
-\.stowrc
+.DS_Store
+.vscode
+.git
+.gitignore
+.stowrc
+archived
