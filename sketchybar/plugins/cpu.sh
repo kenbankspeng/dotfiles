@@ -9,8 +9,6 @@ props=(
   icon.color=$SAPPHIRE
   label="$cpu"
   label.color=$SAPPHIRE
-  icon.padding_left=11   # fine tuning hack
-  label.padding_left=-18 # fine tuning hack
 )
 
 if [ -n "$cpu" ]; then
