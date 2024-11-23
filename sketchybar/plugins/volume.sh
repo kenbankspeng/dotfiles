@@ -6,9 +6,9 @@ source "$CONFIG_DIR/env.sh"
 # percentage is passed to the script.
 
 if [ "$SENDER" = "volume_change" ]; then
-  volumn=$INFO
+  volume=$INFO
 
-  case $volumn in
+  case $volume in
   [6-9][0-9] | 100)
     icon="􀊩"
     ;;
@@ -24,9 +24,10 @@ if [ "$SENDER" = "volume_change" ]; then
   props=(
     icon="$icon"
     icon.color=$LAVENDER
-    label="$volumn%"
+    label="$volume%"
     label.color=$LAVENDER
-    label.font="$FONT:12"
+    icon.padding_left=8    # fine tuning hack
+    label.padding_left=-23 # fine tuning hack
   )
   sketchybar --set $NAME "${props[@]}"
 fi

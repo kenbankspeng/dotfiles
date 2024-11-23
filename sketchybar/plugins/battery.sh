@@ -34,7 +34,7 @@ props=(
   icon.color=$SKY
   label="${percentage}%"
   label.color=$SKY
-  label.font="$FONT:12"
-  label.padding_right=20
+  icon.padding_left=8    # fine tuning hack
+  label.padding_left=-27 # fine tuning hack
 )
 sketchybar --set $NAME "${props[@]}"

@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 
-position=e
+position=left
 
 props=(
   icon.drawing=off
   label.drawing=off
-  padding_left=20
   background.color=off
   script="$PLUGIN_DIR/stack.sh"
 )
@@ -16,7 +15,6 @@ sketchybar --add event space_changed \
 
 props=(
   label.drawing=off
-  icon.font="$ICON_FONT:$ICON_FONTSIZE"
   icon.color=$GREY
   script="$PLUGIN_DIR/stack.sh"
 )

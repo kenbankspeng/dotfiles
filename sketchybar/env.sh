@@ -7,13 +7,17 @@ export WINDOWS_CACHE_FILE="$CACHE_DIR/windows_cache"
 
 export PLUGIN_DIR="$CONFIG_DIR/plugins"
 export ITEM_DIR="$CONFIG_DIR/items"
-export FONT="SF Pro:Semibold"
-export FONTSIZE=13
-export HEIGHT=38
+
 export ICON_FONT="sketchybar-app-font:Regular"
-export ICON_FONTSIZE=18
-export PADDING_V=6
-export PADDING_H=4
+export ICON_FONTSIZE=14
+export FONT="SF Pro:Semibold"
+export FONTSIZE=12
+
+export BAR_WIDTH=40
+export ITEM_HEIGHT=53
+export ICON_PADDING_L=11
+export LABEL_Y_OFFSET=-17
+export SECTION=80
 
 #
 #
@@ -82,6 +86,6 @@ export ACCENT9=$FLAMINGO
 export ACCENT10=$SAPPHIRE
 export ACCENTS=($ACCENT1 $ACCENT2 $ACCENT3 $ACCENT4 $ACCENT5 $ACCENT6 $ACCENT7 $ACCENT8 $ACCENT9 $ACCENT10)
 
-export BAR=$CRUST
+export BAR=0xff303030
 export off=$GREY
 export on=$GREEN
