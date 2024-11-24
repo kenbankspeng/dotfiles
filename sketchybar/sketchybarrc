@@ -36,7 +36,7 @@ bar=(
   y_offset=0
   corner_radius=0
   blur_radius=0
-  padding_left=5
+  padding_left=20
   padding_right=5
   notch_width=0
   notch_offset=0
@@ -79,6 +79,7 @@ sketchybar --default "${default[@]}"
 ##### Left Side Items #####
 # these are now top items
 # starting at top-most
+source $ITEM_DIR/wifi.sh
 source $ITEM_DIR/battery.sh
 source $ITEM_DIR/volume.sh
 source $ITEM_DIR/disk.sh
@@ -92,8 +93,6 @@ source $ITEM_DIR/outdated.sh
 
 source $ITEM_DIR/stack.sh
 source $ITEM_DIR/mouse.sh
-
-source $ITEM_DIR/wifi.sh
 
 # source $ITEM_DIR/windows.sh
 

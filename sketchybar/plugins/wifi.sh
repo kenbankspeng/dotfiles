@@ -60,6 +60,7 @@ fi
 # echo "@@ icon: $icon"
 
 props=(
+  background.height=20
   icon.font="Icomoon:Regular:20"
   icon=$icon
   icon.color="$color"
