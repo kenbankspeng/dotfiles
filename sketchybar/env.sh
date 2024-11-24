@@ -45,13 +45,20 @@ BATTERY_CHARGING=􀢋 # SF Symbols - charging
 
 DISK=􀥾 # SF Symbols - disk
 
-LEGO=􀐛
+LEGO=􀐛 # SF Symbols
 
-BUTTON=􀆨
-GRID=􀏝
-STACK=􀏧
+BUTTON=􀆨 # SF Symbols
+GRID=􀏝   # SF Symbols
+STACK=􀏧  # SF Symbols
 
-CPU=􀧓
+CPU=􀧓 # SF Symbols
+
+CHECKMARK=􀆅 # SF Symbols
+
+VOLUME_3=􀊨 # SF Symbols - wave 3
+VOLUME_2=􀊦 # SF Symbols - wave 2
+VOLUME_1=􀊤 # SF Symbols - wave 1
+VOLUME_0=􀊢 # SF Symbols - muted
 
 #
 #
