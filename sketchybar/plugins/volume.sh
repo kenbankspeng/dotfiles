@@ -6,27 +6,29 @@ source "$CONFIG_DIR/env.sh"
 # percentage is passed to the script.
 
 if [ "$SENDER" = "volume_change" ]; then
-  volumn=$INFO
+  volume=$INFO
 
-  case $volumn in
+  case $volume in
   [6-9][0-9] | 100)
-    icon="􀊩"
+    icon=$VOLUME_3
     ;;
   [3-5][0-9])
-    icon="􀊥"
+    icon=$VOLUME_2
     ;;
   [1-9] | [1-2][0-9])
-    icon="􀊡"
+    icon=$VOLUME_1
     ;;
-  *) icon="􀊣" ;;
+  *) icon=$VOLUME_0 ;;
   esac
 
   props=(
-    icon="$icon"
+    icon=$icon
     icon.color=$LAVENDER
-    label="$volumn%"
+    label="$volume%"
     label.color=$LAVENDER
-    label.font="$FONT:12"
+    icon.align="left"
+    icon.padding_left=8
+    background.height=$ITEM_HEIGHT_WITH_LABEL
   )
   sketchybar --set $NAME "${props[@]}"
 fi

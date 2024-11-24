@@ -11,30 +11,29 @@ fi
 
 case ${percentage} in
 9[0-9] | 100)
-  icon="􀛨"
+  icon=$BATTERY_4 # full
   ;;
 [6-8][0-9])
-  icon="􀺸"
+  icon=$BATTERY_3 # strong
   ;;
 [3-5][0-9])
-  icon="􀺶"
+  icon=$BATTERY_2 # half
   ;;
 [1-2][0-9])
-  icon="􀛩"
+  icon=$BATTERY_1 # low
   ;;
-*) icon="􀛪" ;;
+*) icon=$BATTERY_0 ;; # empty
 esac
 
 if [[ $charging != "" ]]; then
-  icon="􀢋"
+  icon=$BATTERY_CHARGING
 fi
 
 props=(
-  icon="$icon"
+  icon=$icon
   icon.color=$SKY
   label="${percentage}%"
   label.color=$SKY
-  label.font="$FONT:12"
-  label.padding_right=20
+  background.height=$ITEM_HEIGHT_WITH_LABEL
 )
 sketchybar --set $NAME "${props[@]}"

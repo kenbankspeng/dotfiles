@@ -7,13 +7,59 @@ export WINDOWS_CACHE_FILE="$CACHE_DIR/windows_cache"
 
 export PLUGIN_DIR="$CONFIG_DIR/plugins"
 export ITEM_DIR="$CONFIG_DIR/items"
-export FONT="SF Pro:Semibold"
-export FONTSIZE=13
-export HEIGHT=38
+
 export ICON_FONT="sketchybar-app-font:Regular"
-export ICON_FONTSIZE=18
-export PADDING_V=6
-export PADDING_H=4
+export ICON_FONTSIZE=14
+export FONT="SF Pro:Semibold"
+export FONTSIZE=12
+
+export BAR_WIDTH=40
+export ITEM_HEIGHT=38
+export ITEM_HEIGHT_WITH_LABEL=53
+export ICON_PADDING_L=11
+export LABEL_Y_OFFSET=-17
+export SECTION=80
+
+#
+#
+#  Icons
+#
+#
+
+NET_WIFI_3=      # Icomoon - Wi-Fi connected - 3 bars
+NET_WIFI_2=      # Icomoon - Wi-Fi connected - 2 bars
+NET_WIFI_1=      # Icomoon - Wi-Fi connected - 1 bar
+NET_HOTSPOT=􀉤     # SF Symbols - iPhone Wi-Fi hotspot connected
+NET_USB=􀟜         # SF Symbols - iPhone USB hotspot connected
+NET_THUNDERBOLT=􀒗 # SF Symbols - Thunderbolt bridge connected
+NET_OFF=􀙈         # SF Symbols - Network disconnected or Wi-Fi turned off
+
+APPLE_LOGO=􀣺 # SF Symbols
+
+BATTERY_4=􀛨        # SF Symbols - full
+BATTERY_3=􀺸        # SF Symbols - strong
+BATTERY_2=􀺶        # SF Symbols - half
+BATTERY_1=􀛩        # SF Symbols - low
+BATTERY_0=􀛪        # SF Symbols - empty
+BATTERY_CHARGING=􀢋 # SF Symbols - charging
+
+DISK=􀥾 # SF Symbols - disk
+
+LEGO=􀐛 # SF Symbols
+
+ONOFF_BUTTON=􀆨 # SF Symbols
+GRID=􀏝         # SF Symbols
+STACK=􀏧        # SF Symbols
+MOUSE_PTR=􀇰    # SF Symbols
+
+CPU=􀧓 # SF Symbols
+
+CHECKMARK=􀆅 # SF Symbols
+
+VOLUME_3=􀊨 # SF Symbols - wave 3
+VOLUME_2=􀊦 # SF Symbols - wave 2
+VOLUME_1=􀊤 # SF Symbols - wave 1
+VOLUME_0=􀊢 # SF Symbols - muted
 
 #
 #
@@ -82,6 +128,6 @@ export ACCENT9=$FLAMINGO
 export ACCENT10=$SAPPHIRE
 export ACCENTS=($ACCENT1 $ACCENT2 $ACCENT3 $ACCENT4 $ACCENT5 $ACCENT6 $ACCENT7 $ACCENT8 $ACCENT9 $ACCENT10)
 
-export BAR=$CRUST
+export BAR=0xff141421
 export off=$GREY
 export on=$GREEN

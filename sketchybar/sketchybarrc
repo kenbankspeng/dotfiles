@@ -28,17 +28,17 @@ source "$CONFIG_DIR/env.sh" # Loads all defined colors
 
 bar=(
   color=$BAR
-  border_color=$TRANSPARENT
+  border_color=$BAR
   border_width=0
-  position=top
-  height=$HEIGHT
+  position=right
+  height=$BAR_WIDTH # height is width when bar on left/right
   margin=0
-  y_offset=0
+  y_offset=-2
   corner_radius=0
   blur_radius=0
-  padding_left=10
-  padding_right=10
-  notch_width=200
+  padding_left=20
+  padding_right=5
+  notch_width=0
   notch_offset=0
   display=all
   hidden=off
@@ -51,41 +51,63 @@ sketchybar --bar "${bar[@]}"
 
 ##### Changing Defaults #####
 default=(
-  background.height=$(($ICON_FONTSIZE + 2 * $PADDING_V))
-  icon.font="$FONT:$FONTSIZE"
+  background.height=$ITEM_HEIGHT
+  background.color=$TRANSPARENT
+  background.corner_radius=5
+  icon.font="$FONT:$ICON_FONTSIZE"
   icon.color=$TEXT
   label.font="$FONT:$FONTSIZE"
   label.color=$TEXT
-  background.color=$TRANSPARENT
-  background.corner_radius=5
-  padding_left=$PADDING_H
-  padding_right=$PADDING_H
-  icon.padding_left=$PADDING_H
-  icon.padding_right=$PADDING_H
-  label.padding_left=$PADDING_H
-  label.padding_right=$PADDING_H
+  padding_left=0
+  padding_right=0
+
+  icon.width=$BAR_WIDTH
+  icon.align="center"
+  icon.padding_left=0
+  icon.padding_right=0
+
+  label.width=$BAR_WIDTH
+  label.align="center"
+  label.y_offset=$LABEL_Y_OFFSET # hack since on next line
+  label.padding_left=-$BAR_WIDTH # each item needs to be pulled left using negative number
+  label.padding_right=$BAR_WIDTH # but needs to double in width because center aligned
 )
 sketchybar --default "${default[@]}"
 
+# HACK - Left is Top when bar is displayed vertically
+
 ##### Left Side Items #####
-source $ITEM_DIR/apple.sh
-# source $ITEM_DIR/windows.sh
-
-##### Left Side Of Notch Items #####
-source $ITEM_DIR/brew.sh
-source $ITEM_DIR/mise.sh
-
-##### Right Side Of Notch Items #####
-source $ITEM_DIR/stack.sh
-source $ITEM_DIR/mouse.sh
-
-##### Right Side Items #####
-source $ITEM_DIR/clock.sh
+# these are now top items
+# starting at top-most
 source $ITEM_DIR/wifi.sh
 source $ITEM_DIR/battery.sh
 source $ITEM_DIR/volume.sh
 source $ITEM_DIR/disk.sh
 source $ITEM_DIR/cpu.sh
+
+# HACK Virtual Section
+
+source $ITEM_DIR/outdated.sh
+
+# HACK Virtual Section
+
+source $ITEM_DIR/stack.sh
+source $ITEM_DIR/mouse.sh
+
+# source $ITEM_DIR/windows.sh
+
+##### Left Side Of Notch Items #####
+# not relevant on vertical layout
+
+##### Right Side Of Notch Items #####
+# not relevant on vertical layout
+
+##### Right Side Items #####
+# these are now bottom items
+# starting at bottom-most
+
+source $ITEM_DIR/apple.sh
+source $ITEM_DIR/clock.sh
 
 ##### Finalizing Setup #####
 sketchybar --update

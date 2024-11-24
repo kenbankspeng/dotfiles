@@ -3,12 +3,12 @@
 source "$CONFIG_DIR/env.sh"
 
 props=(
-	icon="􀣺"
+	icon=$APPLE_LOGO
 	icon.font="$ICON_FONT:18"
 	icon.color="$SKY"
 	script="$PLUGIN_DIR/apple.sh"
 )
 
-sketchybar --add item apple.logo left \
+sketchybar --add item apple.logo right \
 	--set apple.logo "${props[@]}" \
 	--subscribe apple.logo mouse.clicked

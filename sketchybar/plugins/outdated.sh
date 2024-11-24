@@ -3,15 +3,22 @@
 source "$CONFIG_DIR/env.sh"
 
 # reprocess on mouse click
-sketchybar --set "$NAME" label=Mise icon.color="$BLUE"
+sketchybar --set "$NAME" label="?" icon.color="$BLUE"
+
+sum=0
 
 count=$(mise list | grep -o '\boutdated\b' | wc -l | tr -d '[:space:]')
 sleep 3
+sum=$((sum + count))
 
-case "$count" in
+count=$(brew outdated | wc -l | tr -d ' ')
+sleep 1
+sum=$((sum + count))
+
+case "$sum" in
 0)
 	color=$GREEN
-	count=􀆅
+	sum=$CHECKMARK
 	;;
 [1-2])
 	color=$YELLOW
@@ -25,7 +32,7 @@ case "$count" in
 esac
 
 props=(
-	label="$count"
+	label="$sum"
 	icon.color="$color"
 	label.color="$color"
 )

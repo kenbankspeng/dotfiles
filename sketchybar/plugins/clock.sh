@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
-sketchybar --set $NAME label="$(
-  date +"%-I:%M %p" | sed -e 's/AM/a/' -e 's/PM/p/'
-)"
+datetime=$(date +"%-I:%M %p")
+time=$(echo "$datetime" | awk '{print $1}')
+period=$(echo "$datetime" | awk '{print $2}')
+
+sketchybar --set $NAME icon=$time label=$period
