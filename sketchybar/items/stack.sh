@@ -21,15 +21,15 @@ props=(
 
 # float = normal
 sketchybar -m --add item float $position \
-  --set float icon=􀆨 ${props[@]} \
+  --set float icon="$BUTTON" ${props[@]} \
   --subscribe float mouse.clicked
 
 # bsp = grid
 sketchybar -m --add item bsp $position \
-  --set bsp icon=􀏝 ${props[@]} \
+  --set bsp icon="$GRID" ${props[@]} \
   --subscribe bsp mouse.clicked
 
 # stack
 sketchybar -m --add item stack $position \
-  --set stack icon=􀏧 ${props[@]} \
+  --set stack icon="$STACK" ${props[@]} \
   --subscribe stack mouse.clicked

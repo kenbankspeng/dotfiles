@@ -34,14 +34,24 @@ NET_USB=􀟜         # SF Symbols - iPhone USB hotspot connected
 NET_THUNDERBOLT=􀒗 # SF Symbols - Thunderbolt bridge connected
 NET_OFF=􀙈         # SF Symbols - Network disconnected or Wi-Fi turned off
 
-APPLE_LOGO="􀣺" # SF Symbols
+APPLE_LOGO=􀣺 # SF Symbols
 
-BATTERY_4="􀛨"
-BATTERY_3="􀺸"
-BATTERY_2="􀺶"
-BATTERY_1="􀛩"
-BATTERY_0="􀛪"
-BATTERY_CHARGING="􀢋"
+BATTERY_4=􀛨        # SF Symbols - full
+BATTERY_3=􀺸        # SF Symbols - strong
+BATTERY_2=􀺶        # SF Symbols - half
+BATTERY_1=􀛩        # SF Symbols - low
+BATTERY_0=􀛪        # SF Symbols - empty
+BATTERY_CHARGING=􀢋 # SF Symbols - charging
+
+DISK=􀥾 # SF Symbols - disk
+
+LEGO=􀐛
+
+BUTTON=􀆨
+GRID=􀏝
+STACK=􀏧
+
+CPU=􀧓
 
 #
 #

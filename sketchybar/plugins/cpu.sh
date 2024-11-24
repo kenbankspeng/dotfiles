@@ -2,16 +2,16 @@
 
 source "$CONFIG_DIR/env.sh"
 
-cpu="$(top -l 2 | grep -E "^CPU" | tail -1 | awk '{ print int($3 + $5 + 0.5)"%" }')"
+cpuload="$(top -l 2 | grep -E "^CPU" | tail -1 | awk '{ print int($3 + $5 + 0.5)"%" }')"
 
 props=(
-  icon=􀧓
+  icon="$CPU"
   icon.color=$SAPPHIRE
-  label="$cpu"
+  label="$cpuload"
   label.color=$SAPPHIRE
   background.height=$ITEM_HEIGHT_WITH_LABEL
 )
 
-if [ -n "$cpu" ]; then
+if [ -n "$cpuload" ]; then
   sketchybar -m --set "$NAME" "${props[@]}"
 fi
