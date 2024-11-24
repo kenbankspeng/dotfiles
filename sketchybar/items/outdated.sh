@@ -1,7 +1,7 @@
 #!/bin/bash
 
 props=(
-	icon="$LEGO"
+	icon=$LEGO
 	background.height=$ITEM_HEIGHT_WITH_LABEL
 	update_freq=$((60 * 60)) # once per hour
 	script="$PLUGIN_DIR/outdated.sh"

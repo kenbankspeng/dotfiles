@@ -22,7 +22,7 @@ if [ "$SENDER" = "volume_change" ]; then
   esac
 
   props=(
-    icon="$icon"
+    icon=$icon
     icon.color=$LAVENDER
     label="$volume%"
     label.color=$LAVENDER

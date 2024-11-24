@@ -61,7 +61,7 @@ fi
 
 props=(
   icon.font="Icomoon:Regular:20"
-  icon="$icon"
+  icon=$icon
   icon.color="$color"
 )
 sketchybar --set $NAME "${props[@]}"

@@ -7,5 +7,5 @@ props=(
 
 # stack
 sketchybar -m --add item mouse left \
-  --set mouse icon=􀇰 ${props[@]} \
+  --set mouse icon=$MOUSE_PTR ${props[@]} \
   --subscribe mouse mouse.clicked

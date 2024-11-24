@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 props=(
-  icon="$DISK"
+  icon=$DISK
   icon.color=$SAPPHIRE
   background.height=$ITEM_HEIGHT_WITH_LABEL
   update_freq=5

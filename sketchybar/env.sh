@@ -47,9 +47,10 @@ DISK=􀥾 # SF Symbols - disk
 
 LEGO=􀐛 # SF Symbols
 
-BUTTON=􀆨 # SF Symbols
-GRID=􀏝   # SF Symbols
-STACK=􀏧  # SF Symbols
+ONOFF_BUTTON=􀆨 # SF Symbols
+GRID=􀏝         # SF Symbols
+STACK=􀏧        # SF Symbols
+MOUSE_PTR=􀇰    # SF Symbols
 
 CPU=􀧓 # SF Symbols
 
