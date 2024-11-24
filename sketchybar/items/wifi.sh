@@ -2,4 +2,4 @@
 
 sketchybar --add item wifi left \
   --set wifi script="$PLUGIN_DIR/wifi.sh" \
-  --subscribe wifi volume_change
+  --subscribe wifi wifi_change

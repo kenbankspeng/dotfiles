@@ -10,8 +10,12 @@ gawk *args:
   awk {{args}}
  
 # sed alternative for find/replace withing files
-sed *args:
+sed2 *args:
   sd {{args}}
+
+# sed alternative with fzf
+sed3 *args:
+  sad {{args}}
 
 # new grep for find within glob pattern
 @grep *args:

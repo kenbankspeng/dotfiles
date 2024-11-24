@@ -22,6 +22,29 @@ export SECTION=80
 
 #
 #
+#  Icons
+#
+#
+
+NET_WIFI_3=      # Icomoon - Wi-Fi connected - 3 bars
+NET_WIFI_2=      # Icomoon - Wi-Fi connected - 2 bars
+NET_WIFI_1=      # Icomoon - Wi-Fi connected - 1 bar
+NET_HOTSPOT=􀉤     # SF Symbols - iPhone Wi-Fi hotspot connected
+NET_USB=􀟜         # SF Symbols - iPhone USB hotspot connected
+NET_THUNDERBOLT=􀒗 # SF Symbols - Thunderbolt bridge connected
+NET_OFF=􀙈         # SF Symbols - Network disconnected or Wi-Fi turned off
+
+APPLE_LOGO="􀣺" # SF Symbols
+
+BATTERY_4="􀛨"
+BATTERY_3="􀺸"
+BATTERY_2="􀺶"
+BATTERY_1="􀛩"
+BATTERY_0="􀛪"
+BATTERY_CHARGING="􀢋"
+
+#
+#
 # Catppuccin Macchiato palette
 #
 #
