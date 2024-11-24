@@ -9,6 +9,6 @@ props=(
 	script="$PLUGIN_DIR/apple.sh"
 )
 
-sketchybar --add item apple.logo left \
+sketchybar --add item apple.logo right \
 	--set apple.logo "${props[@]}" \
 	--subscribe apple.logo mouse.clicked

@@ -77,7 +77,8 @@ sketchybar --default "${default[@]}"
 # HACK - Left is Top when bar is displayed vertically
 
 ##### Left Side Items #####
-source $ITEM_DIR/apple.sh
+# these are now top items
+# starting at top-most
 source $ITEM_DIR/battery.sh
 source $ITEM_DIR/volume.sh
 source $ITEM_DIR/disk.sh
@@ -92,7 +93,6 @@ source $ITEM_DIR/outdated.sh
 source $ITEM_DIR/stack.sh
 source $ITEM_DIR/mouse.sh
 
-source $ITEM_DIR/clock.sh
 source $ITEM_DIR/wifi.sh
 
 # source $ITEM_DIR/windows.sh
@@ -105,6 +105,10 @@ source $ITEM_DIR/wifi.sh
 
 ##### Right Side Items #####
 # these are now bottom items
+# starting at bottom-most
+
+source $ITEM_DIR/apple.sh
+source $ITEM_DIR/clock.sh
 
 ##### Finalizing Setup #####
 sketchybar --update
