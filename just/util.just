@@ -33,10 +33,6 @@ sc *args:
   osascript -e 'id of app "{{arg}}"'
   # mdls -name kMDItemCFBundleIdentifier "{{arg}}"
 
-# git origin
-gr:
-  git remote -v
-
 # edit scripts in cursor
 @scripts:
   cursor "$DEV_BOX"
@@ -57,10 +53,6 @@ tsk *args:
 lc *args:
   lolcat {{args}}
 
-# count lines of code
-cloc:
-  tokei
-
 # hyperfine 'sleep 0.3' - OK
 # bm 'sleep 0.3' -- ERROR
 # benchmarks
@@ -70,11 +62,6 @@ bm *args:
 # generate regex
 regex *args:
   greg {{args}}
-
-# needs to be hooked into git
-# git delta viewer
-gdelta *args:
-  delta {{args}}
 
 # TBD: batgrep, batman, batpipe, batwatch, batdiff, prettybat
 
@@ -106,12 +93,8 @@ gdelta *args:
   zx "$NODE_SCRIPTS"/color/color.mjs -c "{{ arg }}"
 
 # color utils
-pas *args:
-  pastel {{args}}
-
-# pastel color <color>
 color *args:
-  pastel color {{ args }}
+  pastel {{args}}
 
 #####################    RUBY    #####################
 

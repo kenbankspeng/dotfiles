@@ -40,3 +40,16 @@ uia component:
 i *libs:
   bun install {{libs}}
 
+# git origin
+gr:
+  git remote -v
+
+# count lines of code
+cloc:
+  tokei
+
+# needs to be hooked into git
+# git delta viewer
+gdelta *args:
+  delta {{args}}
+

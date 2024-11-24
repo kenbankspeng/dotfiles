@@ -62,6 +62,14 @@ default:
   print -- "------------{{BrightCyan}}"
   brew list --versions --formula
 
+# brew casks
+@bc: 
+  print "brew list --casks"
+  print
+  print "{{BrightMagenta}}CASK APPS"
+  print -- "---------{{BrightBlue}}"
+  brew list --cask
+
 # brew leaves
 @bl:
   print "brew leaves"

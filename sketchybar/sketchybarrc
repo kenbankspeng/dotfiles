@@ -28,12 +28,12 @@ source "$CONFIG_DIR/env.sh" # Loads all defined colors
 
 bar=(
   color=$BAR
-  border_color=$TRANSPARENT
+  border_color=$BAR
   border_width=0
   position=right
   height=$BAR_WIDTH # height is width when bar on left/right
   margin=0
-  y_offset=0
+  y_offset=-2
   corner_radius=0
   blur_radius=0
   padding_left=20
