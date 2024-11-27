@@ -8,5 +8,5 @@ props=(
   script="$PLUGIN_DIR/disk.sh"
 )
 
-sketchybar --add item disk left \
+sketchybar --add item disk right \
   --set disk "${props[@]}"

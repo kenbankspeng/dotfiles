@@ -1,7 +1,8 @@
+source "$PLUGIN_DIR/helpers/aerospace.sh"
+
 sketchybar --add event aerospace_workspace_change
 
-spaces=()
-for sid in $(aerospace list-workspaces --all); do
+for sid in $(aerospace_workspaces); do
   props=(
     space="$sid"
     icon="$sid"
@@ -11,6 +12,7 @@ for sid in $(aerospace list-workspaces --all); do
   sketchybar --add space space.$sid left \
     --set space.$sid "${props[@]}" \
     --subscribe space.$sid mouse.clicked
+
 done
 
 # reconstruct the bar when a window changes

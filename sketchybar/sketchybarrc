@@ -81,18 +81,6 @@ sketchybar --default "${default[@]}"
 # starting at top-most
 source $ITEM_DIR/aerospace.sh
 
-source $ITEM_DIR/wifi.sh
-source $ITEM_DIR/battery.sh
-source $ITEM_DIR/volume.sh
-source $ITEM_DIR/disk.sh
-source $ITEM_DIR/cpu.sh
-
-# HACK Virtual Section
-
-source $ITEM_DIR/outdated.sh
-
-# HACK Virtual Section
-
 # source $ITEM_DIR/stack.sh
 
 # source $ITEM_DIR/windows.sh
@@ -107,9 +95,14 @@ source $ITEM_DIR/outdated.sh
 # these are now bottom items
 # starting at bottom-most
 
-source $ITEM_DIR/apple.sh
-source $ITEM_DIR/clock.sh
-
+# source $ITEM_DIR/apple.sh
+# source $ITEM_DIR/clock.sh
+# source $ITEM_DIR/cpu.sh
+# source $ITEM_DIR/disk.sh
+# source $ITEM_DIR/outdated.sh
+# source $ITEM_DIR/volume.sh
+# source $ITEM_DIR/battery.sh
+# source $ITEM_DIR/wifi.sh
 ##### Finalizing Setup #####
 sketchybar --update
 sketchybar --hotload true

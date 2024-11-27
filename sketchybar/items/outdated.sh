@@ -7,6 +7,6 @@ props=(
 	script="$PLUGIN_DIR/outdated.sh"
 )
 sketchybar --add event outdated_update \
-	--add item outdated left \
+	--add item outdated right \
 	--set outdated "${props[@]}" \
 	--subscribe outdated outdated_update mouse.clicked
