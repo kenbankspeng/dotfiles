@@ -1,13 +1,20 @@
 sketchybar --add event aerospace_workspace_change
 
+spaces=()
 for sid in $(aerospace list-workspaces --all); do
-  sketchybar --add item space.$sid left \
-    --subscribe space.$sid aerospace_workspace_change \
-    --set space.$sid \
-    background.color=$MAUVE \
-    background.height=30 \
-    background.drawing=off \
-    label="$sid" \
-    click_script="aerospace workspace $sid" \
-    script="$CONFIG_DIR/plugins/aerospace.sh $sid"
+  props=(
+    space="$sid"
+    icon="$sid"
+    script="$PLUGIN_DIR/aerospace_space.sh $sid"
+    click_script="aerospace workspace $sid"
+  )
+  sketchybar --add space space.$sid left \
+    --set space.$sid "${props[@]}" \
+    --subscribe space.$sid mouse.clicked
 done
+
+# reconstruct the bar when a window changes
+sketchybar --add item aerospace_windows left \
+  --set aerospace_windows \
+  script="$PLUGIN_DIR/aerospace_windows.sh" \
+  --subscribe aerospace_windows aerospace_workspace_change

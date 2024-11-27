@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 source "$CONFIG_DIR/env.sh"
-source "$CONFIG_DIR/plugins/helpers/yabai.sh"
 
 update() {
   type=$(yabai_get_focused_space_type)

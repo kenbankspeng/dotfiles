@@ -79,7 +79,6 @@ sketchybar --default "${default[@]}"
 ##### Left Side Items #####
 # these are now top items
 # starting at top-most
-source $ITEM_DIR/spaces.sh
 source $ITEM_DIR/aerospace.sh
 
 source $ITEM_DIR/wifi.sh
@@ -94,7 +93,7 @@ source $ITEM_DIR/outdated.sh
 
 # HACK Virtual Section
 
-source $ITEM_DIR/stack.sh
+# source $ITEM_DIR/stack.sh
 
 # source $ITEM_DIR/windows.sh
 
