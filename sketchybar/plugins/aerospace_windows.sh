@@ -18,8 +18,6 @@ if [ "$SENDER" = "aerospace_workspace_change" ]; then
       done <<<"${apps_list}"
     fi
 
-    echo "@@ $icon_strip"
-
     props=(
       icon="$sid"
       label="$icon_strip"
