@@ -43,7 +43,7 @@ bar=(
   display=all
   hidden=off
   topmost=off
-  sticky=on
+  sticky=off
   font_smoothing=off
   shadow=off
 )
@@ -79,20 +79,9 @@ sketchybar --default "${default[@]}"
 ##### Left Side Items #####
 # these are now top items
 # starting at top-most
-source $ITEM_DIR/wifi.sh
-source $ITEM_DIR/battery.sh
-source $ITEM_DIR/volume.sh
-source $ITEM_DIR/disk.sh
-source $ITEM_DIR/cpu.sh
+source $ITEM_DIR/aerospace.sh
 
-# HACK Virtual Section
-
-source $ITEM_DIR/outdated.sh
-
-# HACK Virtual Section
-
-source $ITEM_DIR/stack.sh
-source $ITEM_DIR/mouse.sh
+# source $ITEM_DIR/stack.sh
 
 # source $ITEM_DIR/windows.sh
 
@@ -106,9 +95,14 @@ source $ITEM_DIR/mouse.sh
 # these are now bottom items
 # starting at bottom-most
 
-source $ITEM_DIR/apple.sh
-source $ITEM_DIR/clock.sh
-
+# source $ITEM_DIR/apple.sh
+# source $ITEM_DIR/clock.sh
+# source $ITEM_DIR/cpu.sh
+# source $ITEM_DIR/disk.sh
+# source $ITEM_DIR/outdated.sh
+# source $ITEM_DIR/volume.sh
+# source $ITEM_DIR/battery.sh
+# source $ITEM_DIR/wifi.sh
 ##### Finalizing Setup #####
 sketchybar --update
 sketchybar --hotload true

@@ -14,11 +14,10 @@ export FONT="SF Pro:Semibold"
 export FONTSIZE=12
 
 export BAR_WIDTH=40
-export ITEM_HEIGHT=38
+export ITEM_HEIGHT=25
 export ITEM_HEIGHT_WITH_LABEL=53
 export ICON_PADDING_L=11
 export LABEL_Y_OFFSET=-17
-export SECTION=80
 
 #
 #
