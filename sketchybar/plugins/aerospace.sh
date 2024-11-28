@@ -2,11 +2,14 @@
 
 source "$CONFIG_DIR/env.sh"
 source "$PLUGIN_DIR/helpers/aerospace.sh"
+source "$PLUGIN_DIR/helpers/sketchy.sh"
 
 if [ "$SENDER" = "aerospace_workspace_change" ]; then
 
   for sid in $(aerospace_workspaces); do
     apps_list=$(aerospace_space_window_map | jq --arg space "$sid" '.[] | select(.workspace == $space)' | jq -r '.["app-name"]')
+
+    echo "$apps_list"
 
     # if [ "$space_number" = "$CURRENT_SPACE" ]; then
     icon_strip="—"
@@ -23,10 +26,26 @@ if [ "$SENDER" = "aerospace_workspace_change" ]; then
       label="$icon_strip"
       label.font="$ICON_FONT:$ICON_FONTSIZE"
     )
-
-    sketchybar --set space.$sid icon="$sid" label="$icon_strip"
+    sketchy --add item aerospace.$sid left
+    sketchybar --set aerospace.$sid icon="$sid" label="$icon_strip"
 
     # fi
   done
 
 fi
+
+# for sid in $(aerospace_workspaces); do
+#   props=(
+#     icon="$sid"
+#     script="$PLUGIN_DIR/aerospace_space.sh $sid"
+#   )
+#   sketchybar --add item space.$sid left \
+#     --set space.$sid "${props[@]}" \
+#     --subscribe space.$sid mouse.clicked
+# done
+
+# if [ "$1" = "$FOCUSED_WORKSPACE" ]; then
+#   sketchybar --set $NAME background.drawing=on
+# else
+#   sketchybar --set $NAME background.drawing=on
+# fi
