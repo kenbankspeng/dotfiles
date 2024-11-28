@@ -11,7 +11,7 @@ MAX_APPS=6 # max per workspace
 for sid in $(aerospace_workspaces); do
 
   for ((loop_index = 1; loop_index <= MAX_APPS; loop_index++)); do
-    sketchy_remove item aerospace.$sid.$loop_index
+    sketchy_remove aerospace.$sid.$loop_index
   done
 
   apps_list=$(aerospace_space_window_map | jq --arg space "$sid" '.[] | select(.workspace == $space)' | jq -r '.["app-name"]')
