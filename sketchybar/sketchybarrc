@@ -43,7 +43,7 @@ bar=(
   display=all
   hidden=off
   topmost=off
-  sticky=on
+  sticky=off
   font_smoothing=off
   shadow=off
 )
