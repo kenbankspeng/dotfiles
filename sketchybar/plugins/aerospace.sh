@@ -6,7 +6,14 @@ source "$PLUGIN_DIR/helpers/sketchy.sh"
 
 # $FOCUSED_WORKSPACE
 
+MAX_APPS=6 # max per workspace
+
 for sid in $(aerospace_workspaces); do
+
+  for ((loop_index = 1; loop_index <= MAX_APPS; loop_index++)); do
+    sketchy_remove item aerospace.$sid.$loop_index
+  done
+
   apps_list=$(aerospace_space_window_map | jq --arg space "$sid" '.[] | select(.workspace == $space)' | jq -r '.["app-name"]')
 
   icon_strip="—"
@@ -22,12 +29,12 @@ for sid in $(aerospace_workspaces); do
         icon="$($CONFIG_DIR/icon_map.sh "$app")"
         icon.font="$ICON_FONT:$ICON_FONTSIZE"
       )
-      sketchy --add item aerospace.$sid.$app_index left # sketchy only adds if doesn't already exist
+      sketchy_add item aerospace.$sid.$app_index left # sketchy only adds if doesn't already exist
       sketchybar --set aerospace.$sid.$app_index "${props[@]}"
     done <<<"${apps_list}" # app_list has one app per line
 
     if [ "$sid" != "$(aerospace_workspaces | tail -n 1)" ]; then
-      sketchy --add item divider.$sid left \
+      sketchy_add item divider.$sid left \
         --set divider.$sid icon="—" padding_left=5 padding_right=5 \
         --set divider.$sid background.height=0 \
         --set divider.$sid background.corner_radius=4
