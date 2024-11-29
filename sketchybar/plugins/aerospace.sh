@@ -6,7 +6,7 @@ source "$PLUGIN_DIR/helpers/sketchy.sh"
 
 # $FOCUSED_WORKSPACE
 
-echo $SENDER
+# echo $SENDER
 
 cache_all_workspace_apps
 
@@ -14,20 +14,12 @@ for sid in $(aerospace_workspaces); do
 
   apps_list=$(aerospace_apps_in_space $sid)
 
-  while read -r app; do
-    # onto next line if app is empty
-    [ -z "$app" ] && continue
-
-    found=$(find_workspace_app $sid $app)
-    if [ "$found" = true ]; then
-      echo "found $app in $sid"
-      # strike it from the cache to not double count
-      remove_workspace_app $sid $app1
-    else
-      echo "not found $app in $sid"
-      sketchy_remove aerospace.$sid.$app
+  # remove apps from cache if they exist
+  for app in $apps_list; do
+    if [ -n "$app" ] && find_workspace_app "$sid" "$app" >/dev/null; then
+      remove_workspace_app "$sid" "$app"
     fi
-  done <<<"${apps_list}" # app_list has one app per line
+  done
 
   icon_strip="—"
   if [ -n "${apps_list}" ]; then
@@ -48,14 +40,16 @@ for sid in $(aerospace_workspaces); do
 
     if [ "$sid" != "$(aerospace_workspaces | tail -n 1)" ]; then
       sketchy_add item divider.$sid left \
-        --set divider.$sid icon="—" padding_left=5 padding_right=5 \
-        --set divider.$sid background.height=0 \
-        --set divider.$sid background.corner_radius=4
+        --set divider.$sid padding_left=5 padding_right=5 background.height=1 \
+        background.color=$LAVENDER
     fi
 
   fi
 
 done
+
+# sketchy_remove aerospace.$sid.$app
+echo $(get_cache)
 
 # for sid in $(aerospace_workspaces); do
 #   props=(

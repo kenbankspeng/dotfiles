@@ -23,6 +23,10 @@ remove_workspace_app() {
   ' "$CACHE" >"$TEMP" && mv "$TEMP" "$CACHE"
 }
 
+get_cache() {
+  jq -r '.[] | "\(.workspace) \(.["app-name"])"' "$CACHE"
+}
+
 # check for whole word match in array
 item_in_array() {
   local item="$1"
