@@ -6,15 +6,28 @@ source "$PLUGIN_DIR/helpers/sketchy.sh"
 
 # $FOCUSED_WORKSPACE
 
-MAX_APPS=6 # max per workspace
+echo $SENDER
+
+cache_all_workspace_apps
 
 for sid in $(aerospace_workspaces); do
 
-  for ((loop_index = 1; loop_index <= MAX_APPS; loop_index++)); do
-    sketchy_remove aerospace.$sid.$loop_index
-  done
+  apps_list=$(aerospace_apps_in_space $sid)
 
-  apps_list=$(aerospace_space_window_map | jq --arg space "$sid" '.[] | select(.workspace == $space)' | jq -r '.["app-name"]')
+  while read -r app; do
+    # onto next line if app is empty
+    [ -z "$app" ] && continue
+
+    found=$(find_workspace_app $sid $app)
+    if [ "$found" = true ]; then
+      echo "found $app in $sid"
+      # strike it from the cache to not double count
+      remove_workspace_app $sid $app1
+    else
+      echo "not found $app in $sid"
+      sketchy_remove aerospace.$sid.$app
+    fi
+  done <<<"${apps_list}" # app_list has one app per line
 
   icon_strip="—"
   if [ -n "${apps_list}" ]; then

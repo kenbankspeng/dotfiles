@@ -2,8 +2,8 @@
 
 # env variables
 export CACHE_DIR="$HOME/.cache/sketchybar"
-export BRACKET_CACHE_FILE="$CACHE_DIR/space_bracket_cache"
-export WINDOWS_CACHE_FILE="$CACHE_DIR/windows_cache"
+export CACHE="$CACHE_DIR/cache.log"
+export TEMP="$CACHE_DIR/temp"
 
 export PLUGIN_DIR="$CONFIG_DIR/plugins"
 export ITEM_DIR="$CONFIG_DIR/items"

@@ -1,12 +1,9 @@
 source "$PLUGIN_DIR/helpers/aerospace.sh"
 
+# create and empty the cache files
 mkdir -p "$CACHE_DIR"
-touch "$BRACKET_CACHE_FILE"
-touch "$WINDOWS_CACHE_FILE"
-
-# empty the cache files
-: >"$BRACKET_CACHE_FILE"
-: >"$WINDOWS_CACHE_FILE"
+touch "$CACHE"
+: >"$CACHE"
 
 sketchybar --add event aerospace_reset
 sketchybar --add event aerospace_focus_changed

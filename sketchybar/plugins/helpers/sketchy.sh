@@ -1,11 +1,11 @@
-source "$CONFIG_DIR/plugins/helpers/util.sh"
+source "$CONFIG_DIR/plugins/helpers/cache.sh"
 
 # a quiter sketchybar - add only if not exists
 sketchy_add() {
   local item=$2
   local items=$(sketchybar --query bar | jq -r '.items[]')
   if ! item_in_array "$item" "$items"; then
-    echo "adding $item"
+    # echo "adding $item"
     sketchybar --add "$@"
   fi
 }
@@ -13,7 +13,7 @@ sketchy_add() {
 # a quiter sketchybar - remove only if exists
 sketchy_remove() {
   local item=$1
-  echo "removing $item"
+  # echo "removing $item"
   local items=$(sketchybar --query bar | jq -r '.items[]')
   if item_in_array "$item" "$items"; then
     sketchybar --remove "$@"
