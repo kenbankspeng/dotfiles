@@ -52,7 +52,7 @@ for sid in $(aerospace_workspaces); do
   else
 
     sketchy_add item aerospace.$sid.1 left # sketchy only adds if doesn't already exist
-    sketchybar --set aerospace.$sid.1 "${props[@]}" icon="-"
+    sketchybar --set aerospace.$sid.1 "${props[@]}" icon="·"
   fi
   sketchy_add item divider.$sid left \
     --set divider.$sid background.height=1 \
