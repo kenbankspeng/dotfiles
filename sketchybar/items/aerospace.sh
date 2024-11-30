@@ -11,6 +11,14 @@ sketchybar --add event aerospace_window_created
 sketchybar --add event aerospace_window_destroyed
 sketchybar --add event aerospace_workspace_change
 
+# add dividers as anchor points for the workspaces
+workspaces="0 $(aerospace_workspaces)"
+for sid in $workspaces; do
+  sketchybar --add item divider.$sid left \
+    --set divider.$sid background.height=1 \
+    background.color="$LAVENDER"
+done
+
 props=(
   icon.drawing=off
   icon.padding_left=0
