@@ -3,7 +3,7 @@ aerospace_workspaces() {
 }
 
 aerospace_apps_in_spaces() {
-  echo "$(aerospace list-windows --all --json --format %{workspace}%{app-name}%{app-bundle-id})"
+  echo "$(aerospace list-windows --all --json --format %{monitor-appkit-nsscreen-screens-id}%{workspace}%{app-bundle-id}%{app-name})"
 }
 
 aerospace_apps_in_space() {
