@@ -4,11 +4,16 @@ source "$CONFIG_DIR/env.sh"
 source "$PLUGIN_DIR/helpers/aerospace.sh"
 source "$PLUGIN_DIR/helpers/sketchy.sh"
 
-# $FOCUSED_WORKSPACE
+# default to 1
+SELECTED=${FOCUSED_WORKSPACE:-1}
 
 # echo $SENDER
 
 cache_all_workspace_apps
+
+sketchy_add item divider.first left \
+  --set divider.first background.height=1 \
+  background.color=$LAVENDER
 
 for sid in $(aerospace_workspaces); do
 
@@ -21,30 +26,37 @@ for sid in $(aerospace_workspaces); do
     fi
   done
 
-  icon_strip="—"
+  if [ "$sid" = "$SELECTED" ]; then
+    color=$SURFACE1
+  else
+    color=$TRANSPARENT
+  fi
+
+  props=(
+    y_offset=1
+    background.corner_radius=0
+    background.color=$color
+    background.height=$ITEM_HEIGHT
+    label.drawing=off
+    icon.font="$ICON_FONT:$ICON_FONTSIZE"
+  )
+
   if [ -n "${apps_list}" ]; then
-    icon_strip=""
     app_index=0
     while read -r app; do
       ((app_index++))
-
-      props=(
-        background.height=$ITEM_HEIGHT
-        label.drawing=off
-        icon="$($CONFIG_DIR/icon_map.sh "$app")"
-        icon.font="$ICON_FONT:$ICON_FONTSIZE"
-      )
+      icon="$($CONFIG_DIR/icon_map.sh "$app")"
       sketchy_add item aerospace.$sid.$app_index left # sketchy only adds if doesn't already exist
-      sketchybar --set aerospace.$sid.$app_index "${props[@]}"
+      sketchybar --set aerospace.$sid.$app_index "${props[@]}" icon=$icon
     done <<<"${apps_list}" # app_list has one app per line
+  else
 
-    if [ "$sid" != "$(aerospace_workspaces | tail -n 1)" ]; then
-      sketchy_add item divider.$sid left \
-        --set divider.$sid padding_left=5 padding_right=5 background.height=1 \
-        background.color=$LAVENDER
-    fi
-
+    sketchy_add item aerospace.$sid.1 left # sketchy only adds if doesn't already exist
+    sketchybar --set aerospace.$sid.1 "${props[@]}" icon="-"
   fi
+  sketchy_add item divider.$sid left \
+    --set divider.$sid background.height=1 \
+    background.color=$LAVENDER
 
 done
 
