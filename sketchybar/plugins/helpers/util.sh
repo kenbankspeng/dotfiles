@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # check for whole word match in array
 item_in_array() {
   local item="$1"

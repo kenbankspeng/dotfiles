@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 source "$CONFIG_DIR/plugins/helpers/util.sh"
 
 # add item only if not exists

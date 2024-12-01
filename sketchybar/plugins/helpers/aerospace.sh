@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 source "$PLUGIN_DIR/helpers/sketchy.sh"
 source "$CONFIG_DIR/plugins/helpers/util.sh"
 
@@ -21,7 +23,7 @@ aerospace_focused_workspace() {
 
 aerospace_add_dividers() {
   # add dividers as anchor points for the workspaces
-  workspaces="0 $(aerospace_workspaces)"
+  workspaces=(0 $(aerospace_workspaces))
   for sid in $workspaces; do
     sketchybar --add item $DIVIDER.$sid left \
       --set $DIVIDER.$sid background.height=1 \
