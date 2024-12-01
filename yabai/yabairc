@@ -48,7 +48,7 @@ yabai -m config "${global_settings[@]}"
 # yabai -m config [--space <SPACE_SEL>] <space setting>
 #
 space_settings=(
-    layout stack
+    layout float
     top_padding ${gap_top}
     bottom_padding ${gap_bottom}
     left_padding ${gap_left}
@@ -80,10 +80,28 @@ yabai -m rule --add label="Dictionary" app="^Dictionary$" manage=off
 # SIGNALS
 #
 
-yabai -m signal --add event=window_created action="sketchybar --trigger window_created ID=\$YABAI_WINDOW_ID &> /dev/null"
-yabai -m signal --add event=window_destroyed action="sketchybar --trigger window_destroyed ID=\$YABAI_WINDOW_ID &> /dev/null"
-# yabai -m signal --add event=space_changed action="sketchybar --trigger space_changed &> /dev/null"
-# yabai -m signal --add event=space_created action="sketchybar --trigger window_changed &> /dev/null"
-# yabai -m signal --add event=space_destroyed action="sketchybar --trigger window_changed &> /dev/null"
+yabai -m signal --add event=window_created action="sketchybar --trigger yabai_window_created ID=\$YABAI_WINDOW_ID &> /dev/null"
+yabai -m signal --add event=window_destroyed action="sketchybar --trigger yabai_window_destroyed ID=\$YABAI_WINDOW_ID &> /dev/null"
+
+# event=application_launched, ID=\$YABAI_PROCESS_ID
+# event=application_terminated, ID=\$YABAI_PROCESS_ID
+# event=application_front_switched, $YABAI_PROCESS_ID, $YABAI_RECENT_PROCESS_ID
+# event=application_activated, $YABAI_PROCESS_ID
+# event=application_deactivated, $YABAI_PROCESS_ID
+# event=application_visible, $YABAI_PROCESS_ID
+# event=application_hidden, $YABAI_PROCESS_ID
+# event=window_created, $YABAI_WINDOW_ID
+# event=window_destroyed, $YABAI_WINDOW_ID
+# event=window_focused, $YABAI_WINDOW_ID
+# event=window_moved, $YABAI_WINDOW_ID
+# event=window_resized, $YABAI_WINDOW_ID
+# event=window_minimized, $YABAI_WINDOW_ID
+# event=window_deminimized, $YABAI_WINDOW_ID
+# event=window_title_changed, $YABAI_WINDOW_ID
+# event=display_added, $YABAI_DISPLAY_ID, $YABAI_DISPLAY_INDEX
+# event=display_removed, $YABAI_DISPLAY_ID
+# event=display_moved, $YABAI_DISPLAY_ID, $YABAI_DISPLAY_INDEX
+# event=display_resized, $YABAI_DISPLAY_ID, $YABAI_DISPLAY_INDEX
+# event=display_changed, $YABAI_DISPLAY_ID, $YABAI_DISPLAY_INDEX, $YABAI_RECENT_DISPLAY_ID, $YABAI_RECENT_DISPLAY_INDEX
 
 set +x

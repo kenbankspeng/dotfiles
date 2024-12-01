@@ -1,0 +1,37 @@
+#!/usr/bin/env zsh
+
+unmatched_items() {
+  local source=($1)
+  local targets=($2)
+
+  local result=""
+
+  # Iterate over target items
+  for target in "${targets[@]}"; do
+    local item=${target##*.}
+    local matched=0
+
+    echo "debug item: $item"
+
+    # Check if the item exists in source
+    for s_item in "${source[@]}"; do
+      if [[ "$s_item" == "$item" ]]; then
+        matched=1
+        break
+      fi
+    done
+
+    # If the item is not in source
+    if ((matched == 0)); then
+      result+="$target "
+    fi
+  done
+
+  echo "$result"
+}
+
+fixed="Arc WezTerm"
+variable="window.2.1.Arc window.2.2.Cursor window.2.3.WezTerm window.2.4.WezTerm"
+
+result=$(unmatched_items "${fixed}" "${variable}")
+printf "%s" "$result"

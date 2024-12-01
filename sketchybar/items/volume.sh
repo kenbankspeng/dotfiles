@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 sketchybar --add item volume right \
   --set volume script="$PLUGIN_DIR/volume.sh" \

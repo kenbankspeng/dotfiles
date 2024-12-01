@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 source "$CONFIG_DIR/env.sh"
 
@@ -38,9 +38,9 @@ if [ -n "$device" ]; then
       icon=$NET_HOTSPOT
       color=$on
     else
-      status=$(networksetup -getairportpower "$device" | awk '{print $NF}')
-      # echo "@@ status: $status"
-      if [[ "$status" == "On" ]]; then
+      wifi_status=$(networksetup -getairportpower "$device" | awk '{print $NF}')
+      # echo "@@ wifi_status: $wifi_status"
+      if [[ "$wifi_status" == "On" ]]; then
         RSSI=$(sudo wdutil info | rg --only-matching 'RSSI.*?(-?\d+)' -r '$1')
         if ((RSSI >= -50 && RSSI <= -30)); then
           icon=$NET_WIFI_3 # High signal

@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 sketchybar --add item battery right \
   --set battery update_freq=120 \

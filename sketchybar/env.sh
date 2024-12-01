@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 # env variables
 export CACHE_DIR="$HOME/.cache/sketchybar"
@@ -18,6 +18,10 @@ export ITEM_HEIGHT=25
 export ITEM_HEIGHT_WITH_LABEL=53
 export ICON_PADDING_L=11
 export LABEL_Y_OFFSET=-17
+
+# tags to bridge sketchybar and aerospace
+export WINDOW=window
+export DIVIDER=divider
 
 #
 #

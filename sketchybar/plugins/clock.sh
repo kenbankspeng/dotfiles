@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 datetime=$(date +"%-I:%M %p")
 time=$(echo "$datetime" | awk '{print $1}')

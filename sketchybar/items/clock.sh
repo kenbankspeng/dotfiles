@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 props=(
   background.height=$ITEM_HEIGHT_WITH_LABEL
