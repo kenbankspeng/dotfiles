@@ -1,37 +1,38 @@
 #!/usr/bin/env zsh
 
 unmatched_items() {
-  local source=($1)
-  local targets=($2)
+  local source=("${(s/ /)1}")  # Split the first argument into an array
+  local targets=("${(s/ /)${2}}") # Split the second argument into an array
 
   local result=""
+  local -A source_count
+  local -A target_count
 
-  # Iterate over target items
+  # Count occurrences in source
+  for s_item in "${source[@]}"; do
+    ((source_count["$s_item"]++))  # Use quotes around associative array keys
+  done
+
+  # Count occurrences in targets
   for target in "${targets[@]}"; do
     local item=${target##*.}
-    local matched=0
+    ((target_count["$item"]++))  # Use quotes around associative array keys
+  done
 
-    echo "debug item: $item"
-
-    # Check if the item exists in source
-    for s_item in "${source[@]}"; do
-      if [[ "$s_item" == "$item" ]]; then
-        matched=1
-        break
-      fi
-    done
-
-    # If the item is not in source
-    if ((matched == 0)); then
+  # Find unmatched items
+  for target in "${targets[@]}"; do
+    local item=${target##*.}
+    if ((target_count["$item"] > source_count["$item"])); then  # Use quotes around associative array keys
       result+="$target "
+      ((target_count["$item"]--))  # Use quotes around associative array keys
     fi
   done
 
   echo "$result"
 }
 
-fixed="Arc WezTerm"
-variable="window.2.1.Arc window.2.2.Cursor window.2.3.WezTerm window.2.4.WezTerm"
 
-result=$(unmatched_items "${fixed}" "${variable}")
-printf "%s" "$result"
+fixed=("WezTerm" "WezTerm")
+variable=("window.2.3.WezTerm" "window.2.4.WezTerm" "abc")
+
+unmatched_items "${fixed}" "${variable}"

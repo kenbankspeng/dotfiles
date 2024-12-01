@@ -12,21 +12,30 @@ item_in_array() {
 }
 
 unmatched_items() {
-  local source="$1"
-  local targets="$2"
-
-  local source_pattern=$(echo "$source" | tr ' ' '|')
+  local source=("${(s/ /)1}")  # Split the first argument into an array
+  local targets=("${(s/ /)${2}}") # Split the second argument into an array
 
   local result=""
+  local -A source_count
+  local -A target_count
 
-  for target in $(echo "$targets" | tr ' ' '\n'); do
+  # Count occurrences in source
+  for s_item in "${source[@]}"; do
+    ((source_count["$s_item"]++))  # Use quotes around associative array keys
+  done
+
+  # Count occurrences in targets
+  for target in "${targets[@]}"; do
     local item=${target##*.}
+    ((target_count["$item"]++))  # Use quotes around associative array keys
+  done
 
-    local source_count=$(echo "$source" | grep -o "$item" | wc -l)
-    local target_count=$(echo "$targets" | grep -o "$item" | wc -l)
-
-    if [[ ! "$source_pattern" =~ $item ]] || ((target_count > source_count)); then
+  # Find unmatched items
+  for target in "${targets[@]}"; do
+    local item=${target##*.}
+    if ((target_count["$item"] > source_count["$item"])); then  # Use quotes around associative array keys
       result+="$target "
+      ((target_count["$item"]--))  # Use quotes around associative array keys
     fi
   done
 
