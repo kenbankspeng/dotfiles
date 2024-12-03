@@ -50,8 +50,6 @@ unmatched_items() {
   # Remove items ending in .default
   target=("${(@)target:#*.default}")
 
-  # window.4.default
-
   if [[ ${#target[@]} -gt 0 ]]; then
     print "${target[@]}" >&2
   fi
