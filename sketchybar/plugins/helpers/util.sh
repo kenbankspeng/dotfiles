@@ -43,11 +43,12 @@ unmatched_items() {
       fi
     done
   done
-  
+
+  # Remove empty strings
+  target=("${(@)target:#""}")
+
   if [[ ${#target[@]} -gt 0 ]]; then
-    print "#########################" >&2
     print "${target[@]}" >&2
-    print "++++++++++++++++++++++++" >&2
   fi
 
   echo "${target[@]}"
