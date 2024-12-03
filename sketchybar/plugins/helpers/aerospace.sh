@@ -37,12 +37,11 @@ aerospace_add_apps() {
   aerospace_apps=$(aerospace_apps_in_workspace $sid)
   sketchy_apps=$(sketchy_get_space_windows $sid)
 
-  apps_to_remove=$(unmatched_items "${aerospace_apps}" "${sketchy_apps}")
-  if [ -n "${apps_to_remove}" ]; then
-    echo "aerospace_apps: ${aerospace_apps[@]}"
-    echo "sketchy_apps: ${sketchy_apps[@]}"
-    echo "apps_to_remove: ${apps_to_remove[@]}"
-  fi
+  apps_to_remove=$(unmatched_items "${aerospace_apps}" "${sketchy_apps}" 2>/dev/tty)
+
+  # if [[ -n "$apps_to_remove" ]]; then
+  #   echo "apps_to_remove: ${apps_to_remove}"
+  # fi
 
   focused=$(aerospace_focused_workspace)
   if [ "$sid" = "$focused" ]; then

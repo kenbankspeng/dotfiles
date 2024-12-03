@@ -12,32 +12,27 @@ item_in_array() {
 }
 
 unmatched_items() {
-  local source=("${(s/ /)1}")  # Split the first argument into an array
-  local targets=("${(s/ /)${2}}") # Split the second argument into an array
+  local IFS=$'\n'
+  local source=("${(f)1}")
+  local targets=("${(f)2}")
+  local shadow=("${targets[@]}")
 
-  local result=""
-  local -A source_count
-  local -A target_count
-
-  # Count occurrences in source
-  for s_item in "${source[@]}"; do
-    ((source_count["$s_item"]++))  # Use quotes around associative array keys
+  for key in "${source[@]}"; do
+    local matched=false
+    for ((i=0; i<${#targets[@]}; i++)); do 
+      local target_item="${targets[i]}"
+      print "key: $key" >&2
+      print "i: $i" >&2
+      print "target_item: $target_item" >&2
+      print "end: ${target_item##*.}" >&2
+      if [[ $key == "${target_item##*.}" ]]; then
+        shadow=("${shadow[@]:0:i}" "${shadow[@]:((i + 1))}")
+        break
+      fi
+    done
   done
 
-  # Count occurrences in targets
-  for target in "${targets[@]}"; do
-    local item=${target##*.}
-    ((target_count["$item"]++))  # Use quotes around associative array keys
-  done
+  print "result: ${shadow[@]}" >&2
 
-  # Find unmatched items
-  for target in "${targets[@]}"; do
-    local item=${target##*.}
-    if ((target_count["$item"] > source_count["$item"])); then  # Use quotes around associative array keys
-      result+="$target "
-      ((target_count["$item"]--))  # Use quotes around associative array keys
-    fi
-  done
-
-  echo "$result"
+  echo "${shadow[@]}"
 }
