@@ -11,28 +11,56 @@ item_in_array() {
   fi
 }
 
+remove_item() {
+  local item_to_delete="$1"
+  shift
+  local list=("$@")
+  local new_list=()
+  local removed=false
+
+  # print "list: ${list[@]}" >&2
+  # print "item_to_delete: $item_to_delete" >&2
+
+  for item in "${list[@]}"; do
+    if [[ "$item" == "$item_to_delete" && $removed == false ]]; then
+      removed=true
+      continue
+    fi
+    new_list+=("$item")
+  done
+
+  # print "new_list: ${new_list[@]}" >&2
+
+  echo "${new_list[@]}"
+}
+
+
 unmatched_items() {
   local IFS=$'\n'
   local source=("${(f)1}")
   local targets=("${(f)2}")
   local shadow=("${targets[@]}")
 
+  # print "##########################" >&2
+  # print "source: ${source[@]}" >&2
+  # print "targets: ${targets[@]}" >&2
   for key in "${source[@]}"; do
-    local matched=false
-    for ((i=0; i<${#targets[@]}; i++)); do 
-      local target_item="${targets[i]}"
-      print "key: $key" >&2
-      print "i: $i" >&2
-      print "target_item: $target_item" >&2
-      print "end: ${target_item##*.}" >&2
-      if [[ $key == "${target_item##*.}" ]]; then
-        shadow=("${shadow[@]:0:i}" "${shadow[@]:((i + 1))}")
+    for i in "${shadow[@]}"; do
+      # print "key: $key" >&2
+      # print "i: $i" >&2
+      if [[ $key == "${i##*.}" ]]; then
+        # print "pre-shadow: ${shadow[@]}" >&2
+        shadow=($(remove_item "$i" "${shadow[@]}"))
+        # print "post-shadow: ${shadow[@]}" >&2
         break
       fi
     done
   done
-
-  print "result: ${shadow[@]}" >&2
+  
+  if [[ ${#shadow[@]} -gt 0 ]]; then
+    print "result: ${shadow[@]}" >&2
+  fi
+  # print "++++++++++++++++++++++++" >&2
 
   echo "${shadow[@]}"
 }
