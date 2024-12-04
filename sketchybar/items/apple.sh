@@ -6,6 +6,7 @@ props=(
 	icon=$APPLE_LOGO
 	icon.font="$ICON_FONT:18"
 	icon.color="$SKY"
+	padding_left=10
 	script="$PLUGIN_DIR/apple.sh"
 )
 

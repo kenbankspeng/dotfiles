@@ -15,3 +15,7 @@ props=(
 if [ -n "$cpuload" ]; then
   sketchybar -m --set "$NAME" "${props[@]}"
 fi
+
+if [ "$SENDER" = "mouse.clicked" ]; then
+  open -a "Activity Monitor"
+fi

@@ -32,3 +32,7 @@ if [ "$SENDER" = "volume_change" ]; then
   )
   sketchybar --set $NAME "${props[@]}"
 fi
+
+if [ "$SENDER" = "mouse.clicked" ]; then
+  open x-apple.systempreferences:com.apple.Sound-Settings.extension
+fi

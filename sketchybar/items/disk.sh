@@ -9,4 +9,5 @@ props=(
 )
 
 sketchybar --add item disk right \
-  --set disk "${props[@]}"
+  --set disk "${props[@]}" \
+  --subscribe disk mouse.clicked

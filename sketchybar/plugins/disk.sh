@@ -7,3 +7,7 @@ props=(
   label.color=$SAPPHIRE
 )
 sketchybar -m --set "$NAME" "${props[@]}"
+
+if [ "$SENDER" = "mouse.clicked" ]; then
+  open -a "DaisyDisk"
+fi
