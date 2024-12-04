@@ -14,6 +14,11 @@ elif [ "$SENDER" = "aerospace_workspace_change" ]; then
   # aerospace event
   aerospace_add_apps $PREV_WORKSPACE
   aerospace_add_apps $FOCUSED_WORKSPACE
+elif [ "$SENDER" = "yabai_window_moved" ]; then
+  # yabai event
+  for space in $(aerospace_workspaces); do
+    aerospace_add_apps $space
+  done
 else
   # yabai events don't have $PREV_WORKSPACE or $FOCUSED_WORKSPACE
   #   yabai_window_created

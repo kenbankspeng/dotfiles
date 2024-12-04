@@ -152,6 +152,7 @@ alt-shift-6 = 'move-node-to-workspace 6'
 alt-shift-left = 'move-node-to-workspace prev'
 alt-shift-right = 'move-node-to-workspace next'
 
+
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-tab = 'workspace-back-and-forth'
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor

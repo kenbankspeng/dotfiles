@@ -82,6 +82,7 @@ yabai -m rule --add label="Dictionary" app="^Dictionary$" manage=off
 
 yabai -m signal --add event=window_created action="sketchybar --trigger yabai_window_created ID=\$YABAI_WINDOW_ID &> /dev/null"
 yabai -m signal --add event=window_destroyed action="sketchybar --trigger yabai_window_destroyed ID=\$YABAI_WINDOW_ID &> /dev/null"
+yabai -m signal --add event=window_moved action="sketchybar --trigger yabai_window_moved ID=\$YABAI_WINDOW_ID &> /dev/null"
 
 # event=application_launched, ID=\$YABAI_PROCESS_ID
 # event=application_terminated, ID=\$YABAI_PROCESS_ID
