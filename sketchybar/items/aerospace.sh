@@ -26,5 +26,4 @@ sketchybar --add item space_listener left \
   --subscribe space_listener \
   aerospace_workspace_change \
   yabai_window_created \
-  yabai_window_destroyed \
-  yabai_window_moved
+  yabai_window_destroyed
