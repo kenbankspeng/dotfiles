@@ -72,7 +72,8 @@ aerospace_add_apps() {
         sketchybar --add item $item left
         sketchybar --move $item before $DIVIDER.$sid
       fi
-      sketchybar --set $item "${props[@]}" icon=$icon
+      sketchybar --set $item "${props[@]}" icon=$icon \
+        click_script="aerospace workspace $sid"
     done <<<"${aerospace_apps}" # app_list has one app per line
   else
     # only add if doesn't already exist
@@ -82,6 +83,7 @@ aerospace_add_apps() {
       sketchybar --add item $item left
       sketchybar --move $item before $DIVIDER.$sid
     fi
-    sketchybar --set $item "${props[@]}" icon="·"
+    sketchybar --set $item "${props[@]}" icon="·" \
+      click_script="aerospace workspace $sid"
   fi
 }

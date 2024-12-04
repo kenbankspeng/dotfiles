@@ -22,7 +22,6 @@ props=(
 sketchybar --add item space_listener left \
   --set space_listener "${props[@]}" \
   script="$PLUGIN_DIR/aerospace.sh" \
-  click_script="aerospace workspace $sid" \
   --subscribe space_listener \
   aerospace_workspace_change \
   yabai_window_created \
