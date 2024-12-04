@@ -8,4 +8,5 @@ props=(
   update_freq=1
   script="$PLUGIN_DIR/clock.sh"
 )
-sketchybar --add item time right --set time "${props[@]}"
+sketchybar --add item time right --set time "${props[@]}" \
+  --subscribe time mouse.clicked

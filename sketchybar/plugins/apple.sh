@@ -6,7 +6,7 @@ confetti() {
 }
 
 if [ "$BUTTON" = "left" ]; then
-  confetti
+  sketchybar --reload
 elif [ "$BUTTON" = "right" ]; then
   confetti
 fi

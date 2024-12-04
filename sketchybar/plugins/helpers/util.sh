@@ -11,33 +11,45 @@ item_in_array() {
   fi
 }
 
-unmatched_items() {
-  local source=("${(s/ /)1}")  # Split the first argument into an array
-  local targets=("${(s/ /)${2}}") # Split the second argument into an array
+remove_first_item() {
+  local item_to_delete="$1"
+  shift
+  local list=("$@")
+  local new_list=()
+  local removed=false
 
-  local result=""
-  local -A source_count
-  local -A target_count
-
-  # Count occurrences in source
-  for s_item in "${source[@]}"; do
-    ((source_count["$s_item"]++))  # Use quotes around associative array keys
-  done
-
-  # Count occurrences in targets
-  for target in "${targets[@]}"; do
-    local item=${target##*.}
-    ((target_count["$item"]++))  # Use quotes around associative array keys
-  done
-
-  # Find unmatched items
-  for target in "${targets[@]}"; do
-    local item=${target##*.}
-    if ((target_count["$item"] > source_count["$item"])); then  # Use quotes around associative array keys
-      result+="$target "
-      ((target_count["$item"]--))  # Use quotes around associative array keys
+  for item in "${list[@]}"; do
+    if [[ "$item" == "$item_to_delete" && $removed == false ]]; then
+      removed=true
+      continue
     fi
+    new_list+=("$item")
   done
 
-  echo "$result"
+  echo "${new_list[@]}"
+}
+
+
+unmatched_items() {
+  # delimit by space or newline
+  local IFS=$' \n'
+  local source=("${(f)1}")
+  local target=("${(f)2}")
+
+  for key in "${source[@]}"; do
+    for i in "${target[@]}"; do
+      if [[ $key == "${i##*.}" ]]; then
+        target=($(remove_first_item "$i" "${(@)target}"))
+        break
+      fi
+    done
+  done
+
+  # Remove empty strings
+  target=("${(@)target:#""}")
+
+  # Remove items ending in .default
+  target=("${(@)target:#*.default}")
+
+  echo "${target[@]}"
 }

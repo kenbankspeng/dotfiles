@@ -14,10 +14,19 @@ elif [ "$SENDER" = "aerospace_workspace_change" ]; then
   # aerospace event
   aerospace_add_apps $PREV_WORKSPACE
   aerospace_add_apps $FOCUSED_WORKSPACE
-else
+elif [ "$SENDER" = "yabai_window_created" ] || [ "$SENDER" = "yabai_window_destroyed" ]; then
   # yabai events don't have $PREV_WORKSPACE or $FOCUSED_WORKSPACE
-  #   yabai_window_created
-  #   yabai_window_destroyed
   focused=$(aerospace_focused_workspace)
   aerospace_add_apps $focused
+elif [ "$SENDER" = "yabai_window_focused" ]; then
+  print "$SENDER"
+  print "$ID"
+else
+  print "$SENDER"
+
+  # yabai_window_moved
+  # for space in $(aerospace_workspaces); do
+  #   aerospace_add_apps $space
+  # done
+  # fi
 fi

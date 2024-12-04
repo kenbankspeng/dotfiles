@@ -37,11 +37,10 @@ aerospace_add_apps() {
   aerospace_apps=$(aerospace_apps_in_workspace $sid)
   sketchy_apps=$(sketchy_get_space_windows $sid)
 
-  apps_to_remove=$(unmatched_items "${aerospace_apps}" "${sketchy_apps}")
-  if [ -n "${apps_to_remove}" ]; then
-    echo "aerospace_apps: ${aerospace_apps[@]}"
-    echo "sketchy_apps: ${sketchy_apps[@]}"
-    echo "apps_to_remove: ${apps_to_remove[@]}"
+  apps_to_remove=$(unmatched_items "${aerospace_apps}" "${sketchy_apps}" 2>/dev/tty)
+
+  if [[ -n "$apps_to_remove" ]]; then
+    sketchy_remove $apps_to_remove
   fi
 
   focused=$(aerospace_focused_workspace)
@@ -65,13 +64,26 @@ aerospace_add_apps() {
     while read -r app; do
       ((app_index++))
       icon="$($CONFIG_DIR/icon_map.sh "$app")"
-      sketchy_add item $WINDOW.$sid.$app_index.$app left # sketchy only adds if doesn't already exist
-      sketchybar --move $WINDOW.$sid.$app_index.$app before $DIVIDER.$sid
-      sketchybar --set $WINDOW.$sid.$app_index.$app "${props[@]}" icon=$icon
+
+      # only add if doesn't already exist
+      local items=$(sketchybar --query bar | jq -r '.items[]')
+      item="$WINDOW.$sid.$app_index.$app"
+      if ! item_in_array "$item" "$items"; then
+        sketchybar --add item $item left
+        sketchybar --move $item before $DIVIDER.$sid
+      fi
+      sketchybar --set $item "${props[@]}" icon=$icon \
+        click_script="aerospace workspace $sid"
     done <<<"${aerospace_apps}" # app_list has one app per line
   else
-    sketchy_add item $WINDOW.$sid.default left # sketchy only adds if doesn't already exist
-    sketchybar --move $WINDOW.$sid.default before $DIVIDER.$sid
-    sketchybar --set $WINDOW.$sid.default "${props[@]}" icon="·"
+    # only add if doesn't already exist
+    local items=$(sketchybar --query bar | jq -r '.items[]')
+    item="$WINDOW.$sid.default"
+    if ! item_in_array "$item" "$items"; then
+      sketchybar --add item $item left
+      sketchybar --move $item before $DIVIDER.$sid
+    fi
+    sketchybar --set $item "${props[@]}" icon="·" \
+      click_script="aerospace workspace $sid"
   fi
 }

@@ -66,3 +66,7 @@ props=(
   icon.color="$color"
 )
 sketchybar --set $NAME "${props[@]}"
+
+if [ "$SENDER" = "mouse.clicked" ]; then
+  open x-apple.systempreferences:com.apple.wifi-settings-extension
+fi

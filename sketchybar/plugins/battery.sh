@@ -37,3 +37,7 @@ props=(
   background.height=$ITEM_HEIGHT_WITH_LABEL
 )
 sketchybar --set $NAME "${props[@]}"
+
+if [ "$SENDER" = "mouse.clicked" ]; then
+  open "x-apple.systempreferences:com.apple.Battery-Settings.extension"
+fi
