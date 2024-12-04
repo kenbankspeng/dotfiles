@@ -40,6 +40,8 @@ aerospace_add_apps() {
   apps_to_remove=$(unmatched_items "${aerospace_apps}" "${sketchy_apps}" 2>/dev/tty)
 
   if [[ -n "$apps_to_remove" ]]; then
+    echo "aerospace_apps: ${aerospace_apps}"
+    echo "sketchy_apps: ${sketchy_apps}"
     echo "apps_to_remove: ${apps_to_remove}"
   fi
 

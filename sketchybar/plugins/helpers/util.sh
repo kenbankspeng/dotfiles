@@ -31,14 +31,15 @@ remove_first_item() {
 
 
 unmatched_items() {
-  local IFS=$'\n'
+  # delimit by space or newline
+  local IFS=$' \n'
   local source=("${(f)1}")
   local target=("${(f)2}")
 
   for key in "${source[@]}"; do
     for i in "${target[@]}"; do
       if [[ $key == "${i##*.}" ]]; then
-        target=($(remove_first_item "$i" "${target[@]}"))
+        target=($(remove_first_item "$i" "${(@)target}"))
         break
       fi
     done
@@ -49,10 +50,6 @@ unmatched_items() {
 
   # Remove items ending in .default
   target=("${(@)target:#*.default}")
-
-  if [[ ${#target[@]} -gt 0 ]]; then
-    print "${target[@]}" >&2
-  fi
 
   echo "${target[@]}"
 }
