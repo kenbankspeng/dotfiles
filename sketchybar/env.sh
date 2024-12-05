@@ -103,8 +103,9 @@ export CRUST=0xff11111b
 export BLACK=0xff000000
 export WHITE=0xffffffff
 export GREY=0xff808080
-export FAINT=0xff555555
 export TRANSPARENT=0x00000000
+export ACTIVE_COLOR=0xff00ff00
+export ACTIVE_BACKGROUND=0x30a6e3a1
 
 # TODO:hard colors
 

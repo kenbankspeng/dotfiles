@@ -34,6 +34,10 @@ aerospace_add_dividers() {
 aerospace_add_apps() {
   local sid=$1
 
+  if [ -f "$CACHE_DIR/highlighted" ]; then
+    read -r highlighted_space highlighted_app <"$CACHE_DIR/highlighted"
+  fi
+
   aerospace_apps=$(aerospace_apps_in_workspace $sid)
   sketchy_apps=$(sketchy_get_space_windows $sid)
 
@@ -44,16 +48,13 @@ aerospace_add_apps() {
   fi
 
   focused=$(aerospace_focused_workspace)
-  if [ "$sid" = "$focused" ]; then
-    color=$SURFACE1
-  else
-    color=$TRANSPARENT
-  fi
+  background=$([ "$sid" = "$focused" ] && echo $ACTIVE_BACKGROUND || echo $TRANSPARENT)
+  highlight=$([ "$sid" = "$highlighted_space" ] && echo true || echo false)
 
   props=(
     y_offset=1
     background.corner_radius=0
-    background.color=$color
+    background.color=$background
     background.height=$ITEM_HEIGHT
     label.drawing=off
     icon.font="$ICON_FONT:$ICON_FONTSIZE"
@@ -64,6 +65,7 @@ aerospace_add_apps() {
     while read -r app; do
       ((app_index++))
       icon="$($CONFIG_DIR/icon_map.sh "$app")"
+      icon_color=$([ "$highlight" = true ] && [ "$app" = "$highlighted_app" ] && echo $ACTIVE_COLOR || echo $TEXT)
 
       # only add if doesn't already exist
       local items=$(sketchybar --query bar | jq -r '.items[]')
@@ -72,7 +74,7 @@ aerospace_add_apps() {
         sketchybar --add item $item left
         sketchybar --move $item before $DIVIDER.$sid
       fi
-      sketchybar --set $item "${props[@]}" icon=$icon \
+      sketchybar --set $item "${props[@]}" icon=$icon icon.color=$icon_color \
         click_script="aerospace workspace $sid"
     done <<<"${aerospace_apps}" # app_list has one app per line
   else
