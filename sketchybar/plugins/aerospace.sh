@@ -32,6 +32,7 @@ elif [ "$SENDER" = "yabai_window_focused" ]; then
     aerospace_add_apps $focused_workspace
     aerospace_default_apps
   fi
-else
-  print "$SENDER"
+elif [ "$SENDER" = "yabai_window_minimized" ] || [ "$SENDER" = "yabai_window_deminimized" ]; then
+  aerospace_add_apps $(aerospace_focused_workspace)
+  aerospace_default_apps
 fi
