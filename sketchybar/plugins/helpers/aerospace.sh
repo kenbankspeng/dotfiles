@@ -112,18 +112,13 @@ aerospace_default_apps() {
     num_windows=$(echo "$list" | grep -c .)
 
     if [[ "$default_exists" == true && "$num_windows" -gt 1 ]]; then
-      action="remove default"
+      sketchy_remove $item
     elif [[ "$default_exists" == false && "$num_windows" -eq 0 ]]; then
       sketchybar --add item $item left
       sketchybar --move $item before $DIVIDER.$sid
       sketchybar --set $item "${props[@]}" icon="·" \
         click_script="aerospace workspace $sid"
-      action="add default"
-    else
-      action="no change"
     fi
-
-    print "$space $default_exists $num_windows $action"
 
   done
 }

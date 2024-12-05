@@ -11,14 +11,17 @@ if [ "$SENDER" = "forced" ]; then
   for space in $(aerospace_workspaces); do
     aerospace_add_apps $space
   done
+  aerospace_default_apps
 elif [ "$SENDER" = "aerospace_workspace_change" ]; then
   # aerospace event
   echo "$PREV_WORKSPACE $FOCUSED_WORKSPACE" >"$CACHE_DIR/workspace_change"
   aerospace_add_apps $PREV_WORKSPACE
   aerospace_add_apps $FOCUSED_WORKSPACE
+  aerospace_default_apps
 elif [ "$SENDER" = "yabai_window_created" ] || [ "$SENDER" = "yabai_window_destroyed" ]; then
   # yabai events don't have $PREV_WORKSPACE or $FOCUSED_WORKSPACE
   aerospace_add_apps $(aerospace_focused_workspace)
+  aerospace_default_apps
 elif [ "$SENDER" = "yabai_window_focused" ]; then
   # yabai events don't have $PREV_WORKSPACE or $FOCUSED_WORKSPACE
   if [ -f "$CACHE_DIR/workspace_change" ]; then
@@ -27,6 +30,7 @@ elif [ "$SENDER" = "yabai_window_focused" ]; then
     echo "$focused_workspace $highlighted_app" >"$CACHE_DIR/highlighted"
     aerospace_add_apps $prev_workspace
     aerospace_add_apps $focused_workspace
+    aerospace_default_apps
   fi
 else
   print "$SENDER"
