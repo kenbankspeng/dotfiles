@@ -42,15 +42,6 @@ aerospace_add_apps() {
   sketchy_apps=$(sketchy_get_space_windows $sid)
   apps_to_remove=$(unmatched_items "${aerospace_apps}" "${sketchy_apps}" 2>/dev/tty)
 
-  if [ $sid -eq 3 ]; then
-    print "sketchy_apps:"
-    print $sketchy_apps
-    print "aerospace_apps:"
-    print $aerospace_apps
-    print "apps_to_remove:"
-    print $apps_to_remove
-  fi
-
   if [[ -n "$apps_to_remove" ]]; then
     for app in ${(z)apps_to_remove}; do
       sketchy_remove "$app"

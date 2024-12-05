@@ -5,8 +5,6 @@ source "$PLUGIN_DIR/helpers/aerospace.sh"
 source "$PLUGIN_DIR/helpers/sketchy.sh"
 source "$PLUGIN_DIR/helpers/yabai.sh"
 
-print "$SENDER"
-
 # startup - add all workspaces and apps
 if [ "$SENDER" = "forced" ]; then
   # aerospace event
