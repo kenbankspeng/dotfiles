@@ -40,11 +40,21 @@ aerospace_add_apps() {
 
   aerospace_apps=$(aerospace_apps_in_workspace $sid)
   sketchy_apps=$(sketchy_get_space_windows $sid)
-
   apps_to_remove=$(unmatched_items "${aerospace_apps}" "${sketchy_apps}" 2>/dev/tty)
 
+  if [ $sid -eq 3 ]; then
+    print "sketchy_apps:"
+    print $sketchy_apps
+    print "aerospace_apps:"
+    print $aerospace_apps
+    print "apps_to_remove:"
+    print $apps_to_remove
+  fi
+
   if [[ -n "$apps_to_remove" ]]; then
-    sketchy_remove $apps_to_remove
+    for app in ${(z)apps_to_remove}; do
+      sketchy_remove "$app"
+    done
   fi
 
   focused=$(aerospace_focused_workspace)
@@ -60,10 +70,13 @@ aerospace_add_apps() {
     icon.font="$ICON_FONT:$ICON_FONTSIZE"
   )
 
+  # track the index of each app
+  declare -A app_indices
+
   if [ -n "${aerospace_apps}" ]; then
-    app_index=0
     while read -r app; do
-      ((app_index++))
+      ((app_indices[$app]++))
+      app_index=${app_indices[$app]}
       icon="$($CONFIG_DIR/icon_map.sh "$app")"
       icon_color=$([ "$highlight" = true ] && [ "$app" = "$highlighted_app" ] && echo $ACTIVE_COLOR || echo $TEXT)
 
@@ -88,7 +101,6 @@ aerospace_add_apps() {
     sketchybar --set $item "${props[@]}" icon="·" \
       click_script="aerospace workspace $sid"
   fi
-
 }
 
 aerospace_default_apps() {
