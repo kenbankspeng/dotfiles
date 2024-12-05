@@ -88,4 +88,43 @@ aerospace_add_apps() {
     sketchybar --set $item "${props[@]}" icon="·" \
       click_script="aerospace workspace $sid"
   fi
+
+  # set_default_apps
+}
+
+set_default_apps() {
+  props=(
+    y_offset=1
+    background.corner_radius=0
+    # background.color=$background
+    background.height=$ITEM_HEIGHT
+    label.drawing=off
+    icon.font="$ICON_FONT:$ICON_FONTSIZE"
+  )
+
+  for sid in $(aerospace_workspaces); do
+    list=$(sketchy_get_space_windows $sid)
+    item="$WINDOW.$sid.default"
+    if item_in_array "$item" $list; then
+      default_exists=true
+    else
+      default_exists=false
+    fi
+    num_windows=$(echo "$list" | grep -c .)
+
+    if [[ "$default_exists" == true && "$num_windows" -gt 1 ]]; then
+      action="remove default"
+    elif [[ "$default_exists" == false && "$num_windows" -eq 0 ]]; then
+      sketchybar --add item $item left
+      sketchybar --move $item before $DIVIDER.$sid
+      sketchybar --set $item "${props[@]}" icon="·" \
+        click_script="aerospace workspace $sid"
+      action="add default"
+    else
+      action="no change"
+    fi
+
+    print "$space $default_exists $num_windows $action"
+
+  done
 }

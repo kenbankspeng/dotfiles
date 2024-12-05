@@ -22,16 +22,16 @@ sketchy_remove() {
 
 # returns sketchy names
 sketchy_get_all_windows() {
-  sketchybar --query bar | jq -r '.items[] | select(contains("$WINDOW"))'
+  echo "$(sketchybar --query bar | jq -r '.items[] | select(contains("window"))')"
 }
 
 sketchy_get_space_windows() {
   local SPACE=$1
-  sketchybar --query bar | jq -r --arg space "$SPACE" '.items[] | select(test("^window\\." + $space + "\\."))'
+  echo "$(sketchybar --query bar | jq -r --arg space "$SPACE" '.items[] | select(test("^window\\." + $space + "\\."))')"
 }
 
 sketchy_get_space_app() {
   local SPACE=$1
   local APP=$2
-  sketchybar --query bar | jq --arg space "$SPACE" --arg app "$APP" '.items[] | select(test("^window\\." + $space + "\\.\\d+\\." + $app + "$"))'
+  echo "$(sketchybar --query bar | jq --arg space "$SPACE" --arg app "$APP" '.items[] | select(test("^window\\." + $space + "\\.\\d+\\." + $app + "$"))')"
 }

@@ -30,10 +30,4 @@ elif [ "$SENDER" = "yabai_window_focused" ]; then
   fi
 else
   print "$SENDER"
-
-  # yabai_window_moved
-  # for space in $(aerospace_workspaces); do
-  #   aerospace_add_apps $space
-  # done
-  # fi
 fi
