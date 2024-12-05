@@ -89,10 +89,9 @@ aerospace_add_apps() {
       click_script="aerospace workspace $sid"
   fi
 
-  # set_default_apps
 }
 
-set_default_apps() {
+aerospace_default_apps() {
   props=(
     y_offset=1
     background.corner_radius=0
