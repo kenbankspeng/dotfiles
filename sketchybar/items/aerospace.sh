@@ -13,8 +13,6 @@ sketchybar --add event yabai_window_focused
 sketchybar --add event yabai_window_minimized
 sketchybar --add event yabai_window_deminimized
 
-aerospace_add_dividers
-
 props=(
   icon.drawing=off
   label.drawing=off
@@ -30,3 +28,11 @@ sketchy_add item space_listener left \
   yabai_window_focused \
   yabai_window_minimized \
   yabai_window_deminimized
+
+# add dividers as anchor points for the workspaces
+workspaces=(0 $(aerospace_workspaces))
+for sid in $workspaces; do
+  sketchy_add item divider.$sid left \
+    --set divider.$sid background.height=1 \
+    background.color=$DIVIDER
+done

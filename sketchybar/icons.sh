@@ -1,7 +1,47 @@
 #!/usr/bin/env zsh
 
-# TODO:Material Design Icons
+#
+#
+#  Icons
+#
+#
 
+export NET_WIFI_3=      # Icomoon - Wi-Fi connected - 3 bars
+export NET_WIFI_2=      # Icomoon - Wi-Fi connected - 2 bars
+export NET_WIFI_1=      # Icomoon - Wi-Fi connected - 1 bar
+export NET_HOTSPOT=􀉤     # SF Symbols - iPhone Wi-Fi hotspot connected
+export NET_USB=􀟜         # SF Symbols - iPhone USB hotspot connected
+export NET_THUNDERBOLT=􀒗 # SF Symbols - Thunderbolt bridge connected
+export NET_OFF=􀙈         # SF Symbols - Network disconnected or Wi-Fi turned off
+
+export APPLE_LOGO=􀣺 # SF Symbols
+
+export BATTERY_4=􀛨        # SF Symbols - full
+export BATTERY_3=􀺸        # SF Symbols - strong
+export BATTERY_2=􀺶        # SF Symbols - half
+export BATTERY_1=􀛩        # SF Symbols - low
+export BATTERY_0=􀛪        # SF Symbols - empty
+export BATTERY_CHARGING=􀢋 # SF Symbols - charging
+
+export DISK=􀥾 # SF Symbols - disk
+
+export LEGO=􀐛 # SF Symbols
+
+export ONOFF_BUTTON=􀆨 # SF Symbols
+export GRID=􀏝         # SF Symbols
+export STACK=􀏧        # SF Symbols
+export MOUSE_PTR=􀇰    # SF Symbols
+
+export CPU=􀧓 # SF Symbols
+
+export CHECKMARK=􀆅 # SF Symbols
+
+export VOLUME_3=􀊨 # SF Symbols - wave 3
+export VOLUME_2=􀊦 # SF Symbols - wave 2
+export VOLUME_1=􀊤 # SF Symbols - wave 1
+export VOLUME_0=􀊢 # SF Symbols - muted
+
+# TODO
 # Material Design Icons
 
 export ICON_CMD=󰘳

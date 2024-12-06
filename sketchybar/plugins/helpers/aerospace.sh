@@ -21,16 +21,6 @@ aerospace_app_names() {
   echo "$appids" | awk -F '.' '{print $2}' | sort
 }
 
-aerospace_add_dividers() {
-  # add dividers as anchor points for the workspaces
-  workspaces=(0 $(aerospace_workspaces))
-  for sid in $workspaces; do
-    sketchy_add item divider.$sid left \
-      --set divider.$sid background.height=1 \
-      background.color=$DIVIDER
-  done
-}
-
 aerospace_add_apps() {
   local sid=$1
 
@@ -68,7 +58,7 @@ aerospace_add_apps() {
   if [ -n "${aerospace_appids}" ]; then
     while read -r appid; do
       app=$(aerospace_app_names "$appid")
-      icon="$($CONFIG_DIR/icon_map.sh "$app")"
+      icon="$($CONFIG_DIR/icons_apps.sh "$app")"
       icon_color=$([ "$highlight" = true ] && [ "$appid" = "$highlighted_appid" ] && echo $ACTIVE_COLOR || echo $TEXT)
 
       # only add if doesn't already exist

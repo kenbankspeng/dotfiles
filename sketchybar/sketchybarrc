@@ -80,7 +80,7 @@ sketchybar --default "${default[@]}"
 # these are now top items
 # starting at top-most
 source $ITEM_DIR/aerospace.sh
-source $ITEM_DIR/stack.sh
+source $ITEM_DIR/aerospace_layout.sh
 
 ##### Left Side Of Notch Items #####
 # not relevant on vertical layout
