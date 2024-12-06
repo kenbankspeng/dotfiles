@@ -33,6 +33,10 @@ aerospace_add_dividers() {
 aerospace_add_apps() {
   local sid=$1
 
+  if [ -z "$sid" ]; then
+    exit
+  fi
+
   if [ -f "$CACHE_DIR/highlighted" ]; then
     read -r highlighted_space highlighted_app <"$CACHE_DIR/highlighted"
   fi

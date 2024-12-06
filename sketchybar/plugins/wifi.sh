@@ -14,7 +14,7 @@ device=$(scutil --nwi | awk '/Network interfaces:/ {print $3}')
 # echo "@@ device: $device"
 
 icon=$NET_OFF
-color=$off
+color=$OFF
 
 if [ -n "$device" ]; then
   service=$(echo "$services" | sed -n "s/.*Hardware Port: \([^,]*\), Device: $device.*/\1/p")
@@ -23,11 +23,11 @@ if [ -n "$device" ]; then
   case $service in
   "iPhone USB")
     icon=$NET_USB
-    color=$on
+    color=$ON
     ;;
   "Thunderbolt Bridge")
     icon=$NET_THUNDERBOLT
-    color=$on
+    color=$ON
     ;;
   "Wi-Fi")
     airportnetwork=$(networksetup -getairportnetwork "$device")
@@ -36,7 +36,7 @@ if [ -n "$device" ]; then
 
     if [[ $ssid == *iPhone* ]]; then
       icon=$NET_HOTSPOT
-      color=$on
+      color=$ON
     else
       wifi_status=$(networksetup -getairportpower "$device" | awk '{print $NF}')
       # echo "@@ wifi_status: $wifi_status"
@@ -49,7 +49,7 @@ if [ -n "$device" ]; then
         else
           icon=$NET_WIFI_1 # Low signal
         fi
-        color=$on
+        color=$ON
       fi
     fi
     ;;
