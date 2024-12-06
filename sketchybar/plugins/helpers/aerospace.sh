@@ -7,17 +7,18 @@ aerospace_workspaces() {
   echo "$(aerospace list-workspaces --all)"
 }
 
-aerospace_apps_in_all_workspaces() {
-  echo "$(aerospace list-windows --all --json --format %{monitor-appkit-nsscreen-screens-id}%{workspace}%{app-bundle-id}%{app-name} | sed 's/ /_/g')"
-}
-
-aerospace_apps_in_workspace() {
-  local sid="$1"
-  echo "$(aerospace list-windows --workspace "$sid" | awk -F'|' '{gsub(/^ *| *$/, "", $2); gsub(/ /, "_", $2); print $2}')"
-}
-
 aerospace_focused_workspace() {
   echo "$(aerospace list-workspaces --focused)"
+}
+
+aerospace_appids_in_workspace() {
+  local sid="$1"
+  echo "$(aerospace list-windows --workspace "$sid" --json --format %{monitor-id}%{workspace}%{app-bundle-id}%{window-id}%{app-name} | jq -r '.[] | "\(.["window-id"]).\(.["app-name"])"')"
+}
+
+aerospace_app_names() {
+  local appids="$1"
+  echo "$appids" | awk -F '.' '{print $2}' | sort
 }
 
 aerospace_add_dividers() {
@@ -38,13 +39,12 @@ aerospace_add_apps() {
   fi
 
   if [ -f "$CACHE_DIR/highlighted" ]; then
-    read -r highlighted_space highlighted_app <"$CACHE_DIR/highlighted"
+    read -r highlighted_space highlighted_appid <"$CACHE_DIR/highlighted"
   fi
 
-  aerospace_apps=$(aerospace_apps_in_workspace $sid)
+  aerospace_appids=$(aerospace_appids_in_workspace $sid)
   sketchy_apps=$(sketchy_get_space_windows $sid)
-  apps_to_remove=$(unmatched_items "${aerospace_apps}" "${sketchy_apps}" 2>/dev/tty)
-
+  apps_to_remove=$(unmatched_items "${aerospace_appids}" "${sketchy_apps}" 2>/dev/tty)
 
   if [[ -n "$apps_to_remove" ]]; then
     for app in ${(z)apps_to_remove}; do
@@ -65,26 +65,22 @@ aerospace_add_apps() {
     icon.font="$ICON_FONT:$ICON_FONTSIZE"
   )
 
-  # track the index of each app
-  declare -A app_indices
-
-  if [ -n "${aerospace_apps}" ]; then
-    while read -r app; do
-      ((app_indices[$app]++))
-      app_index=${app_indices[$app]}
+  if [ -n "${aerospace_appids}" ]; then
+    while read -r appid; do
+      app=$(aerospace_app_names "$appid")
       icon="$($CONFIG_DIR/icon_map.sh "$app")"
-      icon_color=$([ "$highlight" = true ] && [ "$app" = "$highlighted_app" ] && echo $ACTIVE_COLOR || echo $TEXT)
+      icon_color=$([ "$highlight" = true ] && [ "$appid" = "$highlighted_appid" ] && echo $ACTIVE_COLOR || echo $TEXT)
 
       # only add if doesn't already exist
       local items=$(sketchybar --query bar | jq -r '.items[]')
-      item="$WINDOW.$sid.$app_index.$app"
+      item="$WINDOW.$sid.$appid"
       if ! item_in_array "$item" "$items"; then
         sketchy_add item $item left
         sketchybar --move $item before $DIVIDER.$sid
       fi
       sketchybar --set $item "${props[@]}" icon=$icon icon.color=$icon_color \
         click_script="aerospace workspace $sid"
-    done <<<"${aerospace_apps}" # app_list has one app per line
+    done <<<"${aerospace_appids}" # app_list has one app per line
   else
     # only add if doesn't already exist
     local items=$(sketchybar --query bar | jq -r '.items[]')

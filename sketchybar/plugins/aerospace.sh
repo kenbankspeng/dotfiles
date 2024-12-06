@@ -26,8 +26,9 @@ elif [ "$SENDER" = "yabai_window_focused" ]; then
   # yabai events don't have $PREV_WORKSPACE or $FOCUSED_WORKSPACE
   if [ -f "$CACHE_DIR/workspace_change" ]; then
     read -r prev_workspace focused_workspace <"$CACHE_DIR/workspace_change"
-    highlighted_app=$(yabai_get_window_app_name $ID)
-    echo "$focused_workspace $highlighted_app" >"$CACHE_DIR/highlighted"
+    app_name=$(yabai_get_window_app_name $ID)
+    appid="$ID.$app_name"
+    echo "$focused_workspace $appid" >"$CACHE_DIR/highlighted"
     aerospace_add_apps $prev_workspace
     aerospace_add_apps $focused_workspace
     aerospace_default_apps
