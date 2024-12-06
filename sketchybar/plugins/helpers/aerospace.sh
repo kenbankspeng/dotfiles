@@ -11,7 +11,7 @@ aerospace_layout() {
   aerospace layout tiles accordion
 }
 
-aerospace_orientation() {
+aerospace_direction() {
   aerospace layout horizontal vertical
 }
 

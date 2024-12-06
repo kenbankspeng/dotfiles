@@ -5,10 +5,10 @@ source "$PLUGIN_DIR/helpers/aerospace.sh"
 
 if [ "$SENDER" = "mouse.clicked" ]; then
   if [ "$NAME" = "layout.flatten" ]; then
-    aerospace flatten-workspace-tree
+    aerospace_flatten
   elif [ "$NAME" = "layout.type" ]; then
-    aerospace layout tiles accordion
+    aerospace_layout
   elif [ "$NAME" = "layout.direction" ]; then
-    aerospace layout horizontal vertical
+    aerospace_direction
   fi
 fi
