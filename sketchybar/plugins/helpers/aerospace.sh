@@ -8,13 +8,12 @@ aerospace_workspaces() {
 }
 
 aerospace_apps_in_all_workspaces() {
-  echo "$(aerospace list-windows --all --json --format %{monitor-appkit-nsscreen-screens-id}%{workspace}%{app-bundle-id}%{app-name})"
+  echo "$(aerospace list-windows --all --json --format %{monitor-appkit-nsscreen-screens-id}%{workspace}%{app-bundle-id}%{app-name} | sed 's/ /_/g')"
 }
 
 aerospace_apps_in_workspace() {
   local sid="$1"
-  echo "$(aerospace list-windows --workspace "$sid" | awk -F'|' '{gsub(/^ *| *$/, "", $2); print $2}')"
-  # echo "$(aerospace_apps_in_all_workspaces | jq --arg space "$sid" '.[] | select(.workspace == $space)' | jq -r '.["app-name"]')"
+  echo "$(aerospace list-windows --workspace "$sid" | awk -F'|' '{gsub(/^ *| *$/, "", $2); gsub(/ /, "_", $2); print $2}')"
 }
 
 aerospace_focused_workspace() {
@@ -25,7 +24,7 @@ aerospace_add_dividers() {
   # add dividers as anchor points for the workspaces
   workspaces=(0 $(aerospace_workspaces))
   for sid in $workspaces; do
-    sketchybar --add item $DIVIDER.$sid left \
+    sketchy_add item $DIVIDER.$sid left \
       --set $DIVIDER.$sid background.height=1 \
       background.color="$LAVENDER"
   done
@@ -41,6 +40,7 @@ aerospace_add_apps() {
   aerospace_apps=$(aerospace_apps_in_workspace $sid)
   sketchy_apps=$(sketchy_get_space_windows $sid)
   apps_to_remove=$(unmatched_items "${aerospace_apps}" "${sketchy_apps}" 2>/dev/tty)
+
 
   if [[ -n "$apps_to_remove" ]]; then
     for app in ${(z)apps_to_remove}; do
@@ -75,7 +75,7 @@ aerospace_add_apps() {
       local items=$(sketchybar --query bar | jq -r '.items[]')
       item="$WINDOW.$sid.$app_index.$app"
       if ! item_in_array "$item" "$items"; then
-        sketchybar --add item $item left
+        sketchy_add item $item left
         sketchybar --move $item before $DIVIDER.$sid
       fi
       sketchybar --set $item "${props[@]}" icon=$icon icon.color=$icon_color \
@@ -86,7 +86,7 @@ aerospace_add_apps() {
     local items=$(sketchybar --query bar | jq -r '.items[]')
     item="$WINDOW.$sid.default"
     if ! item_in_array "$item" "$items"; then
-      sketchybar --add item $item left
+      sketchy_add item $item left
       sketchybar --move $item before $DIVIDER.$sid
     fi
     sketchybar --set $item "${props[@]}" icon="·" \
@@ -117,7 +117,7 @@ aerospace_default_apps() {
     if [[ "$default_exists" == true && "$num_windows" -gt 1 ]]; then
       sketchy_remove $item
     elif [[ "$default_exists" == false && "$num_windows" -eq 0 ]]; then
-      sketchybar --add item $item left
+      sketchy_add item $item left
       sketchybar --move $item before $DIVIDER.$sid
       sketchybar --set $item "${props[@]}" icon="·" \
         click_script="aerospace workspace $sid"

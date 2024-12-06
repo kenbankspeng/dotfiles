@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 
 source "$CONFIG_DIR/env.sh"
+source "$PLUGIN_DIR/helpers/sketchy.sh"
 
 props=(
 	icon=$APPLE_LOGO
@@ -10,6 +11,6 @@ props=(
 	script="$PLUGIN_DIR/apple.sh"
 )
 
-sketchybar --add item apple.logo right \
+sketchy_add item apple.logo right \
 	--set apple.logo "${props[@]}" \
 	--subscribe apple.logo mouse.clicked

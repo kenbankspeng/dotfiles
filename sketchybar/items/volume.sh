@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
-sketchybar --add item volume right \
+source "$PLUGIN_DIR/helpers/sketchy.sh"
+
+sketchy_add item volume right \
   --set volume script="$PLUGIN_DIR/volume.sh" \
   --subscribe volume volume_change mouse.clicked

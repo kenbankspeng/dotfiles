@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+source "$PLUGIN_DIR/helpers/sketchy.sh"
+
 position=left
 
 props=(
@@ -8,7 +10,7 @@ props=(
   background.color=off
   script="$PLUGIN_DIR/stack.sh"
 )
-sketchybar --add event space_changed \
+sketchy_add event space_changed \
   --add item stack_listener $position \
   --set stack_listener "${props[@]}" \
   --subscribe stack_listener space_changed

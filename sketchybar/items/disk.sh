@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+source "$PLUGIN_DIR/helpers/sketchy.sh"
+
 props=(
   icon=$DISK
   icon.color=$SAPPHIRE
@@ -8,6 +10,6 @@ props=(
   script="$PLUGIN_DIR/disk.sh"
 )
 
-sketchybar --add item disk right \
+sketchy_add item disk right \
   --set disk "${props[@]}" \
   --subscribe disk mouse.clicked

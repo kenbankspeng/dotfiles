@@ -6,6 +6,7 @@ source "$CONFIG_DIR/plugins/helpers/util.sh"
 sketchy_add() {
   local item=$2
   local items=$(sketchybar --query bar | jq -r '.items[]')
+  item=${item// /_}
   if ! item_in_array "$item" "$items"; then
     sketchybar --add "$@"
   fi
