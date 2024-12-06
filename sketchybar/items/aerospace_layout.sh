@@ -21,18 +21,18 @@ props=(
 
 # flatten
 sketchybar -m --add item layout.flatten left \
-  --set layout.flatten icon=$FLATTEN ${props[@]} \
+  --set layout.flatten icon=$ICON_CMD ${props[@]} \
   --move layout.flatten before stack.divider.1 \
   --subscribe layout.flatten mouse.clicked
 
-# grid
-sketchybar -m --add item layout.grid left \
-  --set layout.grid icon=$GRID ${props[@]} \
-  --move layout.grid before stack.divider.2 \
-  --subscribe layout.grid mouse.clicked
+# layout type
+sketchybar -m --add item layout.type left \
+  --set layout.type icon=$ICON_GRID ${props[@]} \
+  --move layout.type before stack.divider.2 \
+  --subscribe layout.type mouse.clicked
 
-# stack
-sketchybar -m --add item layout.stack left \
-  --set layout.stack icon=$STACK ${props[@]} \
-  --move layout.stack before stack.divider.3 \
-  --subscribe layout.stack mouse.clicked
+# layout direction
+sketchybar -m --add item layout.direction left \
+  --set layout.direction icon=$ICON_STACK ${props[@]} \
+  --move layout.direction before stack.divider.3 \
+  --subscribe layout.direction mouse.clicked

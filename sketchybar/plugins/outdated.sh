@@ -18,7 +18,7 @@ sum=$((sum + count))
 case "$sum" in
 0)
 	color=$GREEN
-	sum=$CHECKMARK
+	sum=$ICON_CHECKMARK
 	;;
 [1-2])
 	color=$YELLOW

@@ -10,15 +10,15 @@ if [ "$SENDER" = "volume_change" ]; then
 
   case $volume in
   [6-9][0-9] | 100)
-    icon=$VOLUME_3
+    icon=$ICON_VOLUME_3
     ;;
   [3-5][0-9])
-    icon=$VOLUME_2
+    icon=$ICON_VOLUME_2
     ;;
   [1-9] | [1-2][0-9])
-    icon=$VOLUME_1
+    icon=$ICON_VOLUME_1
     ;;
-  *) icon=$VOLUME_0 ;;
+  *) icon=$ICON_VOLUME_0 ;;
   esac
 
   props=(

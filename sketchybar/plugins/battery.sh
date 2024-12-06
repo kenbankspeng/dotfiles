@@ -11,22 +11,22 @@ fi
 
 case ${percentage} in
 9[0-9] | 100)
-  icon=$BATTERY_4 # full
+  icon=$ICON_BATTERY_4 # full
   ;;
 [6-8][0-9])
-  icon=$BATTERY_3 # strong
+  icon=$ICON_BATTERY_3 # strong
   ;;
 [3-5][0-9])
-  icon=$BATTERY_2 # half
+  icon=$ICON_BATTERY_2 # half
   ;;
 [1-2][0-9])
-  icon=$BATTERY_1 # low
+  icon=$ICON_BATTERY_1 # low
   ;;
-*) icon=$BATTERY_0 ;; # empty
+*) icon=$ICON_BATTERY_0 ;; # empty
 esac
 
 if [[ $charging != "" ]]; then
-  icon=$BATTERY_CHARGING
+  icon=$ICON_BATTERY_CHARGING
 fi
 
 props=(

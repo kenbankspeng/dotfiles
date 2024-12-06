@@ -3,6 +3,18 @@
 source "$PLUGIN_DIR/helpers/sketchy.sh"
 source "$CONFIG_DIR/plugins/helpers/util.sh"
 
+aerospace_flatten(){
+  aerospace flatten-workspace-tree
+}
+
+aerospace_layout() {
+  aerospace layout tiles accordion
+}
+
+aerospace_orientation() {
+  aerospace layout horizontal vertical
+}
+
 aerospace_workspaces() {
   echo "$(aerospace list-workspaces --all)"
 }

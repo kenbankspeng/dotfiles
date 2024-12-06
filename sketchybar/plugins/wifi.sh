@@ -13,7 +13,7 @@ device=$(scutil --nwi | awk '/Network interfaces:/ {print $3}')
 # echo "@@ services: $services"
 # echo "@@ device: $device"
 
-icon=$NET_OFF
+icon=$ICON_NET_OFF
 color=$OFF
 
 if [ -n "$device" ]; then
@@ -22,11 +22,11 @@ if [ -n "$device" ]; then
 
   case $service in
   "iPhone USB")
-    icon=$NET_USB
+    icon=$ICON_NET_USB
     color=$ON
     ;;
   "Thunderbolt Bridge")
-    icon=$NET_THUNDERBOLT
+    icon=$ICON_NET_THUNDERBOLT
     color=$ON
     ;;
   "Wi-Fi")
@@ -35,7 +35,7 @@ if [ -n "$device" ]; then
     # echo "@@ ssid: $ssid"
 
     if [[ $ssid == *iPhone* ]]; then
-      icon=$NET_HOTSPOT
+      icon=$ICON_NET_HOTSPOT
       color=$ON
     else
       wifi_status=$(networksetup -getairportpower "$device" | awk '{print $NF}')
@@ -43,11 +43,11 @@ if [ -n "$device" ]; then
       if [[ "$wifi_status" == "On" ]]; then
         RSSI=$(sudo wdutil info | rg --only-matching 'RSSI.*?(-?\d+)' -r '$1')
         if ((RSSI >= -50 && RSSI <= -30)); then
-          icon=$NET_WIFI_3 # High signal
+          icon=$ICON_NET_WIFI_3 # High signal
         elif ((RSSI >= -70 && RSSI <= -51)); then
-          icon=$NET_WIFI_2 # Medium signal
+          icon=$ICON_NET_WIFI_2 # Medium signal
         else
-          icon=$NET_WIFI_1 # Low signal
+          icon=$ICON_NET_WIFI_1 # Low signal
         fi
         color=$ON
       fi

@@ -3,7 +3,7 @@
 source "$PLUGIN_DIR/helpers/sketchy.sh"
 
 props=(
-	icon=$LEGO
+	icon=$ICON_LEGO
 	background.height=$ITEM_HEIGHT_WITH_LABEL
 	update_freq=$((60 * 60)) # once per hour
 	script="$PLUGIN_DIR/outdated.sh"

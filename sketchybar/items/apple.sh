@@ -4,7 +4,7 @@ source "$CONFIG_DIR/env.sh"
 source "$PLUGIN_DIR/helpers/sketchy.sh"
 
 props=(
-	icon=$APPLE_LOGO
+	icon=$ICON_APPLE_LOGO
 	icon.font="$ICON_FONT:18"
 	icon.color="$SKY"
 	padding_left=10

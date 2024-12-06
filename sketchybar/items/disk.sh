@@ -3,7 +3,7 @@
 source "$PLUGIN_DIR/helpers/sketchy.sh"
 
 props=(
-  icon=$DISK
+  icon=$ICON_DISK
   icon.color=$SAPPHIRE
   background.height=$ITEM_HEIGHT_WITH_LABEL
   update_freq=5
