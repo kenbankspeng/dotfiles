@@ -32,8 +32,3 @@ sketchy_add item space_listener left \
   yabai_window_focused \
   yabai_window_minimized \
   yabai_window_deminimized
-
-sketchy_add item stack left \
-  --set stack \
-  script="$PLUGIN_DIR/aerospace.sh" \
-  --subscribe stack mouse.clicked

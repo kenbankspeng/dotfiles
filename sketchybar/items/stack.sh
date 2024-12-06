@@ -17,19 +17,13 @@ sketchy_add event space_changed \
 
 props=(
   label.drawing=off
-  icon.color=$GREY
-  script="$PLUGIN_DIR/stack.sh"
+  script="$PLUGIN_DIR/aerospace_stack.sh"
 )
 
-# float = normal
-sketchybar -m --add item float $position \
-  --set float icon=$ONOFF_BUTTON ${props[@]} \
-  --subscribe float mouse.clicked
-
-# bsp = grid
-sketchybar -m --add item bsp $position \
-  --set bsp icon=$GRID ${props[@]} \
-  --subscribe bsp mouse.clicked
+# grid
+sketchybar -m --add item grid $position \
+  --set grid icon=$GRID ${props[@]} \
+  --subscribe grid mouse.clicked
 
 # stack
 sketchybar -m --add item stack $position \
