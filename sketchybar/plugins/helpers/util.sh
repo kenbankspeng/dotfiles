@@ -37,8 +37,9 @@ unmatched_items() {
   local target=("${(f)2}")
 
   for key in "${source[@]}"; do
+    source_key=$(echo "$key" | awk -F '.' '{print $2}')
     for i in "${target[@]}"; do
-      if [[ $key == "${i##*.}" ]]; then
+      if [[ $source_key == "${i##*.}" ]]; then
         target=($(remove_first_item "$i" "${(@)target}"))
         break
       fi
