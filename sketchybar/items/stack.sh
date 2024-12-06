@@ -8,7 +8,7 @@ props=(
   icon.drawing=off
   label.drawing=off
   background.color=off
-  script="$PLUGIN_DIR/stack.sh"
+  script="$PLUGIN_DIR/aerospace_stack.sh"
 )
 sketchy_add event space_changed \
   --add item stack_listener $position \
