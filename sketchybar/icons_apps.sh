@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 ### START-OF-ICON-MAP
-function icon_map() {
+function app_icons() {
      case "$1" in
 
      # from SF symbols app
@@ -662,5 +662,5 @@ function icon_map() {
 }
 ### END-OF-ICON-MAP
 
-icon_map "$1"
+app_icons "$1"
 echo "${icon_result}"
