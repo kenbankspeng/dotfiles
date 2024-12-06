@@ -25,9 +25,9 @@ aerospace_add_dividers() {
   # add dividers as anchor points for the workspaces
   workspaces=(0 $(aerospace_workspaces))
   for sid in $workspaces; do
-    sketchy_add item $DIVIDER.$sid left \
-      --set $DIVIDER.$sid background.height=1 \
-      background.color="$LAVENDER"
+    sketchy_add item divider.$sid left \
+      --set divider.$sid background.height=1 \
+      background.color=$DIVIDER
   done
 }
 
@@ -73,10 +73,10 @@ aerospace_add_apps() {
 
       # only add if doesn't already exist
       local items=$(sketchybar --query bar | jq -r '.items[]')
-      item="$WINDOW.$sid.$appid"
+      item="window.$sid.$appid"
       if ! item_in_array "$item" "$items"; then
         sketchy_add item $item left
-        sketchybar --move $item before $DIVIDER.$sid
+        sketchybar --move $item before divider.$sid
       fi
       sketchybar --set $item "${props[@]}" icon=$icon icon.color=$icon_color \
         click_script="aerospace workspace $sid"
@@ -84,10 +84,10 @@ aerospace_add_apps() {
   else
     # only add if doesn't already exist
     local items=$(sketchybar --query bar | jq -r '.items[]')
-    item="$WINDOW.$sid.default"
+    item="window.$sid.default"
     if ! item_in_array "$item" "$items"; then
       sketchy_add item $item left
-      sketchybar --move $item before $DIVIDER.$sid
+      sketchybar --move $item before divider.$sid
     fi
     sketchybar --set $item "${props[@]}" icon="·" \
       click_script="aerospace workspace $sid"
@@ -106,7 +106,7 @@ aerospace_default_apps() {
 
   for sid in $(aerospace_workspaces); do
     list=$(sketchy_get_space_windows $sid)
-    item="$WINDOW.$sid.default"
+    item="window.$sid.default"
     if item_in_array "$item" $list; then
       default_exists=true
     else
@@ -118,7 +118,7 @@ aerospace_default_apps() {
       sketchy_remove $item
     elif [[ "$default_exists" == false && "$num_windows" -eq 0 ]]; then
       sketchy_add item $item left
-      sketchybar --move $item before $DIVIDER.$sid
+      sketchybar --move $item before divider.$sid
       sketchybar --set $item "${props[@]}" icon="·" \
         click_script="aerospace workspace $sid"
     fi

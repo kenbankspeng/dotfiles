@@ -2,9 +2,6 @@
 
 # env variables
 export CACHE_DIR="$HOME/.cache/sketchybar"
-export CACHE="$CACHE_DIR/cache.log"
-export TEMP="$CACHE_DIR/temp"
-
 export PLUGIN_DIR="$CONFIG_DIR/plugins"
 export ITEM_DIR="$CONFIG_DIR/items"
 
@@ -18,10 +15,6 @@ export ITEM_HEIGHT=25
 export ITEM_HEIGHT_WITH_LABEL=53
 export ICON_PADDING_L=11
 export LABEL_Y_OFFSET=-17
-
-# tags to bridge sketchybar and aerospace
-export WINDOW=window
-export DIVIDER=divider
 
 #
 #
@@ -104,8 +97,6 @@ export BLACK=0xff000000
 export WHITE=0xffffffff
 export GREY=0xff808080
 export TRANSPARENT=0x00000000
-export ACTIVE_COLOR=0xff00ff00
-export ACTIVE_BACKGROUND=0x30a6e3a1
 
 # TODO:hard colors
 
@@ -120,18 +111,10 @@ export ACTIVE_BACKGROUND=0x30a6e3a1
 
 # convenience variables
 
-export ACCENT1=$TEAL
-export ACCENT2=$MAROON
-export ACCENT3=$BLUE
-export ACCENT4=$PINK
-export ACCENT5=$GREEN
-export ACCENT6=$PEACH
-export ACCENT7=$YELLOW
-export ACCENT8=$SKY
-export ACCENT9=$FLAMINGO
-export ACCENT10=$SAPPHIRE
-export ACCENTS=($ACCENT1 $ACCENT2 $ACCENT3 $ACCENT4 $ACCENT5 $ACCENT6 $ACCENT7 $ACCENT8 $ACCENT9 $ACCENT10)
-
 export BAR=0xff141421
 export OFF=$TEXT
 export ON=$GREEN
+export BORDER=0x80a6e3a1
+export DIVIDER=0x80a6e3a1
+export ACTIVE_COLOR=0xff00ff00
+export ACTIVE_BACKGROUND=0x40a6e3a1
