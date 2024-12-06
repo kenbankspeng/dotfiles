@@ -25,6 +25,11 @@ sketchybar -m --add item grid $position \
   --set grid icon=$GRID ${props[@]} \
   --subscribe grid mouse.clicked
 
+# divider
+sketchy_add item stack_divider.$id left \
+  --set stack_divider.$id background.height=1 \
+  background.color=$DIVIDER
+
 # stack
 sketchybar -m --add item stack $position \
   --set stack icon=$STACK ${props[@]} \

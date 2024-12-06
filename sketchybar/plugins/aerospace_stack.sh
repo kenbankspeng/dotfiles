@@ -54,7 +54,7 @@ fi
 
 common_props=(
   background.corner_radius=0
-  background.height=$ITEM_HEIGHT
+  background.height=$((ITEM_HEIGHT + 1))
 )
 
 sketchybar --set grid "${common_props[@]}" "${grid_props[@]}"
