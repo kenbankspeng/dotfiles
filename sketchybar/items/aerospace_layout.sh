@@ -21,7 +21,7 @@ props=(
 
 # flatten
 sketchybar -m --add item layout.flatten left \
-  --set layout.flatten icon=$ICON_CMD ${props[@]} \
+  --set layout.flatten icon=$ICON_FLATTEN ${props[@]} icon.padding_left=3 \
   --move layout.flatten before stack.divider.1 \
   --subscribe layout.flatten mouse.clicked
 
