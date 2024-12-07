@@ -3,17 +3,6 @@
 source "$PLUGIN_DIR/helpers/sketchy.sh"
 source "$CONFIG_DIR/plugins/helpers/util.sh"
 
-aerospace_flatten(){
-  aerospace flatten-workspace-tree
-}
-
-aerospace_layout() {
-  aerospace layout tiles accordion
-}
-
-aerospace_direction() {
-  aerospace layout horizontal vertical
-}
 
 aerospace_workspaces() {
   echo "$(aerospace list-workspaces --all)"
@@ -55,7 +44,7 @@ aerospace_add_apps() {
   fi
 
   focused=$(aerospace_focused_workspace)
-  background=$([ "$sid" = "$focused" ] && echo $ACTIVE_BACKGROUND || echo $TRANSPARENT)
+  background=$([ "$sid" = "$focused" ] && echo $ACTIVE || echo $TRANSPARENT)
   highlight=$([ "$sid" = "$highlighted_space" ] && echo true || echo false)
 
   props=(
@@ -71,7 +60,7 @@ aerospace_add_apps() {
     while read -r appid; do
       app=$(aerospace_app_names "$appid")
       icon="$($CONFIG_DIR/icons_apps.sh "$app")"
-      icon_color=$([ "$highlight" = true ] && [ "$appid" = "$highlighted_appid" ] && echo $ACTIVE_COLOR || echo $TEXT)
+      icon_color=$([ "$highlight" = true ] && [ "$appid" = "$highlighted_appid" ] && echo $ON || echo $OFF)
 
       # only add if doesn't already exist
       local items=$(sketchybar --query bar | jq -r '.items[]')

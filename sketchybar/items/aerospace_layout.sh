@@ -3,11 +3,11 @@
 source "$PLUGIN_DIR/helpers/sketchy.sh"
 
 # spacer
-sketchybar -m --add item spacer left \
+sketchy_add item spacer left \
   --set spacer padding_left=20
 
 # stack dividers
-stack_sections=(0 1 2 3)
+stack_sections=(0 1 2 3 4 5)
 for id in $stack_sections; do
   sketchy_add item stack.divider.$id left \
     --set stack.divider.$id background.height=1 \
@@ -19,20 +19,32 @@ props=(
   script="$PLUGIN_DIR/aerospace_layout.sh"
 )
 
-# flatten
-sketchybar -m --add item layout.flatten left \
-  --set layout.flatten icon=$ICON_FLATTEN ${props[@]} icon.padding_left=3 \
-  --move layout.flatten before stack.divider.1 \
-  --subscribe layout.flatten mouse.clicked
+# stack layout
+sketchy_add item layout.stack left \
+  --set layout.stack icon=$ICON_STACK ${props[@]} \
+  --move layout.stack before stack.divider.1 \
+  --subscribe layout.stack mouse.clicked
 
-# layout type
-sketchybar -m --add item layout.type left \
-  --set layout.type icon=$ICON_GRID ${props[@]} \
-  --move layout.type before stack.divider.2 \
-  --subscribe layout.type mouse.clicked
+# tiles layout
+sketchy_add item layout.tiles left \
+  --set layout.tiles icon=$ICON_TILE ${props[@]} \
+  --move layout.tiles before stack.divider.2 \
+  --subscribe layout.tiles mouse.clicked
 
-# layout direction
-sketchybar -m --add item layout.direction left \
-  --set layout.direction icon=$ICON_STACK ${props[@]} \
-  --move layout.direction before stack.divider.3 \
-  --subscribe layout.direction mouse.clicked
+# floating / tiling
+sketchy_add item layout.float left \
+  --set layout.float icon=$ICON_FLOAT ${props[@]} icon.padding_left=3 \
+  --move layout.float before stack.divider.3 \
+  --subscribe layout.float mouse.clicked
+
+# join windows
+sketchy_add item layout.join left \
+  --set layout.join icon=$ICON_JOIN ${props[@]} icon.padding_left=4 \
+  --move layout.join before stack.divider.4 \
+  --subscribe layout.join mouse.clicked
+
+# auto-focus
+sketchy_add item layout.auto_focus left \
+  --set layout.auto_focus icon=$ICON_MOUSE_PTR ${props[@]} \
+  --move layout.auto_focus before stack.divider.5 \
+  --subscribe layout.auto_focus mouse.clicked

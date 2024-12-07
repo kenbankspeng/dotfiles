@@ -54,8 +54,7 @@ export TRANSPARENT=0x00000000
 
 export BAR=0xff141421
 export OFF=$TEXT
-export ON=$GREEN
+export ON=0xff00ff00
+export ACTIVE=0x40a6e3a1 # selection background
 export BORDER=0x80a6e3a1
 export DIVIDER=0x80a6e3a1
-export ACTIVE_COLOR=0xff00ff00
-export ACTIVE_BACKGROUND=0x40a6e3a1
