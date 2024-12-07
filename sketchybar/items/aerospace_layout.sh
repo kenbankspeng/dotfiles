@@ -50,10 +50,11 @@ sketchy_add item layout.flatten left \
   --move layout.flatten before stack.divider.5 \
   --subscribe layout.flatten mouse.clicked
 
-# popup window
-sketchy_add item aerospace.enable left \
-  --set aerospace.enable icon=$ICON_BUTTON \
-  --move aerospace.enable before stack.divider.6
+# enable/disable
+sketchy_add item layout.enable left \
+  --set layout.enable icon=$ICON_BUTTON ${props[@]} \
+  --move layout.enable before stack.divider.6 \
+  --subscribe layout.enable mouse.clicked
 
 # auto-focus
 sketchy_add item layout.auto_focus left \

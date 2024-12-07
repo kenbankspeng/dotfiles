@@ -20,6 +20,8 @@ if [ "$SENDER" = "mouse.clicked" ]; then
   elif [ "$NAME" = "layout.join" ]; then
     aerospace join-with left
     aerospace join-with up
+  elif [ "$NAME" = "layout.enable" ]; then
+    aerospace enable toggle
   elif [ "$NAME" = "layout.flatten" ]; then
     aerospace flatten-workspace-tree
   fi

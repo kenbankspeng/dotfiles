@@ -32,7 +32,7 @@ export ICON_TILE=􀏟      # SF Symbols
 export ICON_FLOAT=􀇴     # SF Symbols
 export ICON_JOIN=      # NERD
 export ICON_FLATTEN=􀰢   # SF Symbols
-export ICON_BUTTON=􀉤    # SF Symbols
+export ICON_BUTTON=􀆨    # SF Symbols
 export ICON_MOUSE_PTR=􀇰 # SF Symbols
 
 export ICON_CPU=􀧓 # SF Symbols
