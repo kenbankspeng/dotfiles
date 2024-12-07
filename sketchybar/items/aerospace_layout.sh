@@ -7,7 +7,7 @@ sketchy_add item spacer left \
   --set spacer padding_left=20
 
 # stack dividers
-stack_sections=(0 1 2 3 4 5 6)
+stack_sections=(0 1 2 3 4 5 6 7)
 for id in $stack_sections; do
   sketchy_add item stack.divider.$id left \
     --set stack.divider.$id background.height=1 \
@@ -33,25 +33,30 @@ sketchy_add item layout.tiles left \
 
 # floating / tiling
 sketchy_add item layout.float left \
-  --set layout.float icon=$ICON_FLOAT ${props[@]} icon.padding_left=3 \
+  --set layout.float icon=$ICON_FLOAT ${props[@]} \
   --move layout.float before stack.divider.3 \
   --subscribe layout.float mouse.clicked
 
 # join windows
 sketchy_add item layout.join left \
-  --set layout.join icon=$ICON_JOIN ${props[@]} icon.padding_left=4 \
+  --set layout.join icon=$ICON_JOIN ${props[@]} \
   icon.font="$NERD:20" \
   --move layout.join before stack.divider.4 \
   --subscribe layout.join mouse.clicked
 
 # flatten workspace tree
 sketchy_add item layout.flatten left \
-  --set layout.flatten icon=$ICON_FLATTEN ${props[@]} icon.padding_left=4 \
+  --set layout.flatten icon=$ICON_FLATTEN ${props[@]} \
   --move layout.flatten before stack.divider.5 \
   --subscribe layout.flatten mouse.clicked
+
+# popup window
+sketchy_add item aerospace.enable left \
+  --set aerospace.enable icon=$ICON_BUTTON \
+  --move aerospace.enable before stack.divider.6
 
 # auto-focus
 sketchy_add item layout.auto_focus left \
   --set layout.auto_focus icon=$ICON_MOUSE_PTR ${props[@]} \
-  --move layout.auto_focus before stack.divider.6 \
+  --move layout.auto_focus before stack.divider.7 \
   --subscribe layout.auto_focus mouse.clicked
