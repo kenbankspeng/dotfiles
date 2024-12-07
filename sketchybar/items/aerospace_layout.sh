@@ -40,6 +40,7 @@ sketchy_add item layout.float left \
 # join windows
 sketchy_add item layout.join left \
   --set layout.join icon=$ICON_JOIN ${props[@]} icon.padding_left=4 \
+  icon.font="$NERD:20" \
   --move layout.join before stack.divider.4 \
   --subscribe layout.join mouse.clicked
 

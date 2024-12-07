@@ -61,7 +61,7 @@ fi
 
 props=(
   background.height=20
-  icon.font="Icomoon:Regular:20"
+  icon.font="$ICOMOON:20"
   icon=$icon
   icon.color="$color"
 )
