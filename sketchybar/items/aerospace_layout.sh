@@ -7,7 +7,7 @@ sketchy_add item spacer left \
   --set spacer padding_left=20
 
 # stack dividers
-stack_sections=(0 1 2 3 4 5)
+stack_sections=(0 1 2 3 4 5 6)
 for id in $stack_sections; do
   sketchy_add item stack.divider.$id left \
     --set stack.divider.$id background.height=1 \
@@ -44,8 +44,14 @@ sketchy_add item layout.join left \
   --move layout.join before stack.divider.4 \
   --subscribe layout.join mouse.clicked
 
+# flatten workspace tree
+sketchy_add item layout.flatten left \
+  --set layout.flatten icon=$ICON_FLATTEN ${props[@]} icon.padding_left=4 \
+  --move layout.flatten before stack.divider.5 \
+  --subscribe layout.flatten mouse.clicked
+
 # auto-focus
 sketchy_add item layout.auto_focus left \
   --set layout.auto_focus icon=$ICON_MOUSE_PTR ${props[@]} \
-  --move layout.auto_focus before stack.divider.5 \
+  --move layout.auto_focus before stack.divider.6 \
   --subscribe layout.auto_focus mouse.clicked
