@@ -17,5 +17,8 @@ if [ "$SENDER" = "mouse.clicked" ]; then
     else
       sketchybar --set layout.auto_focus icon.color=$ON
     fi
+  elif [ "$NAME" = "layout.join" ]; then
+    aerospace join-with left
+    aerospace join-with up
   fi
 fi
