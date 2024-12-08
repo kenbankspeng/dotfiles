@@ -22,6 +22,25 @@ aerospace_app_names() {
   echo "$appids" | awk -F '.' '{print $2}' | sort
 }
 
+aerospace_change_focus(){
+  if [ -f "$CACHE_DIR/highlighted" ]; then
+    read -r prev_appid <"$CACHE_DIR/highlighted"
+  fi
+
+  if [ -n "$prev_appid" ]; then
+    prev_item=$(sketchy_get_item "$prev_appid")
+    sketchybar --set $prev_item icon.color=$OFF
+  fi
+
+  local appid="$ID"
+  item=$(sketchy_get_item "$appid")
+  if [ -n "$item" ]; then
+    sketchybar --set $item icon.color=$ON
+  fi
+
+  echo "$appid" >"$CACHE_DIR/highlighted"
+}
+
 aerospace_add_apps() {
   local sid=$1
 
@@ -35,10 +54,10 @@ aerospace_add_apps() {
 
   aerospace_appids=$(aerospace_appids_in_workspace $sid)
   sketchy_apps=$(sketchy_get_space_windows $sid)
-  apps_to_remove=$(unmatched_items "${aerospace_appids}" "${sketchy_apps}" 2>/dev/tty)
+  
 
-  if [[ -n "$apps_to_remove" ]]; then
-    for app in ${(z)apps_to_remove}; do
+  if [[ -n "$sketchy_apps" ]]; then
+    for app in ${(z)sketchy_apps}; do
       sketchy_remove "$app"
     done
   fi
@@ -63,12 +82,10 @@ aerospace_add_apps() {
       icon_color=$([ "$highlight" = true ] && [ "$appid" = "$highlighted_appid" ] && echo $ON || echo $OFF)
 
       # only add if doesn't already exist
-      local items=$(sketchybar --query bar | jq -r '.items[]')
+      
       item="window.$sid.$appid"
-      if ! item_in_array "$item" "$items"; then
-        sketchy_add item $item left
-        sketchybar --move $item before divider.$sid
-      fi
+      sketchy_add item $item left
+      sketchybar --move $item before divider.$sid
       sketchybar --set $item "${props[@]}" icon=$icon icon.color=$icon_color \
         click_script="aerospace workspace $sid"
     done <<<"${aerospace_appids}" # app_list has one app per line

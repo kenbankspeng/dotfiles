@@ -36,3 +36,8 @@ sketchy_get_space_app() {
   local APP=$2
   echo "$(sketchybar --query bar | jq --arg space "$SPACE" --arg app "$APP" '.items[] | select(test("^window\\." + $space + "\\.\\d+\\." + $app + "$"))')"
 }
+
+sketchy_get_item() {
+  local APPID=$1
+  echo "$(sketchybar --query bar | jq -r --arg appid "$APPID" '.items[] | select(test("^window\\.\\d+\\." + $appid + "\\..+$"))')"
+}
