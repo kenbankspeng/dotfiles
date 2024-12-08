@@ -12,6 +12,9 @@ if [ "$SENDER" = "forced" ]; then
     aerospace_add_apps $space
   done
   aerospace_default_apps
+elif [ "$SENDER" = "yabai_window_focused" ]; then
+  # yabai events don't have $PREV_WORKSPACE or $FOCUSED_WORKSPACE
+  aerospace_change_focus $ID
 elif [ "$SENDER" = "aerospace_workspace_change" ]; then
   # aerospace event
   # echo "$PREV_WORKSPACE $FOCUSED_WORKSPACE" >"$CACHE_DIR/workspace_change"
@@ -22,9 +25,6 @@ elif [ "$SENDER" = "yabai_window_created" ] || [ "$SENDER" = "yabai_window_destr
   # yabai events don't have $PREV_WORKSPACE or $FOCUSED_WORKSPACE
   aerospace_add_apps $(aerospace_focused_workspace)
   aerospace_default_apps
-elif [ "$SENDER" = "yabai_window_focused" ]; then
-  # yabai events don't have $PREV_WORKSPACE or $FOCUSED_WORKSPACE
-  aerospace_change_focus $ID
 elif [ "$SENDER" = "yabai_window_minimized" ] || [ "$SENDER" = "yabai_window_deminimized" ]; then
   aerospace_add_apps $(aerospace_focused_workspace)
   aerospace_default_apps
