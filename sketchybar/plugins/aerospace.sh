@@ -5,8 +5,6 @@ source "$PLUGIN_DIR/helpers/aerospace.sh"
 source "$PLUGIN_DIR/helpers/sketchy.sh"
 source "$PLUGIN_DIR/helpers/yabai.sh"
 
-echo $SENDER
-
 # startup - add all workspaces and apps
 if [ "$SENDER" = "forced" ]; then
   # aerospace event
@@ -20,8 +18,6 @@ elif [ "$SENDER" = "yabai_window_focused" ]; then
 elif [ "$SENDER" = "aerospace_workspace_change" ]; then
   # aerospace event
   aerospace_space_focus $FOCUSED_WORKSPACE
-elif [ "$SENDER" = "aerospace_new_window" ]; then
-  echo "aerospace_new_window"
 elif [ "$SENDER" = "yabai_window_created" ]; then
   # yabai events don't have $PREV_WORKSPACE or $FOCUSED_WORKSPACE
   aerospace_add_apps $(aerospace_focused_workspace)
