@@ -13,6 +13,8 @@ sketchybar --add event yabai_window_focused
 sketchybar --add event yabai_window_minimized
 sketchybar --add event yabai_window_deminimized
 
+sketchybar --add event aerospace_new_window
+
 props=(
   icon.drawing=off
   label.drawing=off
@@ -27,7 +29,8 @@ sketchy_add item space_listener left \
   yabai_window_destroyed \
   yabai_window_focused \
   yabai_window_minimized \
-  yabai_window_deminimized
+  yabai_window_deminimized \
+  aerospace_new_window
 
 # add dividers as anchor points for the workspaces
 workspaces=(0 $(aerospace_workspaces))

@@ -55,6 +55,5 @@ export TRANSPARENT=0x00000000
 export BAR=0xff141421
 export OFF=$TEXT
 export ON=0xff00ff00
-export ACTIVE=0x40a6e3a1 # selection background
-export BORDER=0x80a6e3a1
+export ACTIVE=0xFFa6e3a1 # selection background
 export DIVIDER=0x80a6e3a1

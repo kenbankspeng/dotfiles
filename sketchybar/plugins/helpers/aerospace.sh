@@ -39,7 +39,7 @@ aerospace_change_focus(){
 
   item=$(sketchy_get_item "$appid")
   if [ -n "$item" ]; then
-    sketchybar --set $item icon.color=$ON background.border_color=$ON
+    sketchybar --set $item icon.color=$ON background.border_color=$ACTIVE
   fi
 
   echo "$appid" >"$CACHE_DIR/highlighted"
@@ -91,7 +91,7 @@ aerospace_add_apps() {
       sketchybar --move $item before divider.$sid
       sketchybar --set $item "${props[@]}" \
       icon=$icon icon.color=$OFF \
-        background.border_width=1 \
+        background.border_width=$BORDER_WIDTH \
         click_script="aerospace workspace $sid"
     done <<<"${aerospace_appids}" # app_list has one app per line
   else
@@ -102,7 +102,7 @@ aerospace_add_apps() {
       sketchy_add item $item left
       sketchybar --move $item before divider.$sid
     fi
-    sketchybar --set $item "${props[@]}" icon="·" background.border_width=1 \
+    sketchybar --set $item "${props[@]}" icon="·" background.border_width=$BORDER_WIDTH \
       click_script="aerospace workspace $sid"
   fi
 }
@@ -111,7 +111,6 @@ aerospace_default_apps() {
   props=(
     y_offset=1
     background.corner_radius=0
-    # background.color=$background
     background.height=$ITEM_HEIGHT
     label.drawing=off
     icon.font="$ICON_FONT:$ICON_FONTSIZE"
