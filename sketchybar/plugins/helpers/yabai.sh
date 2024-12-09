@@ -19,11 +19,6 @@ yabai_get_focused_window() {
   yabai -m query --windows --window "$wid" | jq -r '.id'
 }
 
-yabai_focus_app() {
-  local appid="$1"
-  yabai -m window --focus "$appid"
-}
-
 yabai_autofocus() {
   # autofocus / off / autoraise
   setting="$(yabai -m config focus_follows_mouse)"
