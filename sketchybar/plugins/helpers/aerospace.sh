@@ -156,33 +156,3 @@ aerospace_add_apps() {
       click_script="aerospace workspace $sid"
   fi
 }
-
-aerospace_default_apps() {
-  props=(
-    y_offset=1
-    background.corner_radius=0
-    background.height=$ITEM_HEIGHT
-    label.drawing=off
-    icon.font="$ICON_FONT:$ICON_FONTSIZE"
-  )
-
-  for sid in $(aerospace_workspaces); do
-    list=$(sketchy_get_space_windows $sid)
-    item="window.$sid.default"
-    if item_in_array "$item" $list; then
-      default_exists=true
-    else
-      default_exists=false
-    fi
-    num_windows=$(echo "$list" | grep -c .)
-
-    if [[ "$default_exists" == true && "$num_windows" -gt 1 ]]; then
-      sketchy_remove $item
-    elif [[ "$default_exists" == false && "$num_windows" -eq 0 ]]; then
-      sketchy_add item $item left \
-        --move $item before divider.$sid \
-        --set $item "${props[@]}" icon="·" \
-        click_script="aerospace workspace $sid"
-    fi
-  done
-}
