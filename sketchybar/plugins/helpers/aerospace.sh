@@ -3,7 +3,6 @@
 source "$PLUGIN_DIR/helpers/sketchy.sh"
 source "$CONFIG_DIR/plugins/helpers/util.sh"
 
-
 aerospace_workspaces() {
   echo "$(aerospace list-workspaces --all)"
 }
@@ -22,7 +21,7 @@ aerospace_app_names() {
   echo "$appids" | awk -F '.' '{print $2}' | sort
 }
 
-aerospace_change_focus(){
+aerospace_highlight_app() {
   local appid=$1
   local prev_appid
 
@@ -50,7 +49,7 @@ aerospace_space_focus() {
   local sid=$1
   local item=$(sketchy_get_item $sid)
   if [ -n "$item" ]; then
-    aerospace_change_focus $sid
+    aerospace_highlight_app $sid
     # focus on finder so that yabai_window_focused will fire next change
     osascript -e 'tell application "Finder" to activate'
   fi
@@ -63,10 +62,34 @@ aerospace_get_appid() {
   echo "$appids" | awk -F '.' -v appnum="$appnum" '$1 == appnum {print $0}'
 }
 
+aerospace_remove_app() {
+  local appnum=$1
+  local sid=$(aerospace_focused_workspace)
+  item=$(sketchy_get_item "$appnum")
+  sketchy_remove $item
+
+  # add default if no apps in workspace
+  if [ -z "$(sketchy_get_space_windows $sid)" ]; then
+    item="window.$sid.$sid.default"
+    props=(
+      y_offset=1
+      background.corner_radius=0
+      background.height=$ITEM_HEIGHT
+      label.drawing=off
+      icon.font="$ICON_FONT:$ICON_FONTSIZE"
+    )
+    sketchy_add item $item left \
+      --move $item before divider.$sid \
+      --set $item "${props[@]}" icon="·" background.border_width=$BORDER_WIDTH \
+      click_script="aerospace workspace $sid"
+    aerospace_highlight_app $sid
+  fi
+}
+
 aerospace_new_app() {
-  local sid=$1
-  local appnum=$2
-  
+  local appnum=$1
+  local sid=$(aerospace_focused_workspace)
+
   # remove default if it exists
   sketchy_remove "window.$sid.$sid.default"
 
@@ -85,8 +108,8 @@ aerospace_new_app() {
   sketchy_add item $item left \
     --move $item before divider.$sid \
     --set $item "${props[@]}" \
-      icon=$icon icon.color=$OFF \
-        background.border_width=$BORDER_WIDTH \
+    icon=$icon icon.color=$OFF \
+    background.border_width=$BORDER_WIDTH \
     click_script="aerospace workspace $sid"
 }
 
@@ -98,13 +121,6 @@ aerospace_add_apps() {
   fi
 
   aerospace_appids=$(aerospace_appids_in_workspace $sid)
-  sketchy_apps=$(sketchy_get_space_windows $sid)
-  
-  if [[ -n "$sketchy_apps" ]]; then
-    for app in ${(z)sketchy_apps}; do
-      sketchy_remove "$app"
-    done
-  fi
 
   props=(
     y_offset=1
@@ -118,8 +134,8 @@ aerospace_add_apps() {
     while read -r appid; do
       app=$(aerospace_app_names "$appid")
       icon="$($CONFIG_DIR/icons_apps.sh "$app")"
-    
-      # only add if doesn't already exist  
+
+      # only add if doesn't already exist
       item="window.$sid.$appid"
       sketchy_add item $item left \
         --move $item before divider.$sid \
@@ -134,7 +150,7 @@ aerospace_add_apps() {
     item="window.$sid.$sid.default"
     if ! item_in_array "$item" "$items"; then
       sketchy_add item $item left \
-      --move $item before divider.$sid
+        --move $item before divider.$sid
     fi
     sketchybar --set $item "${props[@]}" icon="·" background.border_width=$BORDER_WIDTH \
       click_script="aerospace workspace $sid"
@@ -164,8 +180,8 @@ aerospace_default_apps() {
       sketchy_remove $item
     elif [[ "$default_exists" == false && "$num_windows" -eq 0 ]]; then
       sketchy_add item $item left \
-      --move $item before divider.$sid \
-      --set $item "${props[@]}" icon="·" \
+        --move $item before divider.$sid \
+        --set $item "${props[@]}" icon="·" \
         click_script="aerospace workspace $sid"
     fi
   done
