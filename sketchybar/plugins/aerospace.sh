@@ -20,7 +20,7 @@ elif [ "$SENDER" = "aerospace_workspace_change" ]; then
   aerospace_space_focus $FOCUSED_WORKSPACE
 elif [ "$SENDER" = "yabai_window_created" ]; then
   # yabai events don't have $PREV_WORKSPACE or $FOCUSED_WORKSPACE
-  aerospace_add_apps $(aerospace_focused_workspace)
+  aerospace_new_app $(aerospace_focused_workspace) $ID
   # aerospace_default_apps
 elif [ "$SENDER" = "yabai_window_destroyed" ]; then
   # yabai events don't have $PREV_WORKSPACE or $FOCUSED_WORKSPACE
