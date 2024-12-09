@@ -32,7 +32,9 @@ aerospace_change_focus(){
 
   if [ -n "$prev_appid" ]; then
     prev_item=$(sketchy_get_item "$prev_appid")
-    sketchybar --set $prev_item icon.color=$OFF background.border_color=$TRANSPARENT
+    if [ -n "$prev_item" ]; then
+      sketchybar --set $prev_item icon.color=$OFF background.border_color=$TRANSPARENT
+    fi
   fi
 
   item=$(sketchy_get_item "$appid")
@@ -133,6 +135,5 @@ aerospace_default_apps() {
       sketchybar --set $item "${props[@]}" icon="·" \
         click_script="aerospace workspace $sid"
     fi
-
   done
 }
