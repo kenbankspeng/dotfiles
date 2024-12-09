@@ -10,7 +10,6 @@ if [ "$SENDER" = "forced" ]; then
   for space in $(aerospace_workspaces); do
     aerospace_add_apps $space
   done
-  aerospace_default_apps
 elif [ "$SENDER" = "yabai_window_focused" ]; then
   aerospace_highlight_app $ID
 elif [ "$SENDER" = "aerospace_workspace_change" ]; then
