@@ -18,7 +18,7 @@ props=(
   label.drawing=off
   background.drawing=off
 )
-sketchy_add item space_listener left \
+sketchy_add_item space_listener left \
   --set space_listener "${props[@]}" \
   script="$PLUGIN_DIR/aerospace.sh" \
   --subscribe space_listener \
@@ -32,7 +32,7 @@ sketchy_add item space_listener left \
 # add dividers as anchor points for the workspaces
 workspaces=(0 $(aerospace_workspaces))
 for sid in $workspaces; do
-  sketchy_add item divider.$sid left \
+  sketchy_add_item divider.$sid left \
     --set divider.$sid background.height=1 \
     background.color=$DIVIDER
 done

@@ -11,6 +11,6 @@ props=(
 	script="$PLUGIN_DIR/apple.sh"
 )
 
-sketchy_add item apple.logo right \
+sketchy_add_item apple.logo right \
 	--set apple.logo "${props[@]}" \
 	--subscribe apple.logo mouse.clicked

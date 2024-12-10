@@ -10,6 +10,6 @@ props=(
   script="$PLUGIN_DIR/disk.sh"
 )
 
-sketchy_add item disk right \
+sketchy_add_item disk right \
   --set disk "${props[@]}" \
   --subscribe disk mouse.clicked

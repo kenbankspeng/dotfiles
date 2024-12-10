@@ -10,5 +10,5 @@ props=(
   update_freq=1
   script="$PLUGIN_DIR/clock.sh"
 )
-sketchy_add item time right --set time "${props[@]}" \
+sketchy_add_item time right --set time "${props[@]}" \
   --subscribe time mouse.clicked

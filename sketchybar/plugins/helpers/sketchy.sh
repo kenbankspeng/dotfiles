@@ -3,7 +3,8 @@
 source "$CONFIG_DIR/plugins/helpers/util.sh"
 
 # add item only if not exists
-sketchy_add() {
+sketchy_add_item() {
+  echo "DEBUG: $1"
   local item=$2
   local items=$(sketchybar --query bar | jq -r '.items[]')
   item=${item// /_}
@@ -37,7 +38,9 @@ sketchy_get_space_app() {
   echo "$(sketchybar --query bar | jq --arg space "$SPACE" --arg app "$APP" '.items[] | select(test("^window\\." + $space + "\\.\\d+\\." + $app + "$"))')"
 }
 
-sketchy_get_item() {
+# returns item ex: window.3.66286.WezTerm
+sketchy_get_item_by_appid() {
+  # ex: 46356
   local APPID=$1
   echo "$(sketchybar --query bar | jq -r --arg appid "$APPID" '.items[] | select(test("^window\\.\\d+\\." + $appid + "\\..+$"))')"
 }
