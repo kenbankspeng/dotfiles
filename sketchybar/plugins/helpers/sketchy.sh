@@ -13,7 +13,7 @@ sketchy_add_item() {
 }
 
 # remove item only if exists
-sketchy_remove() {
+sketchy_remove_item() {
   local item=$1
   local items=$(sketchybar --query bar | jq -r '.items[]')
   if item_in_array "$item" "$items"; then

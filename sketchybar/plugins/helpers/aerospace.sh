@@ -75,13 +75,13 @@ aerospace_get_apptag() {
   echo "$apptags" | awk -F '.' -v appid="$appid" '$1 == appid {print $0}'
 }
 
-aerospace_remove_app() {
+aerospace_remove_appid() {
   # ex: 46356
   local appid=$1
   local sid=$(aerospace_focused_workspace)
   # item ex:window.3.66286.WezTerm
   item=$(sketchy_get_item_by_appid "$appid")
-  sketchy_remove $item
+  sketchy_remove_item $item
 
   # add default if no apps in workspace
   if [ -z "$(sketchy_get_space_windows $sid)" ]; then
@@ -107,7 +107,7 @@ aerospace_new_app() {
   local sid=$(aerospace_focused_workspace)
 
   # remove default if it exists
-  sketchy_remove "window.$sid.$sid.default"
+  sketchy_remove_item "window.$sid.$sid.default"
 
   # apptag: 46356.Cursor
   apptag=$(aerospace_get_apptag "$sid" "$appid")

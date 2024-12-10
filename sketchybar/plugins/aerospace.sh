@@ -18,5 +18,5 @@ elif [ "$SENDER" = "yabai_window_created" ] || [ "$SENDER" = "yabai_window_demin
   aerospace_new_app $ID
   aerospace_highlight_appid $ID
 elif [ "$SENDER" = "yabai_window_destroyed" ] || [ "$SENDER" = "yabai_window_minimized" ]; then
-  aerospace_remove_app $ID
+  aerospace_remove_appid $ID
 fi
