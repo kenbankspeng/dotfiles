@@ -15,7 +15,7 @@ aerospace_focused_workspace() {
 aerospace_appids_in_workspace() {
   local sid="$1"
   local json=$(aerospace list-windows --workspace "$sid" --json --format %{monitor-id}%{workspace}%{app-bundle-id}%{window-id}%{app-name})
-  local filtered=$(echo "$json" | jq -r '.[] | "\(.["window-id"])"')
+  local filtered=$(echo "$json" | jq -r '.[] | ."window-id"' | jq -s -r 'join(" ")')
   echo "$filtered"
 }
 
@@ -136,10 +136,9 @@ aerospace_add_apps() {
   )
 
   aerospace_appids=$(aerospace_appids_in_workspace $sid)
+
   if [ -n "${aerospace_appids}" ]; then
-    # ex: 46356
-    while read -r appid; do
-      # ex: Cursor
+    for appid in ${(s: :)"$aerospace_appids"}; do  # split appids by space
       appname=$(aerospace_appname_from_appid "$appid")
       icon="$($CONFIG_DIR/icons_apps.sh "$appname")"
 
@@ -151,7 +150,7 @@ aerospace_add_apps() {
         icon=$icon icon.color=$OFF \
         background.border_width=$BORDER_WIDTH \
         click_script="aerospace workspace $sid"
-    done <<<"${aerospace_appids}" # app_list has one app per line
+    done
   else
     # only add if doesn't already exist
     local items=$(sketchybar --query bar | jq -r '.items[]')
