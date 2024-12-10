@@ -40,14 +40,20 @@ aerospace_highlight_appid() {
     # prev_item ex: window.3.66286.WezTerm
     prev_item=$(sketchy_get_item_by_appid "$prev_appid")
     if [ -n "$prev_item" ]; then
-      sketchybar --set $prev_item icon.color=$OFF background.border_color=$TRANSPARENT
+      sketchybar --set $prev_item \
+        icon.color=$OFF \
+        background.border_color=$TRANSPARENT \
+        background.color=$TRANSPARENT
     fi
   fi
 
   # item ex: window.3.66286.WezTerm
   item=$(sketchy_get_item_by_appid "$appid")
   if [ -n "$item" ]; then
-    sketchybar --set $item icon.color=$ON background.border_color=$ACTIVE
+    sketchybar --set $item \
+      icon.color=$ON \
+      background.border_color=$ACTIVE \
+      background.color=$BLACK
   fi
 
   echo "$appid" >"$CACHE_DIR/highlighted"

@@ -24,7 +24,7 @@ case "$sum" in
 	color=$YELLOW
 	;;
 [3-4])
-	color=$ORANGE
+	color=$PEACH
 	;;
 *)
 	color=$RED
