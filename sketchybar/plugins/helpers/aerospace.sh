@@ -117,7 +117,7 @@ aerospace_new_appid() {
     --set $item "${props[@]}" \
     icon=$icon icon.color=$OFF \
     background.border_width=$BORDER_WIDTH \
-    click_script="aerospace workspace $sid"
+    click_script="aerospace focus --window-id $appid"
 }
 
 aerospace_add_apps_in_spaceid() {
@@ -150,11 +150,10 @@ aerospace_add_apps_in_spaceid() {
         --set $item "${props[@]}" \
         icon=$icon icon.color=$OFF \
         background.border_width=$BORDER_WIDTH \
-        click_script="aerospace workspace $sid"
+        click_script="aerospace focus --window-id $appid"
     done
   else
     # only add if doesn't already exist
-    
     item="window.$sid.$sid.default"
     sketchy_add_item $item left \
       --move $item before divider.$sid
