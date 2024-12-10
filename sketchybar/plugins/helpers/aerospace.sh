@@ -11,18 +11,20 @@ aerospace_focused_workspace() {
   echo "$(aerospace list-workspaces --focused)"
 }
 
-# returns tags: 46356.Cursor
-aerospace_apptags_in_workspace() {
+# returns appids ex: 46356
+aerospace_appids_in_workspace() {
   local sid="$1"
-  echo "$(aerospace list-windows --workspace "$sid" --json --format %{monitor-id}%{workspace}%{app-bundle-id}%{window-id}%{app-name} | jq -r '.[] | "\(.["window-id"]).\(.["app-name"])"')"
+  local json=$(aerospace list-windows --workspace "$sid" --json --format %{monitor-id}%{workspace}%{app-bundle-id}%{window-id}%{app-name})
+  local filtered=$(echo "$json" | jq -r '.[] | "\(.["window-id"])"')
+  echo "$filtered"
 }
 
-aerospace_app_names() {
-  # ex: 46356.Cursor
-  local apptags="$1"
-
-  # ex: Cursor
-  echo "$apptags" | awk -F '.' '{print $2}' | sort
+# returns appname ex: Cursor from appid ex: 46356
+aerospace_appname_from_appid() {
+  local appid="$1"
+  local json=$(aerospace list-windows --all --json --format '%{monitor-id}%{workspace}%{app-bundle-id}%{window-id}%{app-name}')
+  local filtered=$(echo "$json" | jq -r --arg appid "$appid" '.[] | select(."window-id" == ($appid | tonumber)) | ."app-name"')
+  echo "$filtered"
 }
 
 aerospace_highlight_appid() {
@@ -64,17 +66,6 @@ aerospace_space_focus() {
   fi
 }
 
-aerospace_get_apptag() {
-  local sid=$1
-
-  # ex: 46356
-  local appid=$2
-
-  # apptags: 46356.Cursor
-  local apptags=$(aerospace_apptags_in_workspace "$sid")
-  echo "$apptags" | awk -F '.' -v appid="$appid" '$1 == appid {print $0}'
-}
-
 aerospace_remove_appid() {
   # ex: 46356
   local appid=$1
@@ -109,14 +100,11 @@ aerospace_new_app() {
   # remove default if it exists
   sketchy_remove_item "window.$sid.$sid.default"
 
-  # apptag: 46356.Cursor
-  apptag=$(aerospace_get_apptag "$sid" "$appid")
-
   # ex: Cursor
-  app=$(aerospace_app_names "$apptag")
+  appname=$(aerospace_appname_from_appid "$appid")
 
-  icon="$($CONFIG_DIR/icons_apps.sh "$app")"
-  item="window.$sid.$apptag"
+  icon="$($CONFIG_DIR/icons_apps.sh "$appname")"
+  item="window.$sid.$appid.$appname"
   props=(
     y_offset=1
     background.corner_radius=0
@@ -139,9 +127,6 @@ aerospace_add_apps() {
     exit
   fi
 
-  # ex: 46356.Cursor
-  aerospace_apptags=$(aerospace_apptags_in_workspace $sid)
-
   props=(
     y_offset=1
     background.corner_radius=0
@@ -150,22 +135,23 @@ aerospace_add_apps() {
     icon.font="$ICON_FONT:$ICON_FONTSIZE"
   )
 
-  if [ -n "${aerospace_apptags}" ]; then
-    # ex: 46356.Cursor
-    while read -r apptag; do
+  aerospace_appids=$(aerospace_appids_in_workspace $sid)
+  if [ -n "${aerospace_appids}" ]; then
+    # ex: 46356
+    while read -r appid; do
       # ex: Cursor
-      app=$(aerospace_app_names "$apptag")
-      icon="$($CONFIG_DIR/icons_apps.sh "$app")"
+      appname=$(aerospace_appname_from_appid "$appid")
+      icon="$($CONFIG_DIR/icons_apps.sh "$appname")"
 
       # only add if doesn't already exist
-      item="window.$sid.$apptag"
+      item="window.$sid.$appid.$appname"
       sketchy_add_item $item left \
         --move $item before divider.$sid \
         --set $item "${props[@]}" \
         icon=$icon icon.color=$OFF \
         background.border_width=$BORDER_WIDTH \
         click_script="aerospace workspace $sid"
-    done <<<"${aerospace_apptags}" # app_list has one app per line
+    done <<<"${aerospace_appids}" # app_list has one app per line
   else
     # only add if doesn't already exist
     local items=$(sketchybar --query bar | jq -r '.items[]')
