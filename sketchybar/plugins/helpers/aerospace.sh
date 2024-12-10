@@ -53,7 +53,7 @@ aerospace_highlight_appid() {
   echo "$appid" >"$CACHE_DIR/highlighted"
 }
 
-aerospace_space_focus() {
+aerospace_focus_spaceid() {
   # default window uses sid as appid
   local sid=$1
   # item ex:window.3.66286.WezTerm
@@ -92,7 +92,7 @@ aerospace_remove_appid() {
   fi
 }
 
-aerospace_new_app() {
+aerospace_new_appid() {
   # ex: 46356
   local appid=$1
   local sid=$(aerospace_focused_workspace)
@@ -120,7 +120,7 @@ aerospace_new_app() {
     click_script="aerospace workspace $sid"
 }
 
-aerospace_add_apps() {
+aerospace_add_apps_in_spaceid() {
   local sid=$1
 
   if [ -z "$sid" ]; then
