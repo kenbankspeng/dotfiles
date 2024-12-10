@@ -154,12 +154,10 @@ aerospace_add_apps_in_spaceid() {
     done
   else
     # only add if doesn't already exist
-    local items=$(sketchybar --query bar | jq -r '.items[]')
+    
     item="window.$sid.$sid.default"
-    if ! item_in_array "$item" "$items"; then
-      sketchy_add_item $item left \
-        --move $item before divider.$sid
-    fi
+    sketchy_add_item $item left \
+      --move $item before divider.$sid
     sketchybar --set $item "${props[@]}" icon="·" background.border_width=$BORDER_WIDTH \
       click_script="aerospace workspace $sid"
   fi
