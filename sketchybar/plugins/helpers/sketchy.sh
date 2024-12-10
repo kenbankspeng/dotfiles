@@ -4,12 +4,11 @@ source "$CONFIG_DIR/plugins/helpers/util.sh"
 
 # add item only if not exists
 sketchy_add_item() {
-  echo "DEBUG: $1"
-  local item=$2
+  local item=$1
   local items=$(sketchybar --query bar | jq -r '.items[]')
   item=${item// /_}
   if ! item_in_array "$item" "$items"; then
-    sketchybar --add "$@"
+    sketchybar --add item "$@"
   fi
 }
 
