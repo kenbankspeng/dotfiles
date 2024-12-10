@@ -138,7 +138,7 @@ aerospace_add_apps() {
   aerospace_appids=$(aerospace_appids_in_workspace $sid)
 
   if [ -n "${aerospace_appids}" ]; then
-    for appid in ${(s: :)"$aerospace_appids"}; do  # split appids by space
+    for appid in ${(s: :)aerospace_appids}; do  # split appids by space
       appname=$(aerospace_appname_from_appid "$appid")
       icon="$($CONFIG_DIR/icons_apps.sh "$appname")"
 
