@@ -66,18 +66,11 @@ aerospace_focus_spaceid() {
   fi
 }
 
-aerospace_remove_appid() {
-  # ex: 46356
-  local appid=$1
-  local sid=$(aerospace_focused_workspace)
-  # item ex:window.3.66286.WezTerm
-  item=$(sketchy_get_item_by_appid "$appid")
-  sketchy_remove_item $item
-
-  # add default if no apps in workspace
+add_default_item_if_no_apps() {
+  local sid=$1
   if [ -z "$(sketchy_get_space_windows $sid)" ]; then
-    item="window.$sid.$sid.default"
-    props=(
+    local item="window.$sid.$sid.default"
+    local props=(
       y_offset=1
       background.corner_radius=0
       background.height=$ITEM_HEIGHT
@@ -90,6 +83,18 @@ aerospace_remove_appid() {
       click_script="aerospace workspace $sid"
     aerospace_highlight_appid $sid
   fi
+}
+
+aerospace_remove_appid() {
+  # ex: 46356
+  local appid=$1
+  local sid=$(aerospace_focused_workspace)
+  # item ex:window.3.66286.WezTerm
+  item=$(sketchy_get_item_by_appid "$appid")
+  sketchy_remove_item $item
+
+  # add default if no apps in workspace
+  add_default_item_if_no_apps $sid
 }
 
 aerospace_new_appid() {
@@ -153,11 +158,6 @@ aerospace_add_apps_in_spaceid() {
         click_script="aerospace focus --window-id $appid"
     done
   else
-    # only add if doesn't already exist
-    item="window.$sid.$sid.default"
-    sketchy_add_item $item left \
-      --move $item before divider.$sid
-    sketchybar --set $item "${props[@]}" icon="·" background.border_width=$BORDER_WIDTH \
-      click_script="aerospace workspace $sid"
+    add_default_item_if_no_apps $sid
   fi
 }
