@@ -91,7 +91,7 @@ aerospace_workspace_change() {
   remove_unmatched_items $prev_sid
   aerospace_add_apps_in_spaceid $sid
 
-  aerospace_workspace_focus $sid
+  echo "yabai_get_focused_window: $(yabai_get_focused_window)"
 }
 
 maybe_add_default_item_to_spaceid() {
