@@ -87,6 +87,7 @@ remove_unmatched_items() {
     maybe_add_default_item_to_spaceid $sid
   fi
 }
+
 aerospace_highlight_focused_window() {
   local window_id=$(yabai_get_focused_window_id)
   if [ -n "$window_id" ]; then
