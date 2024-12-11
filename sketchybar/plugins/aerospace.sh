@@ -11,8 +11,10 @@ if [ "$SENDER" = "forced" ]; then
     aerospace_add_apps_in_spaceid $space
   done
 elif [ "$SENDER" = "yabai_window_focused" ]; then
+  echo "SENDER: $SENDER $ID"
   aerospace_highlight_appid $ID
 elif [ "$SENDER" = "aerospace_workspace_change" ]; then
+  echo "SENDER: $SENDER prev:$PREV_WORKSPACE now:$FOCUSED_WORKSPACE"
   aerospace_workspace_change $FOCUSED_WORKSPACE $PREV_WORKSPACE
 elif [ "$SENDER" = "yabai_window_created" ] || [ "$SENDER" = "yabai_window_deminimized" ]; then
   aerospace_new_appid $ID

@@ -70,20 +70,35 @@ aerospace_workspace_focus(){
   fi
 }
 
+remove_unmatched_items() {
+  local sid=$1
+  aerospace_appids=$(aerospace_appids_in_workspace $sid)
+  sketchy_apps=$(sketchy_get_window_items_in_spaceid $sid)
+  apps_to_remove=$(unmatched_items "${aerospace_appids}" "${sketchy_apps}" 2>/dev/tty)
+
+  if [[ -n "$apps_to_remove" ]]; then
+    echo "remove: $apps_to_remove"
+    sketchy_remove_item $apps_to_remove
+    maybe_add_default_item_to_spaceid $sid
+  fi
+}
+
 aerospace_workspace_change() {
   # default window uses sid as appid
   local sid=$1
   local prev_sid=$2
 
-  
+  remove_unmatched_items $prev_sid
+  aerospace_add_apps_in_spaceid $sid
 
   aerospace_workspace_focus $sid
 }
 
-add_default_item_if_no_apps() {
+maybe_add_default_item_to_spaceid() {
   local sid=$1
-  if [ -z "$(sketchy_get_space_windows $sid)" ]; then
+  if [ -z "$(sketchy_get_window_items_in_spaceid $sid)" ]; then
     local item="window.$sid.$sid.default"
+    echo "add default item: $item"
     local props=(
       y_offset=1
       background.corner_radius=0
@@ -99,6 +114,11 @@ add_default_item_if_no_apps() {
   fi
 }
 
+maybe_remove_default_item_from_spaceid() {
+  local sid="$1"
+  sketchy_remove_item "window.$sid.$sid.default"
+}
+
 aerospace_remove_appid() {
   # ex: 46356
   local appid=$1
@@ -108,8 +128,9 @@ aerospace_remove_appid() {
   sketchy_remove_item $item
 
   # add default if no apps in workspace
-  add_default_item_if_no_apps $sid
+  maybe_add_default_item_to_spaceid $sid
 }
+
 
 aerospace_new_appid() {
   # ex: 46356
@@ -117,7 +138,7 @@ aerospace_new_appid() {
   local sid=$(aerospace_focused_workspace)
 
   # remove default if it exists
-  sketchy_remove_item "window.$sid.$sid.default"
+  maybe_remove_default_item_from_spaceid "$sid"
 
   # ex: Cursor
   appname=$(aerospace_appname_from_appid "$appid")
@@ -141,10 +162,6 @@ aerospace_new_appid() {
 
 aerospace_add_apps_in_spaceid() {
   local sid=$1
-
-  if [ -z "$sid" ]; then
-    exit
-  fi
 
   props=(
     y_offset=1
@@ -172,6 +189,7 @@ aerospace_add_apps_in_spaceid() {
         click_script="aerospace focus --window-id $appid"
     done
   else
-    add_default_item_if_no_apps $sid
+    maybe_add_default_item_to_spaceid $sid
   fi
 }
+

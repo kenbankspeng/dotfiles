@@ -21,25 +21,14 @@ sketchy_remove_item() {
   fi
 }
 
-# returns sketchy names
-sketchy_get_all_windows() {
-  echo "$(sketchybar --query bar | jq -r '.items[] | select(contains("window"))')"
-}
-
-sketchy_get_space_windows() {
-  local SPACE=$1
-  echo "$(sketchybar --query bar | jq -r --arg space "$SPACE" '.items[] | select(test("^window\\." + $space + "\\."))')"
-}
-
-sketchy_get_space_app() {
-  local SPACE=$1
-  local APP=$2
-  echo "$(sketchybar --query bar | jq --arg space "$SPACE" --arg app "$APP" '.items[] | select(test("^window\\." + $space + "\\.\\d+\\." + $app + "$"))')"
+sketchy_get_window_items_in_spaceid() {
+  local sid=$1
+  echo "$(sketchybar --query bar | jq -r --arg sid "$sid" '.items[] | select(test("^window\\." + $sid + "\\."))')"
 }
 
 # returns item ex: window.3.66286.WezTerm
 sketchy_get_item_by_appid() {
   # ex: 46356
-  local APPID=$1
-  echo "$(sketchybar --query bar | jq -r --arg appid "$APPID" '.items[] | select(test("^window\\.\\d+\\." + $appid + "\\..+$"))')"
+  local appid=$1
+  echo "$(sketchybar --query bar | jq -r --arg appid "$appid" '.items[] | select(test("^window\\.\\d+\\." + $appid + "\\..+$"))')"
 }
