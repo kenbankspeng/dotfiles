@@ -5,6 +5,7 @@ source "$PLUGIN_DIR/helpers/aerospace.sh"
 source "$PLUGIN_DIR/helpers/sketchy.sh"
 source "$PLUGIN_DIR/helpers/yabai.sh"
 
+start_time=$(date +%s%3N)  # Start time in milliseconds
 
 if [ "$SENDER" = "forced" ]; then
   for space in $(aerospace_workspaces); do
@@ -22,3 +23,6 @@ elif [ "$SENDER" = "yabai_window_destroyed" ] || [ "$SENDER" = "yabai_window_min
   aerospace_remove_window_id $ID
   aerospace_highlight_focused_window
 fi
+
+end_time=$(date +%s%3N)  # End time in milliseconds
+echo "$SENDER -- start: $start_time -- end: $end_time"
