@@ -83,10 +83,14 @@ remove_unmatched_items() {
   apps_to_remove=$(unmatched_items "${aerospace_window_ids}" "${sketchy_apps}" 2>/dev/tty)
 
   if [[ -n "$apps_to_remove" ]]; then
-    echo "remove: $apps_to_remove"
     sketchy_remove_item $apps_to_remove
     maybe_add_default_item_to_spaceid $sid
   fi
+}
+aerospace_highlight_focused_window() {
+  local sid=$(aerospace_focused_workspace)
+  aerospace_highlight_window_id $(yabai_get_focused_window_id)
+  aerospace_workspace_focus $sid
 }
 
 aerospace_workspace_change() {
@@ -97,15 +101,13 @@ aerospace_workspace_change() {
   remove_unmatched_items $prev_sid
   aerospace_add_apps_in_spaceid $sid
 
-  aerospace_highlight_window_id $(yabai_get_focused_window_id)
-  aerospace_workspace_focus $sid
+  aerospace_highlight_focused_window
 }
 
 maybe_add_default_item_to_spaceid() {
   local sid=$1
   if [ -z "$(sketchy_get_window_items_in_spaceid $sid)" ]; then
     local item="window.$sid.$sid.default"
-    echo "add default item: $item"
     local props=(
       y_offset=1
       background.corner_radius=0
