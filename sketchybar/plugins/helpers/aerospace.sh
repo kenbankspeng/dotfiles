@@ -11,34 +11,39 @@ aerospace_focused_workspace() {
   echo "$(aerospace list-workspaces --focused)"
 }
 
-# returns appids ex: 46356
-aerospace_appids_in_workspace() {
+# returns window_ids ex: 46356
+aerospace_window_ids_in_workspace() {
   local sid="$1"
   local json=$(aerospace list-windows --workspace "$sid" --json --format %{monitor-id}%{workspace}%{app-bundle-id}%{window-id}%{app-name})
   local filtered=$(echo "$json" | jq -r '.[] | ."window-id"' | jq -s -r 'join(" ")')
   echo "$filtered"
 }
 
-# returns appname ex: Cursor from appid ex: 46356
-aerospace_appname_from_appid() {
-  local appid="$1"
+# returns appname ex: Cursor from window_id ex: 46356
+aerospace_appname_from_window_id() {
+  local window_id="$1"
   local json=$(aerospace list-windows --all --json --format '%{monitor-id}%{workspace}%{app-bundle-id}%{window-id}%{app-name}')
-  local filtered=$(echo "$json" | jq -r --arg appid "$appid" '.[] | select(."window-id" == ($appid | tonumber)) | ."app-name"')
+  local filtered=$(echo "$json" | jq -r --arg window_id "$window_id" '.[] | select(."window-id" == ($window_id | tonumber)) | ."app-name"')
   echo "$filtered"
 }
 
-aerospace_highlight_appid() {
+aerospace_highlight_window_id() {
   # ex: 46356
-  local appid=$1
-  local prev_appid
+  local window_id=$1
+  local prev_window_id
+
 
   if [ -f "$CACHE_DIR/highlighted" ]; then
-    read -r prev_appid <"$CACHE_DIR/highlighted"
+    read -r prev_window_id <"$CACHE_DIR/highlighted"
   fi
 
-  if [ -n "$prev_appid" ]; then
+  if [ "$prev_window_id" = "$window_id" ]; then
+    return
+  fi
+
+  if [ -n "$prev_window_id" ]; then
     # prev_item ex: window.3.66286.WezTerm
-    prev_item=$(sketchy_get_item_by_appid "$prev_appid")
+    prev_item=$(sketchy_get_item_by_window_id "$prev_window_id")
     if [ -n "$prev_item" ]; then
       sketchybar --set $prev_item \
         icon.color=$OFF \
@@ -48,7 +53,7 @@ aerospace_highlight_appid() {
   fi
 
   # item ex: window.3.66286.WezTerm
-  item=$(sketchy_get_item_by_appid "$appid")
+  item=$(sketchy_get_item_by_window_id "$window_id")
   if [ -n "$item" ]; then
     sketchybar --set $item \
       icon.color=$ON \
@@ -56,14 +61,15 @@ aerospace_highlight_appid() {
       background.color=$BLACK
   fi
 
-  echo "$appid" >"$CACHE_DIR/highlighted"
+  echo "$window_id" >"$CACHE_DIR/highlighted"
 }
 
 aerospace_workspace_focus(){
- # item ex:window.3.66286.WezTerm
-  local item=$(sketchy_get_item_by_appid $sid)
+  # for default item, use spaceid as window_id
+  local sid=$1
+  local item=$(sketchy_get_item_by_window_id $sid)
   if [ -n "$item" ]; then
-    aerospace_highlight_appid $sid
+    aerospace_highlight_window_id $sid
     # TODO: gotcha if finder is open
     # focus on finder so that yabai_window_focused will fire next change
     osascript -e 'tell application "Finder" to activate'
@@ -72,9 +78,9 @@ aerospace_workspace_focus(){
 
 remove_unmatched_items() {
   local sid=$1
-  aerospace_appids=$(aerospace_appids_in_workspace $sid)
+  aerospace_window_ids=$(aerospace_window_ids_in_workspace $sid)
   sketchy_apps=$(sketchy_get_window_items_in_spaceid $sid)
-  apps_to_remove=$(unmatched_items "${aerospace_appids}" "${sketchy_apps}" 2>/dev/tty)
+  apps_to_remove=$(unmatched_items "${aerospace_window_ids}" "${sketchy_apps}" 2>/dev/tty)
 
   if [[ -n "$apps_to_remove" ]]; then
     echo "remove: $apps_to_remove"
@@ -84,14 +90,15 @@ remove_unmatched_items() {
 }
 
 aerospace_workspace_change() {
-  # default window uses sid as appid
+  # default window uses sid as window_id
   local sid=$1
   local prev_sid=$2
 
   remove_unmatched_items $prev_sid
   aerospace_add_apps_in_spaceid $sid
 
-  echo "yabai_get_focused_window: $(yabai_get_focused_window)"
+  aerospace_highlight_window_id $(yabai_get_focused_window_id)
+  aerospace_workspace_focus $sid
 }
 
 maybe_add_default_item_to_spaceid() {
@@ -110,7 +117,7 @@ maybe_add_default_item_to_spaceid() {
       --move $item before divider.$sid \
       --set $item "${props[@]}" icon="·" background.border_width=$BORDER_WIDTH \
       click_script="aerospace workspace $sid"
-    aerospace_highlight_appid $sid
+    aerospace_highlight_window_id $sid
   fi
 }
 
@@ -119,12 +126,12 @@ maybe_remove_default_item_from_spaceid() {
   sketchy_remove_item "window.$sid.$sid.default"
 }
 
-aerospace_remove_appid() {
+aerospace_remove_window_id() {
   # ex: 46356
-  local appid=$1
+  local window_id=$1
   local sid=$(aerospace_focused_workspace)
   # item ex:window.3.66286.WezTerm
-  item=$(sketchy_get_item_by_appid "$appid")
+  item=$(sketchy_get_item_by_window_id "$window_id")
   sketchy_remove_item $item
 
   # add default if no apps in workspace
@@ -132,19 +139,19 @@ aerospace_remove_appid() {
 }
 
 
-aerospace_new_appid() {
+aerospace_new_window_id() {
   # ex: 46356
-  local appid=$1
+  local window_id=$1
   local sid=$(aerospace_focused_workspace)
 
   # remove default if it exists
   maybe_remove_default_item_from_spaceid "$sid"
 
   # ex: Cursor
-  appname=$(aerospace_appname_from_appid "$appid")
+  appname=$(aerospace_appname_from_window_id "$window_id")
 
   icon="$($CONFIG_DIR/icons_apps.sh "$appname")"
-  item="window.$sid.$appid.$appname"
+  item="window.$sid.$window_id.$appname"
   props=(
     y_offset=1
     background.corner_radius=0
@@ -157,7 +164,7 @@ aerospace_new_appid() {
     --set $item "${props[@]}" \
     icon=$icon icon.color=$OFF \
     background.border_width=$BORDER_WIDTH \
-    click_script="aerospace focus --window-id $appid"
+    click_script="aerospace focus --window-id $window_id"
 }
 
 aerospace_add_apps_in_spaceid() {
@@ -171,22 +178,22 @@ aerospace_add_apps_in_spaceid() {
     icon.font="$ICON_FONT:$ICON_FONTSIZE"
   )
 
-  aerospace_appids=$(aerospace_appids_in_workspace $sid)
+  aerospace_window_ids=$(aerospace_window_ids_in_workspace $sid)
 
-  if [ -n "${aerospace_appids}" ]; then
-    # split appids by space
-    for appid in ${(s: :)aerospace_appids}; do
-      appname=$(aerospace_appname_from_appid "$appid")
+  if [ -n "${aerospace_window_ids}" ]; then
+    # split window_ids by space
+    for window_id in ${(s: :)aerospace_window_ids}; do
+      appname=$(aerospace_appname_from_window_id "$window_id")
       icon="$($CONFIG_DIR/icons_apps.sh "$appname")"
 
       # only add if doesn't already exist
-      item="window.$sid.$appid.$appname"
+      item="window.$sid.$window_id.$appname"
       sketchy_add_item $item left \
         --move $item before divider.$sid \
         --set $item "${props[@]}" \
         icon=$icon icon.color=$OFF \
         background.border_width=$BORDER_WIDTH \
-        click_script="aerospace focus --window-id $appid"
+        click_script="aerospace focus --window-id $window_id"
     done
   else
     maybe_add_default_item_to_spaceid $sid

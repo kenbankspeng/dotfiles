@@ -10,13 +10,13 @@ yabai_get_windows_in_space() {
 }
 
 yabai_get_window_app_name() {
-  local wid="$1"
-  yabai -m query --windows --window "$wid" | jq -r '.app'
+  local window_id="$1"
+  yabai -m query --windows --window "$window_id" | jq -r '.app'
 }
 
-yabai_get_focused_window() {
-  local wid="$1"
-  yabai -m query --windows --window "$wid" | jq -r '.id'
+yabai_get_focused_window_id() {
+  local window_id="$1"
+  yabai -m query --windows --window "$window_id" | jq -r '.id'
 }
 
 yabai_autofocus() {

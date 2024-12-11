@@ -27,8 +27,8 @@ sketchy_get_window_items_in_spaceid() {
 }
 
 # returns item ex: window.3.66286.WezTerm
-sketchy_get_item_by_appid() {
+sketchy_get_item_by_window_id() {
   # ex: 46356
-  local appid=$1
-  echo "$(sketchybar --query bar | jq -r --arg appid "$appid" '.items[] | select(test("^window\\.\\d+\\." + $appid + "\\..+$"))')"
+  local window_id=$1
+  echo "$(sketchybar --query bar | jq -r --arg window_id "$window_id" '.items[] | select(test("^window\\.\\d+\\." + $window_id + "\\..+$"))')"
 }

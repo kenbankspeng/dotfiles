@@ -6,19 +6,16 @@ source "$PLUGIN_DIR/helpers/sketchy.sh"
 source "$PLUGIN_DIR/helpers/yabai.sh"
 
 if [ "$SENDER" = "forced" ]; then
-  # startup - add all workspaces and apps
   for space in $(aerospace_workspaces); do
     aerospace_add_apps_in_spaceid $space
   done
 elif [ "$SENDER" = "yabai_window_focused" ]; then
-  echo "SENDER: $SENDER $ID"
-  aerospace_highlight_appid $ID
+  aerospace_highlight_window_id $ID
 elif [ "$SENDER" = "aerospace_workspace_change" ]; then
-  echo "SENDER: $SENDER prev:$PREV_WORKSPACE now:$FOCUSED_WORKSPACE"
   aerospace_workspace_change $FOCUSED_WORKSPACE $PREV_WORKSPACE
 elif [ "$SENDER" = "yabai_window_created" ] || [ "$SENDER" = "yabai_window_deminimized" ]; then
-  aerospace_new_appid $ID
-  aerospace_highlight_appid $ID
+  aerospace_new_window_id $ID
+  aerospace_highlight_window_id $ID
 elif [ "$SENDER" = "yabai_window_destroyed" ] || [ "$SENDER" = "yabai_window_minimized" ]; then
-  aerospace_remove_appid $ID
+  aerospace_remove_window_id $ID
 fi
