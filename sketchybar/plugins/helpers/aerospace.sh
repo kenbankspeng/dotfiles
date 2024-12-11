@@ -59,10 +59,8 @@ aerospace_highlight_appid() {
   echo "$appid" >"$CACHE_DIR/highlighted"
 }
 
-aerospace_focus_spaceid() {
-  # default window uses sid as appid
-  local sid=$1
-  # item ex:window.3.66286.WezTerm
+aerospace_workspace_focus(){
+ # item ex:window.3.66286.WezTerm
   local item=$(sketchy_get_item_by_appid $sid)
   if [ -n "$item" ]; then
     aerospace_highlight_appid $sid
@@ -70,6 +68,16 @@ aerospace_focus_spaceid() {
     # focus on finder so that yabai_window_focused will fire next change
     osascript -e 'tell application "Finder" to activate'
   fi
+}
+
+aerospace_workspace_change() {
+  # default window uses sid as appid
+  local sid=$1
+  local prev_sid=$2
+
+  
+
+  aerospace_workspace_focus $sid
 }
 
 add_default_item_if_no_apps() {
@@ -150,7 +158,7 @@ aerospace_add_apps_in_spaceid() {
 
   if [ -n "${aerospace_appids}" ]; then
     # split appids by space
-    for appid in ${(s: :)aerospace_appids}; do  
+    for appid in ${(s: :)aerospace_appids}; do
       appname=$(aerospace_appname_from_appid "$appid")
       icon="$($CONFIG_DIR/icons_apps.sh "$appname")"
 
