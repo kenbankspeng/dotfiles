@@ -37,12 +37,7 @@ aerospace_highlight_window_id() {
     read -r prev_window_id <"$CACHE_DIR/highlighted"
   fi
 
-  if [ "$prev_window_id" = "$window_id" ]; then
-    return
-  fi
-
-  if [ -n "$prev_window_id" ]; then
-    # prev_item ex: window.3.66286.WezTerm
+  if [ -n "$prev_window_id" ] && [ "$prev_window_id" != "$window_id" ]; then
     prev_item=$(sketchy_get_item_by_window_id "$prev_window_id")
     if [ -n "$prev_item" ]; then
       sketchybar --set $prev_item \
