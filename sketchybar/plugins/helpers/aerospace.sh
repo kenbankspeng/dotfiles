@@ -100,6 +100,7 @@ aerospace_workspace_change() {
   remove_unmatched_items $prev_sid
   aerospace_add_apps_in_spaceid $sid
 
+  maybe_remove_default_item_from_spaceid $sid
   aerospace_highlight_focused_window
 }
 
@@ -118,14 +119,20 @@ maybe_add_default_item_to_spaceid() {
       --move $item before divider.$sid \
       --set $item "${props[@]}" icon="·" background.border_width=$BORDER_WIDTH \
       click_script="aerospace workspace $sid"
+    
     aerospace_highlight_window_id $sid
   fi
 }
 
 maybe_remove_default_item_from_spaceid() {
   local sid="$1"
-  sketchy_remove_item "window.$sid.$sid.default"
+  local items=$(sketchy_get_window_items_in_spaceid $sid)
+  local item_count=$(echo "$items" | wc -w | tr -d ' ')
+  if [[ "$items" == *"window.$sid.$sid.default"* ]] && [[ $item_count -gt 1 ]]; then
+    sketchy_remove_item "window.$sid.$sid.default"
+  fi
 }
+
 
 aerospace_remove_window_id() {
   # ex: 46356
