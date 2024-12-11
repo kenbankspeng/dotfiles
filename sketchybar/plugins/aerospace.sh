@@ -11,7 +11,7 @@ if [ "$SENDER" = "forced" ]; then
   done
   aerospace_highlight_focused_window
 elif [ "$SENDER" = "yabai_window_focused" ]; then
-  aerospace_highlight_window_id $ID
+  aerospace_highlight_focused_window
 elif [ "$SENDER" = "aerospace_workspace_change" ]; then
   aerospace_workspace_change $FOCUSED_WORKSPACE $PREV_WORKSPACE
 elif [ "$SENDER" = "yabai_window_created" ] || [ "$SENDER" = "yabai_window_deminimized" ]; then

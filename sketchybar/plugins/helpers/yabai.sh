@@ -15,8 +15,11 @@ yabai_get_window_app_name() {
 }
 
 yabai_get_focused_window_id() {
-  local window_id="$1"
-  yabai -m query --windows --window "$window_id" | jq -r '.id'
+  local window_id=$(yabai -m query --windows | jq -r '.[] | select(.["has-focus"] == true) | .id')
+  if [[ -z "${window_id// }" ]]; then
+    window_id=""
+  fi
+  echo "$window_id"
 }
 
 yabai_autofocus() {

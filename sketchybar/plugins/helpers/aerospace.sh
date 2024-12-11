@@ -69,10 +69,10 @@ aerospace_workspace_focus(){
   local sid=$1
   local item=$(sketchy_get_item_by_window_id $sid)
   if [ -n "$item" ]; then
-    aerospace_highlight_window_id $sid
     # TODO: gotcha if finder is open
     # focus on finder so that yabai_window_focused will fire next change
     osascript -e 'tell application "Finder" to activate'
+    aerospace_highlight_window_id $sid
   fi
 }
 
@@ -88,8 +88,11 @@ remove_unmatched_items() {
   fi
 }
 aerospace_highlight_focused_window() {
+  local window_id=$(yabai_get_focused_window_id)
+  if [ -n "$window_id" ]; then
+    aerospace_highlight_window_id $window_id
+  fi
   local sid=$(aerospace_focused_workspace)
-  aerospace_highlight_window_id $(yabai_get_focused_window_id)
   aerospace_workspace_focus $sid
 }
 
