@@ -8,7 +8,7 @@ sketchy_add_item spacer left \
 
 # stack dividers
 stack_sections=(0 1 2 3 4 5 6 7)
-for id in "$stack_sections"; do
+for id in "${stack_sections[@]}"; do
   sketchy_add_item "stack.divider.$id" left \
     --set "stack.divider.$id" background.height=1 \
     background.color="$DIVIDER"

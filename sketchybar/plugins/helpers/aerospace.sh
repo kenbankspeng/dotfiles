@@ -182,7 +182,7 @@ aerospace_new_window_id() {
     label.drawing=off
     icon.font="$ICON_FONT:$ICON_FONTSIZE"
   )
-  sketchy_add_item $item left \
+  sketchy_add_item "$item" left \
     --move "$item" before "divider.$sid" \
     --set "$item" "${props[@]}" \
     icon="$icon" icon.color="$OFF" \
@@ -192,7 +192,7 @@ aerospace_new_window_id() {
 
 aerospace_add_apps_in_spaceid() {
   log "* aerospace_add_apps_in_spaceid $1"
-  local sid=$1
+  local sid="$1"
 
   props=(
     y_offset=1
@@ -205,14 +205,15 @@ aerospace_add_apps_in_spaceid() {
   aerospace_window_ids=$(aerospace_window_ids_in_workspace "$sid")
 
   if [ -n "${aerospace_window_ids}" ]; then
-    # split window_ids by space
-    for window_id in ${(s: :)aerospace_window_ids}; do
+    # Read space-separated window_ids into an array and iterate
+    read -ra window_id_array <<< "$aerospace_window_ids"
+    for window_id in "${window_id_array[@]}"; do
       appname=$(aerospace_appname_from_window_id "$window_id")
       icon="$($CONFIG_DIR/icons_apps.sh "$appname")"
 
       # only add if doesn't already exist
       item="window.$sid.$window_id.$appname"
-      sketchy_add_item $item left \
+      sketchy_add_item "$item" left \
         --move "$item" before "divider.$sid" \
         --set "$item" "${props[@]}" \
         icon="$icon" icon.color="$OFF" \
