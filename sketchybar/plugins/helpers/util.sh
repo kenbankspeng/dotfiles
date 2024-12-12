@@ -38,23 +38,24 @@ remove_first_item() {
 unmatched_items() {
   # delimit by space or newline
   local IFS=$' \n'
-  local source=("${(f)1}")
-  local target=("${(f)2}")
+  source=($1)
+  target=($2)
 
   for key in "${source[@]}"; do
     for i in "${target[@]}"; do
-      if [[ "$i" == "window.*.$key.*" ]]; then
-        target=($(remove_first_item "$i" "${(@)target}"))
+      if [[ "$i" =~ ^window.*\.$key\.* ]]; then
+        target=($(remove_first_item "$i" "${target[@]}"))
         break
       fi
     done
   done
 
-  # Remove empty strings
-  target=("${(@)target:#""}")
+  # Filter out empty strings and .default entries
+  for i in "${target[@]}"; do
+    if [[ -n "$i" && ! "$i" =~ \.default$ ]]; then
+      result+=("$i")
+    fi
+  done
 
-  # Remove items ending in .default
-  target=("${(@)target:#*.default}")
-
-  echo "${target[@]}"
+  echo "${result[@]}"
 }
