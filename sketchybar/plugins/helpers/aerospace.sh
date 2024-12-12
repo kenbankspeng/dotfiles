@@ -75,7 +75,7 @@ remove_unmatched_items() {
   local sid="$1"
   aerospace_window_ids=$(aerospace_window_ids_in_workspace "$sid")
   sketchy_apps=$(sketchy_get_window_items_in_spaceid "$sid")
-  apps_to_remove=$(unmatched_items "$aerospace_window_ids" "$sketchy_apps" 2>/dev/tty)
+  apps_to_remove=$(unmatched_items "$aerospace_window_ids" "$sketchy_apps")
   if [[ -n "$apps_to_remove" ]]; then
     sketchy_remove_item "$apps_to_remove"
     maybe_add_default_item_to_spaceid "$sid"
