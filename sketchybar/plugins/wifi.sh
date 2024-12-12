@@ -10,15 +10,12 @@ sleep 1
 services=$(networksetup -listnetworkserviceorder)
 device=$(scutil --nwi | awk '/Network interfaces:/ {print $3}')
 
-# echo "@@ services: $services"
-# echo "@@ device: $device"
-
 icon="$ICON_NET_OFF"
 color="$OFF"
 
 if [ -n "$device" ]; then
   service=$(echo "$services" | sed -n "s/.*Hardware Port: \([^,]*\), Device: $device.*/\1/p")
-  # echo "@@ service: $service"
+  echo "DEBUG: device=$device service=$service"
 
   case $service in
   "iPhone USB")
@@ -31,20 +28,22 @@ if [ -n "$device" ]; then
     ;;
   "Wi-Fi")
     airportnetwork=$(networksetup -getairportnetwork "$device")
+    echo "DEBUG: airportnetwork=$airportnetwork"
     ssid=$(echo $airportnetwork | sed -n 's/Current Wi-Fi Network: \(.*\)/\1/p')
-    # echo "@@ ssid: $ssid"
+    echo "DEBUG: ssid=$ssid"
 
     if [[ $ssid == *iPhone* ]]; then
       icon="$ICON_NET_HOTSPOT"
       color="$ON"
     else
       wifi_status=$(networksetup -getairportpower "$device" | awk '{print $NF}')
-      # echo "@@ wifi_status: $wifi_status"
+      echo "DEBUG: wifi_status=$wifi_status"
       if [[ "$wifi_status" == "On" ]]; then
-        RSSI=$(sudo wdutil info | rg --only-matching 'RSSI.*?(-?\d+)' -r '$1')
-        if ((RSSI >= -50 && RSSI <= -30)); then
+        RSSI=$(sudo wdutil info | awk '/^WIFI$/,/^BLUETOOTH$/ {if ($1=="RSSI") print $3}')
+        echo "DEBUG: RSSI=$RSSI"
+        if [ "$RSSI" -ge -50 ] && [ "$RSSI" -le -30 ]; then
           icon="$ICON_NET_WIFI_3" # High signal
-        elif ((RSSI >= -70 && RSSI <= -51)); then
+        elif [ "$RSSI" -ge -70 ] && [ "$RSSI" -le -51 ]; then
           icon="$ICON_NET_WIFI_2" # Medium signal
         else
           icon="$ICON_NET_WIFI_1" # Low signal
@@ -56,8 +55,6 @@ if [ -n "$device" ]; then
 
   esac
 fi
-# echo "@@ color: $color"
-# echo "@@ icon: $icon"
 
 props=(
   background.height=20
