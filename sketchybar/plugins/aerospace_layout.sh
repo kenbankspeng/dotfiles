@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 source "$CONFIG_DIR/env.sh"
 source "$PLUGIN_DIR/helpers/yabai.sh"

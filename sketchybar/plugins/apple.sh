@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 confetti() {
   afplay "$CONFIG_DIR/plugins/helpers/Cheer.wav" &

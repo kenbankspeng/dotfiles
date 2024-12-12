@@ -1,4 +1,9 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
+
+
+log() {
+  echo "$1" >> "$CACHE_DIR/$LOG_FILE"
+}
 
 # check for whole word match in array
 item_in_array() {

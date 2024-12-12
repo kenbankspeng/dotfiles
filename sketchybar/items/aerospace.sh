@@ -1,10 +1,13 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 source "$PLUGIN_DIR/helpers/sketchy.sh"
 source "$PLUGIN_DIR/helpers/aerospace.sh"
 
 # create the cache directory
 mkdir -p "$CACHE_DIR"
+
+# Reset the logs
+: > "$CACHE_DIR/$LOG_FILE"
 
 sketchybar --add event aerospace_workspace_change
 sketchybar --add event yabai_window_created

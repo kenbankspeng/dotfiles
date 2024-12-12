@@ -1,18 +1,21 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 source "$PLUGIN_DIR/helpers/sketchy.sh"
 source "$CONFIG_DIR/plugins/helpers/util.sh"
 
 aerospace_workspaces() {
+  log "* aerospace_workspaces"
   echo "$(aerospace list-workspaces --all)"
 }
 
 aerospace_focused_workspace() {
+  log "* aerospace_focused_workspace"
   echo "$(aerospace list-workspaces --focused)"
 }
 
 # returns window_ids ex: 46356
 aerospace_window_ids_in_workspace() {
+  log "* aerospace_window_ids_in_workspace $1"
   local sid="$1"
   local json=$(aerospace list-windows --workspace "$sid" --json --format %{monitor-id}%{workspace}%{app-bundle-id}%{window-id}%{app-name})
   local filtered=$(echo "$json" | jq -r '.[] | ."window-id"' | jq -s -r 'join(" ")')
@@ -21,6 +24,7 @@ aerospace_window_ids_in_workspace() {
 
 # returns appname ex: Cursor from window_id ex: 46356
 aerospace_appname_from_window_id() {
+  log "* aerospace_appname_from_window_id $1"
   local window_id="$1"
   local json=$(aerospace list-windows --all --json --format '%{monitor-id}%{workspace}%{app-bundle-id}%{window-id}%{app-name}')
   local filtered=$(echo "$json" | jq -r --arg window_id "$window_id" '.[] | select(."window-id" == ($window_id | tonumber)) | ."app-name"')
@@ -28,6 +32,7 @@ aerospace_appname_from_window_id() {
 }
 
 aerospace_highlight_window_id() {
+  log "* aerospace_highlight_window_id $1"
   # ex: 46356
   local window_id=$1
   local prev_window_id
@@ -60,6 +65,7 @@ aerospace_highlight_window_id() {
 }
 
 aerospace_workspace_focus(){
+  log "* aerospace_workspace_focus $1"
   # for default item, use spaceid as window_id
   local sid=$1
   local item=$(sketchy_get_item_by_window_id $sid)
@@ -72,11 +78,14 @@ aerospace_workspace_focus(){
 }
 
 remove_unmatched_items() {
+  log "* remove_unmatched_items $1"
   local sid=$1
   aerospace_window_ids=$(aerospace_window_ids_in_workspace $sid)
+  log "1^^ $aerospace_window_ids"
   sketchy_apps=$(sketchy_get_window_items_in_spaceid $sid)
+  log "2^^ $sketchy_apps"
   apps_to_remove=$(unmatched_items "${aerospace_window_ids}" "${sketchy_apps}" 2>/dev/tty)
-
+  log "3^^ $apps_to_remove"
   if [[ -n "$apps_to_remove" ]]; then
     sketchy_remove_item $apps_to_remove
     maybe_add_default_item_to_spaceid $sid
@@ -84,6 +93,7 @@ remove_unmatched_items() {
 }
 
 aerospace_highlight_focused_window() {
+  log "* aerospace_highlight_focused_window"
   local window_id=$(yabai_get_focused_window_id)
   if [ -n "$window_id" ]; then
     aerospace_highlight_window_id $window_id
@@ -93,6 +103,7 @@ aerospace_highlight_focused_window() {
 }
 
 aerospace_workspace_change() {
+  log "* aerospace_workspace_change $1 $2"
   # default window uses sid as window_id
   local sid=$1
   local prev_sid=$2
@@ -105,6 +116,7 @@ aerospace_workspace_change() {
 }
 
 maybe_add_default_item_to_spaceid() {
+  log "* maybe_add_default_item_to_spaceid $1"
   local sid=$1
   if [ -z "$(sketchy_get_window_items_in_spaceid $sid)" ]; then
     local item="window.$sid.$sid.default"
@@ -125,6 +137,7 @@ maybe_add_default_item_to_spaceid() {
 }
 
 maybe_remove_default_item_from_spaceid() {
+  log "* maybe_remove_default_item_from_spaceid $1"
   local sid="$1"
   local items=$(sketchy_get_window_items_in_spaceid $sid)
   local item_count=$(echo "$items" | wc -w | tr -d ' ')
@@ -135,6 +148,7 @@ maybe_remove_default_item_from_spaceid() {
 
 
 aerospace_remove_window_id() {
+  log "* aerospace_remove_window_id $1"
   # ex: 46356
   local window_id=$1
   local sid=$(aerospace_focused_workspace)
@@ -148,6 +162,7 @@ aerospace_remove_window_id() {
 
 
 aerospace_new_window_id() {
+  log "* aerospace_new_window_id $1"
   # ex: 46356
   local window_id=$1
   local sid=$(aerospace_focused_workspace)
@@ -176,6 +191,7 @@ aerospace_new_window_id() {
 }
 
 aerospace_add_apps_in_spaceid() {
+  log "* aerospace_add_apps_in_spaceid $1"
   local sid=$1
 
   props=(

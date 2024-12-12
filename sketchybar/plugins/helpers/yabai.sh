@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 yabai_get_windows_in_space() {
   local sid="$1"
   local result=()

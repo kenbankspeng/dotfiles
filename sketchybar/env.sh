@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 source "$CONFIG_DIR/colors.sh"
 source "$CONFIG_DIR/icons.sh"
@@ -7,6 +7,7 @@ source "$CONFIG_DIR/icons.sh"
 export CACHE_DIR="$HOME/.cache/sketchybar"
 export PLUGIN_DIR="$CONFIG_DIR/plugins"
 export ITEM_DIR="$CONFIG_DIR/items"
+export LOG_FILE="aerospace.log"
 
 export ICON_FONT="sketchybar-app-font:Regular"
 export ICON_FONTSIZE=14
