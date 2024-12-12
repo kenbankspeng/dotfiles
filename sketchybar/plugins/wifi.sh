@@ -15,8 +15,7 @@ color="$OFF"
 
 if [ -n "$device" ]; then
   service=$(echo "$services" | sed -n "s/.*Hardware Port: \([^,]*\), Device: $device.*/\1/p")
-  echo "DEBUG: device=$device service=$service"
-
+  
   case $service in
   "iPhone USB")
     icon="$ICON_NET_USB"
@@ -28,19 +27,15 @@ if [ -n "$device" ]; then
     ;;
   "Wi-Fi")
     airportnetwork=$(networksetup -getairportnetwork "$device")
-    echo "DEBUG: airportnetwork=$airportnetwork"
     ssid=$(echo $airportnetwork | sed -n 's/Current Wi-Fi Network: \(.*\)/\1/p')
-    echo "DEBUG: ssid=$ssid"
 
     if [[ $ssid == *iPhone* ]]; then
       icon="$ICON_NET_HOTSPOT"
       color="$ON"
     else
       wifi_status=$(networksetup -getairportpower "$device" | awk '{print $NF}')
-      echo "DEBUG: wifi_status=$wifi_status"
       if [[ "$wifi_status" == "On" ]]; then
         RSSI=$(sudo wdutil info | awk '/^WIFI$/,/^BLUETOOTH$/ {if ($1=="RSSI") print $3}')
-        echo "DEBUG: RSSI=$RSSI"
         if [ "$RSSI" -ge -50 ] && [ "$RSSI" -le -30 ]; then
           icon="$ICON_NET_WIFI_3" # High signal
         elif [ "$RSSI" -ge -70 ] && [ "$RSSI" -le -51 ]; then
