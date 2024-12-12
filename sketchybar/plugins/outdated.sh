@@ -17,23 +17,23 @@ sum=$((sum + count))
 
 case "$sum" in
 0)
-	color=$GREEN
-	sum=$ICON_CHECKMARK
+	color="$GREEN"
+	sum="$ICON_CHECKMARK"
 	;;
 [1-2])
-	color=$YELLOW
+	color="$YELLOW"
 	;;
 [3-4])
-	color=$PEACH
+	color="$PEACH"
 	;;
 *)
-	color=$RED
+	color="$RED"
 	;;
 esac
 
 props=(
 	label="$sum"
 	icon.color="$color"
-	label.color="$color"
+  label.color="$color"
 )
 sketchybar --set "$NAME" "${props[@]}"

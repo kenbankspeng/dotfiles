@@ -24,7 +24,7 @@ remove_first_item() {
   local removed=false
 
   for item in "${list[@]}"; do
-    if [[ "$item" == "$item_to_delete" && $removed == false ]]; then
+    if [[ "$item" == "$item_to_delete" && "$removed" == false ]]; then
       removed=true
       continue
     fi
@@ -43,7 +43,7 @@ unmatched_items() {
 
   for key in "${source[@]}"; do
     for i in "${target[@]}"; do
-      if [[ $i == window.*."$key".* ]]; then
+      if [[ "$i" == "window.*.$key.*" ]]; then
         target=($(remove_first_item "$i" "${(@)target}"))
         break
       fi

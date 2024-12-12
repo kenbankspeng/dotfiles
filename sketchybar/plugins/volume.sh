@@ -8,29 +8,29 @@ source "$CONFIG_DIR/env.sh"
 if [ "$SENDER" = "volume_change" ]; then
   volume=$INFO
 
-  case $volume in
+  case "$volume" in
   [6-9][0-9] | 100)
-    icon=$ICON_VOLUME_3
+    icon="$ICON_VOLUME_3"
     ;;
   [3-5][0-9])
-    icon=$ICON_VOLUME_2
+    icon="$ICON_VOLUME_2"
     ;;
   [1-9] | [1-2][0-9])
-    icon=$ICON_VOLUME_1
+    icon="$ICON_VOLUME_1"
     ;;
-  *) icon=$ICON_VOLUME_0 ;;
+  *) icon="$ICON_VOLUME_0" ;;
   esac
 
   props=(
-    icon=$icon
-    icon.color=$LAVENDER
+    icon="$icon"
+    icon.color="$LAVENDER"
     label="$volume%"
-    label.color=$LAVENDER
+    label.color="$LAVENDER"
     icon.align="left"
     icon.padding_left=8
-    background.height=$ITEM_HEIGHT_WITH_LABEL
+    background.height="$ITEM_HEIGHT_WITH_LABEL"
   )
-  sketchybar --set $NAME "${props[@]}"
+  sketchybar --set "$NAME" "${props[@]}"
 fi
 
 if [ "$SENDER" = "mouse.clicked" ]; then

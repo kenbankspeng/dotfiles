@@ -11,32 +11,32 @@ fi
 
 case ${percentage} in
 9[0-9] | 100)
-  icon=$ICON_BATTERY_4 # full
+  icon="$ICON_BATTERY_4" # full
   ;;
 [6-8][0-9])
-  icon=$ICON_BATTERY_3 # strong
+  icon="$ICON_BATTERY_3" # strong
   ;;
 [3-5][0-9])
-  icon=$ICON_BATTERY_2 # half
+  icon="$ICON_BATTERY_2" # half
   ;;
 [1-2][0-9])
-  icon=$ICON_BATTERY_1 # low
+  icon="$ICON_BATTERY_1" # low
   ;;
-*) icon=$ICON_BATTERY_0 ;; # empty
+*) icon="$ICON_BATTERY_0" ;; # empty
 esac
 
-if [[ $charging != "" ]]; then
-  icon=$ICON_BATTERY_CHARGING
+if [[ "$charging" != "" ]]; then
+  icon="$ICON_BATTERY_CHARGING"
 fi
 
 props=(
-  icon=$icon
-  icon.color=$SKY
+  icon="$icon"
+  icon.color="$SKY"
   label="${percentage}%"
-  label.color=$SKY
-  background.height=$ITEM_HEIGHT_WITH_LABEL
+  label.color="$SKY"
+  background.height="$ITEM_HEIGHT_WITH_LABEL"
 )
-sketchybar --set $NAME "${props[@]}"
+sketchybar --set "$NAME" "${props[@]}"
 
 if [ "$SENDER" = "mouse.clicked" ]; then
   open "x-apple.systempreferences:com.apple.Battery-Settings.extension"

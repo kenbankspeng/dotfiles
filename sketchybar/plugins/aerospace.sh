@@ -11,7 +11,7 @@ log "------------"
 
 if [ "$SENDER" = "forced" ]; then
   for space in $(aerospace_workspaces); do
-    aerospace_add_apps_in_spaceid $space
+    aerospace_add_apps_in_spaceid "$space"
   done
   aerospace_highlight_focused_window
 elif [ "$SENDER" = "yabai_window_focused" ]; then
@@ -19,12 +19,12 @@ elif [ "$SENDER" = "yabai_window_focused" ]; then
   aerospace_highlight_focused_window
 elif [ "$SENDER" = "aerospace_workspace_change" ]; then
   log "$SENDER $PREV_WORKSPACE -> $FOCUSED_WORKSPACE"
-  aerospace_workspace_change $FOCUSED_WORKSPACE $PREV_WORKSPACE
+  aerospace_workspace_change "$FOCUSED_WORKSPACE" "$PREV_WORKSPACE"
 elif [ "$SENDER" = "yabai_window_created" ] || [ "$SENDER" = "yabai_window_deminimized" ]; then
-  aerospace_new_window_id $ID
+  aerospace_new_window_id "$ID"
   aerospace_highlight_focused_window
 elif [ "$SENDER" = "yabai_window_destroyed" ] || [ "$SENDER" = "yabai_window_minimized" ]; then
-  aerospace_remove_window_id $ID
+  aerospace_remove_window_id "$ID"
   aerospace_highlight_focused_window
 fi
 
