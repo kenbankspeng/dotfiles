@@ -151,9 +151,6 @@ aerospace_new_window_id() {
   local window_id="$1"
   local sid=$(aerospace_focused_workspace)
 
-  # remove default if it exists
-  maybe_remove_default_item_from_spaceid "$sid"
-
   # ex: Cursor
   appname=$(aerospace_appname_from_window_id "$window_id")
 
@@ -172,6 +169,11 @@ aerospace_new_window_id() {
     icon="$icon" icon.color="$OFF" \
     background.border_width="$BORDER_WIDTH" \
     click_script="aerospace focus --window-id $window_id"
+
+   # remove default if it exists
+  maybe_remove_default_item_from_spaceid "$sid"
+
+  aerospace_highlight_window_id "$window_id"
 }
 
 aerospace_add_apps_in_spaceid() {
