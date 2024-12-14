@@ -27,13 +27,14 @@ export ICON_DISK=􀥾 # SF Symbols - disk
 
 export ICON_LEGO=􀐛 # SF Symbols
 
-export ICON_STACK=􀏧     # SF Symbols
-export ICON_TILE=􀏟      # SF Symbols
-export ICON_FLOAT=􀇴     # SF Symbols
-export ICON_JOIN=      # NERD
-export ICON_FLATTEN=􀰢   # SF Symbols
-export ICON_BUTTON=􀆨    # SF Symbols
-export ICON_MOUSE_PTR=􀇰 # SF Symbols
+export ICON_STACK=􀏧       # SF Symbols
+export ICON_TILE=􀏟        # SF Symbols
+export ICON_FLOAT=􀇴       # SF Symbols
+export ICON_JOIN_LEFT=   # icomoon
+export ICON_JOIN_RIGHT=  # icomoon
+export ICON_FLATTEN=􀰢     # SF Symbols
+export ICON_BUTTON=􀆨      # SF Symbols
+export ICON_MOUSE_PTR=􀇰   # SF Symbols
 
 export ICON_CPU=􀧓 # SF Symbols
 

@@ -17,8 +17,11 @@ if [ "$SENDER" = "mouse.clicked" ]; then
     else
       sketchybar --set layout.auto_focus icon.color=$ON
     fi
-  elif [ "$NAME" = "layout.join" ]; then
+  elif [ "$NAME" = "layout.join_right" ]; then
     aerospace join-with left
+    aerospace join-with up
+  elif [ "$NAME" = "layout.join_left" ]; then
+    aerospace join-with right
     aerospace join-with up
   elif [ "$NAME" = "layout.enable" ]; then
     aerospace enable toggle
