@@ -5,8 +5,12 @@ source "$PLUGIN_DIR/helpers/sketchy.sh"
 sketchybar --add event update_outdated
 
 props=(
+	label.y_offset=0 # undo hack
+	label.padding_left=0 # undo hack
+  label.padding_right=0 # undo hack
+	icon.drawing=off
+	background.height="$LABEL_ONLY_HEIGHT"
 	icon="$ICON_LEGO"
-	background.height="$ITEM_HEIGHT_WITH_LABEL"
 	update_freq="$((60 * 60))" # once per hour
 	script="$PLUGIN_DIR/outdated.sh"
 )

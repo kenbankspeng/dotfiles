@@ -24,7 +24,11 @@ if [ "$SENDER" = "mouse.clicked" ]; then
     aerospace join-with right
     aerospace join-with up
   elif [ "$NAME" = "layout.enable" ]; then
-    aerospace enable toggle
+    if [ "$BUTTON" = "left" ]; then
+      aerospace enable toggle
+    elif [ "$BUTTON" = "right" ]; then
+      sketchybar --reload
+    fi
   elif [ "$NAME" = "layout.flatten" ]; then
     aerospace flatten-workspace-tree
   fi
