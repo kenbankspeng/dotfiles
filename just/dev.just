@@ -1,5 +1,7 @@
 set shell := ['zsh', '-cu']
 
+import 'colors.just'
+
 default:
   @just --justfile "$JUST/dev.just" --list | zsh -c "$JUSTGREP"
 
@@ -52,4 +54,12 @@ cloc:
 # git delta viewer
 gdelta *args:
   delta {{args}}
+
+# biome lint
+[no-cd]
+@lint:
+  print
+  print "{{BrightMagenta}}BIOME LINT"
+  print -- "----------------------------{{BrightCyan}}"
+  biome check --write
 
