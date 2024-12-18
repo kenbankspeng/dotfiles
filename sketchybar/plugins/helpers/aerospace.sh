@@ -52,7 +52,7 @@ aerospace_highlight_window_id() {
       local space_color=$(get_space_color "$prev_space")
       sketchybar --set "$prev_item" \
         icon.color="$OFF" \
-        background.border_color="$TRANSPARENT" \
+        background.border_width=0 \
         background.color="$space_color"
     fi
   fi
@@ -64,6 +64,7 @@ aerospace_highlight_window_id() {
     local space_color=$(get_space_color "$space")
     sketchybar --set "$item" \
       icon.color="$ON" \
+      background.border_width="$BORDER_WIDTH" \
       background.border_color="$ACTIVE" \
       background.color="$space_color"
   fi
@@ -119,16 +120,18 @@ maybe_add_default_item_to_spaceid() {
   local sid="$1"
   if [ -z "$(sketchy_get_window_items_in_spaceid "$sid")" ]; then
     local item="window.$sid.$sid.default"
+    local space_color=$(get_space_color "$sid")
     local props=(
       y_offset=1
       background.corner_radius=0
       background.height="$ITEM_HEIGHT"
+      background.color="$space_color"
       label.drawing=off
       icon.font="$ICON_FONT:$ICON_FONTSIZE"
     )
     sketchy_add_item "$item" left \
       --move "$item" before "divider.$sid" \
-      --set "$item" "${props[@]}" icon="·" background.border_width="$BORDER_WIDTH" \
+      --set "$item" "${props[@]}" icon="·" \
       click_script="aerospace workspace $sid"
     
     aerospace_highlight_window_id "$sid"
@@ -168,6 +171,7 @@ aerospace_new_window_id() {
 
   icon="$($CONFIG_DIR/icons_apps.sh "$appname")"
   item="window.$sid.$window_id.$appname"
+  space_color=$(get_space_color "$sid")
   props=(
     y_offset=1
     background.corner_radius=0
@@ -179,7 +183,6 @@ aerospace_new_window_id() {
     --move "$item" before "divider.$sid" \
     --set "$item" "${props[@]}" \
     icon="$icon" icon.color="$OFF" \
-    background.border_width="$BORDER_WIDTH" \
     click_script="aerospace focus --window-id $window_id"
 
    # remove default if it exists
@@ -216,7 +219,6 @@ aerospace_add_apps_in_spaceid() {
         --move "$item" before "divider.$sid" \
         --set "$item" "${props[@]}" \
         icon="$icon" icon.color="$OFF" \
-        background.border_width="$BORDER_WIDTH" \
         click_script="aerospace focus --window-id $window_id"
     done
   else
