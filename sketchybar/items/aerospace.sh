@@ -36,6 +36,5 @@ sketchy_add_item space_listener left \
 workspaces=("0" $(aerospace_workspaces))
 for sid in "${workspaces[@]}"; do
   sketchy_add_item "divider.$sid" left \
-    --set "divider.$sid" background.height=1 \
-    background.color=$DIVIDER
+    --set "divider.$sid" background.height=0
 done

@@ -57,6 +57,7 @@ export BAR=0xff141421
 export OFF="$TEXT"
 export ON=0xff00ff00
 export ACTIVE=0xffa6e3a1 # selection background
-export DIVIDER=0x80a6e3a1
+
+export CONFIG_SPACE=0xff203065
 export EVEN_SPACE=0xff004525
-export ODD_SPACE=0xff002545
+export ODD_SPACE=0xff203065

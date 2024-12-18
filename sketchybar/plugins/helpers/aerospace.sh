@@ -194,7 +194,6 @@ aerospace_add_apps_in_spaceid() {
   local space_color=$(get_space_color "$sid")
 
   props=(
-    y_offset=1
     background.corner_radius=0
     background.height="$ITEM_HEIGHT"
     background.color="$space_color"
