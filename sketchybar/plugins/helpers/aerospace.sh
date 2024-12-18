@@ -41,8 +41,6 @@ aerospace_highlight_window_id() {
   local window_id="$1"
   local prev_window_id
 
-
-
   if [ -f "$CACHE_DIR/highlighted" ]; then
     read -r prev_window_id <"$CACHE_DIR/highlighted"
   fi
