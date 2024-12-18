@@ -32,3 +32,8 @@ sketchy_get_item_by_window_id() {
   local window_id="$1"
   echo "$(sketchybar --query bar | jq -r --arg window_id "$window_id" '.items[] | select(test("^window\\.\\d+\\." + $window_id + "\\..+$"))')"
 }
+
+sketchy_get_space_by_item() {
+  local item="$1"
+  echo "$item" | awk -F'.' '{print $2}'
+}

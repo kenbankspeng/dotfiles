@@ -3,6 +3,15 @@
 source "$PLUGIN_DIR/helpers/sketchy.sh"
 source "$CONFIG_DIR/plugins/helpers/util.sh"
 
+get_space_color() {
+  local sid="$1"
+  local space_color="$EVEN_SPACE"
+  if [ $((sid % 2)) -eq 0 ]; then
+    space_color="$ODD_SPACE"
+  fi
+  echo "$space_color"
+}
+
 aerospace_workspaces() {
   echo "$(aerospace list-workspaces --all)"
 }
@@ -33,6 +42,7 @@ aerospace_highlight_window_id() {
   local prev_window_id
 
 
+
   if [ -f "$CACHE_DIR/highlighted" ]; then
     read -r prev_window_id <"$CACHE_DIR/highlighted"
   fi
@@ -40,20 +50,24 @@ aerospace_highlight_window_id() {
   if [ -n "$prev_window_id" ] && [ "$prev_window_id" != "$window_id" ]; then
     prev_item=$(sketchy_get_item_by_window_id "$prev_window_id")
     if [ -n "$prev_item" ]; then
+      local prev_space=$(sketchy_get_space_by_item "$prev_item")
+      local space_color=$(get_space_color "$prev_space")
       sketchybar --set "$prev_item" \
         icon.color="$OFF" \
         background.border_color="$TRANSPARENT" \
-        background.color="$TRANSPARENT"
+        background.color="$space_color"
     fi
   fi
 
   # item ex: window.3.66286.WezTerm
   item=$(sketchy_get_item_by_window_id "$window_id")
   if [ -n "$item" ]; then
+    local space=$(sketchy_get_space_by_item "$item")
+    local space_color=$(get_space_color "$space")
     sketchybar --set "$item" \
       icon.color="$ON" \
       background.border_color="$ACTIVE" \
-      background.color="$BLACK"
+      background.color="$space_color"
   fi
 
   echo "$window_id" >"$CACHE_DIR/highlighted"
@@ -179,10 +193,13 @@ aerospace_new_window_id() {
 aerospace_add_apps_in_spaceid() {
   local sid="$1"
 
+  local space_color=$(get_space_color "$sid")
+
   props=(
     y_offset=1
     background.corner_radius=0
     background.height="$ITEM_HEIGHT"
+    background.color="$space_color"
     label.drawing=off
     icon.font="$ICON_FONT:$ICON_FONTSIZE"
   )

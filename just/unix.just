@@ -18,7 +18,7 @@ sed3 *args:
   sad {{args}}
 
 # new grep for find within glob pattern
-@grep *args:
+@gr *args:
   print "rg (ripgrep)"
   print
   rg {{args}}
