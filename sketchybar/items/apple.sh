@@ -8,6 +8,8 @@ props=(
 	icon.font="$ICON_FONT:18"
 	icon.color="$SKY"
 	padding_left=10
+	background.corner_radius=0
+  background.color="$GROUP"
 	script="$PLUGIN_DIR/apple.sh"
 )
 

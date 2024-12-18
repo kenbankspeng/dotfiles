@@ -3,7 +3,13 @@
 source "$CONFIG_DIR/env.sh"
 
 # reprocess on mouse click
-sketchybar --set "$NAME" label="?" icon.color="$BLUE"
+props=(
+  label="?"
+  icon.color="$BLUE"
+  background.corner_radius=0
+  background.color="$GROUP"
+)
+sketchybar --set "$NAME" "${props[@]}"
 
 sum=0
 
@@ -35,5 +41,7 @@ props=(
 	label="$sum"
 	icon.color="$color"
   label.color="$color"
+	background.corner_radius=0
+  background.color="$GROUP"
 )
 sketchybar --set "$NAME" "${props[@]}"

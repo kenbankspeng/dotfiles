@@ -122,7 +122,6 @@ maybe_add_default_item_to_spaceid() {
     local item="window.$sid.$sid.default"
     local space_color=$(get_space_color "$sid")
     local props=(
-      y_offset=1
       background.corner_radius=0
       background.height="$ITEM_HEIGHT"
       background.color="$space_color"
@@ -173,7 +172,6 @@ aerospace_new_window_id() {
   item="window.$sid.$window_id.$appname"
   space_color=$(get_space_color "$sid")
   props=(
-    y_offset=1
     background.corner_radius=0
     background.height="$ITEM_HEIGHT"
     label.drawing=off
@@ -197,6 +195,7 @@ aerospace_add_apps_in_spaceid() {
   local space_color=$(get_space_color "$sid")
 
   props=(
+    y_offset=1
     background.corner_radius=0
     background.height="$ITEM_HEIGHT"
     background.color="$space_color"

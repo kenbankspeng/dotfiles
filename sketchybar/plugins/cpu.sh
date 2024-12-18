@@ -15,6 +15,8 @@ props=(
   icon.font="$FONT:$((ICON_FONTSIZE - 2))"
   label="$cpuload"
   label.color="$SAPPHIRE"
+  background.corner_radius=0
+  background.color="$GROUP"
 )
 
 if [ -n "$cpuload" ]; then

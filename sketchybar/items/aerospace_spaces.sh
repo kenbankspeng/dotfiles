@@ -23,7 +23,7 @@ props=(
 )
 sketchy_add_item space_listener left \
   --set space_listener "${props[@]}" \
-  script="$PLUGIN_DIR/aerospace.sh" \
+  script="$PLUGIN_DIR/aerospace_spaces.sh" \
   --subscribe space_listener \
   aerospace_workspace_change \
   yabai_window_created \
