@@ -56,8 +56,6 @@ props=(
   icon.font="$ICOMOON:20"
   icon=$icon
   icon.color="$color"
-  background.corner_radius=0
-  background.color="$GROUP"
 )
 sketchybar --set "$NAME" "${props[@]}"
 

@@ -58,7 +58,7 @@ export OFF="$TEXT"
 export ON=0xff00ff00
 export ACTIVE=0xffa6e3a1 # selection background
 
-export GROUP=0xff252540
+export GROUP=0xff203065
 export EVEN_SPACE=0xff004525
 export ODD_SPACE=0xff203065
 export DIVIDER="$GREEN"

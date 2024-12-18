@@ -36,8 +36,6 @@ props=(
   label="${percentage}%"
   label.color="$SKY"
   background.height="$ITEM_HEIGHT"
-  background.corner_radius=0
-  background.color="$GROUP"
 )
 sketchybar --set "$NAME" "${props[@]}"
 

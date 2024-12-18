@@ -8,8 +8,6 @@ props=(
   icon.font="$FONT:$FONTSIZE"
   label.font="$FONT:$((FONTSIZE - 1))"
   update_freq=1
-  background.corner_radius=0
-  background.color="$GROUP"
   script="$PLUGIN_DIR/clock.sh"
 )
 sketchy_add_item time right --set time "${props[@]}" \

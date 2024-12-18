@@ -6,8 +6,6 @@ source "$CONFIG_DIR/env.sh"
 props=(
   label="?"
   icon.color="$BLUE"
-  background.corner_radius=0
-  background.color="$GROUP"
 )
 sketchybar --set "$NAME" "${props[@]}"
 
@@ -41,7 +39,5 @@ props=(
 	label="$sum"
 	icon.color="$color"
   label.color="$color"
-	background.corner_radius=0
-  background.color="$GROUP"
 )
 sketchybar --set "$NAME" "${props[@]}"
