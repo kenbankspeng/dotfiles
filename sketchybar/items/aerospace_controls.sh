@@ -42,16 +42,14 @@ sketchy_add_item layout.float left \
 
 # join windows left
 sketchy_add_item layout.join_left left \
-  --set layout.join_left icon="$ICON_JOIN_LEFT" "${props[@]}" \
+  --set layout.join_left icon="$ICON_JOIN_LEFT" "${props[@]}" icon.font="$ICOMOON:20" \
   --move layout.join_left before stack.divider.4 \
-  icon.font="$ICOMOON:20" \
   --subscribe layout.join_left mouse.clicked
 
 # join windows right
 sketchy_add_item layout.join_right left \
-  --set layout.join_right icon="$ICON_JOIN_RIGHT" "${props[@]}" \
+  --set layout.join_right icon="$ICON_JOIN_RIGHT" "${props[@]}" icon.font="$ICOMOON:20" \
   --move layout.join_right before stack.divider.5 \
-  icon.font="$ICOMOON:20" \
   --subscribe layout.join_right mouse.clicked
 
 # flatten workspace tree
