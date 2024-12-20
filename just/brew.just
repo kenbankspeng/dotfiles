@@ -98,3 +98,16 @@ default:
   brew remove {{ args }}
   brew autoremove
   brew cleanup
+
+# brew tree for package
+@btp *args:
+  print "brew tree for package" {{args}}
+  print
+  brew deps --tree {{args}}
+
+# brew packages that depend on
+@bdo *args:
+  print "brew packages that are used by" {{args}}
+  print
+  brew uses --installed {{args}}
+
