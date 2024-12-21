@@ -6,9 +6,6 @@ return {
     dependencies = {
       -- status updates for LSP loading - bottom right corner
       { 'j-hui/fidget.nvim', opts = {} },
-
-      -- Allows extra capabilities provided by nvim-cmp
-      'hrsh7th/cmp-nvim-lsp',
     },
     opts = function(_, opts)
       -- Enable the following language servers
