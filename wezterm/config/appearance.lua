@@ -8,6 +8,10 @@ return {
    webgpu_power_preference = 'HighPerformance',
    webgpu_preferred_adapter = gpu_adapters:pick_best(),
 
+   -- cursor
+   -- SteadyBlock BlinkingBlock SteadyUnderline BlinkingUnderline SteadyBar BlinkingBar
+   default_cursor_style = 'SteadyBar',
+
    -- color scheme
    colors = colors,
 
