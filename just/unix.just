@@ -5,10 +5,6 @@ default:
 
 ############  UNIX UTIL  ############
 
-# awk for processing delimited files
-gawk *args:
-  awk {{args}}
- 
 # sed alternative for find/replace withing files
 sed2 *args:
   sd {{args}}

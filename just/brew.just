@@ -84,6 +84,13 @@ default:
   print
   brew outdated --greedy --verbose
 
+# brew search
+@bs *args:
+  print "brew search" {{args}}
+  print
+  brew search {{args}}
+
+
 # brew upgrade (greedy)
 @bu:
   print "brew upgrade (greedy) /w cleanup"
