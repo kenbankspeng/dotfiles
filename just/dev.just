@@ -63,3 +63,7 @@ gdelta *args:
   print -- "----------------------------{{BrightCyan}}"
   biome check --write
 
+# guthub cli
+@hb *args:
+  hub {{args}}
+
