@@ -15,7 +15,8 @@ default:
   print
   print "{{BrightMagenta}}MISE"
   print -- "----{{BrightBlue}}"
-  mise outdated
+  mise self-update
+  mise outdated --bump
   print
   print "{{BrightMagenta}}RYE"
   print -- "---{{BrightBlue}}"

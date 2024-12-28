@@ -63,6 +63,18 @@ bm *args:
 regex *args:
   greg {{args}}
 
+# 1-line weather
+@w:
+  curl "wttr.in/London+ON?format=%c%t(%f)+%p+%m\n"
+
+# weather report
+@wr:
+  curl "wttr.in/London+ON?0"
+
+# weather forcast
+@wf:
+  curl "wttr.in/London+ON"
+
 # TBD: batgrep, batman, batpipe, batwatch, batdiff, prettybat
 
 
