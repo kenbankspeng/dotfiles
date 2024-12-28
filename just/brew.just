@@ -20,7 +20,6 @@ default:
   print
   print "{{BrightMagenta}}UV (python)"
   print -- "---{{BrightBlue}}"
-  uv self update
   uv tool upgrade --all
   print
   print "{{BrightMagenta}}GO (go)"
