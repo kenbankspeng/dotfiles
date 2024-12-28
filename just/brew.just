@@ -9,34 +9,34 @@ default:
 
 # outdated
 @o:
-  print "{{BrightMagenta}}BREW (mac apps, misc)"
-  print -- "----{{BrightBlue}}"
+  print "{{BrightMagenta}}BREW: mac apps, binaries"
+  print -- "------------------------{{BrightBlue}}"
   brew outdated --greedy
   print
-  print "{{BrightMagenta}}MISE (uv, bun, go, node, python...)"
-  print -- "----{{BrightBlue}}"
+  print "{{BrightMagenta}}MISE: uv, bun, go, node, python..."
+  print -- "----------------------------------{{BrightBlue}}"
   mise self-update
   mise outdated --bump
   print
-  print "{{BrightMagenta}}UV (python)"
-  print -- "---{{BrightBlue}}"
+  print "{{BrightMagenta}}UV: python packages"
+  print -- "-------------------{{BrightBlue}}"
   uv tool upgrade --all
   print
-  print "{{BrightMagenta}}GO (go)"
-  print -- "------{{BrightBlue}}"
+  print "{{BrightMagenta}}GO: go tools"
+  print -- "------------{{BrightBlue}}"
   print "gotools"
   gotools
   print
-  print "{{BrightMagenta}}RUSTUP (rust)"
-  print -- "------{{BrightBlue}}"
+  print "{{BrightMagenta}}RUSTUP: rust / cargo"
+  print -- "--------------------{{BrightBlue}}"
   rustup check
   print
-  print "{{BrightMagenta}}CARGO (rust)"
-  print -- "-----{{BrightBlue}}"
+  print "{{BrightMagenta}}CARGO: rust packages"
+  print -- "--------------------{{BrightBlue}}"
   cargo install-update -a
   print
-  print "{{BrightMagenta}}BUN (js)"
-  print -- "---{{BrightBlue}}"
+  print "{{BrightMagenta}}BUN: node js packages"
+  print -- "---------------------{{BrightBlue}}"
   bun -g outdated 
 
 # brew tree (casks and formulas)
