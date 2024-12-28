@@ -6,6 +6,7 @@ bun = "latest"
 pipx = "latest"
 deno = "latest"
 go = "latest"
+uv = "latest"
 
 [settings]
 experimental = true
