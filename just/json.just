@@ -6,8 +6,12 @@ default:
 ############  JSON UTIL  ############
 
 # jq json processing
-jsn *args:
+jq1 *args:
   jq {{args}}
+
+# jq.node json processing
+jq2 *args:
+  jqn {{args}}
 
 # yq: jq-like for yaml, json, xml, properties, csv and tsv
 yaml *args:
