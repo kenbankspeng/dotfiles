@@ -43,3 +43,7 @@ mod dev
 
 # ai
 mod ai
+
+# pdf
+mod pdf
+

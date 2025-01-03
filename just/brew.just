@@ -113,7 +113,7 @@ default:
 
 # brew packages that depend on
 @bdo *args:
-  print "brew packages that are used by" {{args}}
+  print "brew packages that depend on" {{args}}
   print
   brew uses --installed {{args}}
 
