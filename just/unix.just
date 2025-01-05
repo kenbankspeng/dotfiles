@@ -28,9 +28,14 @@ sed3 *args:
 @gd *args:
   print $(command tere "$@")
 
-# /bin/ls
-@l *args:
-  /bin/ls {{args}}
+# do not show hidden
+l *args:
+  #!/usr/bin/env zsh
+  if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+    lsd --ignore-config --no-symlink --blocks name --blocks git {{args}}
+  else
+    lsd --ignore-config --no-symlink -1
+  fi
 
 # new ls (git aware)
 #
