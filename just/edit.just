@@ -10,8 +10,8 @@ default:
 # list just modules
 
 # new vscode
-code:
-  cursor .
+code *args:
+  cursor {{args}}
 
 # git tui
 g:
