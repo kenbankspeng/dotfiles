@@ -11,7 +11,16 @@ default:
 
 # new vscode
 code *args:
-  cursor {{args}}
+  #!/usr/bin/env zsh
+  if [ -n "{{args}}" ]; then
+    print "{{BrightMagenta}}cursor {{args}}"
+    print
+    cursor {{args}}
+  else
+    print "{{BrightMagenta}}cursor ."
+    print
+    cursor .
+  fi
 
 # git tui
 g:
@@ -27,7 +36,16 @@ m *args:
 
 # nvim tui
 n *args:
-  nvim {{args}}
+  #!/usr/bin/env zsh
+  if [ -n "{{args}}" ]; then
+    print "{{BrightMagenta}}nvim {{args}}"
+    print
+    nvim {{args}}
+  else
+    print "{{BrightMagenta}}nvim ."
+    print
+    nvim .
+  fi
 
 # micro tui
 mic *args:
@@ -35,5 +53,13 @@ mic *args:
 
 # zed editor
 z *args:
-  zed {{args}}
-
+  #!/usr/bin/env zsh
+  if [ -n "{{args}}" ]; then
+    print "{{BrightMagenta}}zed {{args}}"
+    print
+    zed {{args}}
+  else
+    print "{{BrightMagenta}}zed ."
+    print
+    zed .
+  fi
