@@ -36,16 +36,7 @@ m *args:
 
 # nvim tui
 n *args:
-  #!/usr/bin/env zsh
-  if [ -n "{{args}}" ]; then
-    print "{{BrightMagenta}}nvim {{args}}"
-    print
     nvim {{args}}
-  else
-    print "{{BrightMagenta}}nvim ."
-    print
-    nvim .
-  fi
 
 # micro tui
 mic *args:

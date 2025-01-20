@@ -58,7 +58,7 @@ ls *args:
   else
     lsd {{args}}
   fi
-  
+
 # new ls (tree + git)
 @lt *args:
   lsd --tree --no-symlink --depth 2 -al --blocks name --blocks git {{args}}
@@ -104,7 +104,7 @@ path:
       }
   }'
 
-# watch a directory/file for changes 
+# watch a directory/file for changes
 w:
   watch
 
@@ -115,15 +115,16 @@ x:
 
 # remove .DS_store
 @clean:
-  print "recursively remove .DS_store"
+  print "recursively remove .DS_store and .node_modules"
   fd --unrestricted '^\.DS_Store$' --type file --exec-batch rm
+  fd --unrestricted '^node_modules$' --type directory --exec-batch rm -rf
 
 # remove .DS_store
 @sudoclean:
-  print "powerfully recursively remove .DS_store"
+  print "powerfully recursively remove .DS_store and .node_modules"
   sudo fd --unrestricted '^\.DS_Store$' --type file --exec-batch rm
+  sudo fd --unrestricted '^node_modules$' --type directory --exec-batch rm -rf
 
 # rm -rf
 @zap *args:
   rm -rf {{args}}
-
