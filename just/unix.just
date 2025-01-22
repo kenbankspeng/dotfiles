@@ -5,6 +5,10 @@ default:
 
 ############  UNIX UTIL  ############
 
+# new copy
+cp *args:
+  ditto {{args}}
+
 # sed alternative for find/replace withing files
 sed2 *args:
   sd {{args}}
