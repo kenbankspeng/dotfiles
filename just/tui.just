@@ -34,3 +34,6 @@ cs:
 tm:
   zellij
 
+# network monitor
+sniff:
+  sudo sniffnet

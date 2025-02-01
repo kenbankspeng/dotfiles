@@ -29,8 +29,8 @@ mod json
 # disk util
 mod disk
 
-# curl
-mod curl
+# http / curl
+mod http
 
 # sql
 mod sql
@@ -47,3 +47,5 @@ mod ai
 # pdf
 mod pdf
 
+# web server
+mod ws
