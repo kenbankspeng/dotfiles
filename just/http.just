@@ -18,6 +18,7 @@ default:
   hurl --test {{args}}
 
 # new httpie
+# http GET 'https://api.open-meteo.com/v1/forecast' latitude==42.9849 longitude==-81.2453 current_weather==true
 http *args:
   xh {{args}}
 

@@ -112,11 +112,6 @@ path:
 w:
   watch
 
-# x GET 'https://api.open-meteo.com/v1/forecast' latitude==42.9849 longitude==-81.2453 current_weather==true
-# send http requests
-x:
-  xh
-
 # remove .DS_store
 @clean:
   print "recursively remove .DS_store and .node_modules"
