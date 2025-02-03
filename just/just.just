@@ -49,3 +49,6 @@ mod pdf
 
 # web server
 mod ws
+
+# shell
+mod shell
