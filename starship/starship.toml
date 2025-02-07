@@ -8,6 +8,10 @@ command_timeout = 5000
 ###########  SEGMENTS  #############
 
 format = """
+
+$line_break\
+
+
 [](fg:color_shell)\
 ${custom.shicon}\
 $jobs\
@@ -34,61 +38,13 @@ ${custom.direnv}\
 $fill\
 $character\
 $cmd_duration\
+
 $line_break\
+$username\
 $shlvl\
 
-$hostname\
-$localip\
-$singularity\
-$kubernetes\
-$vcsh\
-$fossil_branch\
-$fossil_metrics\
-$hg_branch\
-$pijul_channel\
-$docker_context\
-$package\
-$c\
-$cmake\
-$cobol\
-$daml\
-$dart\
-$dotnet\
-$elixir\
-$elm\
-$erlang\
-$fennel\
-$gleam\
-$guix_shell\
-$haskell\
-$haxe\
-$helm\
-$java\
-$julia\
-$kotlin\
-$gradle\
-$nim\
-$ocaml\
-$opa\
-$perl\
-$php\
-$pulumi\
-$purescript\
-$quarto\
-$raku\
-$rlang\
-$red\
-$ruby\
-$scala\
-$solidity\
-$swift\
-$terraform\
-$typst\
-$vlang\
-$vagrant\
+
 $buf\
-$nix_shell\
-$conda\
 $meson\
 $spack\
 $memory_usage\
@@ -102,13 +58,22 @@ $sudo\
 $status\
 $container\
 """
-# $username
+
+
+# $vlang
+# $vagrant
+# $typst
+# $pulumi
+# $fennel
+# $package
+# $docker_context
+# $kubernetes
+# $localip
+# $hostname
 # $env_var
 # $battery
 # $os
 # $time
-# $shell
-# $custom
 
 ###########  COLORS  #############
 
@@ -128,6 +93,11 @@ color_direnv = '#d1a3fd'          # green - choosen using oklch
 color_direnv_text = '#261f2f'     # black 92% opacity
 
 ############  SEGMENT SPECS  ############
+
+
+
+[username]
+format = '[$user ]($style)'
 
 # prompt
 [shlvl]
@@ -244,8 +214,6 @@ time_format = "%R"                         # Hour:Minute Format
 style = "bg:color_time fg:color_time_text"
 format = '[$time]($style)'
 
-[package]
-disabled = true
 
 
 
