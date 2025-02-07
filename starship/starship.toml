@@ -11,6 +11,8 @@ format = """
 [](fg:color_shell)\
 $shlvl\
 ${custom.shicon}\
+$jobs\
+[ ](bg:color_shell fg:color_shell_text)\
 [](fg:color_shell bg:color_directory)\
 $directory\
 [](fg:color_directory bg:color_lang)\
@@ -33,7 +35,7 @@ $character\
 $cmd_duration\
 $line_break\
 [⦿](fg:#eba0ad) \
-$username\
+$direnv\
 $hostname\
 $localip\
 $singularity\
@@ -94,21 +96,18 @@ $gcloud\
 $openstack\
 $azure\
 $nats\
-$direnv\
-$env_var\
 $crystal\
-$custom\
 $sudo\
-$cmd_duration\
-$jobs\
-$battery\
 $status\
-$os\
 $container\
-$shell\
-$character"""
-
+"""
+# $username
+# $env_var
+# $battery
+# $os
 # $time
+# $shell
+# $custom
 
 ###########  COLORS  #############
 
@@ -127,6 +126,9 @@ color_time_text = '#251415'      # black 92% opacity
 
 ############  SEGMENT SPECS  ############
 
+[direnv]
+disabled = false
+
 [shlvl]
 disabled = false
 style = "bg:color_shell fg:color_shell_text"
@@ -140,7 +142,14 @@ threshold = 2
 command = "~/.config/starship/shicon"
 when = true
 style = "bg:color_shell fg:color_shell_text"
-format =  "[$output ]($style)"
+format =  "[$output]($style)"
+
+[jobs]
+symbol = '+'
+number_threshold = 1
+symbol_threshold = 1
+style = "bg:color_time fg:color_time_text"
+format = '[$symbol$number]($style)'
 
 [directory]
 style = "bg:color_directory fg:color_directory_text"
@@ -231,4 +240,6 @@ format = '[$time]($style)'
 
 [package]
 disabled = true
+
+
 
