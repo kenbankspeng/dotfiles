@@ -16,8 +16,11 @@ $directory\
 [](fg:color_directory bg:color_lang)\
 $nodejs\
 $deno\
+$golang\
 $python\
 $lua\
+$rust\
+$zig\
 [](fg:color_lang bg:color_git)\
 $git_branch\
 $git_commit\
@@ -28,7 +31,84 @@ $git_status\
 $fill\
 $character\
 $cmd_duration\
-\n[⦿](fg:#eba0ad) """
+$line_break\
+[⦿](fg:#eba0ad) \
+$username\
+$hostname\
+$localip\
+$singularity\
+$kubernetes\
+$vcsh\
+$fossil_branch\
+$fossil_metrics\
+$hg_branch\
+$pijul_channel\
+$docker_context\
+$package\
+$c\
+$cmake\
+$cobol\
+$daml\
+$dart\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$fennel\
+$gleam\
+$guix_shell\
+$haskell\
+$haxe\
+$helm\
+$java\
+$julia\
+$kotlin\
+$gradle\
+$nim\
+$ocaml\
+$opa\
+$perl\
+$php\
+$pulumi\
+$purescript\
+$quarto\
+$raku\
+$rlang\
+$red\
+$ruby\
+$scala\
+$solidity\
+$swift\
+$terraform\
+$typst\
+$vlang\
+$vagrant\
+$buf\
+$nix_shell\
+$conda\
+$meson\
+$spack\
+$memory_usage\
+$aws\
+$gcloud\
+$openstack\
+$azure\
+$nats\
+$direnv\
+$env_var\
+$crystal\
+$custom\
+$sudo\
+$cmd_duration\
+$jobs\
+$battery\
+$status\
+$os\
+$container\
+$shell\
+$character"""
+
+# $time
 
 ###########  COLORS  #############
 
@@ -39,9 +119,9 @@ color_shell_text = '#251415'     # black 92% opacity
 color_directory = '#22c5c7'      # green - choosen using oklch
 color_directory_text = '#112424' # black 92% opacity
 color_lang = '#3a9ef4'           # blue - choosen using oklch
-color_lang_text = '#101D2C'      # black 92% opacity
+color_lang_text = '#101d2c'      # black 92% opacity
 color_git = '#fef1b9'            # yellow - adjusted
-color_git_text = '#2F2D23'       # black 92% opacity
+color_git_text = '#2f2d23'       # black 92% opacity
 color_time = '#da6871'           # red - choosen using oklch
 color_time_text = '#251415'      # black 92% opacity
 
@@ -49,7 +129,8 @@ color_time_text = '#251415'      # black 92% opacity
 
 [shlvl]
 disabled = false
-format = "[$symbol](bg:color_shell fg:color_shell_text)"
+style = "bg:color_shell fg:color_shell_text"
+format = "[$symbol]($style)"
 repeat = true
 symbol = ""
 repeat_offset = 1
@@ -68,8 +149,24 @@ truncation_length = 3
 truncation_symbol = ""
 home_symbol = ""
 
+[golang]
+symbol = "go"
+style = "bg:color_lang fg:color_lang_text"
+format = '[ $symbol ($version) ]($style)'
+
 [lua]
 symbol = ""
+style = "bg:color_lang fg:color_lang_text"
+format = '[ $symbol ($version) ]($style)'
+
+
+[zig]
+symbol = ""
+style = "bg:color_lang fg:color_lang_text"
+format = '[ $symbol ($version) ]($style)'
+
+[rust]
+symbol = ""
 style = "bg:color_lang fg:color_lang_text"
 format = '[ $symbol ($version) ]($style)'
 
