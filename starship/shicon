@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [[ $STARSHIP_SHELL == "nu" ]]; then
-    echo 󰢀 # N
+    echo 󰫻󰬂 # N
 elif [[ $STARSHIP_SHELL == "zsh" ]]; then
     echo  # apple
 elif [[ $STARSHIP_SHELL == "bash" ]]; then

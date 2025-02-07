@@ -58,7 +58,8 @@ threshold = 2
 [custom.shicon]
 command = "~/.config/starship/shicon"
 when = true
-format =  "[$output ](bg:color_shell fg:color_shell_text)"
+style = "bg:color_shell fg:color_shell_text"
+format =  "[$output ]($style)"
 
 [directory]
 style = "bg:color_directory fg:color_directory_text"
