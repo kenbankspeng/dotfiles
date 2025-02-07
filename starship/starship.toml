@@ -29,13 +29,14 @@ $git_commit\
 $git_state\
 $git_metrics\
 $git_status\
-[](fg:color_git)\
+[](fg:color_git bg:color_direnv)\
+${custom.direnv}\
+[](fg:color_direnv)\
 $fill\
 $character\
 $cmd_duration\
 $line_break\
 [⦿](fg:#eba0ad) \
-$direnv\
 $hostname\
 $localip\
 $singularity\
@@ -123,11 +124,10 @@ color_git = '#fef1b9'            # yellow - adjusted
 color_git_text = '#2f2d23'       # black 92% opacity
 color_time = '#da6871'           # red - choosen using oklch
 color_time_text = '#251415'      # black 92% opacity
+color_direnv = '#3a9ef4'          # green - choosen using oklch
+color_direnv_text = '#101d2c'     # black 92% opacity
 
 ############  SEGMENT SPECS  ############
-
-[direnv]
-disabled = false
 
 [shlvl]
 disabled = false
@@ -167,7 +167,6 @@ format = '[ $symbol ($version) ]($style)'
 symbol = ""
 style = "bg:color_lang fg:color_lang_text"
 format = '[ $symbol ($version) ]($style)'
-
 
 [zig]
 symbol = ""
@@ -221,16 +220,22 @@ ahead = ""
 style = "bg:color_git fg:color_git_text"
 format = '[$all_status$ahead_behind ]($style)'
 
+[custom.direnv]
+command = "~/.config/starship/envicon"
+when = "~/.config/starship/envwhen"
+style = "bg:color_direnv fg:color_direnv_text"
+format = "[$output]($style)"
+
+[fill]
+symbol = ' '
+
 [cmd_duration]
-format = "[ $duration]($style)"
 style = "fg:bright-white"
+format = "[ $duration]($style)"
 
 [character]
 success_symbol = ''
 error_symbol = '[ ✗‼](#da6871) '
-
-[fill]
-symbol = ' '
 
 [time]
 disabled = false
