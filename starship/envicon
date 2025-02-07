@@ -2,7 +2,7 @@
 
 allowed=$(direnv status | grep -q "Found RC allowed 0" && echo true || echo false) 
 if [[ $allowed == true ]]; then
-    echo "env " # checkmark
+    echo "" # shield checkmark
 else
-    echo "env " # no entry
+    echo "" # shield not allowed
 fi

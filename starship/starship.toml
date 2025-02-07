@@ -124,8 +124,8 @@ color_git = '#fef1b9'            # yellow - adjusted
 color_git_text = '#2f2d23'       # black 92% opacity
 color_time = '#da6871'           # red - choosen using oklch
 color_time_text = '#251415'      # black 92% opacity
-color_direnv = '#3a9ef4'          # green - choosen using oklch
-color_direnv_text = '#101d2c'     # black 92% opacity
+color_direnv = '#d1a3fd'          # green - choosen using oklch
+color_direnv_text = '#261f2f'     # black 92% opacity
 
 ############  SEGMENT SPECS  ############
 
@@ -224,7 +224,7 @@ format = '[$all_status$ahead_behind ]($style)'
 command = "~/.config/starship/envicon"
 when = "~/.config/starship/envwhen"
 style = "bg:color_direnv fg:color_direnv_text"
-format = "[$output]($style)"
+format = "[ $output ]($style)"
 
 [fill]
 symbol = ' '
