@@ -9,7 +9,8 @@ command_timeout = 5000
 
 format = """
 [](fg:color_shell)\
-[ ](bg:color_shell fg:color_shell_text)\
+$shlvl\
+${custom.shicon}\
 [](fg:color_shell bg:color_directory)\
 $directory\
 [](fg:color_directory bg:color_lang)\
@@ -45,6 +46,19 @@ color_time = '#da6871'           # red - choosen using oklch
 color_time_text = '#251415'      # black 92% opacity
 
 ############  SEGMENT SPECS  ############
+
+[shlvl]
+disabled = false
+format = "[$symbol](bg:color_shell fg:color_shell_text)"
+repeat = true
+symbol = ""
+repeat_offset = 1
+threshold = 2
+
+[custom.shicon]
+command = "~/.config/starship/shicon"
+when = true
+format =  "[$output ](bg:color_shell fg:color_shell_text)"
 
 [directory]
 style = "bg:color_directory fg:color_directory_text"
@@ -120,12 +134,3 @@ format = '[$time]($style)'
 [package]
 disabled = true
 
-[custom.zsh]
-command = "echo 🚀"
-when = "~/.test_zsh.sh"
-prefix = ""
-
-[custom.nu]
-command = "echo 🐟"
-when = "~/.test_fish.sh"
-prefix = ""
