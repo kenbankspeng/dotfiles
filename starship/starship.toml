@@ -1,7 +1,12 @@
 "$schema" = 'https://starship.rs/config-schema.json'
-########################
-command_timeout = 1000
-########################
+
+###########  CONFIG  #############
+
+add_newline = true
+command_timeout = 5000
+
+###########  SEGMENTS  #############
+
 format = """
 [](fg:color_shell)\
 [ ](bg:color_shell fg:color_shell_text)\
@@ -18,12 +23,14 @@ $git_commit\
 $git_state\
 $git_metrics\
 $git_status\
-[](fg:color_git bg:color_tip)\
+[](fg:color_git)\
 $fill\
 $character\
 $cmd_duration\
 \n[⦿](fg:#eba0ad) """
-########################
+
+###########  COLORS  #############
+
 palette = 'custom'
 [palettes.custom]
 color_shell = '#da6871'          # red - choosen using oklch
@@ -36,66 +43,89 @@ color_git = '#fef1b9'            # yellow - adjusted
 color_git_text = '#2F2D23'       # black 92% opacity
 color_time = '#da6871'           # red - choosen using oklch
 color_time_text = '#251415'      # black 92% opacity
-########################
+
+############  SEGMENT SPECS  ############
+
 [directory]
 style = "bg:color_directory fg:color_directory_text"
 format = "[  $path ]($style)"
 truncation_length = 3
 truncation_symbol = ""
-########################
+home_symbol = ""
+
 [lua]
 symbol = ""
 style = "bg:color_lang fg:color_lang_text"
 format = '[ $symbol ($version) ]($style)'
+
 [nodejs]
 symbol = ""                               #  
 style = "bg:color_lang fg:color_lang_text"
 format = '[ $symbol ($version) ]($style)'
 detect_extensions = []
+
 [deno]
 symbol = "┓"
 style = "bg:color_lang fg:color_lang_text"
 format = '[ $symbol ($version) ]($style)'
 detect_files = ["deno.json"]
+
 [python]
 symbol = ""
 style = "bg:color_lang fg:color_lang_text"
 format = '[ $symbol ($version )($virtualenv )]($style)'
-######################## --  󰊤  
+
 [git_branch]
 symbol = ""
 style = "bg:color_git fg:color_git_text"
 format = '[ $symbol$branch ]($style)'
+
 [git_commit]
 style = "bg:color_git fg:color_git_text"
 format = '[\($hash$tag\) ]($style)'
 tag_disabled = false
+
 [git_state]
 style = "bg:color_git fg:color_git_text"
+
 [git_metrics]
 format = "([+$added]($added_style))[]($added_style)"
 added_style = "bg:color_git fg:color_git_text"
 deleted_style = "bg:235 fg:bright-red"
 disabled = true
+
 [git_status]
 behind = ""
 ahead = ""
 style = "bg:color_git fg:color_git_text"
 format = '[$all_status$ahead_behind ]($style)'
-#######################
+
 [cmd_duration]
 format = "[ $duration]($style)"
 style = "fg:bright-white"
-########################
+
 [character]
 success_symbol = ''
 error_symbol = '[ ✗‼](#da6871) '
+
 [fill]
 symbol = ' '
+
 [time]
 disabled = false
 time_format = "%R"                         # Hour:Minute Format
 style = "bg:color_time fg:color_time_text"
 format = '[$time]($style)'
+
 [package]
 disabled = true
+
+[custom.zsh]
+command = "echo 🚀"
+when = "~/.test_zsh.sh"
+prefix = ""
+
+[custom.nu]
+command = "echo 🐟"
+when = "~/.test_fish.sh"
+prefix = ""

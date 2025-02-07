@@ -75,8 +75,8 @@ ls *args:
 @cat *args:
   bat {{args}}
 
-# ps alternative
-pr *args:
+# new ps
+process *args:
   procs {{args}}
 
 # top tui
