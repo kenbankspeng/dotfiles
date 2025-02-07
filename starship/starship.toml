@@ -9,7 +9,6 @@ command_timeout = 5000
 
 format = """
 [](fg:color_shell)\
-$shlvl\
 ${custom.shicon}\
 $jobs\
 [ ](bg:color_shell fg:color_shell_text)\
@@ -36,7 +35,8 @@ $fill\
 $character\
 $cmd_duration\
 $line_break\
-[⦿](fg:#eba0ad) \
+$shlvl\
+
 $hostname\
 $localip\
 $singularity\
@@ -129,14 +129,15 @@ color_direnv_text = '#261f2f'     # black 92% opacity
 
 ############  SEGMENT SPECS  ############
 
+# prompt
 [shlvl]
 disabled = false
-style = "bg:color_shell fg:color_shell_text"
-format = "[$symbol]($style)"
+style = "fg:color_shell bg:color_shell_text"
+format = "[$symbol ]($style)"
 repeat = true
-symbol = ""
-repeat_offset = 1
-threshold = 2
+symbol = "❯"
+repeat_offset = 0
+threshold = 0
 
 [custom.shicon]
 command = "~/.config/starship/shicon"
