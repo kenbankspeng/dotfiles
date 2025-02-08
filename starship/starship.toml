@@ -36,7 +36,7 @@ $git_status\
 ${custom.direnv}\
 [](fg:color_direnv)\
 $fill\
-$character\
+$status\
 $cmd_duration\
 
 $line_break\
@@ -44,22 +44,23 @@ $username\
 $shlvl\
 
 
-$buf\
-$meson\
-$spack\
-$memory_usage\
-$aws\
-$gcloud\
-$openstack\
-$azure\
-$nats\
-$crystal\
-$sudo\
-$status\
+
+
+
+
+
+
+
+
+
 $container\
 """
 
-
+# $sudo
+# $spack
+# $meson
+# $buf
+# crystal
 # $vlang
 # $vagrant
 # $typst
@@ -72,6 +73,7 @@ $container\
 # $hostname
 # $env_var
 # $battery
+# $memory_usage
 # $os
 # $time
 
@@ -204,16 +206,13 @@ symbol = ' '
 style = "fg:bright-white"
 format = "[ $duration]($style)"
 
-[character]
-success_symbol = ''
-error_symbol = '[ ✗‼](#da6871) '
+[status]
+disabled = false
+symbol = "✗‼ "
 
 [time]
 disabled = false
 time_format = "%R"                         # Hour:Minute Format
 style = "bg:color_time fg:color_time_text"
 format = '[$time]($style)'
-
-
-
 
