@@ -8,10 +8,6 @@ command_timeout = 5000
 ###########  SEGMENTS  #############
 
 format = """
-
-$line_break\
-
-
 [](fg:color_shell)\
 ${custom.shicon}\
 $jobs\
@@ -38,24 +34,12 @@ ${custom.direnv}\
 $fill\
 $status\
 $cmd_duration\
-
 $line_break\
 $username\
 $shlvl\
-
-
-
-
-
-
-
-
-
-
-
-$container\
 """
 
+# $container
 # $sudo
 # $spack
 # $meson
@@ -95,8 +79,6 @@ color_direnv = '#d1a3fd'          # green - choosen using oklch
 color_direnv_text = '#261f2f'     # black 92% opacity
 
 ############  SEGMENT SPECS  ############
-
-
 
 [username]
 format = '[$user ]($style)'
@@ -215,4 +197,3 @@ disabled = false
 time_format = "%R"                         # Hour:Minute Format
 style = "bg:color_time fg:color_time_text"
 format = '[$time]($style)'
-
