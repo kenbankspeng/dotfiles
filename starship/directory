@@ -1,0 +1,32 @@
+#!/bin/bash
+
+home_symbol=""
+folder_symbol=""
+
+max_length=20
+current_path=$(pwd)
+home_directory=$(echo ~)
+
+if [ "$current_path" == "$home_directory" ]; then
+    echo "$home_symbol"
+else
+    trimmed_path=$(echo "$current_path" | awk -v max_len="$max_length" '
+    {
+        n = split($0, parts, "/")
+        path = parts[n]
+        if (length(path) > max_len) {
+            path = substr(path, 1, max_len - 3) "..."
+        } else {
+            for (i = n-1; i > 0; i--) {
+                if (length(parts[i] "/" path) <= max_len) {
+                    path = parts[i] "/" path
+                } else {
+                    break
+                }
+            }
+        }
+        print path
+    }')
+
+    echo "$folder_symbol $trimmed_path"
+fi

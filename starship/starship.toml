@@ -13,8 +13,9 @@ ${custom.shicon}\
 $jobs\
 [ ](bg:color_shell fg:color_shell_text)\
 [](fg:color_shell bg:color_directory)\
-$directory\
+${custom.directory}\
 [](fg:color_directory bg:color_lang)\
+
 $nodejs\
 $deno\
 $golang\
@@ -106,12 +107,11 @@ symbol_threshold = 1
 style = "bg:color_time fg:color_time_text"
 format = '[$symbol$number]($style)'
 
-[directory]
+[custom.directory]
+command = "~/.config/starship/directory"
+when = true
 style = "bg:color_directory fg:color_directory_text"
-format = "[  $path ]($style)"
-truncation_length = 3
-truncation_symbol = ""
-home_symbol = ""
+format = "[ $output ]($style)"
 
 [golang]
 symbol = "go"
