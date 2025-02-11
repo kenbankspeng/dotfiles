@@ -7,26 +7,42 @@ max_length=20
 current_path=$(pwd)
 home_directory=$(echo ~)
 
-if [ "$current_path" == "$home_directory" ]; then
-    echo "$home_symbol"
-else
-    trimmed_path=$(echo "$current_path" | awk -v max_len="$max_length" '
-    {
-        n = split($0, parts, "/")
-        path = parts[n]
-        if (length(path) > max_len) {
-            path = substr(path, 1, max_len - 3) "..."
-        } else {
-            for (i = n-1; i > 0; i--) {
-                if (length(parts[i] "/" path) <= max_len) {
-                    path = parts[i] "/" path
-                } else {
-                    break
-                }
+# Trim off the home directory if present
+show_home_symbol=false
+if [[ "$current_path" == "$home_directory"* ]]; then
+    current_path=${current_path#"$home_directory"}
+    show_home_symbol=true
+fi
+
+trimmed_path=$(echo "$current_path" | awk -v max_len="$max_length" '
+{
+    trimmed = 0
+    n = split($0, parts, "/")
+    path = parts[n]
+
+    if (length(path) > max_len) {
+        trimmed = 1
+        path = substr(path, 1, max_len - 3) "..."
+    } else {
+        for (i = n-1; i > 0; i--) {
+            if (length(parts[i] "/" path) <= max_len) {
+                path = parts[i] "/" path
+            } else {
+                trimmed = 1
+                break
             }
         }
-        print path
-    }')
+    }
 
-    echo "$folder_symbol $trimmed_path"
+    if (trimmed == 1) {
+        print "..." path
+    } else {
+        print path
+    }
+}')
+
+if $show_home_symbol; then
+    echo "$home_symbol$trimmed_path"
+else
+    echo "$trimmed_path"
 fi
