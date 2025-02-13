@@ -76,3 +76,9 @@ regex *args:
 # ascii doc
 ad *args:
   asciidoctor {{args}}
+
+ff:
+  fastfetch
+
+of:
+  onefetch

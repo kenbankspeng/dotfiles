@@ -127,3 +127,7 @@ w:
 # rm -rf
 @zap *args:
   rm -rf {{args}}
+
+# new find
+find *args:
+  fd -uuu {{args}}

@@ -26,7 +26,7 @@ default:
   print "{{BrightMagenta}}GO: go tools"
   print -- "------------{{BrightBlue}}"
   print "gotools"
-  gotools
+  gotools -u
   print
   print "{{BrightMagenta}}RUST/CARGO: rust packages"
   print -- "-------------------------{{BrightBlue}}"
