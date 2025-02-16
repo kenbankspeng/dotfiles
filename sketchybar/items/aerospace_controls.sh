@@ -4,7 +4,7 @@ source "$PLUGIN_DIR/helpers/sketchy.sh"
 
 # spacer
 sketchy_add_item spacer left \
-  --set spacer padding_left=30
+  --set spacer padding_left=25
 
 # stack dividers
 stack_sections=(0 1 2 3 4 5 6 7 8)
