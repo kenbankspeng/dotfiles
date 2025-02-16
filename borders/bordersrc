@@ -9,3 +9,5 @@ options=(
 )
 
 borders "${options[@]}"
+
+blacklist="DeskMinder,com.appps.NewDesk"
