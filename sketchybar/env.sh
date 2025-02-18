@@ -16,6 +16,6 @@ export FONTSIZE=12
 export NERD="Symbols Nerd Font:Regular"
 export ICOMOON="Icomoon:Regular"
 
-export BAR_HEIGHT=40
-export ITEM_HEIGHT=30
+export BAR_HEIGHT=38
+export ITEM_HEIGHT=28
 export BORDER_WIDTH=2
