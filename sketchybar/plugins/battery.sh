@@ -30,12 +30,11 @@ if [[ "$charging" != "" ]]; then
 fi
 
 props=(
-  label.drawing=off
   icon="$icon"
   icon.color="$SKY"
+  label.drawing=on
   label="${percentage}%"
   label.color="$SKY"
-  background.height="$ITEM_HEIGHT"
 )
 sketchybar --set "$NAME" "${props[@]}"
 

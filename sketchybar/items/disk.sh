@@ -3,11 +3,8 @@
 source "$PLUGIN_DIR/helpers/sketchy.sh"
 
 props=(
-  label.y_offset=0 # undo hack
-	label.padding_left=0 # undo hack
-  label.padding_right=0 # undo hack
-	icon.drawing=off
-	background.height="$LABEL_ONLY_HEIGHT"
+  label.drawing=on
+	icon.drawing=on
   icon="$ICON_DISK"
   icon.color="$SAPPHIRE"
   icon.font="$FONT:$((ICON_FONTSIZE - 4))"

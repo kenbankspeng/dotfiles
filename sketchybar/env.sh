@@ -18,7 +18,6 @@ export ICOMOON="Icomoon:Regular"
 
 export BAR_WIDTH=40
 export ITEM_HEIGHT=25
-export ITEM_HEIGHT_WITH_LABEL=60
 export LABEL_ONLY_HEIGHT=25
 export LABEL_Y_OFFSET=-17
 export BORDER_WIDTH=2

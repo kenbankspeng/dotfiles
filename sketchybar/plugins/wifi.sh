@@ -52,10 +52,10 @@ if [ -n "$device" ]; then
 fi
 
 props=(
-  background.height=20
   icon.font="$ICOMOON:20"
   icon=$icon
   icon.color="$color"
+  label="WIFI"
 )
 sketchybar --set "$NAME" "${props[@]}"
 
