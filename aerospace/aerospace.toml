@@ -150,10 +150,10 @@ exec-on-workspace-change = [
   alt-9 = 'workspace 9'
   alt-0 = 'workspace 10'
 
-  alt-up = 'workspace prev'
-  alt-down = 'workspace next'
-  alt-left = 'exec-and-forget aerospace focus up --boundaries-action wrap-around-the-workspace'
-  alt-right = 'exec-and-forget aerospace focus down --boundaries-action wrap-around-the-workspace'
+  alt-left = 'workspace prev'
+  alt-right = 'workspace next'
+  alt-up = 'exec-and-forget aerospace focus up --boundaries-action wrap-around-the-workspace'
+  alt-down = 'exec-and-forget aerospace focus down --boundaries-action wrap-around-the-workspace'
 
   # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
   alt-shift-1 = 'move-node-to-workspace 1 --focus-follows-window'
@@ -167,8 +167,8 @@ exec-on-workspace-change = [
   alt-shift-9 = 'move-node-to-workspace 9 --focus-follows-window'
   alt-shift-0 = 'move-node-to-workspace 10 --focus-follows-window'
 
-  alt-shift-up = 'move-node-to-workspace prev --focus-follows-window'
-  alt-shift-down = 'move-node-to-workspace next --focus-follows-window'
+  alt-shift-left = 'move-node-to-workspace prev --focus-follows-window'
+  alt-shift-right = 'move-node-to-workspace next --focus-follows-window'
 
 
   # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
