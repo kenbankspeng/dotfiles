@@ -3,9 +3,6 @@
 source "$PLUGIN_DIR/helpers/sketchy.sh"
 
 
-sketchy_add_item aerospace_controls_spacer left \
-  --set aerospace_controls_spacer background.padding_left=300
-
 props=(
   background.color="$GROUP"
   background.corner_radius=0
@@ -18,41 +15,41 @@ props=(
 )
 
 # stack layout
-sketchy_add_item layout.stack left \
+sketchy_add_item layout.stack center \
   --set layout.stack icon=$ICON_STACK "${props[@]}" \
   --subscribe layout.stack mouse.clicked
 
 # tiles layout
-sketchy_add_item layout.tiles left \
+sketchy_add_item layout.tiles center \
   --set layout.tiles icon="$ICON_TILE" "${props[@]}" \
   --subscribe layout.tiles mouse.clicked
 
 # floating / tiling
-sketchy_add_item layout.float left \
+sketchy_add_item layout.float center \
   --set layout.float icon="$ICON_FLOAT" "${props[@]}" \
   --subscribe layout.float mouse.clicked
 
 # join windows left
-sketchy_add_item layout.join_left left \
+sketchy_add_item layout.join_left center \
   --set layout.join_left icon="$ICON_JOIN_LEFT" "${props[@]}" icon.font="$ICOMOON:20" \
   --subscribe layout.join_left mouse.clicked
 
 # join windows right
-sketchy_add_item layout.join_right left \
+sketchy_add_item layout.join_right center \
   --set layout.join_right icon="$ICON_JOIN_RIGHT" "${props[@]}" icon.font="$ICOMOON:20" \
   --subscribe layout.join_right mouse.clicked
 
 # flatten workspace tree
-sketchy_add_item layout.flatten left \
+sketchy_add_item layout.flatten center \
   --set layout.flatten icon="$ICON_FLATTEN" "${props[@]}" \
   --subscribe layout.flatten mouse.clicked
 
 # enable/disable
-sketchy_add_item layout.enable left \
+sketchy_add_item layout.enable center \
   --set layout.enable icon="$ICON_BUTTON" "${props[@]}" \
   --subscribe layout.enable mouse.clicked
 
 # auto-focus
-sketchy_add_item layout.auto_focus left \
+sketchy_add_item layout.auto_focus center \
   --set layout.auto_focus icon="$ICON_MOUSE_PTR" "${props[@]}" \
   --subscribe layout.auto_focus mouse.clicked
