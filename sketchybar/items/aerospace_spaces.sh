@@ -20,7 +20,7 @@ props=(
   icon.drawing=off
   label.drawing=off
   background.drawing=off
-  padding_left=100
+  width=0
 )
 sketchy_add_item space_listener left \
   --set space_listener "${props[@]}" \
