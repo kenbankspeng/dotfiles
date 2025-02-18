@@ -34,9 +34,16 @@ sketchy_add_item space_listener left \
   yabai_window_deminimized
 
 # add dividers as anchor points for the workspaces
+props=(
+  background.padding_left=0
+  background.padding_right=0
+  background.color=$RED
+  icon.width=1
+  icon.padding_left=0
+  icon.padding_right=0
+)
 workspaces=("0" $(aerospace_workspaces))
 for sid in "${workspaces[@]}"; do
   sketchy_add_item "divider.$sid" left \
-    --set "divider.$sid" background.height=1 \
-    background.color="$DIVIDER"
+    --set "divider.$sid" "${props[@]}"
 done

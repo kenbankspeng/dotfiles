@@ -64,7 +64,7 @@ default=(
   label.padding_left=0
   label.padding_right=5
 
-  background.border_width=1
-  background.border_color=$RED
+  # background.border_width=1
+  # background.border_color=$RED
 )
 sketchybar --default "${default[@]}"

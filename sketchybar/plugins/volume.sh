@@ -24,11 +24,10 @@ if [ "$SENDER" = "volume_change" ]; then
   props=(
     icon="$icon"
     icon.color="$LAVENDER"
+    icon.align="left"
+    icon.width=32
     label="$volume%"
     label.color="$LAVENDER"
-    icon.align="left"
-    icon.padding_left=8
-    background.height="$ITEM_HEIGHT"
   )
   sketchybar --set "$NAME" "${props[@]}"
 fi
