@@ -6,6 +6,8 @@ props=(
   icon.drawing=off
   label.drawing=on
   label.color="$MAUVE"
+  label.padding_left=5
+  label.padding_right=5
   update_freq=1
   script="$PLUGIN_DIR/clock.sh"
 )

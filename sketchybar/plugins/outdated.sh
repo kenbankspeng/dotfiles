@@ -4,8 +4,9 @@ source "$CONFIG_DIR/env.sh"
 
 # reprocess on mouse click
 props=(
+	icon.color="$BLUE"
+	label.drawing=on
   label="?"
-  icon.color="$BLUE"
 )
 sketchybar --set "$NAME" "${props[@]}"
 
@@ -36,8 +37,8 @@ case "$sum" in
 esac
 
 props=(
-	label="$sum"
 	icon.color="$color"
+	label="$sum"
   label.color="$color"
 )
 sketchybar --set "$NAME" "${props[@]}"
