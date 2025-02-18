@@ -11,7 +11,7 @@ props=(
   label.drawing=on
   label="$cpuload"
   label.color="$SAPPHIRE"
-  label.width=30
+  label.width=35
 )
 
 if [ -n "$cpuload" ]; then

@@ -9,7 +9,6 @@ props=(
 	label.padding_left=0 # undo hack
   label.padding_right=0 # undo hack
 	icon.drawing=off
-	background.height="$LABEL_ONLY_HEIGHT"
 	icon="$ICON_LEGO"
 	update_freq="$((60 * 60))" # once per hour
 	script="$PLUGIN_DIR/outdated.sh"
