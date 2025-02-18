@@ -7,6 +7,7 @@ sketchybar --add event update_outdated
 props=(
 	icon="$ICON_LEGO"
 	label.drawing=on
+	label.padding_left=2
 	label.width=16
 	update_freq="$((60 * 60))" # once per hour
 	script="$PLUGIN_DIR/outdated.sh"

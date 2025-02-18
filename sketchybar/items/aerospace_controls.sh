@@ -3,9 +3,16 @@
 source "$PLUGIN_DIR/helpers/sketchy.sh"
 
 
+sketchy_add_item aerospace_controls_spacer left \
+  --set aerospace_controls_spacer background.padding_left=300
+
 props=(
   background.color="$GROUP"
   background.corner_radius=0
+  background.padding_left=0
+  background.padding_right=0
+  icon.padding_left=8
+  icon.padding_right=8
   label.drawing=off
   script="$PLUGIN_DIR/aerospace_controls.sh"
 )

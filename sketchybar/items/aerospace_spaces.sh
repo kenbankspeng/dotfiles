@@ -16,6 +16,9 @@ sketchybar --add event yabai_window_focused
 sketchybar --add event yabai_window_minimized
 sketchybar --add event yabai_window_deminimized
 
+sketchy_add_item aerospace_spaces_spacer left \
+  --set aerospace_spaces_spacer background.padding_left=100
+
 props=(
   icon.drawing=off
   label.drawing=off
