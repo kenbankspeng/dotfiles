@@ -9,3 +9,7 @@ default:
 @how *args:
   how2 {{args}}
 
+# aichat
+@ai *args:
+  aichat {{args}}
+

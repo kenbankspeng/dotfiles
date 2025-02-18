@@ -6,6 +6,7 @@ go = "latest"
 uv = "latest"
 python = "latest"
 node = "latest"
+aqua = "latest"
 
 [settings]
 experimental = true
