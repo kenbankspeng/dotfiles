@@ -10,7 +10,7 @@ after-login-command = []
 # 'after-startup-command' is run after 'after-login-command'
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 after-startup-command = [
-  'exec-and-forget sketchybar',
+  # 'exec-and-forget sketchybar',
   'exec-and-forget borders',
 ]
 
@@ -47,6 +47,17 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 # Also see: https://nikitabobko.github.io/AeroSpace/goodies#disable-hide-app
 automatically-unhide-macos-hidden-apps = true
 
+# on-focus-changed = [
+#   "exec-and-forget osascript -e 'tell application id \"tracesOf.Uebersicht\" to refresh widget id \"simple-bar-index-jsx\"'",
+# ]
+
+# Notify simplebar about workspace change
+# exec-on-workspace-change = [
+#   '/bin/zsh',
+#   '-c',
+#   '/usr/bin/osascript -e "tell application id \"tracesOf.Uebersicht\" to refresh widget id \"simple-bar-index-jsx\""',
+# ]
+
 # Notify Sketchybar about workspace change
 exec-on-workspace-change = [
   '/bin/bash',
@@ -71,9 +82,10 @@ exec-on-workspace-change = [
   inner.horizontal = 10
   inner.vertical = 10
   outer.left = 15
-  outer.bottom = 0
-  outer.top = 0
   outer.right = 41
+  outer.top = 0
+  outer.bottom = 0
+
 
 
 # 'main' binding mode declaration
@@ -138,10 +150,10 @@ exec-on-workspace-change = [
   alt-9 = 'workspace 9'
   alt-0 = 'workspace 10'
 
-  alt-up = 'workspace prev'
-  alt-down = 'workspace next'
-  alt-left = 'exec-and-forget aerospace focus up --boundaries-action wrap-around-the-workspace'
-  alt-right = 'exec-and-forget aerospace focus down --boundaries-action wrap-around-the-workspace'
+  alt-left = 'workspace prev'
+  alt-right = 'workspace next'
+  alt-up = 'exec-and-forget aerospace focus up --boundaries-action wrap-around-the-workspace'
+  alt-down = 'exec-and-forget aerospace focus down --boundaries-action wrap-around-the-workspace'
 
   # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
   alt-shift-1 = 'move-node-to-workspace 1 --focus-follows-window'
@@ -155,8 +167,8 @@ exec-on-workspace-change = [
   alt-shift-9 = 'move-node-to-workspace 9 --focus-follows-window'
   alt-shift-0 = 'move-node-to-workspace 10 --focus-follows-window'
 
-  alt-shift-up = 'move-node-to-workspace prev --focus-follows-window'
-  alt-shift-down = 'move-node-to-workspace next --focus-follows-window'
+  alt-shift-left = 'move-node-to-workspace prev --focus-follows-window'
+  alt-shift-right = 'move-node-to-workspace next --focus-follows-window'
 
 
   # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
