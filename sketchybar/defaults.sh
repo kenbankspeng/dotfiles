@@ -24,7 +24,7 @@ bar=(
   border_color=$BAR
   border_width=0
   position=bottom
-  height=$ITEM_HEIGHT # height is width when bar on left/right
+  height=$BAR_HEIGHT
   margin=0
   y_offset=-2
   corner_radius=0
@@ -47,22 +47,24 @@ default=(
   background.height=$ITEM_HEIGHT
   background.color=$TRANSPARENT
   background.corner_radius=5
+  background.padding_left=5
+  background.padding_right=5
+
   icon.font="$FONT:$ICON_FONTSIZE"
   icon.color=$TEXT
+  icon.align="center"
+  icon.padding_left=5
+  icon.padding_right=5
+
   label.font="$FONT:$FONTSIZE"
   label.color=$TEXT
-  padding_left=5
-  padding_right=5
-
-  icon.width=20
-  icon.align="center"
-  icon.padding_left=0
-  icon.padding_right=0
-
   label.drawing=off
   label.align="left"
   label.y_offset=0
-  label.padding_left=5
-  label.padding_right=5
+  label.padding_left=0
+  label.padding_right=0
+
+  background.border_width=1
+  background.border_color=$RED
 )
 sketchybar --default "${default[@]}"

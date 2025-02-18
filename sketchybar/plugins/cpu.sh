@@ -5,6 +5,8 @@ source "$CONFIG_DIR/env.sh"
 cpuload="$(top -l 2 | grep -E "^CPU" | tail -1 | awk '{ print int($3 + $5 + 0.5)"%" }')"
 
 props=(
+  padding_left=0
+  padding_right=0
   icon="$ICON_CPU"
   icon.color="$SAPPHIRE"
   icon.font="$FONT:$((ICON_FONTSIZE - 2))"

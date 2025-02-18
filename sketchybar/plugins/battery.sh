@@ -35,6 +35,7 @@ props=(
   label.drawing=on
   label="${percentage}%"
   label.color="$SKY"
+  label.padding_left=5
   label.width=40
 )
 sketchybar --set "$NAME" "${props[@]}"
