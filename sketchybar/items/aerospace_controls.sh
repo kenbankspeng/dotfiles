@@ -62,5 +62,5 @@ sketchy_add_item layout.spacer.right center \
 sketchybar --add bracket aerospace_controls '/layout\..*/' \
            --set aerospace_controls \
                     background.corner_radius=4  \
-                    background.color=$GROUP \
-                    background.height=$BAR_HEIGHT
+                    background.color=$GROUP
+                    
