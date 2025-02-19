@@ -41,7 +41,6 @@ aerospace_highlight_window_id() {
   if [ -n "$prev_window_id" ] && [ "$prev_window_id" != "$window_id" ]; then
     prev_item=$(sketchy_get_item_by_window_id "$prev_window_id")
     if [ -n "$prev_item" ]; then
-      local prev_space=$(sketchy_get_space_by_item "$prev_item")
       sketchybar --set "$prev_item" \
         icon.color="$OFF"
     fi
@@ -50,7 +49,6 @@ aerospace_highlight_window_id() {
   # item ex: window.3.66286.WezTerm
   item=$(sketchy_get_item_by_window_id "$window_id")
   if [ -n "$item" ]; then
-    local space=$(sketchy_get_space_by_item "$item")
     sketchybar --set "$item" \
       icon.color="$ON"
   fi
@@ -106,19 +104,24 @@ maybe_add_default_item_to_spaceid() {
   local sid="$1"
   local items=$(sketchy_get_window_items_in_spaceid "$sid")
   
+  local icon="$((sid % 10))"
+  local font_size=$(($ICON_FONTSIZE-4))
+  if [ "$icon" -eq 5 ]; then
+    icon="󰬾"
+    font_size=$(($ICON_FONTSIZE+3))
+  fi
+
   if [ -z "$items" ]; then
     local item="window.$sid.$sid.default"
-    local icon_var_name="ICON_DEFAULT_$sid"
-    local icon="${!icon_var_name}"
     local props=(
       background.corner_radius=0
-      icon.color=$RED
-      icon.font="$ICON_FONT:$(($ICON_FONTSIZE - 3))"
+      icon.font="$ICON_FONT:$font_size"
       icon.width="$APP_WIDTH"
+      icon="$icon"
     )
     sketchy_add_item "$item" left \
       --move "$item" before "divider.end.$sid" \
-      --set "$item" "${props[@]}" icon="$icon" \
+      --set "$item" "${props[@]}" \
       click_script="aerospace workspace $sid"
     
     aerospace_highlight_window_id "$sid"
@@ -158,7 +161,6 @@ aerospace_new_window_id() {
 
   icon="$($CONFIG_DIR/icons_apps.sh "$appname")"
   item="window.$sid.$window_id.$appname"
-  space_color=$(get_space_color "$sid")
   props=(
     background.corner_radius=0
     icon.font="$ICON_FONT:$ICON_FONTSIZE"
