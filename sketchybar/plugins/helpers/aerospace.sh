@@ -123,10 +123,9 @@ maybe_add_default_item_to_spaceid() {
     local space_color=$(get_space_color "$sid")
     local props=(
       background.corner_radius=0
-      background.height="$ITEM_HEIGHT"
       background.color="$space_color"
-      label.drawing=off
       icon.font="$ICON_FONT:$ICON_FONTSIZE"
+      icon.width="$APP_WIDTH"
     )
     sketchy_add_item "$item" left \
       --move "$item" before "divider.$sid" \
@@ -173,9 +172,8 @@ aerospace_new_window_id() {
   space_color=$(get_space_color "$sid")
   props=(
     background.corner_radius=0
-    background.height="$ITEM_HEIGHT"
-    label.drawing=off
     icon.font="$ICON_FONT:$ICON_FONTSIZE"
+    icon.width="$APP_WIDTH"
   )
   sketchy_add_item "$item" left \
     --move "$item" before "divider.$sid" \
@@ -199,8 +197,8 @@ aerospace_add_apps_in_spaceid() {
     background.corner_radius=0
     background.height="$ITEM_HEIGHT"
     background.color="$space_color"
-    label.drawing=off
     icon.font="$ICON_FONT:$ICON_FONTSIZE"
+    icon.width="$APP_WIDTH"
   )
 
   aerospace_window_ids=$(aerospace_window_ids_in_workspace "$sid")

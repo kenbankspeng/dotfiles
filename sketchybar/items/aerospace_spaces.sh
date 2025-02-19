@@ -17,7 +17,7 @@ sketchybar --add event yabai_window_minimized
 sketchybar --add event yabai_window_deminimized
 
 sketchy_add_item aerospace_spaces_spacer left \
-  --set aerospace_spaces_spacer background.padding_left=100
+  --set aerospace_spaces_spacer background.padding_left=10
 
 props=(
   icon.drawing=off
@@ -49,4 +49,13 @@ workspaces=("0" $(aerospace_workspaces))
 for sid in "${workspaces[@]}"; do
   sketchy_add_item "divider.$sid" left \
     --set "divider.$sid" "${props[@]}"
+
+  sketchybar --add bracket space.group.$sid '/window\.$sid\..*/' \
+          --set space.group.$sid \
+                  background.corner_radius=4  \
+                  background.color=$YELLOW \
+                  background.height=$BAR_HEIGHT
 done
+
+
+

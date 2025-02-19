@@ -2,17 +2,18 @@
 
 source "$PLUGIN_DIR/helpers/sketchy.sh"
 
-
+# background.color="$GROUP"
 props=(
-  background.color="$GROUP"
-  background.corner_radius=0
-  background.padding_left=0
-  background.padding_right=0
   icon.padding_left=8
   icon.padding_right=8
-  label.drawing=off
   script="$PLUGIN_DIR/aerospace_controls.sh"
 )
+
+
+# spacer
+sketchy_add_item layout.spacer.left center \
+  --set layout.spacer.left icon.width=5
+
 
 # stack layout
 sketchy_add_item layout.stack center \
@@ -53,3 +54,13 @@ sketchy_add_item layout.enable center \
 sketchy_add_item layout.auto_focus center \
   --set layout.auto_focus icon="$ICON_MOUSE_PTR" "${props[@]}" \
   --subscribe layout.auto_focus mouse.clicked
+
+# spacer
+sketchy_add_item layout.spacer.right center \
+  --set layout.spacer.right icon.width=5
+
+sketchybar --add bracket aerospace_controls '/layout\..*/' \
+           --set aerospace_controls \
+                    background.corner_radius=4  \
+                    background.color=$GROUP \
+                    background.height=$BAR_HEIGHT
