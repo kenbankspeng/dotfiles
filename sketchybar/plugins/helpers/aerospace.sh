@@ -103,16 +103,20 @@ aerospace_workspace_change() {
 
 maybe_add_default_item_to_spaceid() {
   local sid="$1"
-  if [ -z "$(sketchy_get_window_items_in_spaceid "$sid")" ]; then
+  local items=$(sketchy_get_window_items_in_spaceid "$sid")
+  
+  if [ -z "$items" ]; then
+    echo "default $sid" >&2
     local item="window.$sid.$sid.default"
     local props=(
       background.corner_radius=0
-      icon.font="$ICON_FONT:$ICON_FONTSIZE"
+      icon.color=$RED
+      icon.font="$ICON_FONT:$(($ICON_FONTSIZE - 3))"
       icon.width="$APP_WIDTH"
     )
     sketchy_add_item "$item" left \
       --move "$item" before "divider.end.$sid" \
-      --set "$item" "${props[@]}" icon="·" \
+      --set "$item" "${props[@]}" icon="$sid" \
       click_script="aerospace workspace $sid"
     
     aerospace_highlight_window_id "$sid"

@@ -51,15 +51,19 @@ get_group_color() {
 props=(
   background.padding_left=0
   background.padding_right=0
-  icon.width=0
+  background.height=$BAR_HEIGHT
+  background.color=$RED
+  icon.width=2
   icon.padding_left=0
   icon.padding_right=0
 )
-workspaces=("0" $(aerospace_workspaces))
+workspaces=("1" $(aerospace_workspaces))
 for sid in "${workspaces[@]}"; do
+  echo "adding divider.start.$sid" >&2
   sketchy_add_item "divider.start.$sid" left \
     --set "divider.start.$sid" "${props[@]}"
 
+  echo "adding divider.end.$sid" >&2
   sketchy_add_item "divider.end.$sid" left \
     --set "divider.end.$sid" "${props[@]}"
   
