@@ -71,6 +71,5 @@ for sid in "${workspaces[@]}"; do
   sketchybar --add bracket group.$sid "$start" "$end" \
            --set group.$sid \
                     background.corner_radius=0  \
-                    background.color=$(get_group_color $sid) \
-                    background.height=$BAR_HEIGHT
+                    background.color=$(get_group_color $sid)
 done
