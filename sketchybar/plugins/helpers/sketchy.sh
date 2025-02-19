@@ -87,7 +87,7 @@ sketchy_highlight_window_id() {
   item=$(sketchy_get_item_by_window_id "$window_id")
   if [ -n "$item" ]; then
     sketchybar --set "$item" \
-      icon.color="$ON"
+      icon.color="$WORKSPACE_FOCUSED_ICON"
   fi
 
   echo "$window_id" >"$CACHE_DIR/highlighted.window"

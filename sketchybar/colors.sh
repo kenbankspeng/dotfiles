@@ -54,9 +54,10 @@ export TRANSPARENT=0x00000000
 # convenience variables
 
 export BAR=0xff141421
-export OFF="$TEXT"
+export OFF=0xff899ee5
 export ON=0xff00ff00
 export WORKSPACE_ODD=0xff2c2e4e
 export WORKSPACE_EVEN=0xff4e4c2c
-export WORKSPACE_FOCUSED=0xff808020
+export WORKSPACE_FOCUSED=0xff355e47
+export WORKSPACE_FOCUSED_ICON=0xffc7e0d2
 
