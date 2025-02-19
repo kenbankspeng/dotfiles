@@ -3,14 +3,6 @@
 source "$PLUGIN_DIR/helpers/sketchy.sh"
 source "$CONFIG_DIR/plugins/helpers/util.sh"
 
-get_space_color() {
-  local sid="$1"
-  local space_color="$EVEN_SPACE"
-  if [ $((sid % 2)) -eq 0 ]; then
-    space_color="$ODD_SPACE"
-  fi
-  echo "$space_color"
-}
 
 aerospace_workspaces() {
   echo "$(aerospace list-workspaces --all)"

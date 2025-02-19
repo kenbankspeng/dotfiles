@@ -37,52 +37,21 @@ sketchy_add_item space_listener left \
   yabai_window_deminimized
 
 
-
 get_group_color() {
   local sid="$1"
-  case "$sid" in
-    0)
-      echo "$FLAMINGO"
-      ;;
-    1)
-      echo "$GREEN"
-      ;;
-    2)
-      echo "$BLUE"
-      ;;
-    3)
-      echo "$YELLOW"
-      ;;
-    4)
-      echo "$MAUVE"
-      ;;
-    5)
-      echo "$PEACH"
-      ;;
-    6)
-      echo "$ROSEWATER"
-      ;;
-    7) 
-      echo "$RED"
-      ;;
-    8)
-      echo "$MAROON"
-      ;;
-    9)
-      echo "$TEAL"
-      ;;
-    *)
-      echo "$SKY"
-      ;;
-  esac
+  local space_color="$GROUP"
+  if [ $((sid % 2)) -eq 0 ]; then
+    space_color="$GROUP_ALT"
+  fi
+  echo "$space_color"
 }
+
 
 # add dividers as anchor points for the workspaces
 props=(
   background.padding_left=0
   background.padding_right=0
-  background.color=$RED
-  icon.width=1
+  icon.width=0
   icon.padding_left=0
   icon.padding_right=0
 )
@@ -94,10 +63,11 @@ for sid in "${workspaces[@]}"; do
   sketchy_add_item "divider.end.$sid" left \
     --set "divider.end.$sid" "${props[@]}"
   
-  sketchybar --add bracket "group.$sid" '/window.$("$sid")\..*/' \
-           --set "group.$sid" \
-                    background.corner_radius=4  \
-                    background.color=$(get_group_color "$sid") \
+  start="divider.start.$sid"
+  end="divider.end.$sid"
+  sketchybar --add bracket group.$sid "$start" "$end" \
+           --set group.$sid \
+                    background.corner_radius=0  \
+                    background.color=$(get_group_color $sid) \
                     background.height=$BAR_HEIGHT
 done
-

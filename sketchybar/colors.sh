@@ -59,5 +59,5 @@ export ON=0xff00ff00
 export ACTIVE=0xffa6e3a1 # selection background
 
 export GROUP=0xff2c2e4e
-export EVEN_SPACE=0xff004525
-export ODD_SPACE=0xff203065
+export GROUP_ALT=0xff4e4c2c
+
