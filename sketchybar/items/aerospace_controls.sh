@@ -2,13 +2,12 @@
 
 source "$PLUGIN_DIR/helpers/sketchy.sh"
 
-# background.color="$GROUP"
+
 props=(
   icon.padding_left=6
   icon.padding_right=6
   script="$PLUGIN_DIR/aerospace_controls.sh"
 )
-
 
 # spacer
 sketchy_add_item layout.spacer.left center \
