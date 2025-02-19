@@ -41,10 +41,8 @@ aerospace_highlight_window_id() {
     prev_item=$(sketchy_get_item_by_window_id "$prev_window_id")
     if [ -n "$prev_item" ]; then
       local prev_space=$(sketchy_get_space_by_item "$prev_item")
-      local space_color=$(get_space_color "$prev_space")
       sketchybar --set "$prev_item" \
-        icon.color="$OFF" \
-        background.border_width=0
+        icon.color="$OFF"
     fi
   fi
 
@@ -52,11 +50,8 @@ aerospace_highlight_window_id() {
   item=$(sketchy_get_item_by_window_id "$window_id")
   if [ -n "$item" ]; then
     local space=$(sketchy_get_space_by_item "$item")
-    local space_color=$(get_space_color "$space")
     sketchybar --set "$item" \
-      icon.color="$ON" \
-      background.border_width="$BORDER_WIDTH" \
-      background.border_color="$ACTIVE"
+      icon.color="$ON"
   fi
 
   echo "$window_id" >"$CACHE_DIR/highlighted"
@@ -110,7 +105,6 @@ maybe_add_default_item_to_spaceid() {
   local sid="$1"
   if [ -z "$(sketchy_get_window_items_in_spaceid "$sid")" ]; then
     local item="window.$sid.$sid.default"
-    local space_color=$(get_space_color "$sid")
     local props=(
       background.corner_radius=0
       icon.font="$ICON_FONT:$ICON_FONTSIZE"
@@ -178,8 +172,6 @@ aerospace_new_window_id() {
 
 aerospace_add_apps_in_spaceid() {
   local sid="$1"
-
-  local space_color=$(get_space_color "$sid")
 
   props=(
     y_offset=1
