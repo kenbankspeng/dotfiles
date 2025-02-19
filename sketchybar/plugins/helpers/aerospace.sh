@@ -106,6 +106,7 @@ maybe_add_default_item_to_spaceid() {
   
   local icon="$((sid % 10))"
   local font_size=$(($ICON_FONTSIZE-4))
+  # HACK text 5 is not rendering (bug) so use special icon for 5
   if [ "$icon" -eq 5 ]; then
     icon="󰬾"
     font_size=$(($ICON_FONTSIZE+3))
