@@ -59,5 +59,5 @@ sketchy_add_item layout.spacer.right center \
   --set layout.spacer.right icon.width=5
 
 sketchybar --add bracket aerospace_controls '/layout\..*/' \
-           --set aerospace_controls background.color=$GROUP
+           --set aerospace_controls background.color=$WORKSPACE_ODD
                     

@@ -38,7 +38,6 @@ sketchy_get_space_by_item() {
   echo "$item" | awk -F'.' '{print $2}'
 }
 
-
 sketchy_add_workspace() {
   local sid="$1"
   local start="workspace.start.$sid"
@@ -46,7 +45,7 @@ sketchy_add_workspace() {
   sketchybar --add bracket workspace.$sid "$start" "$end" \
            --set workspace.$sid \
                     background.corner_radius=0  \
-                    background.color=$(sketchy_get_group_color $sid)
+                    background.color=$(get_workspace_color $sid)
 }
 
 sketchy_highlight_workspace() {
@@ -58,27 +57,14 @@ sketchy_highlight_workspace() {
   fi
 
   if [ -n "$prev_sid" ] && [ "$prev_sid" != "$sid" ]; then
-    local group="group.$prev_sid"
-    sketchybar --set "$group" background.color="$OFF"
+    sketchybar --set "workspace.$prev_sid" background.color=$(get_workspace_color $prev_sid)
   fi 
 
-  local group="group.$sid"
-  sketchybar --set "$group" background.color=$(sketchy_get_group_color $sid)
+  sketchybar --set "workspace.$sid" background.color=$(get_workspace_color $sid)
 
   echo "$sid" >"$CACHE_DIR/highlighted.workspace"
 }
 
-sketchy_get_group_color() {
-  local sid="$1"
-  local space_color="$GROUP"
-  local focused=$(aerospace_focused_workspace)
-  if [ "$sid" -eq "$focused" ]; then
-    space_color=0xff808020
-  elif [ $((sid % 2)) -eq 0 ]; then
-    space_color="$GROUP_ALT"
-  fi
-  echo "$space_color"
-}
 
 sketchy_highlight_window_id() {
   # ex: 46356
@@ -105,4 +91,17 @@ sketchy_highlight_window_id() {
   fi
 
   echo "$window_id" >"$CACHE_DIR/highlighted.window"
+}
+
+# helper
+get_workspace_color() {
+  local sid="$1"
+  local space_color="$WORKSPACE_ODD"
+  local focused=$(aerospace_focused_workspace)
+  if [ "$sid" -eq "$focused" ]; then
+    space_color="$WORKSPACE_FOCUSED"
+  elif [ $((sid % 2)) -eq 0 ]; then
+    space_color="$WORKSPACE_EVEN"
+  fi
+  echo "$space_color"
 }
