@@ -56,8 +56,6 @@ export TRANSPARENT=0x00000000
 export BAR=0xff141421
 export OFF="$TEXT"
 export ON=0xff00ff00
-export ACTIVE=0xffa6e3a1 # selection background
-
 export GROUP=0xff2c2e4e
 export GROUP_ALT=0xff4e4c2c
 
