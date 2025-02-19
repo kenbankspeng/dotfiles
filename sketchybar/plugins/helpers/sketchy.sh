@@ -45,7 +45,7 @@ sketchy_add_workspace() {
   sketchybar --add bracket workspace.$sid "$start" "$end" \
            --set workspace.$sid \
                     background.corner_radius=0  \
-                    background.color=$(get_workspace_color $sid)
+                    background.color=$(get_workspace_background $sid)
 }
 
 sketchy_highlight_workspace() {
@@ -57,10 +57,10 @@ sketchy_highlight_workspace() {
   fi
 
   if [ -n "$prev_sid" ] && [ "$prev_sid" != "$sid" ]; then
-    sketchybar --set "workspace.$prev_sid" background.color=$(get_workspace_color $prev_sid)
+    sketchybar --set "workspace.$prev_sid" background.color=$(get_workspace_background $prev_sid)
   fi 
 
-  sketchybar --set "workspace.$sid" background.color=$(get_workspace_color $sid)
+  sketchybar --set "workspace.$sid" background.color=$(get_workspace_background $sid)
 
   echo "$sid" >"$CACHE_DIR/highlighted.workspace"
 }
@@ -94,14 +94,66 @@ sketchy_highlight_window_id() {
 }
 
 # helper
-get_workspace_color() {
+get_workspace_background() {
   local sid="$1"
-  local space_color="$WORKSPACE_ODD"
   local focused=$(aerospace_focused_workspace)
   if [ "$sid" -eq "$focused" ]; then
-    space_color="$WORKSPACE_FOCUSED"
+    space_background="$WORKSPACE_FOCUSED_BACKGROUND"
   elif [ $((sid % 2)) -eq 0 ]; then
-    space_color="$WORKSPACE_EVEN"
+    space_background="$WORKSPACE_EVEN_BACKGROUND"
+  else
+    space_background="$WORKSPACE_ODD_BACKGROUND"
   fi
-  echo "$space_color"
+  echo "$space_background"
+}
+
+get_workspace_foreground() {
+  local sid="$1"
+  local focused=$(aerospace_focused_workspace)
+  if [ "$sid" -eq "$focused" ]; then
+    space_foreground="$WORKSPACE_FOCUSED_FOREGROUND"
+  elif [ $((sid % 2)) -eq 0 ]; then
+    space_foreground="$WORKSPACE_EVEN_FOREGROUND" 
+  else
+    space_foreground="$WORKSPACE_ODD_FOREGROUND"
+  fi
+  echo "$space_foreground"
+}
+
+sketchy_highlight_workspace_and_window() {
+  local sid="$1"
+  local window_id="$2"
+  local prev_sid
+  local prev_window_id
+
+  if [ -f "$CACHE_DIR/highlighted" ]; then
+    read -r prev_sid prev_window_id <"$CACHE_DIR/highlighted"
+  fi
+
+  if [ -n "$prev_sid" ] && [ "$prev_sid" != "$sid" ]; then
+    sketchybar --set "workspace.$prev_sid" background.color=$(get_workspace_background $prev_sid)
+  fi
+
+  if [ -n "$prev_window_id" ] && [ "$prev_window_id" != "$window_id" ]; then
+    prev_item=$(sketchy_get_item_by_window_id "$prev_window_id")
+    if [ -n "$prev_item" ]; then
+      sketchybar --set "$prev_item" icon.color="$OFF"
+    fi
+  fi
+
+  sketchybar --set "workspace.$sid" background.color=$(get_workspace_background $sid)
+
+  item=$(sketchy_get_item_by_window_id "$window_id")
+  if [ -n "$item" ]; then
+    sketchybar --set "$item" icon.color="$WORKSPACE_FOCUSED_ICON"
+  fi
+
+  echo "$sid $window_id" >"$CACHE_DIR/highlighted"
+}
+
+sketchy_get_highlighted() {
+  if [ -f "$CACHE_DIR/highlighted" ]; then
+    read -r sid window_id <"$CACHE_DIR/highlighted"
+    echo "$sid $window_id"
+  fi
 }

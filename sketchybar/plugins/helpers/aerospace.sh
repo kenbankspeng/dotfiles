@@ -136,6 +136,7 @@ aerospace_new_window_id() {
   appname=$(aerospace_appname_from_window_id "$window_id")
 
   icon="$($CONFIG_DIR/icons_apps.sh "$appname")"
+  icon_color="$(get_workspace_foreground $sid)"
   item="window.$sid.$window_id.$appname"
   props=(
     background.corner_radius=0
@@ -145,7 +146,7 @@ aerospace_new_window_id() {
   sketchy_add_item "$item" left \
     --move "$item" before "workspace.end.$sid" \
     --set "$item" "${props[@]}" \
-    icon="$icon" icon.color="$OFF" \
+    icon="$icon" icon.color="$icon_color" \
     click_script="aerospace focus --window-id $window_id"
 
    # remove default if it exists
@@ -172,13 +173,14 @@ aerospace_add_apps_in_spaceid() {
     for window_id in "${window_id_array[@]}"; do
       appname=$(aerospace_appname_from_window_id "$window_id")
       icon="$($CONFIG_DIR/icons_apps.sh "$appname")"
+      icon_color="$(get_workspace_foreground $sid)"
 
       # only add if doesn't already exist
       item="window.$sid.$window_id.$appname"
       sketchy_add_item "$item" left \
         --move "$item" before "workspace.end.$sid" \
         --set "$item" "${props[@]}" \
-        icon="$icon" icon.color="$OFF" \
+        icon="$icon" icon.color="$icon_color" \
         click_script="aerospace focus --window-id $window_id"
     done
   else
