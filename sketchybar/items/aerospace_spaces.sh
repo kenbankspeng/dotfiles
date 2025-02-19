@@ -49,13 +49,4 @@ workspaces=("0" $(aerospace_workspaces))
 for sid in "${workspaces[@]}"; do
   sketchy_add_item "divider.$sid" left \
     --set "divider.$sid" "${props[@]}"
-
-  sketchybar --add bracket space.group.$sid '/window\.$sid\..*/' \
-          --set space.group.$sid \
-                  background.corner_radius=4  \
-                  background.color=$YELLOW \
-                  background.height=$BAR_HEIGHT
 done
-
-
-
