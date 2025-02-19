@@ -4,8 +4,8 @@ source "$PLUGIN_DIR/helpers/sketchy.sh"
 
 # background.color="$GROUP"
 props=(
-  icon.padding_left=8
-  icon.padding_right=8
+  icon.padding_left=6
+  icon.padding_right=6
   script="$PLUGIN_DIR/aerospace_controls.sh"
 )
 
@@ -60,7 +60,5 @@ sketchy_add_item layout.spacer.right center \
   --set layout.spacer.right icon.width=5
 
 sketchybar --add bracket aerospace_controls '/layout\..*/' \
-           --set aerospace_controls \
-                    background.corner_radius=4  \
-                    background.color=$GROUP
+           --set aerospace_controls background.color=$GROUP
                     
