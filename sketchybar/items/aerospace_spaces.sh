@@ -57,18 +57,17 @@ props=(
   icon.padding_left=0
   icon.padding_right=0
 )
-workspaces=("1" $(aerospace_workspaces))
+workspaces=($(aerospace_workspaces))
 for sid in "${workspaces[@]}"; do
-  echo "adding divider.start.$sid" >&2
-  sketchy_add_item "divider.start.$sid" left \
-    --set "divider.start.$sid" "${props[@]}"
-
-  echo "adding divider.end.$sid" >&2
-  sketchy_add_item "divider.end.$sid" left \
-    --set "divider.end.$sid" "${props[@]}"
-  
   start="divider.start.$sid"
   end="divider.end.$sid"
+  
+  sketchy_add_item "$start" left \
+    --set "$start" "${props[@]}"
+
+  sketchy_add_item "$end" left \
+    --set "$end" "${props[@]}"
+
   sketchybar --add bracket group.$sid "$start" "$end" \
            --set group.$sid \
                     background.corner_radius=0  \
