@@ -66,6 +66,7 @@ aerospace_workspace_focus(){
     osascript -e 'tell application "Finder" to activate'
     aerospace_highlight_window_id "$sid"
   fi
+  
 }
 
 remove_unmatched_items() {

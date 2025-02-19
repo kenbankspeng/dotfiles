@@ -37,3 +37,26 @@ sketchy_get_space_by_item() {
   local item="$1"
   echo "$item" | awk -F'.' '{print $2}'
 }
+
+sketchy_get_group_color() {
+  local sid="$1"
+  local space_color="$GROUP"
+  if [ "$sid" -eq 1 ]; then
+    space_color="$RED"
+  elif [ $((sid % 2)) -eq 0 ]; then
+    space_color="$GROUP_ALT"
+  fi
+  echo "$space_color"
+}
+
+
+sketchy_add_group() {
+  local sid="$1"
+  local start="divider.start.$sid"
+  local end="divider.end.$sid"
+  sketchybar --add bracket group.$sid "$start" "$end" \
+           --set group.$sid \
+                    background.corner_radius=0  \
+                    background.color=$(sketchy_get_group_color $sid)
+}
+

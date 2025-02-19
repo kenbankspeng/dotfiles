@@ -37,16 +37,6 @@ sketchy_add_item space_listener left \
   yabai_window_deminimized
 
 
-get_group_color() {
-  local sid="$1"
-  local space_color="$GROUP"
-  if [ $((sid % 2)) -eq 0 ]; then
-    space_color="$GROUP_ALT"
-  fi
-  echo "$space_color"
-}
-
-
 # add dividers as anchor points for the workspaces
 props=(
   background.padding_left=0
@@ -68,8 +58,5 @@ for sid in "${workspaces[@]}"; do
   sketchy_add_item "$end" left \
     --set "$end" "${props[@]}"
 
-  sketchybar --add bracket group.$sid "$start" "$end" \
-           --set group.$sid \
-                    background.corner_radius=0  \
-                    background.color=$(get_group_color $sid)
+  sketchy_add_group "$sid"
 done
