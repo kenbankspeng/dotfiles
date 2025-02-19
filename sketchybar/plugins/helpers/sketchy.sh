@@ -38,25 +38,71 @@ sketchy_get_space_by_item() {
   echo "$item" | awk -F'.' '{print $2}'
 }
 
+
+sketchy_add_workspace() {
+  local sid="$1"
+  local start="workspace.start.$sid"
+  local end="workspace.end.$sid"
+  sketchybar --add bracket workspace.$sid "$start" "$end" \
+           --set workspace.$sid \
+                    background.corner_radius=0  \
+                    background.color=$(sketchy_get_group_color $sid)
+}
+
+sketchy_highlight_workspace() {
+  local sid="$1"
+  local prev_sid
+
+  if [ -f "$CACHE_DIR/highlighted.workspace" ]; then
+    read -r prev_sid <"$CACHE_DIR/highlighted.workspace"
+  fi
+
+  if [ -n "$prev_sid" ] && [ "$prev_sid" != "$sid" ]; then
+    local group="group.$prev_sid"
+    sketchybar --set "$group" background.color="$OFF"
+  fi 
+
+  local group="group.$sid"
+  sketchybar --set "$group" background.color=$(sketchy_get_group_color $sid)
+
+  echo "$sid" >"$CACHE_DIR/highlighted.workspace"
+}
+
 sketchy_get_group_color() {
   local sid="$1"
   local space_color="$GROUP"
-  if [ "$sid" -eq 1 ]; then
-    space_color="$RED"
+  local focused=$(aerospace_focused_workspace)
+  if [ "$sid" -eq "$focused" ]; then
+    space_color=0xff808020
   elif [ $((sid % 2)) -eq 0 ]; then
     space_color="$GROUP_ALT"
   fi
   echo "$space_color"
 }
 
+sketchy_highlight_window_id() {
+  # ex: 46356
+  local window_id="$1"
+  local prev_window_id
 
-sketchy_add_group() {
-  local sid="$1"
-  local start="divider.start.$sid"
-  local end="divider.end.$sid"
-  sketchybar --add bracket group.$sid "$start" "$end" \
-           --set group.$sid \
-                    background.corner_radius=0  \
-                    background.color=$(sketchy_get_group_color $sid)
+  if [ -f "$CACHE_DIR/highlighted.window" ]; then
+    read -r prev_window_id <"$CACHE_DIR/highlighted.window"
+  fi
+
+  if [ -n "$prev_window_id" ] && [ "$prev_window_id" != "$window_id" ]; then
+    prev_item=$(sketchy_get_item_by_window_id "$prev_window_id")
+    if [ -n "$prev_item" ]; then
+      sketchybar --set "$prev_item" \
+        icon.color="$OFF"
+    fi
+  fi
+
+  # item ex: window.3.66286.WezTerm
+  item=$(sketchy_get_item_by_window_id "$window_id")
+  if [ -n "$item" ]; then
+    sketchybar --set "$item" \
+      icon.color="$ON"
+  fi
+
+  echo "$window_id" >"$CACHE_DIR/highlighted.window"
 }
-
