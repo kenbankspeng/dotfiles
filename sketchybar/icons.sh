@@ -45,3 +45,14 @@ export ICON_VOLUME_3=􀊨 # SF Symbols - wave 3
 export ICON_VOLUME_2=􀊦 # SF Symbols - wave 2
 export ICON_VOLUME_1=􀊤 # SF Symbols - wave 1
 export ICON_VOLUME_0=􀊢 # SF Symbols - muted
+
+export ICON_DEFAULT_1=1
+export ICON_DEFAULT_2=2
+export ICON_DEFAULT_3=3
+export ICON_DEFAULT_4=4
+export ICON_DEFAULT_5=5
+export ICON_DEFAULT_6=6
+export ICON_DEFAULT_7=7
+export ICON_DEFAULT_8=8
+export ICON_DEFAULT_9=9
+export ICON_DEFAULT_10=10

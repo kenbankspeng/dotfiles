@@ -2,6 +2,7 @@
 
 source "$PLUGIN_DIR/helpers/sketchy.sh"
 source "$CONFIG_DIR/plugins/helpers/util.sh"
+source "$CONFIG_DIR/env.sh"
 
 
 aerospace_workspaces() {
@@ -106,8 +107,9 @@ maybe_add_default_item_to_spaceid() {
   local items=$(sketchy_get_window_items_in_spaceid "$sid")
   
   if [ -z "$items" ]; then
-    echo "default $sid" >&2
     local item="window.$sid.$sid.default"
+    local icon_var_name="ICON_DEFAULT_$sid"
+    local icon="${!icon_var_name}"
     local props=(
       background.corner_radius=0
       icon.color=$RED
@@ -116,7 +118,7 @@ maybe_add_default_item_to_spaceid() {
     )
     sketchy_add_item "$item" left \
       --move "$item" before "divider.end.$sid" \
-      --set "$item" "${props[@]}" icon="$sid" \
+      --set "$item" "${props[@]}" icon="$icon" \
       click_script="aerospace workspace $sid"
     
     aerospace_highlight_window_id "$sid"
