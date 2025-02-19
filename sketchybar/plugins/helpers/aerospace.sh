@@ -125,7 +125,7 @@ maybe_add_default_item_to_spaceid() {
       icon.width="$APP_WIDTH"
     )
     sketchy_add_item "$item" left \
-      --move "$item" before "divider.$sid" \
+      --move "$item" before "divider.end.$sid" \
       --set "$item" "${props[@]}" icon="·" \
       click_script="aerospace workspace $sid"
     
@@ -173,7 +173,7 @@ aerospace_new_window_id() {
     icon.width="$APP_WIDTH"
   )
   sketchy_add_item "$item" left \
-    --move "$item" before "divider.$sid" \
+    --move "$item" before "divider.end.$sid" \
     --set "$item" "${props[@]}" \
     icon="$icon" icon.color="$OFF" \
     click_script="aerospace focus --window-id $window_id"
@@ -208,7 +208,7 @@ aerospace_add_apps_in_spaceid() {
       # only add if doesn't already exist
       item="window.$sid.$window_id.$appname"
       sketchy_add_item "$item" left \
-        --move "$item" before "divider.$sid" \
+        --move "$item" before "divider.end.$sid" \
         --set "$item" "${props[@]}" \
         icon="$icon" icon.color="$OFF" \
         click_script="aerospace focus --window-id $window_id"
