@@ -58,9 +58,6 @@ default:
   brew list --cask
 
 
-#   echo "length: ${#a[@]}"
-#   echo "1: ${a[1]}"
-#   echo "2: ${a[2]}"
 
 # brew list / leaves
 bl *$args:
@@ -69,20 +66,12 @@ bl *$args:
   len=${#a[@]}
   a1=${a[1]}
 
-  if [ $len = 0 ]; then
+  if [ $len = 1 ] && [ "$a1" = "leaves" ]; then
     print "brew leaves"
     print
     print "{{BrightMagenta}}USER-INSTALLED LEAF FORMULAS"
     print -- "----------------------------{{BrightCyan}}"
     brew leaves --installed-on-request
-  elif [ $len = 1 ] && [ "$a1" = "all" ]; then
-    print "brew list"
-    print
-    brew list
-  elif [ $len = 1 ] && [ -z "$a1" ]; then
-    print "brew list"
-    print
-    brew list
   else
     print "brew list {{args}}"
     print
