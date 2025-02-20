@@ -107,14 +107,27 @@ sketchy_get_color_by_sid() {
 }
 
 sketchy_get_color_by_window_id() {
-  local sid="$1"
+  local window_id="$1"
+
+  echo "window_id: $window_id" >&2
+
+  item=$(sketchy_get_item_by_window_id "$window_id")
+  echo "item: $item" >&2
+
+  sid=$(sketchy_get_space_by_item "$item")
+  echo "sid: $sid" >&2
+
+  local window_color
   local focused=$(aerospace_focused_workspace)
-  if [ "$sid" -eq "$focused" ]; then
-    space_foreground="$WORKSPACE_FOCUSED_FOREGROUND"
+  if [ "$sid" = "$focused" ]; then
+    window_color="$WORKSPACE_FOCUSED_FOREGROUND"
   elif [ $((sid % 2)) -eq 0 ]; then
-    space_foreground="$WORKSPACE_EVEN_FOREGROUND" 
+    window_color="$WORKSPACE_EVEN_FOREGROUND" 
   else
-    space_foreground="$WORKSPACE_ODD_FOREGROUND"
+    window_color="$WORKSPACE_ODD_FOREGROUND"
   fi
-  echo "$space_foreground"
+  echo "window_color: $window_color" >&2
+  echo "-------------------" >&2
+
+  echo "$window_color"
 }
