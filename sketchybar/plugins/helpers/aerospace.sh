@@ -59,6 +59,7 @@ aerospace_highlight_focused_window() {
   local sid=$(aerospace_focused_workspace)
   local window_id=$(yabai_get_focused_window_id)
 
+  sketchy_highlight_workspace "$sid"
   sketchy_highlight_window_id "$window_id"
 }
 
@@ -67,10 +68,12 @@ aerospace_workspace_change() {
   local sid="$1"
   local prev_sid="$2"
 
+  # keep prev workspace in sync
   remove_unmatched_items "$prev_sid"
+
+  # keep current workspace in sync
   aerospace_add_apps_in_spaceid "$sid"
 
-  maybe_remove_default_item_from_spaceid "$sid"
   aerospace_highlight_focused_window
 }
 
@@ -183,6 +186,9 @@ aerospace_add_apps_in_spaceid() {
         icon="$icon" icon.color="$icon_color" \
         click_script="aerospace focus --window-id $window_id"
     done
+
+    # remove default item if no apps in workspace
+    maybe_remove_default_item_from_spaceid "$sid"
   else
     maybe_add_default_item_to_spaceid "$sid"
   fi
