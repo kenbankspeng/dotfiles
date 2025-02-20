@@ -66,31 +66,30 @@ sketchy_highlight_workspace() {
 }
 
 
-sketchy_highlight_window_id() {
+sketchy_highlight_item() {
   # ex: 46356
-  local window_id="$1"
-  local prev_window_id
+  local item="$1"
+  local prev_item
 
-  if [ -f "$CACHE_DIR/highlighted.window" ]; then
-    read -r prev_window_id <"$CACHE_DIR/highlighted.window"
+  if [ -f "$CACHE_DIR/highlighted.item" ]; then
+    read -r prev_item <"$CACHE_DIR/highlighted.item"
   fi
 
-  if [ -n "$prev_window_id" ] && [ "$prev_window_id" != "$window_id" ]; then
-    prev_item=$(sketchy_get_item_by_window_id "$prev_window_id")
-    if [ -n "$prev_item" ]; then
+  if [ -n "$prev_item" ] && [ "$prev_item" != "$item" ]; then
+    prev_item=$(sketchy_get_item_by_window_id "$prev_item")
+    if [ -n "$prev_item" ]; then  
       sketchybar --set "$prev_item" \
-        icon.color=$(sketchy_get_color_by_window_id $prev_window_id)
+        icon.color=$(sketchy_get_color_by_item $prev_item)
     fi
   fi
 
   # item ex: window.3.66286.WezTerm
-  item=$(sketchy_get_item_by_window_id "$window_id")
   if [ -n "$item" ]; then
     sketchybar --set "$item" \
-      icon.color=$(sketchy_get_color_by_window_id $window_id)
+      icon.color=$(sketchy_get_color_by_item $item)
   fi
 
-  echo "$window_id" >"$CACHE_DIR/highlighted.window"
+  echo "$item" >"$CACHE_DIR/highlighted.item"
 }
 
 sketchy_get_color_by_sid() {
@@ -106,28 +105,21 @@ sketchy_get_color_by_sid() {
   echo "$space_background"
 }
 
-sketchy_get_color_by_window_id() {
-  local window_id="$1"
-
-  echo "window_id: $window_id" >&2
-
-  item=$(sketchy_get_item_by_window_id "$window_id")
-  echo "item: $item" >&2
-
-  sid=$(sketchy_get_space_by_item "$item")
-  echo "sid: $sid" >&2
+sketchy_get_color_by_item() {
+  local item="$1"
+  local sid=$(sketchy_get_space_by_item "$item")
+  
+  local focused_window_id=$(yabai_get_focused_window_id)
+  local focused_item=$(sketchy_get_item_by_window_id "$focused_window_id")
 
   local window_color
-  local focused=$(aerospace_focused_workspace)
-  if [ "$sid" = "$focused" ]; then
+  if [ "$focused_item" = "$item" ]; then
     window_color="$WORKSPACE_FOCUSED_FOREGROUND"
   elif [ $((sid % 2)) -eq 0 ]; then
     window_color="$WORKSPACE_EVEN_FOREGROUND" 
   else
     window_color="$WORKSPACE_ODD_FOREGROUND"
   fi
-  echo "window_color: $window_color" >&2
-  echo "-------------------" >&2
 
   echo "$window_color"
 }

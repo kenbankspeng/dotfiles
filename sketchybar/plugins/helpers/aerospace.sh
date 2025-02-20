@@ -33,12 +33,13 @@ aerospace_appname_from_window_id() {
 aerospace_workspace_focus(){
   local sid="$1"
   local check_for_default_item=$(sketchy_get_item_by_window_id "$sid")
+  echo "check_for_default_item: $check_for_default_item" >&2
   if [ -n "$check_for_default_item" ]; then
     # TODO: if finder is already open, this doesn't work
     # focus on finder so that yabai_window_focused will fire next change
     osascript -e 'tell application "Finder" to activate'
     # for default item, use spaceid as window_id
-    sketchy_highlight_window_id "$sid"
+    sketchy_highlight_item "$sid"
   else
     sketchy_highlight_workspace "$sid"
   fi
@@ -56,11 +57,25 @@ remove_unmatched_items() {
 }
 
 aerospace_highlight_focused_window() {
-  local sid=$(aerospace_focused_workspace)
-  local window_id=$(yabai_get_focused_window_id)
+  local window_id=$1
+
+  echo "window_id: $window_id" >&2
+  if [ -z "$window_id" ]; then
+    echo "window_id is empty" >&2
+    local sid=$(aerospace_focused_workspace)
+    window_id=$(yabai_get_focused_window_id)
+  fi
+
+  local item=$(sketchy_get_item_by_window_id "$window_id")
+
+
+  
+  echo "sid: $sid" >&2
+  echo "item: $item" >&2
+  echo "--------------------------------" >&2
 
   sketchy_highlight_workspace "$sid"
-  sketchy_highlight_window_id "$window_id"
+  sketchy_highlight_item "$item"
 }
 
 aerospace_workspace_change() {
@@ -104,7 +119,7 @@ maybe_add_default_item_to_spaceid() {
       click_script="aerospace workspace $sid"
     
     # for default item, use spaceid as window_id
-    sketchy_highlight_window_id "$sid"
+    sketchy_highlight_item "$sid"
   fi
 }
 
@@ -138,10 +153,11 @@ aerospace_new_window_id() {
 
   # ex: Cursor
   appname=$(aerospace_appname_from_window_id "$window_id")
+  item="window.$sid.$window_id.$appname"
 
   icon="$($CONFIG_DIR/icons_apps.sh "$appname")"
-  icon_color="$(sketchy_get_color_by_window_id $sid)"
-  item="window.$sid.$window_id.$appname"
+  icon_color="$(sketchy_get_color_by_item $item)"
+
   props=(
     background.corner_radius=0
     icon.font="$ICON_FONT:$ICON_FONTSIZE"
@@ -155,7 +171,7 @@ aerospace_new_window_id() {
 
    # remove default if it exists
   maybe_remove_default_item_from_spaceid "$sid"
-  sketchy_highlight_window_id "$window_id"
+  sketchy_highlight_item "$window_id"
 }
 
 aerospace_add_apps_in_spaceid() {
@@ -175,11 +191,11 @@ aerospace_add_apps_in_spaceid() {
     read -ra window_id_array <<< "$aerospace_window_ids"
     for window_id in "${window_id_array[@]}"; do
       appname=$(aerospace_appname_from_window_id "$window_id")
+      item="window.$sid.$window_id.$appname"
       icon="$($CONFIG_DIR/icons_apps.sh "$appname")"
-      icon_color="$(sketchy_get_color_by_window_id $sid)"
+      icon_color="$(sketchy_get_color_by_item $item)"
 
       # only add if doesn't already exist
-      item="window.$sid.$window_id.$appname"
       sketchy_add_item "$item" left \
         --move "$item" before "workspace.end.$sid" \
         --set "$item" "${props[@]}" \
