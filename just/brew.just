@@ -69,10 +69,6 @@ bl *$args:
   len=${#a[@]}
   a1=${a[1]}
 
-  echo "args: $args"
-  echo "len: $len"
-  echo "a1: $a1"
-
   if [ $len = 0 ]; then
     print "brew leaves"
     print
