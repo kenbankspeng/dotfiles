@@ -73,13 +73,13 @@ bl *$args:
   echo "len: $len"
   echo "a1: $a1"
 
-  if [ -z "$len" ]; then
+  if [ $len = 0 ]; then
     print "brew leaves"
     print
     print "{{BrightMagenta}}USER-INSTALLED LEAF FORMULAS"
     print -- "----------------------------{{BrightCyan}}"
     brew leaves --installed-on-request
-  elif [ $len = 1 ] && [ "$a1" = "a" ]; then
+  elif [ $len = 1 ] && [ "$a1" = "all" ]; then
     print "brew list"
     print
     brew list
