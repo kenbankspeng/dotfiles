@@ -37,29 +37,17 @@ default:
   print -- "---------------------{{BrightBlue}}"
   bun -g outdated 
 
-# brew tree (casks and formulas)
-@bt:
-  print "brew tree"
-  print
-  print "{{BrightMagenta}}CASK APPS"
-  print -- "--------{{BrightBlue}}" # -- because "-..." interpreted as flag
-  brew list --cask
-  print
-  print "{{BrightMagenta}}FORMULAS"
-  print -- "--------{{BrightCyan}}"
-  brew leaves | xargs brew deps --tree
-
 # brew versions
-@bv: 
-  print "brew list --versions"
+@bv *args: 
+  print "brew list --versions {{args}}"
   print
   print "{{BrightMagenta}}CASK APPS"
   print -- "---------{{BrightBlue}}"
-  brew list --versions --cask
+  brew list --versions --cask {{args}} || print "{{BrightRed}}No cask apps found{{BrightCyan}}"
   print
   print "{{BrightMagenta}}FORMULA APPS"
   print -- "------------{{BrightCyan}}"
-  brew list --versions --formula
+  brew list --versions --formula {{args}} || print "{{BrightRed}}No formula apps found{{BrightCyan}}"
 
 # brew casks
 @bc: 
@@ -69,13 +57,20 @@ default:
   print -- "---------{{BrightBlue}}"
   brew list --cask
 
-# brew leaves
-@bl:
-  print "brew leaves"
-  print
-  print "{{BrightMagenta}}USER-INSTALLED LEAF FORMULAS"
-  print -- "----------------------------{{BrightCyan}}"
-  brew leaves --installed-on-request
+# brew list / leaves
+bl *args:
+  #! /usr/bin/env zsh
+  if [ -n "{{args}}" ]; then
+    print "brew list {{args}}"
+    print
+    brew list --formula {{args}}
+  else
+    print "brew leaves"
+    print
+    print "{{BrightMagenta}}USER-INSTALLED LEAF FORMULAS"
+    print -- "----------------------------{{BrightCyan}}"
+    brew leaves --installed-on-request
+  fi
 
 # brew outdated (greedy)
 @bo:
@@ -105,12 +100,20 @@ default:
   brew autoremove
   brew cleanup
 
-# brew tree for package
-@btp *args:
-  print "brew tree for package" {{args}}
+# brew tree (casks and formulas)
+bt *args:
+  #! /usr/bin/env zsh
+  print "brew tree {{args}}"
   print
-  brew deps --tree {{args}}
+  print "{{BrightMagenta}}FORMULAS"
+  print -- "--------{{BrightCyan}}"
+  if [ -n "{{args}}" ]; then
+    brew deps --tree --formula {{args}}
+  else
+    brew leaves | xargs brew deps --tree --formula
+  fi
 
+  
 # brew packages that depend on
 @bdo *args:
   print "brew packages that depend on" {{args}}
