@@ -57,19 +57,40 @@ default:
   print -- "---------{{BrightBlue}}"
   brew list --cask
 
+
+#   echo "length: ${#a[@]}"
+#   echo "1: ${a[1]}"
+#   echo "2: ${a[2]}"
+
 # brew list / leaves
-bl *args:
+bl *$args:
   #! /usr/bin/env zsh
-  if [ -n "{{args}}" ]; then
-    print "brew list {{args}}"
-    print
-    brew list --formula {{args}}
-  else
+  a=(${=args})
+  len=${#a[@]}
+  a1=${a[1]}
+
+  echo "args: $args"
+  echo "len: $len"
+  echo "a1: $a1"
+
+  if [ -z "$len" ]; then
     print "brew leaves"
     print
     print "{{BrightMagenta}}USER-INSTALLED LEAF FORMULAS"
     print -- "----------------------------{{BrightCyan}}"
     brew leaves --installed-on-request
+  elif [ $len = 1 ] && [ "$a1" = "a" ]; then
+    print "brew list"
+    print
+    brew list
+  elif [ $len = 1 ] && [ -z "$a1" ]; then
+    print "brew list"
+    print
+    brew list
+  else
+    print "brew list {{args}}"
+    print
+    brew list --formula {{args}}
   fi
 
 # brew outdated (greedy)
@@ -119,4 +140,3 @@ bt *args:
   print "brew packages that depend on" {{args}}
   print
   brew uses --installed {{args}}
-
