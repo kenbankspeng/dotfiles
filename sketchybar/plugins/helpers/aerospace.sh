@@ -39,7 +39,7 @@ aerospace_workspace_focus(){
     # focus on finder so that yabai_window_focused will fire next change
     osascript -e 'tell application "Finder" to activate'
     # for default item, use spaceid as window_id
-    sketchy_highlight_item "$sid"
+    sketchy_highlight_item "window.$sid.$sid.default"
   else
     sketchy_highlight_workspace "$sid"
   fi
@@ -119,7 +119,7 @@ maybe_add_default_item_to_spaceid() {
       click_script="aerospace workspace $sid"
     
     # for default item, use spaceid as window_id
-    sketchy_highlight_item "$sid"
+    sketchy_highlight_item "window.$sid.$sid.default"
   fi
 }
 
@@ -171,7 +171,7 @@ aerospace_new_window_id() {
 
    # remove default if it exists
   maybe_remove_default_item_from_spaceid "$sid"
-  sketchy_highlight_item "$window_id"
+  sketchy_highlight_item "$item"
 }
 
 aerospace_add_apps_in_spaceid() {

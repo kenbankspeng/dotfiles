@@ -95,7 +95,7 @@ sketchy_highlight_item() {
 sketchy_get_color_by_sid() {
   local sid="$1"
   local focused=$(aerospace_focused_workspace)
-  if [ "$sid" -eq "$focused" ]; then
+  if [ "$sid" = "$focused" ]; then
     space_background="$WORKSPACE_FOCUSED_BACKGROUND"
   elif [ $((sid % 2)) -eq 0 ]; then
     space_background="$WORKSPACE_EVEN_BACKGROUND"
@@ -111,6 +111,10 @@ sketchy_get_color_by_item() {
   
   local focused_window_id=$(yabai_get_focused_window_id)
   local focused_item=$(sketchy_get_item_by_window_id "$focused_window_id")
+
+  echo "item: $item" >&2
+  echo "focused_item: $focused_item" >&2
+
 
   local window_color
   if [ "$focused_item" = "$item" ]; then
