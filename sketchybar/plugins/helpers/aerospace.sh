@@ -31,16 +31,17 @@ aerospace_appname_from_window_id() {
 
 
 aerospace_workspace_focus(){
-  # for default item, use spaceid as window_id
   local sid="$1"
-  local item=$(sketchy_get_item_by_window_id "$sid")
-  if [ -n "$item" ]; then
-    # TODO: gotcha if finder is open
+  local check_for_default_item=$(sketchy_get_item_by_window_id "$sid")
+  if [ -n "$check_for_default_item" ]; then
+    # TODO: if finder is already open, this doesn't work
     # focus on finder so that yabai_window_focused will fire next change
     osascript -e 'tell application "Finder" to activate'
-    sketchy_highlight_window_id "$sid"
+    # for default item, use spaceid as window_id
+    sketchy_set_highlight "$sid" "$sid"
+  else
+    sketchy_set_highlight "$sid" ""
   fi
-  sketchy_highlight_workspace "$sid"
 }
 
 remove_unmatched_items() {
@@ -55,12 +56,10 @@ remove_unmatched_items() {
 }
 
 aerospace_highlight_focused_window() {
-  local window_id=$(yabai_get_focused_window_id)
-  if [ -n "$window_id" ]; then
-    sketchy_highlight_window_id "$window_id"
-  fi
   local sid=$(aerospace_focused_workspace)
-  aerospace_workspace_focus "$sid"
+  local window_id=$(yabai_get_focused_window_id)
+
+  sketchy_set_highlight "$sid" "$window_id"
 }
 
 aerospace_workspace_change() {
@@ -88,6 +87,7 @@ maybe_add_default_item_to_spaceid() {
   fi
 
   if [ -z "$items" ]; then
+    # if no items, add a default item
     local item="window.$sid.$sid.default"
     local props=(
       background.corner_radius=0
@@ -100,7 +100,8 @@ maybe_add_default_item_to_spaceid() {
       --set "$item" "${props[@]}" \
       click_script="aerospace workspace $sid"
     
-    sketchy_highlight_window_id "$sid"
+    # for default item, use spaceid as window_id
+    sketchy_set_highlight "$sid" "$sid"
   fi
 }
 
@@ -152,7 +153,7 @@ aerospace_new_window_id() {
    # remove default if it exists
   maybe_remove_default_item_from_spaceid "$sid"
 
-  sketchy_highlight_window_id "$window_id"
+  sketchy_set_highlight "$sid" "$window_id"
 }
 
 aerospace_add_apps_in_spaceid() {

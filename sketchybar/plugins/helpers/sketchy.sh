@@ -48,49 +48,59 @@ sketchy_add_workspace() {
                     background.color=$(get_workspace_background $sid)
 }
 
-sketchy_highlight_workspace() {
-  local sid="$1"
+
+
+sketchy_set_highlight() {
+  local sid=$1
+  local window_id=$2
   local prev_sid
-
-  if [ -f "$CACHE_DIR/highlighted.workspace" ]; then
-    read -r prev_sid <"$CACHE_DIR/highlighted.workspace"
-  fi
-
-  if [ -n "$prev_sid" ] && [ "$prev_sid" != "$sid" ]; then
-    sketchybar --set "workspace.$prev_sid" background.color=$(get_workspace_background $prev_sid)
-  fi 
-
-  sketchybar --set "workspace.$sid" background.color=$(get_workspace_background $sid)
-
-  echo "$sid" >"$CACHE_DIR/highlighted.workspace"
-}
-
-
-sketchy_highlight_window_id() {
-  # ex: 46356
-  local window_id="$1"
   local prev_window_id
 
-  if [ -f "$CACHE_DIR/highlighted.window" ]; then
-    read -r prev_window_id <"$CACHE_DIR/highlighted.window"
+  # if no sid is provided, use the focused workspace
+  if [ -z "$sid" ]; then
+    sid=$(aerospace_focused_workspace)
   fi
 
-  if [ -n "$prev_window_id" ] && [ "$prev_window_id" != "$window_id" ]; then
-    prev_item=$(sketchy_get_item_by_window_id "$prev_window_id")
-    if [ -n "$prev_item" ]; then
-      sketchybar --set "$prev_item" \
-        icon.color="$OFF"
+  # get previous values
+  if [ -f "$CACHE_DIR/highlighted" ]; then
+    read -r prev_sid prev_window_id <"$CACHE_DIR/highlighted"
+  fi
+
+  # clear previous workspace highlight
+  if [ -n "$prev_sid" ] && [ "$prev_sid" != "$sid" ]; then
+    sketchybar --set "workspace.$prev_sid" background.color=$(get_workspace_background $prev_sid)
+  fi
+
+  # set new workspace highlight
+  sketchybar --set "workspace.$sid" background.color=$(get_workspace_background $sid)
+
+  if [ -n "$window_id" ];then
+    # clear previous window highlight
+    if [ -n "$prev_window_id" ] && [ "$prev_window_id" != "$window_id" ]; then
+      prev_item=$(sketchy_get_item_by_window_id "$prev_window_id")
+      if [ -n "$prev_item" ]; then
+        sketchybar --set "$prev_item" icon.color=$(get_workspace_foreground $prev_sid)
+      fi
     fi
+
+    # set new window highlight
+    item=$(sketchy_get_item_by_window_id "$window_id")
+    if [ -n "$item" ]; then
+      sketchybar --set "$item" icon.color=$(get_workspace_foreground $sid) 
+    fi
+  else
+    # keep previous window id
+    window_id=$prev_window_id
   fi
 
-  # item ex: window.3.66286.WezTerm
-  item=$(sketchy_get_item_by_window_id "$window_id")
-  if [ -n "$item" ]; then
-    sketchybar --set "$item" \
-      icon.color="$WORKSPACE_FOCUSED_ICON"
-  fi
+  echo "$sid $window_id" >"$CACHE_DIR/highlighted"
+}
 
-  echo "$window_id" >"$CACHE_DIR/highlighted.window"
+sketchy_get_highlighted() {
+  if [ -f "$CACHE_DIR/highlighted" ]; then
+    read -r sid window_id <"$CACHE_DIR/highlighted"
+    echo "$sid $window_id"
+  fi
 }
 
 # helper
@@ -118,42 +128,4 @@ get_workspace_foreground() {
     space_foreground="$WORKSPACE_ODD_FOREGROUND"
   fi
   echo "$space_foreground"
-}
-
-sketchy_highlight_workspace_and_window() {
-  local sid="$1"
-  local window_id="$2"
-  local prev_sid
-  local prev_window_id
-
-  if [ -f "$CACHE_DIR/highlighted" ]; then
-    read -r prev_sid prev_window_id <"$CACHE_DIR/highlighted"
-  fi
-
-  if [ -n "$prev_sid" ] && [ "$prev_sid" != "$sid" ]; then
-    sketchybar --set "workspace.$prev_sid" background.color=$(get_workspace_background $prev_sid)
-  fi
-
-  if [ -n "$prev_window_id" ] && [ "$prev_window_id" != "$window_id" ]; then
-    prev_item=$(sketchy_get_item_by_window_id "$prev_window_id")
-    if [ -n "$prev_item" ]; then
-      sketchybar --set "$prev_item" icon.color="$OFF"
-    fi
-  fi
-
-  sketchybar --set "workspace.$sid" background.color=$(get_workspace_background $sid)
-
-  item=$(sketchy_get_item_by_window_id "$window_id")
-  if [ -n "$item" ]; then
-    sketchybar --set "$item" icon.color="$WORKSPACE_FOCUSED_ICON"
-  fi
-
-  echo "$sid $window_id" >"$CACHE_DIR/highlighted"
-}
-
-sketchy_get_highlighted() {
-  if [ -f "$CACHE_DIR/highlighted" ]; then
-    read -r sid window_id <"$CACHE_DIR/highlighted"
-    echo "$sid $window_id"
-  fi
 }
