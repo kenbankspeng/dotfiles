@@ -10,9 +10,9 @@ if [ "$SENDER" = "forced" ]; then
     aerospace_add_apps_in_spaceid "$space"
   done
   # to initialize cache of previous window_id
-  aerospace_highlight_focused_window
+  aerospace_focused_window_change
 elif [ "$SENDER" = "yabai_window_focused" ]; then
-  aerospace_highlight_focused_window $ID
+  aerospace_focused_window_change $ID
 elif [ "$SENDER" = "aerospace_workspace_change" ]; then
   aerospace_workspace_change "$FOCUSED_WORKSPACE" "$PREV_WORKSPACE"
 elif [ "$SENDER" = "yabai_window_created" ] || [ "$SENDER" = "yabai_window_deminimized" ]; then

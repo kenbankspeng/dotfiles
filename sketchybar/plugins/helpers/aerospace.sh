@@ -52,17 +52,10 @@ aerospace_workspace_change() {
   # keep current workspace in sync
   aerospace_add_apps_in_spaceid "$sid"
 
-  # a yabai_window_focused event will follow this
-  # whether because a new window is focused in the new workspace
-  # or because we told finder to activate
-  aerospace_workspace_focus "$sid"
-}
-
-aerospace_workspace_focus(){
-  local sid="$1"
-
+  # highlight workspace
   sketchy_highlight_workspace "$sid"
 
+  # if default item, focus on finder so next change will produce yabai_window_focused event
   local default_item=$(sketchy_get_item_by_window_id "$sid")
   if [ -n "$default_item" ]; then
     # TODO: if finder is already open, this doesn't work
@@ -73,7 +66,7 @@ aerospace_workspace_focus(){
   fi
 }
 
-aerospace_highlight_focused_window() {
+aerospace_focused_window_change() {
   local window_id=$1  
   local sid=$(aerospace_focused_workspace)
  
