@@ -60,16 +60,16 @@ aerospace_workspace_change() {
 
 aerospace_workspace_focus(){
   local sid="$1"
-  local check_for_default_item=$(sketchy_get_item_by_window_id "$sid")
 
-  if [ -n "$check_for_default_item" ]; then
+  sketchy_highlight_workspace "$sid"
+
+  local default_item=$(sketchy_get_item_by_window_id "$sid")
+  if [ -n "$default_item" ]; then
     # TODO: if finder is already open, this doesn't work
     # focus on finder so that yabai_window_focused will fire next change
     osascript -e 'tell application "Finder" to activate'
     # for default item, use spaceid as window_id
-    sketchy_highlight_window_id "$sid"
-  else
-    sketchy_highlight_workspace "$sid"
+    sketchy_highlight_window_id "$sid"  
   fi
 }
 
