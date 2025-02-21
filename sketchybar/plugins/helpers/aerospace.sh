@@ -57,7 +57,7 @@ remove_unmatched_items() {
 }
 
 aerospace_highlight_focused_window() {
-  local window_id=$1
+  local window_id=$1  
  
   if [ -z "$window_id" ]; then
     window_id=$(yabai_get_focused_window_id)

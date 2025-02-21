@@ -67,28 +67,23 @@ sketchy_highlight_workspace() {
 
 
 sketchy_highlight_item() {
-  # ex: 46356
-  local item="$1"
+  local item="$1" # item ex: window.3.66286.WezTerm
   local prev_item
 
   if [ -f "$CACHE_DIR/highlighted.item" ]; then
     read -r prev_item <"$CACHE_DIR/highlighted.item"
   fi
 
-  if [ -n "$prev_item" ] && [ "$prev_item" != "$item" ]; then
-    if [ -n "$prev_item" ]; then  
-      sketchybar --set "$prev_item" \
-        icon.color=$(sketchy_get_color_by_item $prev_item)
-    fi
+  if [ -n "$prev_item" ]; then
+    sketchybar --set "$prev_item" \
+      icon.color=$(sketchy_get_color_by_item $prev_item)
   fi
 
-  # item ex: window.3.66286.WezTerm
   if [ -n "$item" ]; then
     sketchybar --set "$item" \
       icon.color=$(sketchy_get_color_by_item $item)
+    echo "$item" >"$CACHE_DIR/highlighted.item"
   fi
-
-  echo "$item" >"$CACHE_DIR/highlighted.item"
 }
 
 sketchy_get_color_by_sid() {
