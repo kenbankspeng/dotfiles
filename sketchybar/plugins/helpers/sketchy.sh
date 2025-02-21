@@ -52,7 +52,7 @@ sketchy_add_workspace() {
   sketchybar --add bracket workspace.$sid "$start" "$end" \
            --set workspace.$sid \
                     background.corner_radius=0  \
-                    background.color=$(sketchy_get_space_background_color_by_sid $sid)
+                    background.color=$(sketchy_get_space_background_color false)
 }
 
 sketchy_highlight_workspace() {
@@ -64,10 +64,10 @@ sketchy_highlight_workspace() {
   fi
 
   if [ -n "$prev_sid" ] && [ "$prev_sid" != "$sid" ]; then
-    sketchybar --set "workspace.$prev_sid" background.color=$(sketchy_get_space_background_color_by_sid $prev_sid)
+    sketchybar --set "workspace.$prev_sid" background.color=$(sketchy_get_space_background_color false)
   fi 
 
-  sketchybar --set "workspace.$sid" background.color=$(sketchy_get_space_background_color_by_sid $sid)
+  sketchybar --set "workspace.$sid" background.color=$(sketchy_get_space_background_color true)
 
   echo "$sid" >"$CACHE_DIR/highlighted.workspace"
 }
@@ -100,10 +100,9 @@ sketchy_highlight_window_id() {
   fi
 }
 
-sketchy_get_space_background_color_by_sid() {
-  local sid="$1"
-  local focused=$(aerospace_focused_workspace)
-  if [ "$sid" = "$focused" ]; then
+sketchy_get_space_background_color() {
+  local focused="$1"
+  if [ "$focused" = true ]; then
     space_background="$WORKSPACE_FOCUSED_BACKGROUND"
   else
     space_background="$WORKSPACE_BACKGROUND"
