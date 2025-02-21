@@ -9,7 +9,8 @@ if [ "$SENDER" = "forced" ]; then
   for space in $(aerospace_workspaces); do
     aerospace_add_apps_in_spaceid "$space"
   done
-  # aerospace_highlight_focused_window
+  # to initialize cache of previous window_id
+  aerospace_highlight_focused_window
 elif [ "$SENDER" = "yabai_window_focused" ]; then
   aerospace_highlight_focused_window $ID
 elif [ "$SENDER" = "aerospace_workspace_change" ]; then

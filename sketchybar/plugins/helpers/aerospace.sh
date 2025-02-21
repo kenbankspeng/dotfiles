@@ -29,22 +29,6 @@ aerospace_appname_from_window_id() {
   echo "$filtered"
 }
 
-
-aerospace_workspace_focus(){
-  local sid="$1"
-  local check_for_default_item=$(sketchy_get_item_by_window_id "$sid")
-  echo "check_for_default_item: $check_for_default_item" >&2
-  if [ -n "$check_for_default_item" ]; then
-    # TODO: if finder is already open, this doesn't work
-    # focus on finder so that yabai_window_focused will fire next change
-    osascript -e 'tell application "Finder" to activate'
-    # for default item, use spaceid as window_id
-    sketchy_highlight_window_id "$sid"
-  else
-    sketchy_highlight_workspace "$sid"
-  fi
-}
-
 remove_unmatched_items() {
   local sid="$1"
   aerospace_window_ids=$(aerospace_window_ids_in_workspace "$sid")
@@ -53,6 +37,39 @@ remove_unmatched_items() {
   if [[ -n "$apps_to_remove" ]]; then
     sketchy_remove_item "$apps_to_remove"
     maybe_add_default_item_to_spaceid "$sid"
+  fi
+}
+
+
+aerospace_workspace_change() {
+  # default window uses sid as window_id
+  local sid="$1"
+  local prev_sid="$2"
+
+  # keep prev workspace in sync
+  remove_unmatched_items "$prev_sid"
+
+  # keep current workspace in sync
+  aerospace_add_apps_in_spaceid "$sid"
+
+  # a yabai_window_focused event will follow this
+  # whether because a new window is focused in the new workspace
+  # or because we told finder to activate
+  aerospace_workspace_focus "$sid"
+}
+
+aerospace_workspace_focus(){
+  local sid="$1"
+  local check_for_default_item=$(sketchy_get_item_by_window_id "$sid")
+
+  if [ -n "$check_for_default_item" ]; then
+    # TODO: if finder is already open, this doesn't work
+    # focus on finder so that yabai_window_focused will fire next change
+    osascript -e 'tell application "Finder" to activate'
+    # for default item, use spaceid as window_id
+    sketchy_highlight_window_id "$sid"
+  else
+    sketchy_highlight_workspace "$sid"
   fi
 }
 
@@ -66,20 +83,6 @@ aerospace_highlight_focused_window() {
 
   sketchy_highlight_workspace "$sid"
   sketchy_highlight_window_id "$window_id"
-}
-
-aerospace_workspace_change() {
-  # default window uses sid as window_id
-  local sid="$1"
-  local prev_sid="$2"
-
-  # keep prev workspace in sync
-  remove_unmatched_items "$prev_sid"
-
-  # keep current workspace in sync
-  aerospace_add_apps_in_spaceid "$sid"
-
-  aerospace_highlight_focused_window
 }
 
 maybe_add_default_item_to_spaceid() {
