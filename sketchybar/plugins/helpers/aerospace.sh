@@ -58,23 +58,16 @@ remove_unmatched_items() {
 
 aerospace_highlight_focused_window() {
   local window_id=$1
-
-  echo "window_id: $window_id" >&2
+ 
   if [ -z "$window_id" ]; then
-    echo "window_id is empty" >&2
-    local sid=$(aerospace_focused_workspace)
     window_id=$(yabai_get_focused_window_id)
   fi
 
+  local sid=$(aerospace_focused_workspace)
   local item=$(sketchy_get_item_by_window_id "$window_id")
 
-
-  
-  echo "sid: $sid" >&2
-  echo "item: $item" >&2
-  echo "--------------------------------" >&2
-
   sketchy_highlight_workspace "$sid"
+  echo "aerospace_highlight_focused_window item: $item" >&2
   sketchy_highlight_item "$item"
 }
 

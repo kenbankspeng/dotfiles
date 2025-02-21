@@ -76,7 +76,6 @@ sketchy_highlight_item() {
   fi
 
   if [ -n "$prev_item" ] && [ "$prev_item" != "$item" ]; then
-    prev_item=$(sketchy_get_item_by_window_id "$prev_item")
     if [ -n "$prev_item" ]; then  
       sketchybar --set "$prev_item" \
         icon.color=$(sketchy_get_color_by_item $prev_item)
@@ -108,13 +107,8 @@ sketchy_get_color_by_sid() {
 sketchy_get_color_by_item() {
   local item="$1"
   local sid=$(sketchy_get_space_by_item "$item")
-  
   local focused_window_id=$(yabai_get_focused_window_id)
   local focused_item=$(sketchy_get_item_by_window_id "$focused_window_id")
-
-  echo "item: $item" >&2
-  echo "focused_item: $focused_item" >&2
-
 
   local window_color
   if [ "$focused_item" = "$item" ]; then
