@@ -84,7 +84,7 @@ exec-on-workspace-change = [
   outer.left = 15
   outer.right = 15
   outer.top = 0
-  outer.bottom = 38
+  outer.bottom = 45
 
 
 

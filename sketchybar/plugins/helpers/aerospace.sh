@@ -149,7 +149,7 @@ aerospace_new_window_id() {
   item="window.$sid.$window_id.$appname"
 
   icon="$($CONFIG_DIR/icons_apps.sh "$appname")"
-  icon_color="$(sketchy_get_color_by_window_id $window_id)"
+  icon_color="$(sketchy_get_space_foreground_color_by_window_id $window_id)"
 
   props=(
     background.corner_radius=0
@@ -186,7 +186,7 @@ aerospace_add_apps_in_spaceid() {
       appname=$(aerospace_appname_from_window_id "$window_id")
       item="window.$sid.$window_id.$appname"
       icon="$($CONFIG_DIR/icons_apps.sh "$appname")"
-      icon_color="$(sketchy_get_color_by_window_id $window_id)"
+      icon_color="$(sketchy_get_space_foreground_color_by_window_id $window_id)"
 
       # only add if doesn't already exist
       sketchy_add_item "$item" left \

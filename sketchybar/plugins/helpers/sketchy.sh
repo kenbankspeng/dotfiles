@@ -52,7 +52,7 @@ sketchy_add_workspace() {
   sketchybar --add bracket workspace.$sid "$start" "$end" \
            --set workspace.$sid \
                     background.corner_radius=0  \
-                    background.color=$(sketchy_get_color_by_sid $sid)
+                    background.color=$(sketchy_get_space_background_color_by_sid $sid)
 }
 
 sketchy_highlight_workspace() {
@@ -64,10 +64,10 @@ sketchy_highlight_workspace() {
   fi
 
   if [ -n "$prev_sid" ] && [ "$prev_sid" != "$sid" ]; then
-    sketchybar --set "workspace.$prev_sid" background.color=$(sketchy_get_color_by_sid $prev_sid)
+    sketchybar --set "workspace.$prev_sid" background.color=$(sketchy_get_space_background_color_by_sid $prev_sid)
   fi 
 
-  sketchybar --set "workspace.$sid" background.color=$(sketchy_get_color_by_sid $sid)
+  sketchybar --set "workspace.$sid" background.color=$(sketchy_get_space_background_color_by_sid $sid)
 
   echo "$sid" >"$CACHE_DIR/highlighted.workspace"
 }
@@ -85,46 +85,42 @@ sketchy_highlight_window_id() {
   if [ -n "$prev_window_id" ] && [ "$prev_window_id" != "$window_id" ]; then
     local prev_item=$(sketchy_get_item_by_window_id "$prev_window_id")
     if [ -n "$prev_item" ]; then
-      local color=$(sketchy_get_color_by_window_id $prev_window_id)
+      local color=$(sketchy_get_space_foreground_color_by_window_id $prev_window_id)
       sketchybar --set "$prev_item" icon.color="$color"
     fi
   fi
 
   if [ -n "$window_id" ] && [ "$prev_window_id" != "$window_id" ]; then
     local item=$(sketchy_get_item_by_window_id "$window_id")
+    echo "#### $window_id #### $item" >&2
     if [ -n "$item" ]; then 
-      local color=$(sketchy_get_color_by_window_id $window_id)
+      local color=$(sketchy_get_space_foreground_color_by_window_id $window_id)
       sketchybar --set "$item" icon.color="$color"
     fi
     echo "$window_id" >"$CACHE_DIR/highlighted.window_id"
   fi
 }
 
-sketchy_get_color_by_sid() {
+sketchy_get_space_background_color_by_sid() {
   local sid="$1"
   local focused=$(aerospace_focused_workspace)
   if [ "$sid" = "$focused" ]; then
     space_background="$WORKSPACE_FOCUSED_BACKGROUND"
-  elif [ $((sid % 2)) -eq 0 ]; then
-    space_background="$WORKSPACE_EVEN_BACKGROUND"
   else
-    space_background="$WORKSPACE_ODD_BACKGROUND"
+    space_background="$WORKSPACE_BACKGROUND"
   fi
   echo "$space_background"
 }
 
-sketchy_get_color_by_window_id() {
+sketchy_get_space_foreground_color_by_window_id() {
   local window_id="$1"
-  local sid=$(sketchy_get_space_by_window_id "$window_id")
   local focused_window_id=$(yabai_get_focused_window_id)
 
   local window_color
   if [ "$focused_window_id" = "$window_id" ]; then
     window_color="$WORKSPACE_FOCUSED_FOREGROUND"
-  elif [ $((sid % 2)) -eq 0 ]; then
-    window_color="$WORKSPACE_EVEN_FOREGROUND" 
   else
-    window_color="$WORKSPACE_ODD_FOREGROUND"
+    window_color="$WORKSPACE_FOREGROUND"
   fi
 
   echo "$window_color"
