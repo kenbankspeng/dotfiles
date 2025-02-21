@@ -92,7 +92,6 @@ sketchy_highlight_window_id() {
 
   if [ -n "$window_id" ] && [ "$prev_window_id" != "$window_id" ]; then
     local item=$(sketchy_get_item_by_window_id "$window_id")
-    echo "#### $window_id #### $item" >&2
     if [ -n "$item" ]; then 
       local color=$(sketchy_get_space_foreground_color_by_window_id $window_id)
       sketchybar --set "$item" icon.color="$color"
@@ -115,6 +114,12 @@ sketchy_get_space_background_color_by_sid() {
 sketchy_get_space_foreground_color_by_window_id() {
   local window_id="$1"
   local focused_window_id=$(yabai_get_focused_window_id)
+
+  # if [ -z "$focused_window_id" ]; then
+  #   # if no focused window, the must be default item for empty workspace
+  #   # so use sid as window_id
+  #   focused_window_id=$(aerospace_focused_workspace)
+  # fi
 
   local window_color
   if [ "$focused_window_id" = "$window_id" ]; then
