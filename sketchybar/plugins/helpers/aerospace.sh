@@ -82,20 +82,16 @@ maybe_add_default_item_to_spaceid() {
   local sid="$1"
   local items=$(sketchy_get_window_items_in_spaceid "$sid")
   
+  # 10 is optioni 0
   local icon="$((sid % 10))"
   local font_size=$(($ICON_FONTSIZE-4))
-  # HACK text 5 is not rendering (bug) so use special icon for 5
-  if [ "$icon" -eq 5 ]; then
-    icon="󰬾"
-    font_size=$(($ICON_FONTSIZE+3))
-  fi
 
   if [ -z "$items" ]; then
     # if no items, add a default item
     local item="window.$sid.$sid.default"
     local props=(
       background.corner_radius=0
-      icon.font="$ICON_FONT:$font_size"
+      icon.font="$FONT:$font_size"
       icon.width="$APP_WIDTH"
       icon="$icon"
     )
