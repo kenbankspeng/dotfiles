@@ -39,7 +39,7 @@ aerospace_workspace_focus(){
     # focus on finder so that yabai_window_focused will fire next change
     osascript -e 'tell application "Finder" to activate'
     # for default item, use spaceid as window_id
-    sketchy_highlight_item "window.$sid.$sid.default"
+    sketchy_highlight_window_id "$sid"
   else
     sketchy_highlight_workspace "$sid"
   fi
@@ -58,16 +58,14 @@ remove_unmatched_items() {
 
 aerospace_highlight_focused_window() {
   local window_id=$1  
+  local sid=$(aerospace_focused_workspace)
  
   if [ -z "$window_id" ]; then
     window_id=$(yabai_get_focused_window_id)
   fi
 
-  local sid=$(aerospace_focused_workspace)
-  local item=$(sketchy_get_item_by_window_id "$window_id")
-
   sketchy_highlight_workspace "$sid"
-  sketchy_highlight_item "$item"
+  sketchy_highlight_window_id "$window_id"
 }
 
 aerospace_workspace_change() {
@@ -111,7 +109,7 @@ maybe_add_default_item_to_spaceid() {
       click_script="aerospace workspace $sid"
     
     # for default item, use spaceid as window_id
-    sketchy_highlight_item "window.$sid.$sid.default"
+    sketchy_highlight_window_id "$sid"
   fi
 }
 
@@ -148,7 +146,7 @@ aerospace_new_window_id() {
   item="window.$sid.$window_id.$appname"
 
   icon="$($CONFIG_DIR/icons_apps.sh "$appname")"
-  icon_color="$(sketchy_get_color_by_item $item)"
+  icon_color="$(sketchy_get_color_by_window_id $window_id)"
 
   props=(
     background.corner_radius=0
@@ -163,7 +161,7 @@ aerospace_new_window_id() {
 
    # remove default if it exists
   maybe_remove_default_item_from_spaceid "$sid"
-  sketchy_highlight_item "$item"
+  sketchy_highlight_window_id "$window_id"
 }
 
 aerospace_add_apps_in_spaceid() {
@@ -185,7 +183,7 @@ aerospace_add_apps_in_spaceid() {
       appname=$(aerospace_appname_from_window_id "$window_id")
       item="window.$sid.$window_id.$appname"
       icon="$($CONFIG_DIR/icons_apps.sh "$appname")"
-      icon_color="$(sketchy_get_color_by_item $item)"
+      icon_color="$(sketchy_get_color_by_window_id $window_id)"
 
       # only add if doesn't already exist
       sketchy_add_item "$item" left \

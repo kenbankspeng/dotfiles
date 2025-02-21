@@ -38,6 +38,13 @@ sketchy_get_space_by_item() {
   echo "$item" | awk -F'.' '{print $2}'
 }
 
+sketchy_get_space_by_window_id() {
+  local window_id="$1"
+  local item=$(sketchy_get_item_by_window_id "$window_id")
+  local space=$(sketchy_get_space_by_item "$item")
+  echo "$space"
+}
+
 sketchy_add_workspace() {
   local sid="$1"
   local start="workspace.start.$sid"
@@ -66,23 +73,30 @@ sketchy_highlight_workspace() {
 }
 
 
-sketchy_highlight_item() {
-  local item="$1" # item ex: window.3.66286.WezTerm
-  local prev_item
+sketchy_highlight_window_id() {
+  # ex: 66286 - since window.3.66286.WezTerm could now be window.4.66286.WezTerm
+  local window_id="$1"
+  local prev_window_id
 
-  if [ -f "$CACHE_DIR/highlighted.item" ]; then
-    read -r prev_item <"$CACHE_DIR/highlighted.item"
+  if [ -f "$CACHE_DIR/highlighted.window_id" ]; then
+    read -r prev_window_id <"$CACHE_DIR/highlighted.window_id"
   fi
 
-  if [ -n "$prev_item" ]; then
-    sketchybar --set "$prev_item" \
-      icon.color=$(sketchy_get_color_by_item $prev_item)
+  if [ -n "$prev_window_id" ]; then
+    local prev_item=$(sketchy_get_item_by_window_id "$prev_window_id")
+    if [ -n "$prev_item" ]; then
+      sketchybar --set "$prev_item" \
+        icon.color=$(sketchy_get_color_by_window_id $prev_window_id)
+    fi
   fi
 
-  if [ -n "$item" ]; then
-    sketchybar --set "$item" \
-      icon.color=$(sketchy_get_color_by_item $item)
-    echo "$item" >"$CACHE_DIR/highlighted.item"
+  if [ -n "$window_id" ]; then
+    local item=$(sketchy_get_item_by_window_id "$window_id")
+    if [ -n "$item" ]; then 
+      sketchybar --set "$item" \
+        icon.color=$(sketchy_get_color_by_window_id $window_id)
+    fi
+    echo "$window_id" >"$CACHE_DIR/highlighted.window_id"
   fi
 }
 
@@ -99,14 +113,13 @@ sketchy_get_color_by_sid() {
   echo "$space_background"
 }
 
-sketchy_get_color_by_item() {
-  local item="$1"
-  local sid=$(sketchy_get_space_by_item "$item")
+sketchy_get_color_by_window_id() {
+  local window_id="$1"
+  local sid=$(sketchy_get_space_by_window_id "$window_id")
   local focused_window_id=$(yabai_get_focused_window_id)
-  local focused_item=$(sketchy_get_item_by_window_id "$focused_window_id")
 
   local window_color
-  if [ "$focused_item" = "$item" ]; then
+  if [ "$focused_window_id" = "$window_id" ]; then
     window_color="$WORKSPACE_FOCUSED_FOREGROUND"
   elif [ $((sid % 2)) -eq 0 ]; then
     window_color="$WORKSPACE_EVEN_FOREGROUND" 
