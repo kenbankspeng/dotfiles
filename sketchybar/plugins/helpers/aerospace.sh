@@ -67,7 +67,6 @@ aerospace_highlight_focused_window() {
   local item=$(sketchy_get_item_by_window_id "$window_id")
 
   sketchy_highlight_workspace "$sid"
-  echo "aerospace_highlight_focused_window item: $item" >&2
   sketchy_highlight_item "$item"
 }
 
