@@ -13,16 +13,18 @@ source $ITEM_DIR/apple.sh
 source $ITEM_DIR/aerospace_spaces.sh
 
 ##### Center Items #####
-source $ITEM_DIR/aerospace_controls.sh
+
 
 ##### Right Side Items #####
-source $ITEM_DIR/clock.sh
-source $ITEM_DIR/wifi.sh
-source $ITEM_DIR/battery.sh
-source $ITEM_DIR/volume.sh
-source $ITEM_DIR/cpu.sh
-source $ITEM_DIR/disk.sh
-source $ITEM_DIR/outdated.sh
+source $ITEM_DIR/aerospace_controls.sh
+
+# source $ITEM_DIR/clock.sh
+# source $ITEM_DIR/wifi.sh
+# source $ITEM_DIR/battery.sh
+# source $ITEM_DIR/volume.sh
+# source $ITEM_DIR/cpu.sh
+# source $ITEM_DIR/disk.sh
+# source $ITEM_DIR/outdated.sh
 
 ##### Finalizing Setup #####
 sketchybar --update
