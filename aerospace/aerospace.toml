@@ -150,16 +150,16 @@ alt-9 = 'workspace 9'
 alt-0 = 'workspace 10'
 
 # prev/next occupied workspace
-alt-left = 'exec-and-forget aerospace list-workspaces --monitor focused --empty no | aerospace workspace prev'
-alt-right = 'exec-and-forget aerospace list-workspaces --monitor focused --empty no | aerospace workspace next'
+alt-left = 'exec-and-forget aerospace list-workspaces --monitor focused --empty no | aerospace workspace prev --wrap-around'
+alt-right = 'exec-and-forget aerospace list-workspaces --monitor focused --empty no | aerospace workspace next --wrap-around'
 
 # cycle apps in current workspace
 alt-up = 'exec-and-forget aerospace focus up --boundaries-action wrap-around-the-workspace'
 alt-down = 'exec-and-forget aerospace focus down --boundaries-action wrap-around-the-workspace'
 
 # prev/next empty workspace
-ctrl-alt-left = 'exec-and-forget aerospace list-workspaces --monitor focused --empty | aerospace workspace prev'
-ctrl-alt-right = 'exec-and-forget aerospace list-workspaces --monitor focused --empty | aerospace workspace next'
+ctrl-alt-left = 'exec-and-forget aerospace list-workspaces --monitor focused --empty | aerospace workspace prev --wrap-around'
+ctrl-alt-right = 'exec-and-forget aerospace list-workspaces --monitor focused --empty | aerospace workspace next --wrap-around'
 
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
