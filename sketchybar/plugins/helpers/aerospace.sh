@@ -58,9 +58,10 @@ aerospace_workspace_change() {
   # if default item, focus on finder so next change will produce yabai_window_focused event
   local default_item=$(sketchy_get_item_by_window_id "$sid")
   if [ -n "$default_item" ]; then
-    # TODO: if finder is already open, this doesn't work
-    # focus on finder so that yabai_window_focused will fire next change
-    osascript -e 'tell application "Finder" to activate'
+    # BUG since previous app remains in focus, going from default item 
+    # back to the same app doesn't provide the required yabai_window_focused event
+    # which would turn the icon green
+    
     # for default item, use spaceid as window_id
     sketchy_highlight_window_id "$sid"  
   fi
