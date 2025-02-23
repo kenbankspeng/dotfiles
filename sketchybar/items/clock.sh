@@ -2,6 +2,8 @@
 
 source "$PLUGIN_DIR/helpers/sketchy.sh"
 
+location="right"
+
 props=(
   icon.drawing=off
   label.drawing=on
@@ -11,5 +13,5 @@ props=(
   update_freq=1
   script="$PLUGIN_DIR/clock.sh"
 )
-sketchy_add_item time right --set time "${props[@]}" \
+sketchy_add_item time "$location" --set time "${props[@]}" \
   --subscribe time mouse.clicked

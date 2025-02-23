@@ -9,6 +9,8 @@ mkdir -p "$CACHE_DIR"
 # Reset the logs
 : > "$CACHE_DIR/$LOG_FILE"
 
+location="left"
+
 sketchybar --add event aerospace_workspace_change
 sketchybar --add event yabai_window_created
 sketchybar --add event yabai_window_destroyed
@@ -16,7 +18,7 @@ sketchybar --add event yabai_window_focused
 sketchybar --add event yabai_window_minimized
 sketchybar --add event yabai_window_deminimized
 
-sketchy_add_item aerospace_spaces_spacer left \
+sketchy_add_item aerospace_spaces_spacer "$location" \
   --set aerospace_spaces_spacer background.padding_left=10
 
 props=(
@@ -25,7 +27,7 @@ props=(
   background.drawing=off
   width=0
 )
-sketchy_add_item space_listener left \
+  sketchy_add_item space_listener "$location" \
   --set space_listener "${props[@]}" \
   script="$PLUGIN_DIR/aerospace_spaces.sh" \
   --subscribe space_listener \
@@ -53,10 +55,10 @@ for sid in "${workspaces[@]}"; do
   start="workspace.start.$sid"
   end="workspace.end.$sid"
   
-  sketchy_add_item "$start" left \
+  sketchy_add_item "$start" "$location" \
     --set "$start" "${props[@]}"
 
-  sketchy_add_item "$end" left \
+  sketchy_add_item "$end" "$location" \
     --set "$end" "${props[@]}"
 
   sketchy_add_workspace "$sid"

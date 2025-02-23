@@ -3,6 +3,8 @@
 source "$CONFIG_DIR/env.sh"
 source "$PLUGIN_DIR/helpers/sketchy.sh"
 
+location="left"
+
 props=(
 	icon="$ICON_APPLE_LOGO"
 	icon.font="$ICON_FONT:18"
@@ -11,6 +13,6 @@ props=(
 	script="$PLUGIN_DIR/apple.sh"
 )
 
-sketchy_add_item apple.logo left \
+sketchy_add_item apple.logo "$location" \
 	--set apple.logo "${props[@]}" \
 	--subscribe apple.logo mouse.clicked

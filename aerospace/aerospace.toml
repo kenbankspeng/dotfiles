@@ -161,6 +161,8 @@ alt-down = 'exec-and-forget aerospace focus down --boundaries-action wrap-around
 cmd-left = 'exec-and-forget aerospace list-workspaces --monitor focused --empty | aerospace workspace prev --wrap-around'
 cmd-right = 'exec-and-forget aerospace list-workspaces --monitor focused --empty | aerospace workspace next --wrap-around'
 
+alt-shift-left = 'move-node-to-workspace prev --focus-follows-window'
+alt-shift-right = 'move-node-to-workspace next --focus-follows-window'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-shift-1 = 'move-node-to-workspace 1 --focus-follows-window'
@@ -173,9 +175,6 @@ alt-shift-7 = 'move-node-to-workspace 7 --focus-follows-window'
 alt-shift-8 = 'move-node-to-workspace 8 --focus-follows-window'
 alt-shift-9 = 'move-node-to-workspace 9 --focus-follows-window'
 alt-shift-0 = 'move-node-to-workspace 10 --focus-follows-window'
-
-alt-shift-left = 'move-node-to-workspace prev --focus-follows-window'
-alt-shift-right = 'move-node-to-workspace next --focus-follows-window'
 
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
