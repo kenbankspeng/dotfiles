@@ -26,7 +26,7 @@ source $ITEM_DIR/cpu.sh
 source $ITEM_DIR/disk.sh
 source $ITEM_DIR/outdated.sh
 
-# source $ITEM_DIR/wallpaper.sh
+source $ITEM_DIR/wallpaper.sh
 
 ##### Finalizing Setup #####
 sketchybar --update
