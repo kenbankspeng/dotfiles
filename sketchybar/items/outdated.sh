@@ -7,19 +7,19 @@ location="right"
 sketchybar --add event update_outdated
 
 props=(
+	script="$PLUGIN_DIR/outdated.sh"
+	update_freq="$((60 * 60))" # once per hour
 	icon.drawing=off
 	icon="$ICON_LEGO"
 	label.drawing=on
-	background.padding_left=0
-  background.padding_right=0
 	icon.padding_left=0
   icon.padding_right=0
   label.padding_left=0
   label.padding_right=2
   label.width=16
   label.align=center
-	update_freq="$((60 * 60))" # once per hour
-	script="$PLUGIN_DIR/outdated.sh"
+	background.padding_left=0
+  background.padding_right=0
 )
 sketchy_add_item outdated "$location" \
 	--set outdated "${props[@]}" \
