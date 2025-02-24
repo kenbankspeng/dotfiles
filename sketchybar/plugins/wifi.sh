@@ -52,7 +52,6 @@ if [ -n "$device" ]; then
 fi
 
 props=(
-  icon.font="$ICOMOON:20"
   icon=$icon
   icon.color="$color"
 )
