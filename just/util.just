@@ -77,8 +77,19 @@ regex *args:
 ad *args:
   asciidoctor {{args}}
 
+# machine stats
 ff:
   fastfetch
 
+# code/git stats
 of:
   onefetch
+
+# font manager
+font *args:
+  fnt {{args}}
+
+# show img
+show *args:
+  imgcat {{args}}
+

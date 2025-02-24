@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+source "$HOME/.config/zsh/keys/nasa.zsh"
+
 source "$CONFIG_DIR/colors.sh"
 source "$CONFIG_DIR/icons.sh"
 

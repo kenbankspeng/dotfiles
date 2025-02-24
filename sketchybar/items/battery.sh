@@ -4,7 +4,15 @@ source "$PLUGIN_DIR/helpers/sketchy.sh"
 
 location="right"
 
+props=(
+  update_freq=120
+  icon.color="$SKY"
+  label.drawing=on
+  label.color="$SKY"
+  label.width=40
+)
+
 sketchy_add_item battery "$location" \
-  --set battery update_freq=120 \
+  --set battery "${props[@]}" \
   script="$PLUGIN_DIR/battery.sh" \
   --subscribe battery system_woke power_source_change mouse.clicked

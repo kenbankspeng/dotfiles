@@ -31,11 +31,7 @@ fi
 
 props=(
   icon="$icon"
-  icon.color="$SKY"
-  label.drawing=on
   label="${percentage}%"
-  label.color="$SKY"
-  label.width=40
 )
 sketchybar --set "$NAME" "${props[@]}"
 
