@@ -1,5 +1,5 @@
 // import { run, css, styled } from "uebersicht";
-import * as Hi from "./lib/hello.jsx";
+import * as Hi from "./lib/hello/hello.jsx";
 
 // single command at refreshFrequency
 const weather_current =
