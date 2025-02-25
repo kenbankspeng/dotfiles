@@ -5,8 +5,12 @@ source "$HOME/.config/zsh/keys/nasa.zsh"
 source "$CONFIG_DIR/colors.sh"
 source "$CONFIG_DIR/icons.sh"
 
-# env variables
 export CACHE_DIR="$HOME/.cache/sketchybar"
+
+# create the cache directory if needed
+mkdir -p "$CACHE_DIR"
+
+# env variables
 export PLUGIN_DIR="$CONFIG_DIR/plugins"
 export ITEM_DIR="$CONFIG_DIR/items"
 export LOG_FILE="aerospace.log"
