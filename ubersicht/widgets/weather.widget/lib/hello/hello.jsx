@@ -7,4 +7,4 @@ const Container = styled("h1")`
   color: red;
 `;
 
-export const Widget = () => <Container>Hello</Container>;
+export const Hello = () => <Container>Hello</Container>;

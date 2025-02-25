@@ -1,5 +1,5 @@
 // import { run, css, styled } from "uebersicht";
-import * as Hello from "./lib/hello/hello.jsx";
+import { Hello } from "./lib/hello/hello.jsx";
 
 // single command at refreshFrequency
 const weather_current =
@@ -101,6 +101,7 @@ const getWind = (data) => {
 };
 
 export const render = ({ output, error }, dispatch) => {
+	if (!output) return null;
 	const weather = JSON.parse(output);
 
 	return error ? (
@@ -112,7 +113,7 @@ export const render = ({ output, error }, dispatch) => {
 			<article id="content">
 				<div id="windscale">windscale</div>
 				<div id="left">
-					<Hello.Widget />
+					<Hello />
 					<div id="temp">{weather.current.temperature_2m}</div>
 					<div id="condition">condition</div>
 				</div>
