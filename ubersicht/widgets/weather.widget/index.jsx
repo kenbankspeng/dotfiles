@@ -1,6 +1,6 @@
 // import { run, css, styled } from "uebersicht";
 import { Hello } from "./lib/hello/hello.jsx";
-import { Icon1, Icon10, Icon20 } from "./lib/icons.jsx";
+import * as Icons from "./lib/icons.jsx";
 
 // single command at refreshFrequency
 const weather_current =
@@ -101,10 +101,31 @@ export const render = ({ output, error }, dispatch) => {
 				<div id="left">
 					<Hello />
 					<div id="temp">{weather.current.temperature_2m}</div>
-					<Icon1 />
-					<Icon10 />
-					<Icon20 />
-					<Hello />
+					<Icons.Icon1 />
+					<Icons.Icon2 />
+					<Icons.Icon3 />
+					<Icons.Icon4 />
+					<Icons.Icon5 />
+					<Icons.Icon6 />
+					<Icons.Icon7 />
+					<Icons.Icon8 />
+					<Icons.Icon9 />
+					<Icons.Icon10 />
+					<Icons.Icon11 />
+					<Icons.Icon12 />
+					<Icons.Icon13 />
+					<Icons.Icon14 />
+					<Icons.Icon15 />
+					<Icons.Icon16 />
+					<Icons.Icon17 />
+					<Icons.Icon18 />
+					<Icons.Icon19 />
+					<Icons.Icon20 />
+					<Icons.Icon21 />
+					<Icons.Icon22 />
+					<Icons.Icon23 />
+					<Icons.Icon24 />
+					<Icons.Icon25 />
 				</div>
 			</article>
 		</main>
