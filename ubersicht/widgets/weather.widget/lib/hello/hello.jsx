@@ -1,5 +1,7 @@
-import { injectStyles } from "../utils";
-import { css } from "./css";
+export const css = `
+  .hello {
+    color: red;
+  }
+`;
 
-injectStyles("hello-styles", [css]);
 export const Widget = () => <div className="hello">Hello</div>;

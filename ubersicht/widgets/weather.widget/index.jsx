@@ -1,5 +1,8 @@
 // import { run, css, styled } from "uebersicht";
-import * as Hi from "./lib/hello/hello.jsx";
+import * as Hello from "./lib/hello/hello.jsx";
+import { injectStyles } from "./lib/utils";
+
+injectStyles("weather.app-styles", [Hello.css]);
 
 // single command at refreshFrequency
 const weather_current =
@@ -112,7 +115,7 @@ export const render = ({ output, error }, dispatch) => {
 			<article id="content">
 				<div id="windscale">windscale</div>
 				<div id="left">
-					<Hi.Widget />
+					<Hello.Widget />
 					<div id="temp">{weather.current.temperature_2m}</div>
 					<div id="condition">condition</div>
 				</div>
