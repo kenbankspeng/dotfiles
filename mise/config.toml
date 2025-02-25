@@ -5,8 +5,8 @@ deno = "latest"
 go = "latest"
 uv = "latest"
 python = "latest"
-node = "latest"
 aqua = "latest"
+node = "latest"
 
 [settings]
 experimental = true

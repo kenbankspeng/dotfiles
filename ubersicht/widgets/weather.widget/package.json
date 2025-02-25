@@ -1,0 +1,12 @@
+{
+	"name": "weather.widget",
+	"version": "1.0.0",
+	"main": "index.js",
+	"scripts": {},
+	"author": "",
+	"license": "ISC",
+	"description": "",
+	"dependencies": {
+		"lodash.isstring": "^4.0.1"
+	}
+}
