@@ -1,8 +1,5 @@
 // import { run, css, styled } from "uebersicht";
 import * as Hello from "./lib/hello/hello.jsx";
-import { injectStyles } from "./lib/utils";
-
-injectStyles("weather.app-styles", [Hello.css]);
 
 // single command at refreshFrequency
 const weather_current =

@@ -1,7 +1,10 @@
-export const css = `
-  .hello {
-    color: red;
-  }
+import { styled } from "uebersicht";
+
+const Container = styled("h1")`
+  font-family: Ubuntu;
+  font-size: 20px;
+  text-align: center;
+  color: red;
 `;
 
-export const Widget = () => <div className="hello">Hello</div>;
+export const Widget = () => <Container>Hello</Container>;
