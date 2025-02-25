@@ -7,7 +7,7 @@ location="left"
 
 props=(
 	script="$PLUGIN_DIR/apple.sh"
-	update_freq=43200 # 12 hours
+	update_freq=3600 # 1 hour
 	icon="$ICON_APPLE_LOGO"
 	icon.font="$ICON_FONT:18"
 	icon.color="$SKY"
