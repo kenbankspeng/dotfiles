@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
 source "$CONFIG_DIR/env.sh"
-
-
 WALLPAPPER_CACHE="$CACHE_DIR/wallpaper"
 
 set_cache(){
@@ -20,16 +18,18 @@ set_wallpaper_solid(){
 }
 
 set_wallpaper_nasa(){
-  # Download the image and wait for it to complete
-  url=$(command curl -s "https://api.nasa.gov/planetary/apod?api_key=$NASA_API_KEY" | jq -r .url)
-  curl -o "$CONFIG_DIR/wallpapers/wallpaper.jpg" "$url"
-
-  # Copy the wallpaper to the wallpapers directory with today's date
+  # Check if today's wallpaper already exists
   TODAY=$(date +"%Y-%m-%d")
-  cp "$CONFIG_DIR/wallpapers/wallpaper.jpg" "$CONFIG_DIR/wallpapers/wallpaper_$TODAY.jpg"
+  TODAYS_WALLPAPER="$CONFIG_DIR/wallpapers/wallpaper_$TODAY.jpg"
+  
+  if [ ! -f "$TODAYS_WALLPAPER" ]; then
+    # Download the image only if today's wallpaper doesn't exist
+    url=$(command curl -s "https://api.nasa.gov/planetary/apod?api_key=$NASA_API_KEY" | jq -r .url)
+    curl -o "$TODAYS_WALLPAPER" "$url"
+  fi
 
   # Set the wallpaper
-  wallpaper set "$CONFIG_DIR/wallpapers/wallpaper.jpg"
+  wallpaper set "$TODAYS_WALLPAPER"
   set_cache "nasa"
 }
 
