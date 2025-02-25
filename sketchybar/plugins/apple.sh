@@ -22,8 +22,8 @@ set_wallpaper_nasa(){
   TODAY=$(date +"%Y-%m-%d")
   TODAYS_WALLPAPER="$CONFIG_DIR/wallpapers/wallpaper_$TODAY.jpg"
   
+  # Download the image only if today's wallpaper doesn't exist
   if [ ! -f "$TODAYS_WALLPAPER" ]; then
-    # Download the image only if today's wallpaper doesn't exist
     url=$(command curl -s "https://api.nasa.gov/planetary/apod?api_key=$NASA_API_KEY" | jq -r .url)
     curl -o "$TODAYS_WALLPAPER" "$url"
   fi
