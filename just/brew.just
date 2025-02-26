@@ -35,10 +35,10 @@ default:
   print
   print "{{BrightMagenta}}BUN: node js packages"
   print -- "---------------------{{BrightBlue}}"
-  bun -g update 
+  -bun -g update
 
 # brew versions
-@bv *args: 
+@bv *args:
   print "brew list --versions {{args}}"
   print
   print "{{BrightMagenta}}CASK APPS"
@@ -50,7 +50,7 @@ default:
   brew list --versions --formula {{args}} || print "{{BrightRed}}No formula apps found{{BrightCyan}}"
 
 # brew casks
-@bc: 
+@bc:
   print "brew list --casks"
   print
   print "{{BrightMagenta}}CASK APPS"
@@ -119,9 +119,18 @@ bt *args:
     brew leaves | xargs brew deps --tree --formula
   fi
 
-  
+
 # brew packages that depend on
 @bdo *args:
   print "brew packages that depend on" {{args}}
   print
   brew uses --installed {{args}}
+
+# brew zap
+bz:
+  brew cleanup --prune=all
+  rm -rf "$HOME/Library/Application Support/Caches"
+  mkdir "$HOME/Library/Application Support/Caches"
+  rm -rf "$HOME/.cache"
+  mkdir "$HOME/.cache"
+  go clean -modcache

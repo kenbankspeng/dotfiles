@@ -1,6 +1,6 @@
-// import { run, css, styled } from "uebersicht";
+import { styled } from "uebersicht"; // run, css
 import { Hello } from "./lib/hello/hello.jsx";
-import * as Icons from "./lib/icons.jsx";
+import { Clouds, Lightning, Sun, Wind } from "./lib/icons.jsx";
 
 // single command at refreshFrequency
 const weather_current =
@@ -53,38 +53,11 @@ export const initialState = { output: "" };
 // 	}
 // };
 
-// const iconMapping = {
-// 	unknown: "&#xf03e;",
-// 	"01d": "&#xf00d;",
-// 	"01n": "&#xf02e;",
-// 	"02d": "&#xf00c;",
-// 	"02n": "&#xf081;",
-// 	"03d": "&#xf002;",
-// 	"03n": "&#xf031;",
-// 	"04d": "&#xf013;",
-// 	"04n": "&#xf013;",
-// 	"09d": "&#xf01a;",
-// 	"09n": "&#xf01a;",
-// 	"10d": "&#xf019;",
-// 	"10n": "&#xf019;",
-// 	"11d": "&#xf01e;",
-// 	"11n": "&#xf01e;",
-// 	"13d": "&#xf01b;",
-// 	"13n": "&#xf01b;",
-// 	"50d": "&#xf003;",
-// 	"50n": "&#xf04a;",
-// 	wind3: "&#xf0ba;",
-// 	wind4: "&#xf0bb;",
-// 	wind5: "&#xf0bc;",
-// 	wind6: "&#xf0bd;",
-// 	wind7: "&#xf0be;",
-// 	wind8: "&#xf0bf;",
-// 	wind9: "&#xf0c0;",
-// 	wind10: "&#xf0c1;",
-// 	wind11: "&#xf0c2;",
-// 	wind12: "&#xf0c3;",
-// 	none: "",
-// };
+const Grid = styled("div")`
+	display: grid;
+	grid-template-columns: 200px;
+	gap: 10px;
+`;
 
 export const render = ({ output, error }, dispatch) => {
 	if (!output) return null;
@@ -98,34 +71,15 @@ export const render = ({ output, error }, dispatch) => {
 		<main>
 			<article id="content">
 				<div id="windscale">windscale</div>
-				<div id="left">
+				<div>
 					<Hello />
 					<div id="temp">{weather.current.temperature_2m}</div>
-					<Icons.Icon1 />
-					<Icons.Icon2 />
-					<Icons.Icon3 />
-					<Icons.Icon4 />
-					<Icons.Icon5 />
-					<Icons.Icon6 />
-					<Icons.Icon7 />
-					<Icons.Icon8 />
-					<Icons.Icon9 />
-					<Icons.Icon10 />
-					<Icons.Icon11 />
-					<Icons.Icon12 />
-					<Icons.Icon13 />
-					<Icons.Icon14 />
-					<Icons.Icon15 />
-					<Icons.Icon16 />
-					<Icons.Icon17 />
-					<Icons.Icon18 />
-					<Icons.Icon19 />
-					<Icons.Icon20 />
-					<Icons.Icon21 />
-					<Icons.Icon22 />
-					<Icons.Icon23 />
-					<Icons.Icon24 />
-					<Icons.Icon25 />
+					<Grid>
+						<Clouds />
+						<Wind />
+					</Grid>
+					<Sun />
+					<Lightning />
 				</div>
 			</article>
 		</main>
