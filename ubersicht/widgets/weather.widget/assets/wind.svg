@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 72 37" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g transform="matrix(1,0,0,1,0,-110.626)">
+        <g id="Wind" transform="matrix(0.370259,0,0,0.296143,-34.1718,52.6823)">
+            <rect x="92.292" y="195.663" width="193.971" height="123.875" style="fill:none;"/>
+            <g transform="matrix(2.70081,0,0,3.37675,36.1306,-236.105)">
+                <path d="M27.959,142.366L83.901,142.109C83.901,142.109 85.116,141.734 85.462,141.43C86.376,140.627 86.948,139.256 86.695,137.162C86.119,132.41 78.863,133.948 78.863,133.948" style="fill:none;stroke:white;stroke-width:4.67px;"/>
+            </g>
+            <g transform="matrix(2.70081,0,0,-3.37675,-1.66102,753.322)">
+                <path d="M41.49,142.456L83.901,142.109C83.901,142.109 85.116,141.734 85.462,141.43C86.376,140.627 86.948,139.256 86.695,137.162C86.119,132.41 78.863,133.948 78.863,133.948" style="fill:none;stroke:white;stroke-width:4.67px;"/>
+            </g>
+        </g>
+    </g>
+</svg>
