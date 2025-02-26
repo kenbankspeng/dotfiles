@@ -25,7 +25,7 @@ export const refreshFrequency = 36000000; // app refresh time in ms: 10 hours
 export const className = `
 	color: white;
 	left: 35px;
-	bottom: 35px;
+	top: 35px;
 	font-family: Helvetica;
 	font-size: 20px;
 	font-weight: bold;
