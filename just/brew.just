@@ -35,7 +35,7 @@ default:
   print
   print "{{BrightMagenta}}BUN: node js packages"
   print -- "---------------------{{BrightBlue}}"
-  bun -g outdated 
+  bun -g update 
 
 # brew versions
 @bv *args: 
