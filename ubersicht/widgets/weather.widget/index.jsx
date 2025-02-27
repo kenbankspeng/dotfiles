@@ -1,5 +1,5 @@
 import { widgetStyle } from "./lib/util.js";
-import { getWeatherQuery, getWeatherIcon } from "./lib/weather.js";
+import { getWeatherQuery, WeatherIcon } from "./lib/weather.js";
 
 const size = [100, 100, 200, 200]; // X, Y, W, H
 
@@ -52,19 +52,21 @@ const style = `
 
 export const className = widgetStyle(size, style);
 
-export const command = getWeatherQuery();
+// export const command = getWeatherQuery();
+export const command = "echo 'test'";
 export const refreshFrequency = 36000000; // app refresh time in ms: 10 hours
 
 export const render = ({ output }) => {
-	if (output === undefined) return null;
-	const weather = JSON.parse(output);
-	const weatherIcon = getWeatherIcon(weather.current.weather_code);
+	// if (output === undefined) return null;
+	// const weather = JSON.parse(output);
+	// weather.current.weather_code
 
+	//{weather.current.weather_code}
+
+	// 		<h1>{weather.current.temperature_2m}</h1>
 	return (
 		<div>
-			{weather.current.weather_code}
-			{weatherIcon}
-			<h1>{weather.current.temperature_2m}</h1>
+			<WeatherIcon weatherCode={1} />
 		</div>
 	);
 };

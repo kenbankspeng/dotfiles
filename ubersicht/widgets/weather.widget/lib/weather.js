@@ -1,4 +1,5 @@
-import { Clouds, Lightning, Sun, Wind } from "./icons.jsx";
+// import { Cloud, Lightning, Sun, Wind } from "./icons.jsx";
+import { Cloud, Sun } from "./icons.jsx";
 
 // single command at refreshFrequency
 
@@ -26,14 +27,14 @@ export const getWeatherQuery = () => `curl --silent "${api}"`;
 // 95 *					Thunderstorm: Slight or moderate
 // 96, 99 *			Thunderstorm with slight and heavy hail
 
-export const getWeatherIcon = (weatherCode) => {
+export const WeatherIcon = ({ weatherCode }) => {
 	switch (weatherCode) {
 		case 0:
 		case 1:
 			return <Sun />;
 		case 2:
 		case 3:
-			return <Clouds />;
+			return <Cloud />;
 		case 45:
 			return <Sun />;
 		case 48:
