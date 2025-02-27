@@ -54,7 +54,7 @@ style: """
   .container {
     position: fixed;
     right: 12px;  //Adjust this to place grid wherever you want.
-    top: 6px;
+    bottom: 6px;
   }
 
   .buttons {
