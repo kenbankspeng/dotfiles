@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 96 95" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1,0,0,1,0,-192.328)">
+        <g id="HiddenMoon" transform="matrix(0.462694,0,0,0.503039,-51.2479,226.919)">
+            <rect x="110.76" y="-68.766" width="207.368" height="187.4" style="fill:none;"/>
+            <g transform="matrix(1.95358,0,0,1.79689,-385.677,-662.89)">
+                <path d="M259.25,376.957C262.243,354.618 281.14,337.284 304.163,336.736C291.022,355.24 289.717,377.255 302.035,388.457C313.977,399.317 334.824,396.468 351.736,382.768L351.737,383.173C351.737,405.692 335.678,424.49 314.397,428.729C312.66,424.499 310.445,421.024 307.98,418.154C298.769,407.436 284.704,405.988 276.399,405.797C274.385,397.808 269.964,385.604 259.25,376.957Z" style="fill:rgb(255,247,0);"/>
+            </g>
+        </g>
+    </g>
+</svg>

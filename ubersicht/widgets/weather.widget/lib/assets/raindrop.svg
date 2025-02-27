@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 51 62" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1,0,0,1,-740.319,-528)">
+        <g id="Raindrop" transform="matrix(1,0,0,1,429.291,-0.335926)">
+            <rect x="311.028" y="528.336" width="50.611" height="61.981" style="fill:none;"/>
+            <g transform="matrix(1.68501,1.40305e-16,-1.40305e-16,1.68501,-419.092,-288.375)">
+                <path d="M448.033,489.592C448.033,489.592 458.895,501.371 458.895,506.42C458.895,512.415 454.028,517.282 448.033,517.282C442.038,517.282 437.171,512.415 437.171,506.42C437.171,501.371 448.033,489.592 448.033,489.592Z" style="fill:rgb(14,0,255);"/>
+            </g>
+        </g>
+    </g>
+</svg>
