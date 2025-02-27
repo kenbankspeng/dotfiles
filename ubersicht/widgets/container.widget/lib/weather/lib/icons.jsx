@@ -3,7 +3,6 @@ import { styled } from "uebersicht";
 const CloudSvg = styled("svg")`
 	display: block;
   width: 200px;
-	background: transparent;
 	path {
 		fill: #ffffff;
 	}
@@ -115,7 +114,6 @@ const WindSvg = styled("svg")`
   width: 100px;
 	margin-top: -10px;
 	margin-left: -10px;
-	background: transparent;
 	path {
 		fill: none;
 		stroke: #80c0ff;
