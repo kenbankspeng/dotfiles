@@ -1,17 +1,29 @@
 import { styled } from "uebersicht"; // run, css
 
+const DEBUG = true;
+
+const H_MARGIN = "150px";
+const V_MARGIN = "40px";
+
 export const className = `
-	box-sizing: border-box;
+	/* reset */
+	* {
+		box-sizing: border-box;
+	}
+
+	/* container */
 	display: flex;
-	padding: 100px;
-	width: 100%;
+	margin-left:20px;
+	width: calc(100% - ${H_MARGIN});
+	height: calc(100% - ${V_MARGIN});
+	overflow: hidden;
 
 	color: white;
 	font-family: Helvetica;
 	font-size: 20px;
 	font-weight: bold;
 	z-index: 1;
-	border: 5px solid red;
+	${DEBUG && "border: 5px solid red;"}
 `;
 
 const Grid = styled("div")`
@@ -19,10 +31,12 @@ const Grid = styled("div")`
 	grid-template-columns: 1fr 1fr;
 	gap: 10px;
 	width: 100%;
+	height: 100%;
+	padding: 100px;
 `;
 
 const Cell = styled("div")`
-	border: 1px solid red;
+	${DEBUG && "border: 5px solid red;"}
 `;
 
 export const render = ({ output, error }, dispatch) => {
