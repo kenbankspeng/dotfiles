@@ -1,5 +1,6 @@
 import { Sun } from "./icons/sun.jsx";
 import { Moon } from "./icons/moon.jsx";
+import { CloudMoon } from "./icons/cloud-moon.jsx";
 // single command at refreshFrequency
 
 // const weather_forecast =
@@ -35,7 +36,7 @@ export const WeatherIcon = ({ weatherCode, ...rest }) => {
 		case 3:
 			return <Moon {...rest} />;
 		case 45:
-			return null;
+			return <CloudMoon {...rest} />;
 		case 48:
 			return null;
 		case 51:
