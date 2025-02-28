@@ -2,7 +2,6 @@ import { styled } from "uebersicht";
 
 const CloudSvg = styled("svg")`
 	display: block;
-  width: 200px;
 	background: transparent;
 	path {
 		fill: #ffffff;

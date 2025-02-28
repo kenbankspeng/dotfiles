@@ -36,54 +36,54 @@ export const WeatherIcon = ({ weatherCode }) => {
 		case 3:
 			return <Cloud />;
 		case 45:
-			return <Sun />;
+			return null;
 		case 48:
-			return <Sun />;
+			return null;
 		case 51:
-			return <Sun />;
+			return null;
 		case 53:
-			return <Sun />;
+			return null;
 		case 55:
-			return <Sun />;
+			return null;
 		case 56:
-			return <Sun />;
+			return null;
 		case 57:
-			return <Sun />;
+			return null;
 		case 61:
-			return <Sun />;
+			return null;
 		case 63:
-			return <Sun />;
+			return null;
 		case 65:
-			return <Sun />;
+			return null;
 		case 66:
-			return <Sun />;
+			return null;
 		case 67:
-			return <Sun />;
+			return null;
 		case 71:
-			return <Sun />;
+			return null;
 		case 73:
-			return <Sun />;
+			return null;
 		case 75:
-			return <Sun />;
+			return null;
 		case 77:
-			return <Sun />;
+			return null;
 		case 80:
-			return <Sun />;
+			return null;
 		case 81:
-			return <Sun />;
+			return null;
 		case 82:
-			return <Sun />;
+			return null;
 		case 85:
-			return <Sun />;
+			return null;
 		case 86:
-			return <Sun />;
+			return null;
 		case 95:
-			return <Sun />;
+			return null;
 		case 96:
-			return <Sun />;
+			return null;
 		case 99:
-			return <Sun />;
+			return null;
 		default:
-			return <Sun />;
+			return null;
 	}
 };
