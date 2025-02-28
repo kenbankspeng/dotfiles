@@ -1,4 +1,3 @@
-import { styled } from "uebersicht";
 import { widgetStyle } from "./lib/util.js";
 import { getWeatherQuery, WeatherIcon } from "./lib/weather-icon.js";
 
@@ -69,8 +68,8 @@ export const render = ({ output }) => {
 	// 		<h1>{weather.current.temperature_2m}</h1>
 	return (
 		<div>
-			<WeatherIcon weatherCode={1} />
-			<WeatherIcon weatherCode={2} />
+			<WeatherIcon weatherCode={48} />
+			<WeatherIcon weatherCode={45} />
 		</div>
 	);
 };
