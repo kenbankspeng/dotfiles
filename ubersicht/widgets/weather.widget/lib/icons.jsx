@@ -9,7 +9,6 @@ const CloudSvg = styled("svg")`
 	}
 `;
 
-// style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"
 export const Cloud = () => (
 	<CloudSvg viewBox="0 0 151 111">
 		<title>Clouds</title>
@@ -32,7 +31,6 @@ const LightningSvg = styled("svg")`
 	}
 `;
 
-// style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"
 export const Lightning = () => (
 	<LightningSvg viewBox="0 0 25 54">
 		<title>Lightning</title>
@@ -56,68 +54,67 @@ const SunSvg = styled("svg")`
 
 	fill-rule: evenodd;
 	clip-rule: evenodd;
-	stroke-linecap: round;
 	stroke-linejoin: round;
-	stroke-miterlimit: 1.5;
+	stroke-miterlimit: 2;
 
 	circle {
 		fill: yellow;
 	}
 
 	path {
-		fill: none;
+		fill: yellow;
 		stroke: yellow;
-		stroke-width: 16px;
+		stroke-width: 2px;
 	}
 `;
 
 export const Sun = () => {
 	const Sunray = () => (
-		<path d="M409.836,13.742C409.836,13.72 410.009,33.49 410.009,33.49" />
+		<path d="M93.516,33.513L93.477,17.513C93.477,17.513 93.509,15.425 93.949,14.513C94.43,13.513 95.422,12.135 96.367,11.513C97.542,10.739 98.862,10.307 100.162,10.335C101.461,10.363 103.121,10.986 104.162,11.682C105.163,12.352 105.956,13.541 106.407,14.513C106.832,15.431 106.867,17.513 106.867,17.513L106.862,33.513C106.862,33.513 106.8,34.942 106.252,36.214C105.824,37.209 104.968,38.031 104.478,38.513C103.384,39.587 101.604,40.098 100.162,40.098C98.719,40.098 96.916,39.597 95.823,38.513C95.336,38.031 94.434,37.092 94.021,36.097C93.494,34.825 93.516,33.513 93.516,33.513Z" />
 	);
 
 	return (
-		<SunSvg viewBox="0 0 188 188">
+		<SunSvg viewBox="0 0 200 200">
 			<title>Sun</title>
-			<g transform="matrix(1,0,0,1,-749.715,-57.1157)">
-				<g id="Sun" transform="matrix(0.901867,0,0,1,649.825,125.882)">
-					<g transform="matrix(1.51208,-0.000682991,0.000757308,1.36369,-274.728,-116.927)">
+			<g transform="matrix(1,0,0,1,-1.42109e-14,-1.43808)">
+				<g id="Sun" transform="matrix(0.964471,0,0,1.06723,-106.825,74.8273)">
+					<g transform="matrix(1.49651,-0.000677344,0.000749513,1.35242,-267.242,-114.499)">
 						<circle cx="321.82" cy="103.26" r="34.642" />
 					</g>
-					<g transform="matrix(1.10881,0,0,0.60005,-242.655,-61.6824)">
+					<g transform="matrix(1.03684,0,0,0.937002,110.582,-70.1131)">
 						<Sunray />
 					</g>
-					<g transform="matrix(0.959989,0.500421,-0.332951,0.519512,-134.278,-255.404)">
+					<g transform="matrix(0.897928,-0.468501,0.518419,0.811468,71.9092,-10.4484)">
 						<Sunray />
 					</g>
-					<g transform="matrix(0.554406,0.866025,-0.576203,0.300025,66.6151,-374.085)">
+					<g transform="matrix(0.518419,-0.811468,0.897928,0.468501,71.4288,58.697)">
 						<Sunray />
 					</g>
-					<g transform="matrix(1.23103e-16,1,-0.665342,1.11022e-16,306.605,-386.34)">
+					<g transform="matrix(-5.55112e-17,-0.937002,1.03684,2.77556e-16,109.269,118.796)">
 						<Sunray />
 					</g>
-					<g transform="matrix(-0.554406,0.866025,-0.576203,-0.300025,521.237,-288.734)">
+					<g transform="matrix(-0.518419,-0.811468,0.897928,-0.468501,175.291,153.744)">
 						<Sunray />
 					</g>
-					<g transform="matrix(-0.960259,0.5,-0.332671,-0.519658,653.001,-107.42)">
+					<g transform="matrix(-0.897928,-0.468501,0.518419,-0.811468,251.804,154.178)">
 						<Sunray />
 					</g>
-					<g transform="matrix(-1.10881,1.11022e-16,-1.84654e-16,-0.60005,666.589,109.019)">
+					<g transform="matrix(-1.03684,0,5.55112e-17,-0.937002,318.306,119.982)">
 						<Sunray />
 					</g>
-					<g transform="matrix(-0.960259,-0.5,0.332671,-0.519658,558.363,302.589)">
+					<g transform="matrix(-0.897928,0.468501,-0.518419,-0.811468,356.978,60.3171)">
 						<Sunray />
 					</g>
-					<g transform="matrix(-0.554406,-0.866025,0.576203,-0.300025,357.32,421.422)">
+					<g transform="matrix(-0.518419,0.811468,-0.897928,-0.468501,357.459,-8.82833)">
 						<Sunray />
 					</g>
-					<g transform="matrix(1.23103e-16,-1,0.665342,-1.11022e-16,117.329,433.677)">
+					<g transform="matrix(-1.66533e-16,0.937002,-1.03684,-3.33067e-16,319.618,-68.9271)">
 						<Sunray />
 					</g>
-					<g transform="matrix(0.554406,-0.866025,0.576203,0.300025,-97.3026,336.071)">
+					<g transform="matrix(0.518419,0.811468,-0.897928,0.468501,253.596,-103.876)">
 						<Sunray />
 					</g>
-					<g transform="matrix(0.960259,-0.5,0.332671,0.519658,-229.066,154.757)">
+					<g transform="matrix(0.897928,0.468501,-0.518419,0.811468,177.084,-104.31)">
 						<Sunray />
 					</g>
 				</g>
