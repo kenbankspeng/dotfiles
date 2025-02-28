@@ -3,8 +3,8 @@ import { getWeatherQuery, WeatherIcon } from "./lib/weather.js";
 
 const x = 100;
 const y = 100;
-const w = 100;
-const h = 100;
+const w = 150;
+const h = 150;
 
 // 	{
 // 		"current": {
