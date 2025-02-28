@@ -1,15 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="100%" height="100%" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
-    <g transform="matrix(1,0,0,1,-161.703,-261.266)">
-        <g transform="matrix(1,0,0,1,292.408,-172.397)">
-            <rect x="-1057.14" y="-740.46" width="3426.96" height="2296.67"/>
-        </g>
-        <g id="Moon" transform="matrix(0.964471,0,0,1.06723,54.8779,334.655)">
-            <rect x="110.76" y="-68.766" width="207.368" height="187.4" style="fill:none;"/>
-            <g transform="matrix(1.17514,0,0,1.06199,-144.96,-381.998)">
-                <path d="M351.736,382.768C351.737,382.903 351.737,383.038 351.737,383.173C351.737,408.81 330.924,429.623 305.287,429.623C279.651,429.623 258.837,408.81 258.837,383.173C258.837,357.912 279.045,337.334 304.163,336.736C291.022,355.24 289.717,377.255 302.035,388.457C313.977,399.317 334.824,396.468 351.736,382.768Z" style="fill:rgb(255,247,0);"/>
-            </g>
-        </g>
-    </g>
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2" viewBox="0 0 200 200">
+    <path d="M-926.435-1174.123h3426.96v2296.67h-3426.96z"/>
+    <path d="M110.76-68.766h207.368v187.4H110.76z" style="fill:none" transform="matrix(.96447 0 0 1.06723 -106.825 73.389)"/>
+    <path d="m351.736 382.768.001.405c0 25.637-20.813 46.45-46.45 46.45-25.636 0-46.45-20.813-46.45-46.45 0-25.261 20.208-45.839 45.326-46.437-13.141 18.504-14.446 40.519-2.128 51.721 11.942 10.86 32.789 8.011 49.701-5.689" style="fill:#fff700" transform="translate(-246.635 -334.29)scale(1.13339)"/>
 </svg>
