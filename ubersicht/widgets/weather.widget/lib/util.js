@@ -1,6 +1,4 @@
-export const widgetStyle = (size, style) => {
-	const [left, top, width, height] = size;
-
+export const widgetStyle = (x, y, w, h, style) => {
 	return `
   color: #cdd6f4;
 	font-family: Helvetica;
@@ -8,10 +6,11 @@ export const widgetStyle = (size, style) => {
 	font-weight: bold;
 	z-index: 1;
 
-	${left && `left: ${left}px;`}
-	${top && `top: ${top}px;`}
-	${width && `width: ${width}px;`}
-	${height && `height: ${height}px;`}
+	${x && `left: ${x}px;`}
+	${y && `top: ${y}px;`}
+	${w && `width: ${w}px;`}
+	${h && `height: ${h}px;`}
+	overflow: hidden;
 
 	${style}
 `;

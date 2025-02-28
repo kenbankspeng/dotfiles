@@ -49,8 +49,7 @@ export const Lightning = () => (
 
 const SunSvg = styled("svg")`
 	display: block;
-  width: 200px;
-	background: transparent;
+  background: transparent;
 
 	fill-rule: evenodd;
 	clip-rule: evenodd;

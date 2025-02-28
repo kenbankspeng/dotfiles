@@ -1,7 +1,10 @@
 import { widgetStyle } from "./lib/util.js";
 import { getWeatherQuery, WeatherIcon } from "./lib/weather.js";
 
-const size = [100, 100, 200, 200]; // X, Y, W, H
+const x = 100;
+const y = 100;
+const w = 100;
+const h = 100;
 
 // 	{
 // 		"current": {
@@ -50,7 +53,7 @@ const style = `
 	}
 `;
 
-export const className = widgetStyle(size, style);
+export const className = widgetStyle(x, y, w, h, style);
 
 // export const command = getWeatherQuery();
 export const command = "echo 'test'";
