@@ -1,5 +1,6 @@
 import { styled } from "uebersicht";
 
+// svg defaults
 export const Svg = styled("svg")`
   display: block;
 

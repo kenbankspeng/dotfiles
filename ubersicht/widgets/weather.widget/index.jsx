@@ -59,16 +59,6 @@ export const className = widgetStyle(x, y, w, h, globalCss);
 export const command = "echo 'test'";
 export const refreshFrequency = 36000000; // app refresh time in ms: 10 hours
 
-const MySun = styled(WeatherIcon)`
-	path {
-		fill: red;
-	}
-	circle {
-		fill: green;
-	}
-	
-`;
-
 export const render = ({ output }) => {
 	// if (output === undefined) return null;
 	// const weather = JSON.parse(output);
@@ -79,7 +69,8 @@ export const render = ({ output }) => {
 	// 		<h1>{weather.current.temperature_2m}</h1>
 	return (
 		<div>
-			<MySun weatherCode={1} />
+			<WeatherIcon weatherCode={1} />
+			<WeatherIcon weatherCode={2} />
 		</div>
 	);
 };
