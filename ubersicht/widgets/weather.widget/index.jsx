@@ -1,10 +1,11 @@
+import { styled } from "uebersicht";
 import { widgetStyle } from "./lib/util.js";
-import { getWeatherQuery, WeatherIcon } from "./lib/weather.js";
+import { getWeatherQuery, WeatherIcon } from "./lib/weather-icon.js";
 
 const x = 100;
 const y = 100;
-const w = 150;
-const h = 150;
+const w = 200;
+const h = 450;
 
 // 	{
 // 		"current": {
@@ -47,17 +48,26 @@ const h = 150;
 // 		}
 // }
 
-const style = `
-	path {
-		fill: white;
-	}
+// prefer styled over globalCss
+const globalCss = `
+	border: 1px solid #80808040;
 `;
 
-export const className = widgetStyle(x, y, w, h, style);
+export const className = widgetStyle(x, y, w, h, globalCss);
 
 // export const command = getWeatherQuery();
 export const command = "echo 'test'";
 export const refreshFrequency = 36000000; // app refresh time in ms: 10 hours
+
+const MySun = styled(WeatherIcon)`
+	path {
+		fill: red;
+	}
+	circle {
+		fill: green;
+	}
+	
+`;
 
 export const render = ({ output }) => {
 	// if (output === undefined) return null;
@@ -69,7 +79,7 @@ export const render = ({ output }) => {
 	// 		<h1>{weather.current.temperature_2m}</h1>
 	return (
 		<div>
-			<WeatherIcon weatherCode={2} />
+			<MySun weatherCode={1} />
 		</div>
 	);
 };
