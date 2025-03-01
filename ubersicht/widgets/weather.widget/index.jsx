@@ -1,9 +1,10 @@
 import { styled } from "uebersicht";
-import { widgetStyle } from "./lib/util.js";
+import { widgetStyle } from "./lib/util/util.js";
+import { WeatherIcon } from "./lib/weather-icon/weather-icon.jsx";
 import {
-	getWeatherQuery,
-	WeatherIcon,
-} from "./lib/weather-icon/weather-icon.js";
+	getCurrentWeatherQuery,
+	currentWeatherRefresh,
+} from "./lib/api/api.js";
 
 const x = 100;
 const y = 100;
@@ -58,27 +59,25 @@ const globalCss = `
 
 export const className = widgetStyle(x, y, w, h, globalCss);
 
-// export const command = getWeatherQuery();
-export const command = "echo 'test'";
-export const refreshFrequency = 36000000; // app refresh time in ms: 10 hours
+//export const command = "echo 'test'";
+export const command = getCurrentWeatherQuery();
+export const refreshFrequency = currentWeatherRefresh;
 
 const MyWeather = styled(WeatherIcon)`
 	border: 1px solid red;
 `;
 
 export const render = ({ output }) => {
-	// if (output === undefined) return null;
-	// const weather = JSON.parse(output);
-	// weather.current.weather_code
+	if (output === undefined) return null;
+	const weather = JSON.parse(output);
 
-	//{weather.current.weather_code}
+	const weatherCode = weather.current.weather_code;
 
-	// 		<h1>{weather.current.temperature_2m}</h1>
+	// <h1>{weather.current.temperature_2m}</h1>
 	return (
 		<div>
-			<MyWeather weatherCode={73} />
-			<MyWeather weatherCode={67} />
-			<MyWeather weatherCode={71} />
+			{weatherCode}
+			<MyWeather weatherCode={weatherCode} />
 		</div>
 	);
 };
