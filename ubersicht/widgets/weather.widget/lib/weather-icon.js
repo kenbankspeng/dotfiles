@@ -6,7 +6,7 @@ import { Cloud } from "./icons/cloud.jsx";
 import { HeavyClouds } from "./icons/heavy-clouds.jsx";
 import { SunShower } from "./icons/sun-shower.jsx";
 import { Raindrop } from "./icons/raindrop.jsx";
-import { Lightning } from "./icons/lightning.jsx";
+import { ThunderStorm } from "./icons/thunder-storm.jsx";
 import { HeavyRain } from "./icons/heavy-rain.jsx";
 import { NightWind } from "./icons/night-wind.jsx";
 import { LightWind } from "./icons/light-wind.jsx";
@@ -62,7 +62,7 @@ export const WeatherIcon = ({ weatherCode, ...rest }) => {
 		case 56:
 			return <Raindrop {...rest} />;
 		case 57:
-			return <Lightning {...rest} />;
+			return <ThunderStorm {...rest} />;
 		case 61:
 			return <HeavyRain {...rest} />;
 		case 63:

@@ -1,9 +1,9 @@
 import { Svg } from "./svg.jsx";
 
-export const Lightning = (props) => {
+export const ThunderStorm = (props) => {
 	return (
 		<Svg viewBox="0 0 200 200" {...props}>
-			<title>Lightning</title>
+			<title>Thunder Storm</title>
 
 			<g transform="matrix(1.02577 0 0 1.47613 -21.4 -42.573)">
 				<clipPath id="a">
