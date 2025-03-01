@@ -24,72 +24,74 @@ import { SunShower } from "./icons/sun-shower.jsx";
 import { Raindrop } from "./icons/raindrop.jsx";
 import { ThunderStorm } from "./icons/thunder-storm.jsx";
 import { HeavyRain } from "./icons/heavy-rain.jsx";
-import { NightWind } from "./icons/night-wind.jsx";
-import { LightWind } from "./icons/light-wind.jsx";
-import { HeavyWind } from "./icons/heavy-wind.jsx";
 import { LightSnow } from "./icons/light-snow.jsx";
-import { LightShower } from "./icons/light-shower.jsx";
+import { LightRain } from "./icons/light-rain.jsx";
 import { HeavySnow } from "./icons/heavy-snow.jsx";
 
-//
+// <Raindrop {...rest} />;
+// <Moon {...rest} />;
+// <CloudMoon {...rest} />;
+// <SunShower {...rest} />;
 
 export const WeatherIcon = ({ weatherCode, ...rest }) => {
 	switch (weatherCode) {
-		case 0:
-		case 1:
+		case 0: // Clear sky
 			return <Sun {...rest} />;
-		case 2:
-		case 3:
-			return <Moon {...rest} />;
-		case 45:
-			return <CloudMoon {...rest} />;
-		case 48:
+		case 1: // Mainly clear
 			return <CloudSun {...rest} />;
-		case 51:
+		case 2: // Partly cloudy
 			return <Cloud {...rest} />;
-		case 53:
+		case 3: // Overcast
 			return <HeavyClouds {...rest} />;
-		case 55:
-			return <SunShower {...rest} />;
-		case 56:
-			return <Raindrop {...rest} />;
-		case 57:
-			return <ThunderStorm {...rest} />;
-		case 61:
+		case 45: // Fog
+			return;
+		case 48: // depositing rime fog
+			return;
+		case 51: // Drizzle: Light
+			return;
+		case 53: // Drizzle: moderate
+			return;
+		case 55: // Drizzle: dense
+			return;
+		case 56: // Freezing Drizzle: Light
+			return;
+		case 57: // Freezing Drizzle: dense
+			return;
+		case 61: // Rain: Slight
+			return <LightRain {...rest} />;
+		case 63: // Rain: moderate
+			return <LightRain {...rest} />;
+		case 65: // Rain: heavy
 			return <HeavyRain {...rest} />;
-		case 63:
-			return <NightWind {...rest} />;
-		case 65:
-			return <LightWind {...rest} />;
-		case 66:
-			return <HeavyWind {...rest} />;
-		case 67:
+		case 66: // Freezing Rain: Light
+			return;
+		case 67: // Freezing Rain: heavy
+			return;
+		case 71: // Snow fall: Slight
 			return <LightSnow {...rest} />;
-		case 71:
-			return <LightShower {...rest} />;
-		case 73:
+		case 73: // Snow fall: moderate
+			return <LightSnow {...rest} />;
+		case 75: // Snow fall: heavy
 			return <HeavySnow {...rest} />;
-		case 75:
-			return null;
-		case 77:
-			return null;
-		case 80:
-			return null;
-		case 81:
-			return null;
-		case 82:
-			return null;
-		case 85:
-			return null;
-		case 86:
-			return null;
-		case 95:
-			return null;
-		case 96:
-			return null;
-		case 99:
-			return null;
+		case 77: // Snow grains
+			return;
+		case 80: // Rain showers: Slight
+			return <LightRain {...rest} />;
+		case 81: // Rain showers: moderate
+			return <LightRain {...rest} />;
+		case 82: // Rain showers: violent
+			return <HeavyRain {...rest} />;
+		case 85: // Snow showers slight
+			return <LightSnow {...rest} />;
+		case 86: // Snow showers heavy
+			return <HeavySnow {...rest} />;
+		case 95: // Thunderstorm: Slight or moderate
+			return <ThunderStorm {...rest} />;
+		case 96: // Thunderstorm with slight hail
+			return <ThunderStorm {...rest} />;
+		case 99: // Thunderstorm with heavy hail
+			return <ThunderStorm {...rest} />;
 		default:
-			return null;
+			return;
 	}
 };
