@@ -1,7 +1,7 @@
 import { styled } from "uebersicht";
 import { widgetStyle } from "./lib/util/util.js";
-import { colors } from "./lib/weather-icon/theme.js";
-import { DecodeWeather } from "./lib/weather-icon/decode-weather.jsx";
+import { colors } from "./lib/decode-weather/theme.js";
+import { DecodeWeather } from "./lib/decode-weather/decode-weather.jsx";
 import {
 	getCurrentWeatherQuery,
 	currentWeatherRefresh,
