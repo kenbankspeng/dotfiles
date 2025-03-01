@@ -1,19 +1,19 @@
-import { Sun } from "./weather-icon/sun.jsx";
-import { Moon } from "./weather-icon/moon.jsx";
-import { CloudMoon } from "./weather-icon/cloud-moon.jsx";
-import { CloudSun } from "./weather-icon/cloud-sun.jsx";
-import { Cloud } from "./weather-icon/cloud.jsx";
-import { HeavyClouds } from "./weather-icon/heavy-clouds.jsx";
-import { SunShower } from "./weather-icon/sun-shower.jsx";
-import { Raindrop } from "./weather-icon/raindrop.jsx";
-import { ThunderStorm } from "./weather-icon/thunder-storm.jsx";
-import { HeavyRain } from "./weather-icon/heavy-rain.jsx";
-import { NightWind } from "./weather-icon/night-wind.jsx";
-import { LightWind } from "./weather-icon/light-wind.jsx";
-import { HeavyWind } from "./weather-icon/heavy-wind.jsx";
-import { LightSnow } from "./weather-icon/light-snow.jsx";
-import { LightShower } from "./weather-icon/light-shower.jsx";
-import { HeavySnow } from "./weather-icon/heavy-snow.jsx";
+import { Sun } from "./icons/sun.jsx";
+import { Moon } from "./icons/moon.jsx";
+import { CloudMoon } from "./icons/cloud-moon.jsx";
+import { CloudSun } from "./icons/cloud-sun.jsx";
+import { Cloud } from "./icons/cloud.jsx";
+import { HeavyClouds } from "./icons/heavy-clouds.jsx";
+import { SunShower } from "./icons/sun-shower.jsx";
+import { Raindrop } from "./icons/raindrop.jsx";
+import { ThunderStorm } from "./icons/thunder-storm.jsx";
+import { HeavyRain } from "./icons/heavy-rain.jsx";
+import { NightWind } from "./icons/night-wind.jsx";
+import { LightWind } from "./icons/light-wind.jsx";
+import { HeavyWind } from "./icons/heavy-wind.jsx";
+import { LightSnow } from "./icons/light-snow.jsx";
+import { LightShower } from "./icons/light-shower.jsx";
+import { HeavySnow } from "./icons/heavy-snow.jsx";
 
 // single command at refreshFrequency
 

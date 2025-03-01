@@ -1,6 +1,9 @@
 import { styled } from "uebersicht";
 import { widgetStyle } from "./lib/util.js";
-import { getWeatherQuery, WeatherIcon } from "./lib/weather-icon.js";
+import {
+	getWeatherQuery,
+	WeatherIcon,
+} from "./lib/weather-icon/weather-icon.js";
 
 const x = 100;
 const y = 100;
