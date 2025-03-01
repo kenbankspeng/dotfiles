@@ -1,10 +1,11 @@
+import { styled } from "uebersicht";
 import { widgetStyle } from "./lib/util.js";
 import { getWeatherQuery, WeatherIcon } from "./lib/weather-icon.js";
 
 const x = 100;
 const y = 100;
 const w = 200;
-const h = 450;
+const h = null;
 
 // 	{
 // 		"current": {
@@ -58,6 +59,10 @@ export const className = widgetStyle(x, y, w, h, globalCss);
 export const command = "echo 'test'";
 export const refreshFrequency = 36000000; // app refresh time in ms: 10 hours
 
+const MyWeather = styled(WeatherIcon)`
+	border: 1px solid red;
+`;
+
 export const render = ({ output }) => {
 	// if (output === undefined) return null;
 	// const weather = JSON.parse(output);
@@ -68,8 +73,9 @@ export const render = ({ output }) => {
 	// 		<h1>{weather.current.temperature_2m}</h1>
 	return (
 		<div>
-			<WeatherIcon weatherCode={73} />
-			<WeatherIcon weatherCode={71} />
+			<MyWeather weatherCode={1} />
+			<MyWeather weatherCode={2} />
+			<MyWeather weatherCode={45} />
 		</div>
 	);
 };
