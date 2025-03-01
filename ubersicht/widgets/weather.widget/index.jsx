@@ -68,8 +68,8 @@ export const render = ({ output }) => {
 	// 		<h1>{weather.current.temperature_2m}</h1>
 	return (
 		<div>
+			<WeatherIcon weatherCode={66} />
 			<WeatherIcon weatherCode={65} />
-			<WeatherIcon weatherCode={63} />
 		</div>
 	);
 };

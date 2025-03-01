@@ -10,6 +10,7 @@ import { Lightning } from "./icons/lightning.jsx";
 import { HeavyRain } from "./icons/heavy-rain.jsx";
 import { NightWind } from "./icons/night-wind.jsx";
 import { LightWind } from "./icons/light-wind.jsx";
+import { HeavyWind } from "./icons/heavy-wind.jsx";
 
 // single command at refreshFrequency
 
@@ -66,7 +67,7 @@ export const WeatherIcon = ({ weatherCode, ...rest }) => {
 		case 65:
 			return <LightWind {...rest} />;
 		case 66:
-			return null;
+			return <HeavyWind {...rest} />;
 		case 67:
 			return null;
 		case 71:
