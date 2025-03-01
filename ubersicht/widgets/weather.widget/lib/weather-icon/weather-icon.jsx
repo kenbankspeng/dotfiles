@@ -15,23 +15,24 @@
 // 96, 99 *			Thunderstorm with slight and heavy hail
 
 import { Sun } from "./icons/sun.jsx";
-import { Moon } from "./icons/moon.jsx";
-import { CloudMoon } from "./icons/cloud-moon.jsx";
 import { CloudSun } from "./icons/cloud-sun.jsx";
 import { Cloud } from "./icons/cloud.jsx";
 import { HeavyClouds } from "./icons/heavy-clouds.jsx";
-import { SunShower } from "./icons/sun-shower.jsx";
-import { Raindrop } from "./icons/raindrop.jsx";
 import { ThunderStorm } from "./icons/thunder-storm.jsx";
 import { HeavyRain } from "./icons/heavy-rain.jsx";
 import { LightSnow } from "./icons/light-snow.jsx";
 import { LightRain } from "./icons/light-rain.jsx";
 import { HeavySnow } from "./icons/heavy-snow.jsx";
+import { LightShowers } from "./icons/light-showers.jsx";
+import { HeavyShowers } from "./icons/heavy-showers.jsx";
+import { FreezingRain } from "./icons/freezing-rain.jsx";
+import { HeavyFreezingRain } from "./icons/heavy-freezing-rain.jsx";
 
-// <Raindrop {...rest} />;
-// <Moon {...rest} />;
-// <CloudMoon {...rest} />;
-// <SunShower {...rest} />;
+// import { Moon } from "./icons/moon.jsx";
+// import { CloudMoon } from "./icons/cloud-moon.jsx";
+// import { SunShower } from "./icons/sun-shower.jsx";
+// import { Raindrop } from "./icons/raindrop.jsx";
+// import { Wind } from "./icons/wind.jsx";
 
 export const WeatherIcon = ({ weatherCode, ...rest }) => {
 	switch (weatherCode) {
@@ -54,9 +55,9 @@ export const WeatherIcon = ({ weatherCode, ...rest }) => {
 		case 55: // Drizzle: dense
 			return;
 		case 56: // Freezing Drizzle: Light
-			return;
+			return <FreezingRain {...rest} />;
 		case 57: // Freezing Drizzle: dense
-			return;
+			return <HeavyFreezingRain {...rest} />;
 		case 61: // Rain: Slight
 			return <LightRain {...rest} />;
 		case 63: // Rain: moderate
@@ -64,9 +65,9 @@ export const WeatherIcon = ({ weatherCode, ...rest }) => {
 		case 65: // Rain: heavy
 			return <HeavyRain {...rest} />;
 		case 66: // Freezing Rain: Light
-			return;
+			return <FreezingRain {...rest} />;
 		case 67: // Freezing Rain: heavy
-			return;
+			return <HeavyFreezingRain {...rest} />;
 		case 71: // Snow fall: Slight
 			return <LightSnow {...rest} />;
 		case 73: // Snow fall: moderate
@@ -76,11 +77,11 @@ export const WeatherIcon = ({ weatherCode, ...rest }) => {
 		case 77: // Snow grains
 			return;
 		case 80: // Rain showers: Slight
-			return <LightRain {...rest} />;
+			return <LightShowers {...rest} />;
 		case 81: // Rain showers: moderate
-			return <LightRain {...rest} />;
+			return <LightShowers {...rest} />;
 		case 82: // Rain showers: violent
-			return <HeavyRain {...rest} />;
+			return <HeavyShowers {...rest} />;
 		case 85: // Snow showers slight
 			return <LightSnow {...rest} />;
 		case 86: // Snow showers heavy
