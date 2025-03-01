@@ -10,7 +10,7 @@ import {
 const x = 100;
 const y = 100;
 const w = 200;
-const h = null;
+const h = 600;
 
 // 	{
 // 		"current": {
@@ -60,26 +60,34 @@ const globalCss = `
 
 export const className = widgetStyle(x, y, w, h, globalCss);
 
-//export const command = "echo 'test'";
-export const command = getCurrentWeatherQuery();
+export const command = "echo 'test'";
+// export const command = getCurrentWeatherQuery();
 export const refreshFrequency = currentWeatherRefresh;
 
 const Base = styled("div")`
+	display: grid;
+	grid-template-columns: 1fr;
+	justify-items: center;
 	background-color: ${colors.base};
 	border: 1px solid red;
 `;
 
+const Spacer = styled("div")`
+	height: 100px;
+`;
+
 export const render = ({ output }) => {
 	if (output === undefined) return null;
-	const weather = JSON.parse(output);
-	const weatherCode = weather.current.weather_code;
-	const { Icon, desc } = decodeWeather({ weatherCode });
+	// const weather = JSON.parse(output);
+	// const weatherCode = weather.current.weather_code;
+	const { Icon, desc } = decodeWeather({ weatherCode: 1 });
 
 	// <h1>{weather.current.temperature_2m}</h1>
 	return (
 		<Base>
-			<Icon />
+			<Icon width={100} />
 			{desc}
+			<Spacer />
 		</Base>
 	);
 };

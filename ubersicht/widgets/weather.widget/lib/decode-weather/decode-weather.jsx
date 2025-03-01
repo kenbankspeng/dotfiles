@@ -34,25 +34,25 @@ import { HeavyFreezingRain } from "./icons/heavy-freezing-rain.jsx";
 // import { Raindrop } from "./icons/raindrop.jsx";
 // import { Wind } from "./icons/wind.jsx";
 
-export const decodeWeather = ({ weatherCode, ...rest }) => {
+export const decodeWeather = ({ weatherCode }) => {
 	let Icon = () => <div />;
 	let desc = "";
 
 	switch (weatherCode) {
 		case 0: // Clear sky
-			Icon = () => <Sun {...rest} />;
+			Icon = (props) => <Sun {...props} />;
 			desc = "Clear sky";
 			break;
 		case 1: // Mainly clear
-			Icon = () => <CloudSun {...rest} />;
+			Icon = (props) => <CloudSun {...props} />;
 			desc = "Mainly clear";
 			break;
 		case 2: // Partly cloudy
-			Icon = () => <Cloud {...rest} />;
+			Icon = (props) => <Cloud {...props} />;
 			desc = "Partly cloudy";
 			break;
 		case 3: // Overcast
-			Icon = () => <HeavyClouds {...rest} />;
+			Icon = (props) => <HeavyClouds {...props} />;
 			desc = "Overcast";
 			break;
 		case 45: // Fog
@@ -71,78 +71,78 @@ export const decodeWeather = ({ weatherCode, ...rest }) => {
 			desc = "Dense drizzle";
 			break;
 		case 56: // Freezing Drizzle: Light
-			Icon = () => <FreezingRain {...rest} />;
+			Icon = (props) => <FreezingRain {...props} />;
 			desc = "Light freezing drizzle";
 			break;
 		case 57: // Freezing Drizzle: dense
-			Icon = () => <HeavyFreezingRain {...rest} />;
+			Icon = (props) => <HeavyFreezingRain {...props} />;
 			desc = "Dense freezing drizzle";
 			break;
 		case 61: // Rain: Slight
-			Icon = () => <LightRain {...rest} />;
+			Icon = (props) => <LightRain {...props} />;
 			desc = "Light rain";
 			break;
 		case 63: // Rain: moderate
-			Icon = () => <LightRain {...rest} />;
+			Icon = (props) => <LightRain {...props} />;
 			desc = "Moderate rain";
 			break;
 		case 65: // Rain: heavy
-			Icon = () => <HeavyRain {...rest} />;
+			Icon = (props) => <HeavyRain {...props} />;
 			desc = "Heavy rain";
 			break;
 		case 66: // Freezing Rain: Light
-			Icon = () => <FreezingRain {...rest} />;
+			Icon = (props) => <FreezingRain {...props} />;
 			desc = "Light freezing Rain";
 			break;
 		case 67: // Freezing Rain: heavy
-			Icon = () => <HeavyFreezingRain {...rest} />;
+			Icon = (props) => <HeavyFreezingRain {...props} />;
 			desc = "Heavy freezing rain";
 			break;
 		case 71: // Snow fall: Slight
-			Icon = () => <LightSnow {...rest} />;
+			Icon = (props) => <LightSnow {...props} />;
 			desc = "Light snow fall";
 			break;
 		case 73: // Snow fall: moderate
-			Icon = () => <LightSnow {...rest} />;
+			Icon = (props) => <LightSnow {...props} />;
 			desc = "Moderate snow fall";
 			break;
 		case 75: // Snow fall: heavy
-			Icon = () => <HeavySnow {...rest} />;
+			Icon = (props) => <HeavySnow {...props} />;
 			desc = "Heavy snow fall";
 			break;
 		case 77: // Snow grains
 			desc = "Snow grains";
 			break;
 		case 80: // Rain showers: Slight
-			Icon = () => <LightShowers {...rest} />;
+			Icon = (props) => <LightShowers {...props} />;
 			desc = "Light showers";
 			break;
 		case 81: // Rain showers: moderate
-			Icon = () => <LightShowers {...rest} />;
+			Icon = (props) => <LightShowers {...props} />;
 			desc = "Moderate showers";
 			break;
 		case 82: // Rain showers: violent
-			Icon = () => <HeavyShowers {...rest} />;
+			Icon = (props) => <HeavyShowers {...props} />;
 			desc = "Violent showers";
 			break;
 		case 85: // Snow showers slight
-			Icon = () => <LightSnow {...rest} />;
+			Icon = (props) => <LightSnow {...props} />;
 			desc = "Light snow";
 			break;
 		case 86: // Snow showers heavy
-			Icon = () => <HeavySnow {...rest} />;
+			Icon = (props) => <HeavySnow {...props} />;
 			desc = "Heavy snow";
 			break;
 		case 95: // Thunderstorm: Slight or moderate
-			Icon = () => <ThunderStorm {...rest} />;
+			Icon = (props) => <ThunderStorm {...props} />;
 			desc = "Moderate thunderstorm";
 			break;
 		case 96: // Thunderstorm with slight hail
-			Icon = () => <ThunderStorm {...rest} />;
+			Icon = (props) => <ThunderStorm {...props} />;
 			desc = "Thunderstorm with light hail";
 			break;
 		case 99: // Thunderstorm with heavy hail
-			Icon = () => <ThunderStorm {...rest} />;
+			Icon = (props) => <ThunderStorm {...props} />;
 			desc = "Thunderstorm with heavy hail";
 			break;
 	}
