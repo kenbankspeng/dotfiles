@@ -73,9 +73,9 @@ export const render = ({ output }) => {
 	// 		<h1>{weather.current.temperature_2m}</h1>
 	return (
 		<div>
-			<MyWeather weatherCode={61} />
-			<MyWeather weatherCode={63} />
-			<MyWeather weatherCode={65} />
+			<MyWeather weatherCode={73} />
+			<MyWeather weatherCode={67} />
+			<MyWeather weatherCode={71} />
 		</div>
 	);
 };
