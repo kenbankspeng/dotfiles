@@ -73,13 +73,12 @@ export const render = ({ output }) => {
 	if (output === undefined) return null;
 	const weather = JSON.parse(output);
 	const weatherCode = weather.current.weather_code;
-	const { Icon, desc } = decodeWeather({ weatherCode });
+	const { Icon, desc } = decodeWeather({ weatherCode: 99 });
 
 	// <h1>{weather.current.temperature_2m}</h1>
 	return (
 		<Base>
-			{weatherCode}
-			<Icon weatherCode={0} />
+			<Icon />
 			{desc}
 		</Base>
 	);
