@@ -5,6 +5,9 @@ import { CloudSun } from "./icons/cloud-sun.jsx";
 import { Cloud } from "./icons/cloud.jsx";
 import { Clouds } from "./icons/clouds.jsx";
 import { SunShower } from "./icons/sun-shower.jsx";
+import { Raindrop } from "./icons/raindrop.jsx";
+import { Lightning } from "./icons/lightning.jsx";
+import { HeavyRain } from "./icons/heavy-rain.jsx";
 
 // single command at refreshFrequency
 
@@ -51,11 +54,11 @@ export const WeatherIcon = ({ weatherCode, ...rest }) => {
 		case 55:
 			return <SunShower {...rest} />;
 		case 56:
-			return null;
+			return <Raindrop {...rest} />;
 		case 57:
-			return null;
+			return <Lightning {...rest} />;
 		case 61:
-			return null;
+			return <HeavyRain {...rest} />;
 		case 63:
 			return null;
 		case 65:
