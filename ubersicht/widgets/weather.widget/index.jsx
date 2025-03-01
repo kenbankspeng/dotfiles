@@ -1,7 +1,7 @@
 import { styled } from "uebersicht";
 import { widgetStyle } from "./lib/util/util.js";
 import { colors } from "./lib/decode-weather/theme.js";
-import { DecodeWeather } from "./lib/decode-weather/decode-weather.jsx";
+import { decodeWeather } from "./lib/decode-weather/decode-weather.jsx";
 import {
 	getCurrentWeatherQuery,
 	currentWeatherRefresh,
@@ -72,14 +72,15 @@ const Base = styled("div")`
 export const render = ({ output }) => {
 	if (output === undefined) return null;
 	const weather = JSON.parse(output);
-
 	const weatherCode = weather.current.weather_code;
+	const { Icon, desc } = decodeWeather({ weatherCode });
 
 	// <h1>{weather.current.temperature_2m}</h1>
 	return (
 		<Base>
 			{weatherCode}
-			<DecodeWeather weatherCode={0} />
+			<Icon weatherCode={0} />
+			{desc}
 		</Base>
 	);
 };

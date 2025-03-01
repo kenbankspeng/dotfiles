@@ -34,65 +34,117 @@ import { HeavyFreezingRain } from "./icons/heavy-freezing-rain.jsx";
 // import { Raindrop } from "./icons/raindrop.jsx";
 // import { Wind } from "./icons/wind.jsx";
 
-export const DecodeWeather = ({ weatherCode, ...rest }) => {
+export const decodeWeather = ({ weatherCode, ...rest }) => {
+	let Icon = () => <div />;
+	let desc = "";
+
 	switch (weatherCode) {
 		case 0: // Clear sky
-			return <Sun {...rest} />;
+			Icon = () => <Sun {...rest} />;
+			desc = "Clear sky";
+			break;
 		case 1: // Mainly clear
-			return <CloudSun {...rest} />;
+			Icon = () => <CloudSun {...rest} />;
+			desc = "Mainly clear";
+			break;
 		case 2: // Partly cloudy
-			return <Cloud {...rest} />;
+			Icon = () => <Cloud {...rest} />;
+			desc = "Partly cloudy";
+			break;
 		case 3: // Overcast
-			return <HeavyClouds {...rest} />;
+			Icon = () => <HeavyClouds {...rest} />;
+			desc = "Overcast";
+			break;
 		case 45: // Fog
-			return;
+			desc = "Fog";
+			break;
 		case 48: // depositing rime fog
-			return;
+			desc = "Fog with rime";
+			break;
 		case 51: // Drizzle: Light
-			return;
+			desc = "Light drizzle";
+			break;
 		case 53: // Drizzle: moderate
-			return;
+			desc = "Moderate drizzle";
+			break;
 		case 55: // Drizzle: dense
-			return;
+			desc = "Dense drizzle";
+			break;
 		case 56: // Freezing Drizzle: Light
-			return <FreezingRain {...rest} />;
+			Icon = () => <FreezingRain {...rest} />;
+			desc = "Light freezing drizzle";
+			break;
 		case 57: // Freezing Drizzle: dense
-			return <HeavyFreezingRain {...rest} />;
+			Icon = () => <HeavyFreezingRain {...rest} />;
+			desc = "Dense freezing drizzle";
+			break;
 		case 61: // Rain: Slight
-			return <LightRain {...rest} />;
+			Icon = () => <LightRain {...rest} />;
+			desc = "Light rain";
+			break;
 		case 63: // Rain: moderate
-			return <LightRain {...rest} />;
+			Icon = () => <LightRain {...rest} />;
+			desc = "Moderate rain";
+			break;
 		case 65: // Rain: heavy
-			return <HeavyRain {...rest} />;
+			Icon = () => <HeavyRain {...rest} />;
+			desc = "Heavy rain";
+			break;
 		case 66: // Freezing Rain: Light
-			return <FreezingRain {...rest} />;
+			Icon = () => <FreezingRain {...rest} />;
+			desc = "Light freezing Rain";
+			break;
 		case 67: // Freezing Rain: heavy
-			return <HeavyFreezingRain {...rest} />;
+			Icon = () => <HeavyFreezingRain {...rest} />;
+			desc = "Heavy freezing rain";
+			break;
 		case 71: // Snow fall: Slight
-			return <LightSnow {...rest} />;
+			Icon = () => <LightSnow {...rest} />;
+			desc = "Light snow fall";
+			break;
 		case 73: // Snow fall: moderate
-			return <LightSnow {...rest} />;
+			Icon = () => <LightSnow {...rest} />;
+			desc = "Moderate snow fall";
+			break;
 		case 75: // Snow fall: heavy
-			return <HeavySnow {...rest} />;
+			Icon = () => <HeavySnow {...rest} />;
+			desc = "Heavy snow fall";
+			break;
 		case 77: // Snow grains
-			return;
+			desc = "Snow grains";
+			break;
 		case 80: // Rain showers: Slight
-			return <LightShowers {...rest} />;
+			Icon = () => <LightShowers {...rest} />;
+			desc = "Light showers";
+			break;
 		case 81: // Rain showers: moderate
-			return <LightShowers {...rest} />;
+			Icon = () => <LightShowers {...rest} />;
+			desc = "Moderate showers";
+			break;
 		case 82: // Rain showers: violent
-			return <HeavyShowers {...rest} />;
+			Icon = () => <HeavyShowers {...rest} />;
+			desc = "Violent showers";
+			break;
 		case 85: // Snow showers slight
-			return <LightSnow {...rest} />;
+			Icon = () => <LightSnow {...rest} />;
+			desc = "Light snow";
+			break;
 		case 86: // Snow showers heavy
-			return <HeavySnow {...rest} />;
+			Icon = () => <HeavySnow {...rest} />;
+			desc = "Heavy snow";
+			break;
 		case 95: // Thunderstorm: Slight or moderate
-			return <ThunderStorm {...rest} />;
+			Icon = () => <ThunderStorm {...rest} />;
+			desc = "Moderate thunderstorm";
+			break;
 		case 96: // Thunderstorm with slight hail
-			return <ThunderStorm {...rest} />;
+			Icon = () => <ThunderStorm {...rest} />;
+			desc = "Thunderstorm with light hail";
+			break;
 		case 99: // Thunderstorm with heavy hail
-			return <ThunderStorm {...rest} />;
-		default:
-			return;
+			Icon = () => <ThunderStorm {...rest} />;
+			desc = "Thunderstorm with heavy hail";
+			break;
 	}
+	return { Icon, desc };
 };
