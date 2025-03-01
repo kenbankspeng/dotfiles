@@ -1,6 +1,7 @@
 import { styled } from "uebersicht";
 import { widgetStyle } from "./lib/util/util.js";
-import { WeatherIcon } from "./lib/weather-icon/weather-icon.jsx";
+import { colors } from "./lib/weather-icon/theme.js";
+import { DecodeWeather } from "./lib/weather-icon/decode-weather.jsx";
 import {
 	getCurrentWeatherQuery,
 	currentWeatherRefresh,
@@ -63,7 +64,8 @@ export const className = widgetStyle(x, y, w, h, globalCss);
 export const command = getCurrentWeatherQuery();
 export const refreshFrequency = currentWeatherRefresh;
 
-const MyWeather = styled(WeatherIcon)`
+const Base = styled("div")`
+	background-color: ${colors.base};
 	border: 1px solid red;
 `;
 
@@ -75,10 +77,10 @@ export const render = ({ output }) => {
 
 	// <h1>{weather.current.temperature_2m}</h1>
 	return (
-		<div>
+		<Base>
 			{weatherCode}
-			<MyWeather weatherCode={0} />
-		</div>
+			<DecodeWeather weatherCode={0} />
+		</Base>
 	);
 };
 

@@ -34,7 +34,7 @@ import { HeavyFreezingRain } from "./icons/heavy-freezing-rain.jsx";
 // import { Raindrop } from "./icons/raindrop.jsx";
 // import { Wind } from "./icons/wind.jsx";
 
-export const WeatherIcon = ({ weatherCode, ...rest }) => {
+export const DecodeWeather = ({ weatherCode, ...rest }) => {
 	switch (weatherCode) {
 		case 0: // Clear sky
 			return <Sun {...rest} />;

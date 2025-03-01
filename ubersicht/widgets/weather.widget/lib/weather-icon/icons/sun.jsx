@@ -1,4 +1,15 @@
-import { Svg } from "./svg.jsx";
+import { styled } from "uebersicht";
+import { colors } from "../theme.js";
+
+const Svg = styled("svg")`
+  display: block;
+	circle {
+    fill: ${colors.yellow};
+  }
+  path {
+    fill: ${colors.yellow};
+  }
+`;
 
 export const Sun = (props) => {
 	const Sunray = (props) => (
