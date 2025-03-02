@@ -11,7 +11,7 @@ const Svg = styled("svg")`
 		fill: ${colors.yellow};
 	}
 	.cloud {
-    fill: ${colors.red};
+    fill: ${colors.text};
   }
 	.precipitation {
     fill: ${colors.blue};
