@@ -9,8 +9,10 @@ import {
 
 const x = 100;
 const y = 100;
-const w = 200;
-const h = 600;
+const w = 280;
+const h = undefined;
+
+const BORDER = "1px solid #00FF0040";
 
 // 	{
 // 		"current": {
@@ -55,7 +57,12 @@ const h = 600;
 
 // prefer styled over globalCss
 const globalCss = `
-	border: 1px solid #80808040;
+	font-family: Helvetica;
+	font-size: 12px;
+	font-weight: bold;
+	z-index: 1;
+	color: #cdd6f4;
+	border: ${BORDER};
 `;
 
 export const className = widgetStyle(x, y, w, h, globalCss);
@@ -68,13 +75,29 @@ const Base = styled("div")`
 	display: grid;
 	grid-template-columns: 1fr;
 	justify-items: center;
+	align-content: top;
+	gap: 5px;
 	background-color: ${colors.base};
-	border: 1px solid red;
-	padding: 20px;
+	border: ${BORDER};
+	padding: 10px;
 `;
 
-const Spacer = styled("div")`
-	height: 100px;
+const Grid = styled("div")`
+	display: grid;
+	grid-template-columns: 100px 1fr;
+	justify-items: center;
+	width: 100%;
+	gap: 10px;
+`;
+
+const Section = styled("div")`
+	border: ${BORDER};
+	width: 100%;
+`;
+
+const Title = styled("div")`
+	font-size: 14px;
+	justify-self: start;
 `;
 
 export const render = ({ output }) => {
@@ -83,12 +106,18 @@ export const render = ({ output }) => {
 	// const weatherCode = weather.current.weather_code;
 	const { Icon, desc } = decodeWeather({ weatherCode: 1 });
 
+	//
 	// <h1>{weather.current.temperature_2m}</h1>
 	return (
 		<Base>
-			<Icon width={100} />
-			{desc}
-			<Spacer />
+			<Title>London</Title>
+			<Grid>
+				<Section>
+					<Icon />
+					<Section>{desc}</Section>
+				</Section>
+				<Section>...</Section>
+			</Grid>
 		</Base>
 	);
 };
