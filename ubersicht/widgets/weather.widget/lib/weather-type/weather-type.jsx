@@ -34,7 +34,7 @@ import { HeavyFreezingRain } from "./icons/heavy-freezing-rain.jsx";
 // import { Raindrop } from "./icons/raindrop.jsx";
 // import { Wind } from "./icons/wind.jsx";
 
-export const decodeWeather = ({ weatherCode }) => {
+export const getWeatherType = ({ weatherCode }) => {
 	let Icon = () => <div />;
 	let desc = "";
 

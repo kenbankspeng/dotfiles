@@ -1,7 +1,7 @@
 import { styled } from "uebersicht";
 import { widgetStyle } from "./lib/util/util.js";
 import { colors } from "./lib/weather-type/theme.js";
-import { decodeWeather } from "./lib/weather-type/weather-type.jsx";
+import { getWeatherType } from "./lib/weather-type/weather-type.jsx";
 import {
 	getCurrentWeatherQuery,
 	currentWeatherRefresh,
@@ -104,7 +104,7 @@ export const render = ({ output }) => {
 	// if (output === undefined) return null;
 	// const weather = JSON.parse(output);
 	// const weatherCode = weather.current.weather_code;
-	const { Icon, desc } = decodeWeather({ weatherCode: 1 });
+	const { Icon, desc } = getWeatherType({ weatherCode: 1 });
 
 	//
 	// <h1>{weather.current.temperature_2m}</h1>
