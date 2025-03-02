@@ -32,4 +32,8 @@ export const colors = {
 	base: "#1e1e2e",
 	mantle: "#181825",
 	crust: "#11111b",
+
+	white: "#ffffff",
+	grey: "#808080",
+	black: "#000000",
 };

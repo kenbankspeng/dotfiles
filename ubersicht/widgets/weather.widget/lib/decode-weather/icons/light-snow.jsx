@@ -7,7 +7,7 @@ const Svg = styled("svg")`
     fill: ${colors.text};
   }
 	.precipitation {
-    fill: ${colors.blue};
+    fill: ${colors.white};
   }
 `;
 
