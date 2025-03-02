@@ -77,10 +77,10 @@ const Spacer = styled("div")`
 `;
 
 export const render = ({ output }) => {
-	if (output === undefined) return null;
+	// if (output === undefined) return null;
 	// const weather = JSON.parse(output);
 	// const weatherCode = weather.current.weather_code;
-	const { Icon, desc } = decodeWeather({ weatherCode: 1 });
+	const { Icon, desc } = decodeWeather({ weatherCode: 2 });
 
 	// <h1>{weather.current.temperature_2m}</h1>
 	return (
