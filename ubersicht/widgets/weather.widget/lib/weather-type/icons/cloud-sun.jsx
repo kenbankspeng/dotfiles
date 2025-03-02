@@ -13,7 +13,6 @@ const Svg = styled("svg")`
 	path.sunray {
 		fill: ${colors.yellow};
 	}
-		
 `;
 
 export const CloudSun = (props) => (
