@@ -4,13 +4,13 @@ import { colors } from "../theme.js";
 const Svg = styled("svg")`
   display: block;
 	
-	path.cloud {
+	.cloud {
 		fill: ${colors.text};
 	}
-	path.sun {
+	.sun {
 		fill: ${colors.yellow};
 	}
-	path.sunray {
+	.sunray {
 		fill: ${colors.yellow};
 	}
 		
