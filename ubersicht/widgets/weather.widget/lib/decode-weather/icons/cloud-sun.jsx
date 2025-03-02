@@ -10,7 +10,7 @@ const Svg = styled("svg")`
 	.sun {
 		fill: ${colors.yellow};
 	}
-	.sunray {
+	path.sunray {
 		fill: ${colors.yellow};
 	}
 		
