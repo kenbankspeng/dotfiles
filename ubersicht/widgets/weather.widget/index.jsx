@@ -80,7 +80,7 @@ export const render = ({ output }) => {
 	// if (output === undefined) return null;
 	// const weather = JSON.parse(output);
 	// const weatherCode = weather.current.weather_code;
-	const { Icon, desc } = decodeWeather({ weatherCode: 65 });
+	const { Icon, desc } = decodeWeather({ weatherCode: 71 });
 
 	// <h1>{weather.current.temperature_2m}</h1>
 	return (
