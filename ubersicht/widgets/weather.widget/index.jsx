@@ -7,6 +7,7 @@ import {
 	currentWeatherRefresh,
 } from "./lib/api/api.js";
 import { Temperature } from "./lib/temperature/temperature.jsx";
+import Rain from "./lib/animations/rain.jsx";
 
 const x = 100;
 const y = 100;
@@ -102,7 +103,34 @@ const Title = styled("div")`
 	justify-self: start;
 `;
 
-export const render = ({ output }) => {
+export const initialState = {
+	particles: [],
+	ctx: null,
+	width: window.innerWidth,
+	height: window.innerHeight,
+	isRaining: true,
+};
+
+export const init = (dispatch) => {
+	const animate = () => {
+		dispatch({ type: "ANIMATE_RAIN" });
+		requestAnimationFrame(animate);
+	};
+	requestAnimationFrame(animate);
+};
+
+export const updateState = (event, previousState) => {
+	switch (event.type) {
+		case "SETUP_RAIN":
+			return event.setupCanvas(previousState);
+		case "ANIMATE_RAIN":
+			return previousState;
+		default:
+			return previousState;
+	}
+};
+
+export const render = ({ output, state, dispatch }) => {
 	// if (output === undefined) return null;
 	// const weather = JSON.parse(output);
 	// const weatherCode = weather.current.weather_code;
@@ -110,20 +138,23 @@ export const render = ({ output }) => {
 
 	// const temperature = weather.current.temperature_2m;
 	const temperature = -6.3;
-	// {temperature}
+
 	return (
-		<Base>
-			<Title>London</Title>
-			<Grid>
-				<Section>
-					<Temperature />
-				</Section>
-				<Section>
-					<Icon />
-					<Section>{desc}</Section>
-				</Section>
-			</Grid>
-		</Base>
+		<div>
+			<Rain state={state} dispatch={dispatch} />
+			<Base>
+				<Title>London</Title>
+				<Grid>
+					<Section>
+						<Temperature />
+					</Section>
+					<Section>
+						<Icon />
+						<Section>{desc}</Section>
+					</Section>
+				</Grid>
+			</Base>
+		</div>
 	);
 };
 
