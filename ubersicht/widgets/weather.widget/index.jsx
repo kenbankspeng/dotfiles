@@ -7,7 +7,7 @@ import {
 	currentWeatherRefresh,
 } from "./lib/api/api.js";
 import { Temperature } from "./lib/temperature/temperature.jsx";
-import Rain from "./lib/animations/rain.jsx";
+import Rain, { createParticles, draw } from "./lib/animations/rain.jsx";
 
 const x = 100;
 const y = 100;
@@ -104,33 +104,33 @@ const Title = styled("div")`
 `;
 
 export const initialState = {
-	particles: [],
-	ctx: null,
 	width: window.innerWidth,
 	height: window.innerHeight,
-	isRaining: true,
 };
 
-export const init = (dispatch) => {
-	const animate = () => {
-		dispatch({ type: "ANIMATE_RAIN" });
-		requestAnimationFrame(animate);
-	};
-	requestAnimationFrame(animate);
+export const afterRender = (domEl) => {
+	console.log("@@@ AFTER_RENDER @@@");
+	const canvas = domEl.querySelector("#rain-canvas");
+	if (!canvas) return;
+
+	const ctx = canvas.getContext("2d");
+	if (!ctx) return;
+
+	canvas.width = window.innerWidth;
+	canvas.height = window.innerHeight;
+
+	ctx.strokeStyle = "rgba(174,194,224,0.5)";
+	ctx.lineWidth = 1;
+	ctx.lineCap = "round";
+
+	const particles = createParticles(window.innerWidth, window.innerHeight);
+
+	setInterval(() => {
+		draw(ctx, particles, window.innerWidth, window.innerHeight);
+	}, 30);
 };
 
-export const updateState = (event, previousState) => {
-	switch (event.type) {
-		case "SETUP_RAIN":
-			return event.setupCanvas(previousState);
-		case "ANIMATE_RAIN":
-			return previousState;
-		default:
-			return previousState;
-	}
-};
-
-export const render = ({ output, state, dispatch }) => {
+export const render = ({ output }) => {
 	// if (output === undefined) return null;
 	// const weather = JSON.parse(output);
 	// const weatherCode = weather.current.weather_code;
@@ -139,9 +139,10 @@ export const render = ({ output, state, dispatch }) => {
 	// const temperature = weather.current.temperature_2m;
 	const temperature = -6.3;
 
+	console.log("@@@ RENDER @@@");
+
 	return (
 		<div>
-			<Rain state={state} dispatch={dispatch} />
 			<Base>
 				<Title>London</Title>
 				<Grid>

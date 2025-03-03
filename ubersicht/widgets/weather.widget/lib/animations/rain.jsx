@@ -9,7 +9,7 @@ const Canvas = styled("canvas")`
 	z-index: -1;
 `;
 
-const createParticles = (w, h) => {
+export const createParticles = (w, h) => {
 	const maxParts = 1000;
 	return Array.from({ length: maxParts }, () => ({
 		x: Math.random() * w,
@@ -20,7 +20,7 @@ const createParticles = (w, h) => {
 	}));
 };
 
-const draw = (ctx, particles, w, h) => {
+export const draw = (ctx, particles, w, h) => {
 	ctx.clearRect(0, 0, w, h);
 	for (const p of particles) {
 		ctx.beginPath();
@@ -40,34 +40,7 @@ const draw = (ctx, particles, w, h) => {
 	}
 };
 
-const setupCanvas = (state) => {
-	const canvas = document.getElementById("rain-canvas");
-	if (!canvas) return state;
-
-	const ctx = canvas.getContext("2d");
-	if (!ctx) return state;
-
-	canvas.width = state.width;
-	canvas.height = state.height;
-	ctx.strokeStyle = "rgba(174,194,224,0.5)";
-	ctx.lineWidth = 1;
-	ctx.lineCap = "round";
-
-	return {
-		...state,
-		ctx,
-		particles: createParticles(state.width, state.height),
-	};
-};
-
-const Rain = ({ state, dispatch }) => {
-	if (!state.ctx) {
-		dispatch({ type: "SETUP_RAIN", setupCanvas });
-	} else if (state.isRaining) {
-		draw(state.ctx, state.particles, state.width, state.height);
-		dispatch({ type: "ANIMATE_RAIN" });
-	}
-
+const Rain = () => {
 	return <Canvas id="rain-canvas" />;
 };
 
