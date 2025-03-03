@@ -10,7 +10,7 @@ import { Temperature } from "./lib/temperature/temperature.jsx";
 
 const x = 100;
 const y = 100;
-const w = 280;
+const w = undefined;
 const h = undefined;
 
 const BORDER = "1px solid #00FF0040";
@@ -85,7 +85,7 @@ const Base = styled("div")`
 
 const Grid = styled("div")`
 	display: grid;
-	grid-template-columns: 100px 1fr;
+	grid-template-columns: 100px 100px;
 	justify-items: center;
 	justify-content: center;
 	width: 100%;
@@ -116,12 +116,11 @@ export const render = ({ output }) => {
 			<Title>London</Title>
 			<Grid>
 				<Section>
+					<Temperature />
+				</Section>
+				<Section>
 					<Icon />
 					<Section>{desc}</Section>
-				</Section>
-
-				<Section>
-					<Temperature />
 				</Section>
 			</Grid>
 		</Base>
