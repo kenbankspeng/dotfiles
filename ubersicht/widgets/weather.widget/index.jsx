@@ -6,6 +6,7 @@ import {
 	getCurrentWeatherQuery,
 	currentWeatherRefresh,
 } from "./lib/api/api.js";
+import { Temperature } from "./lib/temperature/temperature.jsx";
 
 const x = 100;
 const y = 100;
@@ -67,8 +68,8 @@ const globalCss = `
 
 export const className = widgetStyle(x, y, w, h, globalCss);
 
-export const command = "echo 'test'";
-// export const command = getCurrentWeatherQuery();
+// export const command = "echo 'test'";
+export const command = getCurrentWeatherQuery();
 export const refreshFrequency = currentWeatherRefresh;
 
 const Base = styled("div")`
@@ -86,6 +87,7 @@ const Grid = styled("div")`
 	display: grid;
 	grid-template-columns: 100px 1fr;
 	justify-items: center;
+	justify-content: center;
 	width: 100%;
 	gap: 10px;
 `;
@@ -106,8 +108,9 @@ export const render = ({ output }) => {
 	// const weatherCode = weather.current.weather_code;
 	const { Icon, desc } = getWeatherType({ weatherCode: 1 });
 
-	//
-	// <h1>{weather.current.temperature_2m}</h1>
+	// const temperature = weather.current.temperature_2m;
+	const temperature = -6.3;
+	// {temperature}
 	return (
 		<Base>
 			<Title>London</Title>
@@ -116,7 +119,10 @@ export const render = ({ output }) => {
 					<Icon />
 					<Section>{desc}</Section>
 				</Section>
-				<Section>...</Section>
+
+				<Section>
+					<Temperature />
+				</Section>
 			</Grid>
 		</Base>
 	);
