@@ -92,14 +92,32 @@ export const Temperature = (props) => {
 					gradientTransform="matrix(0 164.336 -239.809 0 85 575.664)"
 					gradientUnits="userSpaceOnUse"
 				>
-					<stop offset="0" style={{ stopColor: "#6b001e", stopOpacity: 1 }} />
-					<stop offset=".07" style={{ stopColor: "#ff4000", stopOpacity: 1 }} />
-					<stop offset=".14" style={{ stopColor: "#ffbf00", stopOpacity: 1 }} />
-					<stop offset=".15" style={{ stopColor: "#afa400", stopOpacity: 1 }} />
-					<stop offset=".18" style={{ stopColor: "#036b00", stopOpacity: 1 }} />
-					<stop offset=".42" style={{ stopColor: "#01366c", stopOpacity: 1 }} />
-					<stop offset=".66" style={{ stopColor: "#0401d8", stopOpacity: 1 }} />
-					<stop offset="1" style={{ stopColor: "#b4b4ff", stopOpacity: 1 }} />
+					<stop offset="0" style={{ stopColor: "#ac1900", stopOpacity: "1" }} />
+					<stop
+						offset=".07"
+						style={{ stopColor: "#b12200", stopOpacity: "1" }}
+					/>
+					<stop
+						offset=".13"
+						style={{ stopColor: "#c33e00", stopOpacity: "1" }}
+					/>
+					<stop
+						offset=".21"
+						style={{ stopColor: "#036b00", stopOpacity: "1" }}
+					/>
+					<stop
+						offset=".39"
+						style={{ stopColor: "#399337", stopOpacity: "1" }}
+					/>
+					<stop
+						offset=".51"
+						style={{ stopColor: "#26426f", stopOpacity: "1" }}
+					/>
+					<stop
+						offset=".74"
+						style={{ stopColor: "#387398", stopOpacity: "1" }}
+					/>
+					<stop offset="1" style={{ stopColor: "#65f1ff", stopOpacity: "1" }} />
 				</linearGradient>
 			</defs>
 		</Svg>

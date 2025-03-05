@@ -9,7 +9,7 @@ source "$CONFIG_DIR/env.sh" # Loads all defined colors
 source "$CONFIG_DIR/defaults.sh"
 
 ##### Left Side Items #####
-source $ITEM_DIR/apple.sh
+source $ITEM_DIR/wallpaper.sh
 source $ITEM_DIR/aerospace_spaces.sh
 
 ##### Center Items (q, center, e) #####
