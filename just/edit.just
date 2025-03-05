@@ -7,7 +7,10 @@ default:
 
 #####################   EDITORS   #####################
 
-# list just modules
+
+# edit current directory
+e:
+  cursor .
 
 # new vscode
 code *args:
@@ -25,10 +28,6 @@ code *args:
 # git tui
 g:
   lazygit
-
-# neophyte editor
-edit *args:
-  neophyte {{args}}
 
 # markdown tui
 m *args:
