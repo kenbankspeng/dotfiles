@@ -68,9 +68,10 @@ const globalCss = `
 
 export const className = widgetStyle(x, y, w, h, globalCss);
 
-// export const command = "echo 'test'";
-export const command = getCurrentWeatherQuery();
-export const refreshFrequency = currentWeatherRefresh;
+export const command = "echo 'test'";
+export const refreshFrequency = 5000;
+// export const command = getCurrentWeatherQuery();
+// export const refreshFrequency = currentWeatherRefresh;
 
 const Base = styled("div")`
 	display: grid;
@@ -102,11 +103,26 @@ const Title = styled("div")`
 	justify-self: start;
 `;
 
+export const updateState = (event, previousState) => {
+	console.log(event);
+	return previousState;
+};
+
+let index = -1;
+const weatherCodes = [
+	0, 1, 2, 3, 45, 48, 51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 71, 73, 75, 77,
+	80, 81, 82, 85, 86, 95, 96, 99,
+];
+
 export const render = ({ output }) => {
+	index++;
+	if (index > weatherCodes.length - 1) {
+		index = 0;
+	}
 	// if (output === undefined) return null;
 	// const weather = JSON.parse(output);
 	// const weatherCode = weather.current.weather_code;
-	const { Icon, desc } = getWeatherType({ weatherCode: 1 });
+	const { Icon, desc } = getWeatherType({ weatherCode: weatherCodes[index] });
 
 	// const temperature = weather.current.temperature_2m;
 	const temperature = -6.3;
