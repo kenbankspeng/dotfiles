@@ -1,4 +1,4 @@
-import { styled } from "uebersicht";
+import { styled, run } from "uebersicht";
 import { widgetStyle } from "./lib/util/util.js";
 import { colors } from "./lib/weather-type/theme.js";
 import { getWeatherType } from "./lib/weather-type/weather-type.jsx";
@@ -68,11 +68,6 @@ const globalCss = `
 
 export const className = widgetStyle(x, y, w, h, globalCss);
 
-export const command = "echo 'test'";
-export const refreshFrequency = 5000;
-// export const command = getCurrentWeatherQuery();
-// export const refreshFrequency = currentWeatherRefresh;
-
 const Base = styled("div")`
 	display: grid;
 	grid-template-columns: 1fr;
@@ -103,33 +98,48 @@ const Title = styled("div")`
 	justify-self: start;
 `;
 
-export const updateState = (event, previousState) => {
-	console.log(event);
-	return previousState;
-};
-
 let index = -1;
 const weatherCodes = [
 	0, 1, 2, 3, 45, 48, 51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 71, 73, 75, 77,
 	80, 81, 82, 85, 86, 95, 96, 99,
 ];
 
-export const render = ({ output }) => {
+// export const command = getCurrentWeatherQuery();
+// export const refreshFrequency = currentWeatherRefresh;
+
+// called once per component instance, except in dev environment
+export const init = (dispatch) => {
+	const timer = setInterval(() => {
+		run(`echo "${new Date().toLocaleTimeString()}"`).then((output) =>
+			dispatch({ type: "TICK", output }),
+		);
+	}, 10000);
+	return () => clearInterval(timer);
+};
+
+export const updateState = (event, previousState) => {
+	console.log(event);
+	if (event.type === "TICK") {
+		return {
+			...previousState,
+			time: event.output.trim(),
+		};
+	}
+	return previousState;
+};
+
+export const render = ({ time }, dispatch) => {
 	index++;
 	if (index > weatherCodes.length - 1) {
 		index = 0;
 	}
-	// if (output === undefined) return null;
-	// const weather = JSON.parse(output);
-	// const weatherCode = weather.current.weather_code;
-	const { Icon, desc } = getWeatherType({ weatherCode: weatherCodes[index] });
 
-	// const temperature = weather.current.temperature_2m;
+	const { Icon, desc } = getWeatherType({ weatherCode: weatherCodes[index] });
 	const temperature = -6.3;
-	// {temperature}
+
 	return (
 		<Base>
-			<Title>London</Title>
+			<Title>London {time}</Title>
 			<Grid>
 				<Section>
 					<Temperature />
