@@ -6,7 +6,5 @@
 	"author": "",
 	"license": "ISC",
 	"description": "",
-	"dependencies": {
-		"lodash.isstring": "^4.0.1"
-	}
+	"dependencies": {}
 }
