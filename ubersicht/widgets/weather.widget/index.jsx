@@ -109,12 +109,19 @@ const weatherCodes = [
 
 // called once per component instance, except in dev environment
 export const init = (dispatch) => {
-	const timer = setInterval(() => {
-		run(`echo "${new Date().toLocaleTimeString()}"`).then((output) =>
-			dispatch({ type: "TICK", output }),
-		);
-	}, 10000);
+	const timer = setInterval(() => tick(dispatch), 10000);
 	return () => clearInterval(timer);
+};
+
+const tick = (dispatch) => {
+	index++;
+	if (index > weatherCodes.length - 1) {
+		index = 0;
+	}
+	dispatch({ type: "TICK", index });
+	// run(`echo "${new Date().toLocaleTimeString()}"`).then((output) =>
+	// 	dispatch({ type: "TICK", output }),
+	// );
 };
 
 export const updateState = (event, previousState) => {
@@ -122,24 +129,20 @@ export const updateState = (event, previousState) => {
 	if (event.type === "TICK") {
 		return {
 			...previousState,
-			time: event.output.trim(),
+			...event,
 		};
 	}
 	return previousState;
 };
 
-export const render = ({ time }, dispatch) => {
-	index++;
-	if (index > weatherCodes.length - 1) {
-		index = 0;
-	}
-
+export const render = (props, dispatch) => {
+	const { index } = props;
 	const { Icon, desc } = getWeatherType({ weatherCode: weatherCodes[index] });
 	const temperature = -6.3;
 
 	return (
 		<Base>
-			<Title>London {time}</Title>
+			<Title>London {index}</Title>
 			<Grid>
 				<Section>
 					<Temperature />
