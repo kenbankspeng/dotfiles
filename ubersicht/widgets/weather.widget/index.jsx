@@ -109,7 +109,7 @@ const weatherCodes = [
 
 // called once per component instance, except in dev environment
 export const init = (dispatch) => {
-	const timer = setInterval(() => tick(dispatch), 1000);
+	const timer = setInterval(() => tick(dispatch), 10000);
 	return () => clearInterval(timer);
 };
 
