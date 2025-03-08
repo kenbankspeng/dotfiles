@@ -154,6 +154,13 @@ keymap = [
 	# Help
 	{ on = "~",    run = "help", desc = "Open help" },
 	{ on = "<F1>", run = "help", desc = "Open help" },
+
+	# plugin - lazygit.yazi
+	{ on = [ "g", "i" ], run = "plugin lazygit", desc = "run lazygit" },
+	
+	# plugin - glow.yazi
+	{ on = ["<C-e>"], run = "seek 5" },
+	{ on = ["<C-y>"], run = "seek -5" },
 ]
 
 [tasks]
@@ -360,8 +367,5 @@ keymap = [
 	{ on = "f", run = "filter", desc = "Apply a filter for the help items" },
 ]
 
-prepend_keymap = [
-  # glow.yazi
-	{ on = ["<C-e>"], run = "seek 5" },
-	{ on = ["<C-y>"], run = "seek -5" },
-]
+
+
