@@ -38,20 +38,21 @@ local mocha = {
    base = '#1e1e2e',
    mantle = '#181825',
    crust = '#11111b',
-   transparent = 'rgba(0, 0, 0, 0.95)',
 }
+
+local background = 'rgba(30, 30, 46, 1)'
 
 -- some programs use standard and others use brights
 -- too difficult so just make them all the same
 local colorscheme = {
    foreground = mocha.text,
-   background = mocha.transparent,
+   background = background,
    cursor_bg = mocha.rosewater,
    cursor_border = mocha.rosewater,
    cursor_fg = mocha.crust,
    selection_bg = mocha.surface2,
    selection_fg = mocha.text,
-   brights = {
+   ansi = {
       mocha.crust,  -- black
       mocha.red,    -- red
       mocha.green,  -- green
@@ -61,7 +62,7 @@ local colorscheme = {
       mocha.teal,   -- cyan
       mocha.text,   -- white
    },
-   ansi = {
+   brights = {
       mocha.crust,  -- black
       mocha.red,    -- red
       mocha.green,  -- green
