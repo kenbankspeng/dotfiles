@@ -87,7 +87,7 @@ format = '[$user ]($style)'
 # prompt
 [shlvl]
 disabled = false
-style = "fg:color_shell bg:color_shell_text"
+style = "fg:color_shell"
 format = "[$symbol ]($style)"
 repeat = true
 symbol = "❯"

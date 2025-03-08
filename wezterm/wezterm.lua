@@ -12,10 +12,15 @@ require('path')
 --     -- },
 -- })
 
+local merge = require('util').merge
+local keymaps = require('config.keymaps')
+local layers = require('colors.layers')
+merge(keymaps.keys, layers)
+
 -- full configs
 local Config = require('config')
 return Config:init()
-    :append(require('config.keymaps'))
+    :append(keymaps)
     :append(require('config.appearance'))
     :append(require('config.fonts'))
     :append(require('config.general'))

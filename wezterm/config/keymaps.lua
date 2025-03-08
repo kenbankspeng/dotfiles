@@ -6,9 +6,6 @@ local quick_select = require('config.quick_select')
 local quick_select_patterns = quick_select.quick_select_patterns
 local quick_select_open_url = quick_select.quick_select_open_url
 
--- local backdrops = require('utils.backdrops')
-
-
 -- Mod keys: Super/Cmd, Ctrl, Alt, LeftAlt, RightAlt, Shift, LeftShift, RightShift
 --
 -- Named keys:
@@ -135,45 +132,8 @@ local keys = {
    -- Quick Select
    map('u', mod.SUPER, action.QuickSelectArgs(quick_select_open_url)),
 
-
-
-   -- background controls --
-   -- {
-   --    key = [[/]],
-   --   mod.SUPER,
-   --    wezterm.action_callback(function(window, _pane)
-   --       backdrops:random(window)
-   --    end),
-   -- },
-   -- {
-   --    key = [[,]],
-   --   mod.SUPER,
-   --    wezterm.action_callback(function(window, _pane)
-   --       backdrops:cycle_back(window)
-   --    end),
-   -- },
-   -- {
-   --    key = [[.]],
-   --   mod.SUPER,
-   --    wezterm.action_callback(function(window, _pane)
-   --       backdrops:cycle_forward(window)
-   --    end),
-   -- },
-   -- {
-   --    key = [[/]],
-   --   mod.SUPER_REV,
-   --    action.InputSelector({
-   --       title = 'Select Background',
-   --       choices = backdrops:choices(),
-   --       fuzzy = true,
-   --       fuzzy_description = 'Select Background: ',
-   --       wezterm.action_callback(function(window, _pane, idx)
-   --          ---@diagnostic disable-next-line: param-type-mismatch
-   --          backdrops:set_img(window, tonumber(idx))
-   --       end),
-   --    }),
-   -- },
-
+   -- CTRL-SHIFT-l activates the debug overlay
+   map('L', mod.CTRL, action.ShowDebugOverlay),
 
    -- key-tables --
    -- resizes fonts
@@ -260,6 +220,10 @@ local mouse_bindings = {
    -- Ctrl-click will open the link under the mouse cursor
    eventmap({ Up = { streak = 1, button = 'Left' } }, mod.CTRL, action.OpenLinkAtMouseCursor),
 }
+
+local opacity_levels = { 1.0, 0.95, 0.9, 0.85, 0.8 }
+local current_opacity_index = 1
+
 
 return {
    disable_default_key_bindings = true, -- reset all keys

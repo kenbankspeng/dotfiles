@@ -40,7 +40,8 @@ local mocha = {
    crust = '#11111b',
 }
 
-local background = 'rgba(30, 30, 46, 1)'
+-- local background = 'rgba(30, 30, 46, 1)'
+local background = 'rgb(139, 0, 0)'
 
 -- some programs use standard and others use brights
 -- too difficult so just make them all the same
