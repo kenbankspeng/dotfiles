@@ -155,6 +155,10 @@ keymap = [
 	{ on = "~",    run = "help", desc = "Open help" },
 	{ on = "<F1>", run = "help", desc = "Open help" },
 
+]
+
+# prepend takes priority over keymap
+prepend_keymap = [
 	# plugin - lazygit.yazi
 	{ on = [ "g", "i" ], run = "plugin lazygit", desc = "run lazygit" },
 	
@@ -162,6 +166,7 @@ keymap = [
 	{ on = ["<C-e>"], run = "seek 5" },
 	{ on = ["<C-y>"], run = "seek -5" },
 ]
+
 
 [tasks]
 

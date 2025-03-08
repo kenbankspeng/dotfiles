@@ -38,13 +38,14 @@ local mocha = {
    base = '#1e1e2e',
    mantle = '#181825',
    crust = '#11111b',
+   transparent = 'rgba(0, 0, 0, 0.95)',
 }
 
 -- some programs use standard and others use brights
 -- too difficult so just make them all the same
 local colorscheme = {
    foreground = mocha.text,
-   background = mocha.base,
+   background = mocha.transparent,
    cursor_bg = mocha.rosewater,
    cursor_border = mocha.rosewater,
    cursor_fg = mocha.crust,
