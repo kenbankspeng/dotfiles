@@ -20,11 +20,3 @@ wezterm.on('toggle-layers', function(window, pane)
   end
   window:set_config_overrides(overrides)
 end)
-
-return {
-  {
-    key = 'B',
-    mods = 'CTRL',
-    action = wezterm.action.EmitEvent 'toggle-layers',
-  },
-} 

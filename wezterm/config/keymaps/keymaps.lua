@@ -135,6 +135,9 @@ local keys = {
    -- CTRL-SHIFT-l activates the debug overlay
    map('L', mod.CTRL, action.ShowDebugOverlay),
 
+   map('B', mod.CTRL, action.EmitEvent('toggle-layers')),
+   
+
    -- key-tables --
    -- resizes fonts
    map('f', mod.LEADER, action.ActivateKeyTable({
