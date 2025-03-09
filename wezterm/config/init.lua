@@ -1,26 +1,28 @@
-local wezterm = require('wezterm')
+-- setup package paths
+require('config.path')
 
-local Config = {}
-Config.__index = Config
+-- -- gui pre-init configs
+-- require('config.startup')({
+--     max = true,
+--     -- args = { 'neo' }, -- server
+--     -- split = {
+--     --     direction = 'Bottom',
+--     --     size = 0.10,
+--     --     args = { 'neo -c' } -- client
+--     -- },
+-- })
 
-function Config:init()
-  local config = setmetatable({ options = {} }, self)
-  return config
-end
+local merge = require('config.util').merge
 
-function Config:append(new_options)
-  for k, v in pairs(new_options) do
-    if self.options[k] ~= nil then
-      wezterm.log_warn(
-        'Duplicate config option detected: ',
-        { old = self.options[k], new = new_options[k] }
-      )
-      goto continue
-    end
-    self.options[k] = v
-    ::continue::
-  end
-  return self
-end
+local config = {}
 
-return Config
+local keymaps = require('config.keymaps')
+merge(keymaps.keys, require('config.colors.layers'))
+merge(config, keymaps)
+merge(config, require('config.colors.appearance'))
+merge(config, require('config.font'))
+merge(config, require('config.general'))
+merge(config, require('config.gpu.gpu'))
+merge(config, require('config.domains'))
+
+return config

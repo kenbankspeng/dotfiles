@@ -11,6 +11,7 @@ local function merge(dest, src)
       dest[k] = v
     end
   end
+  return dest
 end
 
 local obj = {
