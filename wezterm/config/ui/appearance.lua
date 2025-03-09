@@ -1,30 +1,10 @@
 
-local colors = require('config.ui.colors')
-
 return {
-   
-
    -- cursor
    -- SteadyBlock BlinkingBlock SteadyUnderline BlinkingUnderline SteadyBar BlinkingBar
    default_cursor_style = 'SteadyBar',
 
-   -- color scheme
-   colors = colors,
-
-   -- background
-   background = {
-      -- {
-      --    source = { File = wezterm.GLOBAL.background },
-      --    horizontal_align = 'Center',
-      -- },
-      {
-         source = { Color = colors.background },
-         height = '100%',
-         width = '100%',
-         opacity = 1.0,
-      },
-   },
-
+   
    -- scrollbar
    enable_scroll_bar = true,
 

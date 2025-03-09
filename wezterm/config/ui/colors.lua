@@ -43,7 +43,7 @@ local mocha = {
 
 -- some programs use standard and others use brights
 -- too difficult so just make them all the same
-local colorscheme = {
+local colors = {
    foreground = mocha.text,
    background = mocha.base,
    cursor_bg = mocha.rosewater,
@@ -105,4 +105,22 @@ local colorscheme = {
    compose_cursor = mocha.flamingo, -- nightbuild only
 }
 
-return colorscheme
+return {
+   -- color scheme
+   colors = colors,
+
+   -- background
+   background = {
+      -- {
+      --    source = { File = wezterm.GLOBAL.background },
+      --    horizontal_align = 'Center',
+      -- },
+      {
+         source = { Color = colors.background },
+         height = '100%',
+         width = '100%',
+         opacity = 1.0,
+      },
+   },
+}
+

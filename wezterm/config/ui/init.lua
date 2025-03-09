@@ -1,2 +1,9 @@
 require('config.ui.layers')
-return require('config.ui.appearance')
+
+local merge = require('config.util').merge
+  
+local ui = {}
+merge(ui, require('config.ui.appearance'))
+merge(ui, require('config.ui.colors'))
+
+return ui
