@@ -1,8 +1,3 @@
-local function meta__index(tbl)
-  tbl.__index = tbl
-  return setmetatable(tbl, tbl)
-end
-
 local function merge(dest, src)
   for k, v in pairs(src) do
     if type(v) == 'table' and type(dest[k]) == 'table' then
@@ -14,9 +9,4 @@ local function merge(dest, src)
   return dest
 end
 
-local obj = {
-  merge = merge,
-  meta__index = meta__index
-}
-obj.__index = obj
-return obj
+return merge
