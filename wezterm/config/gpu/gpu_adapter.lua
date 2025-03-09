@@ -1,5 +1,5 @@
 local wezterm = require('wezterm')
-local platform = require('util.platform')()
+local platform = require('config.util.platform')()
 
 ---@alias WeztermGPUBackend 'Vulkan'|'Metal'|'Gl'|'Dx12'
 ---@alias WeztermGPUDeviceType 'DiscreteGpu'|'IntegratedGpu'|'Cpu'|'Other'

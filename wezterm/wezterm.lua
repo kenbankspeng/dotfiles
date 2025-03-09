@@ -12,7 +12,7 @@ require('path')
 --     -- },
 -- })
 
-local merge = require('util').merge
+local merge = require('config.util').merge
 local keymaps = require('config.keymaps')
 local layers = require('config.colors.layers')
 merge(keymaps.keys, layers)
