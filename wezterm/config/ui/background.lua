@@ -25,6 +25,7 @@ local function create_transparent_layer()
   }
 end
 
+-- key binding mapped to toggle-layers event
 wezterm.on('toggle-layers', function(window, pane)
   local overrides = window:get_config_overrides() or {}
   if not overrides.background then
