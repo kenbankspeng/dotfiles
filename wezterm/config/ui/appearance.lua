@@ -1,5 +1,5 @@
 
-local colors = require('config.colors.colors')
+local colors = require('config.ui.colors')
 
 return {
    
