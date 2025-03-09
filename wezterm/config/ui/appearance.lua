@@ -1,5 +1,4 @@
 
-require('config.ui.layers')
 local colors = require('config.ui.colors')
 
 return {
