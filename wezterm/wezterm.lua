@@ -24,6 +24,6 @@ return Config:init()
     :append(require('config.colors.appearance'))
     :append(require('config.font'))
     :append(require('config.general'))
-    :append(require('config.gpu'))
+    :append(require('config.gpu.gpu'))
     :append(require('config.domains'))
     .options

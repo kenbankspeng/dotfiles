@@ -1,4 +1,4 @@
-local gpu_adapters = require('util.gpu_adapter')
+local gpu_adapters = require('config.gpu.gpu_adapter')
 
 return {
   animation_fps = 60,
