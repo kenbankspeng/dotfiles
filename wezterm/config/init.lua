@@ -16,7 +16,7 @@ local merge = require('config.util').merge
 
 local config = {}
 
-local keymaps = require('config.keymaps')
+local keymaps = require('config.keymaps.keymaps')
 merge(keymaps.keys, require('config.colors.layers'))
 merge(config, keymaps)
 merge(config, require('config.colors.appearance'))

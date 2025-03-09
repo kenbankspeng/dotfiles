@@ -148,7 +148,7 @@ local keys = {
 
 -- wezterm-nvim integration
 -- merge nav_keys into keys
-local nav_keys = require('config.wezterm_nvim').nav_keys
+local nav_keys = require('config.keymaps.wezterm_nvim').nav_keys
 for _, v in ipairs(nav_keys) do
    table.insert(keys, v)
 end
