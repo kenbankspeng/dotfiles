@@ -22,7 +22,7 @@ local Config = require('config')
 return Config:init()
     :append(keymaps)
     :append(require('config.colors.appearance'))
-    :append(require('config.fonts'))
+    :append(require('config.font'))
     :append(require('config.general'))
     :append(require('config.domains'))
     .options
