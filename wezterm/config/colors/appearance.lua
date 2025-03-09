@@ -1,12 +1,8 @@
-local gpu_adapters = require('util.gpu_adapter')
+
 local colors = require('config.colors.colors')
 
 return {
-   animation_fps = 60,
-   max_fps = 60,
-   front_end = 'WebGpu',
-   webgpu_power_preference = 'HighPerformance',
-   webgpu_preferred_adapter = gpu_adapters:pick_best(),
+   
 
    -- cursor
    -- SteadyBlock BlinkingBlock SteadyUnderline BlinkingUnderline SteadyBar BlinkingBar
