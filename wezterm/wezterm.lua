@@ -14,14 +14,14 @@ require('path')
 
 local merge = require('util').merge
 local keymaps = require('config.keymaps')
-local layers = require('colors.layers')
+local layers = require('config.colors.layers')
 merge(keymaps.keys, layers)
 
 -- full configs
 local Config = require('config')
 return Config:init()
     :append(keymaps)
-    :append(require('colors.appearance'))
+    :append(require('config.colors.appearance'))
     :append(require('config.fonts'))
     :append(require('config.general'))
     :append(require('config.domains'))

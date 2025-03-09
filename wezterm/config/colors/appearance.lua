@@ -1,5 +1,5 @@
 local gpu_adapters = require('util.gpu_adapter')
-local colors = require('colors.custom')
+local colors = require('config.colors.colors')
 
 return {
    animation_fps = 60,
