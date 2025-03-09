@@ -2,7 +2,7 @@
 
 local wezterm = require('wezterm')
 local action = wezterm.action
-local quick_select = require('config.quick_select')
+local quick_select = require('config.keymaps.quick_select')
 local quick_select_patterns = quick_select.quick_select_patterns
 local quick_select_open_url = quick_select.quick_select_open_url
 
