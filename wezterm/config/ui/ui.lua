@@ -1,10 +1,17 @@
+local colors = require('config.ui.colors')
+local background = require('config.ui.background')
 
 return {
+   -- color scheme
+   colors = colors,
+
+   -- background layers
+   background = background,
+
    -- cursor
    -- SteadyBlock BlinkingBlock SteadyUnderline BlinkingUnderline SteadyBar BlinkingBar
    default_cursor_style = 'SteadyBar',
 
-   
    -- scrollbar
    enable_scroll_bar = true,
 

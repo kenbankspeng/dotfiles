@@ -105,22 +105,5 @@ local colors = {
    compose_cursor = mocha.flamingo, -- nightbuild only
 }
 
-return {
-   -- color scheme
-   colors = colors,
-
-   -- background
-   background = {
-      -- {
-      --    source = { File = wezterm.GLOBAL.background },
-      --    horizontal_align = 'Center',
-      -- },
-      {
-         source = { Color = colors.background },
-         height = '100%',
-         width = '100%',
-         opacity = 1.0,
-      },
-   },
-}
+return colors
 
