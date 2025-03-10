@@ -134,3 +134,20 @@ bz:
   rm -rf "$HOME/.cache"
   mkdir "$HOME/.cache"
   go clean -modcache
+
+# brew fonts 
+bf *$args:
+  #! /usr/bin/env zsh
+  a=(${=args})
+  len=${#a[@]}
+  a1=${a[1]}
+
+  if [ $len = 1 ] && [ "$a1" = "installed" ]; then
+    print "brew fonts installed"
+    print
+    brew list --cask | rg "font-"
+  else
+    print "brew fonts available"
+    print
+    brew search --cask "font" | rg "font-"
+  fi
