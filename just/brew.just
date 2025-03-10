@@ -149,5 +149,5 @@ bf *$args:
   else
     print "brew fonts available"
     print
-    brew search --cask "font" | rg "font-"
+    brew search --cask "font" | rg "font-" | rg -v -f <(brew list --cask | rg "font-")
   fi
