@@ -7,35 +7,6 @@ default:
 
 #############  BREW  ##############
 
-# outdated
-@o:
-  print
-  print "{{BrightMagenta}}BREW: mac apps, binaries"
-  print -- "------------------------{{BrightBlue}}"
-  brew outdated --greedy
-  print
-  print "{{BrightMagenta}}MISE: uv, bun, go, node, python, git"
-  print -- "------------------------------------{{BrightBlue}}"
-  mise --silent --yes self-update
-  mise outdated --bump
-  print
-  print "{{BrightMagenta}}UV: python tools"
-  print -- "----------------{{BrightBlue}}"
-  uv tool upgrade --all
-  print
-  print "{{BrightMagenta}}GO: go tools"
-  print -- "------------{{BrightBlue}}"
-  print "gotools"
-  gotools -u
-  print
-  print "{{BrightMagenta}}RUST/CARGO: rust packages"
-  print -- "-------------------------{{BrightBlue}}"
-  rustup check
-  cargo install-update -a
-  print
-  print "{{BrightMagenta}}BUN: node js packages"
-  print -- "---------------------{{BrightBlue}}"
-  -bun -g update
 
 # brew versions
 @bv *args:

@@ -55,3 +55,6 @@ mod scripts
 
 # args test
 mod args
+
+# package managers
+mod pkgmgr
