@@ -352,3 +352,18 @@ go      1.24.1  ~/.config/mise/config.toml  latest
 node    23.9.0  ~/.config/mise/config.toml  latest
 python  3.13.2  ~/.config/mise/config.toml  latest
 uv      0.6.5   ~/.config/mise/config.toml  latest
+
+[1;35mUV TOOLS
+------------[1;36m
+aqua    2.45.0  ~/.config/mise/config.toml  latest
+bun     1.2.4   ~/.config/mise/config.toml  latest
+deno    2.2.3   ~/.config/mise/config.toml  latest
+git     2.48.1  ~/.config/mise/config.toml  latest
+go      1.24.1  ~/.config/mise/config.toml  latest
+node    23.9.0  ~/.config/mise/config.toml  latest
+python  3.13.2  ~/.config/mise/config.toml  latest
+uv      0.6.5   ~/.config/mise/config.toml  latest
+aider-chat v0.76.0
+- aider
+ruff v0.9.10
+- ruff
