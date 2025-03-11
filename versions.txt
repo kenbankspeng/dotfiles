@@ -362,3 +362,9 @@ ruff v0.9.10
 
 GO TOOLS
 --------
+fabric
+go-mod-upgrade
+gopls
+gotools
+staticcheck
+wails
