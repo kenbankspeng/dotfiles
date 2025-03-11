@@ -377,3 +377,10 @@ rustup home:  /Users/ken/.local/share/rustup
 stable-aarch64-apple-darwin (default)
 rustc 1.85.0 (4d91de4e4 2025-02-17)
 cargo 1.85.0 (d73d2caf9 2024-12-31)
+cargo-outdated v0.16.0:
+    cargo-outdated
+cargo-update v16.2.0:
+    cargo-install-update
+    cargo-install-update-config
+rustlings v6.4.0:
+    rustlings
