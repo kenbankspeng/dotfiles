@@ -1,7 +1,7 @@
 brew list --versions
 
-[1;35mBREW CASKS
----------[1;34m
+BREW CASKS
+---------
 aerospace 0.17.1-Beta
 affine 0.20.4
 affinity-designer 2.6.0,3134
@@ -64,8 +64,8 @@ yaak 2025.1.2
 zed 0.176.3
 zoom 6.3.11.50104
 
-[1;35mBREW FORMULAS
-------------[1;36m
+BREW FORMULAS
+------------
 age 1.2.1
 aichat 0.28.0
 aom 3.12.0
@@ -342,8 +342,8 @@ zoxide 0.9.7
 zstd 1.5.7
 zx 8.4.0
 
-[1;35mMISE PACKAGES
-------------[1;36m
+MISE PACKAGES
+------------
 aqua    2.45.0  ~/.config/mise/config.toml  latest
 bun     1.2.4   ~/.config/mise/config.toml  latest
 deno    2.2.3   ~/.config/mise/config.toml  latest
@@ -353,12 +353,12 @@ node    23.9.0  ~/.config/mise/config.toml  latest
 python  3.13.2  ~/.config/mise/config.toml  latest
 uv      0.6.5   ~/.config/mise/config.toml  latest
 
-[1;35mUV TOOLS
-------------[1;36m
+UV TOOLS
+------------
 aider-chat v0.76.0
 - aider
 ruff v0.9.10
 - ruff
 
-[1;35mGO TOOLS
-------------[1;36m
+GO TOOLS
+------------
