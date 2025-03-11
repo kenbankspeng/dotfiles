@@ -1,6 +1,6 @@
 brew list --versions
 
-[1;35mCASK APPS
+[1;35mBREW CASKS
 ---------[1;34m
 aerospace 0.17.1-Beta
 affine 0.20.4
@@ -64,7 +64,7 @@ yaak 2025.1.2
 zed 0.176.3
 zoom 6.3.11.50104
 
-[1;35mFORMULA APPS
+[1;35mBREW FORMULAS
 ------------[1;36m
 age 1.2.1
 aichat 0.28.0
@@ -341,3 +341,14 @@ zimg 3.0.5
 zoxide 0.9.7
 zstd 1.5.7
 zx 8.4.0
+
+[1;35mMISE PACKAGES
+------------[1;36m
+aqua    2.45.0  ~/.config/mise/config.toml  latest
+bun     1.2.4   ~/.config/mise/config.toml  latest
+deno    2.2.3   ~/.config/mise/config.toml  latest
+git     2.48.1  ~/.config/mise/config.toml  latest
+go      1.24.1  ~/.config/mise/config.toml  latest
+node    23.9.0  ~/.config/mise/config.toml  latest
+python  3.13.2  ~/.config/mise/config.toml  latest
+uv      0.6.5   ~/.config/mise/config.toml  latest
