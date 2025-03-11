@@ -387,3 +387,4 @@ rustlings v6.4.0:
 
 BUN
 ---
+No global bun packages found
