@@ -368,3 +368,11 @@ gopls
 gotools
 staticcheck
 wails
+
+RUSTUP/CARGO
+------------
+Default host: aarch64-apple-darwin
+rustup home:  /Users/ken/.local/share/rustup
+
+stable-aarch64-apple-darwin (default)
+rustc 1.85.0 (4d91de4e4 2025-02-17)
