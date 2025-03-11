@@ -3,7 +3,7 @@ brew list --versions
 BREW CASKS
 ----------
 aerospace 0.17.1-Beta
-affine 0.20.4
+affine 0.20.5
 affinity-designer 2.6.0,3134
 affinity-photo 2.6.0,3134
 affinity-publisher 2.6.0,3134
@@ -11,7 +11,7 @@ anythingllm 1.7.5
 arc 1.85.1,59724
 balenaetcher 2.1.0
 bartender 5.2.7
-bettertouchtool 5.253,2025030702
+bettertouchtool 5.260,2025031001
 boltai 1.33.2
 chatgpt 1.2025.057,1741115522
 claude 0.8.0,8898115386c12dc3dbfa8fe1c52c919752c7dd44
@@ -32,7 +32,7 @@ font-sf-pro latest
 font-symbols-only-nerd-font 3.3.0
 font-tex-gyre-termes 2.004
 git-credential-manager 2.6.1
-github 3.4.17-dd36e2aa
+github 3.4.18-19c76e1d
 grandperspective 3.5.1
 httpie 2025.1.0
 jordanbaird-ice 0.11.12
@@ -124,7 +124,7 @@ gnu-sed 4.9
 gnupg 2.4.7
 gnutls 3.8.4
 go 1.24.1
-go-task 3.42.0
+go-task 3.42.1
 gpgme 1.24.2
 graphite2 1.3.14
 grex 1.4.5
@@ -133,7 +133,7 @@ hexyl 0.16.0
 highway 1.2.0
 how2 3.0.3
 htmlq 0.4.0
-htop 3.3.0
+htop 3.4.0
 httpie 3.2.4
 hub 2.14.2
 hurl 6.0.0
@@ -355,7 +355,7 @@ uv      0.6.5   ~/.config/mise/config.toml  latest
 
 UV TOOLS
 --------
-aider-chat v0.76.0
+aider-chat v0.76.1
 - aider
 ruff v0.9.10
 - ruff
