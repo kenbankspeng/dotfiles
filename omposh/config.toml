@@ -8,9 +8,11 @@ final_space = true
   green = '#22c5c7'
   black_on_green = '#112424'
   blue = '#3a9ef4'
+  black_on_blue = '#101d2c'
   yellow = '#fef1b9'
-  orange = '#F07623'
-  white = '#E0DEF4'
+  black_on_yellow = '#2f2d23'
+  orange = '#fab387'
+  black_on_orange = '#150F0B'
 
 [secondary_prompt]
   template = '<p:red,transparent></><,p:red> > </><p:red,transparent></> '
@@ -46,4 +48,72 @@ final_space = true
     background = 'p:green'
     foreground = 'p:black_on_green'
     properties = { command = '~/.config/omposh/directory' }
+
+  [[blocks.segments]]
+    type = "python"
+    template = "  {{ .Full }} "
+    style = "powerline"
+    powerline_symbol = ""
+    background = "p:blue"
+    foreground = "p:black_on_blue"
+    properties = { display_mode = "context" }
     
+  [[blocks.segments]]
+    type = "go"
+    template = " go {{ .Full }} "
+    style = "powerline"
+    powerline_symbol = ""
+    background = "p:blue"
+    foreground = "p:black_on_blue"
+    properties = { display_mode = "context" }
+
+  [[blocks.segments]]
+    type = "lua"
+    template = "  {{ .Full }} "
+    style = "powerline"
+    powerline_symbol = ""
+    background = "p:blue"
+    foreground = "p:black_on_blue"
+    properties = { display_mode = "context" }
+
+  [[blocks.segments]]
+    type = "zig"
+    template = "  {{ .Full }} "
+    style = "powerline"
+    powerline_symbol = ""
+    background = "p:blue"
+    foreground = "p:black_on_blue"
+    properties = { display_mode = "context" }
+
+  [[blocks.segments]]
+    type = "rust"
+    template = "  {{ .Full }} "
+    style = "powerline"
+    powerline_symbol = ""
+    background = "p:blue"
+    foreground = "p:black_on_blue"
+    [blocks.segments.properties]
+        display_mode = "context"
+
+  [[blocks.segments]]
+    type = "node"
+    template = "{{ if .Env.NO_DENO_ENV }}  {{ .Full }} {{ end }}"
+    style = "powerline"
+    powerline_symbol = ""
+    background = "p:blue"
+    foreground = "p:black_on_blue"
+    [blocks.segments.properties]
+      display_mode = "files"
+
+
+  [[blocks.segments]]
+    type = "deno"
+    template = "{{ if .Env.DENO_ENV }} ┓ {{ .Full }} {{ end }}"
+    style = "powerline"
+    powerline_symbol = ""
+    background = "p:blue"
+    foreground = "p:black_on_blue"
+    [blocks.segments.properties]
+      display_mode = "files"
+
+  
