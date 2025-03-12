@@ -57,7 +57,9 @@ final_space = true
     powerline_symbol = ""
     background = "p:blue"
     foreground = "p:black_on_blue"
-    
+    [blocks.segments.properties]
+      display_mode = "context"
+
   [[blocks.segments]]
     type = "go"
     template = " go {{ .Full }} "
@@ -65,6 +67,8 @@ final_space = true
     powerline_symbol = ""
     background = "p:blue"
     foreground = "p:black_on_blue"
+    [blocks.segments.properties]
+      display_mode = "context"
 
   [[blocks.segments]]
     type = "lua"
@@ -73,6 +77,8 @@ final_space = true
     powerline_symbol = ""
     background = "p:blue"
     foreground = "p:black_on_blue"
+    [blocks.segments.properties]
+      display_mode = "context"
 
   [[blocks.segments]]
     type = "zig"
@@ -81,6 +87,8 @@ final_space = true
     powerline_symbol = ""
     background = "p:blue"
     foreground = "p:black_on_blue"
+    [blocks.segments.properties]
+      display_mode = "context"
 
   [[blocks.segments]]
     type = "rust"
@@ -89,6 +97,8 @@ final_space = true
     powerline_symbol = ""
     background = "p:blue"
     foreground = "p:black_on_blue"
+    [blocks.segments.properties]
+      display_mode = "context"
 
   # javascript: deno, svelte, react, node
   [[blocks.segments]]
