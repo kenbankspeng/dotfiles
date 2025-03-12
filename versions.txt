@@ -9,9 +9,9 @@ anythingllm 1.7.5
 arc 1.85.1,59724
 balenaetcher 2.1.0
 bartender 5.2.7
-bettertouchtool 5.260,2025031001
+bettertouchtool 5.265,2025031103
 boltai 1.33.2
-chatgpt 1.2025.057,1741115522
+chatgpt 1.2025.063,1741403068
 claude 0.8.0,8898115386c12dc3dbfa8fe1c52c919752c7dd44
 cursor 0.46.11,ae378be9dc2f5f1a6a1a220c6e25f9f03c8d4e19
 daisydisk 4.31
@@ -31,7 +31,7 @@ font-symbols-only-nerd-font 3.3.0
 font-tex-gyre-termes 2.004
 git-credential-manager 2.6.1
 github 3.4.18-19c76e1d
-gitkraken 10.7.0
+gitkraken 10.8.0
 gitkraken-cli 2.1.2
 grandperspective 3.5.1
 httpie 2025.1.0
@@ -42,7 +42,7 @@ local 9.2.2,6771
 mactex 2025.0308
 mark-text 0.17.1
 microsoft-auto-update 4.77.24121924
-microsoft-edge 134.0.3124.51,bd7a7bb2-a585-4892-8cb1-74c91c53c943
+microsoft-edge 134.0.3124.62,cfd3ffe0-59be-4106-b68a-a2ecccad4b20
 motrix 1.8.19
 obsidian 1.8.9
 omnifocus 4.5.2
@@ -72,7 +72,7 @@ aom 3.12.0
 aqua 2.45.0
 aribb24 1.0.4
 asciidoctor 2.0.23
-ast-grep 0.36.0
+ast-grep 0.36.1
 autoconf 2.72
 bandwhich 0.23.1
 bash 5.2.37
@@ -116,7 +116,7 @@ gettext 0.24
 ghostscript 10.04.0
 giflib 5.2.2
 git-delta 0.18.2_3
-glib 2.82.5
+glib 2.84.0
 glow 2.1.0
 gmp 6.3.0
 gnu-sed 4.9
@@ -263,6 +263,7 @@ posting 2.4.0
 procs 0.14.9
 pv 1.9.31
 python-packaging 24.2
+python-setuptools 76.0.0
 python@3.12 3.12.9
 python@3.13 3.13.2
 rav1e 0.7.1
@@ -292,7 +293,7 @@ starship 1.22.1
 stow 2.4.1
 stylua 2.0.2
 svgo 3.3.2
-svt-av1 3.0.0
+svt-av1 3.0.1
 tealdeer 1.7.1
 tesseract 5.5.0
 theora 1.1.1
