@@ -14,31 +14,32 @@ if [[ "$current_path" == "$home_directory"* ]]; then
     show_home_symbol=true
 fi
 
+# awk code
 trimmed_path=$(echo "$current_path" | awk -v max_len="$max_length" '
 {
+    prepend=".."
+    append="..."
     trimmed = 0
     n = split($0, parts, "/")
     path = parts[n]
 
     if (length(path) > max_len) {
         trimmed = 1
-        path = substr(path, 1, max_len - 3) "..."
+        path = substr(path, 1, max_len - length(append)) append
     } else {
         for (i = n-1; i > 0; i--) {
             if (length(parts[i] "/" path) <= max_len) {
                 path = parts[i] "/" path
             } else {
                 trimmed = 1
+                path = prepend path
                 break
             }
         }
     }
 
-    if (trimmed == 1) {
-        print "..." path
-    } else {
-        print path
-    }
+    print path
+    
 }')
 
 if $show_home_symbol; then

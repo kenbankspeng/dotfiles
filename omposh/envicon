@@ -1,0 +1,8 @@
+#!/bin/bash
+
+allowed=$(direnv status | grep -q "Found RC allowed 0" && echo true || echo false) 
+if [[ $allowed == true ]]; then
+    echo "" # shield checkmark
+else
+    echo "" # shield not allowed
+fi
