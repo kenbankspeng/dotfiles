@@ -92,28 +92,19 @@ final_space = true
     powerline_symbol = ""
     background = "p:blue"
     foreground = "p:black_on_blue"
-    [blocks.segments.properties]
-        display_mode = "context"
 
+  # javascript: deno, bun, svelte, react, node
   [[blocks.segments]]
-    type = "node"
-    template = "{{ if .Env.NO_DENO_ENV }}  {{ .Full }} {{ end }}"
-    style = "powerline"
-    powerline_symbol = ""
+    type = 'command'
+    template = ' {{ .Output }} '
+    style = 'powerline'
+    powerline_symbol = ''
     background = "p:blue"
     foreground = "p:black_on_blue"
-    [blocks.segments.properties]
-      display_mode = "files"
+    properties = { command = '~/.config/omposh/jsenv' }
 
 
-  [[blocks.segments]]
-    type = "deno"
-    template = "{{ if .Env.DENO_ENV }} ┓ {{ .Full }} {{ end }}"
-    style = "powerline"
-    powerline_symbol = ""
-    background = "p:blue"
-    foreground = "p:black_on_blue"
-    [blocks.segments.properties]
-      display_mode = "files"
 
   
+    
+
