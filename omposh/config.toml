@@ -30,13 +30,12 @@ final_space = true
   alignment = 'left'
   newline = true
 
-
   [[blocks.segments]]
     type = 'session'
+    template = '{{ if .SSHSession }} {{ end }}{{ if .Root }} {{ end }} '
     style = 'diamond'
     leading_diamond = ''
     trailing_diamond = ''
-    template = '{{ if .SSHSession }} {{ end }}{{ if .Root }} {{ end }} '
     background = 'p:red'
     foreground = 'p:black_on_red'
     
@@ -47,8 +46,10 @@ final_space = true
     powerline_symbol = ''
     background = 'p:green'
     foreground = 'p:black_on_green'
-    properties = { command = '~/.config/omposh/directory' }
-
+    [blocks.segments.properties]
+      command = '~/.config/omposh/directory'
+      cache = { duration = "1h", strategy = "folder" }
+      
   [[blocks.segments]]
     type = "python"
     template = "  {{ .Full }} "
@@ -56,7 +57,6 @@ final_space = true
     powerline_symbol = ""
     background = "p:blue"
     foreground = "p:black_on_blue"
-    properties = { display_mode = "context" }
     
   [[blocks.segments]]
     type = "go"
@@ -65,7 +65,6 @@ final_space = true
     powerline_symbol = ""
     background = "p:blue"
     foreground = "p:black_on_blue"
-    properties = { display_mode = "context" }
 
   [[blocks.segments]]
     type = "lua"
@@ -74,7 +73,6 @@ final_space = true
     powerline_symbol = ""
     background = "p:blue"
     foreground = "p:black_on_blue"
-    properties = { display_mode = "context" }
 
   [[blocks.segments]]
     type = "zig"
@@ -83,7 +81,6 @@ final_space = true
     powerline_symbol = ""
     background = "p:blue"
     foreground = "p:black_on_blue"
-    properties = { display_mode = "context" }
 
   [[blocks.segments]]
     type = "rust"
@@ -93,7 +90,7 @@ final_space = true
     background = "p:blue"
     foreground = "p:black_on_blue"
 
-  # javascript: deno, bun, svelte, react, node
+  # javascript: deno, svelte, react, node
   [[blocks.segments]]
     type = 'command'
     template = ' {{ .Output }} '
@@ -101,10 +98,8 @@ final_space = true
     powerline_symbol = ''
     background = "p:blue"
     foreground = "p:black_on_blue"
-    properties = { command = '~/.config/omposh/jsenv' }
-
-
-
-  
+    [blocks.segments.properties]
+      command = '~/.config/omposh/jsenv'
+      cache = { duration = "1h", strategy = "folder" }
     
 
