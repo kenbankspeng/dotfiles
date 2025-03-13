@@ -58,8 +58,8 @@ final_space = true
     template = ' {{ .Output }} '
     style = 'powerline'
     powerline_symbol = ''
-    background = 'p:green'
-    foreground = 'p:on_green'
+    background = 'p:teal'
+    foreground = 'p:on_teal'
 
     [blocks.segments.properties]
       command = '~/.config/omposh/directory'
