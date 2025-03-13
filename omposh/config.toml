@@ -2,9 +2,6 @@
 version = 3
 final_space = true
 
-[var]
-  start = "<transparent></>"
-  end = "<transparent></>"
 
 [palette]
   red = "#a90000"    # oklch(45% 0.200 30) 
@@ -22,6 +19,7 @@ final_space = true
   on_blue = "#e5e6f2"
   on_purple = "#e8e3ee"
   on_pink = "#ebe2eb"
+  base = "#1e1e2e"
   
   language = "#2f40c2"
   on_language = "#e5e6f2"
@@ -57,11 +55,12 @@ final_space = true
 
   [[blocks.segments]]
     type = 'command'
-    template = ' {{ .Output }}'
-    style = 'powerline'
-    powerline_symbol = ''
+    style = "diamond"
+    leading_diamond = ""
+    trailing_diamond = ""
     background = 'p:teal'
     foreground = 'p:on_teal'
+    template = ' {{ .Output }} '
 
     [blocks.segments.properties]
       command = '~/.config/omposh/directory'
@@ -71,55 +70,60 @@ final_space = true
 
   [[blocks.segments]]
     type = "python"
-    template = "  {{ .Full }} "
-    style = "powerline"
-    powerline_symbol = ""
+    style = "diamond"
+    leading_diamond = ""
+    trailing_diamond = ""
     background = "p:language"
     foreground = "p:on_language"
+    template = "  {{ .Full }} "
 
     [blocks.segments.properties]
       display_mode = "context"
 
   [[blocks.segments]]
     type = "go"
-    template = " go {{ .Full }} "
-    style = "powerline"
-    powerline_symbol = ""
+    style = "diamond"
+    leading_diamond = ""
+    trailing_diamond = ""
     background = "p:language"
     foreground = "p:on_language"
+    template = " go {{ .Full }} "
 
     [blocks.segments.properties]
       display_mode = "context"
 
   [[blocks.segments]]
     type = "lua"
-    template = "  {{ .Full }} "
-    style = "powerline"
-    powerline_symbol = ""
+    style = "diamond"
+    leading_diamond = ""
+    trailing_diamond = ""
     background = "p:language"
     foreground = "p:on_language"
+    template = "  {{ .Full }} "
 
     [blocks.segments.properties]
       display_mode = "context"
 
   [[blocks.segments]]
     type = "zig"
-    template = "  {{ .Full }} "
-    style = "powerline"
-    powerline_symbol = ""
+    style = "diamond"
+    leading_diamond = ""
+    trailing_diamond = ""
     background = "p:language"
     foreground = "p:on_language"
+    template = "  {{ .Full }} "
 
     [blocks.segments.properties]
       display_mode = "context"
 
   [[blocks.segments]]
     type = "rust"
-    template = "  {{ .Full }} "
-    style = "powerline"
-    powerline_symbol = ""
+    style = "diamond"
+    leading_diamond = ""
+    trailing_diamond = ""
     background = "p:language"
     foreground = "p:on_language"
+    template = "  {{ .Full }} "
 
     [blocks.segments.properties]
       display_mode = "context"
@@ -127,11 +131,12 @@ final_space = true
   # javascript: deno, svelte, react, node
   [[blocks.segments]]
     type = 'command'
-    template = ' {{ .Output }} '
-    style = 'powerline'
-    powerline_symbol = ''
+    style = "diamond"
+    leading_diamond = ""
+    trailing_diamond = ""
     background = "p:language"
     foreground = "p:on_language"
+    template = ' {{ .Output }} '
     
     [blocks.segments.properties]
       command = '~/.config/omposh/jsenv'
@@ -139,20 +144,18 @@ final_space = true
     
   ######### GIT #########
 
-
-
   [[blocks.segments]]
     type = "git"
-    style = "plain"
-    powerline_symbol = ""
+    style = "diamond"
+    leading_diamond = ""
+    trailing_diamond = ""
     background = "p:green"
     foreground = "p:on_green"
-    
+    template = " {{ .HEAD }}{{ if .Working.Changed }} 󱩽{{ end }}{{ if gt .Ahead 0 }} {{ .Ahead }}{{ end }}{{ if gt .Behind 0 }} {{ .Behind }}{{ end }}{{ if and (not .Working.Changed) (eq .Ahead 0) (eq .Behind 0) }} {{ end }}"
     background_templates = [
       "{{ if .Working.Changed }}p:gold{{ end }}",
       "{{ if or (gt .Ahead 0) (gt .Behind 0) }}p:pink{{ end }}",
     ]
-    template = "{{.Var.start}} {{ .HEAD }}{{ if .Working.Changed }} 󱩽{{ end }}{{ if gt .Ahead 0 }} {{ .Ahead }}{{ end }}{{ if gt .Behind 0 }} {{ .Behind }}{{ end }}{{ if and (not .Working.Changed) (eq .Ahead 0) (eq .Behind 0) }} {{ end }} {{ .Var.end }}"
 
     [blocks.segments.properties]
       fetch_status = true
@@ -160,15 +163,13 @@ final_space = true
       
   ######### ENDCAP #########
 
-
-
   [[blocks.segments]]
     type = "text"
     style = "accordion"
     leading_powerline_symbol = ""
     powerline_symbol = ""
-    template = " "
     background = "p:red"
+    template = " "
 
 
 
@@ -182,6 +183,6 @@ final_space = true
   [[blocks.segments]]
       type = "text"
       style = "plain"
-      template = "{{ repeat .SHLVL \"❯\" }}"
       background = "transparent"
       foreground = "p:orange"
+      template = "{{ repeat .SHLVL \"❯\" }}"
