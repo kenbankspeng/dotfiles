@@ -2,84 +2,33 @@
 version = 3
 final_space = true
 
+# oklch(45% 0.200 30) w/ 12 colors
+# 30 - red - #a90000
+# 90 - gold - #6d5100
+# 150 - green - #006b1d
+# 240- teal - #005b95
+# 270 - blue - #2f40c2
+# 300 - purple - #6928b0
+# 330 - pink - #8c0888
 [palette]
-
-  # oklch(61% 0.16 27)
-  H27_C016_L61 = "#5C2B31"
-
-  H014_S1 = "#5C2B31"
-  H014_S2 = "#754449"
-  H014_S3 = "#8C595E"
-  H050_S1 = "#5A3017"
-  H050_S2 = "#794321"
-  H050_S3 = "#98552B"
-  H086_S1 = "#4D3903"
-  H086_S2 = "#655124"
-  H086_S3 = "#7B673A"
-  H122_S1 = "#364213"
-  H122_S2 = "#4B5B1C"
-  H122_S3 = "#5E7226"
-  H158_S1 = "#12482E"
-  H158_S2 = "#1B6240"
-  H158_S3 = "#257A51"
-  H194_S1 = "#004848"
-  H194_S2 = "#02605F"
-  H194_S3 = "#037878"
-  H230_S1 = "#00435B"
-  H230_S2 = "#235A72"
-  H230_S3 = "#3B7089"
-  H266_S1 = "#2B3B62"
-  H266_S2 = "#41527A"
-  H266_S3 = "#566891"
-  H302_S1 = "#44335C"
-  H302_S2 = "#5A4B74"
-  H302_S3 = "#70618B"
-  H338_S1 = "#552D4A"
-  H338_S2 = "#6D4561"
-  H338_S3 = "#845A77"
-  
-
-  language_bg = "#41527A"
-  language_fg = "#cdd6f4"
-
-
+  red = "#a90000" 
+  gold = "#6d5100" 
+  green = "#006b1d"
+  teal = "#005b95" 
+  blue = "#2f40c2"
+  purple = "#6928b0"
+  pink = "#8c0888"
+  TEXT = "#cdd6f4"
   TBD = "#11111b"
 
-  crust = "#11111b"
-  mantle = "#181825"
-  base = "#1e1e2e"
-  surface0 = "#313244"
-  surface1 = "#45475a"
-  surface2 = "#585b70"
-  overlay0 = "#6c7086"
-  overlay1 = "#7f849c"
-  overlay2 = "#9399b2"
-  subtext0 = "#a6adc8"
-  subtext1 = "#bac2de"
-  text = "#cdd6f4"
-  lavender  = "#b4befe"
-  blue = "#89b4fa"
-  sapphire = "#74c7ec"
-  sky = "#89dceb"
-  teal = "#94e2d5"
-  green = "#a6e3a1"
-  yellow = "#f9e2af"
-  peach = "#fab387"
-  maroon = "#eba0ac"
-  red = "#f38ba8"
-  mauve = "#cba6f7"
-  pink = "#f5c2e7"
-  flamingo = "#f2cdcd"
-  rosewater = "#f5e0dc"
-
 [secondary_prompt]
-  template = '<p:TBD,transparent></><,p:TBD> > </><p:TBD,transparent></> '
-  foreground = 'p:TBD'
+  template = '<p:red,transparent></><,p:red> > </><p:red,transparent></> '
+  foreground = 'p:red'
   background = 'transparent'
 
 [transient_prompt]
-  template = '<p:TBD,transparent></><,p:TBD> </><p:TBD,transparent></> '
-  foreground = 'p:TBD'
+  template = '<p:red,transparent></><p:TEXT,p:red> </><p:red,transparent></> '
+  foreground = 'p:red'
   background = 'transparent'
   newline = true
 
@@ -96,8 +45,8 @@ final_space = true
     style = 'diamond'
     leading_diamond = ''
     trailing_diamond = ''
-    background = 'p:H050_S3'
-    foreground = 'p:text'
+    background = 'p:red'
+    foreground = 'p:TEXT'
     
   ######### DIRECTORY #########
 
@@ -106,8 +55,8 @@ final_space = true
     template = ' {{ .Output }} '
     style = 'powerline'
     powerline_symbol = ''
-    background = 'p:H194_S3'
-    foreground = 'p:text'
+    background = 'p:gold'
+    foreground = 'p:TEXT'
 
     [blocks.segments.properties]
       command = '~/.config/omposh/directory'
@@ -120,8 +69,8 @@ final_space = true
     template = "  {{ .Full }} "
     style = "powerline"
     powerline_symbol = ""
-    background = "p:language_bg"
-    foreground = "p:language_fg"
+    background = "p:teal"
+    foreground = "p:TEXT"
 
     [blocks.segments.properties]
       display_mode = "context"
@@ -131,8 +80,8 @@ final_space = true
     template = " go {{ .Full }} "
     style = "powerline"
     powerline_symbol = ""
-    background = "p:language_bg"
-    foreground = "p:language_fg"
+    background = "p:teal"
+    foreground = "p:TEXT"
 
     [blocks.segments.properties]
       display_mode = "context"
@@ -142,8 +91,8 @@ final_space = true
     template = "  {{ .Full }} "
     style = "powerline"
     powerline_symbol = ""
-    background = "p:language_bg"
-    foreground = "p:language_fg"
+    background = "p:teal"
+    foreground = "p:TEXT"
 
     [blocks.segments.properties]
       display_mode = "context"
@@ -153,8 +102,8 @@ final_space = true
     template = "  {{ .Full }} "
     style = "powerline"
     powerline_symbol = ""
-    background = "p:language_bg"
-    foreground = "p:language_fg"
+    background = "p:teal"
+    foreground = "p:TEXT"
 
     [blocks.segments.properties]
       display_mode = "context"
@@ -164,8 +113,8 @@ final_space = true
     template = "  {{ .Full }} "
     style = "powerline"
     powerline_symbol = ""
-    background = "p:language_bg"
-    foreground = "p:language_fg"
+    background = "p:teal"
+    foreground = "p:TEXT"
 
     [blocks.segments.properties]
       display_mode = "context"
@@ -176,8 +125,8 @@ final_space = true
     template = ' {{ .Output }} '
     style = 'powerline'
     powerline_symbol = ''
-    background = "p:language_bg"
-    foreground = "p:language_fg"
+    background = "p:teal"
+    foreground = "p:TEXT"
     
     [blocks.segments.properties]
       command = '~/.config/omposh/jsenv'
@@ -189,14 +138,14 @@ final_space = true
     type = "git"
     style = "powerline"
     powerline_symbol = ""
-    background = "p:H194_S3"
-    foreground = "p:text"
+    background = "p:purple"
+    foreground = "p:TEXT"
 
     background_templates = [
-      "{{ if or (.Working.Changed) (.Staging.Changed) }}p:H086_S3{{ end }}",
-      "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:TBD{{ end }}",
-      "{{ if gt .Ahead 0 }}p:TBD{{ end }}",
-      "{{ if gt .Behind 0 }}p:TBD{{ end }}"
+      "{{ if or (.Working.Changed) (.Staging.Changed) }}p:purple{{ end }}",
+      "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:purple{{ end }}",
+      "{{ if gt .Ahead 0 }}p:purple{{ end }}",
+      "{{ if gt .Behind 0 }}p:purple{{ end }}"
     ]
     template = "{{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }}"
 
@@ -204,3 +153,5 @@ final_space = true
     fetch_status = true
     fetch_upstream_icon = true
     source = "cli"
+
+ 
