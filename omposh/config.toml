@@ -19,6 +19,9 @@ final_space = true
   on_purple = "#e8e3ee"
   on_pink = "#ebe2eb"
   
+  language = "#2f40c2"
+  on_language = "#e5e6f2"
+
   TBD = "#11111b"
 
 [secondary_prompt]
@@ -55,8 +58,8 @@ final_space = true
     template = ' {{ .Output }} '
     style = 'powerline'
     powerline_symbol = ''
-    background = 'p:gold'
-    foreground = 'p:on_gold'
+    background = 'p:green'
+    foreground = 'p:on_green'
 
     [blocks.segments.properties]
       command = '~/.config/omposh/directory'
@@ -69,8 +72,8 @@ final_space = true
     template = "  {{ .Full }} "
     style = "powerline"
     powerline_symbol = ""
-    background = "p:teal"
-    foreground = "p:on_teal"
+    background = "p:language"
+    foreground = "p:on_language"
 
     [blocks.segments.properties]
       display_mode = "context"
@@ -80,8 +83,8 @@ final_space = true
     template = " go {{ .Full }} "
     style = "powerline"
     powerline_symbol = ""
-    background = "p:teal"
-    foreground = "p:on_teal"
+    background = "p:language"
+    foreground = "p:on_language"
 
     [blocks.segments.properties]
       display_mode = "context"
@@ -91,8 +94,8 @@ final_space = true
     template = "  {{ .Full }} "
     style = "powerline"
     powerline_symbol = ""
-    background = "p:teal"
-    foreground = "p:on_teal"
+    background = "p:language"
+    foreground = "p:on_language"
 
     [blocks.segments.properties]
       display_mode = "context"
@@ -102,8 +105,8 @@ final_space = true
     template = "  {{ .Full }} "
     style = "powerline"
     powerline_symbol = ""
-    background = "p:teal"
-    foreground = "p:on_teal"
+    background = "p:language"
+    foreground = "p:on_language"
 
     [blocks.segments.properties]
       display_mode = "context"
@@ -113,8 +116,8 @@ final_space = true
     template = "  {{ .Full }} "
     style = "powerline"
     powerline_symbol = ""
-    background = "p:teal"
-    foreground = "p:on_teal"
+    background = "p:language"
+    foreground = "p:on_language"
 
     [blocks.segments.properties]
       display_mode = "context"
@@ -125,8 +128,8 @@ final_space = true
     template = ' {{ .Output }} '
     style = 'powerline'
     powerline_symbol = ''
-    background = "p:teal"
-    foreground = "p:on_teal"
+    background = "p:language"
+    foreground = "p:on_language"
     
     [blocks.segments.properties]
       command = '~/.config/omposh/jsenv'
@@ -138,20 +141,21 @@ final_space = true
     type = "git"
     style = "powerline"
     powerline_symbol = ""
-    background = "p:purple"
-    foreground = "p:on_purple"
+    background = "p:green"
+    foreground = "p:on_green"
 
     background_templates = [
-      "{{ if or (.Working.Changed) (.Staging.Changed) }}p:purple{{ end }}",
-      "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:purple{{ end }}",
-      "{{ if gt .Ahead 0 }}p:purple{{ end }}",
-      "{{ if gt .Behind 0 }}p:purple{{ end }}"
+      "{{ if or (.Working.Changed) (.Staging.Changed) }}p:gold{{ end }}",
+      "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:golf{{ end }}",
+      "{{ if gt .Ahead 0 }}p:gold{{ end }}",
+      "{{ if gt .Behind 0 }}p:gold{{ end }}"
     ]
-    template = "{{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }}"
+    template = " {{ .HEAD }}{{if .BranchStatus }} {{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }}"
 
     [blocks.segments.properties]
-    fetch_status = true
-    fetch_upstream_icon = true
-    source = "cli"
+      fetch_status = true
+      source = "cli"
+      
+      
 
  
