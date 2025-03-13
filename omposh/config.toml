@@ -11,6 +11,7 @@ final_space = true
   blue = "#2f40c2"   # oklch(45% 0.200 270)
   purple = "#6928b0" # oklch(45% 0.200 300)
   pink = "#8c0888"   # oklch(45% 0.200 330)
+  orange = "#f55c1b" # fallback
   on_red = "#f4e4e5"
   on_gold = "#ede9e5"
   on_green = "#e5ece6"
@@ -147,9 +148,18 @@ final_space = true
     background_templates = [
       "{{ if or .Working.Changed (gt .Ahead 0) (gt .Behind 0) }}p:gold{{ end }}",
     ]
-    template = " {{ .HEAD }}{{ if .Working.Changed }} 󰷬{{ end }}{{ if gt .Ahead 0 }} {{ .Ahead }}{{ end }}{{ if gt .Behind 0 }} {{ .Behind }}{{ end }}{{ if and (not .Working.Changed) (eq .Ahead 0) (eq .Behind 0) }} {{ end }} "
+    template = " {{ .HEAD }}{{ if .Working.Changed }} 󱩽{{ end }}{{ if gt .Ahead 0 }} {{ .Ahead }}{{ end }}{{ if gt .Behind 0 }} {{ .Behind }}{{ end }}{{ if and (not .Working.Changed) (eq .Ahead 0) (eq .Behind 0) }} {{ end }} "
 
     [blocks.segments.properties]
       fetch_status = true
       source = "cli"
       
+   ######### SHELL LEVEL PROMPT #########
+
+  [[blocks.segments]]
+      type = "shell"
+      template = "\n{{ repeat .SHLVL \"❯\" }}"
+      style = "powerline"
+      powerline_symbol = ""
+      background = "transparent"
+      foreground = "#f55c1b"
