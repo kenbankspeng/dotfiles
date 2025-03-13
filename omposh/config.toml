@@ -24,16 +24,16 @@ final_space = true
   language = "#2f40c2"
   on_language = "#e5e6f2"
 
+[transient_prompt]
+  template = '<p:red,transparent></><p:on_red,p:red> </><p:red,transparent></> '
+  foreground = 'p:red'
+  background = 'transparent'
+  newline = true
+
 [secondary_prompt]
   template = '<p:red,transparent></><,p:red> > </><p:red,transparent></> '
   foreground = 'p:red'
   background = 'transparent'
-
-[transient_prompt]
-  template = '<p:red,transparent></><p:on_red,p:red> </><p:red,transparent></> '
-  foreground = 'p:red'
-  background = 'transparent'
-  newline = true
 
 [[blocks]]
   type = 'prompt'
