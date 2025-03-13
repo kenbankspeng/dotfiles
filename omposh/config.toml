@@ -153,13 +153,27 @@ final_space = true
       fetch_status = true
       source = "cli"
       
-  # endcap
+  ######### ENDCAP #########
+
+[[blocks.segments]]
+    type = "text"
+    style = "accordion"
+    powerline_symbol = ""
+    background = "black"
+
+ [[blocks.segments]]
+    type = "text"
+    style = "accordion"
+    powerline_symbol = ""
+    background = "p:red"
+
   [[blocks.segments]]
     type = "text"
     style = "accordion"
     powerline_symbol = ""
-    template = "  "
+    template = " "
     background = "p:red"
+
 
 
 ######### NEW_LINE - SHELL LEVEL PROMPT #########
