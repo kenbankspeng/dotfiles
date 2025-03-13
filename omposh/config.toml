@@ -2,23 +2,23 @@
 version = 3
 final_space = true
 
-# oklch(45% 0.200 30) w/ 12 colors
-# 30 - red - #a90000
-# 90 - gold - #6d5100
-# 150 - green - #006b1d
-# 240- teal - #005b95
-# 270 - blue - #2f40c2
-# 300 - purple - #6928b0
-# 330 - pink - #8c0888
+
 [palette]
-  red = "#a90000" 
-  gold = "#6d5100" 
-  green = "#006b1d"
-  teal = "#005b95" 
-  blue = "#2f40c2"
-  purple = "#6928b0"
-  pink = "#8c0888"
-  TEXT = "#cdd6f4"
+  red = "#a90000"    # oklch(45% 0.200 30) 
+  gold = "#6d5100"   # oklch(45% 0.200 90)
+  green = "#006b1d"  # oklch(45% 0.200 150)
+  teal = "#005b95"   # oklch(45% 0.200 240)
+  blue = "#2f40c2"   # oklch(45% 0.200 270)
+  purple = "#6928b0" # oklch(45% 0.200 300)
+  pink = "#8c0888"   # oklch(45% 0.200 330)
+  on_red = "#f4e4e5"
+  on_gold = "#ede9e5"
+  on_green = "#e5ece6"
+  on_teal = "#e5eaf0"
+  on_blue = "#e5e6f2"
+  on_purple = "#e8e3ee"
+  on_pink = "#ebe2eb"
+  
   TBD = "#11111b"
 
 [secondary_prompt]
@@ -27,7 +27,7 @@ final_space = true
   background = 'transparent'
 
 [transient_prompt]
-  template = '<p:red,transparent></><p:TEXT,p:red> </><p:red,transparent></> '
+  template = '<p:red,transparent></><p:on_red,p:red> </><p:red,transparent></> '
   foreground = 'p:red'
   background = 'transparent'
   newline = true
@@ -46,7 +46,7 @@ final_space = true
     leading_diamond = ''
     trailing_diamond = ''
     background = 'p:red'
-    foreground = 'p:TEXT'
+    foreground = 'p:on_red'
     
   ######### DIRECTORY #########
 
@@ -56,7 +56,7 @@ final_space = true
     style = 'powerline'
     powerline_symbol = ''
     background = 'p:gold'
-    foreground = 'p:TEXT'
+    foreground = 'p:on_gold'
 
     [blocks.segments.properties]
       command = '~/.config/omposh/directory'
@@ -70,7 +70,7 @@ final_space = true
     style = "powerline"
     powerline_symbol = ""
     background = "p:teal"
-    foreground = "p:TEXT"
+    foreground = "p:on_teal"
 
     [blocks.segments.properties]
       display_mode = "context"
@@ -81,7 +81,7 @@ final_space = true
     style = "powerline"
     powerline_symbol = ""
     background = "p:teal"
-    foreground = "p:TEXT"
+    foreground = "p:on_teal"
 
     [blocks.segments.properties]
       display_mode = "context"
@@ -92,7 +92,7 @@ final_space = true
     style = "powerline"
     powerline_symbol = ""
     background = "p:teal"
-    foreground = "p:TEXT"
+    foreground = "p:on_teal"
 
     [blocks.segments.properties]
       display_mode = "context"
@@ -103,7 +103,7 @@ final_space = true
     style = "powerline"
     powerline_symbol = ""
     background = "p:teal"
-    foreground = "p:TEXT"
+    foreground = "p:on_teal"
 
     [blocks.segments.properties]
       display_mode = "context"
@@ -114,7 +114,7 @@ final_space = true
     style = "powerline"
     powerline_symbol = ""
     background = "p:teal"
-    foreground = "p:TEXT"
+    foreground = "p:on_teal"
 
     [blocks.segments.properties]
       display_mode = "context"
@@ -126,7 +126,7 @@ final_space = true
     style = 'powerline'
     powerline_symbol = ''
     background = "p:teal"
-    foreground = "p:TEXT"
+    foreground = "p:on_teal"
     
     [blocks.segments.properties]
       command = '~/.config/omposh/jsenv'
@@ -139,7 +139,7 @@ final_space = true
     style = "powerline"
     powerline_symbol = ""
     background = "p:purple"
-    foreground = "p:TEXT"
+    foreground = "p:on_purple"
 
     background_templates = [
       "{{ if or (.Working.Changed) (.Staging.Changed) }}p:purple{{ end }}",
