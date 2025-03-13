@@ -3,6 +3,10 @@ version = 3
 final_space = true
 
 [palette]
+
+  # oklch(61% 0.16 27)
+  H27_C016_L61 = "#5C2B31"
+
   H014_S1 = "#5C2B31"
   H014_S2 = "#754449"
   H014_S3 = "#8C595E"
@@ -35,14 +39,12 @@ final_space = true
   H338_S3 = "#845A77"
   
 
-  language_bg = "#89b4fa"
-  language_fg = "#1e1e2e"
+  language_bg = "#41527A"
+  language_fg = "#cdd6f4"
 
 
+  TBD = "#11111b"
 
-
-  crust = "#11111b"
-  mantle = "#181825"
   crust = "#11111b"
   mantle = "#181825"
   base = "#1e1e2e"
@@ -69,23 +71,15 @@ final_space = true
   pink = "#f5c2e7"
   flamingo = "#f2cdcd"
   rosewater = "#f5e0dc"
-  
-  
-
-  tbd = "#808080"
-  text_color = '#251415'
-  
-  bright_yellow = '#ffeb3b'
-  bright_orange = '#ffcc80' 
 
 [secondary_prompt]
-  template = '<p:surface1,transparent></><,p:surface1> > </><p:surface1,transparent></> '
-  foreground = 'p:text_color'
+  template = '<p:TBD,transparent></><,p:TBD> > </><p:TBD,transparent></> '
+  foreground = 'p:TBD'
   background = 'transparent'
 
 [transient_prompt]
-  template = '<p:overlay0,transparent></><,p:overlay0> </><p:overlay0,transparent></> '
-  foreground = 'p:text_color'
+  template = '<p:TBD,transparent></><,p:TBD> </><p:TBD,transparent></> '
+  foreground = 'p:TBD'
   background = 'transparent'
   newline = true
 
@@ -102,7 +96,7 @@ final_space = true
     style = 'diamond'
     leading_diamond = ''
     trailing_diamond = ''
-    background = 'p:surface1'
+    background = 'p:H050_S3'
     foreground = 'p:text'
     
   ######### DIRECTORY #########
@@ -112,7 +106,7 @@ final_space = true
     template = ' {{ .Output }} '
     style = 'powerline'
     powerline_symbol = ''
-    background = 'p:surface1'
+    background = 'p:H194_S3'
     foreground = 'p:text'
 
     [blocks.segments.properties]
@@ -195,14 +189,14 @@ final_space = true
     type = "git"
     style = "powerline"
     powerline_symbol = ""
-    background = "green"
-    foreground = "p:text_color"
+    background = "p:H194_S3"
+    foreground = "p:text"
 
     background_templates = [
-      "{{ if or (.Working.Changed) (.Staging.Changed) }}p:bright_yellow{{ end }}",
-      "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:bright_orange{{ end }}",
-      "{{ if gt .Ahead 0 }}p:tbd{{ end }}",
-      "{{ if gt .Behind 0 }}p:tbd{{ end }}"
+      "{{ if or (.Working.Changed) (.Staging.Changed) }}p:H086_S3{{ end }}",
+      "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:TBD{{ end }}",
+      "{{ if gt .Ahead 0 }}p:TBD{{ end }}",
+      "{{ if gt .Behind 0 }}p:TBD{{ end }}"
     ]
     template = "{{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }}"
 
