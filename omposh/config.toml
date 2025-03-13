@@ -3,28 +3,89 @@ version = 3
 final_space = true
 
 [palette]
-  red = '#da6871'
-  black_on_red = '#251415'
-  green = '#22c5c7'
-  black_on_green = '#112424'
-  blue = '#3a9ef4'
-  black_on_blue = '#101d2c'
-  yellow = '#fef1b9'
-  black_on_yellow = '#2f2d23'
-  orange = '#fab387'
-  black_on_orange = '#150f0b'
-  mauve = '#3a9ef4'
+  H014_S1 = "#5C2B31"
+  H014_S2 = "#754449"
+  H014_S3 = "#8C595E"
+  H050_S1 = "#5A3017"
+  H050_S2 = "#794321"
+  H050_S3 = "#98552B"
+  H086_S1 = "#4D3903"
+  H086_S2 = "#655124"
+  H086_S3 = "#7B673A"
+  H122_S1 = "#364213"
+  H122_S2 = "#4B5B1C"
+  H122_S3 = "#5E7226"
+  H158_S1 = "#12482E"
+  H158_S2 = "#1B6240"
+  H158_S3 = "#257A51"
+  H194_S1 = "#004848"
+  H194_S2 = "#02605F"
+  H194_S3 = "#037878"
+  H230_S1 = "#00435B"
+  H230_S2 = "#235A72"
+  H230_S3 = "#3B7089"
+  H266_S1 = "#2B3B62"
+  H266_S2 = "#41527A"
+  H266_S3 = "#566891"
+  H302_S1 = "#44335C"
+  H302_S2 = "#5A4B74"
+  H302_S3 = "#70618B"
+  H338_S1 = "#552D4A"
+  H338_S2 = "#6D4561"
+  H338_S3 = "#845A77"
+  
+
+  language_bg = "#89b4fa"
+  language_fg = "#1e1e2e"
+
+
+
+
+  crust = "#11111b"
+  mantle = "#181825"
+  crust = "#11111b"
+  mantle = "#181825"
+  base = "#1e1e2e"
+  surface0 = "#313244"
+  surface1 = "#45475a"
+  surface2 = "#585b70"
+  overlay0 = "#6c7086"
+  overlay1 = "#7f849c"
+  overlay2 = "#9399b2"
+  subtext0 = "#a6adc8"
+  subtext1 = "#bac2de"
+  text = "#cdd6f4"
+  lavender  = "#b4befe"
+  blue = "#89b4fa"
+  sapphire = "#74c7ec"
+  sky = "#89dceb"
+  teal = "#94e2d5"
+  green = "#a6e3a1"
+  yellow = "#f9e2af"
+  peach = "#fab387"
+  maroon = "#eba0ac"
+  red = "#f38ba8"
+  mauve = "#cba6f7"
+  pink = "#f5c2e7"
+  flamingo = "#f2cdcd"
+  rosewater = "#f5e0dc"
+  
+  
+
+  tbd = "#808080"
+  text_color = '#251415'
+  
   bright_yellow = '#ffeb3b'
   bright_orange = '#ffcc80' 
 
 [secondary_prompt]
-  template = '<p:red,transparent></><,p:red> > </><p:red,transparent></> '
-  foreground = 'p:black_on_red'
+  template = '<p:surface1,transparent></><,p:surface1> > </><p:surface1,transparent></> '
+  foreground = 'p:text_color'
   background = 'transparent'
 
 [transient_prompt]
-  template = '<p:red,transparent></><,p:red> </><p:red,transparent></> '
-  foreground = 'p:black_on_red'
+  template = '<p:overlay0,transparent></><,p:overlay0> </><p:overlay0,transparent></> '
+  foreground = 'p:text_color'
   background = 'transparent'
   newline = true
 
@@ -40,9 +101,9 @@ final_space = true
     template = '{{ if .SSHSession }} {{ end }}{{ if .Root }} {{ end }} '
     style = 'diamond'
     leading_diamond = ''
-    trailing_diamond = ''
-    background = 'p:red'
-    foreground = 'p:black_on_red'
+    trailing_diamond = ''
+    background = 'p:surface1'
+    foreground = 'p:text'
     
   ######### DIRECTORY #########
 
@@ -50,9 +111,9 @@ final_space = true
     type = 'command'
     template = ' {{ .Output }} '
     style = 'powerline'
-    powerline_symbol = ''
-    background = 'p:blue'
-    foreground = 'p:black_on_blue'
+    powerline_symbol = ''
+    background = 'p:surface1'
+    foreground = 'p:text'
 
     [blocks.segments.properties]
       command = '~/.config/omposh/directory'
@@ -64,9 +125,9 @@ final_space = true
     type = "python"
     template = "  {{ .Full }} "
     style = "powerline"
-    powerline_symbol = ""
-    background = "p:yellow"
-    foreground = "p:black_on_yellow"
+    powerline_symbol = ""
+    background = "p:language_bg"
+    foreground = "p:language_fg"
 
     [blocks.segments.properties]
       display_mode = "context"
@@ -75,9 +136,9 @@ final_space = true
     type = "go"
     template = " go {{ .Full }} "
     style = "powerline"
-    powerline_symbol = ""
-    background = "p:yellow"
-    foreground = "p:black_on_yellow"
+    powerline_symbol = ""
+    background = "p:language_bg"
+    foreground = "p:language_fg"
 
     [blocks.segments.properties]
       display_mode = "context"
@@ -86,9 +147,9 @@ final_space = true
     type = "lua"
     template = "  {{ .Full }} "
     style = "powerline"
-    powerline_symbol = ""
-    background = "p:yellow"
-    foreground = "p:black_on_yellow"
+    powerline_symbol = ""
+    background = "p:language_bg"
+    foreground = "p:language_fg"
 
     [blocks.segments.properties]
       display_mode = "context"
@@ -97,9 +158,9 @@ final_space = true
     type = "zig"
     template = "  {{ .Full }} "
     style = "powerline"
-    powerline_symbol = ""
-    background = "p:yellow"
-    foreground = "p:black_on_yellow"
+    powerline_symbol = ""
+    background = "p:language_bg"
+    foreground = "p:language_fg"
 
     [blocks.segments.properties]
       display_mode = "context"
@@ -108,9 +169,9 @@ final_space = true
     type = "rust"
     template = "  {{ .Full }} "
     style = "powerline"
-    powerline_symbol = ""
-    background = "p:yellow"
-    foreground = "p:black_on_yellow"
+    powerline_symbol = ""
+    background = "p:language_bg"
+    foreground = "p:language_fg"
 
     [blocks.segments.properties]
       display_mode = "context"
@@ -120,9 +181,9 @@ final_space = true
     type = 'command'
     template = ' {{ .Output }} '
     style = 'powerline'
-    powerline_symbol = ''
-    background = "p:yellow"
-    foreground = "p:black_on_yellow"
+    powerline_symbol = ''
+    background = "p:language_bg"
+    foreground = "p:language_fg"
     
     [blocks.segments.properties]
       command = '~/.config/omposh/jsenv'
@@ -133,15 +194,15 @@ final_space = true
   [[blocks.segments]]
     type = "git"
     style = "powerline"
-    powerline_symbol = ""
-    background = "p:green"
-    foreground = "p:black_on_green"
+    powerline_symbol = ""
+    background = "green"
+    foreground = "p:text_color"
 
     background_templates = [
       "{{ if or (.Working.Changed) (.Staging.Changed) }}p:bright_yellow{{ end }}",
       "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:bright_orange{{ end }}",
-      "{{ if gt .Ahead 0 }}p:red{{ end }}",
-      "{{ if gt .Behind 0 }}p:red{{ end }}"
+      "{{ if gt .Ahead 0 }}p:tbd{{ end }}",
+      "{{ if gt .Behind 0 }}p:tbd{{ end }}"
     ]
     template = "{{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }}"
 
