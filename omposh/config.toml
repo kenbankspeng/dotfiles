@@ -198,6 +198,7 @@ final_space = true
   type = 'prompt'
   alignment = 'right'
 
+  # TODO
   [[tooltips]]
     leading_diamond = ''
     trailing_diamond = ''
