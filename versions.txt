@@ -6,17 +6,15 @@ affinity-designer 2.6.0,3134
 affinity-photo 2.6.0,3134
 affinity-publisher 2.6.0,3134
 anythingllm 1.7.5
-arc 1.85.1,59724
-balenaetcher 2.1.0
+arc 1.86.0,59845
 bartender 5.2.7
-bettertouchtool 5.265,2025031103
+bettertouchtool 5.268,2025031201
 boltai 1.33.2
 chatgpt 1.2025.063,1741403068
 claude 0.8.0,8898115386c12dc3dbfa8fe1c52c919752c7dd44
 cursor 0.46.11,ae378be9dc2f5f1a6a1a220c6e25f9f03c8d4e19
 daisydisk 4.31
 docker 4.39.0,184744
-dropzone 4.80.46
 espanso 2.2.1
 figma 125.1.5
 font-alegreya 2.008
@@ -42,10 +40,9 @@ local 9.2.2,6771
 mactex 2025.0308
 mark-text 0.17.1
 microsoft-auto-update 4.77.24121924
-microsoft-edge 134.0.3124.62,cfd3ffe0-59be-4106-b68a-a2ecccad4b20
-motrix 1.8.19
+microsoft-edge 134.0.3124.68,652efb17-53e6-4847-a085-3db94160e488
 obsidian 1.8.9
-omnifocus 4.5.2
+omnifocus 4.5.3
 onyx 4.7.5
 pdf-pals 1.8.1
 raycast 1.93.2
@@ -56,12 +53,11 @@ symboliclinker 2.2
 syntax-highlight 2.1.25
 typeface 3.15.3,4320
 ubersicht 1.6.82
-upscayl 2.15.0
 vmware-fusion 13.6.3,24585314
-warp 0.2025.03.05.08.02.stable_02
+warp 0.2025.03.12.08.02.stable_03
 wezterm 20240203-110809,5046fc22
 yaak 2025.1.2
-zed 0.176.3
+zed 0.177.8
 zoom 6.3.11.50104
 
 BREW FORMULAS
@@ -69,7 +65,7 @@ BREW FORMULAS
 age 1.2.1
 aichat 0.28.0
 aom 3.12.0
-aqua 2.45.0
+aqua 2.45.1
 aribb24 1.0.4
 asciidoctor 2.0.23
 ast-grep 0.36.1
@@ -100,7 +96,7 @@ dust 1.1.2
 fastfetch 2.38.0
 fd 10.2.0
 ffmpeg 7.1.1_1
-fish 4.0.0
+fish 4.0.1
 flac 1.5.0
 flock 0.4.0
 fnt 1.9
@@ -113,7 +109,7 @@ fzf 0.60.3
 gawk 5.3.1
 gdk-pixbuf 2.42.12
 gettext 0.24
-ghostscript 10.04.0
+ghostscript 10.05.0
 giflib 5.2.2
 git-delta 0.18.2_3
 glib 2.84.0
@@ -135,7 +131,7 @@ htmlq 0.4.0
 htop 3.4.0
 httpie 3.2.4
 hub 2.14.2
-hurl 6.0.0
+hurl 6.1.0
 hyperfine 1.19.0
 icu4c@76 76.1_1
 imagemagick 7.1.1-45
@@ -214,7 +210,7 @@ lolcat 100.0.1
 lpeg 1.1.0
 lsd 1.1.5
 lua 5.4.7
-luajit 2.1.1741571767
+luajit 2.1.1741730670
 luarocks 3.11.1
 luv 1.50.0-1
 lz4 1.10.0
@@ -238,12 +234,12 @@ ncurses 6.5
 neovim 0.10.4_1
 nettle 3.10.1
 nginx 1.27.4
-node 23.9.0
+node 23.10.0
 npth 1.8
 nspr 4.36
 nss 3.109
 nushell 0.102.0
-oh-my-posh 25.3.0
+oh-my-posh 25.4.2
 onefetch 2.23.1
 oniguruma 6.9.10
 opencore-amr 0.1.6
@@ -252,7 +248,7 @@ openjpeg 2.5.3
 openssl@3 3.4.1
 opus 1.5.2
 p11-kit 0.25.5
-pango 1.56.1
+pango 1.56.2
 pastel 0.10.0
 pcre2 10.44
 pinentry 1.3.1_1
@@ -300,7 +296,7 @@ theora 1.1.1
 tokei 12.1.2
 tree 2.2.1
 tree-sitter 0.25.3
-turso 0.98.2
+turso 0.99.1
 typst 0.13.1
 uchardet 0.0.8
 unbound 1.22.0
@@ -328,7 +324,7 @@ zeromq 4.3.5_1
 zimg 3.0.5
 zoxide 0.9.7
 zstd 1.5.7
-zx 8.4.0
+zx 8.4.1
 
 MISE PACKAGES
 -------------
@@ -343,9 +339,9 @@ uv      0.6.5   ~/.config/mise/config.toml  latest
 
 UV TOOLS
 --------
-aider-chat v0.76.2
+aider-chat v0.77.0
 - aider
-ruff v0.9.10
+ruff v0.11.0
 - ruff
 
 GO TOOLS
@@ -362,8 +358,16 @@ RUSTUP/CARGO
 Default host: aarch64-apple-darwin
 rustup home:  /Users/ken/.local/share/rustup
 
-stable-aarch64-apple-darwin (default)
-rustc 1.85.0 (4d91de4e4 2025-02-17)
+installed toolchains
+--------------------
+stable-aarch64-apple-darwin (active, default)
+
+active toolchain
+----------------
+name: stable-aarch64-apple-darwin
+active because: it's the default toolchain
+installed targets:
+  aarch64-apple-darwin
 cargo 1.85.0 (d73d2caf9 2024-12-31)
 cargo-outdated v0.16.0:
     cargo-outdated
