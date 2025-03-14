@@ -21,17 +21,18 @@ final_space = true
   on_pink = "#ebe2eb"
   base = "#1e1e2e"
   
-  language = "#2f40c2"
-  on_language = "#e5e6f2"
+  # rust, go, zig, lua, python...
+  language = "#005b95"
+  on_language = "#e5eaf0"
 
 [transient_prompt]
-  template = '<p:red,transparent></><p:on_red,p:red> </><p:red,transparent></> '
-  foreground = 'p:red'
+  template = '<p:teal,transparent></><p:on_teal,p:teal>  </><p:teal,transparent></> '
+  foreground = 'p:teal'
   background = 'transparent'
   newline = true
 
 [secondary_prompt]
-  template = '<p:red,transparent></><,p:red> > </><p:red,transparent></> '
+  template = '<p:red,transparent></><,p:gold> > </><p:gold,transparent></> '
   foreground = 'p:red'
   background = 'transparent'
 
@@ -44,12 +45,12 @@ final_space = true
 
   [[blocks.segments]]
     type = 'session'
-    template = '{{ if .SSHSession }} {{ end }}{{ if .Root }} {{ end }} '
+    template = ' {{ if .SSHSession }} {{ end }}{{ if .Root }} {{ end }} '
     style = 'diamond'
     leading_diamond = ''
     trailing_diamond = ''
-    background = 'p:red'
-    foreground = 'p:on_red'
+    background = 'p:teal'
+    foreground = 'p:on_teal'
     
   ######### DIRECTORY #########
 
@@ -58,8 +59,8 @@ final_space = true
     style = "diamond"
     leading_diamond = ""
     trailing_diamond = ""
-    background = 'p:teal'
-    foreground = 'p:on_teal'
+    background = 'p:blue'
+    foreground = 'p:on_blue'
     template = ' {{ .Output }} '
 
     [blocks.segments.properties]
@@ -151,7 +152,7 @@ final_space = true
     trailing_diamond = ""
     background = "p:green"
     foreground = "p:on_green"
-    template = " {{ .HEAD }}{{ if .Working.Changed }} 󱩽{{ end }}{{ if gt .Ahead 0 }} {{ .Ahead }}{{ end }}{{ if gt .Behind 0 }} {{ .Behind }}{{ end }}{{ if and (not .Working.Changed) (eq .Ahead 0) (eq .Behind 0) }} {{ end }}"
+    template = " {{ .HEAD }}{{ if .Working.Changed }} 󱩽{{ end }}{{ if gt .Ahead 0 }} {{ .Ahead }}{{ end }}{{ if gt .Behind 0 }} {{ .Behind }}{{ end }}{{ if and (not .Working.Changed) (eq .Ahead 0) (eq .Behind 0) }} {{ end }} "
     background_templates = [
       "{{ if .Working.Changed }}p:gold{{ end }}",
       "{{ if or (gt .Ahead 0) (gt .Behind 0) }}p:pink{{ end }}",
@@ -161,17 +162,52 @@ final_space = true
       fetch_status = true
       source = "cli"
       
-  ######### ENDCAP #########
+  ######### STATUS ENDCAP #########
 
   [[blocks.segments]]
-    type = "text"
-    style = "accordion"
-    leading_powerline_symbol = ""
-    powerline_symbol = ""
-    background = "p:red"
-    template = " "
+    type = 'status'
+    style = 'accordion'
+    leading_powerline_symbol = '<transparent,background></>'
+    powerline_symbol = ''
+    background = 'p:teal'
+    foreground = 'p:on_teal'
+    template = '    '
+    
+    background_templates = ['{{ if gt .Code 0 }}p:red{{ end }}']
 
+    [blocks.segments.properties]
+      always_enabled = true
 
+[[blocks]]
+  type = 'prompt'
+  alignment = 'right'
+
+  [[tooltips]]
+    leading_diamond = ''
+    trailing_diamond = ''
+    template = '  {{ .Profile }}{{ if .Region }}@{{ .Region }}{{ end }} '
+    foreground = 'p:white'
+    background = 'p:orange'
+    type = 'aws'
+    style = 'diamond'
+    tips = ['aws']
+
+  [tooltips.properties]
+    display_default = true
+
+  [[tooltips]]
+    leading_diamond = ''
+    trailing_diamond = ''
+    template = '  {{ .Name }} '
+    foreground = 'p:white'
+    background = 'p:blue'
+    type = 'az'
+    style = 'diamond'
+    tips = ['az']
+
+    [tooltips.properties]
+      display_default = true
+    
 
 ######### NEW_LINE - SHELL LEVEL PROMPT #########
 

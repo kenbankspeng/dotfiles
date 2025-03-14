@@ -1,7 +1,0 @@
-#!/bin/bash
-
-if direnv status | grep -q "Found RC allowed"; then
-  exit 0  # .envrc exists
-else
-  exit 1  # .envrc does not exist
-fi
