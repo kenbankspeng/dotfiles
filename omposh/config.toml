@@ -50,7 +50,13 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     trailing_diamond = ''
     background = 'p:teal'
     foreground = 'p:on_teal'
-    template = '{{ if eq .Name "zsh" }}  {{ else if eq .Name "bash" }}  {{ else if eq .Name "fish" }}   {{ else if eq .Name "nu" }} 󰫻󰬂 {{ end }} '
+    templates = [
+      '{{ if eq .Name "zsh" }}  {{ end }}',
+      '{{ if eq .Name "bash" }}  {{ end }}',
+      '{{ if eq .Name "fish" }}   {{ end }}',
+      '{{ if eq .Name "nu" }} 󰫻󰬂 {{ end }}'
+    ]
+    templates_logic = 'join'
     
   ######### DIRECTORY #########
 
