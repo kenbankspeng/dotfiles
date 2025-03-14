@@ -1,12 +1,14 @@
 #!/bin/bash
 
-if [[ $STARSHIP_SHELL == "nu" ]]; then
+local $shell = $1
+
+if [[ $shell == "nu" ]]; then
     echo 󰫻󰬂 # NU
-elif [[ $STARSHIP_SHELL == "zsh" ]]; then
+elif [[ $shell == "zsh" ]]; then
     echo  # apple
-elif [[ $STARSHIP_SHELL == "bash" ]]; then
+elif [[ $shell == "bash" ]]; then
     echo  # >
-elif [[ $STARSHIP_SHELL == "fish" ]]; then
+elif [[ $shell == "fish" ]]; then
     echo  # fish
 else 
     echo  # apple

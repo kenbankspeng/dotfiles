@@ -2,6 +2,8 @@
 version = 3
 final_space = true
 
+[var]
+  myshell = "zsh"
 
 [palette]
   red = "#a90000"    # oklch(45% 0.200 30) 
@@ -26,7 +28,7 @@ final_space = true
   on_language = "#e5eaf0"
 
 [transient_prompt]
-  template = '<p:teal,transparent></><p:on_teal,p:teal>  </><p:teal,transparent></> '
+  template = '<p:teal,transparent></><p:on_teal,p:teal>   </><p:teal,transparent></> '
   foreground = 'p:teal'
   background = 'transparent'
   newline = true
@@ -44,123 +46,127 @@ final_space = true
   ######### SHELL #########
 
   [[blocks.segments]]
-    type = 'session'
-    template = ' {{ if .SSHSession }} {{ end }}{{ if .Root }} {{ end }} '
+    type = 'command'
     style = 'diamond'
     leading_diamond = ''
     trailing_diamond = ''
     background = 'p:teal'
     foreground = 'p:on_teal'
+    template = '{{ if eq .Shell "zsh" }} {{ .Shell }} {{ end }} {{ .Output }} '
+
+    [blocks.segments.properties]
+      command = '~/.config/omposh/shell_icon {{ .Shell }}'
+      cache = { duration = '1h', strategy = 'folder' }
     
   ######### DIRECTORY #########
 
   [[blocks.segments]]
     type = 'command'
-    style = "diamond"
-    leading_diamond = ""
-    trailing_diamond = ""
+    style = 'diamond'
+    leading_diamond = ''
+    trailing_diamond = ''
     background = 'p:blue'
     foreground = 'p:on_blue'
     template = ' {{ .Output }} '
 
     [blocks.segments.properties]
       command = '~/.config/omposh/directory'
-      cache = { duration = "1h", strategy = "folder" }
+      cache = { duration = '1h', strategy = 'folder' }
   
   ######### LANGUAGES #########
 
   [[blocks.segments]]
-    type = "python"
-    style = "diamond"
-    leading_diamond = ""
-    trailing_diamond = ""
-    background = "p:language"
-    foreground = "p:on_language"
-    template = "  {{ .Full }} "
+    type = 'python'
+    style = 'diamond'
+    leading_diamond = ''
+    trailing_diamond = ''
+    background = 'p:language'
+    foreground = 'p:on_language'
+    template = '  {{ .Full }} '
 
     [blocks.segments.properties]
-      display_mode = "context"
+      display_mode = 'context'
 
   [[blocks.segments]]
-    type = "go"
-    style = "diamond"
-    leading_diamond = ""
-    trailing_diamond = ""
-    background = "p:language"
-    foreground = "p:on_language"
-    template = " go {{ .Full }} "
+    type = 'go'
+    style = 'diamond'
+    leading_diamond = ''
+    trailing_diamond = ''
+    background = 'p:language'
+    foreground = 'p:on_language'
+    template = ' go {{ .Full }} '
 
     [blocks.segments.properties]
-      display_mode = "context"
+      display_mode = 'context'
 
   [[blocks.segments]]
-    type = "lua"
-    style = "diamond"
-    leading_diamond = ""
-    trailing_diamond = ""
-    background = "p:language"
-    foreground = "p:on_language"
-    template = "  {{ .Full }} "
+    type = 'lua'
+    style = 'diamond'
+    leading_diamond = ''
+    trailing_diamond = ''
+    background = 'p:language'
+    foreground = 'p:on_language'
+    template = '  {{ .Full }} '
 
     [blocks.segments.properties]
-      display_mode = "context"
+      display_mode = 'context'
 
   [[blocks.segments]]
-    type = "zig"
-    style = "diamond"
-    leading_diamond = ""
-    trailing_diamond = ""
-    background = "p:language"
-    foreground = "p:on_language"
-    template = "  {{ .Full }} "
+    type = 'zig'
+    style = 'diamond'
+    leading_diamond = ''
+    trailing_diamond = ''
+    background = 'p:language'
+    foreground = 'p:on_language'
+    template = '  {{ .Full }} '
 
     [blocks.segments.properties]
-      display_mode = "context"
+      display_mode = 'context'
 
   [[blocks.segments]]
-    type = "rust"
-    style = "diamond"
-    leading_diamond = ""
-    trailing_diamond = ""
-    background = "p:language"
-    foreground = "p:on_language"
-    template = "  {{ .Full }} "
+    type = 'rust'
+    style = 'diamond'
+    leading_diamond = ''
+    trailing_diamond = ''
+    background = 'p:language'
+    foreground = 'p:on_language'
+    template = '  {{ .Full }} '
 
     [blocks.segments.properties]
-      display_mode = "context"
+      display_mode = 'context'
 
   # javascript: deno, svelte, react, node
   [[blocks.segments]]
     type = 'command'
-    style = "diamond"
-    leading_diamond = ""
-    trailing_diamond = ""
-    background = "p:language"
-    foreground = "p:on_language"
+    style = 'diamond'
+    leading_diamond = ''
+    trailing_diamond = ''
+    background = 'p:language'
+    foreground = 'p:on_language'
     template = ' {{ .Output }} '
     
     [blocks.segments.properties]
       command = '~/.config/omposh/jsenv'
-      cache = { duration = "1h", strategy = "folder" }
+      cache = { duration = '1h', strategy = 'folder' }
     
   ######### GIT #########
 
   [[blocks.segments]]
-    type = "git"
-    style = "diamond"
-    leading_diamond = ""
-    trailing_diamond = ""
-    background = "p:green"
-    foreground = "p:on_green"
-    template = " {{ .HEAD }}{{ if .Working.Changed }} 󱩽{{ end }}{{ if gt .Ahead 0 }} {{ .Ahead }}{{ end }}{{ if gt .Behind 0 }} {{ .Behind }}{{ end }}{{ if and (not .Working.Changed) (eq .Ahead 0) (eq .Behind 0) }} {{ end }} "
+    type = 'git'
+    style = 'diamond'
+    leading_diamond = ''
+    trailing_diamond = ''
+    background = 'p:green'
+    foreground = 'p:on_green'
+    template = ' {{ .HEAD }}{{ if .Working.Changed }} 󱩽{{ end }}{{ if gt .Ahead 0 }} {{ .Ahead }}{{ end }}{{ if gt .Behind 0 }} {{ .Behind }}{{ end }}{{ if and (not .Working.Changed) (eq .Ahead 0) (eq .Behind 0) }} {{ end }} '
     background_templates = [
-      "{{ if .Working.Changed }}p:gold{{ end }}",
-      "{{ if or (gt .Ahead 0) (gt .Behind 0) }}p:pink{{ end }}",
+      '{{ if .Working.Changed }}p:gold{{ end }}',
+      '{{ if or (gt .Ahead 0) (gt .Behind 0) }}p:pink{{ end }}',
     ]
 
     [blocks.segments.properties]
       fetch_status = true
-      source = "cli"
+      source = 'cli'
       
   ######### STATUS ENDCAP #########
 
@@ -217,8 +223,8 @@ final_space = true
   newline = true
 
   [[blocks.segments]]
-      type = "text"
-      style = "plain"
-      background = "transparent"
-      foreground = "p:orange"
-      template = "{{ repeat .SHLVL \"❯\" }}"
+    type = 'text'
+    style = 'plain'
+    background = 'transparent'
+    foreground = 'p:orange'
+    template = '{{ repeat .SHLVL "❯" }}'
