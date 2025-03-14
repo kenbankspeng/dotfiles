@@ -1,7 +1,6 @@
 "$schema" = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json"
 version = 3
 final_space = true
-console_title_template = '{{ .Shell }} in {{ .Folder }}'
 
 [palette]
   red = "#a90000"    # oklch(45% 0.200 30) 
