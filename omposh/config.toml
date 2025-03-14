@@ -54,10 +54,20 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
       '{{ if eq .Name "zsh" }}  {{ end }}',
       '{{ if eq .Name "bash" }}  {{ end }}',
       '{{ if eq .Name "fish" }}   {{ end }}',
-      '{{ if eq .Name "nu" }} 󰫻󰬂 {{ end }}'
+      '{{ if eq .Name "nu" }} 󰫻󰬂 {{ end }}',
     ]
-    templates_logic = 'join'
+    templates_logic = 'first_match'
     
+    [[blocks.segments]]
+    type = 'root'
+    style = 'diamond'
+    leading_diamond = ''
+    trailing_diamond = ''
+    foreground = 'p:on_red'
+    background = 'p:red'
+    template = '  '
+
+
   ######### DIRECTORY #########
 
   [[blocks.segments]]
