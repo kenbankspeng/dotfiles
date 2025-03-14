@@ -1,9 +1,7 @@
 "$schema" = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json"
 version = 3
 final_space = true
-
-[var]
-  myshell = "zsh"
+console_title_template = '{{ .Shell }} in {{ .Folder }}'
 
 [palette]
   red = "#a90000"    # oklch(45% 0.200 30) 
@@ -46,17 +44,13 @@ final_space = true
   ######### SHELL #########
 
   [[blocks.segments]]
-    type = 'command'
+    type = 'shell'
     style = 'diamond'
     leading_diamond = ''
     trailing_diamond = ''
     background = 'p:teal'
     foreground = 'p:on_teal'
-    template = ' {{ if not (eq .Shell .Var.myshell) }}{{ .Shell }}{{ else }}{{ .Output }}{{ end }} '
-
-    [blocks.segments.properties]
-      command = '~/.config/omposh/shell_icon {{ .Shell }}'
-      cache = { duration = '1h', strategy = 'folder' }
+    template = '{{ if eq .Name "zsh" }}  {{ else if eq .Name "bash" }}  {{ else if eq .Name "fish" }}   {{ else if eq .Name "nu" }} 󰫻󰬂 {{ end }} '
     
   ######### DIRECTORY #########
 
@@ -70,7 +64,7 @@ final_space = true
     template = ' {{ .Output }} '
 
     [blocks.segments.properties]
-      command = '~/.config/omposh/directory'
+      command = '~/.config/omposh/directory zsh'
       cache = { duration = '1h', strategy = 'folder' }
   
   ######### LANGUAGES #########
@@ -158,15 +152,16 @@ final_space = true
     trailing_diamond = ''
     background = 'p:green'
     foreground = 'p:on_green'
-    template = ' {{ .HEAD }}{{ if .Working.Changed }} 󱩽{{ end }}{{ if gt .Ahead 0 }} {{ .Ahead }}{{ end }}{{ if gt .Behind 0 }} {{ .Behind }}{{ end }}{{ if and (not .Working.Changed) (eq .Ahead 0) (eq .Behind 0) }} {{ end }} '
+    template = ' {{ if .UpstreamURL }}{{ url .UpstreamIcon .UpstreamURL }} {{ end }}{{ .HEAD }}{{ if .Working.Changed }} 󱩽{{ end }}{{ if gt .Ahead 0 }} {{ .Ahead }}{{ end }}{{ if gt .Behind 0 }} {{ .Behind }}{{ end }}{{ if and (not .Working.Changed) (eq .Ahead 0) (eq .Behind 0) }} {{ end }} '
     background_templates = [
       '{{ if .Working.Changed }}p:gold{{ end }}',
       '{{ if or (gt .Ahead 0) (gt .Behind 0) }}p:pink{{ end }}',
     ]
 
     [blocks.segments.properties]
+      branch_template = '{{ trunc 25 .Branch }}'
       fetch_status = true
-      source = 'cli'
+      fetch_upstream_icon = true
       
   ######### STATUS ENDCAP #########
 

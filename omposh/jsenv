@@ -38,4 +38,8 @@ function get_js_env() {
 
 get_js_env "$1"
 
-echo "$ICON $VERSION"
+if [[ -n "$VERSION" ]]; then
+  echo "$ICON $VERSION"
+else
+  echo "$ICON"
+fi
