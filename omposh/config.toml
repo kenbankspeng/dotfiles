@@ -70,17 +70,13 @@ final_space = true
   ######### DIRECTORY #########
 
   [[blocks.segments]]
-    type = 'command'
+    type = 'text'
     style = 'diamond'
     leading_diamond = ''
     trailing_diamond = ''
     background = 'p:blue'
     foreground = 'p:on_blue'
-    template = ' {{ .Output }} '
-
-    [blocks.segments.properties]
-      command = '~/.config/omposh/directory zsh'
-      cache = { duration = '1h', strategy = 'folder' }
+    template = ' {{ .Env.DIRPATH }} '
   
   ######### LANGUAGES #########
 
@@ -146,17 +142,13 @@ final_space = true
 
   # javascript: deno, svelte, react, node
   [[blocks.segments]]
-    type = 'command'
+    type = 'text'
     style = 'diamond'
     leading_diamond = ''
     trailing_diamond = ''
     background = 'p:language'
     foreground = 'p:on_language'
-    template = ' {{ .Output }} '
-    
-    [blocks.segments.properties]
-      command = '~/.config/omposh/jsenv'
-      cache = { duration = '1h', strategy = 'folder' }
+    template = ' {{ .Env.JSENV }} '
     
   ######### GIT #########
 

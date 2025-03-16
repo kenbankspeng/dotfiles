@@ -28,10 +28,6 @@ sed3 *args:
   print "tldr (tealdeer)"
   tldr {{ args }}
 
-# get directory path
-@gd *args:
-  print $(command tere "$@")
-
 # do not show hidden
 l *args:
   #!/usr/bin/env zsh

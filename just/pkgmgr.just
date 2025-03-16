@@ -21,11 +21,6 @@ default:
   print -- "----------------"
   uv tool upgrade --all
   print
-  print "GO: go tools"
-  print -- "------------"
-  print "gotools"
-  gotools -u
-  print
   print "RUST/CARGO: rust packages"
   print -- "-------------------------"
   rustup check

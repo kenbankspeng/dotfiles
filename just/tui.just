@@ -14,14 +14,6 @@ ss:
 pl:
   portal
 
-# api client (atac) tui
-at:
-  atac --directory "$HOME"/.local/share/atac
-
-# visidata
-vd *args:
-  visidata {{args}}
-
 # lazydocker
 ld:
   lazydocker
