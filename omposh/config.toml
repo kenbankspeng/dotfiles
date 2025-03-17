@@ -3,8 +3,6 @@ version = 3
 final_space = true
 
 # jobs - env
-# cmd_duration - execution time
-# time - time
 
 [palette]
   red = "#a90000"    # oklch(45% 0.200 30) 
@@ -70,6 +68,14 @@ final_space = true
     background = 'p:red'
     template = '  '
 
+    [[blocks.segments]]
+      type = 'text'
+      style = 'diamond'
+      leading_diamond = ''
+      trailing_diamond = ''
+      background = 'p:green'
+      foreground = 'p:on_green'
+      template = ' {{ .Env.JOBCOUNT }} '
 
   ######### DIRECTORY #########
 
