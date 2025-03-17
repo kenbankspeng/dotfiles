@@ -2,6 +2,10 @@
 version = 3
 final_space = true
 
+# jobs - env
+# cmd_duration - execution time
+# time - time
+
 [palette]
   red = "#a90000"    # oklch(45% 0.200 30) 
   gold = "#a17a00"   # oklch(60% 0.200 90) - lighter
