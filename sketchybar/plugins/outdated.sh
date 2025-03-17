@@ -25,24 +25,17 @@ case "$sum" in
 0)
   color="$GREEN"
   sum="$ICON_CHECKMARK"
-  echo "$sum in 0"
   ;;
 [1-2])
   color="$YELLOW"
-  echo "$sum in 1-2"
   ;;
 [3-4])
   color="$PEACH"
-  echo "$sum in 3-4"
   ;;
 *)
   color="$RED"
-  echo "$sum in *"
   ;;
 esac
-
-echo "color: $color"
-echo "sum: $sum"
 
 props=(
   icon.color="$color"
