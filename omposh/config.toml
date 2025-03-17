@@ -194,33 +194,27 @@ final_space = true
   type = 'prompt'
   alignment = 'right'
 
-  # TODO
-  [[tooltips]]
-    leading_diamond = ''
+  [[blocks.segments]]
+    type = "executiontime"
+    style = "plain"
+    foreground = "p:on_teal"
+    background = "tranparent"
+    template = "󰄉 {{ .FormattedMs }} "
+
+    [blocks.segments.properties]
+      threshold = 500
+      style = "austin"
+      always_enabled = false
+
+  [[blocks.segments]]
+    type = "text"
+    style = "diamond"
+    leading_diamond = ''
     trailing_diamond = ''
-    template = '  {{ .Profile }}{{ if .Region }}@{{ .Region }}{{ end }} '
-    foreground = 'p:white'
-    background = 'p:orange'
-    type = 'aws'
-    style = 'diamond'
-    tips = ['aws']
+    foreground = "p:on_red"
+    background = "p:red"
+    template = "{{if .Segments.Status.Error }}{{ .Segments.Status.Code }}{{ end }}"
 
-  [tooltips.properties]
-    display_default = true
-
-  [[tooltips]]
-    leading_diamond = ''
-    trailing_diamond = ''
-    template = '  {{ .Name }} '
-    foreground = 'p:white'
-    background = 'p:blue'
-    type = 'az'
-    style = 'diamond'
-    tips = ['az']
-
-    [tooltips.properties]
-      display_default = true
-    
 
 ######### NEW_LINE - SHELL LEVEL PROMPT #########
 
