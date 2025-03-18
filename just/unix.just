@@ -119,15 +119,8 @@ w:
 
 # remove .DS_store
 @clean:
-  print "recursively remove .DS_store and .node_modules"
-  fd --unrestricted '^\.DS_Store$' --type file --exec-batch rm
-  fd --unrestricted '^node_modules$' --type directory --exec-batch rm -rf
-
-# remove .DS_store
-@sudoclean:
-  print "powerfully recursively remove .DS_store and .node_modules"
+  print "recursively remove .DS_store"
   sudo fd --unrestricted '^\.DS_Store$' --type file --exec-batch rm
-  sudo fd --unrestricted '^node_modules$' --type directory --exec-batch rm -rf
 
 # rm -rf
 @zap *args:
