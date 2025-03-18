@@ -45,20 +45,36 @@ sed3 *args:
 # T : type change
 # C : conflict
 #
-@ls *args:
-  lsd --almost-all --blocks name --blocks git {{args}}
+ls *args:
+  #!/usr/bin/env zsh
+  if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+    lsd --almost-all --blocks name --blocks git {{args}}
+  else
+    lsd --almost-all --blocks name {{args}}
+  fi
 
 # list minimal 
 @l *args:
   lsd -l --no-symlink --blocks name {{args}}
+  
 
 # list tree
-@lt *args:
-  lsd --almost-all --tree --no-symlink --depth 2 -al --blocks name --blocks git {{args}}
+lt *args:
+  #!/usr/bin/env zsh
+  if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+    lsd --almost-all --tree --no-symlink --depth 2 -al --blocks name --blocks git {{args}}
+  else
+    lsd --almost-all --tree --no-symlink --depth 2 -al --blocks name {{args}}
+  fi
 
 # list long
-@ll *args:
-  lsd --almost-all --no-symlink --blocks name --blocks git --blocks permission --blocks user --blocks size --blocks date {{args}}
+ll *args:
+  #!/usr/bin/env zsh
+  if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+    lsd --almost-all --no-symlink --blocks name --blocks git --blocks permission --blocks user --blocks size --blocks date {{args}}
+  else
+    lsd --almost-all --no-symlink --blocks name --blocks permission --blocks user --blocks size --blocks date {{args}}
+  fi
 
 # new cat
 @cat *args:
