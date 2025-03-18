@@ -28,16 +28,9 @@ sed3 *args:
   print "tldr (tealdeer)"
   tldr {{ args }}
 
-# do not show hidden
-l *args:
-  #!/usr/bin/env zsh
-  if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
-    lsd --ignore-config --no-symlink --blocks name --blocks git {{args}}
-  else
-    lsd --ignore-config --no-symlink -1
-  fi
-
-# new ls (git aware)
+# list w/ git-symbols
+#
+# blocks means show the block
 #
 # git symbols
 # -----------
@@ -51,21 +44,21 @@ l *args:
 # I : ignored
 # T : type change
 # C : conflict
-ls *args:
-  #!/usr/bin/env zsh
-  if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
-    lsd -al --blocks name --blocks git {{args}}
-  else
-    lsd {{args}}
-  fi
+#
+@ls *args:
+  lsd --almost-all --blocks name --blocks git {{args}}
 
-# new ls (tree + git)
+# list minimal 
+@l *args:
+  lsd -l --no-symlink --blocks name {{args}}
+
+# list tree
 @lt *args:
-  lsd --tree --no-symlink --depth 2 -al --blocks name --blocks git {{args}}
+  lsd --almost-all --tree --no-symlink --depth 2 -al --blocks name --blocks git {{args}}
 
-# new ls (long + all + git)
+# list long
 @ll *args:
-  lsd -al --no-symlink --blocks name --blocks git --blocks permission --blocks user --blocks size --blocks date {{args}}
+  lsd --almost-all --no-symlink --blocks name --blocks git --blocks permission --blocks user --blocks size --blocks date {{args}}
 
 # new cat
 @cat *args:

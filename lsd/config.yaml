@@ -14,7 +14,6 @@ blocks:
   - user
   - size
   - date
-  - git
   - name
 
 # == Color ==
@@ -46,7 +45,7 @@ dereference: false
 # == Display ==
 # What items to display. Do not specify this for the default behavior (all)
 # Possible values: all, almost-all, directory-only
-display: almost-all
+# display: all
 
 # == Icons ==
 icons:
@@ -63,8 +62,8 @@ icons:
 
 # == Ignore Globs ==
 # A list of globs to ignore when listing.
-ignore-globs:
-  - .git
+# ignore-globs:
+#  - .git
 
 # == Indicators ==
 # Whether to add indicator characters to certain listed files.
