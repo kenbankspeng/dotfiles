@@ -7,6 +7,9 @@
 // custom settings, run `zed: open default settings` from the
 // command palette
 {
+  "features": {
+    "edit_prediction_provider": "zed"
+  },
   "assistant": {
     "default_model": {
       "provider": "openai",
@@ -54,5 +57,13 @@
     "edit_debounce_ms": 700,
     "scroll_debounce_ms": 50
   },
-  "restore_on_startup": "none"
+  "restore_on_startup": "none",
+  "lsp": {
+    "tinymist": {
+      "initialization_options": {
+        "exportPdf": "onSave",
+        "outputPath": "$root/$name"
+      }
+    }
+  }
 }

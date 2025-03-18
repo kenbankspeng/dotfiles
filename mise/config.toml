@@ -4,7 +4,6 @@ bun = "latest"
 deno = "latest"
 uv = "latest"
 python = "latest"
-aqua = "latest"
 node = "latest"
 go = "latest"
 
