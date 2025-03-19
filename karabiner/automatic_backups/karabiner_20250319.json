@@ -1,0 +1,119 @@
+{
+	"profiles": [
+		{
+			"name": "Default profile",
+			"selected": true,
+			"virtual_hid_keyboard": { "keyboard_type_v2": "ansi" },
+			"devices": [
+				{
+					"identifiers": { "is_keyboard": true },
+					"simple_modifications": [
+						{
+							"from": { "key_code": "caps_lock" },
+							"to": [{ "key_code": "escape" }]
+						}
+					]
+				}
+			],
+			"complex_modifications": {
+				"rules": [
+					{
+						"description": "Change double tap left ⇧ key to f20",
+						"manipulators": [
+							{
+								"conditions": [
+									{
+										"name": "left_shift pressed",
+										"type": "variable_if",
+										"value": 1
+									}
+								],
+								"from": {
+									"key_code": "left_shift",
+									"modifiers": { "optional": ["any"] }
+								},
+								"to": [{ "key_code": "f20" }],
+								"type": "basic"
+							},
+							{
+								"from": {
+									"key_code": "left_shift",
+									"modifiers": { "optional": ["any"] }
+								},
+								"to": [
+									{
+										"set_variable": {
+											"name": "left_shift pressed",
+											"value": 1
+										}
+									},
+									{ "key_code": "left_shift" }
+								],
+								"to_delayed_action": {
+									"to_if_canceled": [
+										{
+											"set_variable": {
+												"name": "left_shift pressed",
+												"value": 0
+											}
+										}
+									],
+									"to_if_invoked": [
+										{
+											"set_variable": {
+												"name": "left_shift pressed",
+												"value": 0
+											}
+										}
+									]
+								},
+								"type": "basic"
+							}
+						]
+					},
+					{
+						"description": "Map F4 to Command+Space",
+						"manipulators": [
+							{
+								"from": {
+									"key_code": "f4",
+									"modifiers": { "optional": ["any"] }
+								},
+								"to": [
+									{
+										"key_code": "spacebar",
+										"modifiers": ["command"]
+									}
+								],
+								"type": "basic"
+							}
+						]
+					},
+					{
+						"description": "Caps lock to hyper key + space",
+						"manipulators": [
+							{
+								"from": {
+									"key_code": "caps_lock",
+									"modifiers": { "optional": ["any"] }
+								},
+								"to": [
+									{
+										"key_code": "spacebar",
+										"modifiers": [
+											"left_shift",
+											"left_command",
+											"left_control",
+											"left_option"
+										]
+									}
+								],
+								"type": "basic"
+							}
+						]
+					}
+				]
+			}
+		}
+	]
+}
